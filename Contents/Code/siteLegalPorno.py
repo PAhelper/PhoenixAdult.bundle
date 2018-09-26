@@ -104,7 +104,8 @@ def update(metadata,siteID,movieGenres):
     #    metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
         metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
         posterNum += 1
-   metadata.posters[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = posterNum) 
+    
+    metadata.posters[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = posterNum) 
 
 
     
