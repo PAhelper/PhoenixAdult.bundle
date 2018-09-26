@@ -80,8 +80,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 ## Known Limitations
 - Teen Fidelity, Porn Fidelity, Kelly Madison, and X-Art will sometimes not pull metadata when many files from that site are being added at once. This is a limitation on the number of requests to their website. Just go back to that video and hit Refresh Metadata (or Match if it didn't make it that far) and everything should then be added.
 
+-LegalPorno does not have high quality pictures to be used for metadata.
+
 ## Change Log/Updates
-- **2018-09-25 3:15PM CST** - Bug Fix for crashing on metadata load on some sites in the Reality Kings network
+- ** 2018-09-26 3:00PM CST** - Added Porndoe Premium Network, added LegalPorno
+- 2018-09-25 3:15PM CST - Bug Fix for crashing on metadata load on some sites in the Reality Kings network
 - 2018-09-23 1:45PM CST - Bug fixes, split code into multiple Python files by site for better organization and aid in allowing simpler code maintenance.
     + Files can be matched to sites with or without the spaces in the site name and if .com is left in the site name as well.
     + Bang Bros - Fixed incomplete metadata due to crashing when the agent reached the video date
@@ -186,6 +189,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 -   Butts and Blacks
 #### - Girlsway *Title Search
 #### - Kelly Madison *Title Search *Date/Actor Search
+#### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
 -   My Friends Hot Mom
 -   My First Sex Teacher
@@ -234,6 +238,51 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 -   Live Naughty Teacher
 -   Live Naughty Milf
 -   Live Naughty Nurse
+#### - Porndoe Premium Network *Title Search *Date/Actor Search
+-   Porndoe Premium
+-   The White Boxxx
+-   Scam Angels
+-   Chicas Loca
+-   Her Limit
+-   A Girl Knows
+-   Porno Academie
+-   Xchimera
+-   Carne Del Mercado
+-   XXXShades
+-   BumsBus
+-   Bitches Abroad
+-   La Cochonne
+-   Crowd Bondage
+-   Relaxxxed
+-   My Naughty Album
+-   Tu Venganza
+-   Bums Buero
+-   Los Consoladores
+-   Quest for Orgasm
+-   Transbella
+-   Her Big Ass
+-   Narcos X
+-   Fucked In Traffic
+-   Las Folladoras
+-   Badtime Stories
+-   Exposed Casting
+-   Kinky Inlaws
+-   Doe Projects
+-   Porndoepedia
+-   Casting Francais
+-   Bums Besuch
+-   Special Feet Force
+-   Trans Taboo
+-   Operacion Limpieza
+-   La Novice
+-   Casting Alla Italiana
+-   PinUp Sex
+-   Hausfrau Ficken
+-   Deutchland Report
+-   Reife Swinger
+-   Scambisti Maturi
+-   STG
+-   XXX Omas
 #### - PornFidelity *Title Search *Date/Actor Search
 #### - Reality Kings Network *Title Search
 -   40 Inch Plus

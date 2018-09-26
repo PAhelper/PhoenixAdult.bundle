@@ -40,6 +40,8 @@ class PhoenixGenres:
                 skip = True
             if "18 year" == newGenre.lower():
                 skip = True
+            if "hd videos" == newGenre.lower():
+                skip = True
 
             ##### Replace
             if "big ass" == newGenre.lower() or "big booty" == newGenre.lower() or "bib booty" == newGenre.lower() or "girl big ass" == newGenre.lower():
@@ -108,7 +110,7 @@ class PhoenixGenres:
                 newGenre = "cum swap"
             if "euro" == newGenre.lower() or "europe" == newGenre.lower():
                 newGenre = "european"
-            if "enhanced" == newGenre.lower() or "enhanced tits" == newGenre.lower():
+            if "enhanced" == newGenre.lower() or "enhanced tits" == newGenre.lower() or "silicone tits" == newGenre.lower():
                 newGenre = "fake tits"
             if "trimmed" == newGenre.lower():
                 newGenre = "trimmed pussy"

@@ -178,6 +178,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or (searchSiteID >= 187 and searchSiteID <= 215):
                     results = PAsearchSites.siteTeamSkeet.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## Porndoe Premium
+            ###############
+            if siteNum == 216:
+                if searchAll or (searchSiteID >= 216 and searchSiteID <= 259):
+                    results = PAsearchSites.sitePorndoePremium.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Legal Porno
+            ###############
+            if siteNum == 260:
+                if searchAll or searchSiteID == 260:
+                    results = PAsearchSites.siteLegalPorno.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
         
         results.Sort('score', descending=True)
@@ -314,7 +328,21 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID >= 187 and siteID <= 215:
             metadata = PAsearchSites.siteTeamSkeet.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Porndoe Premium                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 216 and siteID <= 259:
+            metadata = PAsearchSites.sitePorndoePremium.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   LegalPorno                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 260:
+            metadata = PAsearchSites.siteLegalPorno.update(metadata,siteID,movieGenres)
 
 
 

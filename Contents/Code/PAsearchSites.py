@@ -12,8 +12,10 @@ import sitePornFidelity
 import siteTeenFidelity
 import siteKellyMadison
 import siteTeamSkeet
+import sitePorndoePremium
+import siteLegalPorno
 
-searchSites = [None] * 216
+searchSites = [None] * 261
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -230,6 +232,51 @@ searchSites[212] = ["Gingerpatch","Gingerpatch", "https://www.teamskeet.com","ht
 searchSites[213] = ["BraceFaced","BraceFaced", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[214] = ["TeenJoi","TeenJoi", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[215] = ["StepSiblings","StepSiblings", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[216] = ["Porndoe Premium","Porndoe Premium", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[217] = ["The White Boxxx","The White Boxxx", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[218] = ["Scam Angels","Scam Angels", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[219] = ["Chicas Loca","Chicas Loca", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[220] = ["Her Limit","Her Limit", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[221] = ["A Girl Knows","A Girl Knows", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[222] = ["Porno Academie","Porno Academie", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[223] = ["Xchimera","Xchimera", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[224] = ["Carne Del Mercado","Carne Del Mercado", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[225] = ["XXXShades","XXXShades", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[226] = ["BumsBus","BumsBus", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[227] = ["Bitches Abroad","Bitches Abroad", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[228] = ["La Cochonne","La Cochonne", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[229] = ["Crowd Bondage","Crowd Bondage", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[230] = ["Relaxxxed","Relaxxxed", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[231] = ["My Naughty Album","My Naughty Album", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[232] = ["Tu Venganza","Tu Venganza", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[233] = ["Bums Buero","Bums Buero", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[234] = ["Los Consoladores","Los Consoladores", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[235] = ["Quest for Orgasm","Quest for Orgasm", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[236] = ["Transbella","Transbella", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[237] = ["Her Big Ass","Her Big Ass", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[238] = ["Narcos X","Narcos X", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[239] = ["Fucked In Traffic","Fucked In Traffic", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[240] = ["Las Folladoras","Las Folladoras", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[241] = ["Badtime Stories","Badtime Stories", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[242] = ["Exposed Casting","Exposed Casting", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[243] = ["Kinky Inlaws","Kinky Inlaws", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[244] = ["Doe Projects","Doe Projects", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[245] = ["Porndoepedia","Porndoepedia", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[246] = ["Casting Francais","Casting Francais", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[247] = ["Bums Besuch","Bums Besuch", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[248] = ["Special Feet Force","Special Feet Force", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[249] = ["Trans Taboo","Trans Taboo", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[250] = ["Operacion Limpieza","Operacion Limpieza", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[251] = ["La Novice","La Novice", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[252] = ["Casting Alla Italiana","Casting Alla Italiana", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[253] = ["PinUp Sex","PinUp Sex", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[254] = ["Hausfrau Ficken","Hausfrau Ficken", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[255] = ["Deutchland Report","Deutchland Report", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[256] = ["Reife Swinger","Reife Swinger", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[257] = ["Scambisti Maturi","Scambisti Maturi", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[258] = ["STG","STG", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[259] = ["XXX Omas","XXX Omas", "https://porndoepremium.com","https://porndoepremium.com/videos?keywords="]
+searchSites[260] = ["LegalPorno","LegalPorno","https://www.legalporno.com","https://www.legalporno.com/search/?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
