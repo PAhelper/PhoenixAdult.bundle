@@ -121,7 +121,7 @@ searchSites[101] = ["Blowjob Ninjas","Blowjob Ninjas","https://bangbros.com","ht
 searchSites[102] = ["Boob Squad","Boob Squad","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[103] = ["Brown Bunnies","Brown Bunnies","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[104] = ["Can He Score","Can He Score","https://bangbros.com","https://bangbros.com/search/"]
-searchSites[105] = ["Casting","Casting","https://bangbros.com","https://bangbros.com/search/"]
+searchSites[105] = ["Bang Casting","Bang Casting","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[106] = ["Chongas","Chongas","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[107] = ["Colombia Fuck Fest","Colombia Fuck Fest","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[108] = ["Dirty World Tour","Dirty World Tour","https://bangbros.com","https://bangbros.com/search/"]
@@ -345,6 +345,17 @@ def getSearchSettings(mediaTitle):
         else:
             searchType = 0
     else:
-        searchType = 0
+        if unicode(searchTitle[:2], 'utf-8').isnumeric():
+            if unicode(searchTitle[3:5], 'utf-8').isnumeric():
+                if unicode(searchTitle[6:8], 'utf-8').isnumeric():
+                    searchType = 1
+                    searchDate = "20" + searchTitle[0:8].replace(" ","-")
+                    searchTitle = searchTitle[11:]
+                else:
+                    searchType = 0
+            else:
+                searchType = 0
+        else:
+            searchType = 0
 
     return [searchSiteID,searchType,searchTitle,searchDate]

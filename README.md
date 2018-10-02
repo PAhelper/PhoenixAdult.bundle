@@ -92,7 +92,8 @@ If you would like to send a donation my way, which are greatly appreciated, you 
 
 
 ## Change Log/Updates
-- **2018-09-26 3:00PM CST** - Added Porndoe Premium Network, added LegalPorno
+- 2018-10-02 6:00PM CST - Date match on a 2 digit year added as failover. Fixed issue with ExposedCasting not matching. Fixed Brazzers error handling when background banner was missing
+- 2018-09-26 3:00PM CST - Added Porndoe Premium Network, added LegalPorno
 - 2018-09-25 3:15PM CST - Bug Fix for crashing on metadata load on some sites in the Reality Kings network
 - 2018-09-23 1:45PM CST - Bug fixes, split code into multiple Python files by site for better organization and aid in allowing simpler code maintenance.
     + Files can be matched to sites with or without the spaces in the site name and if .com is left in the site name as well.

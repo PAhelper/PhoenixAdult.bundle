@@ -96,9 +96,12 @@ def update(metadata,siteID,movieGenres):
 
     #Posters
     i = 1
-    background = "http:" + detailsPageElements.xpath('//*[@id="trailer-player"]/img')[0].get('src')
-    Log("BG DL: " + background)
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    try:
+        background = "http:" + detailsPageElements.xpath('//*[@id="trailer-player"]/img')[0].get('src')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
     for poster in detailsPageElements.xpath('//a[@rel="preview"]'):
         posterUrl = "http:" + poster.get('href').strip()
         thumbUrl = "http:" + detailsPageElements.xpath('//img[contains(@data-src,"thm")]')[i-1].get('data-src')
