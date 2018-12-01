@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search?site=1&search=" + encodedTitle)
+    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/?search=" + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
     searchPageResult = searchPageContent[len(searchPageContent)-1][:-2]
     searchPageResult = searchPageResult.replace('\\n',"").replace('\\',"")

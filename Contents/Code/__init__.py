@@ -192,6 +192,125 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 260:
                     results = PAsearchSites.siteLegalPorno.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## Mofos
+            ###############
+            if siteNum == 261:
+                if searchAll or (searchSiteID >= 261 and searchSiteID <= 270):
+                    results = PAsearchSites.siteMofos.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Babes
+            ###############
+            if siteNum == 271:
+                if searchAll or (searchSiteID >= 271 and searchSiteID <= 276):
+                    results = PAsearchSites.siteBabes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Evil Angel
+            ###############
+            if siteNum == 277:
+                if searchAll or searchSiteID == 277:
+                    results = PAsearchSites.siteEvilAngel.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## HardX
+            ###############
+            if siteNum == 278:
+                if searchAll or searchSiteID == 278:
+                    results = PAsearchSites.siteHardX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## GloryHoleSecrets
+            ###############
+            if siteNum == 279:
+                if searchAll or searchSiteID == 279:
+                    results = PAsearchSites.siteGloryHoleSecrets.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## NewSensations
+            ###############
+            if siteNum == 280:
+                if searchAll or searchSiteID == 280:
+                    results = PAsearchSites.siteNewSensations.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## PureTaboo
+            ###############
+            if siteNum == 281:
+                if searchAll or searchSiteID == 281:
+                    results = PAsearchSites.sitePureTaboo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Swallowed
+            ###############
+            if siteNum == 282:
+                if searchAll or searchSiteID == 282:
+                    results = PAsearchSites.siteSwallowed.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## TrueAnal
+            ###############
+            if siteNum == 283:
+                if searchAll or searchSiteID == 283:
+                    results = PAsearchSites.siteTrueAnal.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Nympho
+            ###############
+            if siteNum == 284:
+                if searchAll or searchSiteID == 284:
+                    results = PAsearchSites.siteNympho.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## EroticaX
+            ###############
+            if siteNum == 285:
+                if searchAll or searchSiteID == 285:
+                    results = PAsearchSites.siteEroticaX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## DarkX
+            ###############
+            if siteNum == 286:
+                if searchAll or searchSiteID == 286:
+                    results = PAsearchSites.siteDarkX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## LesbianX
+            ###############
+            if siteNum == 287:
+                if searchAll or searchSiteID == 287:
+                    results = PAsearchSites.siteLesbianX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Twistys
+            ###############
+            if siteNum == 288:
+                if searchAll or (searchSiteID >= 288 and searchSiteID <= 291):
+                    results = PAsearchSites.siteTwistys.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Lubed
+            ###############
+            if siteNum == 292:
+                if searchAll or searchSiteID == 292:
+                    results = PAsearchSites.siteLubed.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Spizoo
+            ###############
+            if siteNum == 293:
+                if searchAll or searchSiteID == 293:
+                    results = PAsearchSites.siteSpizoo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Private
+            ###############
+            if siteNum == 294:
+                if searchAll or (searchSiteID >= 294 and searchSiteID <= 305):
+                    results = PAsearchSites.sitePrivate.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
         
         results.Sort('score', descending=True)
@@ -344,25 +463,141 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 260:
             metadata = PAsearchSites.siteLegalPorno.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Mofos                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 261 and siteID <= 270:
+            metadata = PAsearchSites.siteMofos.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Babes                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 271 and siteID <= 276:
+            metadata = PAsearchSites.siteBabes.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Evil Angel                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 277:
+            metadata = PAsearchSites.siteEvilAngel.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   HardX                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 278:
+            metadata = PAsearchSites.siteHardX.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   GloryHoleSecrets                                       ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 279:
+            metadata = PAsearchSites.siteGloryHoleSecrets.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   NewSensations                                          ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 280:
+            metadata = PAsearchSites.siteNewSensations.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   PureTaboo                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 281:
+            metadata = PAsearchSites.sitePureTaboo.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Swallowed                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 282:
+            metadata = PAsearchSites.siteSwallowed.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   TrueAnal                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 283:
+            metadata = PAsearchSites.siteTrueAnal.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Nympho                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 284:
+            metadata = PAsearchSites.siteNympho.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   EroticaX                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 285:
+            metadata = PAsearchSites.siteEroticaX.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   DarkX                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 286:
+            metadata = PAsearchSites.siteDarkX.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   LesbianX                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 287:
+            metadata = PAsearchSites.siteLesbianX.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Twistys		                                    ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 288 and siteID <= 291:
+            metadata = PAsearchSites.siteTwistys.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Lubed                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 292:
+            metadata = PAsearchSites.siteLubed.update(metadata,siteID,movieGenres)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Spizoo                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 293:
+            metadata = PAsearchSites.siteSpizoo.update(metadata,siteID,movieGenres)
 
-
-
-
+        ##############################################################
+        ##                                                          ##
+        ##   Private		                                    ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 294 and siteID <= 305:
+            metadata = PAsearchSites.sitePrivate.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add

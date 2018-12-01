@@ -28,7 +28,7 @@ def update(metadata,siteID,movieGenres):
     metadata.studio = "Reality Kings"
     paragraph = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//p')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    metadata.summary = paragraph
+    metadata.summary = paragraph.strip()
     metadata.title = detailsPageElements.xpath('//h1[@class="section_title"]')[0].text_content()
     metadata.tagline = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//div[@class="category"]//a')[0].text_content()
     metadata.collections.clear()

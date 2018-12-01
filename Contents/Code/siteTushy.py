@@ -69,6 +69,7 @@ def update(metadata,siteID,movieGenres):
     date_object = datetime.strptime(date, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year    
+    metadata.collections.add("Tushy")
         
 
     # Genres
