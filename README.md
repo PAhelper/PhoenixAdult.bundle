@@ -82,15 +82,6 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 
 - LegalPorno does not have high quality pictures to be used for metadata.
 
-## Donations
-If you would like to send a donation my way, which are greatly appreciated, you can do so a few different ways.
-- If you are in the US you can donate via https://squareup.com/store/phoenix-plex-code/
-- If you would like to send via Venmo, you can message me on the Plex Forums (https://forums.plex.tv/u/PhoenixUser) or send an email to: donations [at] phoenixplexcode.33mail.com
-- If you are outside of the US, contact me on the Plex Forums (https://forums.plex.tv/u/PhoenixUser) or send an email to: donations [at] phoenixplexcode.33mail.com and we will see what we can work out.
-- BTC: 12XEjShia1CMo4PvVa5M2XeNiGZv6nG5Dh
-- BCH: qqgtqyfacdrw0da5k9n4zg6p8fv58we44vuzqg8zct
-
-
 ## Change Log/Updates
 - 2018-12-01 3:00PM CST - Forked the project and uploaded the changes I've been making over the last few weeks
     + Added support for Mofos (and subsites), Babes, EvilAngel, Hardx/Darkx/Lesbianx/Eroticax, GloryholeSecrets,NewSensations, PureTaboo, Swallowed/TrueAnal/Nympho
