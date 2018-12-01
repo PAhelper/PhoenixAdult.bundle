@@ -64,7 +64,7 @@ Plex main folder location:
     * '/raid0/data/module/Plex/sys/Plex Media Server/',                          # Thecus
     * '/raid0/data/PLEX_CONFIG/Plex Media Server/'                               # Thecus Plex community    
 
-Get the latest source zip in GitHub release at https://github.com/PhoenixPlexCode/PhoenixAdult.bundle > "Clone or download > Download Zip
+Get the latest source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
 - Rename folder to "PhoenixAdult.bundle" (remove -master)
 
@@ -92,6 +92,10 @@ If you would like to send a donation my way, which are greatly appreciated, you 
 
 
 ## Change Log/Updates
+- 2018-12-01 3:00PM CST - Forked the project and uploaded the changes I've been making over the last few weeks
+    + Added support for Mofos (and subsites), Babes, EvilAngel, Hardx/Darkx/Lesbianx/Eroticax, GloryholeSecrets,NewSensations, PureTaboo, Swallowed/TrueAnal/Nympho
+    + I also borrowed code from SwissAdult to add Twistys (and variants), Lubed, Spizoo, and Private (and subsites)
+    + I also moved my TODO list into the GitHub Issues tab
 - 2018-10-02 6:00PM CST - Date match on a 2 digit year added as failover. Fixed issue with ExposedCasting not matching. Fixed Brazzers error handling when background banner was missing
 - 2018-09-26 3:00PM CST - Added Porndoe Premium Network, added LegalPorno
 - 2018-09-25 3:15PM CST - Bug Fix for crashing on metadata load on some sites in the Reality Kings network
@@ -373,7 +377,30 @@ If you would like to send a donation my way, which are greatly appreciated, you 
 #### - Tushy *Title Search *Date/Actor Search
 #### - Vixen *Title Search *Date/Actor Search
 #### - X-Art *Title Search
-
+#### - Mofos Network
+ -  Mofos
+ -  Share My BF
+ -  Don't Break Me
+ -  I Know That Girl
+ -  Let's Try Anal
+ -  Pervs On Patrol
+ -  Stranded Teens
+ -  Mofos B Sides
+ -  She's A Freak
+ -  Public Pickups
+#### - Babes Network
+ -  Babes
+ -  Babes Unleashed
+ -  Black is Better
+ -  Elegant Anal
+ -  Office Obsession
+ -  Stepmom Lessons
+#### - Evil Angel
+#### - Hardx / Darkx / Lesbianx / Eroticax
+#### - Gloryhole Secrets
+#### - New Sensations
+#### - Pure Taboo
+#### - Swallowed / TrueAnal / Nymphos
 
 
 
