@@ -19,8 +19,8 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
-    searchResults = HTML.ElementFromURL('https://www.hardx.com/en/search/' + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@data-itemtype="scenes"]//a'):
+    searchResults = HTML.ElementFromURL('https://www.lesbianx.com/en/search/' + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="tlcTitle"]//a'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
         curID = searchResult.get('href').replace('/','_')
@@ -40,19 +40,14 @@ def update(metadata,siteID,movieGenres):
     # Summary
     paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    paragraph = paragraph[14:]
+    paragraph = paragraph[20:]
     metadata.summary = paragraph.strip()
-    tagline = detailsPageElements.xpath('//a[@class="dvdLink  "]')[0].get('title')
     metadata.collections.clear()
-    tagline = tagline.strip()
+    tagline = "LesbianX"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
-    # Director
-    directedBy = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')[0].text_content()
-    metadata.director = directedBy.strip()
-    metadata.tagline = directedBy.strip()
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//div[@class="sceneCol sceneColCategories"]//a')
@@ -67,7 +62,7 @@ def update(metadata,siteID,movieGenres):
     date = detailsPageElements.xpath('//div[@class="updatedDate"]')
     if len(date) > 0:
         date = date[0].text_content().strip()
-        date_object = datetime.strptime(date, '%Y-%m-%d')
+        date_object = datetime.strptime(date, '%m-%d-%Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -86,12 +81,40 @@ def update(metadata,siteID,movieGenres):
             role.photo = actorPhotoURL
 
     #Posters
-    #i = 1
-    #try:
-    #    background = "http:" + detailsPageElements.xpath('//*[@class="player-video"]/img')[0].get('src')
-    #    Log("BG DL: " + background)
-    #    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    #except:
-    #    pass
+    i = 1
+    try:
+        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
+
+    photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href')
+    photoPage = HTML.ElementFromURL(photoPageUrl)
+    unlockedPhotos = photoPage.xpath('//a[@class="imgLink"]')
+    for unlockedPhoto in unlockedPhotos:
+        posterUrl = unlockedPhoto.get('href')
+        Log("Poster URL: " + posterUrl)
+        if not posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #posterUrl = posterUrl[:-6] + "01.jpg"
+                #Add the image proxy items to the collection
+                if(width > 1):
+                    # Item is a poster
+
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+                if(width > 100):
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
+                i = i + 1
+
+            except:
+                pass
+
 
     return metadata

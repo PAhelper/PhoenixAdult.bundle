@@ -1,3 +1,4 @@
+
 # PhoenixAdult metadata agent
 
 This metadata agent will receive data from multiple sites for scene video releases.
@@ -83,6 +84,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - LegalPorno does not have high quality pictures to be used for metadata.
 
 ## Change Log/Updates
+- 2018-12-03 8:00AM CST - Updated code for Hardx to correct search results, fix metadata results, and add Posters and Background (though the images appear to work in logs, they didn't work in my testing... more to come on that)
 - 2018-12-01 3:00PM CST - Forked the project and uploaded the changes I've been making over the last few weeks
     + Added support for Mofos (and subsites), Babes, EvilAngel, Hardx/Darkx/Lesbianx/Eroticax, GloryholeSecrets,NewSensations, PureTaboo, Swallowed/TrueAnal/Nympho
     + I also borrowed code from SwissAdult to add Twistys (and variants), Lubed, Spizoo, and Private (and subsites)
@@ -387,7 +389,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Office Obsession
  -  Stepmom Lessons
 #### - Evil Angel
-#### - Hardx / Darkx / Lesbianx / Eroticax
+#### - XEmpire
+ -  Hardx
+ -  Darkx
+ -  Lesbianx
+ -  Eroticax
 #### - Gloryhole Secrets
 #### - New Sensations
 #### - Pure Taboo
