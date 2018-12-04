@@ -38,8 +38,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'GloryHoleSecrets'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
+    #url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary

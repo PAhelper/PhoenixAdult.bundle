@@ -38,10 +38,10 @@ def update(metadata,siteID,movieGenres):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
+    #paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    paragraph = paragraph[20:]
-    metadata.summary = paragraph.strip()
+    #paragraph = paragraph[20:]
+    #metadata.summary = paragraph.strip()
     metadata.collections.clear()
     tagline = "DarkX"
     metadata.tagline = tagline
@@ -91,7 +91,7 @@ def update(metadata,siteID,movieGenres):
 
     photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href')
     photoPage = HTML.ElementFromURL(photoPageUrl)
-    unlockedPhotos = photoPage.xpath('//a[@class="imgLink"]')
+    unlockedPhotos = photoPage.xpath('//a[@class="imgLink pgUnlocked"]')
     for unlockedPhoto in unlockedPhotos:
         posterUrl = unlockedPhoto.get('href')
         Log("Poster URL: " + posterUrl)
