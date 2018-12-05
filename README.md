@@ -84,6 +84,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - LegalPorno does not have high quality pictures to be used for metadata.
 
 ## Change Log/Updates
+- 2018-12-05 8:00AM CST - Realized PureTaboo is made by same studio as XEmpire, so copied my recently updated code for Hardx into the PureTaboo file, then made the few changes needed...
 - 2018-12-03 7:00PM CST - Lots of little bug fixes to XEmpire sites (though they still don't seem to pull poster/bg images) and GloryholeSecrets
 - 2018-12-03 8:00AM CST - Updated code for Hardx to correct search results, fix metadata results, and add Posters and Background (though the images appear to work in logs, they didn't work in my testing... more to come on that)
 - 2018-12-01 3:00PM CST - Forked the project and uploaded the changes I've been making over the last few weeks

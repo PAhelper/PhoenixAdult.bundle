@@ -40,10 +40,13 @@ def update(metadata,siteID,movieGenres):
     # Summary
     paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    paragraph = paragraph[18:]
+    paragraph = paragraph[20:]
     metadata.summary = paragraph.strip()
     metadata.collections.clear()
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    tagline = "Pure Taboo"
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
     # Genres
     movieGenres.clearGenres()
@@ -78,12 +81,40 @@ def update(metadata,siteID,movieGenres):
             role.photo = actorPhotoURL
 
     #Posters
-    #i = 1
-    #try:
-    #    background = "http:" + detailsPageElements.xpath('//*[@class="player-video"]/img')[0].get('src')
-    #    Log("BG DL: " + background)
-    #    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    #except:
-    #    pass
+    i = 1
+    try:
+        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
+
+    photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href')
+    photoPage = HTML.ElementFromURL(photoPageUrl)
+    unlockedPhotos = photoPage.xpath('//a[@class="imgLink pgUnlocked"]')
+    for unlockedPhoto in unlockedPhotos:
+        posterUrl = unlockedPhoto.get('href')
+        Log("Poster URL: " + posterUrl)
+        if not posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #posterUrl = posterUrl[:-6] + "01.jpg"
+                #Add the image proxy items to the collection
+                if(width > 1):
+                    # Item is a poster
+
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+                if(width > 100):
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
+                i = i + 1
+
+            except:
+                pass
+
 
     return metadata
