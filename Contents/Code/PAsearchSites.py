@@ -31,8 +31,11 @@ import siteTwistys
 import siteLubed
 import siteSpizoo
 import sitePrivate
+import sitePassionHD
+import siteFantasyHD
+import sitePornPros
 
-searchSites = [None] * 306
+searchSites = [None] * 328
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -339,6 +342,28 @@ searchSites[302] = ["Russian Teen Ass","Russian Teen Ass","https://www.private.c
 searchSites[303] = ["Sex on the beach","Sex on the beach","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[304] = ["Private Stars","Private Stars","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[305] = ["Tight and Teen","Tight and Teen","https://www.private.com","https://www.private.com/search.php?query="]
+searchSites[306] = ["Passion-HD","PassionHD","https://www.passion-hd.com","https://passion-hd.com/video/"]
+searchSites[307] = ["Fantasy-HD","FantasyHD","https://www.fantasy-hd.com","https://fantasy-hd.com/video/"]
+searchSites[308] = ["PornPros","PornPros","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[309] = ["18YearsOld","18YearsOld","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[310] = ["RealExGirlfriends","RealExGirlfriends","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[311] = ["MassageCreep","MassageCreep","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[312] = ["DeepThroatLove","DeepThroatLove","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[313] = ["TeenBFF","TeenBFF","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[314] = ["ShadyPi","ShadyPi","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[315] = ["CrueltyParty","CrueltyParty","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[316] = ["Disgraced18","Disgraced18","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[317] = ["MilfHumiliation","MilfHumiliation","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[318] = ["CumshotSurprise","CumshotSurprise","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[319] = ["40ozBounce","40ozBounce","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[320] = ["JurassicCock","JurassicCock","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[321] = ["FreaksOfCock","FreaksOfCock","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[322] = ["EuroHumpers","EuroHumpers","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[323] = ["FreaksOfBoobs","FreaksOfBoobs","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[324] = ["CumDisgrace","CumDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[325] = ["CockCompetition","CockCompetition","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

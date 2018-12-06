@@ -49,9 +49,9 @@ def update(metadata, siteID, movieGenres):
             genreName = genreLink.text_content().lower()
             movieGenres.addGenre(genreName)
 
-    date = detailsPageElements.xpath('//h3[@class="date"]')
+    date = detailsPageElements.xpath('//div[@class="date"]')
     if len(date) > 0:
-        date = date[0].text_content()[:10]
+        date = date[0].text_content()[10:]
         date_object = datetime.strptime(date, '%b-%d-%Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
@@ -75,10 +75,12 @@ def update(metadata, siteID, movieGenres):
         metadata.title = metadata.title
 
 
-    # Posters
-    background = "https://i3-hw.twistyscontent.com/scenes/" + detailsPageElements.xpath('//div[@id="video-player"]')[0].get('data-release-id') + "/s1002x564.jpg"
-    Log("BG DL: " + background)
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    #Posters
+    imagesPath = "https://i3-hw.twistyscontent.com/scenes/" + detailsPageElements.xpath('//div[@id="video-player"]')[0].get('data-release-id') + "/"
+    metadata.art[imagesPath+"s1002x564.jpg"] = Proxy.Preview(HTTP.Request(imagesPath+"s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    metadata.posters[imagesPath+"s1002x564.jpg"] = Proxy.Preview(HTTP.Request(imagesPath+"s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+
+    for i in range(1, 6):
+        metadata.posters[imagesPath + "s300x225_" + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(imagesPath + "s300x225_" + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
 
     return metadata
