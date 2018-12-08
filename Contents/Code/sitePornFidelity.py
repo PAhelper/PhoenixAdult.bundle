@@ -1,21 +1,20 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-
-    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/?search=" + encodedTitle)
+    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search/?search=" + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
     searchPageResult = searchPageContent[len(searchPageContent)-1][:-2]
     searchPageResult = searchPageResult.replace('\\n',"").replace('\\',"")
-    Log(searchPageResult)
+    #Log(searchPageResult)
     searchResults = HTML.ElementFromString(searchPageResult)
-    for searchResult in searchResults.xpath('//div[contains(@class,"episode")]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]')[0].text_content()
+    for searchResult in searchResults.xpath('//div[contains(@class,"d-flex")]'):
+        titleNoFormatting = searchResult.xpath('.//a[@class="text-pf"]')[0].text_content().strip()
         Log(titleNoFormatting)
-        curID = searchResult.xpath('.//a[contains(@class,"card-link")]')[0].get('href')
+        curID = searchResult.xpath('.//a[@class="text-pf"]')[0].get('href')
         curID = curID.replace('/','_')
         curID = curID[8:-19]
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//div[contains(@class,"card-meta")]//div[contains(@class,"text-left")]')[0].text_content()[19:-4]
+        releasedDate = searchResult.xpath('.//div[contains(@class,"text-left")]')[0].text_content().strip()[10:]
         if ", 20" not in releasedDate:
             releasedDate = releasedDate + ", " + str(datetime.now().year)
         Log(str(curID))
@@ -47,6 +46,12 @@ def update(metadata,siteID,movieGenres):
     metadata.studio = "PornFidelity"
     metadata.summary = detailsPageElements.xpath('//p[contains(@class,"card-text")]')[0].text_content()
     metadata.title = detailsPageElements.xpath('//h4')[0].text_content()[36:]
+    if "Kelly Madison \#" in metadata.title:
+        tagline = "Kelly Madison"
+    elif "Teenfidelity \#" in metadata.title:
+        tagline = "TeenFidelity"
+    else:
+        tagline = "PornFidelity"
     Log(metadata.title)
     metadataParts = detailsPageElements.xpath('//div[contains(@class,"episode-summary")]//h4')
     for metadataPart in metadataParts:
@@ -56,8 +61,9 @@ def update(metadata,siteID,movieGenres):
             date_object = datetime.strptime(releasedDate, '%Y-%m-%d')
             metadata.originally_available_at = date_object
             metadata.year = metadata.originally_available_at.year 
-    
-    
+
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Genres
     movieGenres.clearGenres()

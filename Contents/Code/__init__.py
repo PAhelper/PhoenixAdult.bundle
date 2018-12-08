@@ -11,7 +11,7 @@ from SSLEXTRA import sslOptions
 import PAgenres
 import PAsearchSites
 
-VERSION_NO = '2.2018.09.22.1'
+VERSION_NO = '2.2018.12.08.1'
 
 def any(s):
     for v in s:
@@ -39,7 +39,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.title
-        title = title.replace('"','').replace("'","").replace(":","").replace("!","").replace("(","").replace(")","").replace("&","")
+        strippedTitle = title.replace('"','').replace("'","").replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","")
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -47,10 +47,10 @@ class PhoenixAdultAgent(Agent.Movies):
         if media.primary_metadata is not None:
             year = media.primary_metadata.year
 
-        Log("Getting Search Settings for: " + title)
+        Log("Getting Search Settings for: " + strippedTitle)
         searchDate = None
         searchSiteID = None
-        searchSettings = PAsearchSites.getSearchSettings(title)
+        searchSettings = PAsearchSites.getSearchSettings(strippedTitle)
         if searchSettings[0] == 9999:
             searchAll = True
         else:
@@ -87,11 +87,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 2:
                 if searchAll or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81):
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             ###############
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchAll or (searchSiteID >= 5 and searchSiteID <= 51): 
+                if searchAll or (searchSiteID >= 5 and searchSiteID <= 51):
                     results = PAsearchSites.siteNaughtyAmerica.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -100,7 +101,7 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 52:
                 if searchAll or searchSiteID == 52:
                     results = PAsearchSites.siteVixen.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-                
+
             ###############
             ## Girlsway
             ###############
@@ -108,21 +109,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 53:
                     results = PAsearchSites.siteGirlsway.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
-                
             ###############
             ## X-Art
             ###############
             if siteNum == 82:
                 if searchAll or searchSiteID == 82:
                     results = PAsearchSites.siteXart.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-            
+
             ###############
             ## Bang Bros
             ###############
             if siteNum == 83:
                 if searchAll or (searchSiteID >= 83 and searchSiteID <= 135):
                     results = PAsearchSites.siteBangBros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-                    
+
             ###############
             ## Tushy
             ###############
@@ -130,36 +130,31 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 136:
                     results = PAsearchSites.siteTushy.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
-
             ###############
             ## Reality Kings
             ###############
             if siteNum == 137:
                 if searchAll or (searchSiteID >= 137 and searchSiteID <= 182):
                     results = PAsearchSites.siteRealityKings.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-                            
-            
+
             ###############
             ## 21Naturals
             ###############
             if siteNum == 183:
                 if searchAll or searchSiteID == 183:
                     results = PAsearchSites.site21Naturals.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-                            
 
             ###############
             ## PornFidelity
             ###############
             if siteNum == 184:
-                
                 if searchAll or searchSiteID == 184:
                     results = PAsearchSites.sitePornFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-            
+
             ###############
             ## TeenFidelity
             ###############
             if siteNum == 185:
-                
                 if searchAll or searchSiteID == 185:
                     results = PAsearchSites.siteTeenFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
@@ -170,7 +165,6 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 186:
                     results = PAsearchSites.siteKellyMadison.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
-        
             ###############
             ## Team Skeet
             ###############
@@ -204,6 +198,17 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 271:
                 if searchAll or (searchSiteID >= 271 and searchSiteID <= 276):
+                    Log("We made it into the Babes section")
+                    title = title.replace('"','').replace(":","").replace("!","").replace("(","").replace(")","").replace("&","")
+                    words = title.split(" ")
+                    title = ""
+                    for word in words:
+                        if "'" not in word:
+                            title = title + word + " "
+                    searchSettings = PAsearchSites.getSearchSettings(title)
+                    searchTitle = searchSettings[2]
+                    Log("Babes searchTitle: " + searchTitle)
+                    encodedTitle = urllib.quote(searchTitle)
                     results = PAsearchSites.siteBabes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -333,16 +338,16 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.sitePornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             siteNum += 1 
-        
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
         movieGenres = PAgenres.PhoenixGenres()
-        
+
         HTTP.ClearCache()
 
         Log('******UPDATE CALLED*******')
-        
+
         siteID = int(str(metadata.id).split("|")[1])
         Log(str(siteID))
         ##############################################################
@@ -352,7 +357,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 1:
             metadata = PAsearchSites.siteBlacked.update(metadata,siteID,movieGenres)
-            
+
         ##############################################################
         ##                                                          ##
         ##   Blacked Raw                                            ##
@@ -360,7 +365,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 0:
             metadata = PAsearchSites.siteBlacked.updateRaw(metadata,siteID,movieGenres)
-        
+
         ##############################################################
         ##                                                          ##
         ##   Brazzers                                               ##
@@ -368,12 +373,12 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 2 or (siteID >= 54 and siteID <= 81):
             metadata = PAsearchSites.siteBrazzers.update(metadata,siteID,movieGenres)
-                
+
         ##############################################################
         ##                                                          ##
         ##   Naughty America                                        ##
         ##                                                          ##
-        ##############################################################        
+        ##############################################################
         if siteID >= 5 and siteID <= 51:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres)
 
@@ -392,7 +397,6 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 53:
             metadata = PAsearchSites.siteGirlsway.update(metadata,siteID,movieGenres)
-
 
         ##############################################################
         ##                                                          ##
@@ -649,4 +653,3 @@ class PhoenixAdultAgent(Agent.Movies):
         metadata.genres.clear()
         Log("Genres")
         movieGenres.processGenres(metadata)
-       

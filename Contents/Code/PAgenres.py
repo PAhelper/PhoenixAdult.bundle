@@ -42,6 +42,10 @@ class PhoenixGenres:
                 skip = True
             if "hd videos" == newGenre.lower():
                 skip = True
+            if "show less" == newGenre.lower():
+                skip = True
+            if "show more" == newGenre.lower():
+                skip = True
 
             ##### Replace
             if "big ass" == newGenre.lower() or "big booty" == newGenre.lower() or "bib booty" == newGenre.lower() or "girl big ass" == newGenre.lower():
