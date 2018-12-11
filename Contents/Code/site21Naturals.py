@@ -28,7 +28,7 @@ def update(metadata,siteID,movieGenres):
 
     # Summary
     metadata.studio = "21Naturals"
-    metadata.summary = detailsPageElements.xpath('//div[contains(@class,"sceneDesc")]')[0].text_content()[70:]
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class,"sceneDesc")]')[0].text_content()[70:].strip()
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
     releasedDate = detailsPageElements.xpath('//div[@class="updatedDate"]')[0].text_content()[14:24]
     date_object = datetime.strptime(releasedDate, '%Y-%m-%d')

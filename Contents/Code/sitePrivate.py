@@ -1,5 +1,18 @@
 import PAsearchSites
 import PAgenres
+
+def posterAlreadyExists(posterUrl,metadata):
+    for p in metadata.posters.keys():
+        Log(p.lower())
+        if p.lower() == posterUrl.lower():
+            Log("Found " + posterUrl + " in posters collection")
+            return True
+
+    for p in metadata.art.keys():
+        if p.lower() == posterUrl.lower():
+            return True
+    return False
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     searchSiteName = PAsearchSites.getSearchSiteName(searchSiteID)
     searchResults = HTML.ElementFromURL('https://www.private.com/search.php?query=' + encodedTitle)
@@ -34,7 +47,7 @@ def update(metadata, siteID, movieGenres):
     # Summary
     paragraph = detailsPageElements.xpath('//meta[@itemprop="description"]')[0].get('content')
     # paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n', '').replace('  ', '') + "\n\n"
-    metadata.summary = paragraph[:-10]
+    metadata.summary = paragraph
     tagline = detailsPageElements.xpath('//span[@class="title-site"]')[0].text_content()
     metadata.collections.clear()
     metadata.tagline = tagline
@@ -47,7 +60,7 @@ def update(metadata, siteID, movieGenres):
 
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.xpath('//a')[0].text_content().lower()
+            genreName = genreLink.xpath('.//a')[0].text_content().lower()
             movieGenres.addGenre(genreName)
 
     # Date
@@ -78,15 +91,41 @@ def update(metadata, siteID, movieGenres):
     art = detailsPageElements.xpath('//meta[@itemprop="thumbnailUrl"]')[0].get('content')
     Log("posters DL: " + art)
     metadata.posters[art] = Proxy.Preview(HTTP.Request(art, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+    metadata.art[art] = Proxy.Preview(HTTP.Request(art, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
 
-    backgrounds = detailsPageElements.xpath('//div[@class="slick-slide"]')
+    #backgrounds = detailsPageElements.xpath('//div[@class="slick-slide"]')
     posterNum = 1
-    Log('Len ' + str(len(backgrounds)))
-    for background in backgrounds:
-        Log(background.get("class"))
-        img = background.xpath('.//a')[0].get("href")
-        metadata.art[img] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        metadata.posters[img] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        posterNum = posterNum + 1
+    backgrounds = detailsPageElements.xpath('//meta[@itemprop="contentURL"]')[0].get('content')
+    i = 1
+    j = backgrounds.rfind("upload/")
+    k = backgrounds.rfind("trailers/")
+    sceneID = backgrounds[j+7:k-1]
+    backgrounds = backgrounds[:k] + "Fullwatermarked/"
+    Log('Backgrounds Base URL: ' + backgrounds)
+    for i in range(1,10):
+        posterUrl = backgrounds + sceneID.lower() + "_" + "{0:0=3d}".format(i*5) + ".jpg"
+        if not posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #posterUrl = posterUrl[:-6] + "01.jpg"
+                #Add the image proxy items to the collection
+                if(width > 1):
+                    # Item is a poster
+
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+                if(width > 100):
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
+
+            except:
+                pass
+
+        #Log('Background: ' + img)
+        #metadata.art[img] = Proxy.Preview(HTTP.Request(img, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+        #metadata.posters[img] = Proxy.Preview(HTTP.Request(img, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
 
     return metadata

@@ -84,6 +84,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - LegalPorno does not have high quality pictures to be used for metadata.
 
 ## Change Log/Updates
+- 2018-12-11 8:00AM CST - Fixed bugs in Private metadata and images
+- 2018-12-08 3:00PM CST - Fixed bugs in PornFidelity search and metadata, and in Babes search results
 - 2018-12-06 8:00AM CST - Worked on adding PornPros Network sites based on SwissPlexCode's Lubed code, but realized they don't have a search on their site :( Fixed a bug in the Twisty's code that was preventing the release date, also spruced up the poster code so it pulls 5 posters and 1 bg image to choose from
 - 2018-12-05 8:00AM CST - Realized PureTaboo is made by same studio as XEmpire, so copied my recently updated code for Hardx into the PureTaboo file, then made the few changes needed...
 - 2018-12-03 7:00PM CST - Lots of little bug fixes to XEmpire sites (though they still don't seem to pull poster/bg images) and GloryholeSecrets
