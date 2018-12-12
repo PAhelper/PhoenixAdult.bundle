@@ -46,12 +46,7 @@ def update(metadata,siteID,movieGenres):
     metadata.studio = "PornFidelity"
     metadata.summary = detailsPageElements.xpath('//p[contains(@class,"card-text")]')[0].text_content()
     metadata.title = detailsPageElements.xpath('//h4')[0].text_content()[36:]
-    if "Kelly Madison \#" in metadata.title:
-        tagline = "Kelly Madison"
-    elif "Teenfidelity \#" in metadata.title:
-        tagline = "TeenFidelity"
-    else:
-        tagline = "PornFidelity"
+    tagline = "PornFidelity"
     Log(metadata.title)
     metadataParts = detailsPageElements.xpath('//div[contains(@class,"episode-summary")]//h4')
     for metadataPart in metadataParts:
@@ -63,6 +58,7 @@ def update(metadata,siteID,movieGenres):
             metadata.year = metadata.originally_available_at.year 
 
     metadata.tagline = tagline
+    metadata.collections.clear()
     metadata.collections.add(tagline)
 
     # Genres

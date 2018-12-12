@@ -34,8 +34,9 @@ import sitePrivate
 import sitePassionHD
 import siteFantasyHD
 import sitePornPros
+import siteDigitalPlayground
 
-searchSites = [None] * 328
+searchSites = [None] * 329
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -364,6 +365,7 @@ searchSites[324] = ["CumDisgrace","CumDisgrace","https://www.pornpros.com","http
 searchSites[325] = ["CockCompetition","CockCompetition","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com/search/videos/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -376,7 +378,7 @@ def getSearchSiteName(siteID):
 def getSearchSiteIDByFilter(searchFilter):
     searchID = 0
     for sites in searchSites:
-        if sites[0].lower().replace(" ","") in searchFilter.lower().replace(".com","") or sites[0].lower().replace(" ","") in searchFilter.lower().replace(".com","").replace(" ",""):
+        if sites[0].lower().replace(" ","").replace("[","").replace("]","") in searchFilter.lower().replace(".com","") or sites[0].lower().replace(" ","").replace("[","").replace("]","") in searchFilter.lower().replace(".com","").replace(" ",""):
             return searchID
         searchID += 1
     return 9999

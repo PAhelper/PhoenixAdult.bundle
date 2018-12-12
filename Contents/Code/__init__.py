@@ -337,6 +337,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or (searchSiteID >= 308 and searchSiteID <= 327):
                     results = PAsearchSites.sitePornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## DigitalPlayground
+            ###############
+            if siteNum == 328:
+                if searchAll or searchSiteID == 328:
+                    results = PAsearchSites.siteDigitalPlayground.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -638,7 +645,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 307:
-            metadata = PAsearchSites.sitePassionHD.update(metadata,siteID,movieGenres)
+            metadata = PAsearchSites.siteFantasyHD.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ##                                                          ##
@@ -647,6 +654,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 308 and siteID <= 327:
             metadata = PAsearchSites.sitePornPros.update(metadata,siteID,movieGenres)
+
+        ##############################################################
+        ##                                                          ##
+        ##   DigitalPlayground                                      ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 328:
+            metadata = PAsearchSites.siteDigitalPlayground.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add

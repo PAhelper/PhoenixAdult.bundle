@@ -17,21 +17,20 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchSiteName = PAsearchSites.getSearchSiteName(searchSiteID)
     searchResults = HTML.ElementFromURL('https://www.private.com/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[@class="col-lg-3 col-md-4 col-sm-6 col-xs-6"]'):
-        Log(searchResult.get('class'))
+        #Log(searchResult.get('class'))
         titleNoFormatting = searchResult.xpath('.//div[@class="scene"]//div//h3//a')[0].text_content()
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//div[@class="scene"]//div//h3//a')[0].get('href').replace('/','_')
         Log("ID: " + curID)
         # releasedDate = searchResult.xpath('.//div[@class="release-info"]//div[@class="views-date-box"]//span[@class="date-added"]')[0].text_content()
 
-        girlName = searchResult.xpath('.//div[@class="scene"]//div//p[@class="scene-models"]//a')[0].text_content()
+        #girlName = searchResult.xpath('.//div[@class="scene"]//div//p[@class="scene-models"]//a')[0].text_content()
 
-        Log("CurID" + str(curID))
-        lowerResultTitle = str(titleNoFormatting).lower()
-        
-        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Private]"
+        #Log("CurID" + str(curID))
+        #lowerResultTitle = str(titleNoFormatting).lower()
+        #titleNoFormatting = girlName + " - " + titleNoFormatting + " [Private]"
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Private]", score = score, lang = lang))
     return results
 
 
