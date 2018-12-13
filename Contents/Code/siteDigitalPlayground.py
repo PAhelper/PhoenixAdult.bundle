@@ -28,15 +28,30 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 
 def update(metadata, siteID, movieGenres):
-    url = str(metadata.id).split("|")[0].replace('_', '/')
-    Log('url :' + url)
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/'))
 
     metadata.studio = "Digital Playground"
 
-    # Summary
-    summary = detailsPageElements.xpath('//span[text()="SYNOPSIS"]/following::span')[0].text_content().strip()
-    tagline = detailsPageElements.xpath('//a[@class="full-scene-button "]')[0].text_content().strip()
+    # Tagline
+    try:
+		tagline = detailsPageElements.xpath('//a[@class="full-scene-button "]')[0].text_content().strip()
+	except:
+		pass
+
+	# Summary
+    try:
+		#Typical summary for Flixxx and Raw Cuts, etc.
+		summary = detailsPageElements.xpath('//span[text()="SYNOPSIS"]/following::span')[0].text_content().strip()
+	except:
+		pass
+	try:
+		#Series keep their summary on the Series Info page
+		seriesPage = detailsPageElements.xpath('//a[text()="info"]')[0].get("href")
+		seriesPageElements = HTML.ElementFromURL(seriesPage)
+		summary = seriesPageElements.xpath('//div[@class="overview"]/following::p')[0].text_content().strip()
+		tagline = "Series: " + seriesPageElements.xpath('//h1')[0].text_content().strip()
+	except:
+		pass
     if tagline == "Full Movie":
         tagline = "Blockbuster"
     tagline = "DP " + tagline
@@ -66,7 +81,7 @@ def update(metadata, siteID, movieGenres):
     # Actors
     metadata.roles.clear()
     searchPageElements = HTML.ElementFromURL("https://www.digitalplayground.com/search/videos/" + urllib.quote(title))
-    actors = searchPageElements.xpath('//div[@class="title-text"]//a')
+    actors = searchPageElements.xpath('//div[@class="title-text"][0]//a')
     if len(actors) > 0:
         for actorLink in actors:
             role = metadata.roles.new()
