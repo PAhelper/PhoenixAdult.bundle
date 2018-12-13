@@ -82,7 +82,7 @@ def update(metadata,siteID,movieGenres):
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL('http://www.gloryholesecrets.com/tour/'+actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[@class="thumbs"]')[0].get("src")
-            role.photo = actorPhotoURL
+            role.photo = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
 
     #Posters
     i = 1
@@ -95,7 +95,7 @@ def update(metadata,siteID,movieGenres):
 
     for poster in detailsPageElements.xpath('//div[@class="grid_4"]//img'):
         posterUrl = "http://gloryholesecrets.com" + poster.get('src')
-        Log("posterURL: " , posterUrl)
+        Log("posterURL: " + posterUrl)
         if not posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:

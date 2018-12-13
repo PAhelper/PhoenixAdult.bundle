@@ -83,7 +83,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 
 - LegalPorno does not have high quality pictures to be used for metadata.
 
+- GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
+
 ## Change Log/Updates
+- 2018-12-13 8:00AM CST - Fixed minor bugs in GloryholeSecrets; also discovered a bunch more sites that follow the XEmpire template, should be easy adds
+- 2018-12-12 10:00AM CST - Applied recent PornFidelity fixes to TeenFidelity and Kelly Madison, added support for Digital Playground videos (full movies not yet supported)
 - 2018-12-11 8:00AM CST - Fixed bugs in Private metadata and images
 - 2018-12-08 3:00PM CST - Fixed bugs in PornFidelity search and metadata, and in Babes search results
 - 2018-12-06 8:00AM CST - Worked on adding PornPros Network sites based on SwissPlexCode's Lubed code, but realized they don't have a search on their site :( Fixed a bug in the Twisty's code that was preventing the release date, also spruced up the poster code so it pulls 5 posters and 1 bg image to choose from
