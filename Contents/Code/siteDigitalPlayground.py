@@ -34,24 +34,24 @@ def update(metadata, siteID, movieGenres):
 
     # Tagline
     try:
-		tagline = detailsPageElements.xpath('//a[@class="full-scene-button "]')[0].text_content().strip()
-	except:
-		pass
+        tagline = detailsPageElements.xpath('//a[@class="full-scene-button "]')[0].text_content().strip()
+    except:
+        pass
 
-	# Summary
+    # Summary
     try:
-		#Typical summary for Flixxx and Raw Cuts, etc.
-		summary = detailsPageElements.xpath('//span[text()="SYNOPSIS"]/following::span')[0].text_content().strip()
-	except:
-		pass
-	try:
-		#Series keep their summary on the Series Info page
-		seriesPage = detailsPageElements.xpath('//a[text()="info"]')[0].get("href")
-		seriesPageElements = HTML.ElementFromURL(seriesPage)
-		summary = seriesPageElements.xpath('//div[@class="overview"]/following::p')[0].text_content().strip()
-		tagline = "Series: " + seriesPageElements.xpath('//h1')[0].text_content().strip()
-	except:
-		pass
+        #Typical summary for Flixxx and Raw Cuts, etc.
+        summary = detailsPageElements.xpath('//span[text()="SYNOPSIS"]/following::span')[0].text_content().strip()
+    except:
+        pass
+    try:
+        #Series keep their summary on the Series Info page
+        seriesPage = detailsPageElements.xpath('//a[text()="info"]')[0].get("href")
+        seriesPageElements = HTML.ElementFromURL(seriesPage)
+        summary = seriesPageElements.xpath('//div[@class="overview"]/following::p')[0].text_content().strip()
+        tagline = "Series: " + seriesPageElements.xpath('//h1')[0].text_content().strip()
+    except:
+        pass
     if tagline == "Full Movie":
         tagline = "Blockbuster"
     tagline = "DP " + tagline
