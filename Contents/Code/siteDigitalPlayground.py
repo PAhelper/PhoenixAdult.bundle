@@ -23,7 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("ID: " + curID)
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [DigitalPlayground]", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang))
     return results
 
 
@@ -80,8 +80,13 @@ def update(metadata, siteID, movieGenres):
 
     # Actors
     metadata.roles.clear()
-    searchPageElements = HTML.ElementFromURL("https://www.digitalplayground.com/search/videos/" + urllib.quote(title))
-    actors = searchPageElements.xpath('//div[@class="title-text"][0]//a')
+    try:
+        # This should work for most things
+        actors = detailsPageElements.xpath('//span[text()="STARRING"]/following::span//a')
+    except:
+        # Fallback plan is to find the actors on the Search Page results
+        searchPageElements = HTML.ElementFromURL("https://www.digitalplayground.com/search/videos/" + urllib.quote(title))
+        actors = searchPageElements.xpath('//h4[contains(text(),"'+title+'"]/following-sibling::a')
     if len(actors) > 0:
         for actorLink in actors:
             role = metadata.roles.new()
