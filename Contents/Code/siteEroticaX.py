@@ -19,7 +19,7 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
-    searchResults = HTML.ElementFromURL('https://www.eroticax.com/en/search/' + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="tlcTitle"]//a'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()

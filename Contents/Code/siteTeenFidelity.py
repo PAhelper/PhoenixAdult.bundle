@@ -1,7 +1,8 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search/?search=" + encodedTitle)
+    searchPageContent = HTTP.Request("https://www.pornfidelity.com")
+    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search/?site=3&page=1&search=" + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
     searchPageResult = searchPageContent[len(searchPageContent)-1][:-2]
     searchPageResult = searchPageResult.replace('\\n',"").replace('\\',"")
@@ -24,7 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%b %m, $Y')
             score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + ", " + releasedDate + "]"
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
     return results
@@ -40,7 +41,7 @@ def update(metadata,siteID,movieGenres):
     # Summary
     metadata.studio = "PornFidelity"
     metadata.summary = detailsPageElements.xpath('//p[contains(@class,"card-text")]')[0].text_content()
-    metadata.title = detailsPageElements.xpath('//h4')[0].text_content()[36:]
+    metadata.title = detailsPageElements.xpath('//h4')[0].text_content()[36:].strip()
     tagline = "TeenFidelity"
     Log(metadata.title)
     metadataParts = detailsPageElements.xpath('//div[contains(@class,"episode-summary")]//h4')

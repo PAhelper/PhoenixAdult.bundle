@@ -39,7 +39,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.title
-        strippedTitle = title.replace('"','').replace("'","").replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","")
+        strippedTitle = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","")
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year

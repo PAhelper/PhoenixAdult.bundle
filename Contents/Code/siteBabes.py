@@ -21,7 +21,7 @@ def posterAlreadyExists(posterUrl,metadata):
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
     i=0
-    searchResults = HTML.ElementFromURL('https://www.babes.com/tour/search/all/keyword/' + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//a[@class="scene-title notracking"]'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
