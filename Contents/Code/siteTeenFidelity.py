@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-    searchPageContent = HTTP.Request("https://www.pornfidelity.com")
+    searchPageContent = HTTP.Request("https://www.pornfidelity.com") #The search page seems to redirect to PornFidelity.com if you didn't just come from there, so I open this first to trick it...
     searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search/?site=3&page=1&search=" + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
     searchPageResult = searchPageContent[len(searchPageContent)-1][:-2]
@@ -53,8 +53,8 @@ def update(metadata,siteID,movieGenres):
             metadata.originally_available_at = date_object
             metadata.year = metadata.originally_available_at.year 
 
-    metadata.collections.clear()
     metadata.tagline = tagline
+    metadata.collections.clear()
     metadata.collections.add(tagline)
 
     # Genres

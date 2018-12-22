@@ -668,3 +668,7 @@ class PhoenixAdultAgent(Agent.Movies):
         metadata.genres.clear()
         Log("Genres")
         movieGenres.processGenres(metadata)
+
+        ##############################################################
+        ## Add Content Rating
+        metadata.content_rating = 'XXX'

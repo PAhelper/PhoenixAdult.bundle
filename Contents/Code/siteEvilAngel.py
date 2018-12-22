@@ -50,8 +50,31 @@ def update(metadata,siteID,movieGenres):
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
     # Director
-    #directedBy = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')[0].text_content()
-    #metadata.director = directedBy.strip()
+    try:
+        directedBy = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')[0].text_content().strip()
+        metadata.directors.clear()
+        metadata.directors.add(directedBy)
+    except:
+        pass
+
+    # director  
+    #try:
+    #  htmldirector = html.xpath('//p[@class="director"]/a')
+    #  metadata.directors.clear()
+    #  for member in htmldirector:
+    #    dirname = member.text_content().strip()
+    #  try:
+    #    director = metadata.directors.new()
+    #    director.name = dirname
+    #  except:
+    #    try:
+    #      director = metadata.directors.new()
+    #      metadata.directors.add(dirname)
+    #    except: pass
+    #except: pass
+
+
+
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//div[@class="sceneCol sceneColCategories"]//a')

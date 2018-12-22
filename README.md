@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2018-12-22 1:00PM CST - Added XXX as the Content Rating for all videos, added Blockbuster movie support for Digital Playground
 - 2018-12-18 8:00AM CST - Been working on cleaning up the DigitalPlayground support. Also made some improvements to the PornFidelity network searches and some code cleanup here and there
 - 2018-12-13 8:00AM CST - Fixed minor bugs in GloryholeSecrets; also discovered a bunch more sites that follow the XEmpire template, should be easy adds
 - 2018-12-12 10:00AM CST - Applied recent PornFidelity fixes to TeenFidelity and Kelly Madison, added support for Digital Playground videos (full movies not yet supported)

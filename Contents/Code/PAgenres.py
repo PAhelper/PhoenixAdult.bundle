@@ -2,7 +2,7 @@ class PhoenixGenres:
     genresTable = None
     genresNum = 0
     def __init__(self):
-        self.genresTable = [None] * 60
+        self.genresTable = [None] * 100
         self.genresNum = 0
     def addGenre(self,newGenre):
         #Log("GenresNum: " + str(self.genresNum))
@@ -45,6 +45,8 @@ class PhoenixGenres:
             if "show less" == newGenre.lower():
                 skip = True
             if "show more" == newGenre.lower():
+                skip = True
+            if "episode" in newGenre.lower():
                 skip = True
 
             ##### Replace
