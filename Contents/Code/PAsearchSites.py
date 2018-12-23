@@ -38,8 +38,9 @@ import siteDigitalPlayground
 import siteThroated
 import siteSweetheartVideo
 import siteNuruMassage
+import siteSweetSinner
 
-searchSites = [None] * 332
+searchSites = [None] * 333
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -372,6 +373,7 @@ searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digital
 searchSites[329] = ["Throated","Throated","https://www.throated.com","https://www.throated.com/en/search/scene/"]
 searchSites[330] = ["Sweetheart Video","Sweetheart Video","https://www.sweetheartvideo.com","https://www.sweetheartvideo.com/en/search/"]
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.nurumassage.com","https://www.nurumassage.com/en/search/"]
+searchSites[332] = ["SweetSinner","SweetSinner","https://www.sweetsinner.com","https://www.sweetsinner.com/en/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

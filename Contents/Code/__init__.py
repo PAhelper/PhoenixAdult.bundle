@@ -365,6 +365,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 331:
                     results = PAsearchSites.siteNuruMassage.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## SweetSinner
+            ###############
+            if siteNum == 332:
+                if searchAll or searchSiteID == 332:
+                    results = PAsearchSites.siteSweetSinner.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -702,11 +709,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##   SweetheartVideo                                        ##
+        ##   Nuru Massage                                           ##
         ##                                                          ##
         ##############################################################
         if siteID == 331:
             metadata = PAsearchSites.siteNuruMassage.update(metadata,siteID,movieGenres)
+
+        ##############################################################
+        ##                                                          ##
+        ##   SweetSinner                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 332:
+            metadata = PAsearchSites.siteSweetSinner.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add

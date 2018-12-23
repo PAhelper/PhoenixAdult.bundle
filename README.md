@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2018-12-22 8:30PM CST - Added SweetSinner
 - 2018-12-22 8:15PM CST - Added Nuru Massage
 - 2018-12-22 7:45PM CST - Fixed images in XEmpire sites, fixed search results for PorndoePremium, added Throated.com, SweetheartVideo.com, fixed 21Naturals.com
 - 2018-12-22 1:00PM CST - Added XXX as the Content Rating for all videos, added Blockbuster movie support for Digital Playground
@@ -414,4 +415,4 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - Throated
 #### - SweetheartVideo
 #### - Nuru Massage
-
+#### - SweetSinner
