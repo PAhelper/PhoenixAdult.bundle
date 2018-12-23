@@ -83,7 +83,7 @@ def update(metadata,siteID,movieGenres):
     #Posters
     i = 1
     try:
-        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content')
+        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content').replace("https:","http:")
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
@@ -93,7 +93,7 @@ def update(metadata,siteID,movieGenres):
     photoPage = HTML.ElementFromURL(photoPageUrl)
     unlockedPhotos = photoPage.xpath('//a[@class="imgLink pgUnlocked"]')
     for unlockedPhoto in unlockedPhotos:
-        posterUrl = unlockedPhoto.get('href')
+        posterUrl = unlockedPhoto.get('href').replace("https:","http:")
         Log("Poster URL: " + posterUrl)
         if not posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis

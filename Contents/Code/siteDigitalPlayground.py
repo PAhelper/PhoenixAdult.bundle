@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = movie.xpath('.//h4[1]/a[1]')[0].get('title').strip()
         Log("Result Title: " + titleNoFormatting)
         moviePage = PAsearchSites.getSearchBaseURL(siteNum) + movie.xpath('.//div[@class="release-info"]/div[@class="info-left"]/div[@class="subtitle-container"]/div/span[@class="subtitle"]/h4/a')[0].get('href')
-        curID = moviePage.replace('/','_')
+        curID = moviePage.replace('/','_').replace("?","!")
         Log("ID: " + curID)
         releaseDate = datetime.strptime(movie.xpath('.//div[@class="release-info"]/div[@class="info-left"]/span[2]')[0].text_content().strip(), "%d %B, %Y")
         lowerResultTitle = str(titleNoFormatting).lower()

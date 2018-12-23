@@ -19,34 +19,33 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
-    searchResults = HTML.ElementFromURL('https://www.puretaboo.com/en/search/' + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="tlcTitle"]//a'):
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
         Log(str(searchResult.get('href')))
-        titleNoFormatting = searchResult.text_content()
-        curID = searchResult.get('href').replace('/','_')
+        titleNoFormatting = searchResult.xpath('.//div[@class="tlcTitle"]/a[1]')[0].text_content().strip()
+        releaseDate = searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()
+        curID = searchResult.xpath('.//div[@class="tlcTitle"]/a[1]')[0].get('href').replace('/','_').replace("?","!")
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Pure Taboo]", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Throated] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Pure Taboo'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    metadata.studio = 'XEmpire'
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace("!","?")
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//meta[@name="twitter:description"]')[0].get('content').strip()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    paragraph = paragraph[20:]
-    metadata.summary = paragraph.strip()
     metadata.collections.clear()
-    tagline = "Pure Taboo"
+    tagline = "Throated"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
 
     # Genres
     movieGenres.clearGenres()
@@ -59,7 +58,7 @@ def update(metadata,siteID,movieGenres):
 
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="updatedDate"]')
+    date = detailsPageElements.xpath('//p[@class="updatedDate"]')
     if len(date) > 0:
         date = date[0].text_content().strip()
         date_object = datetime.strptime(date, '%m-%d-%Y')
@@ -83,7 +82,7 @@ def update(metadata,siteID,movieGenres):
     #Posters
     i = 1
     try:
-        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content')
+        background = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content').replace("https:","http:")
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
@@ -91,7 +90,7 @@ def update(metadata,siteID,movieGenres):
 
     photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href')
     photoPage = HTML.ElementFromURL(photoPageUrl)
-    unlockedPhotos = photoPage.xpath('//a[@class="imgLink pgUnlocked"]')
+    unlockedPhotos = photoPage.xpath('//a[@class="imgLink"]')
     for unlockedPhoto in unlockedPhotos:
         posterUrl = unlockedPhoto.get('href').replace("https:","http:")
         Log("Poster URL: " + posterUrl)

@@ -344,6 +344,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 328:
                     results = PAsearchSites.siteDigitalPlayground.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## Throated
+            ###############
+            if siteNum == 329:
+                if searchAll or searchSiteID == 329:
+                    results = PAsearchSites.siteThroated.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Sweetheart Video
+            ###############
+            if siteNum == 330:
+                if searchAll or searchSiteID == 330:
+                    results = PAsearchSites.siteSweetheartVideo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -662,6 +676,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 328:
             metadata = PAsearchSites.siteDigitalPlayground.update(metadata,siteID,movieGenres)
+
+        ##############################################################
+        ##                                                          ##
+        ##   Throated                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 329:
+            metadata = PAsearchSites.siteThroated.update(metadata,siteID,movieGenres)
+
+        ##############################################################
+        ##                                                          ##
+        ##   SweetheartVideo                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 330:
+            metadata = PAsearchSites.siteSweetheartVideo.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add

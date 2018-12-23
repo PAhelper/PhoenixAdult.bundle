@@ -2,33 +2,24 @@ import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="video-item-big"]'):
-        
+    for searchResult in searchResults.xpath('//div[@class="video-item"]'):
         #Log(searchResult.text_content())
-        titleNoFormatting = searchResult.xpath('.//a[@class="v-title"]')[0].text_content()
+        titleNoFormatting = searchResult.xpath('.//a[@class="item-top"]')[0].get('data-title')
+        subSite = searchResult.xpath('.//a[@class="item-top"]')[0].get('data-brand')
         Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get("href")
+        curID = searchResult.xpath('.//a[@class="item-top"]')[0].get('href')
         curID = curID.replace('/','+')
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//span[@class="v-stat"]//span[@class="txt"]')[0].text_content()
-        releasedDate = datetime.strptime(releasedDate, '%d.%m.%y').strftime('%Y-%m-%d')
-        Log(releasedDate)
-        Log(str(curID))
         lowerResultTitle = str(titleNoFormatting).lower()
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         else:
             searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%Y-%m-%d')
             score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = "[" + releasedDate + "] " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]"
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "/"+subSite+"]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
-
-
-
     return results
-
-
 
 def update(metadata,siteID,movieGenres):
     Log('******UPDATE CALLED*******')
@@ -39,15 +30,17 @@ def update(metadata,siteID,movieGenres):
 
     # Summary
     metadata.studio = "Porndoe Premium"
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content()
+    porndoeJson = detailsPageElements.xpath('//script[@type="application/ld+json"]')[0].text_content()
+    j = porndoeJson.find('"uploadDate":')
+    k = porndoeJson.find('T', j)
+    releaseDate = porndoeJson[j+14:k].replace('"','')
+    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
     metadata.title = detailsPageElements.xpath('//h1[@class="big-container-title"]')[0].text_content()
-    releasedDate = detailsPageElements.xpath('//div[@class="col date"]')[0].text_content()[71:-37]
-    Log(releasedDate)
-    date_object = datetime.strptime(releasedDate, '%d.%m.%y')
+    #releasedDate = detailsPageElements.xpath('//div[@class="col date"]')[0].text_content()[71:-37]
+    date_object = datetime.strptime(releaseDate, '%Y-%m-%d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
     metadata.tagline = detailsPageElements.xpath('//div[@class="col channel"]//a')[0].text_content()
-    Log(metadata.tagline)
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
 
