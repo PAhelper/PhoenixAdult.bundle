@@ -17,7 +17,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     temp = str(metadata.id).split("|")[0].replace('_','/')
 
@@ -95,21 +95,16 @@ def update(metadata,siteID,movieGenres):
 
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//div[contains(@class,"models-name")]')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = actorLink.xpath('.//a')[0].text_content()
-            role.name = actorName
             actorPageURL = actorLink.xpath('.//a')[0].get("href")
-
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
-            
             actorPhotoURL = actorPage.xpath('//div[contains(@class,"model-picture__thumb js-model-picture__thumb")]')[0]
             actorPhotoURL = actorPhotoURL.xpath('.//img')[0].get("data-bind").split("'")[1]
-            Log("pic: " + actorPhotoURL)
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
     valid_names = list()

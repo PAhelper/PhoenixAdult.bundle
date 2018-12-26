@@ -23,7 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 
-def update(metadata, siteID, movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_', '/')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
@@ -48,20 +48,17 @@ def update(metadata, siteID, movieGenres):
         movieGenres.addGenre(genreName)
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     titleActors = ""
     actors = detailsPageElements.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]//div[@class="row"]//div[@class="col-6 col-md-12"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
-
             actorPageURL = 'https://fantasy-hd.com' + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorName = actorPage.xpath('//div[@class="col-md-3 order-md-2 mb-2 details"]//h1')[0].text_content()
             titleActors = titleActors + actorName + " & "
-            role.name = actorName
             actorPhotoURL = "https:" + actorPage.xpath('//div[@class="col-md-6 order-md-1 mb-4 image"]//a//img')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
         metadata.title = metadata.title
 

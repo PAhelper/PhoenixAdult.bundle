@@ -18,7 +18,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL('https://www.newsensations.com/tour_ns/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//h4//a'):
         Log(str(searchResult.get('href')))
@@ -30,7 +30,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'New Sensations'
     url = str(metadata.id).split("|")[0].replace('_','/')
@@ -68,19 +68,16 @@ def update(metadata,siteID,movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li//span[@class="tour_update_models"]//a')
     Log("Actors found: "+str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            #actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
     #i = 1

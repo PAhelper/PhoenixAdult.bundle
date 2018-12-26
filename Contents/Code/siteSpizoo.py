@@ -22,7 +22,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 
-def update(metadata, siteID, movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_', '/')
 
     url = temp
@@ -59,21 +59,17 @@ def update(metadata, siteID, movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     titleActors = ""
     actors = detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row line"]//div[@class="col-3"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
-
             actorPageURL = 'https://www.spizoo.com' + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorName = actorPage.xpath('//div[@class="model-titular col-12"]//h1')[0].text_content()
-            Log('actorName ' + actorName)
             titleActors = titleActors + actorName + " & "
-            role.name = actorName
             actorPhotoURL = "https://www.spizoo.com" + actorPage.xpath('//div[@class="model-bio-pic"]//img')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
         metadata.title = metadata.title
 

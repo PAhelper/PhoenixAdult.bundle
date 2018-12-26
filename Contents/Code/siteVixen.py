@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         
@@ -23,7 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_','/')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
@@ -52,17 +52,15 @@ def update(metadata,siteID,movieGenres):
     movieGenres.addGenre("Glamcore")
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//p[@id="castme-subtitle"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = actorLink.text_content()
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL("https://www.vixen.com"+actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[@class="thumb-img"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
     posters = detailsPageElements.xpath('//div[@class="swiper-slide"]')

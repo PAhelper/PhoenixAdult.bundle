@@ -18,7 +18,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
     i=0
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -39,7 +39,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         i = i + 1
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Babes'
     temp = str(metadata.id).split("|")[0].replace('_','/')
@@ -76,18 +76,15 @@ def update(metadata,siteID,movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//h2[@class="video-bar__models"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
             actorPhotoURL = "http:" + actorPage.xpath('//img[@class="profile-picture"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
     sceneID = detailsPageElements.xpath('//input[@id="sceneid"]')[0].get("value")

@@ -18,7 +18,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="tlcTitle"]//a'):
         Log(str(searchResult.get('href')))
@@ -30,7 +30,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Erotica X]", score = score, lang = lang))
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'XEmpire'
     temp = str(metadata.id).split("|")[0].replace('_','/')
@@ -67,18 +67,15 @@ def update(metadata,siteID,movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            #actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
     i = 1
@@ -107,10 +104,10 @@ def update(metadata,siteID,movieGenres):
                 if(width > 1):
                     # Item is a poster
 
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': photoPageUrl}).content, sort_order = i)
                 if(width > 100):
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': photoPageUrl}).content, sort_order = i+1)
                 i = i + 1
 
             except:

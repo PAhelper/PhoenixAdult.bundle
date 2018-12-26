@@ -48,7 +48,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 
-def update(metadata, siteID, movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     detailsPageURL = str(metadata.id).split("|")[0].replace('_', '/').replace("!","?")
     detailsPageElements = HTML.ElementFromURL(detailsPageURL)
     thisPage = detailsPageElements.xpath('//a[contains(text(),"trailer")]')[0].get('href')
@@ -162,19 +162,16 @@ def update(metadata, siteID, movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     Log("Actors found: " + str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
             actorPageURL = actorLink.get("href")
             if "/model/" in actorPageURL: # dirty hack to filter out the extra actor I was getting that was named for some other scene; actual problem is probably just my xpath search for actors above
-                role = metadata.roles.new()
                 actorName = str(actorLink.text_content().strip())
-                role.name = actorName
                 actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
                 actorPhotoURL = "https:" + actorPage.xpath('//div[@class="preview-image"]//img')[0].get("src")
-                role.photo = actorPhotoURL
-
+                movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters
     j = 1

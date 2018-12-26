@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         
@@ -25,7 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_','/')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
@@ -52,17 +52,15 @@ def update(metadata,siteID,movieGenres):
 
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//p[@id="castme-subtitle"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = actorLink.text_content()
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL("https://www.blacked.com"+actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[@class="thumb-img"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
     valid_names = list()
@@ -79,7 +77,7 @@ def update(metadata,siteID,movieGenres):
         posterNum = posterNum + 1
     return metadata
 
-def updateRaw(metadata,siteID,movieGenres):
+def updateRaw(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     temp = str(metadata.id).split("|")[0].replace('_','/')
 
@@ -107,17 +105,15 @@ def updateRaw(metadata,siteID,movieGenres):
 
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     actors = detailsPageElements.xpath('//span[@id="castme-subtitle"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = actorLink.text_content()
-            role.name = actorName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[@class="thumb-img"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
     valid_names = list()

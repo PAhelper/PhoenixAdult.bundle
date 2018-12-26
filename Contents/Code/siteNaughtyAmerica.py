@@ -25,7 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = titleNoFormatting + " [NA, " + releasedDate +"]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_','/')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
@@ -44,19 +44,17 @@ def update(metadata,siteID,movieGenres):
     metadata.year = metadata.originally_available_at.year    
         
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     titleActors = ""
     actors = detailsPageElements.xpath('//a[@class="scene-title grey-text"]')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = actorLink.text_content()
-            role.name = actorName
             titleActors = titleActors + actorName + " & "
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = "http:" + actorPage.xpath('//img[@class="performer-pic"]')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
         metadata.title = titleActors + metadata.title
 

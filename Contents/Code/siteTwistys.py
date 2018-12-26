@@ -21,7 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 
-def update(metadata, siteID, movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_', '/')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
@@ -57,20 +57,17 @@ def update(metadata, siteID, movieGenres):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
+    movieActors.clearActors()
     titleActors = ""
     actors = detailsPageElements.xpath('//div[@class="left"]//h2//a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
-
             actorPageURL = 'https://www.twistys.com' + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorName = actorPage.xpath('//div[@class="profile-bio-box"]//h1')[0].text_content()
             titleActors = titleActors + actorName + " & "
-            role.name = actorName
             actorPhotoURL = "https:" + actorPage.xpath('//div[@class="profile-pic"]//img')[0].get("src")
-            role.photo = actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
         metadata.title = metadata.title
 

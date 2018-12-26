@@ -18,7 +18,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//h2[contains(@class,"scene-card-title")]//a'):
         Log(str(searchResult.get('href')))
@@ -30,7 +30,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers]", score = score, lang = lang))
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     zzseries = False
     metadata.studio = 'Brazzers'
@@ -66,34 +66,18 @@ def update(metadata,siteID,movieGenres):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
     
-
-    # Starring/Collection 
-    metadata.roles.clear()
+    # Actors
+    movieActors.clearActors()
     #starring = detailsPageElements.xpath('//p[contains(@class,"related-model")]//a')
-    starring = detailsPageElements.xpath('//div[@class="model-card"]//a')
-    memberSceneActorPhotos = detailsPageElements.xpath('//img[contains(@class,"lazy card-main-img")]')
-    memberSceneActorPhotos_TotalNum = len(memberSceneActorPhotos)
-    memberTotalNum = len(starring)/2
-    Log('----- Number of Actors: ' +str(memberTotalNum) + ' ------')
-    Log('----- Number of Photos: ' +str(memberSceneActorPhotos_TotalNum) + ' ------')
-    
-    memberNum = 0
-    for memberCard in starring:
+    actors = detailsPageElements.xpath('//div[@class="model-card"]//a')
+    if len(actors) > 0:
         # Check if member exists in the maleActors list as either a string or substring
         #if any(member.text_content().strip() in m for m in maleActors) == False:
-            role = metadata.roles.new()
-            # Add to actor and collection
-            #role.name = "Test"
-            memberName = memberCard.xpath('//h2[contains(@class,"model-card-title")]//a')[memberNum]
-            memberPhoto = memberCard.xpath('//img[@class="lazy card-main-img" and @alt="'+memberName.text_content().strip()+'"]')[0].get('data-src')
-            role.name = memberName.text_content().strip()
-            memberNum = memberNum + 1
-            memberNum = memberNum % memberTotalNum
-            Log('--------- Photo   ---------- : ' + memberPhoto)
-            role.photo = "http:" + memberPhoto.replace("model-medium.jpg","model-small.jpg")
-
-    detailsPageElements.xpath('//h1')[0].text_content()
-
+        for actorLink in actors:
+            actorName = str(actorLink.text_content().strip())
+            actorPhotoURL = "http:" + memberCard.xpath('//img[@class="lazy card-main-img" and @alt="'+memberName.text_content().strip()+'"]')[0].get('data-src').replace("model-medium.jpg","model-small.jpg")
+            movieActors.addActor(actorName,actorPhotoURL)
+    
     #Posters
     i = 1
     try:
