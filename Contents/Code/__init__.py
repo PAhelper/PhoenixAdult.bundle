@@ -8,6 +8,7 @@ from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
 from SSLEXTRA import sslOptions
+from dateutil.parser import parse
 import PAactors
 import PAgenres
 import PAsearchSites
@@ -57,10 +58,6 @@ class PhoenixAdultAgent(Agent.Movies):
         else:
             searchAll = False
             searchSiteID = searchSettings[0]
-            if searchSiteID == 3:
-                searchSiteID = 0
-            if searchSiteID == 4:
-                searchSiteID = 1
         searchTitle = searchSettings[2]
         Log("Site ID: " + str(searchSettings[0]))
         Log("Search Title: " + searchSettings[2])
@@ -88,6 +85,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 2:
                 if searchAll or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81):
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## SexyHub
+            ###############
+            if siteNum == 3:
+                if searchAll or searchSiteID == 3 or (searchSiteID >= 3 and searchSiteID <= 4):
+                    results = PAsearchSites.networkSexyHub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## Naughty America
@@ -412,6 +416,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 2 or (siteID >= 54 and siteID <= 81):
             metadata = PAsearchSites.siteBrazzers.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   SexyHub                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 3 or (siteID >= 3 and siteID <= 4):
+            metadata = PAsearchSites.networkSexyHub.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##

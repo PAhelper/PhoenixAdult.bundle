@@ -1,10 +1,5 @@
 import PAsearchSites
 import PAgenres
-def tagAleadyExists(tag,metadata):
-    for t in metadata.genres:
-        if t.lower() == tag.lower():
-            return True
-    return False
 
 def posterAlreadyExists(posterUrl,metadata):
     for p in metadata.posters.keys():
@@ -69,13 +64,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     movieActors.clearActors()
     #starring = detailsPageElements.xpath('//p[contains(@class,"related-model")]//a')
-    actors = detailsPageElements.xpath('//div[@class="model-card"]//a')
+    actors = detailsPageElements.xpath('//div[@class="model-card"]/div[@class="card-image"]/a/img[@class="lazy card-main-img"]')
     if len(actors) > 0:
         # Check if member exists in the maleActors list as either a string or substring
         #if any(member.text_content().strip() in m for m in maleActors) == False:
         for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPhotoURL = "http:" + memberCard.xpath('//img[@class="lazy card-main-img" and @alt="'+memberName.text_content().strip()+'"]')[0].get('data-src').replace("model-medium.jpg","model-small.jpg")
+            actorName = actorLink.get('alt')
+            actorPhotoURL = "http:" + actorLink.get('data-src').replace("model-medium.jpg","model-small.jpg")
             movieActors.addActor(actorName,actorPhotoURL)
     
     #Posters

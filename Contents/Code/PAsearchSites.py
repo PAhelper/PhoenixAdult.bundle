@@ -39,13 +39,14 @@ import siteThroated
 import siteSweetheartVideo
 import siteNuruMassage
 import siteSweetSinner
+import networkSexyHub
 
 searchSites = [None] * 333
-searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
-searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
+searchSites[0] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
+searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
-searchSites[4] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
-searchSites[3] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
+searchSites[3] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[4] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[5] = ["My Friends Hot Mom","My Friends Hot Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[6] = ["My First Sex Teacher","My First Sex Teacher","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[7] = ["Seduced By A Cougar","Seduced By A Cougar","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]

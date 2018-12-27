@@ -1,12 +1,5 @@
 import PAsearchSites
 import PAgenres
-from dateutil.parser import parse
-
-def tagAleadyExists(tag,metadata):
-    for t in metadata.genres:
-        if t.lower() == tag.lower():
-            return True
-    return False
 
 def posterAlreadyExists(posterUrl,metadata):
     for p in metadata.posters.keys():
