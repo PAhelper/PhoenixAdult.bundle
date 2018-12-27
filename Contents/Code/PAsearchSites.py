@@ -41,7 +41,7 @@ import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
 
-searchSites = [None] * 333
+searchSites = [None] * 339
 searchSites[0] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -375,6 +375,12 @@ searchSites[329] = ["Throated","Throated","https://www.throated.com","https://ww
 searchSites[330] = ["Sweetheart Video","Sweetheart Video","https://www.sweetheartvideo.com","https://www.sweetheartvideo.com/en/search/"]
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.nurumassage.com","https://www.nurumassage.com/en/search/"]
 searchSites[332] = ["SweetSinner","SweetSinner","https://www.sweetsinner.com","https://www.sweetsinner.com/en/search/"]
+searchSites[333] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[334] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[335] = ["Girlfriends","Girlfriends","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[336] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[337] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[338] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

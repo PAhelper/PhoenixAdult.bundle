@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2018-12-27 2:00PM CST - Updated Brazzers and RealityKings search results to include subsite and release date, added support for SexyHub sites
 - 2018-12-26 1:30PM CST - Added PAactors.py to help clean and match Actors
 - 2018-12-22 8:45PM CST - Updated Girlsway to match the rest of the XEmpire code
 - 2018-12-22 8:30PM CST - Added SweetSinner
@@ -410,11 +411,18 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Darkx
  -  Lesbianx
  -  Eroticax
-#### - Gloryhole Secrets
+#### - Gloryhole Secrets *Title Search (includes actress first name)
 #### - New Sensations
 #### - Pure Taboo
-#### - Swallowed / TrueAnal / Nymphos
+#### - Swallowed / TrueAnal / Nymphos *Title Search (usually includes actress first name)
 #### - Throated
 #### - SweetheartVideo
 #### - Nuru Massage
 #### - SweetSinner
+#### - SexyHub *Title Search
+ -  Dane Jones
+ -  Fitness Rooms
+ -  Girlfriends
+ -  Lesbea
+ -  Massage Rooms
+ -  MomXXX

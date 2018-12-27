@@ -7,7 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('href').replace('/','_')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        subSite = searchResult.xpath('.//div[@class="card-info__meta"]//a[1]')[0].text_content.strip().replace(' ','')
+        subSite = searchResult.xpath('.//div[@class="card-info__meta"]//a[1]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//span[@class="card-info__meta-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [RealityKings/"+subSite+"] "+releaseDate, score = score, lang = lang))    

@@ -90,7 +90,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## SexyHub
             ###############
             if siteNum == 3:
-                if searchAll or searchSiteID == 3 or (searchSiteID >= 3 and searchSiteID <= 4):
+                if searchAll or searchSiteID == 2 or (searchSiteID >= 333 and searchSiteID <= 338):
                     results = PAsearchSites.networkSexyHub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -422,7 +422,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   SexyHub                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 3 or (siteID >= 3 and siteID <= 4):
+        if siteID == 2 or (siteID >= 333 and siteID <= 338):
             metadata = PAsearchSites.networkSexyHub.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

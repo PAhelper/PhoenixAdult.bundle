@@ -15,22 +15,21 @@ def posterAlreadyExists(posterUrl,metadata):
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//h2[contains(@class,"scene-card-title")]//a'):
-        Log(str(searchResult.get('href')))
-        titleNoFormatting = searchResult.get('title')
-        curID = searchResult.get('href').replace('/','_')
-        lowerResultTitle = str(titleNoFormatting).lower()
+    for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
+        titleNoFormatting = searchResult.xpath('.//a[1]')[0].get('title')
+        curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href')).replace('/','_').replace('?','!')
+        Log("curID: "+curID)
+        subSite = searchResult.xpath('.//span[@class="label-text"]')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//time')[0].text_content().strip()).strftime('%Y-%m-%d')
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers]", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    zzseries = False
     metadata.studio = 'Brazzers'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    url = str(metadata.id).split("|")[0].replace('_','/')
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
