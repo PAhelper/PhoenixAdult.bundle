@@ -58,8 +58,12 @@ class PhoenixAdultAgent(Agent.Movies):
         else:
             searchAll = False
             searchSiteID = searchSettings[0]
+            if searchSiteID == 3:
+                searchSiteID = 0
+            if searchSiteID == 4:
+                searchSiteID = 1
         searchTitle = searchSettings[2]
-        Log("Site ID: " + str(searchSettings[0]))
+        Log("Site ID: " + str(searchSiteID))
         Log("Search Title: " + searchSettings[2])
         if searchSettings[1]:
             searchByDateActor = True
@@ -73,10 +77,17 @@ class PhoenixAdultAgent(Agent.Movies):
         siteNum = 0
         for searchSite in PAsearchSites.searchSites:
             ###############
-            ## Blacked and Blacked Raw Search
+            ## Blacked Raw
             ###############
-            if siteNum == 0 or siteNum == 1:
-                if searchAll or searchSiteID == 0 or searchSiteID == 1:
+            if siteNum == 0:
+                if searchAll or searchSiteID == 0:
+                    results = PAsearchSites.siteBlacked.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Blacked
+            ###############
+            if siteNum == 1:
+                if searchAll or searchSiteID == 1:
                     results = PAsearchSites.siteBlacked.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -89,8 +100,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## SexyHub
             ###############
-            if siteNum == 3:
-                if searchAll or searchSiteID == 2 or (searchSiteID >= 333 and searchSiteID <= 338):
+            if siteNum == 333:
+                if searchAll or searchSiteID == 333 or (searchSiteID >= 333 and searchSiteID <= 339):
                     results = PAsearchSites.networkSexyHub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -400,7 +411,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 1:
             metadata = PAsearchSites.siteBlacked.update(metadata,siteID,movieGenres,movieActors)
-
+            
         ##############################################################
         ##                                                          ##
         ##   Blacked Raw                                            ##

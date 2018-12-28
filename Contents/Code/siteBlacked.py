@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         
@@ -21,7 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
             score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + ", " + releasedDate + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
@@ -33,6 +33,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "Blacked"
+    metadata.tagline = "Blacked"
+    metadata.collections.clear()
+    metadata.collections.add(metadata.tagline)
     paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph
@@ -52,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # Actors
-    movieActors.clearActors()
+    metadata.roles.clear()
     actors = detailsPageElements.xpath('//p[@id="castme-subtitle"]//a')
     if len(actors) > 0:
         for actorLink in actors:
@@ -85,7 +88,10 @@ def updateRaw(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
-    metadata.studio = "BlackedRaw"
+    metadata.studio = "Blacked"
+    metadata.tagline = "BlackedRaw"
+    metadata.collections.clear()
+    metadata.collections.add(metadata.tagline)
     paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph
@@ -105,7 +111,7 @@ def updateRaw(metadata,siteID,movieGenres,movieActors):
 
 
     # Actors
-    movieActors.clearActors()
+    metadata.roles.clear()
     actors = detailsPageElements.xpath('//span[@id="castme-subtitle"]//a')
     if len(actors) > 0:
         for actorLink in actors:

@@ -41,12 +41,12 @@ import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
 
-searchSites = [None] * 339
-searchSites[0] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
-searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
+searchSites = [None] * 341
+searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
+searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
-searchSites[3] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[4] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[4] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
+searchSites[3] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[5] = ["My Friends Hot Mom","My Friends Hot Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[6] = ["My First Sex Teacher","My First Sex Teacher","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[7] = ["Seduced By A Cougar","Seduced By A Cougar","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
@@ -375,12 +375,14 @@ searchSites[329] = ["Throated","Throated","https://www.throated.com","https://ww
 searchSites[330] = ["Sweetheart Video","Sweetheart Video","https://www.sweetheartvideo.com","https://www.sweetheartvideo.com/en/search/"]
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.nurumassage.com","https://www.nurumassage.com/en/search/"]
 searchSites[332] = ["SweetSinner","SweetSinner","https://www.sweetsinner.com","https://www.sweetsinner.com/en/search/"]
-searchSites[333] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[334] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[335] = ["Girlfriends","Girlfriends","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[336] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[337] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[338] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[333] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[334] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[335] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[336] = ["Girlfriends","Girlfriends","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -401,7 +403,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = mediaTitle.replace(".", " ")
     mediaTitle = mediaTitle.replace(" - ", " ")
     mediaTitle = mediaTitle.replace("-", " ")
-    # Search Site ID or -1 is all
+    # Search Site ID of -1 is all
     searchSiteID = None
     # Date/Actor or Title
     searchType = None
