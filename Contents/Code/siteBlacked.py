@@ -38,7 +38,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
     paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    metadata.summary = paragraph
+    metadata.summary = paragraph.strip()
     metadata.title = detailsPageElements.xpath('//h1[@id="castme-title"]')[0].text_content()
     date = detailsPageElements.xpath('//span[@class="player-description-detail"]//span')[0].text_content()
     date_object = datetime.strptime(date, '%B %d, %Y')
@@ -94,7 +94,7 @@ def updateRaw(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
     paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    metadata.summary = paragraph
+    metadata.summary = paragraph.strip()
     metadata.title = detailsPageElements.xpath('//div[@id="castme-title"]')[0].text_content()
     date = detailsPageElements.xpath('//span[@class="right"]//span')[0].text_content()
     date_object = datetime.strptime(date, '%B %d, %Y')

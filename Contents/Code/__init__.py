@@ -433,7 +433,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   SexyHub                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 2 or (siteID >= 333 and siteID <= 338):
+        if siteID == 333 or (siteID >= 333 and siteID <= 338):
             metadata = PAsearchSites.networkSexyHub.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
