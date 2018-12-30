@@ -41,7 +41,7 @@ import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
 
-searchSites = [None] * 341
+searchSites = [None] * 342
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -348,8 +348,8 @@ searchSites[302] = ["Russian Teen Ass","Russian Teen Ass","https://www.private.c
 searchSites[303] = ["Sex on the beach","Sex on the beach","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[304] = ["Private Stars","Private Stars","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[305] = ["Tight and Teen","Tight and Teen","https://www.private.com","https://www.private.com/search.php?query="]
-searchSites[306] = ["Passion-HD","PassionHD","https://www.passion-hd.com","https://passion-hd.com/video/"]
-searchSites[307] = ["Fantasy-HD","FantasyHD","https://www.fantasy-hd.com","https://fantasy-hd.com/video/"]
+searchSites[306] = ["PassionHD","PassionHD","https://www.passion-hd.com","https://passion-hd.com/video/"]
+searchSites[307] = ["FantasyHD","FantasyHD","https://www.fantasy-hd.com","https://fantasy-hd.com/video/"]
 searchSites[308] = ["PornPros","PornPros","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[309] = ["18YearsOld","18YearsOld","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[310] = ["RealExGirlfriends","RealExGirlfriends","https://www.pornpros.com","https://pornpros.com/video/"]
@@ -383,6 +383,7 @@ searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sex
 searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

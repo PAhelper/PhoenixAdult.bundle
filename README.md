@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2018-12-29 9:00PM CST - Added NaughtyAmerica's new site 'Big Cock Bully', changed PassionHD and FantasyHD where they can hopefully be used now
 - 2018-12-28 4:30PM CST - Updated Brazzers to add a Collection for the Series if a file is part of a series, along with some minor tweaks to Blacked and BlackedRaw Studio/Tagline
 - 2018-12-28 11:15AM CST - Fixed Blacked and BlackedRaw search results
 - 2018-12-27 2:00PM CST - Updated Brazzers and RealityKings search results to include subsite and release date, added support for SexyHub sites
