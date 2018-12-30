@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-    url = 'https://passion-hd.com/video/' + searchTitle.lower().replace(" ","-")
+    url = 'http://passion-hd.com/video/' + searchTitle.lower().replace(" ","-")
     searchResults = HTML.ElementFromURL(url)
 
     searchResult = searchResults.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]')[0]
@@ -53,11 +53,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     actors = detailsPageElements.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]//div[@class="row"]//div[@class="col-6 col-md-12"]//a')
     if len(actors) > 0:
         for actorLink in actors:
-            actorPageURL = 'https://passion-hd.com' + actorLink.get("href")
+            actorPageURL = 'http://passion-hd.com' + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorName = actorPage.xpath('//div[@class="col-md-3 order-md-2 mb-2 details"]//h1')[0].text_content()
             titleActors = titleActors + actorName + " & "
-            actorPhotoURL = "https:" + actorPage.xpath('//div[@class="col-md-6 order-md-1 mb-4 image"]//a//img')[0].get("src")
+            actorPhotoURL = "http:" + actorPage.xpath('//div[@class="col-md-6 order-md-1 mb-4 image"]//a//img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
         metadata.title = metadata.title
@@ -65,7 +65,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Posters
 
-    background = "https:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
+    background = "http:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
     Log("BG DL: " + background)
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
