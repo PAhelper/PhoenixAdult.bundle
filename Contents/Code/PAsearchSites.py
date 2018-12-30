@@ -334,7 +334,7 @@ searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.t
 searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
-searchSites[292] = ["Lubed","Lubed","https://lubed.com","https://lubed.com/video/"]
+searchSites[292] = ["Lubed","Lubed","http://lubed.com","http://lubed.com/video/"]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[295] = ["Anal Introductions","Anal Introductions","https://www.private.com","https://www.private.com/search.php?query="]
