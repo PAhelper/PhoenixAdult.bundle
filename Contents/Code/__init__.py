@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.title
-        strippedTitle = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","")
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG','').replace('1080p','').replace('720p','')
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -49,10 +49,10 @@ class PhoenixAdultAgent(Agent.Movies):
         if media.primary_metadata is not None:
             year = media.primary_metadata.year
 
-        Log("Getting Search Settings for: " + strippedTitle)
+        Log("Getting Search Settings for: " + title)
         searchDate = None
         searchSiteID = None
-        searchSettings = PAsearchSites.getSearchSettings(strippedTitle)
+        searchSettings = PAsearchSites.getSearchSettings(title)
         if searchSettings[0] == 9999:
             searchAll = True
         else:
@@ -214,17 +214,6 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 271:
                 if searchAll or (searchSiteID >= 271 and searchSiteID <= 276):
-                    Log("We made it into the Babes section")
-                    title = title.replace('"','').replace(":","").replace("!","").replace("(","").replace(")","").replace("&","")
-                    words = title.split(" ")
-                    title = ""
-                    for word in words:
-                        if "'" not in word:
-                            title = title + word + " "
-                    searchSettings = PAsearchSites.getSearchSettings(title)
-                    searchTitle = searchSettings[2]
-                    Log("Babes searchTitle: " + searchTitle)
-                    encodedTitle = urllib.quote(searchTitle)
                     results = PAsearchSites.siteBabes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############

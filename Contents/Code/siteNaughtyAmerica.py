@@ -35,9 +35,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = "Naughty America"
     #paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    metadata.summary = detailsPageElements.xpath('//p[@class="synopsis_txt"]')[0].text_content()
-    site = detailsPageElements.xpath('//a[@class="site-title grey-text"]')[0].text_content()
-    metadata.title = " in " + site
+    metadata.summary = detailsPageElements.xpath('//p[@class="synopsis_txt"]')[0].text_content().strip()
+    subSite = detailsPageElements.xpath('//a[@class="site-title grey-text"]')[0].text_content()
+    metadata.tagline = subSite
+    metadata.collections.clear()
+    metadata.collections.add(metadata.tagline)
+
+    metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
     date = detailsPageElements.xpath('//p[@class="scenedate"]//span')[0].text_content()
     date_object = datetime.strptime(date, '%b %d, %Y')
     metadata.originally_available_at = date_object
@@ -45,18 +49,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         
     # Actors
     movieActors.clearActors()
-    titleActors = ""
     actors = detailsPageElements.xpath('//a[@class="scene-title grey-text"]')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
-            titleActors = titleActors + actorName + " & "
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = "http:" + actorPage.xpath('//img[@class="performer-pic"]')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
-        titleActors = titleActors[:-3]
-        metadata.title = titleActors + metadata.title
 
     # Genres
     movieGenres.clearGenres()

@@ -396,7 +396,7 @@ def getSearchSiteName(siteID):
 def getSearchSiteIDByFilter(searchFilter):
     searchID = 0
     for sites in searchSites:
-        if sites[0].lower().replace(" ","").replace("[","").replace("]","") in searchFilter.lower().replace(".com","") or sites[0].lower().replace(" ","").replace("[","").replace("]","") in searchFilter.lower().replace(".com","").replace(" ",""):
+        if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
             return searchID
         searchID += 1
     return 9999
@@ -439,6 +439,14 @@ def getSearchSettings(mediaTitle):
         Log("6")
     else:
         searchTitle = mediaTitle
+
+    # Babes site search doesn't seem to handle words with apostrophes very well, so let's strip those words out
+    if searchSiteID >= 271 and searchSiteID <= 276:
+        words = searchTitle.split(" ")
+        searchTitle = ""
+        for word in words:
+            if "'" not in word:
+                searchTitle = searchTitle + word + " "
 
     #Search Type
     if unicode(searchTitle[:4], 'utf-8').isnumeric():

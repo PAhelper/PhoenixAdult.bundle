@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-02 4:00PM CST - Updated NaughtyAmerica metadata so the subsite is added as the tagline and a collection, and changed to the more interesting title instead of the one used in Search Results. In the process, I also put the Babes apostrophe-handling workaround in a more elegant place (in PAsearchSites.getSearchSettings instead of __init__)
 - 2019-01-02 11:30AM CST - Added code to pull full name for GloryHoleSecrets where available, also changed the Studio to Aziani (as they have a few other sites as well)
 - 2018-12-31 11:30AM CST - I started getting redirected to beta.blacked.com sometimes, started writing code to accommodate that new site layout
 - 2018-12-29 9:00PM CST - Added NaughtyAmerica's new site 'Big Cock Bully', changed PassionHD and FantasyHD where they can hopefully be used now
