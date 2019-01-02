@@ -14,7 +14,7 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL('https://www.lesbianx.com/en/search/' + encodedTitle)
+    searchResults = HTML.ElementFromURL('http://www.lesbianx.com/en/search/' + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="tlcTitle"]//a'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()

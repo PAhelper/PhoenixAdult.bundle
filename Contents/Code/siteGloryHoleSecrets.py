@@ -32,7 +32,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'GloryHoleSecrets'
+    metadata.studio = 'Aziani'
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     #url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
@@ -71,6 +71,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
+            sceneImg = detailsPageElements.xpath('//div[@class="grid_10 alpha"]/a/img')[0].get('src')
+            actorFullName = sceneImg.split('/')[4]
+            actorFirstName = actorName.split(' ')[0]
+            if actorFirstName.lower() == actorFullName[:len(actorFirstName)].lower() and len(actorFullName) > len(actorName):
+                actorLastName = actorFullName[len(actorFirstName):].capitalize()
+                actorName = actorFirstName + " " + actorLastName
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL('http://www.gloryholesecrets.com/tour/'+actorPageURL)
             actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//img[@class="thumbs"]')[0].get("src")
@@ -79,7 +85,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Posters
     i = 1
     try:
-        background = "http://www.gloryholesecrets.com" + detailsPageElements.xpath('//div[@class="grid_10 alpha"]/img')[0].get('src')
+        background = "http://www.gloryholesecrets.com" + detailsPageElements.xpath('//div[@class="grid_10 alpha"]/a/img')[0].get('src')
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:

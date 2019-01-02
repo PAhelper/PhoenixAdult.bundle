@@ -329,7 +329,7 @@ searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://t
 searchSites[284] = ["Nympho","Nympho","https://tour.nympho.com","https://tour.nympho.com/search/"]
 searchSites[285] = ["EroticaX","EroticaX","https://www.eroticax.com","https://www.eroticax.com/en/search/"]
 searchSites[286] = ["DarkX","DarkX","https://www.darkx.com","https://www.darkx.com/en/search/"]
-searchSites[287] = ["LesbianX","LesbianX","https://www.lesbianx.com","https://www.lesbianx.com/en/search/"]
+searchSites[287] = ["LesbianX","LesbianX","http://www.lesbianx.com","http://www.lesbianx.com/en/search/"]
 searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]

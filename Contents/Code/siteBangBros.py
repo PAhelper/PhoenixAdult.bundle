@@ -58,9 +58,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//div[contains(@class,"vdoTags")]//a')
-
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
