@@ -3,7 +3,7 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     searchString = encodedTitle.replace(" ","+")
     if not searchAll:
-        searchString = searchString + " " + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
+        searchString = searchString + "+" + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="scene-item"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
