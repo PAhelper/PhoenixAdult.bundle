@@ -3,7 +3,7 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     searchString = encodedTitle.replace(" ","+")
     if not searchAll:
-        searchString = searchString + "+in+" + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
+        searchString = searchString + " " + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="scene-item"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
@@ -55,7 +55,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = actorLink.text_content()
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = "http:" + actorPage.xpath('//img[@class="performer-pic"]')[0].get("src")
+            try:
+                actorPhotoURL = "http:" + actorPage.xpath('//img[@class="performer-pic"]')[0].get("src")
+            except:
+                actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Genres
