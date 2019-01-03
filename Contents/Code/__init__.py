@@ -377,6 +377,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 332:
                     results = PAsearchSites.siteSweetSinner.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## Dogfart
+            ###############
+            if siteNum == 342:
+                if searchAll or searchSiteID == 342:
+                    results = PAsearchSites.siteDogfart.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## JulesJordan
+            ###############
+            if siteNum == 343:
+                if searchAll or searchSiteID == 343:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -738,6 +752,23 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 332:
             metadata = PAsearchSites.siteSweetSinner.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   Dogfart                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 342:
+            metadata = PAsearchSites.siteDogfart.update(metadata,siteID,movieGenres)
+
+        ##############################################################
+        ##                                                          ##
+        ##   JulesJordan                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 343:
+            Log('On est la')
+            metadata = PAsearchSites.sitejulesJordan.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add

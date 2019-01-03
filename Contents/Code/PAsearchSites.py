@@ -40,8 +40,10 @@ import siteSweetheartVideo
 import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
+import siteDogfart
+import siteJulesJordan
 
-searchSites = [None] * 342
+searchSites = [None] * 344
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -384,6 +386,8 @@ searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","h
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[342] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[343] = ["JulesJordan","JulesJordan", "https://www.julesjordan.com","https://www.julesjordan.com/trial/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
