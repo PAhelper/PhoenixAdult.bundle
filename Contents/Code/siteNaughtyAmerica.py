@@ -49,7 +49,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//a[@class="scene-title grey-text"]')
+    actors = detailsPageElements.xpath('//a[contains(@class,"scene-title grey-text")]')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
