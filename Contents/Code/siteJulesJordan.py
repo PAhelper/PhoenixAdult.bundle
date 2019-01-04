@@ -10,6 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log(str(titleNoFormatting))
         releaseDate = searchResults.xpath('//div[@class="update_details"]//div[@class="cell update_date"]')[i].text_content().strip()
         curID = searchResult.get('href').replace('_','£').replace('/','_')
+        Log('CurID : ' + curID )
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
 
@@ -23,23 +24,24 @@ def update(metadata,siteID,movieGenres):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Jules Jordan'
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('£','_')
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    Log('temp :' + temp)
+    url = temp
     Log('Url : ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
 
-    paragraph = detailsPageElements.xpath('//p[@class="section-detail section-detail--description"]')[0].text_content()
+    paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph.strip()
-    tagline = detailsPageElements.xpath('//a[@class="video-bar__release-site"]')[0].text_content()
-    metadata.collections.clear()
-    tagline = tagline.strip()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
+    #tagline = detailsPageElements.xpath('//a[@class="video-bar__release-site"]')[0].text_content()
+    #metadata.collections.clear()
+    #tagline = tagline.strip()
+    #metadata.tagline = tagline
+    #metadata.collections.add(tagline)
+    metadata.title = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content()
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//p[@class="section-detail section-detail--tags last"]//a')
+    genres = detailsPageElements.xpath('//span[@class="update_tags"]')
 
     if len(genres) > 0:
         for genreLink in genres:
@@ -48,16 +50,16 @@ def update(metadata,siteID,movieGenres):
 
 
     # Release Date
-    date = detailsPageElements.xpath('//span[@class="video-info__date"]')
+    date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content()
     if len(date) > 0:
-        date = date[0].text_content().strip()
-        date_object = datetime.strptime(date, '%b %d, %Y')
+        date = date.strip()
+        date_object = datetime.strptime(date, '%m/%d/%Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
     metadata.roles.clear()
-    actors = detailsPageElements.xpath('//h2[@class="video-bar__models"]//a')
+    actors = detailsPageElements.xpath('//span[@class="update_models"]//a')
     if len(actors) > 0:
         for actorLink in actors:
             role = metadata.roles.new()
@@ -65,14 +67,13 @@ def update(metadata,siteID,movieGenres):
             actorName = actorName.replace("\xc2\xa0", " ")
             role.name = actorName
             actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
-            actorPhotoURL = "http:" + actorPage.xpath('//img[@class="profile-picture"]')[0].get("src")
+            actorPage = HTML.ElementFromURL(actorPageURL)
+            actorPhotoURL = actorPage.xpath('//div[@class="cell_top model_bio_pic"]/img')[0].get("src")
             role.photo = actorPhotoURL
 
     #Posters
-    sceneID = detailsPageElements.xpath('//input[@id="sceneid"]')[0].get("value")
     try:
-        background = "https://static-hw.babescontent.com/scenes/" + str(sceneID) + "/s970x545.jpg"
+        background = detailsPageElements.xpath('//div[@class="mejs-poster mejs-layer"]/img')[0].get("src")
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:

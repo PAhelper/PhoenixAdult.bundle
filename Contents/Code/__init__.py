@@ -768,7 +768,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 343:
             Log('On est la')
-            metadata = PAsearchSites.sitejulesJordan.update(metadata,siteID,movieGenres)
+            metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres)
 
         ##############################################################
         ## Cleanup Genres and Add
