@@ -34,11 +34,11 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('title')
-        curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href')).replace('/','_').replace('?','!')
-        if PAsearchSites.getSearchSiteName(siteNum) == "Fitness Rooms":
+        curID = (PAsearchSites.getSearchBaseURL(searchSiteID) + searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href')).replace('/','_').replace('?','!')
+        if PAsearchSites.getSearchSiteName(searchSiteID) == "Fitness Rooms":
             subSite = "Fitness Rooms"
         else:
             subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
@@ -100,7 +100,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="tag-card"]//a[contains(@href,"/model/")]')
+    actors = detailsPageElements.xpath('//article[@class="tag-card"]/a[contains(@href,"/tour/model/")]')
     Log("Actors found: "+str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
