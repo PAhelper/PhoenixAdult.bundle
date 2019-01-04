@@ -15,15 +15,14 @@ def posterAlreadyExists(posterUrl,metadata):
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL('https://tour.nympho.com/search/' + encodedTitle)
-    for searchResult in searchResults.xpath('//h3[@class="title"]//a'):
-        Log(str(searchResult.get('href')))
-        titleNoFormatting = searchResult.text_content()
-        #relDate = searchResults.xpath('//span[@class="fa fa-calendar"]')[0].text_content().strip()
-        curID = searchResult.get('href').replace('/','_')
+    for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
+        titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()
+        curID = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('./span[@class="date hidden-xs"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Nympho]", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Nympho] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -31,9 +30,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'KB Productions'
     url = str(metadata.id).split("|")[0].replace('_','/')
     detailsPageElements = HTML.ElementFromURL(url)
+    art = []
 
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="desc"]')[0].text_content().strip()
+    paragraph = detailsPageElements.xpath('//div[contains(@class,"desc")]')[0].text_content().strip()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph
     tagline = 'Nympho'
@@ -56,11 +56,11 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="model-photo"]//img')[0].get("src")
+            actorPhotoURL = actorPage.xpath('//div[contains(@class,"wrap-model")]//img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Release Date
-    date = detailsPageElements.xpath('//span[@class="post-date"]')
+    date = detailsPageElements.xpath('//span[@class="date hidden-xs"]')
     if len(date) > 0:
         date = date[0].text_content().strip()
         date_object = parse(date)
@@ -68,37 +68,34 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     #Posters
-    i = 1
-    try:
-        background = detailsPageElements.xpath('//div[@id="trailer-player"]')[0].get('data-screencap')
-        Log("BG DL: " + background)
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    except:
-        pass
+    art.append(detailsPageElements.xpath('//video[@id="ypp-player"]')[0].get('poster'))
 
-    posterTemplateURL = actorPage.xpath('//a[@href="' + url + '"]//img')[0].get('src')
-    Log("Poster template: " + posterTemplateURL)
-    for i in range(1,10):
-        posterUrl = posterTemplateURL[:-5] + str(i) + ".jpg"
-        Log("Poster URL: " + posterUrl)
-        if not posterAlreadyExists(posterUrl,metadata):
+    for poster in actorPage.xpath('//a[@href="' + url + '"]//img'):
+        art.append(poster.get('src'))
+    for poster in actorPage.xpath('//div[@class="thumb-mouseover"]'):
+        theStyle = poster.get('style')
+        alpha = theStyle.find('http')
+        omega = theStyle.find(');',alpha)
+        art.append(theStyle[alpha:omega].strip())
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #posterUrl = posterUrl[:-6] + "01.jpg"
                 #Add the image proxy items to the collection
                 if(width > 1):
                     # Item is a poster
-
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
                 if(width > 100):
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
-                i = i + 1
-
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
             except:
                 pass
 

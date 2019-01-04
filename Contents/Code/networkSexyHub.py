@@ -38,7 +38,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('title')
         curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href')).replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip().replace(' ','')
+        if PAsearchSites.getSearchSiteName(siteNum) == "Fitness Rooms":
+            subSite = "Fitness Rooms"
+        else:
+            subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
@@ -53,28 +56,34 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
-    metadata.summary  = detailsPageElements.xpath('//div[@class="overview"]/p')[0].text_content().strip()
+    try:
+        metadata.summary  = detailsPageElements.xpath('//div[@class="overview"]/p')[0].text_content().strip()
+    except:
+        metadata.summary  = detailsPageElements.xpath('//div[@class="expandable"]/p')[0].text_content().strip()
     metadata.collections.clear()
-    subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img')[0].get('alt')
+    try:
+        subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img')[0].get('alt')
+    except:
+        subSite = detailsPageElements.xpath('//a[@class="site-logo"]/img')[0].get('alt')
     if "danejones" in subSite:
-        tagline = "DaneJones"
+        tagline = "Dane Jones"
     elif "lesbea" in subSite:
         tagline = "Lesbea"
     elif "momxxx" in subSite:
         tagline = "MomXXX"
-    elif "fitnessrooms" in subSite:
-        tagline = "FitnessRooms"
+    elif "Fitnessrooms" in subSite:
+        tagline = "Fitness Rooms"
     elif "girlfriends" in subSite:
         tagline = "Girlfriends"
     elif "massagerooms" in subSite:
-        tagline = "MassageRooms"
+        tagline = "Massage Rooms"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@class="col-tags"]//a[@rel="nofollow"]')
+    genres = detailsPageElements.xpath('//div[contains(@class,"col-tags")]//a[@rel="nofollow"]')
     Log("Genres found: "+str(len(genres)))
     if len(genres) > 0:
         for genreLink in genres:
@@ -91,7 +100,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="tag-group"]//a')
+    actors = detailsPageElements.xpath('//div[@class="tag-card"]//a[contains(@href,"/model/")]')
     Log("Actors found: "+str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
@@ -110,6 +119,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         background = "http:" + tmp[k+4:j]
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
         pass
 
