@@ -759,7 +759,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 342:
-            metadata = PAsearchSites.siteDogfart.update(metadata,siteID,movieGenres)
+            metadata = PAsearchSites.siteDogfart.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -767,8 +767,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 343:
-            Log('On est la')
-            metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres)
+            metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

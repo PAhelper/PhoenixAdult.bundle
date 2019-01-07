@@ -18,7 +18,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
     i=0
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -27,22 +27,22 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.xpath('//div/h3[@class="scene-title"]')[i].text_content()
         Log(titleNoFormatting)
-        curID = searchResult.get('href').replace("/"," ")
+        curID = searchResult.get('href').replace("/","_")
         Log(curID)
         lowerResultTitle = str(titleNoFormatting).lower()
         subSite = searchResult.xpath('//div/p[@class="help-block"]')[i].text_content()
         Log("subsite: "+ subSite)
-        
+
         site = " [Dogfart"
         if len(subSite) > 0 and subSite != "Dogfart":
-            site = site + "/" + subSite
+            site = site + " / " + subSite
         site = site + "] "
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(329), name = titleNoFormatting + " [Dogfart]" , score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(329), name = titleNoFormatting + site , score = score, lang = lang))
         i = i + 1
     return results
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Dogfart'
     temp = str(metadata.id).split("|")[0].replace('_','/')

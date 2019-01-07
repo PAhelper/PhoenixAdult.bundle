@@ -1,15 +1,15 @@
 import PAsearchSites
 import PAgenres
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     i = 0
-    Log(' On entre dans recherche JulesJordan')
-    for searchResult in searchResults.xpath('//div[@class="update_details"]/a[@title=""]'):
+    for searchResult in searchResults.xpath('//div[@class="update_details"]/a[2]'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResults.xpath('//div[@class="update_details"]/a[2]')[i].text_content()
         Log(str(titleNoFormatting))
         releaseDate = searchResults.xpath('//div[@class="update_details"]//div[@class="cell update_date"]')[i].text_content().strip()
-        curID = searchResult.get('href').replace('_','£').replace('/','_')
+        curID = searchResult.get('href').replace('/','_')
         Log('CurID : ' + curID )
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
@@ -20,10 +20,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 
 
-def update(metadata,siteID,movieGenres):
+def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Jules Jordan'
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('£','_')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('/vids.html','_vids.html')
     Log('temp :' + temp)
     url = temp
     Log('Url : ' + url)
@@ -32,11 +32,11 @@ def update(metadata,siteID,movieGenres):
     paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph.strip()
-    #tagline = detailsPageElements.xpath('//a[@class="video-bar__release-site"]')[0].text_content()
-    #metadata.collections.clear()
-    #tagline = tagline.strip()
-    #metadata.tagline = tagline
-    #metadata.collections.add(tagline)
+    tagline = "JulesJordan"
+    metadata.collections.clear()
+    tagline = tagline.strip()
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
     metadata.title = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content()
 
     # Genres
@@ -59,7 +59,8 @@ def update(metadata,siteID,movieGenres):
 
     # Actors
     metadata.roles.clear()
-    actors = detailsPageElements.xpath('//span[@class="update_models"]//a')
+    movieActors.clearActors()
+    actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
     if len(actors) > 0:
         for actorLink in actors:
             role = metadata.roles.new()
@@ -67,44 +68,49 @@ def update(metadata,siteID,movieGenres):
             actorName = actorName.replace("\xc2\xa0", " ")
             role.name = actorName
             actorPageURL = actorLink.get("href")
+            Log('acteur page : ' + actorPageURL)
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="cell_top model_bio_pic"]/img')[0].get("src")
-            role.photo = actorPhotoURL
+            actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0_1x")
+            if (str(actorPhotoURL) == 'None' ) :
+                actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0")
 
+            Log('acteur URL img: ' + str(actorPhotoURL))
+            movieActors.addActor(actorName,actorPhotoURL)
+            role.photo = actorPhotoURL
     #Posters
     try:
-        background = detailsPageElements.xpath('//div[@class="mejs-poster mejs-layer"]/img')[0].get("src")
-        Log("BG DL: " + background)
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        background = detailsPageElements.xpath('//div[@class="mejs-poster mejs-layer"]')[0].get("style")
+        Log("BG DL: " + str(background))
+        #metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
-        pass
-
+    	pass
     i = 1
-    for i in range(1,10):
-        posterUrl = "https://static-hw.babescontent.com/scenes/" + str(sceneID) + "/s310x161_" + str(i) + ".jpg"
-        Log("Poster URL: " + posterUrl)
-        if not posterAlreadyExists(posterUrl,metadata):
+    page = detailsPageElements.xpath('//div[@class="cell content_tab"]/a')[0].get("href")
+    Log(page)
+    Searchposter = HTML.ElementFromURL(page)
+    for posterUrls in Searchposter.xpath('//div[@class="photo_gallery_thumbnail_wrapper"]/a/img'):
+        posterUrl = posterUrls.get("src")
+        Log(str(posterUrl))
             #Download image file for analysis
-            try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
-                resized_image = Image.open(im)
-                width, height = resized_image.size
-                #posterUrl = posterUrl[:-6] + "01.jpg"
-                #Add the image proxy items to the collection
-                if(width > 1):
+        try:
+            img_file = urllib.urlopen(posterUrl)
+            im = StringIO(img_file.read())
+            resized_image = Image.open(im)
+            width, height = resized_image.size
+            #posterUrl = posterUrl[:-6] + "01.jpg"
+            #Add the image proxy items to the collection
+            if(width > 1):
                     # Item is a poster
 
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
-                if(width > 100):
-                    # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i+1)
-                i = i + 1
+                metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
 
-            except:
-                pass
+            i = i + 1
+            if i>10:
+                break
+                
 
-    
+        except:
+            pass
 
     
     return metadata
