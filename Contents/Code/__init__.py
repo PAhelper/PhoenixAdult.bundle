@@ -377,6 +377,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 332:
                     results = PAsearchSites.siteSweetSinner.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## GloryHoleSwallow
+            ###############
+            if siteNum == 342:
+                if searchAll or searchSiteID == 342:
+                    results = PAsearchSites.siteGloryHoleSwallow.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## FullPornNetwork
+            ###############
+            if siteNum == 343:
+                if searchAll or (searchSiteID >= 343 and searchSiteID <= 350):
+                    results = PAsearchSites.networkFPN.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -738,6 +752,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 332:
             metadata = PAsearchSites.siteSweetSinner.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   GloryHoleSwallow                                       ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 342:
+            metadata = PAsearchSites.siteGloryHoleSwallow.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   FullPornNetwork                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 343 and siteID <= 350:
+            metadata = PAsearchSites.networkFPN.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

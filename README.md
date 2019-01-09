@@ -86,6 +86,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-09 11:45AM CST - Added Full Porn Network (Analized, James Deen, Twisted Visual, Only Prince, Bad Daddy POV, POV Perverts, Pervert Gallery, DTF Sluts)
+- 2019-01-04 4:15PM CST - Bugfixes to SexyHub/Fitness Rooms
 - 2019-01-04 11:00AM CST - Updated SexyHub code for Fitness Rooms acting as a separate entity, and bugfixed one of my previous bugfixes in NaughtyAmerica
 - 2019-01-03 5:15PM CST - Another minor bugfix to NaughtyAmerica, this time to Actor metadata
 - 2019-01-03 4:30PM CST - Another minor bugfix to NaughtyAmerica search
@@ -436,3 +438,12 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Lesbea
  -  Massage Rooms
  -  MomXXX
+#### - Full Porn Network
+ -  Analized
+ -  James Deen
+ -  Twisted Visual
+ -  Only Prince
+ -  Bad Daddy POV
+ -  POV Perverts
+ -  Pervert Gallery
+ -  DTF Sluts

@@ -19,6 +19,7 @@ import siteBabes
 import siteEvilAngel
 import siteHardX
 import siteGloryHoleSecrets
+import siteGloryHoleSwallow
 import siteNewSensations
 import sitePureTaboo
 import siteSwallowed
@@ -40,8 +41,9 @@ import siteSweetheartVideo
 import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
+import networkFPN
 
-searchSites = [None] * 342
+searchSites = [None] * 351
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -384,6 +386,15 @@ searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","h
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[342] = ["GloryHoleSwallow","GloryHoleSwallow","https://www.gloryholeswallow.com","https://gloryholeswallow.com/newtour/search.php?query="]
+searchSites[343] = ["Analized","Analized","https://www.analized.com","https://analized.com/search.php?query="]
+searchSites[344] = ["James Deen","James Deen","https://www.jamesdeen.com","https://jamesdeen.com/search.php?query="]
+searchSites[345] = ["Twisted Visual","Twisted Visual","https://www.twistedvisual.com","https://twistedvisual.com/search.php?query="]
+searchSites[346] = ["Only Prince","Only Prince","https://www.onlyprince.com","https://onlyprince.com/search.php?query="]
+searchSites[347] = ["Bad Daddy POV","Bad Daddy POV","https://www.baddaddypov.com","https://baddaddypov.com/search.php?query="]
+searchSites[348] = ["POV Perverts","POV Perverts","https://www.povperverts.net","https://povperverts.net/search.php?query="]
+searchSites[349] = ["Pervert Gallery","Pervert Gallery","https://www.pervertgallery.com","https://pervertgallery.com/search.php?query="]
+searchSites[350] = ["DTF Sluts","DTF Sluts","https://www.dtfsluts.com","https://dtfsluts.com/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

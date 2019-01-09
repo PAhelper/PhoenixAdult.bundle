@@ -39,7 +39,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
-    #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     paragraph = paragraph[20:]
     metadata.summary = paragraph.strip()
     metadata.collections.clear()
