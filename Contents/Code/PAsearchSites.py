@@ -22,9 +22,6 @@ import siteGloryHoleSecrets
 import siteGloryHoleSwallow
 import siteNewSensations
 import sitePureTaboo
-import siteSwallowed
-import siteTrueAnal
-import siteNympho
 import siteEroticaX
 import siteDarkX
 import siteLesbianX
@@ -42,6 +39,7 @@ import siteNuruMassage
 import siteSweetSinner
 import networkSexyHub
 import networkFPN
+import networkSteppedUp
 
 searchSites = [None] * 351
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
@@ -327,7 +325,7 @@ searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholes
 searchSites[280] = ["NewSensations","NewSensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
 searchSites[281] = ["PureTaboo","PureTaboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/search/"]
-searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.true.com/search/"]
+searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/search/"]
 searchSites[284] = ["Nympho","Nympho","https://tour.nympho.com","https://tour.nympho.com/search/"]
 searchSites[285] = ["EroticaX","EroticaX","https://www.eroticax.com","https://www.eroticax.com/en/search/"]
 searchSites[286] = ["DarkX","DarkX","https://www.darkx.com","https://www.darkx.com/en/search/"]

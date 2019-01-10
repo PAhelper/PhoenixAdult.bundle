@@ -256,21 +256,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 282:
                 if searchAll or searchSiteID == 282:
-                    results = PAsearchSites.siteSwallowed.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## TrueAnal
             ###############
             if siteNum == 283:
                 if searchAll or searchSiteID == 283:
-                    results = PAsearchSites.siteTrueAnal.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## Nympho
             ###############
             if siteNum == 284:
                 if searchAll or searchSiteID == 284:
-                    results = PAsearchSites.siteNympho.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## EroticaX
@@ -611,27 +611,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##   Swallowed                                              ##
+        ##   Stepped Up Media                                       ##
         ##                                                          ##
         ##############################################################
-        if siteID == 282:
-            metadata = PAsearchSites.siteSwallowed.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##   TrueAnal                                               ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 283:
-            metadata = PAsearchSites.siteTrueAnal.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##   Nympho                                                 ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 284:
-            metadata = PAsearchSites.siteNympho.update(metadata,siteID,movieGenres,movieActors)
+        if siteID >= 282 and siteID <= 284:
+            metadata = PAsearchSites.networkSteppedUp.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##

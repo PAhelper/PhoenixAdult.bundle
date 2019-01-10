@@ -16,6 +16,8 @@ def posterAlreadyExists(posterUrl,metadata):
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
+        if searchSiteID != 9999:
+            siteNum = searchSiteID
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].get('title')
         curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href')).replace('/','_').replace('?','!')
         Log("curID: "+curID)
