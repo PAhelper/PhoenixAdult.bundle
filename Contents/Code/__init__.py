@@ -391,6 +391,27 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or (searchSiteID >= 343 and searchSiteID <= 350):
                     results = PAsearchSites.networkFPN.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## Dogfart
+            ###############
+            if siteNum == 351:
+                if searchAll or searchSiteID == 351:
+                    results = PAsearchSites.siteDogfart.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## JulesJordan
+            ###############
+            if siteNum == 352:
+                if searchAll or searchSiteID == 352:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## DDFNetwork
+            ###############
+            if siteNum == 353:
+                if searchAll or (searchSiteID >= 353 and searchSiteID <= 367):
+                    results = PAsearchSites.siteDDFNetwork.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -407,6 +428,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         siteID = int(str(metadata.id).split("|")[1])
         Log(str(siteID))
+        #Log('Cover = ' + cover )
         ##############################################################
         ##                                                          ##
         ##   Blacked                                                ##
@@ -752,6 +774,29 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 343 and siteID <= 350:
             metadata = PAsearchSites.networkFPN.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##   Dogfart                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 351:
+            metadata = PAsearchSites.siteDogfart.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   JulesJordan                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 352:
+            metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   DDFNetwork                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 353 and siteID <= 367:
+            metadata = PAsearchSites.siteDDFNetwork.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
