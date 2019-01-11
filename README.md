@@ -448,3 +448,19 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  POV Perverts
  -  Pervert Gallery
  -  DTF Sluts
+ #### - JulesJordan - *Title Search/Actress
+ #### - DDFNetwork - *Title Search/Actress
+ -  HandsOnHardcore
+ -  DDFBusty
+ -  HouseOfTaboo
+ -  EuroGirlsOnGirls
+ -  1By-Day
+ -  ddfnetworkvr
+ -  EuroTeenErotica
+ -  HotLegsandFeet
+ -  OnlyBlowJob
+ -  SandysFantasys
+ -  CherryJul
+ -  EveAngelOfficial
+ -  SexVideoCasting
+ -  HairyTwatter
