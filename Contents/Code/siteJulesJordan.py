@@ -81,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         background = detailsPageElements.xpath('//div[@class="mejs-poster mejs-layer"]')[0].get("style")
         Log("BG DL: " + str(background))
-        #metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
     	pass
     i = 1

@@ -391,6 +391,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or searchSiteID == 343:
                     results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## DDFNetwork
+            ###############
+            if siteNum == 344:
+                if searchAll or (searchSiteID >= 344 and searchSiteID <= 358):
+                    results = PAsearchSites.siteDDFNetwork.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -407,6 +414,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         siteID = int(str(metadata.id).split("|")[1])
         Log(str(siteID))
+        #Log('Cover = ' + cover )
         ##############################################################
         ##                                                          ##
         ##   Blacked                                                ##
@@ -768,6 +776,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 343:
             metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   DDFNetwork                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 344 and siteID <= 358:
+            metadata = PAsearchSites.siteDDFNetwork.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

@@ -42,8 +42,9 @@ import siteSweetSinner
 import networkSexyHub
 import siteDogfart
 import siteJulesJordan
+import siteDDFNetwork
 
-searchSites = [None] * 344
+searchSites = [None] * 359
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -388,6 +389,21 @@ searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.f
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[342] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
 searchSites[343] = ["JulesJordan","JulesJordan", "https://www.julesjordan.com","https://www.julesjordan.com/trial/search.php?query="]
+searchSites[344] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[345] = ["HandsOnHardcore","HandsOnHardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[346] = ["DDFBusty","DDFBusty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[347] = ["HouseOfTaboo","HouseOfTaboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[348] = ["EuroGirlsOnGirls","EuroGirlsOnGirls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[349] = ["1By-Day","1By-Day", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[350] = ["ddfnetworkvr","ddfnetworkvr", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[351] = ["EuroTeenErotica","EuroTeenErotica", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[352] = ["HotLegsandFeet","HotLegsandFeet", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[353] = ["OnlyBlowJob","OnlyBlowJob", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[354] = ["SandysFantasys","SandysFantasys", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[355] = ["CherryJul","CherryJul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[356] = ["EveAngelOfficial","EveAngelOfficial", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[357] = ["SexVideoCasting","SexVideoCasting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[358] = ["HairyTwatter","HairyTwatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
