@@ -1,26 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-#SexyHub sites:
-#MassageRooms
-#MomXXX
-#DaneJones
-#Lesbea
-#Girlfriends
-#FitnessRooms
-
-#FakeHub sites:
-#FakeAgent
-#FakeAgentUK
-#FakeCop
-#FakeTaxi
-#FakeHospital
-#FemaleAgent
-#PublicAgent
-#FemaleFakeTaxi
-#FakeDrivingSchool
-
-
 def posterAlreadyExists(posterUrl,metadata):
     for p in metadata.posters.keys():
         Log(p.lower())

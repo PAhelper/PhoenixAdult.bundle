@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-14 10:00AM CST - Consolidated/added all Gamma Enterprises sites into a single file: networkGammaEnt.py
 - 2019-01-10 10:45AM CST - Consolidated TrueAnal/Swallowed/Nympho into a single file: networkSteppedUp.py
 - 2019-01-09 11:45AM CST - Added Full Porn Network (Analized, James Deen, Twisted Visual, Only Prince, Bad Daddy POV, POV Perverts, Pervert Gallery, DTF Sluts)
 - 2019-01-04 4:15PM CST - Bugfixes to SexyHub/Fitness Rooms
@@ -140,7 +141,6 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 
 ## Supported Networks/Site
 
-#### - 21Naturals *Title Search *Date/Actor Search
 #### - Bang Bros Network *Title Search *Date/Actor Search
 -   Ass Parade
 -   AvaSpice
@@ -224,7 +224,6 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 -   Teens Like It Black
 -   Racks and Blacks
 -   Butts and Blacks
-#### - Girlsway *Title Search
 #### - Kelly Madison *Title Search *Date/Actor Search
 #### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
@@ -418,20 +417,10 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Elegant Anal
  -  Office Obsession
  -  Stepmom Lessons
-#### - Evil Angel
-#### - XEmpire
- -  Hardx
- -  Darkx
- -  Lesbianx
- -  Eroticax
 #### - Gloryhole Secrets *Title Search (includes actress first name)
 #### - New Sensations
 #### - Pure Taboo
 #### - Swallowed / TrueAnal / Nymphos *Title Search (usually includes actress first name)
-#### - Throated
-#### - SweetheartVideo
-#### - Nuru Massage
-#### - SweetSinner
 #### - SexyHub *Title Search
  -  Dane Jones
  -  Fitness Rooms
@@ -448,3 +437,65 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  POV Perverts
  -  Pervert Gallery
  -  DTF Sluts
+#### - Xempire
+ -  Hardx
+ -  Darkx
+ -  Lesbianx
+ -  Eroticax
+#### - Blowpass
+ -  Throated
+ -  MommyBlowsBest
+ -  OnlyTeenBlowjobs
+ -  1000 Facials
+ -  ImmoralLive
+#### - FantasyMassage
+ -  FantasyMassage
+ -  AllGirlMassage
+ -  NuruMassage
+ -  SoapyMassage
+ -  MilkingTable
+ -  MassageParlor
+ -  TrickySpa
+#### - MileHighNetwork
+ -  CherryPop
+ -  SweetSinner
+ -  RealityJunkies
+ -  SweetheartVideo
+ -  LesbianOlderYounger
+ -  DoghouseDigital
+#### - 21Sextury
+ -  AnalTeenAngels
+ -  DeepthroatFrenzy
+ -  DPFanatics
+ -  FootsieBabes
+ -  Gapeland
+ -  LezCuties
+ -  PixandVideo
+#### - 21Naturals
+ -  21Naturals
+ -  21FootArt
+ -  21EroticAnal
+#### - Girlsway
+ -  MommysGirl
+ -  WebYoung
+ -  GirlsTryAnal
+ -  SextapeLesbians
+ -  GirlswayOriginals
+#### - FameDigital
+ -  DevilsFilm
+ -  PeterNorth
+ -  RoccoSiffredi
+ -  TeraPatrick
+#### - OpenlifeNetwork
+ -  SunnyLeone
+ -  LaneSisters
+ -  DylanRyder
+ -  AbbeyBrooks
+ -  AshleyFires
+ -  DevonLee
+ -  HannaHilton
+#### - PureTaboo
+#### - GirlfriendsFilms
+#### - BurningAngel
+#### - EvilAngel
+#### - PrettyDirty
