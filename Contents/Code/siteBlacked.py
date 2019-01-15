@@ -55,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
         paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','')
     except:
-        paragraph = detailsPageElements.xpath('//meta[@content="description"]')[0].get('content')
+        paragraph = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content')
     
     metadata.summary = paragraph.strip()
 

@@ -500,6 +500,7 @@ def getSearchSettings(mediaTitle):
             if "'" not in word:
                 searchTitle = searchTitle + word + " "
 
+    Log("searchTitle (before date processing): "+searchTitle)
     #Search Type
     if unicode(searchTitle[:4], 'utf-8').isnumeric():
         if unicode(searchTitle[5:7], 'utf-8').isnumeric():
@@ -517,7 +518,7 @@ def getSearchSettings(mediaTitle):
                 if unicode(searchTitle[6:8], 'utf-8').isnumeric():
                     searchType = 1
                     searchDate = "20" + searchTitle[0:8].replace(" ","-")
-                    searchTitle = searchTitle[11:]
+                    searchTitle = searchTitle[9:]
                 else:
                     searchType = 0
             else:

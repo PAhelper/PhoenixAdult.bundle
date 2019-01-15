@@ -9,12 +9,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
-        curID = curID[31:-26]
-        curID = curID.replace('/','_')
-        Log("ID: " + curID)
+        curID = curID[:-26]
+        curID = curID.replace('/','_').replace('?','!')
         releasedDate = searchResult.xpath('.//p[@class="entry-date"]')[0].text_content()
 
-        Log("CurID" + str(curID))
         lowerResultTitle = str(titleNoFormatting).lower()
         searchString = searchString.replace("+"," ")
         if searchByDateActor != True:
@@ -26,9 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_','/')
-
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
