@@ -53,7 +53,7 @@ searchSites[6] = ["My First Sex Teacher","My First Sex Teacher","https://tour.na
 searchSites[7] = ["Seduced By A Cougar","Seduced By A Cougar","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[8] = ["My Daughters Hot Friend","My Daughters Hot Friend","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[9] = ["My Wife is My Pornstar","My Wife is My Pornstar","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[10] = ["Tonights Girlfriend Class","Tonights Girlfriend Class","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[10] = ["Tonights Girlfriend Classic","Tonights Girlfriend Classic","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[11] = ["Wives on Vacation","Wives on Vacation","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[12] = ["My Sisters Hot Friend","My Sisters Hot Friend","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[13] = ["Naughty Weddings","Naughty Weddings","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
@@ -436,6 +436,10 @@ searchSites[389] = ["Dylan Ryder","Dylan Ryder","http://www.dylanryder.com","htt
 searchSites[390] = ["Abbey Brooks","Abbey Brooks","http://www.abbeybrooks.com","http://www.abbeybrooks.com/en/search/scene/"]
 searchSites[391] = ["Devon Lee","Devon Lee","http://www.devonlee.com","http://www.devonlee.com/en/search/scene/"]
 searchSites[392] = ["Hanna Hilton","Hanna Hilton","http://www.hannahilton.com","http://www.hannahilton.com/en/search/scene/"]
+searchSites[341] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[341] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[341] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[341] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

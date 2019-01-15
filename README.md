@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-15 7:45AM CST - Added 4 new NaughtyAmerica sites: LA Sluts, Slut Stepsister, Teens Love Cream, and Latina Stepmom
 - 2019-01-14 7:15PM CST - Bugfix and a few enhancements for Evil Angel
 - 2019-01-14 6:30PM CST - Fixed a bug in 2-digit year date matching that was truncating part of the search title, fixed a bug in NaughtyAmerica result URLs that prevented metadata, fixed a bug in Blacked's new beta.blacked.com DOM
 - 2019-01-14 10:00AM CST - Consolidated/added all Gamma Enterprises sites into a single file: networkGammaEnt.py
@@ -230,6 +231,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
 -   My Friends Hot Mom
+-   LA Sluts
+-   Big Cock Bully
+-   Slut Stepsister
+-   Teens Love Cream
+-   Latina Stepmom
 -   My First Sex Teacher
 -   Seduced By A Cougar
 -   My Daughters Hot Friend

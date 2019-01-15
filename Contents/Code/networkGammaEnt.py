@@ -57,8 +57,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             network = 'Evil Angel'
         elif searchSiteID == 382:
             network = 'Pretty Dirty'
-        Log("searchSiteID: "+str(searchSiteID))
-        Log("network: "+network)
 
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+PAsearchSites.getSearchSiteName(searchSiteID)+"] " + releaseDate, score = score, lang = lang))
     return results
@@ -121,7 +119,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     try:
-        dvdLink = detailsPageElements.xpath('//a[contains(@class,"dvdLink")]')[0].get('title').strip()
+        dvdLink = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdLink)
     except:
         pass
