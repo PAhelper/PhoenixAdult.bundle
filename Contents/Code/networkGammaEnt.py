@@ -21,11 +21,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Results Found: "+str(len(searchResults.xpath('//div[@class="tlcDetails"]'))))
     for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
-        Log("titleNoFormatting: "+titleNoFormatting)
         curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
-        Log("curID: "+curID)
-        releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        Log("releaseDate: "+releaseDate)
+        try:
+            releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        except:
+            releaseDate = ''
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
 
@@ -120,6 +120,23 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
+    try:
+        dvdLink = detailsPageElements.xpath('//a[contains(@class,"dvdLink")]')[0].get('title').strip()
+        metadata.collections.add(dvdLink)
+    except:
+        pass
+
+    # Director
+    metadata.directors.clear()
+    try:
+        directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')
+        Log("Directors found: "+str(len(directors)))
+        for director in directors:
+            Log("Director: "+str(director.text_content().strip()))
+            metadata.directors.add(director.text_content().strip())
+    except:
+        pass
+
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//div[@class="sceneCol sceneColCategories"]//a | //div[@class="sceneCategories"]//a')
@@ -160,6 +177,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         omega = picScript.find('"',alpha)
         Log('BG in <script>: '+picScript[alpha:omega].replace('\\',''))
         art.append(picScript[alpha:omega].replace('\\','').replace("https:","http:"))
+
+    try:
+        sceneImg = detailsPageElements.xpath('//img[@class="sceneImage"]')[0].get('src').replace("https:","http:")
+        art.append(sceneImg)
+    except:
+        pass
     
     try:
         photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href').replace("https:","http:")
