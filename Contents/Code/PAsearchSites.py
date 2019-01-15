@@ -436,10 +436,10 @@ searchSites[389] = ["Dylan Ryder","Dylan Ryder","http://www.dylanryder.com","htt
 searchSites[390] = ["Abbey Brooks","Abbey Brooks","http://www.abbeybrooks.com","http://www.abbeybrooks.com/en/search/scene/"]
 searchSites[391] = ["Devon Lee","Devon Lee","http://www.devonlee.com","http://www.devonlee.com/en/search/scene/"]
 searchSites[392] = ["Hanna Hilton","Hanna Hilton","http://www.hannahilton.com","http://www.hannahilton.com/en/search/scene/"]
-searchSites[341] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[341] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[341] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[341] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[393] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[394] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[395] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[396] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
