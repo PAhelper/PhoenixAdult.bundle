@@ -1,4 +1,3 @@
-
 # PhoenixAdult metadata agent
 
 This metadata agent will receive data from multiple sites for scene video releases.
@@ -86,6 +85,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-10 12:30PM CST - Add Primecups, Dogfart, JulesJordan, 21sextury, DDFNetwork
 - 2019-01-10 10:45AM CST - Consolidated TrueAnal/Swallowed/Nympho into a single file: networkSteppedUp.py
 - 2019-01-09 11:45AM CST - Added Full Porn Network (Analized, James Deen, Twisted Visual, Only Prince, Bad Daddy POV, POV Perverts, Pervert Gallery, DTF Sluts)
 - 2019-01-04 4:15PM CST - Bugfixes to SexyHub/Fitness Rooms
@@ -464,3 +464,13 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  EveAngelOfficial
  -  SexVideoCasting
  -  HairyTwatter
+
+#### - Dogfart - *Title Search/Actress
+ - BlacksOnBlondes
+ - InterracialBlowbang
+ - CuckoldSessions
+ - GloryHole
+ - InterracialBlowbang
+ - InterracialPickups
+
+#### - 21sextury - *Title Search/Actress
