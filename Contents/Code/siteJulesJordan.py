@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [JulesJordan] " + releaseDate , score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [JulesJordan] " + releaseDate , score = score, lang = lang))
         i = i + 1
     return results
 
@@ -28,7 +28,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     url = temp
     Log('Url : ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
-
+    
+    indice = str(metadata.id).split("|")[2]
+    titre_search=str(metadata.id).split("|")[3]
+    siteNum = str(metadata.id).split("|")[1]
+    Log('Indice ' + indice)
     paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph.strip()
@@ -41,7 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//span[@class="update_tags"]')
+    genres = detailsPageElements.xpath('//span[@class="update_tags"]/a')
 
     if len(genres) > 0:
         for genreLink in genres:
@@ -78,15 +82,33 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
             role.photo = actorPhotoURL
     #Posters
-    try:
-        background = detailsPageElements.xpath('//div[@class="mejs-poster mejs-layer"]')[0].get("style")
-        Log("BG DL: " + str(background))
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    except:
-    	pass
+    searchbckgs = HTML.ElementFromURL('https://www.julesjordan.com/trial/search.php?query='+ titre_search )
+    j = int(indice)
+    k=0
+    for searchbckg in searchbckgs.xpath('//div[@class="category_listing_wrapper_updates"]/div[@class="update_details"]' ):
+        if k == j:
+            try:
+                for l in range (0,6):
+                    m = 1
+                    srcbckgrd=str("src" + str(l) + "_1x")
+                    background = searchbckg.xpath('./a/img')[0].get(srcbckgrd)
+                    Log('Url BG ' + str(background))
+                    try:
+                        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = m)
+                    except:
+                        pass
+                    l = l + 1
+                    m = m + 1
+                    
+            except: 
+                background = searchbckg.get("src")
+                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)       
+            break   
+        k = k + 1
+        
     i = 1
     page = detailsPageElements.xpath('//div[@class="cell content_tab"]/a')[0].get("href")
-    Log(page)
+
     Searchposter = HTML.ElementFromURL(page)
     for posterUrls in Searchposter.xpath('//div[@class="photo_gallery_thumbnail_wrapper"]/a/img'):
         posterUrl = posterUrls.get("src")

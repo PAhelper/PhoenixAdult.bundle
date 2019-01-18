@@ -43,8 +43,10 @@ import networkSteppedUp
 import siteDogfart
 import siteJulesJordan
 import siteDDFNetwork
+import site21sextury
+import sitePrimecups
 
-searchSites = [None] * 368
+searchSites = [None] * 376
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -413,6 +415,17 @@ searchSites[364] = ["CherryJul","CherryJul", "https://ddfnetwork.com","https://d
 searchSites[365] = ["EveAngelOfficial","EveAngelOfficial", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[366] = ["SexVideoCasting","SexVideoCasting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[367] = ["HairyTwatter","HairyTwatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[368] = ["21sextury","21sextury", "https://www.21sextury.com","https://www.21sextury.com/en/search/"]
+searchSites[369] = ["Primecups","Primecups", "https://www.primecups.com","https://www.primecups.com/movies?q="]
+searchSites[370] = ["BlacksOnBlondes","Blacks On Blondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[371] = ["CuckoldSessions","Cuckold Sessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[372] = ["GloryHole","Glory Hole","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[373] = ["BlacksOnCougars","Blacks On Cougars","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[374] = ["InterracialBlowbang","Interracial Blowbang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+searchSites[375] = ["InterracialPickups","Interracial Pickups","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?nats=&search="]
+
+
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

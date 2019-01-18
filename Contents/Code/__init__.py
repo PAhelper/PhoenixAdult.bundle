@@ -395,7 +395,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Dogfart
             ###############
             if siteNum == 351:
-                if searchAll or searchSiteID == 351:
+                if searchAll or searchSiteID == 351 or (searchSiteID >= 370 and searchSiteID <= 375):
                     results = PAsearchSites.siteDogfart.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -412,6 +412,19 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or (searchSiteID >= 353 and searchSiteID <= 367):
                     results = PAsearchSites.siteDDFNetwork.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            ###############
+            ## 21sextury
+            ###############
+            if siteNum == 368:
+                if searchAll or  searchSiteID == 368:
+                    results = PAsearchSites.site21sextury.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## Primecups
+            ###############
+            if siteNum == 369:
+                if searchAll or  searchSiteID == 369:
+                    results = PAsearchSites.sitePrimecups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
             siteNum += 1 
 
         results.Sort('score', descending=True)
@@ -779,7 +792,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Dogfart                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 351:
+        if siteID == 351 or (siteID >= 370 and siteID <= 375):
             metadata = PAsearchSites.siteDogfart.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -797,6 +810,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 353 and siteID <= 367:
             metadata = PAsearchSites.siteDDFNetwork.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   21sextury                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 368:
+            metadata = PAsearchSites.site21sextury.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   Primecups                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 369:
+            metadata = PAsearchSites.sitePrimecups.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
