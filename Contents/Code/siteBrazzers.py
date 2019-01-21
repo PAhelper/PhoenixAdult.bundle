@@ -14,13 +14,12 @@ def posterAlreadyExists(posterUrl,metadata):
     return False
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
-        if searchSiteID != 9999:
-            siteNum = searchSiteID
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].get('title')
-        curID = ("http://www.brazzers.com" + searchResult.xpath('.//a[1]')[0].get('href')).replace('/','_').replace('?','!')
-        Log("curID: "+curID)
+        curID = (PAsearchSites.getSearchBaseURL(int(siteNum)) + searchResult.xpath('.//a[1]')[0].get('href')).replace('/','_').replace('?','!')
         subSite = searchResult.xpath('.//span[@class="label-text"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//time')[0].text_content().strip()).strftime('%Y-%m-%d')
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())

@@ -32,7 +32,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
     #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = detailsPageElements.xpath('//p[@class="synopsis_txt"]')[0].text_content().strip()
-    subSite = detailsPageElements.xpath('//a[contains(@class,"site-title grey-text")]')[0].text_content()
+    subSite = detailsPageElements.xpath(('//div[@class="scene-info"]/a[@class="site-title grey-text link"]'))[0].text_content().strip()
     metadata.tagline = subSite
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)

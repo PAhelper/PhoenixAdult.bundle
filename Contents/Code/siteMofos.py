@@ -16,7 +16,6 @@ def posterAlreadyExists(posterUrl,metadata):
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
     searchResults = HTML.ElementFromURL('https://www.mofos.com/tour/search/?q=' + encodedTitle)
     for searchResult in searchResults.xpath('//div[contains(@class,"title details-only")]//a'):
-        Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
         subSite = searchResults.xpath('//a[@class="site-name"]')[0].text_content().strip()
         relDate = searchResults.xpath('//span[@class="date-added"]')[0].text_content().strip()

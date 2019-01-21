@@ -13,46 +13,46 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
-        if searchSiteID != 9999:
-            siteNum = searchSiteID
-        titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="date hidden-xs"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(searchSiteID)+"] " + releaseDate, score = score, lang = lang))
-    return results
-
-def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
-        if searchSiteID != 9999:
-            siteNum = searchSiteID
-        titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(searchSiteID)+"] " + releaseDate, score = score, lang = lang))
-    return results
-
 def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="info-wrap"]'):
-        if searchSiteID != 9999:
-            siteNum = searchSiteID
         titleNoFormatting = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//time')[0].text_content().strip()).strftime('%Y-%m-%d')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(searchSiteID)+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+    return results
+
+def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
+        titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
+        curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        lowerResultTitle = str(titleNoFormatting).lower()
+        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+    return results
+
+def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
+        titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()
+        curID = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//span[@class="date hidden-xs"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        lowerResultTitle = str(titleNoFormatting).lower()
+        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

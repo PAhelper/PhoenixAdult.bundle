@@ -6,10 +6,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         #Log(searchResult.text_content())
         titleNoFormatting = searchResult.xpath('.//a[@class="item-top"]')[0].get('data-title')
         subSite = searchResult.xpath('.//a[@class="item-top"]')[0].get('data-brand')
-        Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a[@class="item-top"]')[0].get('href')
         curID = curID.replace('/','+')
-        Log("ID: " + curID)
         lowerResultTitle = str(titleNoFormatting).lower()
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())

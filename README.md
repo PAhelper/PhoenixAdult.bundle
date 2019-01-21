@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-20 5:15PM CST - Merged Dev's code for JulesJordan, Dogfart Network, DDF Network, and the Perfect Gonzo network. Added 21Sextreme network to the existing GammaEnt file.
 - 2019-01-15 7:45AM CST - Added 4 new NaughtyAmerica sites: LA Sluts, Slut Stepsister, Teens Love Cream, and Latina Stepmom
 - 2019-01-14 7:15PM CST - Bugfix and a few enhancements for Evil Angel
 - 2019-01-14 6:30PM CST - Fixed a bug in 2-digit year date matching that was truncating part of the search title, fixed a bug in NaughtyAmerica result URLs that prevented metadata, fixed a bug in Blacked's new beta.blacked.com DOM
@@ -479,6 +480,12 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Gapeland
  -  LezCuties
  -  PixandVideo
+#### - 21Sextreme
+ -  LustyGrandmas
+ -  GrandpasFuckTeens
+ -  TeachMeFisting
+ -  Zoliboy
+ -  DominatedGirls
 #### - 21Naturals
  -  21Naturals
  -  21FootArt
@@ -507,3 +514,53 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - BurningAngel
 #### - EvilAngel
 #### - PrettyDirty
+#### - JulesJordan - *Title Search/Actress
+#### - DDFNetwork - *Title Search/Actress
+ -  HandsOnHardcore
+ -  DDFBusty
+ -  HouseOfTaboo
+ -  EuroGirlsOnGirls
+ -  1By-Day
+ -  ddfnetworkvr
+ -  EuroTeenErotica
+ -  HotLegsandFeet
+ -  OnlyBlowJob
+ -  SandysFantasys
+ -  CherryJul
+ -  EveAngelOfficial
+ -  SexVideoCasting
+ -  HairyTwatter
+#### - Dogfart - *Title Search/Actress
+ -  BlacksOnBlondes
+ -  InterracialBlowbang
+ -  CuckoldSessions
+ -  GloryHole
+ -  InterracialBlowbang
+ -  InterracialPickups
+ -  BlacksOnCougars
+ -  WeFuckBlackGirls
+ -  WatchingMyMomGoBlack
+ -  CumBang
+ -  WatchingMyDaughterGoBlack
+ -  ZebraGirls
+ -  Gloryhole-Initiations
+ -  DogfarBehindTheScenes
+ -  BlackMeatWhiteFeet
+ -  SpringThomas
+ -  KatieThomas
+ -  RuthBlackwell
+ -  CandyMonroe
+ -  WifeWriting
+ -  BarbCummings
+ -  TheMinion
+ -  BlacksOnBoys
+ -  GloryholesAndHandjobs
+#### - PerfectGonzo Network
+ -  PerfectGonzo
+ -  AllInternal
+ -  AssTraffic
+ -  CumForCover
+ -  PrimeCups
+ -  PurePOV
+ -  SpermSwap
+ -  TamedTeens

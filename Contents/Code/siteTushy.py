@@ -5,15 +5,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         
         
-        Log(searchResult.text_content())
         titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
         curID = curID.replace('/','_')
-        Log("ID: " + curID)
         releasedDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
 
-        Log(str(curID))
         lowerResultTitle = str(titleNoFormatting).lower()
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -27,15 +23,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
             
             
-            Log(searchResult.text_content())
             titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
-            Log("Result Title: " + titleNoFormatting)
             curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
             curID = curID.replace('/','_')
-            Log("ID: " + curID)
             releasedDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
 
-            Log(str(curID))
             lowerResultTitle = str(titleNoFormatting).lower()
             if searchByDateActor != True:
                 score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())

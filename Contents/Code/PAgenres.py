@@ -48,6 +48,10 @@ class PhoenixGenres:
                 skip = True
             if "episode" in newGenre.lower():
                 skip = True
+            if "5k" in newGenre.lower():
+                skip = True
+            if "60fps" in newGenre.lower():
+                skip = True
 
             ##### Replace
             if "big ass" == newGenre.lower() or "big booty" == newGenre.lower() or "bib booty" == newGenre.lower() or "girl big ass" == newGenre.lower():

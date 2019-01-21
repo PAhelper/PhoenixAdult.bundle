@@ -13,20 +13,46 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
-    for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('title')
-        curID = (PAsearchSites.getSearchBaseURL(searchSiteID) + searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href')).replace('/','_').replace('?','!')
-        if PAsearchSites.getSearchSiteName(searchSiteID) == "Fitness Rooms":
+def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//article[contains(@class,"release-card"]'):
+        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('title')
+        curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('href')).replace('/','_').replace('?','!')
+        if PAsearchSites.getSearchSiteName(siteNum) == "Fake Hostel":
+            subSite = "Fake Hostel"
+        elif PAsearchSites.getSearchSiteName(siteNum) == "Fitness Rooms":
             subSite = "Fitness Rooms"
         else:
             subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
+        if siteNum != 406 and siteNum != 407:
+            network = "SexyHub"
+        else:
+            network = "FakeHub"
+        releaseDate = parse(searchResult.xpath('.//div[@class="release-date"] | .//div[@class="release-card__info__release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        lowerResultTitle = str(titleNoFormatting).lower()
+        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+subSite+"] " + releaseDate, score = score, lang = lang))
+    return results
+
+def searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//a[@class="release-card"]'):
+        titleNoFormatting = searchResult.xpath('.//h2[@class="title"]')[0].text_content().strip()
+        curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.get('href')).replace('/','_').replace('?','!')
+        if PAsearchSites.getSearchSiteName(siteNum) == "Fitness Rooms":
+            subSite = "Fitness Rooms"
+        else:
+            subSite = searchResult.xpath('.//div[@class="site-site-name"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [SexyHub/"+subSite+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [FakeHub/"+subSite+"] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

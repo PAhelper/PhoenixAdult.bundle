@@ -1,9 +1,7 @@
 import siteBrazzers
-import site21Naturals
 import siteBlacked
 import siteNaughtyAmerica
 import siteVixen 
-import siteGirlsway
 import siteXart
 import siteBangBros
 import siteTushy
@@ -16,15 +14,9 @@ import sitePorndoePremium
 import siteLegalPorno
 import siteMofos
 import siteBabes
-import siteEvilAngel
-import siteHardX
 import siteGloryHoleSecrets
 import siteGloryHoleSwallow
 import siteNewSensations
-import sitePureTaboo
-import siteEroticaX
-import siteDarkX
-import siteLesbianX
 import siteTwistys
 import siteLubed
 import siteSpizoo
@@ -33,16 +25,16 @@ import sitePassionHD
 import siteFantasyHD
 import sitePornPros
 import siteDigitalPlayground
-import siteThroated
-import siteSweetheartVideo
-import siteNuruMassage
-import siteSweetSinner
 import networkSexyHub
 import networkFPN
 import networkSteppedUp
 import networkGammaEnt
+import networkDogfart
+import siteJulesJordan
+import networkDDFNetwork
+import networkPerfectGonzo
 
-searchSites = [None] * 397
+searchSites = [None] * 462
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -440,6 +432,75 @@ searchSites[393] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","htt
 searchSites[394] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[395] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[396] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[397] = ["Fake Taxi","Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[398] = ["Fakehub Originals","Fakehub Originals","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[399] = ["Public Agent","Public Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[400] = ["Fake Agent","Fake Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[401] = ["Female Agent","Female Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[402] = ["Fake Hospital","Fake Hospital","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[403] = ["Fake Agent UK","Fake Agent UK","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[404] = ["Fake Cop","Fake Cop","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.femalefaketaxi.com","https://www.femalefaketaxi.com/search/videos/"]
+searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakedrivingschool.com","https://www.fakedrivingschool.com/search/videos/"]
+searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehostel.com","https://www.fakehostel.com/search/videos/"]
+searchSites[408] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[409] = ["BlacksOnBlondes","Blacks On Blondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[410] = ["CuckoldSessions","Cuckold Sessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[411] = ["GloryHole","Glory Hole","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[412] = ["BlacksOnCougars","Blacks On Cougars","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[413] = ["WeFuckBlackGirls","WeFuckBlackGirls","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[414] = ["WatchingMyMomGoBlack","WatchingMyMomGoBlack","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[415] = ["InterracialBlowbang","Interracial Blowbang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[416] = ["CumBang","CumBang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[417] = ["InterracialPickups","Interracial Pickups","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[418] = ["WatchingMyDaughterGoBlack","WatchingMyDaughterGoBlack","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[419] = ["ZebraGirls","ZebraGirls","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[420] = ["GloryHoleInitiations","GloryHoleInitiations","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[421] = ["DogfartBehindTheScenes","DogfartBehindTheScenes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[422] = ["BlackMeatWhiteFeet","BlackMeatWhiteFeet","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[423] = ["SpringThomas","SpringThomas","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[424] = ["KatieThomas","KatieThomas","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[425] = ["RuthBlackwell","RuthBlackwell","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[426] = ["CandyMonroe","CandyMonroe","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[427] = ["WifeWriting","WifeWriting","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[428] = ["BarbCummings","BarbCummings","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[429] = ["TheMinion","TheMinion","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[430] = ["BlacksOnBoys","BlacksOnBoys","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[431] = ["GloryholesAndHandjobs","GloryholesAndHandjobs","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[432] = ["JulesJordan","JulesJordan", "https://www.julesjordan.com","https://www.julesjordan.com/trial/search.php?query="]
+searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[434] = ["HandsOnHardcore","HandsOnHardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[435] = ["DDFBusty","DDFBusty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[436] = ["HouseOfTaboo","HouseOfTaboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[437] = ["EuroGirlsOnGirls","EuroGirlsOnGirls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[438] = ["1By-Day","1By-Day", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[439] = ["ddfnetworkvr","ddfnetworkvr", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[440] = ["EuroTeenErotica","EuroTeenErotica", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[441] = ["HotLegsandFeet","HotLegsandFeet", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[442] = ["OnlyBlowJob","OnlyBlowJob", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[443] = ["SandysFantasys","SandysFantasys", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[444] = ["CherryJul","CherryJul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[445] = ["EveAngelOfficial","EveAngelOfficial", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[446] = ["SexVideoCasting","SexVideoCasting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[447] = ["HairyTwatter","HairyTwatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[448] = ["PerfectGonzo","PerfectGonzo", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?q="]
+searchSites[449] = ["AllInternal","AllInternal", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=allinternal&q="]
+searchSites[450] = ["AssTraffic","AssTraffic", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=asstraffic&q="]
+searchSites[451] = ["CumForCover","CumForCover", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=cumforcover&q="]
+searchSites[452] = ["Primecups","Primecups", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=primecups&q="]
+searchSites[453] = ["PurePOV","PurePOV", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=purepov&q="]
+searchSites[454] = ["SpermSwap","SpermSwap", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=spermaswap&q="]
+searchSites[455] = ["TamedTeens","TamedTeens", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=tamedteens&q="]
+searchSites[456] = ["GiveMePink","GiveMePink", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=givemepink&q="]
+searchSites[457] = ["FistFlush","FistFlush", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=fistflush&q="]
+searchSites[458] = ["MilfThing","MilfThing", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=milfthing&q="]
+searchSites[459] = ["PerfectGonzoInterview","PerfectGonzoInterview", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=interview&q="]
+searchSites[460] = ["21Sextreme","21Sextreme","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
+searchSites[461] = ["LustyGrandmas","LustyGrandmas","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
+searchSites[462] = ["GrandpasFuckTeens","GrandpasFuckTeens","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
+searchSites[463] = ["TeachMeFisting","TeachMeFisting","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
+searchSites[464] = ["Zoliboy","Zoliboy","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
+searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

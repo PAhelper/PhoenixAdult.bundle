@@ -10,12 +10,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 titleNoFormatting = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("title")
                 curID = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("href")
                 curID = curID.replace('/','_')
-                Log(str(curID))
 
 
                 releasedDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content()
 
-                Log(str(curID))
                 lowerResultTitle = str(titleNoFormatting).lower()
                 if searchByDateActor != True:
                     score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
