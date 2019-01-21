@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-01-21 9:00AM CST - Cleaned up the search section of init, a few other bugfixes
 - 2019-01-20 5:15PM CST - Merged Dev's code for JulesJordan, Dogfart Network, DDF Network, and the Perfect Gonzo network. Added 21Sextreme network to the existing GammaEnt file.
 - 2019-01-15 7:45AM CST - Added 4 new NaughtyAmerica sites: LA Sluts, Slut Stepsister, Teens Love Cream, and Latina Stepmom
 - 2019-01-14 7:15PM CST - Bugfix and a few enhancements for Evil Angel
@@ -428,7 +429,6 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Stepmom Lessons
 #### - Gloryhole Secrets *Title Search (includes actress first name)
 #### - New Sensations
-#### - Pure Taboo
 #### - Swallowed / TrueAnal / Nymphos *Title Search (usually includes actress first name)
 #### - SexyHub *Title Search
  -  Dane Jones

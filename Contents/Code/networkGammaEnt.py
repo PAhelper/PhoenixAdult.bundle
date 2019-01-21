@@ -114,15 +114,23 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
     try:
-        metadata.title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
-    except:
-        metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-
-    try:
-        dvdLink = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
-        metadata.collections.add(dvdLink)
+        dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
+        metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
     except:
         pass
+
+    try:
+        title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
+    except:
+        title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    
+    if dvdTitle == title:
+        pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
+        alpha = pageTitle.find('Scene')+6
+        omega = pageTitle.find(' ',alpha)
+        title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
+
+    metadata.title = title
 
     # Director
     metadata.directors.clear()
