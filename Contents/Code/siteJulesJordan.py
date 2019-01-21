@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResults.xpath('//div[@class="update_details"]/a[2]')[i].text_content()
         Log(str(titleNoFormatting))
-        releaseDate = searchResults.xpath('//div[@class="update_details"]//div[@class="cell update_date"]')[i].text_content().strip()
+        releaseDate = parse(searchResult.xpath('//div[@class="update_details"]//div[@class="cell update_date"]')[i].text_content().strip()).strftime('%Y-%m-%d')
         curID = searchResult.get('href').replace('/','_')
         Log('CurID : ' + curID )
         lowerResultTitle = str(titleNoFormatting).lower()
@@ -34,9 +34,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     siteNum = str(metadata.id).split("|")[1]
     Log('Indice ' + indice)
     paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
-    #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = paragraph.strip()
-    tagline = "JulesJordan"
+    tagline = "Jules Jordan"
     metadata.collections.clear()
     tagline = tagline.strip()
     metadata.tagline = tagline

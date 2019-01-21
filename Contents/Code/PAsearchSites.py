@@ -34,7 +34,7 @@ import siteJulesJordan
 import networkDDFNetwork
 import networkPerfectGonzo
 
-searchSites = [None] * 466
+searchSites = [None] * 467
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -402,6 +402,7 @@ searchSites[363] = ["Lesbian Older Younger","Lesbian Older Younger","http://www.
 searchSites[364] = ["Digital Doghouse","Digital Doghouse","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
 searchSites[365] = ["21Sextury","21Sextury","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[366] = ["Anal Teen Angels","Anal Teen Angels","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[367] = ["Deepthroat Frenzy","Deepthroat Frenzy","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[368] = ["DP Fanatics","DP Fanatics","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[369] = ["Footsie Babes","Footsie Babes","http://www.21sextury.com","http://www.21sextury.com/en/search/"]

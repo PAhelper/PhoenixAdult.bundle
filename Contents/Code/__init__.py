@@ -318,7 +318,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## GammaEnt
             ###############
             if siteNum == 344:
-                if searchAll or searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 383) or (searchSiteID >= 460 and searchSiteID <= 465):
+                if searchAll or searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 383) or (searchSiteID >= 460 and searchSiteID <= 466):
                     results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
@@ -619,7 +619,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 383) or (siteID >= 460 and siteID <= 465):
+        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 383) or (siteID >= 460 and siteID <= 466):
             metadata = PAsearchSites.networkGammaEnt.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
