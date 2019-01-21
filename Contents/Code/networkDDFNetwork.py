@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log('Url : ' + str(searchResult.get('href')))
         titleNoFormatting = searchResult.get("title")
         Log('Titre ' + str(titleNoFormatting))
-        releaseDate = searchResults.xpath('//div[@class="card-footer d-flex justify-content-between"]//small')[i].text_content().strip()
+        releaseDate = parse(searchResult.xpath('//div[@class="card-footer d-flex justify-content-between"]//small')[i].text_content().strip()).strftime('%Y-%m-%d')
         #coverURL = searchResults.xpath('//div[@class="card m-1"]/a/img')[i].get('data-src')
         #Log('CoverUrl : ' + str(coverURL) )
         curID = searchResult.get('href').replace('/','_')

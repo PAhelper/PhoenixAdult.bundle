@@ -98,20 +98,6 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
-            ## SexyHub
-            ###############
-            if siteNum == 333:
-                if searchAll or (searchSiteID >= 333 and searchSiteID <= 339) or (searchSiteID >= 406 and searchSiteID <= 407):
-                    results = PAsearchSites.networkSexyHub.searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
-            ###############
-            ## FakeHub
-            ###############
-            if siteNum == 397:
-                if searchAll or (searchSiteID >= 397 and searchSiteID <= 405):
-                    results = PAsearchSites.networkSexyHub.searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
-            ###############
             ## Naughty America
             ###############
             if siteNum == 5:
@@ -124,6 +110,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 52:
                 if searchAll or searchSiteID == 52:
                     results = PAsearchSites.siteVixen.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## GammaEnt
+            ###############
+            if siteNum == 53 or siteNum == 183 or siteNum == 277 or siteNum == 278 or siteNum == 281 or (siteNum >=285 and siteNum <= 287) or siteNum == 329 or siteNum == 330 or (siteNum >= 351 and siteNum <= 355) or siteNum == 365 or (siteNum >= 380 and siteNum <= 392) or siteNum == 460:
+                if searchAll or searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 383) or (searchSiteID >= 460 and searchSiteID <= 466):
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## X-Art
@@ -301,6 +294,13 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteDigitalPlayground.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
+            ## SexyHub
+            ###############
+            if siteNum == 333 or siteNum == 335 or siteNum == 406 or siteNum == 407:
+                if searchAll or (searchSiteID >= 333 and searchSiteID <= 339) or (searchSiteID >= 406 and searchSiteID <= 407):
+                    results = PAsearchSites.networkSexyHub.searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
             ## GloryHoleSwallow
             ###############
             if siteNum == 342:
@@ -310,23 +310,23 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## FullPornNetwork
             ###############
-            if siteNum == 343:
+            if siteNum >= 343 and siteNum <=350:
                 if searchAll or (searchSiteID >= 343 and searchSiteID <= 350):
                     results = PAsearchSites.networkFPN.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
-            ## GammaEnt
-            ###############
-            if siteNum == 344:
-                if searchAll or searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 383) or (searchSiteID >= 460 and searchSiteID <= 466):
-                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
-            ###############
             ## DogfartNetwork
             ###############
-            if siteNum == 351:
+            if siteNum == 408:
                 if searchAll or (searchSiteID >= 408 and searchSiteID <= 431):
                     results = PAsearchSites.networkDogfart.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## FakeHub
+            ###############
+            if siteNum == 340 or siteNum == 405:
+                if searchAll or (searchSiteID >= 397 and searchSiteID <= 405):
+                    results = PAsearchSites.networkSexyHub.searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## JulesJordan
@@ -345,7 +345,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## PerfectGonzo
             ###############
-            if siteNum == 351:
+            if siteNum == 448:
                 if searchAll or (searchSiteID >= 448 and searchSiteID <= 459):
                     results = PAsearchSites.networkPerfectGonzo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 

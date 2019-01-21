@@ -7,8 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     i = 0
     for searchResult in searchResults.xpath('//div[@class="itemm"]/a'):
         titleNoFormatting = searchResult.get("title")
-        releaseDate = searchResults.xpath('//div[@class="itemm"]//span[@class="nm-date"]')[i].text_content().strip()
-
+        releaseDate = parse(searchResult.xpath('//div[@class="itemm"]//span[@class="nm-date"]')[i].text_content().strip()).strftime('%Y-%m-%d')
         curID = searchResult.get('href').replace('/','_').replace('?','!')
         lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())

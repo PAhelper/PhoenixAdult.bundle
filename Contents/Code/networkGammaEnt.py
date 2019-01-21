@@ -37,7 +37,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             network = 'Fantasy Massage'
         elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 365):
             network = 'Mile High Network'
-        elif siteNum >= 365 and siteNum <= 372:
+        elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466:
             network = '21Sextury'
         elif siteNum == 183 or (siteNum >= 373 and siteNum <= 374):
             network = '21Naturals'
@@ -71,7 +71,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Fantasy Massage'
     elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 365):
         metadata.studio = 'Mile High Network'
-    elif siteID >= 365 and siteID <= 372:
+    elif (siteID >= 365 and siteID <= 372) or siteID == 466:
         metadata.studio = '21Sextury'
     elif siteID == 183 or (siteID >= 373 and siteID <= 374):
         metadata.studio = '21Naturals'
