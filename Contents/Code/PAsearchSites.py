@@ -6,9 +6,6 @@ import siteXart
 import siteBangBros
 import siteTushy
 import siteRealityKings
-import sitePornFidelity
-import siteTeenFidelity
-import siteKellyMadison
 import siteTeamSkeet
 import sitePorndoePremium
 import siteLegalPorno
@@ -33,6 +30,7 @@ import networkDogfart
 import siteJulesJordan
 import networkDDFNetwork
 import networkPerfectGonzo
+import networkPornFidelity
 
 searchSites = [None] * 467
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
