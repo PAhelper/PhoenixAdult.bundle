@@ -1,7 +1,7 @@
 import siteBrazzers
 import siteBlacked
 import siteNaughtyAmerica
-import siteVixen 
+import siteVixen
 import siteXart
 import siteBangBros
 import siteTushy
@@ -32,7 +32,7 @@ import networkDDFNetwork
 import networkPerfectGonzo
 import networkPornFidelity
 
-searchSites = [None] * 467
+searchSites = [None] * 469
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -500,6 +500,8 @@ searchSites[463] = ["TeachMeFisting","TeachMeFisting","http://www.21sextreme.com
 searchSites[464] = ["Zoliboy","Zoliboy","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
 searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
 searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[467] = ["Anal College","Anal College","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[468] = ["Watch Your Wife","Watch Your Wife","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
