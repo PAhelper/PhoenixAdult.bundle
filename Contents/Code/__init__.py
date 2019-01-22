@@ -151,21 +151,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 184:
                 if searchAll or searchSiteID == 184:
-                    results = PAsearchSites.sitePornFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkPornFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## TeenFidelity
             ###############
             if siteNum == 185:
                 if searchAll or searchSiteID == 185:
-                    results = PAsearchSites.siteTeenFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkPornFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## Kelly Madison
             ###############
             if siteNum == 186:
                 if searchAll or searchSiteID == 186:
-                    results = PAsearchSites.siteKellyMadison.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+                    results = PAsearchSites.networkPornFidelity.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             ###############
             ## Team Skeet
@@ -451,24 +451,8 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   PornFidelity                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID == 184:
-            metadata = PAsearchSites.sitePornFidelity.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##   TeenFidelity                                           ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 185:
-            metadata = PAsearchSites.siteTeenFidelity.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##   Kelly Madison                                          ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 186:
-            metadata = PAsearchSites.siteKellyMadison.update(metadata,siteID,movieGenres,movieActors)
+        if siteID >= 184 and siteID <= 186:
+            metadata = PAsearchSites.networkPornFidelity.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##

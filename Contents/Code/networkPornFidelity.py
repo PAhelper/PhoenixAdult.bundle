@@ -1,31 +1,34 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchPageContent = HTTP.Request("https://www.pornfidelity.com") #The search page seems to redirect to PornFidelity.com if you didn't just come from there, so I open this first to trick it...
-    searchPageContent = HTTP.Request("https://www.pornfidelity.com/episodes/search/?site=2&page=1&search=" + encodedTitle)
+    searchPageContent = HTTP.Request(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
     searchPageResult = searchPageContent[len(searchPageContent)-1][:-2]
     searchPageResult = searchPageResult.replace('\\n',"").replace('\\',"")
     #Log(searchPageResult)
     searchResults = HTML.ElementFromString(searchPageResult)
     for searchResult in searchResults.xpath('//div[contains(@class,"d-flex")]'):
-        titleNoFormatting = searchResult.xpath('.//a[@class="text-pf"]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//a[@class="text-km"] | .//a[@class="text-pf"] | .//a[@class="text-tf"]')[0].text_content().strip()
         Log(titleNoFormatting)
-        curID = searchResult.xpath('.//a[@class="text-pf"]')[0].get('href')
-        curID = curID.replace('/','_')
+        curID = searchResult.xpath('.//a[@class="text-km"] | .//a[@class="text-pf"] | .//a[@class="text-tf"]')[0].get('href')
+        curID = curID.replace('/','_').replace('?','!')
         curID = curID[8:-19]
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//div[contains(@class,"text-left")]')[0].text_content().strip()[10:]
-        if ", 20" not in releasedDate:
-            releasedDate = releasedDate + ", " + str(datetime.now().year)
+        releaseDate = searchResult.xpath('.//div[contains(@class,"text-left")]')[0].text_content().strip()[10:]
+        if ", 20" not in releaseDate:
+            releaseDate = releaseDate + ", " + str(datetime.now().year)
+        releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
         Log(str(curID))
         lowerResultTitle = str(titleNoFormatting).lower()
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         else:
             searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%b %m, $Y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
+            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releaseDate.lower())
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
     return results
@@ -40,16 +43,21 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "PornFidelity"
-    metadata.summary = detailsPageElements.xpath('//p[contains(@class,"card-text")]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//p[contains(@class,"card-text")]')[0].text_content().strip()
     metadata.title = detailsPageElements.xpath('//h4')[0].text_content()[36:].strip()
-    tagline = "PornFidelity"
+    if "Teenfidelity" in metadata.title:
+        tagline = "TeenFidelity"
+    elif "Kelly Madison" in metadata.title:
+        tagline = "Kelly Madison"
+    else:
+        tagline = "PornFidelity"
     Log(metadata.title)
     metadataParts = detailsPageElements.xpath('//div[contains(@class,"episode-summary")]//h4')
     for metadataPart in metadataParts:
         if "Published" in metadataPart.text_content():
-            releasedDate = metadataPart.text_content()[39:49]
-            Log(releasedDate)
-            date_object = datetime.strptime(releasedDate, '%Y-%m-%d')
+            releaseDate = metadataPart.text_content()[39:49]
+            Log(releaseDate)
+            date_object = datetime.strptime(releaseDate, '%Y-%m-%d')
             metadata.originally_available_at = date_object
             metadata.year = metadata.originally_available_at.year 
 
