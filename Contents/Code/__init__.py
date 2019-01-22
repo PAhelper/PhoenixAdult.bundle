@@ -636,7 +636,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID >= 448 and siteID <= 459:
-            metadata = PAsearchSites.networkPefectGonzo.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.networkPerfectGonzo.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

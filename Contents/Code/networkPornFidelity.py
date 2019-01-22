@@ -26,8 +26,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         else:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%b %m, $Y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releaseDate.lower())
+            score = 102 - Util.LevenshteinDistance(searchDate, releaseDate)
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
