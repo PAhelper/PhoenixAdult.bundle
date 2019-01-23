@@ -350,6 +350,26 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.networkPerfectGonzo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
             siteNum += 1
+            ###############
+            ## BadoinkVR Network
+            ###############
+            if siteNum == 469:
+                if searchAll or (searchSiteID >= 469 and searchSiteID <= 473):
+                    results = PAsearchSites.networkBadoinkVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
+            ###############
+            ## VRBangers
+            ###############
+            if siteNum == 474:
+                if searchAll or searchSiteID == 474:
+                    results = PAsearchSites.siteVRBangers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## SexBabesVR
+            ###############
+            if siteNum == 475:
+                if searchAll or searchSiteID == 475:
+                    results = PAsearchSites.siteSexBabesVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+
 
         results.Sort('score', descending=True)
 
@@ -637,7 +657,27 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 448 and siteID <= 459:
             metadata = PAsearchSites.networkPerfectGonzo.update(metadata,siteID,movieGenres,movieActors)
-
+        ##############################################################
+        ##                                                          ##
+        ##  BadoinkVR Network                                       ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 469 and siteID <= 473:
+            metadata = PAsearchSites.networkBadoinkVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  VRBangers                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 474:
+            metadata = PAsearchSites.siteVRBangers.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  SexBabesVR                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 475:
+            metadata = PAsearchSites.siteSexBabesVR.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
