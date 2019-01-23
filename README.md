@@ -565,3 +565,13 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  PurePOV
  -  SpermSwap
  -  TamedTeens
+
+ #### - BaDoinkVR Network *Title Search
+ -  BaDoinkVR
+ -  18VR
+ -  BabeVR
+ -  KinkVR
+ -  VRCosplayX
+
+ #### - VRBangers *Title Search
+ #### - SexBabesVR *Title (+SceneNumber) Search
