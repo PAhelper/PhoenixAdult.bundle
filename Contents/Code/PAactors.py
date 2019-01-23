@@ -18,7 +18,7 @@ class PhoenixActors:
             skip = False
             # Save the potentional new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
             newActor = self.actorsTable[actorsProcessed].replace("\xc2\xa0", " ").strip()
-            
+
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if "Bad Name" == newActor:
                 skip = True
@@ -28,6 +28,8 @@ class PhoenixActors:
                 newActor = "Gina Gerson"
             if "Anjelica" == newActor or "Ebbi" == newActor or "Abby H" == newActor or "Katherine A" == newActor:
                 newActor = "Krystal Boyd"
+            if "Nathaly" == newActor or "Nathalie Cherie" == newActor:
+                newActor = "Nathaly Cherie"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.tagline == "21Sextury" and "Abbie" == newActor:

@@ -1,7 +1,7 @@
 import siteBrazzers
 import siteBlacked
 import siteNaughtyAmerica
-import siteVixen 
+import siteVixen
 import siteXart
 import siteBangBros
 import siteTushy
@@ -31,8 +31,11 @@ import siteJulesJordan
 import networkDDFNetwork
 import networkPerfectGonzo
 import networkPornFidelity
+import networkBadoinkVR
+import siteVRBangers
+import siteSexBabesVR
 
-searchSites = [None] * 467
+searchSites = [None] * 476
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -500,6 +503,15 @@ searchSites[463] = ["TeachMeFisting","TeachMeFisting","http://www.21sextreme.com
 searchSites[464] = ["Zoliboy","Zoliboy","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
 searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
 searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[467] = ["Anal College","Anal College","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[468] = ["Watch Your Wife","Watch Your Wife","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[469] = ["BadoinkVR","BadoinkVR","https://www.badoinkvr.com","https://badoinkvr.com/vrpornvideo/"]
+searchSites[470] = ["BabeVR","BabeVR","https://www.babevr.com","https://babevr.com/vrpornvideo/"]
+searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrpornvideo/"]
+searchSites[472] = ["KinkVR","KinkVR","https://www.kinkvr.com","https://kinkvr.com/bdsm-vr-video/"]
+searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaypornvideo/"]
+searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/video/"]
+searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
