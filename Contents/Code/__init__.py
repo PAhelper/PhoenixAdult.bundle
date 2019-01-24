@@ -375,6 +375,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 476:
                 if searchAll or searchSiteID == 476:
                     results = PAsearchSites.siteWankzVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## MilfVR
+            ###############
+            if siteNum == 477:
+                if searchAll or searchSiteID == 477:
+                    results = PAsearchSites.siteMilfVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
 
         results.Sort('score', descending=True)
@@ -686,11 +692,19 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.siteSexBabesVR.update(metadata,siteID,movieGenres,movieActors)
         ##############################################################
         ##                                                          ##
-        ##  WankzVR                                              ##
+        ##  WankzVR                                                 ##
         ##                                                          ##
         ##############################################################
         if siteID == 476:
             metadata = PAsearchSites.siteWankzVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  MilfVR                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 477:
+            metadata = PAsearchSites.siteMilfVR.update(metadata,siteID,movieGenres,movieActors)
+
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")
