@@ -117,7 +117,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
     except:
-        pass
+        dvdTitle = 'This is some damn nonsense that should never match the scene title'
 
     try:
         title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
