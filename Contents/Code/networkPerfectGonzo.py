@@ -29,7 +29,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     paragraph = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content()
     metadata.summary = paragraph.strip()
 
-    metadata.studio="Perfect Gonzo"
+    metadata.studio = "Perfect Gonzo"
     tagline = "Primecups"
     tagline = tagline.strip()
     metadata.tagline = tagline

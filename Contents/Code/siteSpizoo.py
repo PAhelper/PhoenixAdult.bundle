@@ -42,7 +42,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
     title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-    if title[-3:] = " 4k":
+    if title[-3:] == " 4k":
         title = title[:-3].strip()
     metadata.title = title
 
