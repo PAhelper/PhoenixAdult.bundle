@@ -72,9 +72,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.addGenre("Glamcore")
-    if len(actors) = 3:
+    if len(actors) == 3:
         movieGenres.addGenre("Threesome")
-    if len(actors) = 4:
+    if len(actors) == 4:
         movieGenres.addGenre("Foursome")
     if len(actors) > 4:
         movieGenres.addGenre("Orgy")

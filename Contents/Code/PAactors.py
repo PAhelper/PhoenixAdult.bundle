@@ -30,6 +30,8 @@ class PhoenixActors:
                 newActor = "Krystal Boyd"
             if "Nathaly" == newActor or "Nathalie Cherie" == newActor:
                 newActor = "Nathaly Cherie"
+            if "Josephine" == newActor or "Conny" == newActor or "Conny Carter" == newActor or "Connie" == newActor:
+                newActor = "Connie Carter"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.tagline == "21Sextury" and "Abbie" == newActor:
