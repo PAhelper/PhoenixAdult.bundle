@@ -51,6 +51,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     posters = detailsPageElements.xpath('//a//img[@class="swiper-lazy"]')
     background = posters[0].get("src")
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+
 # unneccesary binocular pictures
     # for posterCur in posters:
     #     posterURL = posterCur.get("data-src")
@@ -62,7 +64,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//header//h4//a')
     if len(actors) > 0:
-        posterNum = 1
+        posterNum = 2
         for actorLink in actors:
             actorName = actorLink.text_content()
             actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
@@ -73,7 +75,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
             # Actor profile pic as possible poster
             metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-            posterNum = posterNum + 1
+            posterNum += 1
 
     # Genres
     movieGenres.clearGenres()

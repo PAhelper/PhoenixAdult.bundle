@@ -36,8 +36,9 @@ import siteVRBangers
 import siteSexBabesVR
 import siteWankzVR
 import siteMilfVR
+import siteJoymii
 
-searchSites = [None] * 478
+searchSites = [None] * 479
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -516,6 +517,7 @@ searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https:/
 searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
+searchSites[478] = ["Joymii","Joymii","https://www.joymii.com","https://www.joymii.com/search?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

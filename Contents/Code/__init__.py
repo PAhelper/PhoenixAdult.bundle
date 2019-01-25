@@ -381,6 +381,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 477:
                 if searchAll or searchSiteID == 477:
                     results = PAsearchSites.siteMilfVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## Joymii
+            ###############
+            if siteNum == 478:
+                if searchAll or searchSiteID == 478:
+                    results = PAsearchSites.siteJoymii.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
 
         results.Sort('score', descending=True)
@@ -704,6 +710,13 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 477:
             metadata = PAsearchSites.siteMilfVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  Joymii                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 478:
+            metadata = PAsearchSites.siteJoymii.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
