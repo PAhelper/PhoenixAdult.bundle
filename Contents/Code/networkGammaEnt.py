@@ -134,6 +134,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Director
     metadata.directors.clear()
+    director = metadata.directors.new()
     try:
         directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')
         Log("Directors found: "+str(len(directors)))
