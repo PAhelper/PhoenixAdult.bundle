@@ -153,7 +153,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="updatedDate"]')
+    date = detailsPageElements.xpath('//*[@class="updatedDate"]')
     if len(date) > 0:
         date = date[0].text_content().strip()
         date_object = parse(date)
