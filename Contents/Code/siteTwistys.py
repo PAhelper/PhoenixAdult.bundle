@@ -8,14 +8,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href').replace('/','_')
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-right"]//div[@class="info-box-date"]')[0].text_content()
-
+        releaseDate = parse(searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-right"]//div[@class="info-box-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         girlName = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//div[@class="info-box-models-name"]//div//a')[0].text_content()
 
-        Log("CurID" + str(curID))
+        subSite = searchResult.xpath('.//img[@class="new-video-thumb"]')[0].get('alt')
+        subSite = subSite[subSite.rfind('-')+2:].strip()
+        if subSite == "Twistys":
+            subSite = ''
+        else:
+            subSite = '/' + subSite
         lowerResultTitle = str(titleNoFormatting).lower()
         
-        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Twistys, " + releasedDate + "]"
+        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Twistys" + subSite + "] " + releaseDate
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
@@ -73,11 +77,18 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     #Posters
-    imagesPath = "https://i3-hw.twistyscontent.com/scenes/" + detailsPageElements.xpath('//div[@id="video-player"]')[0].get('data-release-id') + "/"
-    metadata.art[imagesPath+"s1002x564.jpg"] = Proxy.Preview(HTTP.Request(imagesPath+"s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[imagesPath+"s1002x564.jpg"] = Proxy.Preview(HTTP.Request(imagesPath+"s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    sceneID = detailsPageElements.xpath('//div[@id="video-player"]')[0].get('data-release-id')
+    metadata.art["http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    metadata.posters["http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     for i in range(1, 6):
-        metadata.posters[imagesPath + "s300x225_" + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(imagesPath + "s300x225_" + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
-
+        try:
+            metadata.posters["http://i3-hw.twistyscontent.com/scenes/" + sceneID + "/s300x225_" + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/" + sceneID + "/s300x225_" + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        except:
+            pass
+    for i in range(1, 3):
+        try:
+            metadata.posters["http://i1-hw.twistyscontent.com/photos/"+sceneID+"/p300x225_"+str(i)+".jpg"] = Proxy.Preview(HTTP.Request("http://i1-hw.twistyscontent.com/photos/"+sceneID+"/p300x225_"+str(i)+".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        except:
+            pass
     return metadata
