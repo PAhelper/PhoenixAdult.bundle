@@ -7,20 +7,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="scene-item"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
-        Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
         curID = curID[:-26]
         curID = curID.replace('/','_').replace('?','!')
-        releasedDate = searchResult.xpath('.//p[@class="entry-date"]')[0].text_content()
-
+        releaseDate = parse(searchResult.xpath('.//p[@class="entry-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         lowerResultTitle = str(titleNoFormatting).lower()
         searchString = searchString.replace("+"," ")
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchString.lower(), titleNoFormatting.lower())
         else:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%b %d, %y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [NA, " + releasedDate +"]"
+            score = 102 - Util.LevenshteinDistance(searchDate, releaseDate)
+        titleNoFormatting = titleNoFormatting + " [NA] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 def update(metadata,siteID,movieGenres,movieActors):
@@ -29,8 +26,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "Naughty America"
-    #paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content()
-    #paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
     metadata.summary = detailsPageElements.xpath('//p[@class="synopsis_txt"]')[0].text_content().strip()
     subSite = detailsPageElements.xpath(('//div[@class="scene-info"]/a[@class="site-title grey-text link"]'))[0].text_content().strip()
     metadata.tagline = subSite
