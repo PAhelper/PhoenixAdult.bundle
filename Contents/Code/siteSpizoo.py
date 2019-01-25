@@ -9,14 +9,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_')
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="date-label"]')[0].text_content()[22:].strip()
+        releaseDate = parse(searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="date-label"]')[0].text_content()[22:].strip()).strftime('%Y-%m-%d')
 
         girlName = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="model-labels"]//span[@class="update_models"]//a')[0].get('title').strip()
 
         Log("CurID" + str(curID))
         lowerResultTitle = str(titleNoFormatting).lower()
         
-        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Spizoo, " + releasedDate +"]"
+        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Spizoo] " + releaseDate
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
@@ -32,14 +32,19 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = "Spizoo"
 
     # Summary
-    paragraph = detailsPageElements.xpath('//p[@class="description"]')[0].text_content()
-    # paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n', '').replace('  ', '') + "\n\n"
-    metadata.summary = paragraph[:-10]
-    # tagline = detailsPageElements.xpath('//a[@class="site-name"]')[0].text_content().strip()
+    paragraph = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+    metadata.summary = paragraph
     metadata.collections.clear()
-    # metadata.tagline = tagline
-    # metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()[:-3]
+    try:
+        tagline = detailsPageElements.xpath('i[id="site"]')[0].get('value').strip()
+    except:
+        tagline = "Spizoo"
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    if title[-3:] = " 4k":
+        title = title[:-3].strip()
+    metadata.title = title
 
     # Genres
     movieGenres.clearGenres()
