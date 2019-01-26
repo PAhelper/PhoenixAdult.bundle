@@ -15,12 +15,12 @@ import siteGloryHoleSecrets
 import siteGloryHoleSwallow
 import siteNewSensations
 import siteTwistys
-import siteLubed
+# import siteLubed
 import siteSpizoo
 import sitePrivate
-import sitePassionHD
-import siteFantasyHD
-import sitePornPros
+# import sitePassionHD
+# import siteFantasyHD
+# import sitePornPros
 import siteDigitalPlayground
 import networkSexyHub
 import networkFPN
@@ -37,8 +37,9 @@ import siteSexBabesVR
 import siteWankzVR
 import siteMilfVR
 import siteJoymii
+import networkPornPros
 
-searchSites = [None] * 479
+searchSites = [None] * 490
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -331,7 +332,7 @@ searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.t
 searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
 searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/tour/search/list/keyword/?keyword="]
-searchSites[292] = ["Lubed","Lubed","http://lubed.com","http://lubed.com/video/"]
+searchSites[292] = ["Replaced","Replaced","http://lubed.com","http://lubed.com/video/"]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[295] = ["Anal Introductions","Anal Introductions","https://www.private.com","https://www.private.com/search.php?query="]
@@ -346,7 +347,7 @@ searchSites[303] = ["Sex on the beach","Sex on the beach","https://www.private.c
 searchSites[304] = ["Private Stars","Private Stars","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[305] = ["Tight and Teen","Tight and Teen","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[306] = ["PassionHD","PassionHD","http://www.passion-hd.com","http://passion-hd.com/video/"]
-searchSites[307] = ["FantasyHD","FantasyHD","http://www.fantasy-hd.com","http://fantasy-hd.com/video/"]
+searchSites[307] = ["FantasyHD","FantasyHD","http://www.fantasyhd.com","http://fantasyhd.com/video/"]
 searchSites[308] = ["PornPros","PornPros","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[309] = ["18YearsOld","18YearsOld","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[310] = ["RealExGirlfriends","RealExGirlfriends","https://www.pornpros.com","https://pornpros.com/video/"]
@@ -518,6 +519,18 @@ searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
 searchSites[478] = ["Joymii","Joymii","https://www.joymii.com","https://www.joymii.com/search?query="]
+searchSites[479] = ["POVD","POVD","https://www.povd.com","https://povd.com/video/"]
+searchSites[480] = ["Cum4K","Cum4K","https://www.cum4k.com","https://cum4k.com/video/"]
+searchSites[481] = ["Exotic4k","Exotic4k","https://www.exotic4k.com","https://exotic4k.com/video/"]
+searchSites[482] = ["Tiny4k","Tiny4k","https://www.tiny4k.com","https://tiny4k.com/video/"]
+searchSites[483] = ["Lubed","Lubed","https://www.lubed.com","https://lubed.com/video/"]
+searchSites[484] = ["PureMature","PureMature","https://www.puremature.com","https://puremature.com/video/"]
+searchSites[485] = ["NannySpy","NannySpy","https://www.nannyspy.com","https://nannyspy.com/video/"]
+searchSites[486] = ["Holed","Holed","https://www.holed.com","https://holed.com/video/"]
+searchSites[487] = ["CastingCouch-X","CastingCouch-X","https://www.castingcouch-x.com","https://castingcouch-x.com/video/"]
+searchSites[488] = ["SpyFam","SpyFam","https://www.spyfam.com","https://spyfam.com/video/"]
+searchSites[489] = ["MyVeryFirstTime","MyVeryFirstTime","https://www.myveryfirsttime.com","https://myveryfirsttime.com/video/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -582,7 +595,7 @@ def getSearchSettings(mediaTitle):
             if "'" not in word:
                 searchTitle = searchTitle + word + " "
 
-    Log("searchTitle (before date processing): "+searchTitle)
+    Log("searchTitle (before date processing): " + searchTitle)
     #Search Type
     if unicode(searchTitle[:4], 'utf-8').isnumeric():
         if unicode(searchTitle[5:7], 'utf-8').isnumeric():

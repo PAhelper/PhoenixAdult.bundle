@@ -67,8 +67,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
+            actorPhotoURL = PAactors.actorDBfinder(actorName)
             Log(actorName)
-            movieActors.addActor(actorName, None)
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.addGenre("Glamcore")
