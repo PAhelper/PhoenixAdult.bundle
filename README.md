@@ -580,7 +580,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  #### - WankzVR Network *Title Search *Actor search
   - WankzVR
   - MilfVR
- #### - Joymii *Title Search
+ #### - Joymii *Title Search *Actor search
  #### - PornPros Network *Title Search
   - POVD
   - Tiny4k
