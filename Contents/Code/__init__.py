@@ -63,7 +63,7 @@ class PhoenixAdultAgent(Agent.Movies):
             if searchSiteID == 4:
                 searchSiteID = 1
         searchTitle = searchSettings[2]
-        Log("Site ID: " + str(searchSiteID))
+        Log("Site ID: " + PAsearchSites.getSearchSiteName(searchSiteID) + ", " + str(searchSiteID))
         Log("Search Title: " + searchSettings[2])
         if searchSettings[1]:
             searchByDateActor = True
@@ -265,27 +265,32 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchAll or (searchSiteID >= 294 and searchSiteID <= 305):
                     results = PAsearchSites.sitePrivate.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
+            # ###############
+            # ## Passion-HD
+            # ###############
+            # if siteNum == 306:
+            #     if searchAll or searchSiteID == 306:
+            #         results = PAsearchSites.sitePassionHD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            #
+            # ###############
+            # ## Fantasy-HD
+            # ###############
+            # if siteNum == 307:
+            #     if searchAll or searchSiteID == 307:
+            #         results = PAsearchSites.siteFantasyHD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            #
+            # ###############
+            # ## PornPros
+            # ###############
+            # if siteNum == 308:
+            #     if searchAll or (searchSiteID >= 308 and searchSiteID <= 327):
+            #         results = PAsearchSites.sitePornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
             ###############
-            ## Passion-HD
+            ## PornPros Network
             ###############
             if siteNum == 306:
-                if searchAll or searchSiteID == 306:
-                    results = PAsearchSites.sitePassionHD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
-            ###############
-            ## Fantasy-HD
-            ###############
-            if siteNum == 307:
-                if searchAll or searchSiteID == 307:
-                    results = PAsearchSites.siteFantasyHD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
-            ###############
-            ## PornPros
-            ###############
-            if siteNum == 308:
-                if searchAll or (searchSiteID >= 308 and searchSiteID <= 327):
-                    results = PAsearchSites.sitePornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
-
+                if searchAll or (searchSiteID >= 306 and searchSiteID <= 327) or (searchSiteID >= 479 and searchSiteID <= 489):
+                    results = PAsearchSites.networkPornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
             ###############
             ## DigitalPlayground
             ###############
@@ -369,6 +374,24 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 475:
                 if searchAll or searchSiteID == 475:
                     results = PAsearchSites.siteSexBabesVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## WankzVR
+            ###############
+            if siteNum == 476:
+                if searchAll or searchSiteID == 476:
+                    results = PAsearchSites.siteWankzVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## MilfVR
+            ###############
+            if siteNum == 477:
+                if searchAll or searchSiteID == 477:
+                    results = PAsearchSites.siteMilfVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
+            ###############
+            ## Joymii
+            ###############
+            if siteNum == 478:
+                if searchAll or searchSiteID == 478:
+                    results = PAsearchSites.siteJoymii.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID)
 
 
         results.Sort('score', descending=True)
@@ -570,29 +593,37 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID >= 294 and siteID <= 305:
             metadata = PAsearchSites.sitePrivate.update(metadata,siteID,movieGenres,movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Passion-HD                                             ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 306:
-            metadata = PAsearchSites.sitePassionHD.update(metadata,siteID,movieGenres,movieActors)
+        # ##############################################################
+        # ##                                                          ##
+        # ##   Passion-HD                                             ##
+        # ##                                                          ##
+        # ##############################################################
+        # if siteID == 306:
+        #     metadata = PAsearchSites.sitePassionHD.update(metadata,siteID,movieGenres,movieActors)
+        #
+        # ##############################################################
+        # ##                                                          ##
+        # ##   Fantasy-HD                                             ##
+        # ##                                                          ##
+        # ##############################################################
+        # if siteID == 307:
+        #     metadata = PAsearchSites.siteFantasyHD.update(metadata,siteID,movieGenres,movieActors)
+        #
+        # ##############################################################
+        # ##                                                          ##
+        # ##   PornPros                                               ##
+        # ##                                                          ##
+        # ##############################################################
+        # if siteID >= 308 and siteID <= 327:
+        #     metadata = PAsearchSites.sitePornPros.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
-        ##   Fantasy-HD                                             ##
+        ##   PornPros Network                                       ##
         ##                                                          ##
         ##############################################################
-        if siteID == 307:
-            metadata = PAsearchSites.siteFantasyHD.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##   PornPros                                               ##
-        ##                                                          ##
-        ##############################################################
-        if siteID >= 308 and siteID <= 327:
-            metadata = PAsearchSites.sitePornPros.update(metadata,siteID,movieGenres,movieActors)
+        if (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489):
+            metadata = PAsearchSites.networkPornPros.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -678,6 +709,27 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 475:
             metadata = PAsearchSites.siteSexBabesVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  WankzVR                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 476:
+            metadata = PAsearchSites.siteWankzVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  MilfVR                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 477:
+            metadata = PAsearchSites.siteMilfVR.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  Joymii                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 478:
+            metadata = PAsearchSites.siteJoymii.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
