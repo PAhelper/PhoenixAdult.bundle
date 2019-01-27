@@ -5,10 +5,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL('https://www.spizoo.com/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="category_listing_wrapper_updates"]'):
 
-        titleNoFormatting = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]//h3')[0].text_content()[:-3]
-        Log("Result Title: " + titleNoFormatting)
+        titleNoFormatting = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]//h3')[0].text_content().strip()
+        if titleNoFormatting[-3:] == " 4k":
+            titleNoFormatting = titleNoFormatting[:-3].strip()
         curID = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_')
-        Log("ID: " + curID)
+
         releaseDate = parse(searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="date-label"]')[0].text_content()[22:].strip()).strftime('%Y-%m-%d')
 
         girlName = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="model-labels"]//span[@class="update_models"]//a')[0].get('title').strip()
@@ -36,7 +37,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = paragraph
     metadata.collections.clear()
     try:
-        tagline = detailsPageElements.xpath('i[id="site"]')[0].get('value').strip()
+        tagline = detailsPageElements.xpath('//i[@id="site"]')[0].get('value').strip()
     except:
         tagline = "Spizoo"
     metadata.tagline = tagline
