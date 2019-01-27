@@ -57,6 +57,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             network = 'Evil Angel'
         elif siteNum == 382:
             network = 'Pretty Dirty'
+        elif siteNum >= 460 and siteNum <= 466:
+            network = '21Sextreme'
 
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
@@ -91,6 +93,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Evil Angel'
     elif siteID == 382:
         metadata.studio = 'Pretty Dirty'
+    elif siteID >= 460 and siteID <= 466:
+        metadata.studio = '21Sextreme'
     temp = str(metadata.id).split("|")[0].replace('_','/')
     url = (PAsearchSites.getSearchBaseURL(siteID) + temp).replace("https:","http:")
     detailsPageElements = HTML.ElementFromURL(url)
