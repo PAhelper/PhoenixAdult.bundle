@@ -13,7 +13,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     movieSearchResults = HTML.ElementFromURL("https://www.digitalplayground.com/search/movies/" + encodedTitle)
     for movie in movieSearchResults.xpath('//div[@class="box-card dvd"]'):
         titleNoFormatting = movie.xpath('.//h4[1]/a[1]')[0].get('title').strip()
@@ -22,7 +22,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = moviePage.replace('/','_').replace("?","!")
         Log("ID: " + curID)
         releaseDate = datetime.strptime(movie.xpath('.//div[@class="release-info"]/div[@class="info-left"]/span[2]')[0].text_content().strip(), "%d %B, %Y")
-        lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " (" + str(releaseDate.year) + ") - Full Movie [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang))
 
@@ -41,7 +40,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             curID = curID + "?sceneid=" + video.xpath('.//h4')[0].text_content()[6:8].replace(":","")
         curID = curID.replace('/','_').replace("?","!")
         Log("ID: " + curID)
-        lowerResultTitle = str(titleNoFormatting).lower()
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang))
 

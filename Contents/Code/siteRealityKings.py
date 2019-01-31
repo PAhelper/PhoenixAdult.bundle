@@ -1,16 +1,31 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+
+    Log("searchDate: " + str(searchDate))
+
+    if searchDate:
+        Log("searchDate passed")
+    else:
+        Log("searchDate failed")
+    
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="card card--release"]'):
         titleNoFormatting = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('title')
-        curID = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('href').replace('/','_')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        curID = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('href').replace('/','_').replace('?','!')
         subSite = searchResult.xpath('.//div[@class="card-info__meta"]//a[1]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//span[@class="card-info__meta-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [RealityKings/"+subSite+"] "+releaseDate, score = score, lang = lang))    
+        if PAsearchSites.getSearchSiteName(siteNum) != "Reality Kings":
+            score = score - Util.LevenshteinDistance(PAsearchSites.getSearchSiteName(siteNum).lower(), subSite.lower())
+
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [RealityKings/"+subSite+"] "+releaseDate, score = score, lang = lang))    
 
     return results
 
@@ -18,12 +33,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 
-    # Summary
+    # Studio / Summary / Title / Collections
     metadata.studio = "Reality Kings"
     paragraph = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//p')[0].text_content()
     paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
@@ -32,10 +47,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//div[@class="category"]//a')[0].text_content()
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
-    dateElements = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + urllib.quote(metadata.title))
-    date = dateElements.xpath('//span[@class="card-info__meta-date"]')[0].text_content()
-    Log("Date:" + date)
-    date_object = datetime.strptime(date, '%B %d, %Y')
+
+    # Release Date
+    date_object = datetime.strptime(str(metadata.id).split("|")[2], '%Y-%m-%d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year    
         

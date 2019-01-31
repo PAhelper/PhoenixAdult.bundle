@@ -1,46 +1,36 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchsiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchsiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         Log(searchResult.text_content())
         titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
-        curID = curID.replace('/','_')
+        curID = curID.replace('/','_').replace('?','!')
         Log("ID: " + curID)
-        releasedDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
-
-        lowerResultTitle = str(titleNoFormatting).lower()
-        if searchByDateActor != True:
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        releaseDate = parse(searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + ", " + releasedDate + "]"
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
-    #return results
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     # I'm getting redirected to https://beta.blacked.com for searches, unsure if everybody else is; this should pull results from the beta search:
     for searchResult in searchResults.xpath('//div[@class="pb6v16-1 fNpwyc"]'):
         titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
-        curID = curID.replace('/','_')
+        curID = curID.replace('/','_').replace('?','!')
         Log("ID: " + curID)
-        lowerResultTitle = str(titleNoFormatting).lower()
-        if searchByDateActor != True:
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        else:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
+        score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
@@ -129,7 +119,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 def updateRaw(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)

@@ -2,8 +2,10 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-").replace("'","-")
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     searchResults = HTML.ElementFromURL(url)
 
     searchResult = searchResults.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]')[0]
@@ -11,15 +13,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Result Title: " + titleNoFormatting)
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
     Log("CurID: " + curID)
-    releasedDate = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content()
-
+    releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content().strip()).strftime('%Y-%m-%d')
     girlName = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//a')[0].text_content()
 
-    lowerResultTitle = str(titleNoFormatting).lower()
-
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + ", " + releasedDate +"]"
+    titleNoFormatting = girlName + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
 
@@ -30,20 +29,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('scene url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
 
-    if (siteID >= 308 and siteID <= 327):
-        metadata.studio = "Porn Pros"
-    else:
-        metadata.studio = PAsearchSites.getSearchSiteName(siteID)
-    Log("Studio: " + metadata.studio)
+    metadata.studio = "Porn Pros"
 
     # Collections / Tagline
     siteName = PAsearchSites.getSearchSiteName(siteID)
-    Log("Site Name: " + siteName)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
-    if metadata.tagline != metadata.studio:
-        metadata.collections.add(metadata.studio)
 
     # Actors
     movieActors.clearActors()
@@ -94,14 +86,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Date
-    date = detailsPageElements.xpath('//div[contains(@class,"details")]//p')[0].text_content()
+    date = detailsPageElements.xpath('//div[contains(@class,"details")]//p')[0].text_content().strip()
     Log('Date: ' + date)
     date_object = datetime.strptime(date, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Title
-    sceneTitle = detailsPageElements.xpath('//div[contains(@class,"details")]//h1')[0].text_content()
-    metadata.title = siteName + " - " + sceneTitle
+    metadata.title = detailsPageElements.xpath('//div[contains(@class,"details")]//h1')[0].text_content().strip()
 
     return metadata

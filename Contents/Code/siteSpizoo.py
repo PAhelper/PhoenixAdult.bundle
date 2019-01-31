@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
 
     searchResults = HTML.ElementFromURL('https://www.spizoo.com/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="category_listing_wrapper_updates"]'):
@@ -8,23 +10,25 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]//h3')[0].text_content().strip()
         if titleNoFormatting[-3:] == " 4k":
             titleNoFormatting = titleNoFormatting[:-3].strip()
-        curID = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_')
+        curID = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_').replace('?','!')
 
         releaseDate = parse(searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="date-label"]')[0].text_content()[22:].strip()).strftime('%Y-%m-%d')
 
         girlName = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="model-labels"]//span[@class="update_models"]//a')[0].get('title').strip()
 
         Log("CurID" + str(curID))
-        lowerResultTitle = str(titleNoFormatting).lower()
         
         titleNoFormatting = girlName + " - " + titleNoFormatting + " [Spizoo] " + releaseDate
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_', '/')
+    temp = str(metadata.id).split("|")[0].replace('_', '/').replace('!','?')
 
     url = temp
     Log('url :' + url)

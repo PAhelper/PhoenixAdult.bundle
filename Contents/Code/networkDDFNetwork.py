@@ -1,7 +1,9 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     i = 0
     for searchResult in searchResults.xpath('//div[@class="card m-1"]/a'):
@@ -11,12 +13,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         releaseDate = parse(searchResult.xpath('//div[@class="card-footer d-flex justify-content-between"]//small')[i].text_content().strip()).strftime('%Y-%m-%d')
         #coverURL = searchResults.xpath('//div[@class="card m-1"]/a/img')[i].get('data-src')
         #Log('CoverUrl : ' + str(coverURL) )
-        curID = searchResult.get('href').replace('/','_')
+        curID = searchResult.get('href').replace('/','_').replace('?','!')
         Log('CurID : ' + curID )
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [DDFNetwork] " + releaseDate , score = score, lang = lang ))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [DDFNetwork] " + releaseDate , score = score, lang = lang ))
         i = i + 1
     return results
 
@@ -24,7 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log('temp :' + temp)
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     Log('Url : ' + url)

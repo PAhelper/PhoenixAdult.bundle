@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     i = 0
     for searchResult in searchResults.xpath('//div[@class="update_details"]/a[2]'):
@@ -9,10 +9,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResults.xpath('//div[@class="update_details"]/a[2]')[i].text_content()
         Log(str(titleNoFormatting))
         releaseDate = parse(searchResult.xpath('//div[@class="update_details"]//div[@class="cell update_date"]')[i].text_content().strip()).strftime('%Y-%m-%d')
-        curID = searchResult.get('href').replace('/','_')
+        curID = searchResult.get('href').replace('/','_').replace('?','!')
         Log('CurID : ' + curID )
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [JulesJordan] " + releaseDate , score = score, lang = lang))
         i = i + 1
@@ -23,7 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Jules Jordan'
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('/vids.html','_vids.html')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('/vids.html','_vids.html')
     Log('temp :' + temp)
     url = temp
     Log('Url : ' + url)

@@ -1,30 +1,25 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchString = encodedTitle.replace(" ","+")
-    # if not searchAll:
-    #     searchString = searchString + "+" + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[contains(@class,"compact")]//article'):
         titleNoFormatting = searchResult.xpath('.//a//h3')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
-        # curID = curID[:-26]
-        curID = curID.replace('/','_')
-        Log("curID: " + curID)
-        releasedDate = searchResult.xpath('.//div[@class="date"]')[0].text_content()
-        Log("releasedDate: " + releasedDate.strip())
-
-        lowerResultTitle = str(titleNoFormatting).lower()
+        curID = curID.replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         searchString = searchString.replace("+"," ")
-        score = 102 - Util.LevenshteinDistance(searchString.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate +"]"
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
     return results
 def update(metadata,siteID,movieGenres,movieActors):
-    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/')
+    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log("scene url: " + url)
     detailsPageElements = HTML.ElementFromURL(url)
 

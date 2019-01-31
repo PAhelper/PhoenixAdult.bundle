@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     url = "https://vrbangers.com/video/" + searchTitle.lower().replace(" ","-")
     searchResults = HTML.ElementFromURL(url)
 
@@ -8,23 +8,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     titleNoFormatting = searchResults.xpath('//div[@class="video-info-title"]//h1[@class="pull-left page-title"]//span')[0].text_content()
     Log("Result Title: " + titleNoFormatting)
     cur = "/video/" + searchTitle.lower().replace(" ","-")
-    curID = cur.replace('/','_')
-    Log("ID: " + curID)
-    releasedDate = searchResults.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible"]')[0].text_content()
-
+    curID = cur.replace('/','_').replace('?','!')
+    releaseDate = parse(searchResult.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible')[0].text_content().strip()).strftime('%Y-%m-%d')
     girlName = searchResults.xpath('//div[contains(@class,"girls-name")]//a')[0].text_content()
 
-    Log("CurID: " + str(curID))
-    lowerResultTitle = str(titleNoFormatting).lower()
-
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " [VRBangers, " + releasedDate +"]"
+    titleNoFormatting = girlName + " - " + titleNoFormatting + " [VRBangers] " + releaseDate
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace("_", "/")
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log('temp: ' + temp)
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     Log('url: ' + url)

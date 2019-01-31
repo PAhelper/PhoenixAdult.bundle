@@ -13,7 +13,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -31,13 +31,15 @@ def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateA
         else:
             network = "FakeHub"
         releaseDate = parse(searchResult.xpath('.//div[@class="release-date"] | .//div[@class="release-card__info__release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+subSite+"] " + releaseDate, score = score, lang = lang))
     return results
 
-def searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -49,8 +51,10 @@ def searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateA
         else:
             subSite = searchResult.xpath('.//div[@class="site-site-name"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [FakeHub/"+subSite+"] " + releaseDate, score = score, lang = lang))
     return results
@@ -62,15 +66,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Summary
-    try:
-        metadata.summary  = detailsPageElements.xpath('//div[@class="overview"]/p')[0].text_content().strip()
-    except:
-        metadata.summary  = detailsPageElements.xpath('//div[@class="expandable"]/p')[0].text_content().strip()
+    metadata.summary  = detailsPageElements.xpath('//div[@class="overview"]/p | //div[@class="expandable"]/p')[0].text_content().strip()
     metadata.collections.clear()
-    try:
-        subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img')[0].get('alt')
-    except:
-        subSite = detailsPageElements.xpath('//a[@class="site-logo"]/img')[0].get('alt')
+
+    subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img | //a[@class="site-logo"]/img')[0].get('alt')
     if "danejones" in subSite:
         tagline = "Dane Jones"
     elif "lesbea" in subSite:

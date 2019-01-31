@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchPageContent = HTTP.Request("https://www.pornfidelity.com") #The search page seems to redirect to PornFidelity.com if you didn't just come from there, so I open this first to trick it...
@@ -22,11 +22,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = releaseDate + ", " + str(datetime.now().year)
         releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
         Log(str(curID))
-        lowerResultTitle = str(titleNoFormatting).lower()
-        if searchByDateActor != True:
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
-            score = 102 - Util.LevenshteinDistance(searchDate, releaseDate)
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
@@ -35,7 +35,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = "https://" + temp
     detailsPageElements = HTML.ElementFromURL(url)

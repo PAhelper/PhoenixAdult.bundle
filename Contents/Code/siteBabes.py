@@ -13,16 +13,15 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
     i=0
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//a[@class="scene-title notracking"]'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
-        curID = searchResult.get('href').replace('/','_')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        releaseDate = searchResult.xpath('//time[@class="release-date"]')[i].text_content()
+        curID = searchResult.get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('//time[@class="release-date"]')[i].text_content().strip()).strftime('%Y-%m-%d')
         subSite = searchResult.xpath('//a[@class="release-site notracking"]')[i].text_content().strip()
         site = " [Babes"
         if len(subSite) > 0 and subSite != "Babes":
@@ -37,7 +36,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Babes'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 

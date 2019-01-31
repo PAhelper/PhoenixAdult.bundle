@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     xartpost = {
         "input_search_sm" : encodedTitle
     }
@@ -15,7 +15,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 curID = searchResult.get("href")[21:]
                 curID = curID.replace('/','+')
                 Log(str(curID))
-                lowerResultTitle = str(titleNoFormatting).lower()
                 score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
                 titleNoFormatting = titleNoFormatting + " [X-Art]"
                 results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))

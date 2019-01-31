@@ -12,15 +12,10 @@ import siteLegalPorno
 import siteMofos
 import siteBabes
 import siteGloryHoleSecrets
-import siteGloryHoleSwallow
 import siteNewSensations
 import siteTwistys
-# import siteLubed
 import siteSpizoo
 import sitePrivate
-# import sitePassionHD
-# import siteFantasyHD
-# import sitePornPros
 import siteDigitalPlayground
 import networkSexyHub
 import networkFPN
@@ -235,7 +230,7 @@ searchSites[191] = ["Teen Curves","Teen Curves", "https://www.teamskeet.com","ht
 searchSites[192] = ["CFNM Teens","CFNM Teens", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[193] = ["Teens Love Anal","Teens Love Anal", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[194] = ["My Babysitters Club","My Babysitters Club", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
-searchSites[195] = ["She's New","She's New", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[195] = ["Shes New","She's New", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[196] = ["Teens Do Porn","Teens Do Porn", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[197] = ["POV Life","POV Life", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[198] = ["The Real Workout","The Real Workout", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
@@ -382,7 +377,7 @@ searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","h
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[342] = ["GloryHoleSwallow","GloryHoleSwallow","https://www.gloryholeswallow.com","https://gloryholeswallow.com/newtour/search.php?query="]
+searchSites[342] = ["FILL THIS IN","FILL THIS IN","https://FILL THIS IN.com","https://FILL THIS IN.com/search?term="]
 searchSites[343] = ["Analized","Analized","https://www.analized.com","https://analized.com/search.php?query="]
 searchSites[344] = ["James Deen","James Deen","https://www.jamesdeen.com","https://jamesdeen.com/search.php?query="]
 searchSites[345] = ["Twisted Visual","Twisted Visual","https://www.twistedvisual.com","https://twistedvisual.com/search.php?query="]

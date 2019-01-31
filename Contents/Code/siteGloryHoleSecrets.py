@@ -13,21 +13,20 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     searchResults = HTML.ElementFromURL('http://www.gloryholesecrets.com/tour/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//li[@class="featured-video morestdimage grid_4 mb"]'):
         detailsPage = searchResult.xpath('./a')[0].get('href')
-        Log(str(detailsPage))
         titleNoFormatting = searchResult.xpath('./div[@class="details"]//h5[2]')[0].text_content().strip()
-        Log(str(titleNoFormatting))
-        titleDate = searchResult.xpath('./div[@class="details"]//text()')[8].strip()
-        Log(str(titleDate))
+        releaseDate = parse(searchResult.xpath('./div[@class="details"]//text()')[8].strip()).strftime('%Y-%m-%d')
         curID = detailsPage.replace('/','_').replace('?','!')
         Log(curID + "|" + str(siteNum))
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " (" + titleDate + ") [GloryHoleSecrets]", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [GloryHoleSecrets] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

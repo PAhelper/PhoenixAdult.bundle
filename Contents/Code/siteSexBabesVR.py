@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-", 1).replace(" ","_")
     searchResults = HTML.ElementFromURL(url)
 
@@ -8,16 +8,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     titleNoFormatting = searchResults.xpath('.//div[@class="video-group-left"]//h1[@class="title"]')[0].text_content()
     Log("Result Title: " + titleNoFormatting)
     curID = searchTitle.lower().replace(" ","-", 1).replace(" ","_")
-    # curID = cur.replace('/','_')
     Log("ID: " + curID)
-    releasedDate = searchResults.xpath('.//div[@class="grid-one-date"]//span[@class="date-display-single"]')[0].text_content()
-
+    releaseDate = parse(searchResult.xpath('.//div[@class="grid-one-date"]//span[@class="date-display-single"]')[0].text_content().strip()).strftime('%Y-%m-%d')
     girlName = searchResults.xpath('.//div[(@class="video-actress-name")]//a')[0].text_content()
 
-    # Log("CurID" + str(curID))
-    lowerResultTitle = str(titleNoFormatting).lower()
-
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +", " + releasedDate +"]"
+    titleNoFormatting = girlName + " - " + titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +"] " + releaseDate
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting, score = score, lang = lang))
     return results

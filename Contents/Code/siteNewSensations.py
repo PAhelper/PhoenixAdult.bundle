@@ -13,13 +13,12 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     searchResults = HTML.ElementFromURL('https://www.newsensations.com/tour_ns/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//h4//a'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
-        curID = searchResult.get('href').replace('/','_')
-        lowerResultTitle = str(titleNoFormatting).lower()
+        curID = searchResult.get('href').replace('/','_').replace('?','!')
         score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
@@ -28,9 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'New Sensations'
-    url = str(metadata.id).split("|")[0].replace('_','/')
-    url = url.replace('tour/ns','tour_ns')
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('tour/ns','tour_ns'))
 
     # Summary
     paragraph = detailsPageElements.xpath('//div[@class="trailerInfo"]//p')[0].text_content().strip()

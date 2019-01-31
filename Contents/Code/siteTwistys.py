@@ -1,12 +1,14 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL('https://www.twistys.com/tour/search/list/keyword/?keyword=' + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="video-ui-wrapper"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//h2//a')[0].text_content().strip()
         Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_')
+        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
         Log("ID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-right"]//div[@class="info-box-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         girlName = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//div[@class="info-box-models-name"]//div//a')[0].text_content()
@@ -17,16 +19,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             subSite = ''
         else:
             subSite = '/' + subSite
-        lowerResultTitle = str(titleNoFormatting).lower()
         
         titleNoFormatting = girlName + " - " + titleNoFormatting + " [Twistys" + subSite + "] " + releaseDate
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_', '/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     Log('url :' + url)

@@ -13,23 +13,27 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL('https://www.mofos.com/tour/search/?q=' + encodedTitle)
     for searchResult in searchResults.xpath('//div[contains(@class,"title details-only")]//a'):
         titleNoFormatting = searchResult.text_content()
         subSite = searchResults.xpath('//a[@class="site-name"]')[0].text_content().strip()
-        relDate = searchResults.xpath('//span[@class="date-added"]')[0].text_content().strip()
-        curID = searchResult.get('href').replace('/','_')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        releaseDate = parse(searchResult.xpath('//span[@class="date-added"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        curID = searchResult.get('href').replace('/','_').replace('?','!')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mofos/" + subSite + "] " + relDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mofos/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Mofos'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 

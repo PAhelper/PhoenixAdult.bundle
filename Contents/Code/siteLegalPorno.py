@@ -1,6 +1,6 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     if "Search for" in searchResults.xpath('//title')[0].text_content():
         for searchResult in searchResults.xpath('//div[@class="thumbnails"]//div[contains(@class,"thumbnail ")]'):
@@ -10,18 +10,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             curID = searchResult.xpath('.//a')[0].get("href")[27:]
             curID = curID.replace('/','+')
             Log("ID: " + curID)
-            releasedDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-7"]')[0].text_content().replace("\n","")[14:-1]
-            releasedDate = datetime.strptime(releasedDate, '%b %d, %Y').strftime('%Y-%m-%d')
-            Log(releasedDate)
+            releaseDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-7"]')[0].text_content().replace("\n","")[14:-1]
+            releaseDate = datetime.strptime(releaseDate, '%b %d, %Y').strftime('%Y-%m-%d')
+            Log(releaseDate)
             Log(str(curID))
-            lowerResultTitle = str(titleNoFormatting).lower()
-            if searchByDateActor != True:
-                score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
-                searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%Y-%m-%d')
-                score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-            titleNoFormatting = "[" + releasedDate + "] " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]"
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting  + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     else:
         Log("single match redirect")
@@ -31,10 +28,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = curID.replace('/','+')
         Log("ID: " + curID)
         #releasedDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-7"]')[0].text_content().replace("\n","")[14:-1]
-        #releasedDate = datetime.strptime(releasedDate, '%b %d, %Y').strftime('%Y-%m-%d')
-        #Log(releasedDate)
+        #releasedDate = datetime.strptime(releaseDate, '%b %d, %Y').strftime('%Y-%m-%d')
+        #Log(releaseDate)
         Log(str(curID))
-        lowerResultTitle = str(titleNoFormatting).lower()
+        LOWERRESULTTITLE = str(titleNoFormatting).lower()
         score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
@@ -54,9 +51,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = "LegalPorno"
     #metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content()
     metadata.title = detailsPageElements.xpath('//title')[0].text_content()[2:-15]
-    releasedDate = detailsPageElements.xpath('//span[@title="Release date"]//a')[0].text_content()
-    Log(releasedDate)
-    date_object = datetime.strptime(releasedDate, '%Y-%m-%d')
+    releaseDate = detailsPageElements.xpath('//span[@title="Release date"]//a')[0].text_content()
+    Log(releaseDate)
+    date_object = datetime.strptime(releaseDate, '%Y-%m-%d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
     

@@ -18,6 +18,7 @@ class PhoenixActors:
             skip = False
             # Save the potentional new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
             newActor = self.actorsTable[actorsProcessed].replace("\xc2\xa0", " ").strip()
+            newPhoto = self.photosTable[actorsProcessed].strip()
 
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if "Bad Name" == newActor:
@@ -41,17 +42,20 @@ class PhoenixActors:
                 newActor = "Krystal Boyd"
             if metadata.tagline == "LegalPorno" and "Abby" == newActor:
                 newActor = "Krystal Boyd"
+            if metadata.studio == "Joymii" and newActor == "Gina G.":
+                newActor = "Gina Gerson"
 
             if not skip:
                 role = metadata.roles.new()
                 role.name = newActor
-                role.photo = self.photosTable[actorsProcessed]
+                if newPhoto == '':
+                    newPhoto = actorDBfinder(newActor)
+                role.photo = newPhoto
             actorsProcessed = actorsProcessed + 1
 
 # https://www.indexxx.com/models/59558/anjelica-1/
 
-            # For sites without a proper actor profile picture, this method looks in external databases based on actorName
-            
+# For sites without a proper actor profile picture, this method looks in external databases based on actorName            
 def actorDBfinder(actorName):
     try:
         databaseName = "AdultDVDEmpire"

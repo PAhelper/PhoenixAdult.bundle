@@ -13,7 +13,7 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -26,8 +26,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         except:
             releaseDate = ''
-        lowerResultTitle = str(titleNoFormatting).lower()
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        if searchDate and releaseDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         if siteNum == 278 or (siteNum >= 285 and siteNum <= 287):
             network = 'XEmpire'
@@ -95,7 +97,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Pretty Dirty'
     elif siteID >= 460 and siteID <= 466:
         metadata.studio = '21Sextreme'
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     url = (PAsearchSites.getSearchBaseURL(siteID) + temp).replace("https:","http:")
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
@@ -138,7 +140,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Director
     metadata.directors.clear()
-    director = metadata.directors.new()
     try:
         directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')
         Log("Directors found: "+str(len(directors)))

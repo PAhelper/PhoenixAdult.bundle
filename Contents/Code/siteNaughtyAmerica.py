@@ -1,9 +1,9 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchString = encodedTitle.replace(" ","+")
-    if not searchAll:
-        searchString = searchString + "+" + PAsearchSites.getSearchSiteName(searchSiteID).replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="scene-item"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
@@ -11,12 +11,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = curID[:-26]
         curID = curID.replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//p[@class="entry-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
         searchString = searchString.replace("+"," ")
-        if searchByDateActor != True:
-            score = 102 - Util.LevenshteinDistance(searchString.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
-            score = 102 - Util.LevenshteinDistance(searchDate, releaseDate)
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [NA] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results

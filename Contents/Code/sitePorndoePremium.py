@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="video-item"]'):
         #Log(searchResult.text_content())
@@ -8,12 +10,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         subSite = searchResult.xpath('.//a[@class="item-top"]')[0].get('data-brand')
         curID = searchResult.xpath('.//a[@class="item-top"]')[0].get('href')
         curID = curID.replace('/','+')
-        lowerResultTitle = str(titleNoFormatting).lower()
-        if searchByDateActor != True:
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        else:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%Y-%m-%d')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
+
+        score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "/"+subSite+"]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 

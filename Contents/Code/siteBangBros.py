@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchPageNum = 1
     while searchPageNum <= 2:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/" + str(searchPageNum))
@@ -8,33 +10,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         for searchResult in searchResults.xpath('//div[@class="echThumb"]'):
             if len(searchResult.xpath('.//a[contains(@href,"/video")]')) > 0:
                 titleNoFormatting = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("title")
-                curID = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("href")
-                curID = curID.replace('/','_')
+                curID = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("href").replace('/','_').replace('?','!')
 
-
-                releasedDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content()
-
-                lowerResultTitle = str(titleNoFormatting).lower()
-                if searchByDateActor != True:
-                    score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                releaseDate = parse(searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().strip()).strftime('%Y-%m-%d')
+                if searchDate:
+                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:
-                    searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%b %d, %y')
-                    score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-                titleNoFormatting = titleNoFormatting + " [Bang Bros, " + releasedDate + "]"
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [BangBros] " + releaseDate, score = score, lang = lang))
         searchPageNum += 1
-
-
-
-
 
     return results
 
 
-
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
@@ -46,8 +38,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     releaseID = detailsPageElements.xpath('//div[@class="vdoCast"]')[1].text_content()[9:]
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + releaseID)
     searchResult = searchResults.xpath('//div[@class="echThumb"]')[0]
-    releasedDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().replace("\n","")
-    date_object = datetime.strptime(releasedDate, '%b %d, %Y')
+    releaseDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().replace("\n","")
+    date_object = datetime.strptime(releaseDate, '%b %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
     metadata.tagline = detailsPageElements.xpath('//a[contains(@href,"/websites")]')[1].text_content()

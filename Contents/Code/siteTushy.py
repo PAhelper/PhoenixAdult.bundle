@@ -1,22 +1,21 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchAll,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
         
         
         titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
         curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
-        curID = curID.replace('/','_')
-        releasedDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
+        curID = curID.replace('/','_').replace('?','!')
+        releaseDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
 
-        lowerResultTitle = str(titleNoFormatting).lower()
         if searchByDateActor != True:
             score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         else:
             searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
+            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releaseDate.lower())
+        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releaseDate + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     if searchByDateActor == True:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "&page=2")
@@ -25,16 +24,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             
             titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
             curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
-            curID = curID.replace('/','_')
-            releasedDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
+            curID = curID.replace('/','_').replace('?','!')
+            releaseDate = searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content()
 
-            lowerResultTitle = str(titleNoFormatting).lower()
             if searchByDateActor != True:
                 score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
             else:
                 searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
-                score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releasedDate.lower())
-            titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releasedDate + "]"
+                score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releaseDate.lower())
+            titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + ", " + releaseDate + "]"
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
 
@@ -46,7 +44,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/')
+    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)

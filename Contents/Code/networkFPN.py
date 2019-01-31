@@ -13,24 +13,22 @@ def posterAlreadyExists(posterUrl,metadata):
             return True
     return False
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchAll, searchSiteID):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="update animation-element bounce-up"]'):
-        if searchSiteID != 9999:
-            siteNum = searchSiteID
         titleNoFormatting = searchResult.xpath('.//a[@class="title"]')[0].text_content().strip()
         Log("Result Title: " + titleNoFormatting)
-        curID = PAsearchSites.getSearchSearchURL(searchSiteID) + titleNoFormatting.lower().replace(' ','+')
+        curID = PAsearchSites.getSearchSearchURL(siteNum) + titleNoFormatting.lower().replace(' ','+')
         curID = curID.replace('/','_').replace('?','!')
         Log("ID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="info-column video-data"]/span[last()]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        lowerResultTitle = str(titleNoFormatting).lower()
         if searchDate:
-            searchDateCompare = datetime.strptime(searchDate, '%Y-%m-%d').strftime('%B %d, %y')
-            score = 102 - Util.LevenshteinDistance(searchDateCompare.lower(), releaseDate.lower())
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        titleNoFormatting = titleNoFormatting + " [FPN/" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        titleNoFormatting = titleNoFormatting + " [FPN/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
 def update(metadata,siteID,movieGenres,movieActors):
