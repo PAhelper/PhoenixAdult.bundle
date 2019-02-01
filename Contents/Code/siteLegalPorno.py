@@ -20,28 +20,19 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     else:
         Log("single match redirect")
-        curID = urllib.unquote(searchResults.xpath('//a[@class="logout-button clear-user-cache"]')[0].get("href"))[83:-1]
-        Log("ID:" + curID)
+        curID = urllib.unquote(searchResults.xpath('//a[@class="logout-button clear-user-cache"]')[0].get("href"))[57:-1].replace('/','+').replace('?','!')
         titleNoFormatting = searchResults.xpath('//title')[0].text_content()[:-13]
-        curID = curID.replace('/','+')
         Log("ID: " + curID)
-        #releasedDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-7"]')[0].text_content().replace("\n","")[14:-1]
-        #releasedDate = datetime.strptime(releaseDate, '%b %d, %Y').strftime('%Y-%m-%d')
-        #Log(releaseDate)
-        Log(str(curID))
-        score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]"
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+        releaseDate = parse(searchResults.xpath('//span[@title="Release date"]//a')[0].text_content().strip()).strftime('%Y-%m-%d')
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting  + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
 
-
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = str(metadata.id).split("|")[0].replace('+','/').replace('?','!')
-
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('+','/').replace('?','!'))
 
     # Summary
     metadata.studio = "LegalPorno"
