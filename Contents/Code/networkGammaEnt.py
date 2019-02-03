@@ -67,8 +67,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
+    metadata.directors.clear()
+    director = metadata.directors.new()
+    
     if siteID == 278 or (siteID >= 285 and siteID <= 287):
         metadata.studio = 'XEmpire'
+        director.name = 'Mason'
     elif siteID == 329 or (siteID >= 351 and siteID <= 354):
         metadata.studio = 'Blowpass'
     elif siteID == 331 or (siteID >= 355 and siteID <= 360):
@@ -81,6 +85,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = '21Naturals'
     elif siteID == 53 or (siteID >= 375 and siteID <= 379):
         metadata.studio = 'Girlsway'
+        director.name = 'Stills by Alan'
     elif siteID >= 383 and siteID <= 386:
         metadata.studio = 'Fame Digital'
     elif siteID >= 387 and siteID <= 392:
@@ -139,13 +144,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = title
 
     # Director
-    metadata.directors.clear()
     try:
         directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a')
         Log("Directors found: "+str(len(directors)))
-        for director in directors:
-            Log("Director: "+str(director.text_content().strip()))
-            metadata.directors.add(director.text_content().strip())
+        for dirname in directors:
+            Log("Director: "+str(dirname.text_content().strip()))
+            #metadata.directors.add(director.text_content().strip())
+            director.name = dirname.text_content().strip()
     except:
         pass
 

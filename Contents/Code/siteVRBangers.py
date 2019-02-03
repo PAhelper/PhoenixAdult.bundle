@@ -10,11 +10,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     cur = "/video/" + searchTitle.lower().replace(" ","-")
     curID = cur.replace('/','_').replace('?','!')
     releaseDate = parse(searchResult.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible')[0].text_content().strip()).strftime('%Y-%m-%d')
-    girlName = searchResults.xpath('//div[contains(@class,"girls-name")]//a')[0].text_content()
 
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " [VRBangers] " + releaseDate
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [VRBangers] " + releaseDate, score = score, lang = lang))
     return results
 
 

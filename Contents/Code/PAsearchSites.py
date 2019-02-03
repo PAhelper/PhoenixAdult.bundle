@@ -1,10 +1,10 @@
 import siteBrazzers
-import siteBlacked
+#import siteBlacked
 import siteNaughtyAmerica
-import siteVixen
+#import siteVixen
 import siteXart
 import siteBangBros
-import siteTushy
+#import siteTushy
 import siteRealityKings
 import siteTeamSkeet
 import sitePorndoePremium
@@ -33,6 +33,7 @@ import siteWankzVR
 import siteMilfVR
 import siteJoymii
 import networkPornPros
+import networkStrike3
 
 searchSites = [None] * 490
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
@@ -546,6 +547,10 @@ def getSearchSettings(mediaTitle):
     mediaTitle = mediaTitle.replace(".", " ")
     mediaTitle = mediaTitle.replace(" - ", " ")
     mediaTitle = mediaTitle.replace("-", " ")
+
+    # Search Site abbreviations
+    mediaTitle = re.sub('bblib', 'Big Butts Like It Big', mediaTitle, flags=re.IGNORECASE)
+
     # Search Site ID of -1 is all
     searchSiteID = None
     # Date/Actor or Title
@@ -617,3 +622,15 @@ def getSearchSettings(mediaTitle):
             searchType = 0
 
     return [searchSiteID,searchType,searchTitle,searchDate]
+
+def posterAlreadyExists(posterUrl,metadata):
+    for p in metadata.posters.keys():
+        Log(p.lower())
+        if p.lower() == posterUrl.lower():
+            Log("Found " + posterUrl + " in posters collection")
+            return True
+
+    for p in metadata.art.keys():
+        if p.lower() == posterUrl.lower():
+            return True
+    return False

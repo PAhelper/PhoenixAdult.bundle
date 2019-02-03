@@ -10,13 +10,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     searchResult = searchResults.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]')[0]
     titleNoFormatting = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//h1')[0].text_content()
-    Log("Result Title: " + titleNoFormatting)
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
-    Log("CurID: " + curID)
     releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content().strip()).strftime('%Y-%m-%d')
-    girlName = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//a')[0].text_content()
 
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
+    titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     return results
