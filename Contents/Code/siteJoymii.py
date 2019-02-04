@@ -4,18 +4,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchString = encodedTitle.replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[contains(@class,"set set-photo")]'):
-        resultURL = searchResult.xpath('.//a')[0].get('href')
-        if resultURL[10:15] == "video":
-            titleNoFormatting = searchResult.xpath('.//div[contains(@class,"title")]//a')[0].text_content().title().strip()
-            curID = searchResult.xpath('.//a')[0].get('href')
-            curID = curID.replace("_","!").replace('/','_').replace('?','!')
-            releaseDate = parse(searchResult.xpath('.//div[contains(@class,"release_date")]')[0].text_content().strip()).strftime('%Y-%m-%d')
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        titleNoFormatting = searchResult.xpath('.//div[contains(@class,"title")]//a')[0].text_content().title().strip()
+        curID = searchResult.xpath('.//a')[0].get('href')
+        curID = curID.replace("_","!").replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//div[contains(@class,"release_date")]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
