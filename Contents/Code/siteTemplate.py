@@ -2,20 +2,6 @@ import PAsearchSites
 import PAgenres
 from dateutil.parser import parse
 
-# This function checks to see if a poster from the same URL has already been downloaded, and allows it to be skipped if it has
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
-
 # This function will pull Search Results from the appropriate site
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:

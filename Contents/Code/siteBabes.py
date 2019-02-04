@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
     i=0
@@ -93,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for i in range(1,10):
         posterUrl = "https://static-hw.babescontent.com/scenes/" + str(sceneID) + "/s310x161_" + str(i) + ".jpg"
         Log("Poster URL: " + posterUrl)
-        if not posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

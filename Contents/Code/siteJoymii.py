@@ -35,7 +35,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@id="video-set-details"]//p[@class="text"]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//p[@class="text"]')[0].text_content()
     Log('summary: ' +  metadata.summary)
 
     # Posters/Background
@@ -46,14 +46,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         posters = detailsPageElements.xpath('//div[@id="video-set-details"]//video[@id="video-playback"]')
         background = posters[0].get("poster")
     except:
-        background = detailsPageElements.xpath('//img[@class="poster"]')[0].get('src')
+        background = detailsPageElements.xpath('//img[@class="poster"] | //img[@class="cover"]')[0].get('src')
     Log("background: " + background)
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@id="video-set-details"]//h2[@class="starring-models"]//a')
+    actors = detailsPageElements.xpath('//h2[@class="starring-models"]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
@@ -62,6 +62,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.addGenre("Glamcore")
+    movieGenres.addGenre("Artistic")
     if len(actors) == 3:
         movieGenres.addGenre("Threesome")
     if len(actors) == 4:

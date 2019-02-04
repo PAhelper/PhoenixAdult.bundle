@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     searchResults = HTML.ElementFromURL('http://www.gloryholesecrets.com/tour/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//li[@class="featured-video morestdimage grid_4 mb"]'):
@@ -93,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for poster in detailsPageElements.xpath('//div[@class="grid_4"]//img'):
         posterUrl = "http://gloryholesecrets.com" + poster.get('src')
         Log("posterURL: " + posterUrl)
-        if not posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

@@ -73,6 +73,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[contains(@class,"episode-summary")]//a[contains(@href,"/models/")]')
     if len(actors) > 0:
+        if len(actors) == 3:
+            movieGenres.addGenre("Threesome")
+        if len(actors) == 4:
+            movieGenres.addGenre("Foursome")
+        if len(actors) > 4:
+            movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = actorLink.text_content()
             actorPageURL = actorLink.get("href")

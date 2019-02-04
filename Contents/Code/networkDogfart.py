@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        #Log(p.lower())
-        if p.lower().split('?')[0] == posterUrl.lower().split('?')[0]:
-            Log("Found " + posterUrl.split('?')[0] + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -112,7 +100,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         posterUrl = posterpage.xpath('//div[@class="col-xs-12 remove-bs-padding"]/img')[0].get('src')
             #Download image file for analysis
         try:
-            if not posterAlreadyExists(posterUrl,metadata):
+            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)

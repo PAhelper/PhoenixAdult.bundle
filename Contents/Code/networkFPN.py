@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -53,13 +41,23 @@ def update(metadata,siteID,movieGenres,movieActors):
     # No Source for Genres, add manual
 
     movieGenres.addGenre("Hardcore")
-    if siteID == 343:
+    if tagline == "Analized":
         movieGenres.addGenre("Anal")
+    if tagline == "Only Prince":
+        movieGenres.addGenre("Interracial")
+    if "Daddy" in tagline:
+        movieGenres.addGenre("Incest")
 
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//span[@class="update_models"]/a')
     if len(actors) > 0:
+        if len(actors) == 3:
+            movieGenres.addGenre("Threesome")
+        if len(actors) == 4:
+            movieGenres.addGenre("Foursome")
+        if len(actors) > 4:
+            movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = actorLink.text_content()
             actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + "/models/models.html"
@@ -85,7 +83,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

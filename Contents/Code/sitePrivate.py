@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchSiteName = PAsearchSites.getSearchSiteName(searchSiteID)
     searchResults = HTML.ElementFromURL('https://www.private.com/search.php?query=' + encodedTitle)
@@ -100,7 +88,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Backgrounds Base URL: ' + backgrounds)
     for i in range(1,10):
         posterUrl = backgrounds + sceneID.lower() + "_" + "{0:0=3d}".format(i*5) + ".jpg"
-        if not posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

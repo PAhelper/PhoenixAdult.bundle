@@ -1,18 +1,6 @@
 import PAsearchSites
 import PAgenres
 
-def posterAlreadyExists(posterUrl,metadata):
-    for p in metadata.posters.keys():
-        Log(p.lower())
-        if p.lower() == posterUrl.lower():
-            Log("Found " + posterUrl + " in posters collection")
-            return True
-
-    for p in metadata.art.keys():
-        if p.lower() == posterUrl.lower():
-            return True
-    return False
-
 def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -80,19 +68,25 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.clearGenres()
     movieGenres.addGenre('hardcore')
     movieGenres.addGenre('heterosexual')
-    if siteID == 282:
+    if tagline == "Swallowed":
         movieGenres.addGenre('blowjob')
         movieGenres.addGenre('cum swallow')
-    elif siteID == 283:
+    elif tagline == "TrueAnal":
         movieGenres.addGenre('anal')
         movieGenres.addGenre('gaping')
-    elif siteID == 284:
+    elif tagline == "Nympho":
         movieGenres.addGenre('nympho')
 
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('(//h4[@class="models"])[1]//a')
     if len(actors) > 0:
+        if len(actors) == 3:
+            movieGenres.addGenre("Threesome")
+        if len(actors) == 4:
+            movieGenres.addGenre("Foursome")
+        if len(actors) > 4:
+            movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
@@ -126,7 +120,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
