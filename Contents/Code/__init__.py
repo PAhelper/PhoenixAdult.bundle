@@ -676,7 +676,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID >= 490 and siteID <= 522:
-            metadata = PAsearchSites.siteJoymii.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.networkKink.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

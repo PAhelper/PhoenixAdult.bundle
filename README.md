@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-06 11:00AM CST - Added Kink.com network of sites
 - 2019-02-06 8:00AM CST - Bugfix for Joymii photo set results, added several aliases for Joymii to PAactors
 - 2019-02-05 8:00AM CST - Added subsite to Bang Bros search results
 - 2019-02-04 2:30PM CST - Joymii bugfixes to update() function after allowing photo sets in the search results
