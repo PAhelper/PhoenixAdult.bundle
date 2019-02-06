@@ -34,8 +34,9 @@ import siteMilfVR
 import siteJoymii
 import networkPornPros
 import networkStrike3
+import networkKink
 
-searchSites = [None] * 490
+searchSites = [None] * 523
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -526,7 +527,39 @@ searchSites[486] = ["Holed","Holed","https://www.holed.com","https://holed.com/v
 searchSites[487] = ["CastingCouch-X","CastingCouch-X","https://www.castingcouch-x.com","https://castingcouch-x.com/video/"]
 searchSites[488] = ["SpyFam","SpyFam","https://www.spyfam.com","https://spyfam.com/video/"]
 searchSites[489] = ["MyVeryFirstTime","MyVeryFirstTime","https://www.myveryfirsttime.com","https://myveryfirsttime.com/video/"]
-
+searchSites[490] = ["Bound Gang Bangs","Bound Gang Bangs","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[491] = ["Brutal Sessions","Brutal Sessions","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[492] = ["Device Bondage","Device Bondage","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[493] = ["Families Tied","Families Tied","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[494] = ["Hardcore Gangbang","Hardcore Gangbang","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[495] = ["Hogtied","Hogtied","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[496] = ["Kink Features","Kink Features","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[497] = ["Kink University","Kink University","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[498] = ["Public Disgrace","Public Disgrace","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[499] = ["Sadistic Rope","Sadistic Rope","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[500] = ["Sex and Submission","Sex and Submission","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[501] = ["The Training of O","The Training of O","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[502] = ["The Upper Floor","The Upper Floor","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[503] = ["Water Bondage","Water Bondage","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[504] = ["Everything Butt","Everything Butt","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[505] = ["Foot Worship","Foot Worship","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[506] = ["Fucking Machines","Fucking Machines","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[507] = ["TS Pussy Hunters","TS Pussy Hunters","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[508] = ["TS Seduction","TS Seduction","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[509] = ["Gangbang","Gangbang","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[510] = ["30 Minutes of Torment","30 Minutes of Torment","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[511] = ["Bound Gods","Bound Gods","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[512] = ["Bound in Public","Bound in Public","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[513] = ["Butt Machine Boys","Butt Machine Boys","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[514] = ["Men of Edge","Men of Edge","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[515] = ["Naked Kombat","Naked Kombat","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[516] = ["Gay Bondage","Gay Bondage","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[517] = ["Gay Fetish","Gay Fetish","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[518] = ["Divine Bitches","Divine Bitches","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[519] = ["Electrosluts","Electrosluts","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[520] = ["Men in Pain","Men In Pain","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[521] = ["Whipped Ass","Whipped Ass","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
+searchSites[522] = ["Wired Pussy","Wired Pussy","https://www.kink.com","https://www.kink.com/search?type=shoot&query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

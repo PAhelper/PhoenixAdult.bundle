@@ -11,14 +11,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             if len(searchResult.xpath('.//a[contains(@href,"/video")]')) > 0:
                 titleNoFormatting = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("title")
                 curID = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("href").replace('/','_').replace('?','!')
-
+                subSite = searchResult.xpath('.//span[@class="faTxt"]')[0].text_content().strip()
                 releaseDate = parse(searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().strip()).strftime('%Y-%m-%d')
                 if searchDate:
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:
                     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [BangBros] " + releaseDate, score = score, lang = lang))
+                if subSite != "BangBros":
+                    subSite = "/"+subSite
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [BangBros"+subSite+"] " + releaseDate, score = score, lang = lang))
         searchPageNum += 1
 
     return results

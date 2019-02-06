@@ -50,7 +50,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         elif siteNum >= 460 and siteNum <= 466:
             network = '21Sextreme'
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+        if network == PAsearchSites.getSearchSiteName(siteNum):
+            network = ''
+        else:
+            network = network + "/"
+
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

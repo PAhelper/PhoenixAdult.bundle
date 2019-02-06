@@ -20,12 +20,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             subSite = '/' + subSite
         
-        titleNoFormatting = girlName + " - " + titleNoFormatting + " [Twistys" + subSite + "] " + releaseDate
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Twistys" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
 

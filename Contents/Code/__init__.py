@@ -358,6 +358,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 478:
                     results = PAsearchSites.siteJoymii.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Kink
+            ###############
+            if siteNum == 490:
+                if searchSiteID == 9999 or searchSiteID == 490:
+                    results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -661,6 +668,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 478:
+            metadata = PAsearchSites.siteJoymii.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Kink                                                    ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 490 and siteID <= 522:
             metadata = PAsearchSites.siteJoymii.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

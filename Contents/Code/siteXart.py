@@ -16,8 +16,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 curID = curID.replace('/','+')
                 Log(str(curID))
                 score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-                titleNoFormatting = titleNoFormatting + " [X-Art]"
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [X-Art]", score = score, lang = lang))
     return results
 
 
@@ -50,7 +49,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.clearGenres()
     # No Source for Genres, add manual
     movieGenres.addGenre("Artistic")
-
+    movieGenres.addGenre("Glamcore")
 
     # Actors
     movieActors.clearActors()
