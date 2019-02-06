@@ -34,16 +34,30 @@ class PhoenixActors:
             if "Nathaly" == newActor or "Nathalie Cherie" == newActor:
                 newActor = "Nathaly Cherie"
 
-
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
-            if metadata.tagline == "21Sextury" and "Abbie" == newActor:
+            if metadata.studio == "21Sextury" and "Abbie" == newActor:
                 newActor = "Krystal Boyd"
-            if metadata.tagline == "Babes" and "Angelica" == newActor:
+            if metadata.studio == "Babes" and "Angelica" == newActor:
                 newActor = "Krystal Boyd"
-            if metadata.tagline == "LegalPorno" and "Abby" == newActor:
+            if metadata.studio == "LegalPorno" and "Abby" == newActor:
                 newActor = "Krystal Boyd"
-            if metadata.studio == "Joymii" and newActor == "Gina G.":
-                newActor = "Gina Gerson"
+            if metadata.studio == "Joymii":
+                if "Valentina" in newActor:
+                    newActor == "Valentina Nappi"
+                if newActor == "Gina G.":
+                    newActor = "Gina Gerson"
+                if newActor == "Tasha R.":
+                    newActor = "Tasha Reign"
+                if newActor == "Piper P.":
+                    newActor = "Piper Perri"
+                if newActor == "Lara":
+                    newActor = "Dido Angel"
+                if newActor == "Cindy L.":
+                    newActor = "Cindy Carson"
+                if newActor == "Denisa":
+                    newActor == "Denisa Heaven"
+                if newActor == "Abigail":
+                    newActor = "Abigaile Johnson"
 
             if not skip:
                 role = metadata.roles.new()

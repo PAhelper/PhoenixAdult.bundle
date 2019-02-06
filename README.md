@@ -86,6 +86,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-06 8:00AM CST - Bugfix for Joymii photo set results, added several aliases for Joymii to PAactors
+- 2019-02-05 8:00AM CST - Added subsite to Bang Bros search results
 - 2019-02-04 2:30PM CST - Joymii bugfixes to update() function after allowing photo sets in the search results
 - 2019-02-04 11:30AM CST - Moved posterAlreadyExists() function into PAsearchSites, deleted all other copies of that function throughout the code and pointed all references to it to PAsearchSites.posterAlreadyExists()
 - 2019-02-04 10:00AM CST - Added actor count Genres to all sites that have manual Genres
@@ -442,9 +444,9 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Elegant Anal
  -  Office Obsession
  -  Stepmom Lessons
-#### - Gloryhole Secrets *Title Search (includes actress first name)
+#### - Gloryhole Secrets *Title Search (Title includes actress first name)
 #### - New Sensations
-#### - Swallowed / TrueAnal / Nymphos *Title Search (usually includes actress first name)
+#### - Swallowed / TrueAnal / Nymphos *Title Search (Title includes actress first name)
 #### - SexyHub *Title Search
  -  Dane Jones
  -  Fitness Rooms
@@ -461,18 +463,18 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  POV Perverts
  -  Pervert Gallery
  -  DTF Sluts
-#### - Xempire
+#### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  Hardx
  -  Darkx
  -  Lesbianx
  -  Eroticax
-#### - Blowpass
+#### - Blowpass *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  Throated
  -  MommyBlowsBest
  -  OnlyTeenBlowjobs
  -  1000 Facials
  -  ImmoralLive
-#### - FantasyMassage
+#### - FantasyMassage *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  FantasyMassage
  -  AllGirlMassage
  -  NuruMassage
@@ -480,14 +482,14 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  MilkingTable
  -  MassageParlor
  -  TrickySpa
-#### - MileHighNetwork
+#### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  CherryPop
  -  SweetSinner
  -  RealityJunkies
  -  SweetheartVideo
  -  LesbianOlderYounger
  -  DoghouseDigital
-#### - 21Sextury
+#### - 21Sextury *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  AnalTeenAngels
  -  DeepthroatFrenzy
  -  DPFanatics
@@ -495,28 +497,28 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Gapeland
  -  LezCuties
  -  PixandVideo
-#### - 21Sextreme
+#### - 21Sextreme *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  LustyGrandmas
  -  GrandpasFuckTeens
  -  TeachMeFisting
  -  Zoliboy
  -  DominatedGirls
-#### - 21Naturals
+#### - 21Naturals *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  21Naturals
  -  21FootArt
  -  21EroticAnal
-#### - Girlsway
+#### - Girlsway *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  MommysGirl
  -  WebYoung
  -  GirlsTryAnal
  -  SextapeLesbians
  -  GirlswayOriginals
-#### - FameDigital
+#### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  DevilsFilm
  -  PeterNorth
  -  RoccoSiffredi
  -  TeraPatrick
-#### - OpenlifeNetwork
+#### - OpenlifeNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
  -  SunnyLeone
  -  LaneSisters
  -  DylanRyder
@@ -524,11 +526,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  AshleyFires
  -  DevonLee
  -  HannaHilton
-#### - PureTaboo
-#### - GirlfriendsFilms
-#### - BurningAngel
-#### - EvilAngel
-#### - PrettyDirty
+#### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - GirlfriendsFilms *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - JulesJordan - *Title Search/Actress
 #### - DDFNetwork - *Title Search/Actress
  -  HandsOnHardcore
@@ -579,22 +581,40 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  PurePOV
  -  SpermSwap
  -  TamedTeens
-
- #### - BaDoinkVR Network *Title Search
+#### - BaDoinkVR Network *No Search available, exact URL match only
  -  BaDoinkVR
  -  18VR
  -  BabeVR
  -  KinkVR
  -  VRCosplayX
-
- #### - VRBangers *Title Search
- #### - SexBabesVR *Title (+SceneNumber) Search
-
- #### - WankzVR Network *Title Search *Actor search
+#### - VRBangers *Title Search
+#### - SexBabesVR *Title (+SceneNumber) Search
+#### - WankzVR Network *Title Search *Actor search
   - WankzVR
   - MilfVR
- #### - Joymii *Title Search *Actor search
- #### - PornPros Network *Title Search
+#### - Joymii *Title Search *Actor search
+#### - PornPros Network *No Search available, exact URL match only
+  - RealExGirlfriends
+  - 18YearsOld
+  - MassageCreep
+  - DeepThroatLove
+  - PornPros
+  - TeenBFF
+  - ShadyPi
+  - CrueltyParty
+  - Disgraced18
+  - MilfHumiliation
+  - CumshotSurprise
+  - 40ozBounce
+  - JurassicCock
+  - FreaksOfCock
+  - EuroHumpers
+  - FreaksOfBoobs
+  - CumDisgrace
+  - CockCompetition
+  - PimpParade
+  - SquirtDisgrace
+#### - Other PornPros sites *No Search available, exact URL match only
   - POVD
   - Tiny4k
   - Cum4K
@@ -608,4 +628,3 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - NannySpy
   - CastingCouch-X
   - SpyFam
-  - PornPros subsites

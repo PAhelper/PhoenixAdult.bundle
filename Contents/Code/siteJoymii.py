@@ -56,7 +56,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     actors = detailsPageElements.xpath('//h2[@class="starring-models"]/a')
     if len(actors) > 0:
         for actorLink in actors:
-            actorName = actorLink.text_content()
+            actorName = actorLink.text_content().strip()
             actorPhotoURL = ''
             movieActors.addActor(actorName, actorPhotoURL)
 
@@ -72,6 +72,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # TITLE
-    metadata.title = detailsPageElements.xpath('//div[@id="video-set-details"]//h1[@class="title"]')[0].text_content().title().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="title"]')[0].text_content().title().strip()
 
     return metadata
