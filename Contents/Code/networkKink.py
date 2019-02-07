@@ -4,15 +4,19 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
+    Log(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="shoot search"]'):
         titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
         curID = searchResult.xpath('.//a[@class="shoot-link"]')[0].get('href').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        shootID = searchResult.xpath('.//span[@class="favorite-button"]')[0].get('data-id')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if shootID in title:
+            score = 100
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
@@ -21,24 +25,84 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Kink'
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(url,headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
     art = []
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[1].text_content().strip().replace('\n',' ')
     
     # Tagline
     channel = detailsPageElements.xpath('//div[contains(@class,"shoot-logo")]')[0].text_content().strip()
-    if "boundinpublic" in channel:
-        tagline = "Bound in Public"
+    if "boundgangbangs" in channel:
+        tagline = "Bound Gangbangs"
+    elif "brutalsessions" in channel:
+        tagline = "Brutal Sessions"
+    elif "devicebondage" in channel:
+        tagline = "Device Bondage"
+    elif "familiestied" in channel:
+        tagline = "Families Tied"
+    elif "hardcoregangbang" in channel:
+        tagline = "Hardcore Gangbang"
+    elif "hogtied" in channel:
+        tagline = "Hogtied"
+    elif "kinkfeatures" in channel:
+        tagline = "Kink Features"
+    elif "kinkuniversity" in channel:
+        tagline = "Kink University"
     elif "publicdisgrace" in channel:
         tagline = "Public Disgrace"
+    elif "sadisticrope" in channel:
+        tagline = "Sadistic Rope"
+    elif "sexandsubmission" in channel:
+        tagline = "Sex and Submission"
+    elif "thetrainingofo" in channel:
+        tagline = "The Training of O"
+    elif "theupperfloor" in channel:
+        tagline = "The Upper Floor"
+    elif "waterbondage" in channel:
+        tagline = "Water Bondage"
+    elif "everythingbutt" in channel:
+        tagline = "Everything Butt"
+    elif "footworship" in channel:
+        tagline = "Foot Worship"
+    elif "fuckingmachines" in channel:
+        tagline = "Fucking Machines"
+    elif "tspussyhunters" in channel:
+        tagline = "TS Pussy Hunters"
+    elif "tsseduction" in channel:
+        tagline = "TS Seduction"
+    elif "ultimatesurrender" in channel:
+        tagline = "Ultimate Surrender"
+    elif "30minutesoftorment" in channel:
+        tagline = "30 Minutes of Torment"
+    elif "boundgods" in channel:
+        tagline = "Bound Gods"
+    elif "boundinpublic" in channel:
+        tagline = "Bound in Public"
+    elif "buttmachineboys" in channel:
+        tagline = "Butt Machine Boys"
+    elif "menonedge" in channel:
+        tagline = "Men on Edge"
+    elif "nakedkombat" in channel:
+        tagline = "Naked Kombat"
+    elif "divinebitches" in channel:
+        tagline = "Divine Bitches"
+    elif "electrosluts" in channel:
+        tagline = "Electrosluts"
+    elif "meninpain" in channel:
+        tagline = "Men in Pain"
+    elif "whippedass" in channel:
+        tagline = "Whipped Ass"
+    elif "wiredpussy" in channel:
+        tagline = "Wired Pussy"
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()[:-1]
 
     # Genres
     movieGenres.clearGenres()
@@ -51,7 +115,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"With:")]/a')
+    actors = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"With:")]//a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -76,7 +140,9 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Release Date
-    date_object = parse(detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[6:].strip())
+    date = detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[0].text_content().strip()
+    date = date[6:]
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
@@ -88,7 +154,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     for poster in detailsPageElements.xpath('//div[@class="gallery"]//img'):
         #baseCDN = poster.get('src')[:poster.find(".com")+4]
-        art.append("https://cdnp.kink.com"+poster.get('data-image-file'))
+        art.append("http://cdnp.kink.com"+poster.get('data-image-file'))
 
     j = 1
     Log("Artwork found: " + str(len(art)))

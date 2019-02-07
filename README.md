@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-07 10:45AM CST - Updates to Kink.com network to fix searching, clean up the Title and Summary, fix Actors, add Shoot ID search functionality
 - 2019-02-06 11:00AM CST - Added Kink.com network of sites
 - 2019-02-06 8:00AM CST - Bugfix for Joymii photo set results, added several aliases for Joymii to PAactors
 - 2019-02-05 8:00AM CST - Added subsite to Bang Bros search results
@@ -629,3 +630,35 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - NannySpy
   - CastingCouch-X
   - SpyFam
+#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + Shoot ID
+  - BoundGangBangs
+  - BrutalSessions
+  - DeviceBondage
+  - FamiliesTied
+  - HardcoreGangbang
+  - Hogtied
+  - KinkFeatures
+  - KinkUniversity
+  - PublicDisgrace
+  - SadisticRope
+  - SexAndSubmission
+  - TheTrainingOfO
+  - TheUpperFloor
+  - WaterBondage
+  - EverythingButt
+  - FootWorship
+  - FuckingMachines
+  - TSPussyHunters
+  - TSSeduction
+  - UltimateSurrender
+  - 30MinutesofTorment
+  - BoundGods
+  - BoundinPublic
+  - ButtMachineBoys
+  - MenOnEdge
+  - NakedKombat
+  - DivineBitches
+  - Electrosluts
+  - MenInPain
+  - WhippedAss
+  - WiredPussy

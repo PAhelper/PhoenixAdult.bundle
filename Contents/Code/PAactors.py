@@ -60,10 +60,12 @@ class PhoenixActors:
                     newActor = "Abigaile Johnson"
 
             if not skip:
-                role = metadata.roles.new()
-                role.name = newActor
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)
+                Log("Actor: "+newActor+" "+newPhoto)
+
+                role = metadata.roles.new()
+                role.name = newActor
                 role.photo = newPhoto
             actorsProcessed = actorsProcessed + 1
 
