@@ -40,7 +40,7 @@ class PhoenixAdultAgent(Agent.Movies):
     def search(self, results, media, lang):
         title = media.name
         if media.primary_metadata is not None:
-            title = media.primary_metadata.title
+            title = media.primary_metadata.studio + " " + media.primary_metadata.title
         title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','')
         Log('*******MEDIA TITLE****** ' + str(title))
 
@@ -298,8 +298,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## JulesJordan
             ###############
-            if siteNum == 432 or siteNum == 524:
-                if searchSiteID == 9999 or searchSiteID == 432 or searchSiteID == 522:
+            if siteNum == 432 or (siteNum >= 522 and siteNum <= 524):
+                if searchSiteID == 9999 or searchSiteID == 432 or (searchSiteID >= 522 and searchSiteID <= 524):
                     results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -362,7 +362,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Kink
             ###############
             if siteNum == 490:
-                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 522):
+                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521):
                     Log("Made it to Kink")
                     results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
@@ -604,7 +604,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Jules Jordan                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID == 432 or siteID == 524:
+        if siteID == 432 or (siteID >= 522 and siteID <= 524):
             metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -676,7 +676,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Kink                                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 490 and siteID <= 522:
+        if siteID >= 490 and siteID <= 521:
             metadata = PAsearchSites.networkKink.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

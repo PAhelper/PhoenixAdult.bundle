@@ -24,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
+    metadata.studio = 'Jules Jordan'
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('/vids.html','_vids.html')
     Log('temp :' + temp)
     url = temp
@@ -37,7 +37,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Indice ' + indice)
     paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
     metadata.summary = paragraph.strip()
-    tagline = metadata.studio
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     tagline = tagline.strip()
     metadata.tagline = tagline

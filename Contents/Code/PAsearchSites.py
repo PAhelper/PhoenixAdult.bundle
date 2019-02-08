@@ -317,8 +317,8 @@ searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com",
 searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/scene/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
-searchSites[280] = ["NewSensations","NewSensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
-searchSites[281] = ["PureTaboo","PureTaboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
+searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
+searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/search/"]
 searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/search/"]
 searchSites[284] = ["Nympho","Nympho","https://tour.nympho.com","https://tour.nympho.com/search/"]
@@ -590,7 +590,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('tuf ', 'The Upper Floor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('wa ', 'Whipped Ass ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fm ', 'Fucking Machines ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
 
     # Search Site ID of -1 is all
     searchSiteID = None

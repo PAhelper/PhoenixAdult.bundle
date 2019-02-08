@@ -13,7 +13,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         try:
             releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         except:
-            releaseDate = ''
+            try:
+                detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href'))
+                releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            except:
+                releaseDate = ''
         if searchDate and releaseDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -38,7 +42,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         elif siteNum >= 387 and siteNum <= 392:
             network = 'Open Life Network'
         elif siteNum == 281:
-            network = 'PureTaboo'
+            network = 'Pure Taboo'
         elif siteNum == 380:
             network = 'Girlfriends Films'
         elif siteNum == 381:
@@ -84,7 +88,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteID >= 387 and siteID <= 392:
         metadata.studio = 'Open Life Network'
     elif siteID == 281:
-        metadata.studio = 'PureTaboo'
+        metadata.studio = 'Pure Taboo'
     elif siteID == 380:
         metadata.studio = 'Girlfriends Films'
     elif siteID == 381:
