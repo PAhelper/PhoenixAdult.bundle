@@ -76,7 +76,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieGenres.addGenre('Orgy')
 
     # Posters
-    background = "https:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
+    background = "http:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
     Log("BG DL: " + background)
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)

@@ -16,7 +16,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [JulesJordan] " + releaseDate , score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate , score = score, lang = lang))
         i = i + 1
     return results
 
@@ -24,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Jules Jordan'
+    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('/vids.html','_vids.html')
     Log('temp :' + temp)
     url = temp
@@ -37,7 +37,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Indice ' + indice)
     paragraph = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content()
     metadata.summary = paragraph.strip()
-    tagline = "Jules Jordan"
+    tagline = metadata.studio
     metadata.collections.clear()
     tagline = tagline.strip()
     metadata.tagline = tagline
@@ -83,7 +83,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
             role.photo = actorPhotoURL
     #Posters
-    searchbckgs = HTML.ElementFromURL('https://www.julesjordan.com/trial/search.php?query='+ titre_search )
+    searchbckgs = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + titre_search )
     j = int(indice)
     k=0
     for searchbckg in searchbckgs.xpath('//div[@class="category_listing_wrapper_updates"]/div[@class="update_details"]' ):

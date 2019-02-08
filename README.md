@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-08 8:00AM CST - Added other JulesJordan sites
 - 2019-02-07 10:45AM CST - Updates to Kink.com network to fix searching, clean up the Title and Summary, fix Actors, add Shoot ID search functionality
 - 2019-02-06 11:00AM CST - Added Kink.com network of sites
 - 2019-02-06 8:00AM CST - Bugfix for Joymii photo set results, added several aliases for Joymii to PAactors
@@ -533,7 +534,11 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - JulesJordan - *Title Search/Actress
+#### - JulesJordan network - *Title Search/Actress
+ -  JulesJordan
+ -  ManuelFerarra
+ -  TheAssFactory
+ -  SpermSwallowers
 #### - DDFNetwork - *Title Search/Actress
  -  HandsOnHardcore
  -  DDFBusty
