@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-08 2:45PM CST - Bugfixes for newly added JulesJordan sites, added another method of pulling release date for Gamma Entertainment search results
 - 2019-02-08 8:00AM CST - Added other JulesJordan sites
 - 2019-02-07 10:45AM CST - Updates to Kink.com network to fix searching, clean up the Title and Summary, fix Actors, add Shoot ID search functionality
 - 2019-02-06 11:00AM CST - Added Kink.com network of sites

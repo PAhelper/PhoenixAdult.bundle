@@ -559,7 +559,7 @@ searchSites[518] = ["Men in Pain","Men In Pain","http://www.kink.com","http://ww
 searchSites[519] = ["Whipped Ass","Whipped Ass","http://www.kink.com","http://www.kink.com/search?channelIds=whippedass&q="]
 searchSites[520] = ["Wired Pussy","Wired Pussy","http://www.kink.com","http://www.kink.com/search?channelIds=wiredpussy&q="]
 searchSites[521] = ["Bound Gang Bangs","Bound Gang Bangs","http://www.kink.com","http://www.kink.com/search?channelIds=boundgangbangs&q="]
-searchSites[522] = ["Manuel Ferrara","Manuel Ferrara", "https://www.manuelferarra.com","https://www.manuelferarra.com/trial/search.php?query="]
+searchSites[522] = ["Manuel Ferrara","Manuel Ferrara", "https://www.manuelferrara.com","https://www.manuelferrara.com/trial/search.php?query="]
 searchSites[523] = ["The Ass Factory","The Ass Factory", "https://www.theassfactory.com","https://www.theassfactory.com/trial/search.php?query="]
 searchSites[524] = ["Sperm Swallowers","Sperm Swallowers", "https://www.spermswallowers.com","https://www.spermswallowers.com/trial/search.php?query="]
 

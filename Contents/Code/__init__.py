@@ -298,8 +298,29 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## JulesJordan
             ###############
-            if siteNum == 432 or (siteNum >= 522 and siteNum <= 524):
-                if searchSiteID == 9999 or searchSiteID == 432 or (searchSiteID >= 522 and searchSiteID <= 524):
+            if siteNum == 432:
+                if searchSiteID == 9999 or searchSiteID == 432:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Manuel Ferrara
+            ###############
+            if siteNum == 522:
+                if searchSiteID == 9999 or searchSiteID == 522:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## The Ass Factory
+            ###############
+            if siteNum == 523:
+                if searchSiteID == 9999 or searchSiteID == 523:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Sperm Swallowers
+            ###############
+            if siteNum == 524:
+                if searchSiteID == 9999 or searchSiteID == 524:
                     results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############

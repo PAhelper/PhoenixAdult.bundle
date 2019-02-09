@@ -13,7 +13,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         releaseDate = parse(searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-right"]//div[@class="info-box-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         girlName = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//div[@class="info-box-models-name"]//div//a')[0].text_content()
 
-        subSite = searchResult.xpath('.//img[@class="new-video-thumb"]')[0].get('alt')
+        subSite = searchResult.xpath('.//img[@class="new-video-thumb"] | .//img[@class="old-video-thumb"]')[0].get('alt')
         subSite = subSite[subSite.rfind('-')+2:].strip()
         if subSite == "Twistys":
             subSite = ''
