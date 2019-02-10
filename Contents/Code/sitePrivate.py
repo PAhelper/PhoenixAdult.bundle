@@ -2,7 +2,6 @@ import PAsearchSites
 import PAgenres
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    searchSiteName = PAsearchSites.getSearchSiteName(searchSiteID)
     searchResults = HTML.ElementFromURL('https://www.private.com/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[@class="col-lg-3 col-md-4 col-sm-6 col-xs-6"]'):
         #Log(searchResult.get('class'))
