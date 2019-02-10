@@ -86,6 +86,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-10 3:30PM CST - Added full movie (DVD) support for some Gamma Entertainment sites (specifically Evil Angel and SweetSinner, though others may work)
+- 2019-02-09 9:30PM CST - More bugfixes and an overhaul of the art/poster assets for JulesJordan sites
 - 2019-02-08 2:45PM CST - Bugfixes for newly added JulesJordan sites, added another method of pulling release date for Gamma Entertainment search results
 - 2019-02-08 8:00AM CST - Added other JulesJordan sites
 - 2019-02-07 10:45AM CST - Updates to Kink.com network to fix searching, clean up the Title and Summary, fix Actors, add Shoot ID search functionality
@@ -253,6 +255,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - Kelly Madison *Title Search *Date/Actor Search
 #### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
+-   Anal College
+-   Watch Your Wife
 -   My Friends Hot Mom
 -   LA Sluts
 -   Big Cock Bully
