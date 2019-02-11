@@ -5,7 +5,7 @@ def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateA
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//article[contains(@class,"release-card"]'):
+    for searchResult in searchResults.xpath('//article[contains(@class,"release-card")]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('title')
         curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('href')).replace('/','_').replace('?','!')
         if PAsearchSites.getSearchSiteName(siteNum) == "Fake Hostel":
@@ -57,7 +57,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary  = detailsPageElements.xpath('//div[@class="overview"]/p | //div[@class="expandable"]/p')[0].text_content().strip()
     metadata.collections.clear()
 
-    subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img | //a[@class="site-logo"]/img')[0].get('alt')
+    try:
+        subSite = detailsPageElements.xpath('//div[@class="collection-logo"]/img')[0].get('alt')
+    except:
+        subSite = detailsPageElements.xpath('//a[@class="site-logo"]/img')[0].get('alt')
+    Log("subSite: "+subSite)
     if "danejones" in subSite:
         tagline = "Dane Jones"
     elif "lesbea" in subSite:

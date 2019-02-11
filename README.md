@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-11 10:00AM CST - Bugfix for SexyHub
 - 2019-02-10 3:30PM CST - Added full movie (DVD) support for some Gamma Entertainment sites (specifically Evil Angel and SweetSinner, though others may work)
 - 2019-02-09 9:30PM CST - More bugfixes and an overhaul of the art/poster assets for JulesJordan sites
 - 2019-02-08 2:45PM CST - Bugfixes for newly added JulesJordan sites, added another method of pulling release date for Gamma Entertainment search results
