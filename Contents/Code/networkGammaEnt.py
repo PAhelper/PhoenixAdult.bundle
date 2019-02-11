@@ -151,7 +151,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
     except:
-        title = detailsPageElements.xpath('//h1 | //h3[@class="dvdTitle"]')[0].text_content().strip()
+        try:
+            title = detailsPageElements.xpath('//h1 | //h3[@class="dvdTitle"]')[0].text_content().strip()
+        except:
+            try:
+                dataLayer = detailsPageElements.xpath('//script[contains(text(),"dataLayer")]')[0].text_content()
+                alpha = dataLayer.find('"sceneTitle"')+14
+                omega = dataLayer.find('"',alpha)
+                title = dataLayer[alpha:omega]
+            except:
+                title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
 
     if dvdTitle == title:
         pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
