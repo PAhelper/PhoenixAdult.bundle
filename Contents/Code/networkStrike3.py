@@ -4,12 +4,9 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchsiteID):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
-        Log(searchResult.text_content())
         titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a[@class="videolist-link ajaxable"]')[0].get('href')
+        curID = searchResult.xpath('.//a[contains(@class,"videolist-link")]')[0].get('href')
         curID = curID.replace('/','_').replace('?','!')
-        Log("ID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -20,10 +17,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     # I'm getting redirected to https://beta.blacked.com for searches, unsure if everybody else is; this should pull results from the beta search:
     for searchResult in searchResults.xpath('//div[@class="pb6v16-1 fNpwyc"]'):
         titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
-        Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
         curID = curID.replace('/','_').replace('?','!')
-        Log("ID: " + curID)
         score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + "]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
@@ -102,9 +97,11 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPhotoURL = actorPage.xpath('//img[@class="thumb-img"]')[0].get("src")
             except:
                 actorBigScript = actorPage.xpath('//footer/following::script[1]')[0].text_content()
-                alpha = actorBigScript.find('"filePath":"')+12
+                alpha = actorBigScript.find('"src":"')+7
                 omega = actorBigScript.find('"',alpha)
-                actorPhotoURL =  + actorBigScript[alpha:omega].decode('utf-8')
+                actorPhotoURL = actorBigScript[alpha:omega].decode('unicode_escape')
+                if 'http' not in actorPhotoURL:
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID)+actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Director
@@ -122,7 +119,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         # This is where beta.*.com code will go
         alpha = bigScript.find('"width":1200,"height":800,"src"')+33
         omega = bigScript.find('"',alpha)
-        art.append(bigScript[alpha:omega].decode('utf-8'))
+        background = bigScript[alpha:omega].decode('unicode_escape')
+        if 'http' not in background:
+            background = PAsearchSites.getSearchBaseURL(siteID)+background
+        Log("background: "+background)
+        art.append(background)
 
     try:
         posters = detailsPageElements.xpath('//div[@class="swiper-slide"]')
@@ -140,7 +141,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         while i <= imageCount:
             alpha = bigScript.find('"width":1200,"height":800,"src"',omega)+33
             omega = bigScript.find('"',alpha)
-            art.append(bigScript[alpha:omega].decode('utf-8'))
+            posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+            if 'http' not in posterUrl:
+                posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+            Log("artwork: "+posterUrl)
+            art.append(posterUrl)
             i = i + 1
 
     # Posters

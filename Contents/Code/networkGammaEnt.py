@@ -35,6 +35,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     elif siteNum >= 460 and siteNum <= 466:
         network = '21Sextreme'
 
+    if network == PAsearchSites.getSearchSiteName(siteNum):
+        network = ''
+    else:
+        network = network + "/"
+
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Results Found: "+str(len(searchResults.xpath('//div[@class="tlcDetails"]'))))
@@ -54,30 +59,27 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        if network == PAsearchSites.getSearchSiteName(siteNum):
-            network = ''
-        else:
-            network = network + "/"
-
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
 
-    dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
-    for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
-        titleNoFormatting = dvdResult.xpath('.//a')[0].get('title').strip()
-        curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        try:
-            releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
-        except:
+    try:
+        dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
+        for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
+            titleNoFormatting = dvdResult.xpath('.//a')[0].get('title').strip()
+            curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
             try:
-                detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + dvdResult.xpath('.//a[1]')[0].get('href'))
-                releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip())
+                releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
             except:
-                releaseDate = ''
-        
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                try:
+                    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + dvdResult.xpath('.//a[1]')[0].get('href'))
+                    releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip())
+                except:
+                    releaseDate = ''
+            
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+network+"]", score = score, lang = lang))
-   
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+network+"]", score = score, lang = lang))
+    except:
+        pass
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
