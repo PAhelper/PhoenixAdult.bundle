@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network = 'Blowpass'
     elif siteNum == 331 or (siteNum >= 355 and siteNum <= 360):
         network = 'Fantasy Massage'
-    elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 365):
+    elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 364):
         network = 'Mile High Network'
     elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466:
         network = '21Sextury'
@@ -94,7 +94,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Blowpass'
     elif siteID == 331 or (siteID >= 355 and siteID <= 360):
         metadata.studio = 'Fantasy Massage'
-    elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 365):
+    elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
         metadata.studio = 'Mile High Network'
     elif (siteID >= 365 and siteID <= 372) or siteID == 466:
         metadata.studio = '21Sextury'
@@ -141,9 +141,16 @@ def update(metadata,siteID,movieGenres,movieActors):
                     paragraph = ''
     metadata.summary = paragraph.strip()
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+
+    # Tagline
+    try:
+        tagline = detailsPageElements.xpath('//div[@class="studioLink"]')[0].text_content().strip()
+    except:
+        tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
+    # Title
     try:
         dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
