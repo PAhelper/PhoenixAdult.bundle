@@ -64,7 +64,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     try:
         dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
         for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
-            titleNoFormatting = dvdResult.xpath('.//a')[0].get('title').strip()
+            titleNoFormatting = dvdResult.xpath('.//a | .//div[@class="tlcTitle"]/a')[0].get('title').strip()
             curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
             try:
                 releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
@@ -77,7 +77,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+network+"]", score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+PAsearchSites.getSearchSiteName(siteNum)+"]", score = score, lang = lang))
     except:
         pass
     return results

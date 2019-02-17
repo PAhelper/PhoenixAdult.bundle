@@ -90,7 +90,7 @@ searchSites[49] = ["Live Naughty Teacher","Live Naughty Teacher","https://tour.n
 searchSites[50] = ["Live Naughty Milf","Live Naughty Milf","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[51] = ["Live Naughty Nurse","Live Naughty Nurse","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[52] = ["Vixen","Vixen","http://www.vixen.com","http://www.vixen.com/search?q="]
-searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","https://www.girlsway.com/en/search/"]
+searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","http://www.girlsway.com/en/search/"]
 searchSites[54] = ["Moms in Control","Moms in Control","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[55] = ["Pornstars Like It Big","Pornstars Like It Big","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[56] = ["Big Tits at Work","Big Tits at Work","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -587,6 +587,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('bblib ', 'Big Butts Like It Big ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btaw ', 'Big Tits at Work ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btas ', 'Big Tits at School ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('btis ', 'Big Tits in Sports', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('tuf ', 'The Upper Floor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('wa ', 'Whipped Ass ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fm ', 'Fucking Machines ', mediaTitle, flags=re.IGNORECASE)

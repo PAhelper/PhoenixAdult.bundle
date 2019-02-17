@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','')
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -107,10 +107,213 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
-            ## GammaEnt
+            ## Girlsway
             ###############
-            if siteNum == 53 or siteNum == 183 or siteNum == 277 or siteNum == 278 or siteNum == 281 or (siteNum >=285 and siteNum <= 287) or siteNum == 329 or siteNum == 330 or (siteNum >= 351 and siteNum <= 355) or siteNum == 365 or (siteNum >= 380 and siteNum <= 392) or siteNum == 460:
-                if searchSiteID == 9999 or searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 383) or (searchSiteID >= 460 and searchSiteID <= 466):
+            if siteNum == 53:
+                if searchSiteID == 9999 or searchSiteID == 53 or (searchSiteID >= 375 and searchSiteID <= 379):
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## 21Naturals
+            ###############
+            if siteNum == 183:
+                if searchSiteID == 9999 or searchSiteID == 183 or searchSiteID == 373 or searchSiteID == 374:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Evil Angel
+            ###############
+            if siteNum == 277:
+                if searchSiteID == 9999 or searchSiteID == 277:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## XEmpire/Hardx
+            ###############
+            if siteNum == 278:
+                if searchSiteID == 9999 or searchSiteID == 278:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## XEmpire/Eroticax
+            ###############
+            if siteNum == 285:
+                if searchSiteID == 9999 or searchSiteID == 285:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## XEmpire/Darkx
+            ###############
+            if siteNum == 286:
+                if searchSiteID == 9999 or searchSiteID == 286:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## XEmpire/Lesbianx
+            ###############
+            if siteNum == 287:
+                if searchSiteID == 9999 or searchSiteID == 287:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Pure Taboo
+            ###############
+            if siteNum == 281:
+                if searchSiteID == 9999 or searchSiteID == 281:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Blowpass/Throated
+            ###############
+            if siteNum == 329:
+                if searchSiteID == 9999 or searchSiteID == 329:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Blowpass/Mommy Blows Best
+            ###############
+            if siteNum == 351:
+                if searchSiteID == 9999 or searchSiteID == 351:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Blowpass/Only Teen Blowjobs
+            ###############
+            if siteNum == 352:
+                if searchSiteID == 9999 or searchSiteID == 352:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Blowpass/1000 Facials
+            ###############
+            if siteNum == 353:
+                if searchSiteID == 9999 or searchSiteID == 353:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Blowpass/Immoral Live
+            ###############
+            if siteNum == 354:
+                if searchSiteID == 9999 or searchSiteID == 354:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Mile High Media
+            ###############
+            if siteNum == 330:
+                if searchSiteID == 9999 or searchSiteID == 330 or searchSiteID == 332 or (searchSiteID >= 361 and searchSiteID <= 364):
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Fantasy Massage
+            ###############
+            if siteNum == 331:
+                if searchSiteID == 9999 or searchSiteID == 331 or (searchSiteID >= 355 and searchSiteID <= 360):
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## 21Sextury
+            ###############
+            if siteNum == 365:
+                if searchSiteID == 9999 or (searchSiteID >= 365 and searchSiteID <= 372) or searchSiteID == 466:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Girlfriends Films
+            ###############
+            if siteNum == 380:
+                if searchSiteID == 9999 or searchSiteID == 380:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Burning Angel
+            ###############
+            if siteNum == 381:
+                if searchSiteID == 9999 or searchSiteID == 381:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Pretty Dirty
+            ###############
+            if siteNum == 382:
+                if searchSiteID == 9999 or searchSiteID == 382:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Devil's Film
+            ###############
+            if siteNum == 383:
+                if searchSiteID == 9999 or searchSiteID == 383:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Peter North
+            ###############
+            if siteNum == 384:
+                if searchSiteID == 9999 or searchSiteID == 384:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Rocco Siffredi
+            ###############
+            if siteNum == 385:
+                if searchSiteID == 9999 or searchSiteID == 385:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Tera Patrick
+            ###############
+            if siteNum == 386:
+                if searchSiteID == 9999 or searchSiteID == 386:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Sunny Leone
+            ###############
+            if siteNum == 387:
+                if searchSiteID == 9999 or searchSiteID == 387:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Lane Sisters
+            ###############
+            if siteNum == 388:
+                if searchSiteID == 9999 or searchSiteID == 388:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Dylan Ryder
+            ###############
+            if siteNum == 389:
+                if searchSiteID == 9999 or searchSiteID == 389:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Abbey Brooks
+            ###############
+            if siteNum == 390:
+                if searchSiteID == 9999 or searchSiteID == 390:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Devon Lee
+            ###############
+            if siteNum == 391:
+                if searchSiteID == 9999 or searchSiteID == 391:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Hanna Hilton
+            ###############
+            if siteNum == 392:
+                if searchSiteID == 9999 or searchSiteID == 392:
+                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## 21Sextreme
+            ###############
+            if siteNum == 460:
+                if searchSiteID == 9999 or (searchSiteID >= 460 and searchSiteID <= 465):
                     results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -609,7 +812,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 383) or (siteID >= 460 and siteID <= 466):
+        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 392) or (siteID >= 460 and siteID <= 466):
             metadata = PAsearchSites.networkGammaEnt.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

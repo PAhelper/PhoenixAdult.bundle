@@ -2,7 +2,7 @@ import PAsearchSites
 import PAgenres
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    searchResults = HTML.ElementFromURL('https://www.newsensations.com/tour_ns/search.php?query=' + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//h4//a'):
         Log(str(searchResult.get('href')))
         titleNoFormatting = searchResult.text_content()
