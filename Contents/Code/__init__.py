@@ -589,6 +589,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521):
                     Log("Made it to Kink")
                     results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Nubiles
+            ###############
+            if siteNum == 525:
+                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <=540):
+                    Log("Made it to Nubile")
+                    results = PAsearchSites.networkNubiles.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -902,6 +909,13 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 490 and siteID <= 521:
             metadata = PAsearchSites.networkKink.update(metadata,siteID,movieGenres,movieActors)
+        ##############################################################
+        ##                                                          ##
+        ##  Nubiles                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 525 and siteID <=540:
+            metadata = PAsearchSites.networkNubiles.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
