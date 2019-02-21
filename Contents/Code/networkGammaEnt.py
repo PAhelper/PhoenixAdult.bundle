@@ -214,7 +214,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]//a | //div[@class="sceneCol sceneActors"]//a | //div[@class="pornstarNameBox"]/a[@class="pornstarName"] | //div[@id="slick_DVDInfoActorCarousel"]//a')
     if metadata.title == 'Kennedy Leigh' and metadata.tagline == 'Only Teen Blowjobs':
-        movieActors.addActor('Kennedy Leigh','')
+        movieActors.addActor('Kennedy Leigh','https://imgs1cdn.adultempire.com/actors/649607h.jpg')
 
     if len(actors) > 0:
         for actorLink in actors:
@@ -223,6 +223,30 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL).replace("https:","http:"))
             actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"] | //span[@class="removeAvatarParent"]/img')[0].get("src").replace("https:","http:")
             movieActors.addActor(actorName,actorPhotoURL)
+    else:
+        try:
+            dataLayer = detailsPageElements.xpath('//script[contains(text(),"dataLayer")]')[0].text_content()
+            alpha = dataLayer.find('"sceneActors"')+14
+            omega = dataLayer.find(']',alpha)
+            sceneActors = dataLayer[alpha:omega]
+            i = 1
+            alpha = 0
+            omega = 0
+            while i <= sceneActors.count('actorId'):
+                alpha = sceneActors.find('"actorId"',omega)+11
+                omega = sceneActors.find('"',alpha)
+                actorId = sceneActors[alpha:omega]
+                alpha = sceneActors.find('"actorName"',omega)+13
+                omega = sceneActors.find('"',alpha)
+                actorName = sceneActors[alpha:omega]
+                #Search for the actor to get their page (then photo) or hardcode the URL pattern if feeling frisky
+                actorPageURL = '/en/pornstar/'+actorName.replace(' ','-')+'/'+actorId
+                actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL).replace("https:","http:"))
+                actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"] | //span[@class="removeAvatarParent"]/img')[0].get("src").replace("https:","http:")
+                movieActors.addActor(actorName,actorPhotoURL)
+                i = i + 1
+        except:
+            pass
 
     #Posters
 

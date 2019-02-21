@@ -93,7 +93,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
-    movieActors.addActor('Mike Adriano','')
+    movieActors.addActor('Mike Adriano','https://imgs1cdn.adultempire.com/actors/470003.jpg')
 
     # Release Date
     date = detailsPageElements.xpath('//span[contains(@class,"date")]')

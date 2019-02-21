@@ -41,9 +41,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     date_object = datetime.strptime(releaseDate, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
-    tagline = detailsPageElements.xpath('//div[@style="white-space:nowrap;"]')[0].text_content()[6:-4].strip()
-    if tagline == "She'sNew":
-        tagline = "She's New"
+    tagline = detailsPageElements.xpath('//div[@style="white-space:nowrap;"]')[0].text_content()[6:].strip()
+    endofsubsite = tagline.find('.com')
+    tagline = tagline[:endofsubsite].strip()
     metadata.tagline = tagline
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)

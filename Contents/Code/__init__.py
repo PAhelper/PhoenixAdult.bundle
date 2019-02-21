@@ -494,8 +494,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## FakeHub
             ###############
-            if siteNum == 340 or siteNum == 405:
-                if searchSiteID == 9999 or (searchSiteID >= 397 and searchSiteID <= 405):
+            if siteNum == 340:
+                if searchSiteID == 9999 or searchSiteID == 340 or (searchSiteID >= 397 and searchSiteID <= 404):
                     results = PAsearchSites.networkSexyHub.searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -635,7 +635,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   SexyHub/FakeHub                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 333 and siteID <= 338) or (siteID >= 397 and siteID <= 407):
+        if (siteID >= 333 and siteID <= 340) or (siteID >= 397 and siteID <= 407):
             metadata = PAsearchSites.networkSexyHub.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

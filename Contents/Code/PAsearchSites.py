@@ -401,7 +401,7 @@ searchSites[360] = ["Tricky Spa","Tricky Spa","http://www.fantasymassage.com","h
 searchSites[361] = ["Cherry Pop","Cherry Pop","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
 searchSites[362] = ["Reality Junkies","Reality Junkies","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
 searchSites[363] = ["Lesbian Older Younger","Lesbian Older Younger","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
-searchSites[364] = ["Digital Doghouse","Digital Doghouse","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
+searchSites[364] = ["Doghouse Digital","Doghouse Digital","http://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
 searchSites[365] = ["21Sextury","21Sextury","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[366] = ["Anal Teen Angels","Anal Teen Angels","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[367] = ["Deepthroat Frenzy","Deepthroat Frenzy","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
@@ -574,6 +574,12 @@ def getSearchSiteName(siteID):
 def getSearchSiteIDByFilter(searchFilter):
     searchID = 0
     for sites in searchSites:
+        # Might try converting this code to use startswith() to avoid problems with overlapping site names:
+        # https://www.tutorialspoint.com/python/string_startswith.htm
+        # Examples:
+        #  Blacked -> BlackedRaw
+        #  Babes -> FootsieBabes
+        #  PassionHD Love Ties -> HD Love
         if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
             return searchID
         searchID += 1
@@ -584,6 +590,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = mediaTitle.replace("-", " ")
 
     # Search Site abbreviations
+    # Using Regex instead of .replace or .startswith so it can be case insensitive
     mediaTitle = re.sub('bblib ', 'Big Butts Like It Big ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btaw ', 'Big Tits at Work ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btas ', 'Big Tits at School ', mediaTitle, flags=re.IGNORECASE)
@@ -592,8 +599,14 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('wa ', 'Whipped Ass ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fm ', 'Fucking Machines ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
-
-    # Search Site ID of -1 is all
+    mediaTitle = re.sub('fho ', 'Fakehub Originals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fhl ', 'Fake Hostel ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('pba ', 'Public Agent ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('frs ', 'Fitness Rooms ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fds ', 'Fake Driving School ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fft ', 'Female Fake Taxi ', mediaTitle, flags=re.IGNORECASE)
+    
+    # Search Site ID of 9999 is all
     searchSiteID = None
     # Date/Actor or Title
     searchType = None
