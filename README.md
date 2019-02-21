@@ -86,6 +86,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-21 1:00PM CST - Added Nubiles-Porn Network, Nubiles.net, Nubilefilms
 - 2019-02-17 1:45PM CST - Decompressed GammaEnt search strings in init to make searching faster, bugfixes for Mile High Media and Fame Digital
 - 2019-02-13 10:00AM CST - Bugfixes for GammaEnt, specifically relating to 21Sextury channels
 - 2019-02-12 11:00AM CST - Bugfixes to GammaEnt and beta.Blacked code. I think the beta.blacked redesign might be fully live now...
@@ -677,3 +678,22 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - MenInPain
   - WhippedAss
   - WiredPussy
+### - Nubiles.net *Shoot ID (Nubiles - id)
+
+### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id)
+  - Nubiles Porn
+  - Steph Siblings Caught
+  - Moms Teach Sex  
+  - Bad Teens Punished
+  - Princesscum
+  - Nubiles Unscripted
+  - Nubiles Casting
+  - Petite Hd Porn
+  - Driverxxx
+  - Petite Ballerinas Fucked
+  - Teacher Fucks Teens
+  - Bountyhunter Porn
+  - Daddy's Lil Angel
+  - My Family Pies
+
+### - Nubilesfilms *shoot ID (Nubilesfilms - id)
