@@ -86,7 +86,9 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
-- 2019-02-21 1:00PM CST - Added Nubiles-Porn Network, Nubiles.net, Nubilefilms
+- 2019-02-22 8:00AM CST - Couple of Nubiles updates and bugfixes
+- 2019-02-21 1:00PM CST - Added Nubiles-Porn Network, Nubiles.net, Nubilefilms (Thanks b0nensfw!)
+- 2019-02-21 9:00AM CST - Added FakeHub support (except Female Fake Taxi, the information just isn't there)
 - 2019-02-17 1:45PM CST - Decompressed GammaEnt search strings in init to make searching faster, bugfixes for Mile High Media and Fame Digital
 - 2019-02-13 10:00AM CST - Bugfixes for GammaEnt, specifically relating to 21Sextury channels
 - 2019-02-12 11:00AM CST - Bugfixes to GammaEnt and beta.Blacked code. I think the beta.blacked redesign might be fully live now...
@@ -468,6 +470,17 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Lesbea
  -  Massage Rooms
  -  MomXXX
+#### - FakeHub
+ -  FakeTaxi
+ -  Fakehub Originals
+ -  Public Agent
+ -  Fake Agent
+ -  Female Agent
+ -  Fake Hospital
+ -  Fake Agent UK
+ -  Fake Cop
+ -  #Fake Driving School
+ -  #Fake Hostel
 #### - Full Porn Network
  -  Analized
  -  James Deen
@@ -679,7 +692,6 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - WhippedAss
   - WiredPussy
 ### - Nubiles.net *Shoot ID (Nubiles - id)
-
 ### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id)
   - Nubiles Porn
   - Steph Siblings Caught
@@ -695,5 +707,4 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - Bountyhunter Porn
   - Daddy's Lil Angel
   - My Family Pies
-
 ### - Nubilesfilms *shoot ID (Nubilesfilms - id)

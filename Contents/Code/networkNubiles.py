@@ -22,10 +22,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
 
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
-    Log('scene url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
 
     metadata.studio = "Nubiles"
+
+    # Summary
+    metadata.summary = detailsPageElements.xpath('//div[@class="video-description"]/article/p')[0].text_content().strip()
 
     # Collections / Tagline
     siteName = PAsearchSites.getSearchSiteName(siteID)
@@ -35,39 +37,22 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    titleActors = ""
-    actors = detailsPageElements.xpath('//span[@class="featuring-modelname model"]//a')
+    actors = detailsPageElements.xpath('//span[@class="featuring-modelname model"]/a')
     if len(actors) > 0:
         for actorLink in actors:
-            actorName = actorLink.text_content()
-            actorPhotoURL = PAactors.actorDBfinder(actorName)
-            titleActors = titleActors + actorName + " & "
-            Log("actorPhoto: " + actorPhotoURL)
+            actorName = actorLink.text_content().replace(',','')
+            actorPageURL = actorLink.get("href")
+            actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL).replace("https:","http:"))
+            actorPhotoURL = "http:"+actorPage.xpath('//img[@class="img-responsive"]')[0].get("src").replace("https:","http:")
             movieActors.addActor(actorName,actorPhotoURL)
-        titleActors = titleActors[:-3]
 
     # Genres
     movieGenres.clearGenres()
-        # Based on site
-    #if siteName.lower() == "Lubed".lower():
-     #   for genreName in ['Lube', 'Raw', 'Wet']:
-      #      movieGenres.addGenre(genreName)
-    #elif siteName.lower() == "Holed".lower():
-     #   for genreName in ['Anal', 'Ass']:
-      #      movieGenres.addGenre(genreName)
-    #elif siteName.lower() == "POVD".lower():
-     #   for genreName in ['Gonzo', 'POV']:
-      #      movieGenres.addGenre(genreName)
-    #elif siteName.lower() == "MassageCreep".lower():
-     #   for genreName in ['Massage', 'Oil']:
-      #      movieGenres.addGenre(genreName)
-    #elif siteName.lower() == "DeepThroatLove".lower():
-     #   for genreName in ['Blowjob', 'Deep Throat']:
-      #      movieGenres.addGenre(genreName)
-    #elif siteName.lower() == "PureMature".lower():
-     #   for genreName in ['MILF', 'Mature']:
-      #      movieGenres.addGenre(genreName)
-    # Based on number of actors
+    genres = detailsPageElements.xpath('//div[@class="tags categories"]/a')
+    if len(genres) > 0:
+        for genreLink in genres:
+            genreName = genreLink.text_content().strip('\n').lower()
+            movieGenres.addGenre(genreName)
     if len(actors) == 3:
         movieGenres.addGenre('Threesome')
     if len(actors) == 4:

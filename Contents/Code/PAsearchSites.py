@@ -563,21 +563,21 @@ searchSites[521] = ["Bound Gang Bangs","Bound Gang Bangs","http://www.kink.com",
 searchSites[522] = ["Manuel Ferrara","Manuel Ferrara", "https://www.manuelferrara.com","https://www.manuelferrara.com/trial/search.php?query="]
 searchSites[523] = ["The Ass Factory","The Ass Factory", "https://www.theassfactory.com","https://www.theassfactory.com/trial/search.php?query="]
 searchSites[524] = ["Sperm Swallowers","Sperm Swallowers", "https://www.spermswallowers.com","https://www.spermswallowers.com/trial/search.php?query="]
-searchSites[525] = ["Nubilefilms", "Nubilefilms", "https://nubilefilms.com","https://nubilefilms.com/video/watch/" ]
-searchSites[526] = ["Nubilesporn", "Nubilesporn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[527] = ["Stephsiblingscaught", "Stephsiblingscaught", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[528] = ["Momsteachsex", "Momsteachsex", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[529] = ["Badteenspunished", "Badteenspunished", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[530] = ["Princesscum", "Princesscum", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[531] = ["Nubilesunscripted", "Nubilesunscripted", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[532] = ["Nubilescasting", "Nubilescasting", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/"]
-searchSites[533] = ["Petitehdporn", "Petitehdporn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[534] = ["Driverxxx", "Driverxxx", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[535] = ["Petiteballerinasfucked", "Petiteballerinasfucked", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[536] = ["Teacherfucksteens", "Teacherfucksteens", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[537] = ["Bountyhunterporn", "Bountyhunterporn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[538] = ["Daddyslilangel", "Daddyslilangel", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
-searchSites[539] = ["Myfamilypies", "Myfamilypies", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[525] = ["Nubile Films", "Nubile Films", "https://nubilefilms.com","https://nubilefilms.com/video/watch/" ]
+searchSites[526] = ["Nubiles Porn", "Nubiles Porn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[527] = ["Step Siblings Caught", "Step Siblings Caught", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[528] = ["Moms Teach Sex", "Moms Teach Sex", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[529] = ["Bad Teens Punished", "Bad Teens Punished", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[530] = ["Princess Cum", "Princess Cum", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[531] = ["Nubiles Unscripted", "Nubiles Unscripted", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[532] = ["Nubiles Casting", "Nubiles Casting", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/"]
+searchSites[533] = ["Petite HD Porn", "Petite HD Porn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[534] = ["Driver XXX", "Driver XXX", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[535] = ["Petite Ballerinas Fucked", "Petite Ballerinas Fucked", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[536] = ["Teacher Fucks Teens", "Teacher Fucks Teens", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[537] = ["Bountyhunter Porn", "Bountyhunter Porn", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[538] = ["Daddys Lil Angel", "Daddys Lil Angel", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
+searchSites[539] = ["My Family Pies", "My Family Pies", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
 searchSites[540] = ["Nubiles", "Nubiles", "https://nubiles.net","https://nubiles.net/video/watch/" ]
 
 def getSearchBaseURL(siteID):
@@ -622,6 +622,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('frs ', 'Fitness Rooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fds ', 'Fake Driving School ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fft ', 'Female Fake Taxi ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('mts ', 'Moms Teach Sex ', mediaTitle, flags=re.IGNORECASE)
     
     # Search Site ID of 9999 is all
     searchSiteID = None
