@@ -1,37 +1,34 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","_").replace("'","_")
+    url = PAsearchSites.getSearchSearchURL(searchSiteID) + title.lower().replace(" ","_").replace("'","_")
     searchResults = HTML.ElementFromURL(url)
 
     searchResult = searchResults.xpath('//div[@class="video-rating-and-details"]')[0]
     titleNoFormatting = searchResult.xpath('.//h1[@class="heading heading--2 video-title"]')[0].text_content()
-    Log("Result Title: " + titleNoFormatting)
-    curID = searchTitle.lower().replace(" ","_").replace("'","_")
-    Log("ID: " + curID)
-    releaseDate = parse(searchResult.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-    girlName = searchResult.xpath('.//div[@class="video-details"]//p[@class="video-actors"]//a')[0].text_content()
+    curID = title.lower().replace(" ","_").replace("'","_")
+    releaseDate = parse(searchResult.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].get('content').strip()).strftime('%Y-%m-%d')
 
-    titleNoFormatting = girlName + " - " + titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +"] " + releaseDate[10:]
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +"] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0]
-    Log('temp: ' + temp)
+    temp = str(metadata.id).split("|")[0].replace('_','-',-1)
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
-    Log('url:' + url)
     detailsPageElements = HTML.ElementFromURL(url)
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="video-rating-and-details"]//h1[@class="heading heading--2 video-title"]')[0].text_content()
+
     # Studio
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
-    Log('Studio: ' + metadata.studio)
+    metadata.studio = 'BadoinkVR'
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//p[@class="video-description"]')[0].text_content().strip()
 
     # Tagline and Collection
-    tagline = metadata.studio
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -76,10 +73,5 @@ def update(metadata,siteID,movieGenres,movieActors):
     date_object = datetime.strptime(dateFixed, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
-
-    # Title
-    titleOfficial = detailsPageElements.xpath('//div[@class="video-rating-and-details"]//h1[@class="heading heading--2 video-title"]')[0].text_content()
-    metadata.title = metadata.studio + " - " + titleOfficial
-    Log('Title: ' + metadata.title)
 
     return metadata

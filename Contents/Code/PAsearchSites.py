@@ -619,6 +619,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('btaw ', 'Big Tits at Work ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btas ', 'Big Tits at School ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btis ', 'Big Tits in Sports', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('plib ', 'Pornstars Like it Big', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('tuf ', 'The Upper Floor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('wa ', 'Whipped Ass ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fm ', 'Fucking Machines ', mediaTitle, flags=re.IGNORECASE)
@@ -630,7 +631,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('fds ', 'Fake Driving School ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fft ', 'Female Fake Taxi ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('mts ', 'Moms Teach Sex ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('hoh ', 'HandsOnHardcore', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
     
     # Search Site ID of 9999 is all
     searchSiteID = None

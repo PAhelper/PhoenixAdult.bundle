@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-23 4:15PM CST - Bugfix for BadoinkVR network
 - 2019-02-23 1:45AM CST - Additional artwork source for Nubiles
 - 2019-02-23 12:30AM CST - DDF Prod and TrueAnal bugfixes
 - 2019-02-22 8:15PM CST - Nubiles bugfixes
