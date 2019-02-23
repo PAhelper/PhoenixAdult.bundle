@@ -86,6 +86,8 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-22 8:15PM CST - Nubiles bugfixes
+- 2019-02-22 9:45AM CST - Added a few more standalone sites from Studio Nubiles (Anilos, HotCrazyMess, NFBusty, and ThatSitcomShow)
 - 2019-02-22 8:00AM CST - Couple of Nubiles updates and bugfixes
 - 2019-02-21 1:00PM CST - Added Nubiles-Porn Network, Nubiles.net, Nubilefilms (Thanks b0nensfw!)
 - 2019-02-21 9:00AM CST - Added FakeHub support (except Female Fake Taxi, the information just isn't there)
@@ -691,20 +693,25 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
   - MenInPain
   - WhippedAss
   - WiredPussy
-### - Nubiles.net *Shoot ID (Nubiles - id)
-### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id)
+#### - Nubiles.net *Shoot ID (Nubiles - id)
+#### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id)
   - Nubiles Porn
-  - Steph Siblings Caught
+  - Step Siblings Caught
   - Moms Teach Sex  
   - Bad Teens Punished
-  - Princesscum
+  - Princess Cum
   - Nubiles Unscripted
   - Nubiles Casting
   - Petite Hd Porn
-  - Driverxxx
+  - Driver XXX
   - Petite Ballerinas Fucked
   - Teacher Fucks Teens
   - Bountyhunter Porn
   - Daddy's Lil Angel
   - My Family Pies
-### - Nubilesfilms *shoot ID (Nubilesfilms - id)
+#### - Nubilesfilms *shoot ID (Nubilesfilms - id)
+#### - Bratty Sis *shoot ID (BrattySis - id)
+#### - Anilos *shoot ID (Anilos - id)
+#### - Hot Crazy Mess *shoot ID (HotCrazyMess - id)
+#### - NF Busty *shoot ID (NFBusty - id)
+#### - That Sitcom Show *shoot ID (ThatSitcomShow - id)

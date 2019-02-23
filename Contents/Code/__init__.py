@@ -593,8 +593,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Nubiles
             ###############
             if siteNum == 525:
-                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <=540):
-                    Log("Made it to Nubile")
+                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <= 545):
                     results = PAsearchSites.networkNubiles.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
@@ -914,7 +913,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Nubiles                                                  ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 525 and siteID <=540:
+        if siteID >= 525 and siteID <= 545:
             metadata = PAsearchSites.networkNubiles.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

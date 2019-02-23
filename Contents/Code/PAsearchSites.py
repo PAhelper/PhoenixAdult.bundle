@@ -37,7 +37,7 @@ import networkStrike3
 import networkKink
 import networkNubiles
 
-searchSites = [None] * 541
+searchSites = [None] * 546
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -579,6 +579,11 @@ searchSites[537] = ["Bountyhunter Porn", "Bountyhunter Porn", "https://nubiles-p
 searchSites[538] = ["Daddys Lil Angel", "Daddys Lil Angel", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
 searchSites[539] = ["My Family Pies", "My Family Pies", "https://nubiles-porn.com","https://nubiles-porn.com/video/watch/" ]
 searchSites[540] = ["Nubiles", "Nubiles", "https://nubiles.net","https://nubiles.net/video/watch/" ]
+searchSites[541] = ["Bratty Sis", "Bratty Sis", "https://brattysis.com","https://brattysis.com/video/watch/" ]
+searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com/video/watch/" ]
+searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/watch/" ]
+searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/watch/" ]
+searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomporn.com","https://thatsitcomporn.com/video/watch/" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -623,6 +628,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('fds ', 'Fake Driving School ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fft ', 'Female Fake Taxi ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('mts ', 'Moms Teach Sex ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('hoh ', 'HandsOnHardcore', mediaTitle, flags=re.IGNORECASE)
     
     # Search Site ID of 9999 is all
     searchSiteID = None
