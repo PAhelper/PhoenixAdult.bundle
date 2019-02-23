@@ -28,11 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    Log('temp :' + temp)
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
-    Log('Url : ' + url)
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?'))
     indice = str(metadata.id).split("|")[2]
     titre_search=str(metadata.id).split("|")[3]
     siteNum = str(metadata.id).split("|")[1]
@@ -45,19 +41,57 @@ def update(metadata,siteID,movieGenres,movieActors):
             Good_CoverURL = coverURL
         k = k + 1
     Log('Good Cover URL ' + Good_CoverURL )
-    paragraph = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content()
-    metadata.summary = paragraph.strip()
 
-    metadata.studio="DDFNetwork"
-    tagline = "DDFNetwork"
-    tagline = tagline.strip()
-    metadata.tagline = tagline
-
-    metadata.collections.clear()
-    collection = str(PAsearchSites.getSearchSiteName(siteID))
-    metadata.collections.add(collection)
-
+    # Title
     metadata.title = detailsPageElements.xpath('//div[@class="px-2 col-12 col-md-7 video-titles "]/h1')[0].text_content()
+
+    # Summary
+    metadata.summary  = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content().strip()
+
+    # Studio
+    metadata.studio = "DDFProd"
+
+    # Tagline / Collection
+    itempropURL = detailsPageElements.xpath('//meta[@itemprop="url"]')[0].get('content').strip()
+    if "ddfbusty" in itempropURL:
+        tagline = "DDFBusty"
+    elif "handsonhardcore" in itempropURL:
+        tagline = "Hands on Hardcore"
+    elif "houseoftaboo" in itempropURL:
+        tagline = "House of Taboo"
+    elif "onlyblowjob" in itempropURL:
+        tagline = "Only Blowjob"
+    elif "hotlegsandfeet" in itempropURL:
+        tagline = "Hot Legs & Feet"
+    elif "eurogirlsongirls" in itempropURL:
+        tagline = "Euro Girls on Girls"
+    elif "1by-day" in itempropURL:
+        tagline = "1By-Day"
+    elif "cherryjul" in itempropURL:
+        tagline = "Cherry Jul"
+    elif "ddfhardcore" in itempropURL:
+        tagline = "DDF Hardcore"
+    elif "ddfxtreme" in itempropURL:
+        tagline = "DDF Xtreme"
+    elif "ddfnetworkvr" in itempropURL:
+        tagline = "DDF Network VR"
+    elif "euroteenerotica" in itempropURL:
+        tagline = "Euro Teen Erotica"
+    elif "sandysfantasies" in itempropURL:
+        tagline = "Sandy's Fantasies"
+    elif "eveangelofficial" in itempropURL:
+        tagline = "Eve Angel Official"
+    elif "sexvideocasting" in itempropURL:
+        tagline = "Sex Video Casting"
+    elif "hairytwatter" in itempropURL:
+        tagline = "Hairy Twatter"
+    else:
+        tagline = str(PAsearchSites.getSearchSiteName(siteID).strip())
+
+    metadata.tagline = tagline
+    metadata.collections.clear()
+    metadata.collections.add(tagline)
+
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//a[@class="btn btn-light-tag"]')
@@ -69,31 +103,24 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # Release Date
-    date = detailsPageElements.xpath('//time')[0].text_content()
+    date = detailsPageElements.xpath('//time')[0].text_content().strip()
     if len(date) > 0:
-        date = date.strip()
-        date_object = datetime.strptime(date, '%B %d, %Y')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
     metadata.roles.clear()
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//h5[@class="card-title mb-1 text-center"]/a')
+    actors = detailsPageElements.xpath('//h2[@class="actors mb-2"]/a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
             actorPageURL = actorLink.get("href")
-            Log('acteur page : ' + actorPageURL)
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID) + actorPageURL)
-            actorPhoto = actorPage.xpath('//div[@class="col-6 col-sm-4 col-md-6 col-xl-5 px-0 card border-0"]/img')[0].get("data-src")
-            actorPhotoURL= 'http:' + actorPhoto
-            Log('acteur URL img: ' + str(actorPhotoURL))
+            actorPhotoURL = 'http:' + actorPage.xpath('//div[@class="card nomargin"]/img')[0].get("data-src")
             movieActors.addActor(actorName,actorPhotoURL)
-            role.photo = actorPhotoURL
+
     #Posters
         background = detailsPageElements.xpath('//div[@class="video-join-box after_video_join"]/a/img')[0].get("src")
         Log("BG DL: " + str(background))

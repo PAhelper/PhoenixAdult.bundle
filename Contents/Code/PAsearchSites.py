@@ -37,7 +37,7 @@ import networkStrike3
 import networkKink
 import networkNubiles
 
-searchSites = [None] * 546
+searchSites = [None] * 548
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -472,20 +472,20 @@ searchSites[430] = ["BlacksOnBoys","BlacksOnBoys","https://www.dogfartnetwork.co
 searchSites[431] = ["GloryholesAndHandjobs","GloryholesAndHandjobs","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com","https://www.julesjordan.com/trial/search.php?query="]
 searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[434] = ["HandsOnHardcore","HandsOnHardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[435] = ["DDFBusty","DDFBusty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[436] = ["HouseOfTaboo","HouseOfTaboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[437] = ["EuroGirlsOnGirls","EuroGirlsOnGirls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[436] = ["House of Taboo","House of Taboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[437] = ["Euro Girls on Girls","Euro Girls on Girls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[438] = ["1By-Day","1By-Day", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[439] = ["ddfnetworkvr","ddfnetworkvr", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[440] = ["EuroTeenErotica","EuroTeenErotica", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[441] = ["HotLegsandFeet","HotLegsandFeet", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[442] = ["OnlyBlowJob","OnlyBlowJob", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[443] = ["SandysFantasys","SandysFantasys", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[444] = ["CherryJul","CherryJul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[445] = ["EveAngelOfficial","EveAngelOfficial", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[446] = ["SexVideoCasting","SexVideoCasting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[447] = ["HairyTwatter","HairyTwatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[439] = ["DDF Network VR","DDF Network VR", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[440] = ["Euro Teen Erotica","Euro Teen Erotica", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[441] = ["Hot Legs and Feet","Hot Legs & Feet", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[442] = ["Only Blowjob","Only Blowjob", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[443] = ["Sandys Fantasies","Sandy's Fantasies", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[444] = ["Cherry Jul","Cherry Jul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[445] = ["Eve Angel Official","Eve Angel Official", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[446] = ["Sex Video Casting","Sex Video Casting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[447] = ["Hairy Twatter","Hairy Twatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[448] = ["PerfectGonzo","PerfectGonzo", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?q="]
 searchSites[449] = ["AllInternal","AllInternal", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=allinternal&q="]
 searchSites[450] = ["AssTraffic","AssTraffic", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=asstraffic&q="]
@@ -584,6 +584,8 @@ searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com
 searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/watch/" ]
 searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/watch/" ]
 searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomporn.com","https://thatsitcomporn.com/video/watch/" ]
+searchSites[546] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
+searchSites[547] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

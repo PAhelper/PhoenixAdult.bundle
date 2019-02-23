@@ -5,41 +5,45 @@ This metadata agent will receive data from multiple sites for scene video releas
 
 ## Features
 
-The agent searches in two ways, Scene title or scene date with at least one star name
+The agent searches in a few ways depending on the site: Scene title, Actress name, Scene ID or exact URL match are the most common. Also the release date can often be used to increase the accuracy of the match.
 
 Currently the features of this metadata agent are:
-- Grabs Metadata
+- Grabs all available Metadata
 - Title
 - Studio
-- Release Data
-- Genres
+- Site (Saved as the Tagline, and also a Collection)
+- Release Date
+- Genres/Categories
 - Porn Stars stored in Actors with photo
-- Movie Poster
-- Video banner as video background
+- Scene director (if available)
+- Movie Poster(s) / Background art
+- Functions to help clean up extraneous Genres
+- Functions to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
 
 ## File Naming
 
 **Plex Video Files Scanner needs to be set as the library scanner for best results.
 
-For best results, file names should follow the layout below
+For best results, file names should follow the layout below. The release date can be added to the filename for more accurate matching. Date can use a 2-digit year or 4-digit year.
 
 ###### Title Search
 
-- Site - Scene Title.[ext]
+- Site - YYYY-MM-DD - Scene Title.[ext]
 
 Examples:
 - Blacked - Hot Vacation Adventures.mp4
+- Blacked - 2018-12-11 - The Real Thing.mp4
 - Blackedraw - Pass Me Around.mp4
 
-###### Date/Actor Search
+###### Actor Search
 
 - Site - YYYY-MM-DD - Porn Star Names.[ext]
-- Site - YYYY-MM-DD - Porn Star Name Porn Star Name.[ext]
+- Site - Porn Star Name Porn Star Name.[ext]
 
 Examples:
 - Blacked - 2018-09-07 - Alecia Fox.mp4
-- Blacked - 2018-09-07 - Alecia Fox Joss Lescaf.mp4
-- Blacked - 2018-09-04 - Haley Reed.mp4
+- Blacked - 18-09-07 - Alecia Fox Joss Lescaf.mp4
+- Blacked - 18-09-04 - Haley Reed.mp4
 - Blacked - 2018-09-04 - Haley Reed Jason Luv.mp4
 
 The site can be missing from the filename, but all sites will then be searched possibly causing a mismatch.
@@ -74,18 +78,19 @@ If you are doing a manual search in Plex and you wish to only search a single si
 
 ## Notice
 
-No real error checking is implemented. It was quickly tested on 10+ titles per site before the initial posting.
+I try to maintain bug-free code, but sometimes bugs happen. If you are having difficulty matching a scene, [create an issue on Github](https://github.com/PAhelper/PhoenixAdult.bundle/issues) and I will do my best to address it.
 
 ** Plex Video Files Scanner needs to be set as the library scanner for best results. **
 
 ## Known Limitations
 - Teen Fidelity, Porn Fidelity, Kelly Madison, and X-Art will sometimes not pull metadata when many files from that site are being added at once. This is a limitation on the number of requests to their website. Just go back to that video and hit Refresh Metadata (or Match if it didn't make it that far) and everything should then be added.
 
-- LegalPorno does not have high quality pictures to be used for metadata.
+- LegalPorno does not have high quality pictures to be used for metadata artwork.
 
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-23 12:30AM CST - DDF Prod and TrueAnal bugfixes
 - 2019-02-22 8:15PM CST - Nubiles bugfixes
 - 2019-02-22 9:45AM CST - Added a few more standalone sites from Studio Nubiles (Anilos, HotCrazyMess, NFBusty, and ThatSitcomShow)
 - 2019-02-22 8:00AM CST - Couple of Nubiles updates and bugfixes
@@ -444,7 +449,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
 #### - Tushy *Title Search *Date/Actor Search
 #### - Vixen *Title Search *Date/Actor Search
 #### - X-Art *Title Search
-#### - Mofos Network
+#### - Mofos Network *Title Search *Actor Search (adding Date will help match either)
  -  Mofos
  -  Share My BF
  -  Don't Break Me
@@ -472,7 +477,7 @@ No real error checking is implemented. It was quickly tested on 10+ titles per s
  -  Lesbea
  -  Massage Rooms
  -  MomXXX
-#### - FakeHub
+#### - FakeHub *Title Search
  -  FakeTaxi
  -  Fakehub Originals
  -  Public Agent
