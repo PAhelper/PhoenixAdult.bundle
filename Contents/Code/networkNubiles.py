@@ -19,10 +19,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0]
-
-    url = PAsearchSites.getSearchSearchURL(siteID) + temp
-    detailsPageElements = HTML.ElementFromURL(url)
+    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + str(metadata.id).split("|")[0])
+    art = []
 
     # Title
     metadata.title = detailsPageElements.xpath('//span[contains(@class,"wp-title")]')[0].text_content().strip()
@@ -79,5 +77,35 @@ def update(metadata,siteID,movieGenres,movieActors):
     background = "http:" + detailsPageElements.xpath('//div[@id="watchpagevideo"]//div[@class="edgeCMSVideoPlayer"]//video')[0].get('poster')
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+
+    try:
+        photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-xs wptag " and contains(text(),"Pics")]')[0].get('href')
+        Log("photoPageURL: " + str(photoPageURL))
+        photoPageElements = HTML.ElementFromURL(photoPageURL)
+        for posterUrl in photoPageElements.xpath('//figure[@class="photo-thumbnail"]//img'):
+            art.append("http:" + posterUrl.get('src').replace('/tn',''))
+    except:
+        pass
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
 
     return metadata

@@ -53,8 +53,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline / Collection
     itempropURL = detailsPageElements.xpath('//meta[@itemprop="url"]')[0].get('content').strip()
-    if "ddfbusty" in itempropURL:
+    if "ddfhardcore" in itempropURL:
+        tagline = "DDF Hardcore"
+    elif "ddfbusty" in itempropURL:
         tagline = "DDFBusty"
+    elif "ddfxtreme" in itempropURL:
+        tagline = "DDF Xtreme"
     elif "handsonhardcore" in itempropURL:
         tagline = "Hands on Hardcore"
     elif "houseoftaboo" in itempropURL:
@@ -69,10 +73,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "1By-Day"
     elif "cherryjul" in itempropURL:
         tagline = "Cherry Jul"
-    elif "ddfhardcore" in itempropURL:
-        tagline = "DDF Hardcore"
-    elif "ddfxtreme" in itempropURL:
-        tagline = "DDF Xtreme"
     elif "ddfnetworkvr" in itempropURL:
         tagline = "DDF Network VR"
     elif "euroteenerotica" in itempropURL:

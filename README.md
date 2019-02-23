@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-23 1:45AM CST - Additional artwork source for Nubiles
 - 2019-02-23 12:30AM CST - DDF Prod and TrueAnal bugfixes
 - 2019-02-22 8:15PM CST - Nubiles bugfixes
 - 2019-02-22 9:45AM CST - Added a few more standalone sites from Studio Nubiles (Anilos, HotCrazyMess, NFBusty, and ThatSitcomShow)
@@ -460,7 +461,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  Mofos B Sides
  -  She's A Freak
  -  Public Pickups
-#### - Babes Network
+#### - Babes Network *Title Search *Actor Search (adding Date will help match either)
  -  Babes
  -  Babes Unleashed
  -  Black is Better
@@ -488,7 +489,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  Fake Cop
  -  #Fake Driving School
  -  #Fake Hostel
-#### - Full Porn Network
+#### - Full Porn Network *Title Search *Actor Search (adding Date will help match either)
  -  Analized
  -  James Deen
  -  Twisted Visual
@@ -571,20 +572,22 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  TheAssFactory
  -  SpermSwallowers
 #### - DDFNetwork - *Title Search/Actress
- -  HandsOnHardcore
- -  DDFBusty
- -  HouseOfTaboo
- -  EuroGirlsOnGirls
+ -  DDF Hardcore
+ -  DDF Busty
+ -  DDF Xtreme
+ -  Hands on Hardcore
+ -  House of Taboo
+ -  Euro Girls on Girls
  -  1By-Day
- -  ddfnetworkvr
- -  EuroTeenErotica
- -  HotLegsandFeet
- -  OnlyBlowJob
- -  SandysFantasys
- -  CherryJul
- -  EveAngelOfficial
- -  SexVideoCasting
- -  HairyTwatter
+ -  ddf Network VR
+ -  Euro Teen Erotica
+ -  Hot Legs & Feet
+ -  Only Blowjob
+ -  Sandy's Fantasies
+ -  Cherry Jul
+ -  Eve Angel Official
+ -  Sex Video Casting
+ -  Hairy Twatter
 #### - Dogfart - *Title Search/Actress
  -  BlacksOnBlondes
  -  InterracialBlowbang
@@ -610,7 +613,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  TheMinion
  -  BlacksOnBoys
  -  GloryholesAndHandjobs
-#### - PerfectGonzo Network
+#### - PerfectGonzo Network *Actor Search
  -  PerfectGonzo
  -  AllInternal
  -  AssTraffic
