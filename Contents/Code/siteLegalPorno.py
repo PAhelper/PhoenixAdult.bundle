@@ -43,8 +43,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
     
+    tagline = detailsPageElements.xpath('//a[@class="watchpage-studioname"]')[0].text_content().strip()
+    metadata.tagline = tagline
     metadata.collections.clear()
-    metadata.collections.add(metadata.tagline)
+    metadata.collections.add(tagline)
 
     # Genres
     movieGenres.clearGenres()
@@ -65,6 +67,17 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="model--avatar"]//img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
+
+    # Director
+    director = metadata.directors.new()
+    if tagline == "Giorgio Grandi" or tagline == "Giorgio's Lab":
+        director.name = 'Giorgio Grandi'
+    try:
+        directors = detailsPageElements.xpath('//p[@class="director"]/a')
+        for dirname in directors:
+            director.name = dirname.text_content().strip()
+    except:
+        pass
 
     # Posters/Background
     valid_names = list()

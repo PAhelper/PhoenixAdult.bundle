@@ -90,6 +90,8 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-24 5:00PM CST - Bugfixes for Devil's Film individual DVD scenes
+- 2019-02-24 4:00PM CST - Added support for BellaPass network of sites (Bryci, KatieBanks, etc.)
 - 2019-02-23 4:15PM CST - Bugfix for BadoinkVR network
 - 2019-02-23 1:45AM CST - Additional artwork source for Nubiles
 - 2019-02-23 12:30AM CST - DDF Prod and TrueAnal bugfixes
@@ -724,3 +726,19 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 #### - Hot Crazy Mess *shoot ID (HotCrazyMess - id)
 #### - NF Busty *shoot ID (NFBusty - id)
 #### - That Sitcom Show *shoot ID (ThatSitcomShow - id)
+#### - BellaPass
+  - Bryci
+  - KatieBanks
+  - AlexisMonroe
+  - CaliCarter
+  - TaliaShepard
+  - JanaFox
+  - MonroeLee
+  - AleahJasmine
+  - CeceSeptember
+  - HunterLeigh
+  - AvaDawn
+  - BellaNextDoor
+  - JoePerv
+  - HD19
+  - BellaHD

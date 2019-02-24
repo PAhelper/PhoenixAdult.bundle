@@ -1,10 +1,7 @@
 import siteBrazzers
-#import siteBlacked
 import siteNaughtyAmerica
-#import siteVixen
 import siteXart
 import siteBangBros
-#import siteTushy
 import siteRealityKings
 import siteTeamSkeet
 import sitePorndoePremium
@@ -36,8 +33,9 @@ import networkPornPros
 import networkStrike3
 import networkKink
 import networkNubiles
+import networkBellaPass
 
-searchSites = [None] * 548
+searchSites = [None] * 564
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -586,6 +584,22 @@ searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbus
 searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomporn.com","https://thatsitcomporn.com/video/watch/" ]
 searchSites[546] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
 searchSites[547] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
+searchSites[548] = ["BellaPass", "BellaPass", "https://www.bellapass.com","https://bellapass.com/search.php?query=" ]
+searchSites[549] = ["Bryci", "Bryci", "https://www.bryci.com","https://bryci.com/search.php?query=" ]
+searchSites[550] = ["Katie Banks", "Katie Banks", "https://www.katiebanks.com","https://katiebanks.com/search.php?query=" ]
+searchSites[551] = ["Alexis Monroe", "Alexis Monroe", "https://www.alexismonroe.com","https://alexismonroe.com/search.php?query=" ]
+searchSites[552] = ["Cali Carter", "Cali Carter", "https://www.calicarter.com","https://calicarter.com/search.php?query=" ]
+searchSites[553] = ["Talia Shepard", "Talia Shepard", "https://www.taliashepard.com","https://taliashepard.com/search.php?query=" ]
+searchSites[554] = ["Jana Fox", "Jana Fox", "https://www.janafox.com","https://janafox.com/search.php?query=" ]
+searchSites[555] = ["Monroe Lee", "Monroe Lee", "https://www.monroelee.com","https://monroelee.com/search.php?query=" ]
+searchSites[556] = ["Aleah Jasmine", "Aleah Jasmine", "https://www.aleahjasmine.com","https://aleahjasmine.com/search.php?query=" ]
+searchSites[557] = ["Cece September", "Cece September", "https://www.ceceseptember.com","https://ceceseptember.com/search.php?query=" ]
+searchSites[558] = ["Hunter Leigh", "Hunter Leigh", "https://www.hunterleigh.com","https://hunterleigh.com/search.php?query=" ]
+searchSites[559] = ["Ava Dawn", "Ava Dawn", "https://www.avadawn.com","https://avadawn.com/search.php?query=" ]
+searchSites[560] = ["Bella Next Door", "Bella Next Door", "https://www.bellanextdoor.com","https://bellanextdoor.com/search.php?query=" ]
+searchSites[561] = ["Joe Perv", "Joe Perv", "https://www.joeperv.com","https://joeperv.com/search.php?query=" ]
+searchSites[562] = ["HD 19", "HD 19", "https://www.hd19.com","https://hd19.com/search.php?query=" ]
+searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://bellahd.com/search.php?query=" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

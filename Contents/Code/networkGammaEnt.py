@@ -171,7 +171,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             except:
                 title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
 
-    if dvdTitle == title:
+    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip():
         pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
         alpha = pageTitle.find('Scene')+6
         omega = pageTitle.find(' ',alpha)
@@ -200,11 +200,10 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Release Date
     try:
-        date = detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()
+        date = detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().replace('|','').strip()
     except:
         date = detailsPageElements.xpath('//*[@class="updatedOn"]')[0].text_content().strip()
         date = date[8:].strip()
-
     if len(date) > 0:
         date_object = parse(date)
         metadata.originally_available_at = date_object
@@ -212,7 +211,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]//a | //div[@class="sceneCol sceneActors"]//a | //div[@class="pornstarNameBox"]/a[@class="pornstarName"] | //div[@id="slick_DVDInfoActorCarousel"]//a')
+    actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]//a | //div[@class="sceneCol sceneActors"]//a | //div[@class="pornstarNameBox"]/a[@class="pornstarName"] | //div[@id="slick_DVDInfoActorCarousel"]//a | //div[@id="slick_sceneInfoPlayerActorCarousel"]//a')
     if metadata.title == 'Kennedy Leigh' and metadata.tagline == 'Only Teen Blowjobs':
         movieActors.addActor('Kennedy Leigh','https://imgs1cdn.adultempire.com/actors/649607h.jpg')
 
@@ -232,7 +231,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             i = 1
             alpha = 0
             omega = 0
-            while i <= sceneActors.count('actorId'):
+            while i <= int(sceneActors.count('actorId')):
                 alpha = sceneActors.find('"actorId"',omega)+11
                 omega = sceneActors.find('"',alpha)
                 actorId = sceneActors[alpha:omega]
@@ -244,7 +243,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL).replace("https:","http:"))
                 actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"] | //span[@class="removeAvatarParent"]/img')[0].get("src").replace("https:","http:")
                 movieActors.addActor(actorName,actorPhotoURL)
-                i = i + 1
+                i = int(i) + 1
         except:
             pass
 

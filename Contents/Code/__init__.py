@@ -70,6 +70,10 @@ class PhoenixAdultAgent(Agent.Movies):
         encodedTitle = urllib.quote(searchTitle)
         Log(encodedTitle)
         siteNum = 0
+
+        #Dirty hack to prevent long all-site searches
+        if searchSiteID == 9999:
+            searchSiteID = 9998
         for searchSite in PAsearchSites.searchSites:
             ###############
             ## Blacked Raw
@@ -596,6 +600,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <= 545):
                     results = PAsearchSites.networkNubiles.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## BellaPass
+            ###############
+            if siteNum == 548:
+                if searchSiteID == 9999 or (searchSiteID >= 548 and searchSiteID <= 563):
+                    results = PAsearchSites.networkBellaPass.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -915,6 +926,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 525 and siteID <= 545:
             metadata = PAsearchSites.networkNubiles.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  BellaPass                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 548 and siteID <= 563:
+            metadata = PAsearchSites.networkBellaPass.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
