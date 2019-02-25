@@ -5,21 +5,41 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
-    searchResults = HTML.ElementFromURL(url)
+    if searchDate:
+        url = PAsearchSites.getSearchSearchURL(siteNum) + "date/" + searchDate + "/" + searchDate
+        searchResults = HTML.ElementFromURL(url)
+        for searchResult in searchResults.xpath('//div[contains(@class,"thumbnail-grid videoset")]'):
+            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
+            temp = searchResult.xpath('.//a[@class="title"]')[0].get('href')
+            alpha = temp.replace('/', '_', 2).find('/')+1
+            omega = temp.rfind('/')
 
-    searchResult = searchResults.xpath('//div[@class="descrips"]')[0]
-    titleNoFormatting = searchResult.xpath('//span[@class="wp-title videotitle"]')[0].text_content()
-    curID = searchTitle.lower().replace(" ","-").replace("'","-")
-    releaseDate = parse(searchResult.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()).strftime('%Y-%m-%d')
+            curID = temp[alpha:omega].replace('/','_').replace('?','!')
+            Log('curID: ' + str(curID))
+            releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-    score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+
+    if unicode(searchTitle, 'utf-8').isnumeric():
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/video/watch/" + searchTitle.lower().replace(" ","-").replace("'","-")
+        searchResults = HTML.ElementFromURL(url)
+
+        searchResult = searchResults.xpath('//div[@class="descrips"]')[0]
+        titleNoFormatting = searchResult.xpath('//span[@class="wp-title videotitle"]')[0].text_content()
+        curID = searchTitle.lower().replace(" ","-").replace("'","-")
+        releaseDate = parse(searchResult.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()).strftime('%Y-%m-%d')
+
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + str(metadata.id).split("|")[0])
+    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID) + '/video/watch/' + str(metadata.id).split("|")[0])
     art = []
 
     # Title
@@ -69,6 +89,36 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL))
             actorPhotoURL = "http:"+actorPage.xpath('//div[@id="modelprofile"]/img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
+    if "Logan Long" in summary:
+        movieActors.addActor('Logan Long','')
+    elif "Patrick Delphia" in summary:
+        movieActors.addActor('Patrick Delphia','')
+    elif "Seth Gamble" in summary:
+        movieActors.addActor('Seth Gamble','')
+    elif "Alex D." in summary:
+        movieActors.addActor('Alex D.','')
+    elif "Lucas Frost" in summary:
+        movieActors.addActor('Lucas Frost','')
+    elif "Van Wylde" in summary:
+        movieActors.addActor('Van Wylde','')
+    elif "Tyler Nixon" in summary:
+        movieActors.addActor('Tyler Nixon','')
+    elif "Logan Pierce" in summary:
+        movieActors.addActor('Logan Pierce','')
+    elif "Johnny Castle" in summary:
+        movieActors.addActor('Johnny Castle','')
+    elif "Damon Dice" in summary:
+        movieActors.addActor('Damon Dice','')
+    elif "Scott Carousel" in summary:
+        movieActors.addActor('Scott Carousel','')
+    elif "Dylan Snow" in summary:
+        movieActors.addActor('Dylan Snow','')
+    elif "Michael Vegas" in summary:
+        movieActors.addActor('Michael Vegas','')
+    elif "Xander Corvus" in summary:
+        movieActors.addActor('Xander Corvus','')
+    elif "Chad White" in summary:
+        movieActors.addActor('Chad White','')
 
     # Genres
     movieGenres.clearGenres()

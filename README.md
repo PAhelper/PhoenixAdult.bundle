@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-24 8:45PM CST - Added new way to search for Nubiles Network sites: date added
 - 2019-02-24 6:45PM CST - Nubiles.net workaround (match them to "NubilesNet") and actor image fix
 - 2019-02-24 6:15PM CST - Updated SexyHub and FakeHub artwork potential
 - 2019-02-24 5:00PM CST - Bugfixes for Devil's Film individual DVD scenes
@@ -706,8 +707,8 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - MenInPain
   - WhippedAss
   - WiredPussy
-#### - Nubiles.net *Shoot ID (Nubiles - id)
-#### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id)
+#### - Nubiles.net *Shoot ID (NubilesNet - id) *Date search
+#### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
   - Nubiles Porn
   - Step Siblings Caught
   - Moms Teach Sex  
@@ -722,13 +723,13 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - Bountyhunter Porn
   - Daddy's Lil Angel
   - My Family Pies
-#### - Nubilesfilms *shoot ID (Nubilesfilms - id)
-#### - Bratty Sis *shoot ID (BrattySis - id)
-#### - Anilos *shoot ID (Anilos - id)
-#### - Hot Crazy Mess *shoot ID (HotCrazyMess - id)
-#### - NF Busty *shoot ID (NFBusty - id)
-#### - That Sitcom Show *shoot ID (ThatSitcomShow - id)
-#### - BellaPass
+#### - Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
+#### - Bratty Sis *shoot ID (BrattySis - id) *Date search
+#### - Anilos *shoot ID (Anilos - id) *Date search
+#### - Hot Crazy Mess *shoot ID (HotCrazyMess - id) *Date search
+#### - NF Busty *shoot ID (NFBusty - id) *Date search
+#### - That Sitcom Show *shoot ID (ThatSitcomShow - id) *Date search
+#### - BellaPass *Title Search
   - Bryci
   - KatieBanks
   - AlexisMonroe
