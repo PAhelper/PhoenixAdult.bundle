@@ -153,18 +153,36 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
-    i = 1
+
+    # SexyHub poster
     try:
         tmp = detailsPageElements.xpath('//div[@id="player"]')[0].get('style')
         k = tmp.find("url(")
         j = tmp.rfind(")")
-        background = "http:" + tmp[k+4:j]
+        background = "http:" + tmp[k+4:j].replace('960x540','1021x574')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        background = background.replace('_1.jpg','_2.jpg')
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
         metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
         pass
-    
+ 
+     # Video poster from script + one extra
+    try:
+        background = "http:"+detailsPageElements.xpath('//img[@class="trailer-cover"]')[0].get('src').replace('main','1021x574_1')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        background = background.replace('1021x574_1','1021x574_2')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+    except:
+        pass
+
     try:
         background = "http:"+detailsPageElements.xpath('//img[@class="trailer-cover"]')[0].get('src')
         Log("BG DL: " + background)

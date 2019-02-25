@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-24 6:15PM CST - Updated SexyHub and FakeHub artwork potential
 - 2019-02-24 5:00PM CST - Bugfixes for Devil's Film individual DVD scenes
 - 2019-02-24 4:00PM CST - Added support for BellaPass network of sites (Bryci, KatieBanks, etc.)
 - 2019-02-23 4:15PM CST - Bugfix for BadoinkVR network
