@@ -20,7 +20,7 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
 def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.lower())
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.upper())
     for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
         titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
@@ -111,7 +111,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     for poster in actorPage.xpath('//a[@href="' + url + '"]//img'):
         art.append(poster.get('src'))
-    for poster in actorPage.xpath('//div[@class="thumb-mouseover"]'):
+    for poster in actorPage.xpath('//div[@class="thumb-mouseover"] | //div[@class="thumb-bottom"] | //div[@class="thumb-top"]'):
         theStyle = poster.get('style')
         alpha = theStyle.find('http')
         omega = theStyle.find(');',alpha)

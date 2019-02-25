@@ -62,7 +62,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = actorLink.text_content().strip()
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL))
-            actorPhotoURL = "http:"+actorPage.xpath('//img[@class="img-responsive"]')[0].get("src")
+            actorPhotoURL = "http:"+actorPage.xpath('//div[@id="modelprofile"]/img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Genres
