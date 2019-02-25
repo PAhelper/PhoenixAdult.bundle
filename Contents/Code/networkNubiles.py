@@ -11,7 +11,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResult = searchResults.xpath('//div[@class="descrips"]')[0]
     titleNoFormatting = searchResult.xpath('//span[@class="wp-title videotitle"]')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
-    releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[0].text_content().strip()).strftime('%Y-%m-%d')
+    releaseDate = parse(searchResult.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()).strftime('%Y-%m-%d')
 
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
@@ -38,7 +38,12 @@ def update(metadata,siteID,movieGenres,movieActors):
                 summary = summary + '\n\n' + paragraph.text_content()
             pNum += 1
     except:
-        summary = detailsPageElements.xpath('//div[@class="video-description"]/article')[0].text_content().strip()
+        pass
+    if summary == '':
+        try:
+            summary = detailsPageElements.xpath('//div[@class="video-description"]/article')[0].text_content().strip()
+        except:
+            pass
     metadata.summary = summary.strip()
 
     # Collections / Tagline
