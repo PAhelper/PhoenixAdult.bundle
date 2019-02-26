@@ -20,6 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
+    art = []
 
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
     Log('scene url: ' + url)
@@ -90,5 +91,78 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[contains(@class,"details")]//h1')[0].text_content().strip()
+	
+    #Extra Posters
+    import random
+    from googlesearch import search
+	
+    # Check first X google results. Set Stop = X to search more
+    urls = search('"' + siteName + 'fan"' + actorName + metadata.title , stop=2)
+    if siteName is "Holed":
+        urls = search('"AnalPornfan"' + actorName + metadata.title , stop=2)
+	
+    match = "false"
+    for url in urls:
+        if match is "false":
+            googleSearchURL = url
+            fanPageElements = HTML.ElementFromURL(googleSearchURL)
+
+            try:
+                nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
+                if siteName is "Holed":
+                    nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[2]')[0].text_content()  
+                Log("Actress name in header: " + nameinheader)
+
+                if actorName in nameinheader:
+                    Log(siteName + " Fansite Match Found")
+                    match = "true"
+                    metadata.summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
+
+                # Various xpath needed for different sites
+                try:
+                    if siteName is "PassionHD":
+                        Log("Searching PassionHDFan")
+                        for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a'):
+                            art.append(posterURL.get('href'))
+                    elif siteName is "Lubed":
+                        Log("Searching LubedFan")
+                        for posterURL in fanPageElements.xpath('(//div[@class="entry-inner"]//a)[position()>1][position()<last()]'):
+                           art.append(posterURL.get('href'))
+                    elif siteName is "Holed":
+                        Log("Searching AnalPornFan")
+                        for posterURL in fanPageElements.xpath('//div[contains(@class, "rgg-imagegrid")]//a'):
+                           art.append(posterURL.get('href'))
+                except:
+                    pass
+            except:
+                Log("No Actress found in the site header")
+                pass
+
+    # Return, first, last and randóm selection of images
+    # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
+    sample = [art[0], art[-1]] + random.sample(art, 4)     
+    art = sample
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        Log("Trying next Image")
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
 
     return metadata
