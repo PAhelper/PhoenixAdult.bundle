@@ -67,10 +67,50 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = summary.strip()
 
     # Collections / Tagline
-    siteName = PAsearchSites.getSearchSiteName(siteID)
+    siteName = detailsPageElements.xpath('//span[@class="featuring-modelname model"]/preceding::a[1]')[0].text_content().strip()
+    if "stepsiblingscaught" in siteName.lower():
+        tagline = "Step Siblings Caught"
+    elif "momsteachsex" in siteName.lower():
+        tagline = "Moms Teach Sex"
+    elif "badteenspunished" in siteName.lower():
+        tagline = "Bad Teens Punished"
+    elif "princesscum" in siteName.lower():
+        tagline = "Princess Cum"
+    elif "nubilesunscripted" in siteName.lower():
+        tagline = "Nubiles Unscripted"
+    elif "nubilescasting" in siteName.lower():
+        tagline = "Nubiles Casting"
+    elif "petitehdporn" in siteName.lower():
+        tagline = "Petite HD Porn"
+    elif "driverxxx" in siteName.lower():
+        tagline = "Driver XXX"
+    elif "petiteballerinasfucked" in siteName.lower():
+        tagline = "Petite Ballerinas Fucked"
+    elif "teacherfucksteens" in siteName.lower():
+        tagline = "Teacher Fucks Teens"
+    elif "bountyhunterporn" in siteName.lower():
+        tagline = "Bountyhunter Porn"
+    elif "daddyslilangel" in siteName.lower():
+        tagline = "Daddy's Lil Angel"
+    elif "myfamilypies" in siteName.lower():
+        tagline = "My Family Pies"
+    elif "nubiles.net" in siteName.lower():
+        tagline = "Nubiles"
+    elif "brattysis" in siteName.lower():
+        tagline = "Bratty Sis"
+    elif "anilos" in siteName.lower():
+        tagline = "Anilos"
+    elif "hotcrazymess" in siteName.lower():
+        tagline = "Hot Crazy Mess"
+    elif "nfbusty" in siteName.lower():
+        tagline = "NF Busty"
+    elif "thatsitcomporn" in siteName.lower():
+        tagline = "That Sitcom Show"
+    else:
+        tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
-    metadata.tagline = siteName
-    metadata.collections.add(siteName)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Date
     date = detailsPageElements.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()

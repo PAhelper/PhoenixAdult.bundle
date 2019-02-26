@@ -90,7 +90,8 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
-- 2019-02-24 8:45PM CST - Added new way to search for Nubiles Network sites: release date
+- 2019-02-25 9:30PM CST - Nubiles now pulls site for tagline and collection from the scene details page
+- 2019-02-24 8:45PM CST - Added new way to search for Nubiles Network sites: release date, and also manually added male actors to Nubiles scenes (via name match in the Summary)
 - 2019-02-24 6:45PM CST - Nubiles.net workaround (match them to "NubilesNet") and actor image fix
 - 2019-02-24 6:15PM CST - Updated SexyHub and FakeHub artwork potential
 - 2019-02-24 5:00PM CST - Bugfixes for Devil's Film individual DVD scenes
