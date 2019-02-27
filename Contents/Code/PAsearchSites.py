@@ -612,12 +612,22 @@ def getSearchSiteName(siteID):
 def getSearchSiteIDByFilter(searchFilter):
     searchID = 0
     for sites in searchSites:
+        #First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
+        try:
+            if searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0] == sites[0].lower().replace(" ","").replace("'",""):
+                return searchID
+        except:
+            pass
+        searchID += 1
+    
+    searchID = 0
+    for sites in searchSites:
         # Might try converting this code to use startswith() to avoid problems with overlapping site names:
         # https://www.tutorialspoint.com/python/string_startswith.htm
         # Examples:
         #  Blacked -> BlackedRaw
         #  Babes -> FootsieBabes
-        #  PassionHD Love Ties -> HD Love
+        #  PassionHD Love Ties -> HD Love       
         if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
             return searchID
         searchID += 1
