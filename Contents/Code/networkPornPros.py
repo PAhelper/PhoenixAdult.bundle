@@ -95,7 +95,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     from googlesearch import search
-    Log("imported stuff")
 	
     # Check first X google results. Set Stop = X to search more
     urls = search('"' + siteName + 'fan" ' + actorName + ' ' + metadata.title , stop=2)
@@ -131,13 +130,11 @@ def update(metadata,siteID,movieGenres,movieActors):
                         pNum = 1
                         summary = ""
                         for paragraph in paragraphs:
-                            if pNum == 1 or pNum == 3 or pNum == 4:
+                            if pNum >= 1 and pNum <= 5:
                                 summary = summary + '\n' + paragraph.text_content()
                             pNum += 1
 
                         metadata.summary = summary.strip()  
-                        #summary = fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]//p[position()=1]')[0].text_content()
-                        #metadata.summary = (fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]//p[position()=1]')[0].text_content() + '/n' + fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]//p[position()=14]')[0].text_content()).strip()
                     else:
                         metadata.summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
 
