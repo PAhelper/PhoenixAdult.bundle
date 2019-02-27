@@ -34,8 +34,9 @@ import networkStrike3
 import networkKink
 import networkNubiles
 import networkBellaPass
+import siteAllureMedia
 
-searchSites = [None] * 564
+searchSites = [None] * 566
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -600,6 +601,8 @@ searchSites[560] = ["Bella Next Door", "Bella Next Door", "https://www.bellanext
 searchSites[561] = ["Joe Perv", "Joe Perv", "https://www.joeperv.com","https://joeperv.com/search.php?query=" ]
 searchSites[562] = ["HD 19", "HD 19", "https://www.hd19.com","https://hd19.com/search.php?query=" ]
 searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://bellahd.com/search.php?query=" ]
+searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallure.com","https://www.amateurallure.com/tour/search.php?st=advanced&cat%5B%5D=5&qall=" ]
+searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qall=" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

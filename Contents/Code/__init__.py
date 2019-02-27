@@ -607,6 +607,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 548 and searchSiteID <= 563):
                     results = PAsearchSites.networkBellaPass.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## AllureMedia
+            ###############
+            if siteNum == 564 or siteNum == 565:
+                if searchSiteID == 9999 or searchSiteID == 564 or searchSiteID == 565:
+                    results = PAsearchSites.siteAllureMedia.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -934,6 +941,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 548 and siteID <= 563:
             metadata = PAsearchSites.networkBellaPass.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  AllureMedia                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 564 or siteID == 565:
+            metadata = PAsearchSites.siteAllureMedia.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
