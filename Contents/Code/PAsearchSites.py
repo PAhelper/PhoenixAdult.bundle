@@ -35,8 +35,9 @@ import networkKink
 import networkNubiles
 import networkBellaPass
 import siteAllureMedia
+import siteBlackValleyGirls
 
-searchSites = [None] * 566
+searchSites = [None] * 567
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -603,6 +604,7 @@ searchSites[562] = ["HD 19", "HD 19", "https://www.hd19.com","https://hd19.com/s
 searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://bellahd.com/search.php?query=" ]
 searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallure.com","https://www.amateurallure.com/tour/search.php?st=advanced&cat%5B%5D=5&qall=" ]
 searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qall=" ]
+searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -643,23 +645,28 @@ def getSearchSettings(mediaTitle):
 
     # Search Site abbreviations
     # Using Regex instead of .replace or .startswith so it can be case insensitive
-    mediaTitle = re.sub('bblib ', 'Big Butts Like It Big ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('btaw ', 'Big Tits at Work ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('btas ', 'Big Tits at School ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('btis ', 'Big Tits in Sports', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('plib ', 'Pornstars Like it Big', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('tuf ', 'The Upper Floor ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('wa ', 'Whipped Ass ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('fm ', 'Fucking Machines ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('btaw ', 'BigTitsatWork ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('btas ', 'BigTitsatSchool ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('btis ', 'BigTitsinSports', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('plib ', 'PornstarsLikeitBig', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('dbm ', 'DontBreakMe', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fm ', 'FuckingMachines ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('fho ', 'Fakehub Originals ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('fhl ', 'Fake Hostel ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('pba ', 'Public Agent ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('frs ', 'Fitness Rooms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('fds ', 'Fake Driving School ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('fft ', 'Female Fake Taxi ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('mts ', 'Moms Teach Sex ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fho ', 'FakehubOriginals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fka ', 'FakeAgent ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('ftx ', 'FakeTaxi ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fhl ', 'FakeHostel ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('frs ', 'FitnessRooms ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fds ', 'FakeDrivingSchool ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fft ', 'FemaleFakeTaxi ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('mts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('fms ', 'FantasyMassage ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
     
     # Search Site ID of 9999 is all
     searchSiteID = None

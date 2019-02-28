@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-02-28 4:30PM CST - Added BlackValleyGirls (a TeamSkeet site) and multiple bugfixes
 - 2019-02-27 10:00AM CST - Added Amateur Allure and Swallow Salon
 - 2019-02-25 3:45PM AEST - Pull summary and additional art from PornPros Fan Sites
 - 2019-02-25 9:30PM CST - Nubiles now pulls site for tagline and collection from the scene details page

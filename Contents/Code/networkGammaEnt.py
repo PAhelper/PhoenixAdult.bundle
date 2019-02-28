@@ -40,9 +40,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     else:
         network = network + "/"
 
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Results Found: "+str(len(searchResults.xpath('//div[@class="tlcDetails"]'))))
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
         curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
@@ -64,7 +62,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     try:
         dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
         for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
-            titleNoFormatting = dvdResult.xpath('.//a | .//div[@class="tlcTitle"]/a')[0].get('title').strip()
+            titleNoFormatting = dvdResult.xpath('.//div[@class="tlcTitle"]/a')[0].get('title').strip()
             curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
             try:
                 releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
@@ -128,6 +126,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         paragraph = detailsPageElements.xpath('//meta[@name="twitter:description"]')[0].get('content').strip()
     except:
+        paragraph = ""
+    
+    if paragraph == "":
         try:
             paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
             paragraph = paragraph[20:]
@@ -171,7 +172,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             except:
                 title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
 
-    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip():
+    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
         pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
         alpha = pageTitle.find('Scene')+6
         omega = pageTitle.find(' ',alpha)
@@ -215,6 +216,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     if metadata.title == 'Kennedy Leigh' and metadata.tagline == 'Only Teen Blowjobs':
         movieActors.addActor('Kennedy Leigh','https://imgs1cdn.adultempire.com/actors/649607h.jpg')
 
+    if len(actors) == 0: # Try pulling the mobile site
+        try:
+            HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19'
+            mobilePageElements = HTML.ElementFromURL(url.replace('www','m'))
+            actors = mobilePageElements.xpath('//a[@class="pornstarName"]')
+            HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+        except:
+            pass
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
@@ -243,6 +252,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL).replace("https:","http:"))
                 actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"] | //span[@class="removeAvatarParent"]/img')[0].get("src").replace("https:","http:")
                 movieActors.addActor(actorName,actorPhotoURL)
+                Log('i: '+str(i))
                 i = int(i) + 1
         except:
             pass

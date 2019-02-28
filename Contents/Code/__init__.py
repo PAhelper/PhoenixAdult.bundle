@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -614,6 +614,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 564 or searchSiteID == 565:
                     results = PAsearchSites.siteAllureMedia.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## BlackValleyGirls
+            ###############
+            if siteNum == 566:
+                if searchSiteID == 9999 or searchSiteID == 566:
+                    results = PAsearchSites.siteBlackValleyGirls.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -949,6 +956,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 564 or siteID == 565:
             metadata = PAsearchSites.siteAllureMedia.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  BlackValleyGirls                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 566:
+            metadata = PAsearchSites.siteBlackValleyGirls.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
