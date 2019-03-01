@@ -154,6 +154,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         pass
 
+    # Actors
+    movieActors.clearActors()
+    try:
+        actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
+    except:
+        pass
+    if len(actors) > 0:
+        for actorLink in actors:
+            actorName = str(actorLink.text_content().strip())
+            actorPageURL = actorLink.get("href")
+            actorPage = HTML.ElementFromURL(actorPageURL)
+            actorPhotoURL = art[2]
+            if 'http' not in actorPhotoURL:
+            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            movieActors.addActor(actorName,actorPhotoURL)
+
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
@@ -167,10 +183,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 #Add the image proxy items to the collection
                 if width > 1 or height > width:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
                 j = j + 1
             except Exception as e:
                 Log("posterUrl: "+ posterUrl)
