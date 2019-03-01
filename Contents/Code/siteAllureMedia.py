@@ -120,6 +120,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             posterUrl = ptx1600[alpha:omega]
             if 'http' not in posterUrl:
                 posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+            if i == 5:
+                actorPhotoURL = posterUrl
             photos.append(posterUrl)
             i = i + 1
         for x in range(10):
@@ -147,6 +149,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             posterUrl = ptxjpg[alpha:omega]
             if 'http' not in posterUrl:
                 posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+            if i == 5:
+                actorPhotoURL = posterUrl
             vidcaps.append(posterUrl)
             i = i + 1
         for x in range(10):
@@ -165,7 +169,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = art[2]
+            #actorPhotoURL = art[2]
             if 'http' not in actorPhotoURL:
             	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
