@@ -70,7 +70,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         omega = bigScript.find(']',alpha)
         genres = bigScript[alpha:omega].strip('"').split(',')
         for genre in genres:
-            movieGenres.addGenre(genre.lower())
+            movieGenres.addGenre(genre.replace('"','').lower())
     except:
         # No Source for Genres, add manual
         if 'Blacked' in metadata.tagline:

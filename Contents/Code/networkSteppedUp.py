@@ -5,6 +5,7 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.lower())
+    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="info-wrap"]'))))
     for searchResult in searchResults.xpath('//div[@class="info-wrap"]'):
         titleNoFormatting = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
@@ -21,6 +22,7 @@ def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByD
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.upper())
+    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
     for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
         titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
@@ -37,6 +39,7 @@ def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDat
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.lower())
+    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-card-info"]'))))
     for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
         titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].get('href').replace('/','_').replace('?','!')

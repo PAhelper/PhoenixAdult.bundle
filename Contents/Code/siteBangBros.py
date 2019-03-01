@@ -7,7 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     while searchPageNum <= 2:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/" + str(searchPageNum))
 
-        for searchResult in searchResults.xpath('//div[@class="echThumb"]'):
+        for searchResult in searchResults.xpath('//div[@class="thumbsHolder elipsTxt"]/div[1]/div[@class="echThumb"]'):
             if len(searchResult.xpath('.//a[contains(@href,"/video")]')) > 0:
                 titleNoFormatting = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("title")
                 curID = searchResult.xpath('.//a[contains(@href,"/video")]')[0].get("href").replace('/','_').replace('?','!')
