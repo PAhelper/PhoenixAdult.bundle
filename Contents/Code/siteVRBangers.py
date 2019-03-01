@@ -9,7 +9,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Result Title: " + titleNoFormatting)
     cur = "/video/" + searchTitle.lower().replace(" ","-")
     curID = cur.replace('/','_').replace('?','!')
-    releaseDate = parse(searchResult.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible')[0].text_content().strip()).strftime('%Y-%m-%d')
+    releaseDate = parse(searchResults.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible')[0].text_content().strip()).strftime('%Y-%m-%d')
 
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [VRBangers] " + releaseDate, score = score, lang = lang))
