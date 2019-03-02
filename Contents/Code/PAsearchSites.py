@@ -25,7 +25,7 @@ import networkPerfectGonzo
 import networkPornFidelity
 import networkBadoinkVR
 import siteVRBangers
-import siteSexBabesVR
+import networkHighTechVR
 import siteWankzVR
 import siteMilfVR
 import siteJoymii
@@ -37,8 +37,9 @@ import networkBellaPass
 import siteAllureMedia
 import siteBlackValleyGirls
 import siteSisLovesMe
+import siteManyvids
 
-searchSites = [None] * 568
+searchSites = [None] * 571
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -513,7 +514,7 @@ searchSites[470] = ["BabeVR","BabeVR","https://www.babevr.com","https://babevr.c
 searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrpornvideo/"]
 searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-vr-video/"]
 searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaypornvideo/"]
-searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/video/"]
+searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/?post_type=video&s="]
 searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
@@ -607,6 +608,9 @@ searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallu
 searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qall=" ]
 searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes" ]
 searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://www.sislovesme.com/t2/?single=" ]
+searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/" ]
+searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"] 
+searchSites[570] = ["StasyQ VR","StasyQ VR","https://www.stasyqvr.com","https://stasyqvr.com/virtualreality/scene/id/"] 
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -650,8 +654,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btaw ', 'BigTitsatWork ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('btas ', 'BigTitsatSchool ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('btis ', 'BigTitsinSports', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('plib ', 'PornstarsLikeitBig', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('btis ', 'BigTitsinSports ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('plib ', 'PornstarsLikeitBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('dbm ', 'DontBreakMe', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)

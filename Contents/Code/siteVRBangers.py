@@ -1,39 +1,48 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    url = "https://vrbangers.com/video/" + searchTitle.lower().replace(" ","-")
-    searchResults = HTML.ElementFromURL(url)
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//article'):
+        titleNoFormatting = searchResult.xpath('.//a[@rel="bookmark"]')[0].text_content().strip()
+        detailsPageElements = HTML.ElementFromURL(searchResult.xpath('.//a[@rel="bookmark"]')[0].get('href'))
+        releaseDate = parse(detailsPageElements.xpath('//p[@class="pull-right dates invisible"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        curID = searchResult.xpath('.//a[@rel="bookmark"]')[0].get('href').replace('/','_').replace('?','!')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if len(titleNoFormatting) > 29:
+            titleNoFormatting = titleNoFormatting[:32] + "..."
 
-    # searchResult = searchResults.xpath('//div[@class="video-rating-and-details"]')[0]
-    titleNoFormatting = searchResults.xpath('//div[@class="video-info-title"]//h1[@class="pull-left page-title"]//span')[0].text_content()
-    Log("Result Title: " + titleNoFormatting)
-    cur = "/video/" + searchTitle.lower().replace(" ","-")
-    curID = cur.replace('/','_').replace('?','!')
-    releaseDate = parse(searchResults.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible')[0].text_content().strip()).strftime('%Y-%m-%d')
-
-    score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [VRBangers] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
-
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    Log('temp: ' + temp)
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
-    Log('url: ' + url)
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
+
     # Studio
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
-    Log('Studio: ' + metadata.studio)
+    metadata.studio = "VR Bangers"
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="video-info-title"]//h1[@class="pull-left page-title"]//span')[0].text_content()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="mainContent"]/p')[0].text_content().strip()
 
     # Tagline and Collection
-    tagline = "VRBangers"
+    tagline = "VR Bangers"
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
+    # Release Date
+    date = detailsPageElements.xpath('//p[@class="pull-right dates invisible"]')[0].text_content()
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
@@ -69,17 +78,5 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # backgroundURL = detailsPageElements.xpath('//img[@class="video-image"]')[0].get("src").split('?')
     # metadata.art[backgroundURL[0]] = Proxy.Preview(HTTP.Request(backgroundURL[0], headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-
-    # Date
-    date = detailsPageElements.xpath('//div[@class="col-lg-3 col-md-3 col-sm-12 download-block"]//p[@class="pull-right dates invisible"]')[0].text_content()
-    Log('DateRaw: ' + date)
-    date_object = datetime.strptime(date, '%d %B , %Y')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
-
-    # Title
-    titleOfficial = detailsPageElements.xpath('//div[@class="video-info-title"]//h1[@class="pull-left page-title"]//span')[0].text_content()
-    metadata.title = metadata.studio + " - " + titleOfficial
-    Log('Title: ' + metadata.title)
 
     return metadata

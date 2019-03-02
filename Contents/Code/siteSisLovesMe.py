@@ -24,6 +24,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     art =[]
     Log('******UPDATE CALLED*******')   
     detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/'))
+    Log("urlName: " + detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5])
+    urlName = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5]
 
     # Summary
     metadata.studio = "TeamSkeet"
@@ -43,18 +45,51 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actor in actors:
             actorName = actor
-            actorPhotoURL = PAactors.actorDBfinder(actorName)
+            actorPhotoURL = "http://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/"+urlName+".jpg"
             Log("actorPhoto: " + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
-    background = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster")
     try:
-        metadata.posters[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
+        art.append("http:" + detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster"))
     except:
         pass
-        
+
+    try:
+        art.append("http://cdn1.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/v2.jpg")
+    except:
+        pass
+
+    try:
+        art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_small.jpg")
+    except:
+        pass
+
+    try:
+        art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_small2.jpg")
+    except:
+        pass
+
+    try:
+        art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_big.jpg")
+    except:
+        pass
+
+    try:
+        art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/low.jpg")
+    except:
+        pass
+
+    try:
+        art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/med.jpg")
+    except:
+        pass
+
+    try:
+        art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/hi.jpg")
+    except:
+        pass
+
     #Extra Posters
     import random
     from googlesearch import search
@@ -92,25 +127,22 @@ def update(metadata,siteID,movieGenres,movieActors):
                         
                 if match is 1:
                     # Summary
-                    paragraphs = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"])[not(*[contains(@class, "jp-relatedposts-post")])]')
-                    Log(len(paragraphs))
-                    if len(paragraphs) > 3:
-                        pNum = 1
-                        summary = ""
-                        for paragraph in paragraphs:
-                            if pNum >= 1 and pNum <= 7:
-                                summary = summary + '\n\n' + paragraph.text_content()
-                                Log(summary)
-                            pNum += 1
+                    try:
+                        paragraphs = fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]')[0].text_content().split('\n')
+                        Log(len(paragraphs))
+                        if len(paragraphs) > 13:
+                            summary = ""
+                            for paragraph in paragraphs:
+                                summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
+                            if len(metadata.summary) < len(summary):
+                                metadata.summary = summary.strip()
+                        else:
+                            summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
                         if len(metadata.summary) < len(summary):
-                            metadata.summary = summary.strip()
-                    else:
-                        summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
-                        Log(summary)
-                        Log(len(summary))
-                        Log(len(metadata.summary))
-                        if len(metadata.summary) < len(summary):
-                            metadata.summary = summary.strip()                
+                            metadata.summary = summary.strip()   
+                    except:
+			Log("Error grabbing fansite summary")
+                        pass                    
                      
                 # Various Poster xpaths needed for different sites
                 try:
@@ -131,28 +163,28 @@ def update(metadata,siteID,movieGenres,movieActors):
         art = sample
         Log("Selecting first, last and random 4 images from set")
 
-        j = 1
-											  
-        for posterUrl in art:
-            Log("Trying next Image")
-            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
-                try:
-                    img_file = urllib.urlopen(posterUrl)
-                    im = StringIO(img_file.read())
-                    resized_image = Image.open(im)
-                    width, height = resized_image.size
-                    #Add the image proxy items to the collection
-                    if width > 1 or height > width:
-                        # Item is a poster
-                        metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                    if width > 100 and width > height:
-                        # Item is an art item
-                        metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                    j = j + 1
-                except:
-                    Log("there was an issue")
-                    pass
+    j = 1
+                                          
+    for posterUrl in art:
+        Log("Trying next Image")
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                Log("there was an issue")
+                pass
     
 
 
