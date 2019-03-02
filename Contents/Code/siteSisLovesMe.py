@@ -92,25 +92,22 @@ def update(metadata,siteID,movieGenres,movieActors):
                         
                 if match is 1:
                     # Summary
-                    paragraphs = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"])[not(*[contains(@class, "jp-relatedposts-post")])]')
-                    Log(len(paragraphs))
-                    if len(paragraphs) > 3:
-                        pNum = 1
-                        summary = ""
-                        for paragraph in paragraphs:
-                            if pNum >= 1 and pNum <= 7:
-                                summary = summary + '\n\n' + paragraph.text_content()
-                                Log(summary)
-                            pNum += 1
+                    try:
+                        paragraphs = fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]')[0].text_content().split('\n')
+                        Log(len(paragraphs))
+                        if len(paragraphs) > 13
+                            summary = ""
+                            for paragraph in paragraphs:
+                                summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
+                            if len(metadata.summary) < len(summary):
+                                metadata.summary = summary.strip()
+                        else:
+                            summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
                         if len(metadata.summary) < len(summary):
-                            metadata.summary = summary.strip()
-                    else:
-                        summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
-                        Log(summary)
-                        Log(len(summary))
-                        Log(len(metadata.summary))
-                        if len(metadata.summary) < len(summary):
-                            metadata.summary = summary.strip()                
+                            metadata.summary = summary.strip()   
+                    except:
+			Log("Error grabbing fansite summary")
+                        pass                    
                      
                 # Various Poster xpaths needed for different sites
                 try:
