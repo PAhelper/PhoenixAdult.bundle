@@ -563,7 +563,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 475:
                 if searchSiteID == 9999 or searchSiteID == 475:
-                    results = PAsearchSites.siteSexBabesVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkHighTechVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## SinsVR
+            ###############
+            if siteNum == 569:
+                if searchSiteID == 9999 or searchSiteID == 569:
+                    results = PAsearchSites.networkHighTechVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## StasyQ VR
+            ###############
+            if siteNum == 570:
+                if searchSiteID == 9999 or searchSiteID == 570:
+                    results = PAsearchSites.networkHighTechVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## WankzVR
@@ -914,7 +928,23 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 475:
-            metadata = PAsearchSites.siteSexBabesVR.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.networkHighTechVR.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  SinsVR                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 569:
+            metadata = PAsearchSites.networkHighTechVR.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  StasyQ VR                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 570:
+            metadata = PAsearchSites.networkHighTechVR.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##

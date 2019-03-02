@@ -25,7 +25,7 @@ import networkPerfectGonzo
 import networkPornFidelity
 import networkBadoinkVR
 import siteVRBangers
-import siteSexBabesVR
+import networkHighTechVR
 import siteWankzVR
 import siteMilfVR
 import siteJoymii
@@ -39,7 +39,7 @@ import siteBlackValleyGirls
 import siteSisLovesMe
 import siteManyvids
 
-searchSites = [None] * 569
+searchSites = [None] * 571
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -609,6 +609,8 @@ searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.
 searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes" ]
 searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://www.sislovesme.com/t2/?single=" ]
 searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/" ]
+searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"] 
+searchSites[570] = ["StasyQ VR","StasyQ VR","https://www.stasyqvr.com","https://stasyqvr.com/virtualreality/scene/id/"] 
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
