@@ -90,6 +90,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
 
 ## Change Log/Updates
+- 2019-03-02 11:00AM EST - Added Manyvids (by id)
 - 2019-03-02 3:30PM AEST - Added Sis Loves Me (a TeemSkeet site) functional but can be refined.
 - 2019-03-01 7:30AM CST - Bugfix for VRBangers
 - 2019-02-28 4:30PM CST - Added BlackValleyGirls (a TeamSkeet site) and multiple bugfixes
@@ -754,3 +755,4 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - BellaHD
 #### - Amateur Allure
 #### - Swallow Salon
+#### - Manyvids (Manyvids - id)
