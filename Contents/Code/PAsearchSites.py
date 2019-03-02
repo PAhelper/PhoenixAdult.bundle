@@ -514,7 +514,7 @@ searchSites[470] = ["BabeVR","BabeVR","https://www.babevr.com","https://babevr.c
 searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrpornvideo/"]
 searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-vr-video/"]
 searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaypornvideo/"]
-searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/video/"]
+searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/?post_type=video&s="]
 searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
