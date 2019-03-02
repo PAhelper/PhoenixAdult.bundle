@@ -36,8 +36,9 @@ import networkNubiles
 import networkBellaPass
 import siteAllureMedia
 import siteBlackValleyGirls
+import siteSisLovesMe
 
-searchSites = [None] * 567
+searchSites = [None] * 568
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -605,6 +606,7 @@ searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://b
 searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallure.com","https://www.amateurallure.com/tour/search.php?st=advanced&cat%5B%5D=5&qall=" ]
 searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qall=" ]
 searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes" ]
+searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://www.sislovesme.com/t2/?single=" ]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
