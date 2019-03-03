@@ -39,7 +39,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         if siteName.lower() == "Cum4K".lower():
         
             summaryurl = "https://cum4k.tube/" + temp
-            Log(summaryurl)
+ 
             summaryPageElements = HTML.ElementFromURL(summaryurl)
             metadata.summary = summaryPageElements.xpath('//p[@class="more"]/text()')[0].strip()
     except:
