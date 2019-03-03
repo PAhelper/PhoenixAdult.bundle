@@ -33,6 +33,18 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
+    
+    # Summary
+    try:
+        if siteName.lower() == "Cum4K".lower():
+        
+            summaryurl = "https://cum4k.tube/" + temp
+            Log(summaryurl)
+            summaryPageElements = HTML.ElementFromURL(summaryurl)
+            metadata.summary = summaryPageElements.xpath('//p[@class="more"]/text()')[0].strip()
+    except:
+        Log("Did not pull cum4k.tube summary")
+        pass
 
     # Actors
     movieActors.clearActors()
