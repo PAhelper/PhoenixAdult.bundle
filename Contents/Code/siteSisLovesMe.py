@@ -108,6 +108,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                     nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"]')[0].text_content()
                     Log("Actress name in header: " + nameinheader)
                 except:
+                    Log("No Actress found in the fansite header")
                     pass
                     
                 if actorName.lower() in nameinheader.lower():
@@ -122,7 +123,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                                     Log(siteName + " Fansite Match Found")
                                     match = 1
                     except:
-                        Log("no good")
+                        Log("No Match")
                         pass
                         
                 if match is 1:
@@ -141,21 +142,21 @@ def update(metadata,siteID,movieGenres,movieActors):
                         if len(metadata.summary) < len(summary):
                             metadata.summary = summary.strip()   
                     except:
-			Log("Error grabbing fansite summary")
+                        Log("Error grabbing fansite summary")
                         pass                    
                      
-                # Various Poster xpaths needed for different sites
-                try:
-                    Log("Searching Fan site")
-                    for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
-                        art.append(posterURL.get('data-orig-file'))
-                except:
-                    pass
+                    # Posters
+                    try:
+                        Log("Searching Fan site")
+                        for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
+                            art.append(posterURL.get('data-orig-file'))
+                    except:
+                        Log("No fansite images found")
+                        pass
             except:
-                Log("No Actress found in the site header")
                 pass
     
-    if match is 1:
+    if match is 1 and len(art) >= 10:
         Log("Artwork found: " + str(len(art)))
         # Return, first, last and randóm selection of images
         # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
