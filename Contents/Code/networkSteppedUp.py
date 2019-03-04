@@ -15,7 +15,13 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
             searchTitle+=temp[s].lower()
             caps=True
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle)
-    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="info-wrap"]'))))
+    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower())
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
     for searchResult in searchResults.xpath('//div[@class="info-wrap"]'):
         titleNoFormatting = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
@@ -43,6 +49,12 @@ def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByD
             caps=True
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle)
     Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower())
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
     for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
         titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
