@@ -754,6 +754,15 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - JoePerv
   - HD19
   - BellaHD
-#### - Amateur Allure
-#### - Swallow Salon
+#### - Amateur Allure *Title Search *Actor Search
+#### - Swallow Salon *Title Search *Actor Search
 #### - Manyvids (Manyvids - id)
+#### - Spizoo *Title Search *Actor Search
+  - FirstClassPOV
+  - IntimateLesbians
+  - TheStripperExperience
+  - PornGoesPro
+  - JessicaJaymesXXX
+  - PornstarTease
+  - RawAttack
+#### - DigitalPlayground *Title Search *Actor Search

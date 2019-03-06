@@ -39,7 +39,7 @@ import siteBlackValleyGirls
 import siteSisLovesMe
 import siteManyvids
 
-searchSites = [None] * 571
+searchSites = [None] * 578
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -611,6 +611,13 @@ searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com"
 searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/" ]
 searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"] 
 searchSites[570] = ["StasyQ VR","StasyQ VR","https://www.stasyqvr.com","https://stasyqvr.com/virtualreality/scene/id/"]
+searchSites[571] = ["First Class POV","First Class POV","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[572] = ["Intimate Lesbians","Intimate Lesbians","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[573] = ["The Stripper Experience","The Stripper Experience","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
