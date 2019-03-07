@@ -212,18 +212,22 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
+
+    Log("Initial try for actors")
     actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]//a | //div[@class="sceneCol sceneActors"]//a | //div[@class="pornstarNameBox"]/a[@class="pornstarName"] | //div[@id="slick_DVDInfoActorCarousel"]//a | //div[@id="slick_sceneInfoPlayerActorCarousel"]//a')
     if metadata.title == 'Kennedy Leigh' and metadata.tagline == 'Only Teen Blowjobs':
         movieActors.addActor('Kennedy Leigh','https://imgs1cdn.adultempire.com/actors/649607h.jpg')
 
+    Log("actors found: " + str(len(actors)))
     if len(actors) == 0: # Try pulling the mobile site
         try:
+            Log("Trying mobile site for actors")
             HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19'
             mobilePageElements = HTML.ElementFromURL(url.replace('www','m'))
             actors = mobilePageElements.xpath('//a[@class="pornstarName"]')
             HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
-        except:
-            pass
+        except Exception as e:
+            Log("Error: " + str(e))
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
@@ -232,6 +236,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"] | //span[@class="removeAvatarParent"]/img')[0].get("src").replace("https:","http:")
             movieActors.addActor(actorName,actorPhotoURL)
     else:
+        Log("Still no actors, trying to pull from Javascript")
         try:
             dataLayer = detailsPageElements.xpath('//script[contains(text(),"dataLayer")]')[0].text_content()
             alpha = dataLayer.find('"sceneActors"')+14

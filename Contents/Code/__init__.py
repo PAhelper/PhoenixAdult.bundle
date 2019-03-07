@@ -450,7 +450,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Spizoo
             ###############
             if siteNum == 293:
-                if searchSiteID == 9999 or searchSiteID == 293:
+                if searchSiteID == 9999 or searchSiteID == 293 or (searchSiteID >= 571 and searchSiteID <= 577):
                     results = PAsearchSites.siteSpizoo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -831,7 +831,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Spizoo                                                 ##
         ##                                                          ##
         ##############################################################
-        if siteID == 293:
+        if siteID == 293 or (siteID >= 571 and siteID <= 577):
             metadata = PAsearchSites.siteSpizoo.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

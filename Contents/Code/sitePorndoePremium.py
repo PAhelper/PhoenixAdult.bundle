@@ -12,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = curID.replace('/','+')
 
         score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "/"+subSite+"]"
+        titleNoFormatting = titleNoFormatting + " [LetsDoeIt/"+subSite+"]"
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
 
     return results

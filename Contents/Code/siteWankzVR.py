@@ -24,40 +24,25 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 def update(metadata,siteID,movieGenres,movieActors):
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    Log("scene url: " + url)
     detailsPageElements = HTML.ElementFromURL(url)
 
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="contentContainer"]//h2')[0].text_content()
+
     # Studio/Tagline/Collection
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
+    metadata.studio = "WankzVR"
     metadata.tagline = metadata.studio
     metadata.collections.clear()
     metadata.collections.add(metadata.studio)
 
-    # Date
-    date = detailsPageElements.xpath('//div[@class="date"]')[0].text_content()
-    Log('date: ' + date)
-    date_object = datetime.strptime(date.strip(), '%d %B, %Y')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
-
-    # Summary
+    # Summary 
     metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
 
-    # Posters/Background
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
-    posters = detailsPageElements.xpath('//a//img[@class="swiper-lazy"]')
-    background = posters[0].get("src")
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-
-# unneccesary binocular pictures
-    # for posterCur in posters:
-    #     posterURL = posterCur.get("data-src")
-    #     if posterURL is not None:
-    #         metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-    #         posterNum = posterNum + 1
+    # Date
+    date = detailsPageElements.xpath('//div[@class="date"]')[0].text_content().strip()
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
     # Actors / possible posters
     movieActors.clearActors()
@@ -83,10 +68,34 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genre in genres:
             movieGenres.addGenre(genre.text_content())
 
-    # TITLE
+    # Posters and artwork
+    art = []
 
-    title = detailsPageElements.xpath('//div[@class="contentContainer"]//h2')[0].text_content()
-    metadata.title = metadata.studio + " - " + title
+    # Background
+    try:
+        art.append(detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content').replace('medium.jpg','large.jpg'))
+    except:
+        pass
 
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
 
     return metadata
