@@ -39,7 +39,7 @@ import siteBlackValleyGirls
 import siteSisLovesMe
 import siteManyvids
 
-searchSites = [None] * 578
+searchSites = [None] * 579
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -618,6 +618,7 @@ searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","ht
 searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
