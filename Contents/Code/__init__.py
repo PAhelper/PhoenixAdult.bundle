@@ -582,9 +582,16 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## WankzVR
             ###############
-            if siteNum == 476 or siteNum == 477:
-                if searchSiteID == 9999 or searchSiteID == 476 or searchSiteID == 477:
+            if siteNum == 476:
+                if searchSiteID == 9999 or searchSiteID == 476:
                     results = PAsearchSites.siteWankzVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## MilfVR
+            ###############
+            if siteNum == 477:
+                if searchSiteID == 9999 or searchSiteID == 477:
+                    results = PAsearchSites.siteMilfVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Joymii
@@ -958,8 +965,16 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  WankzVR                                                 ##
         ##                                                          ##
         ##############################################################
-        if siteID == 476 or siteID == 477:
+        if siteID == 476:
             metadata = PAsearchSites.siteWankzVR.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MilfVR                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 477:
+            metadata = PAsearchSites.siteMilfVR.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
