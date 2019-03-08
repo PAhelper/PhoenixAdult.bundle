@@ -642,6 +642,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 568:
                     results = PAsearchSites.siteManyvids.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## VirtualTaboo
+            ###############
+            if siteNum == 292:
+                if searchSiteID == 9999 or searchSiteID == 292:
+                    results = PAsearchSites.siteVirtualTaboo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## VirtualRealPorn
+            ###############
+            if siteNum == 342:
+                if searchSiteID == 9999 or searchSiteID == 342:
+                    results = PAsearchSites.siteVirtualReal.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1009,6 +1023,24 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 568:
             metadata = PAsearchSites.siteSisLovesMe.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VirtualTaboo                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 292:
+            metadata = PAsearchSites.siteVirtualTaboo.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VirtualRealPorn                                         ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 342:
+            metadata = PAsearchSites.siteVirtualReal.update(metadata,siteID,movieGenres,movieActors)
+
+
 
         ##############################################################
         ## Cleanup Genres and Add

@@ -38,6 +38,8 @@ import siteAllureMedia
 import siteBlackValleyGirls
 import siteSisLovesMe
 import siteManyvids
+import siteVirtualReal
+import siteVirtualTaboo
 
 searchSites = [None] * 578
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
@@ -332,7 +334,7 @@ searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.t
 searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/search?q="]
 searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/search?q="]
 searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/search?q="]
-searchSites[292] = ["Replaced","Replaced","http://lubed.com","http://lubed.com/video/"]
+searchSites[292] = ["VirtualTaboo","VirtualTaboo","https://virtualtaboo.com","https://virtualtaboo.com/search?q="]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[295] = ["Anal Introductions","Anal Introductions","https://www.private.com","https://www.private.com/search.php?query="]
@@ -382,7 +384,7 @@ searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","h
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[342] = ["FILL THIS IN","FILL THIS IN","https://FILL THIS IN.com","https://FILL THIS IN.com/search?term="]
+searchSites[342] = ["VirtualRealPorn","VirtualRealPorn","https://virtualrealporn.com/","https://virtualrealporn.com/vr-porn-video/"]
 searchSites[343] = ["Analized","Analized","https://www.analized.com","https://analized.com/search.php?query="]
 searchSites[344] = ["James Deen","James Deen","https://www.jamesdeen.com","https://jamesdeen.com/search.php?query="]
 searchSites[345] = ["Twisted Visual","Twisted Visual","https://www.twistedvisual.com","https://twistedvisual.com/search.php?query="]
