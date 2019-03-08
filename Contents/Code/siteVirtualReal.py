@@ -5,7 +5,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-")
     searchPage = HTML.ElementFromURL(url)
 
-    titleNoFormatting = searchPage.xpath('//h1')[0].text_content().strip("VR Porn video").strip()
+    titleNoFormatting = searchPage.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
     Log("Result Title: " + titleNoFormatting)
     curID = searchTitle.lower().replace(" ","-")
     Log("ID: " + curID)
@@ -14,7 +14,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for actor in resultActors:
         actorList.append(actor.get("alt"))
     actors = ", ".join(actorList)
-    # lowerResultTitle = titleNoFormatting.lower()
 
     titleNoFormatting = actors + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "]"
     score = 100
@@ -75,7 +74,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip(" VR Porn video")
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
     Log('Title: ' + metadata.title)
 
     return metadata
