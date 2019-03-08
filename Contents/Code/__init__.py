@@ -582,8 +582,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## WankzVR
             ###############
-            if siteNum == 476 or siteNum == 477 or siteNum == 578:
-                if searchSiteID == 9999 or searchSiteID == 476 or searchSiteID == 477 or searchSiteID == 578:
+            if siteNum == 476 or siteNum == 477:
+                if searchSiteID == 9999 or searchSiteID == 476 or searchSiteID == 477:
                     results = PAsearchSites.siteWankzVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -634,7 +634,7 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 567:
                 if searchSiteID == 9999 or searchSiteID == 567:
                     results = PAsearchSites.siteSisLovesMe.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
-            
+
             ###############
             ## Manyvids
             ###############
@@ -944,7 +944,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  WankzVR                                                 ##
         ##                                                          ##
         ##############################################################
-        if siteID == 476 or siteID == 477 or siteID == 578:
+        if siteID == 476 or siteID == 477:
             metadata = PAsearchSites.siteWankzVR.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -993,7 +993,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 566:
             metadata = PAsearchSites.siteBlackValleyGirls.update(metadata,siteID,movieGenres,movieActors)
-        
+
         ##############################################################
         ##                                                          ##
         ##  SisLovesMe                                              ##
@@ -1009,7 +1009,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 568:
             metadata = PAsearchSites.siteSisLovesMe.update(metadata,siteID,movieGenres,movieActors)
-            
+
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")

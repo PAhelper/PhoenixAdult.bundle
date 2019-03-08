@@ -39,7 +39,7 @@ import siteBlackValleyGirls
 import siteSisLovesMe
 import siteManyvids
 
-searchSites = [None] * 579
+searchSites = [None] * 578
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -609,7 +609,7 @@ searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.
 searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes" ]
 searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://www.sislovesme.com/t2/?single=" ]
 searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/" ]
-searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"] 
+searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"]
 searchSites[570] = ["StasyQ VR","StasyQ VR","https://www.stasyqvr.com","https://stasyqvr.com/virtualreality/scene/id/"]
 searchSites[571] = ["First Class POV","First Class POV","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[572] = ["Intimate Lesbians","Intimate Lesbians","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
@@ -618,7 +618,7 @@ searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","ht
 searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
-searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
+# searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -638,7 +638,7 @@ def getSearchSiteIDByFilter(searchFilter):
         except:
             pass
         searchID += 1
-    
+
     searchID = 0
     for sites in searchSites:
         # Might try converting this code to use startswith() to avoid problems with overlapping site names:
@@ -646,7 +646,7 @@ def getSearchSiteIDByFilter(searchFilter):
         # Examples:
         #  Blacked -> BlackedRaw
         #  Babes -> FootsieBabes
-        #  PassionHD Love Ties -> HD Love       
+        #  PassionHD Love Ties -> HD Love
         if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
             return searchID
         searchID += 1
@@ -682,7 +682,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('fms ', 'FantasyMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
-    
+
     # Search Site ID of 9999 is all
     searchSiteID = None
     # Date/Actor or Title
