@@ -1022,7 +1022,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 568:
-            metadata = PAsearchSites.siteSisLovesMe.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.siteManyvids.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
