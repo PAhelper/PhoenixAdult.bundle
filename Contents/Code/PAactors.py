@@ -35,7 +35,7 @@ class PhoenixActors:
                 newActor = "Nathaly Cherie"
             if newActor == "Alex D":
                 newActor = "Alex D."
-            if "Crissy Kay" == newActor or "Emma Hicks" == newActor:
+            if "Crissy Kay" == newActor or "Emma Hicks" == newActor or "Emma Hixx" == newActor:
                 newActor = "Emma Hix"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
@@ -62,6 +62,57 @@ class PhoenixActors:
                     newActor == "Denisa Heaven"
                 if newActor == "Abigail":
                     newActor = "Abigaile Johnson"
+			if metadata.studio == "NubilesNet":
+                if "Lilian" in newActor:
+                    newActor == "Lillian Lee"
+                if "Kimmie" in newActor:
+                    newActor == "Kimmie Cream"
+                if "Kimberly" in newActor:
+                    newActor == "Kimberly Allure"
+                if "Eriko" in newActor:
+                    newActor == "Nikko Jordan"
+                if "Sandra" in newActor:
+                    newActor == "Sandra Shine"
+                if "Sarah" in newActor:
+                    newActor == "Sarah Blake"
+                if "Ginnah" in newActor:
+                    newActor == "Lucie"
+                if "Tereza" in newActor:
+                    newActor == "Tereza Ilova"
+                if "Janelle" in newActor:
+                    newActor == "Karlie Montana"
+                if "Christine" in newActor:
+                    newActor == "Christie Lee"
+                if "Diana" in newActor:
+                    newActor == "Belicia"
+                if "Layna" in newActor:
+                    newActor == "Brigitte Hunter"
+				if "Nicole" in newActor:
+                    newActor == "Nikita G."
+				if "Andrea" in newActor:
+                    newActor == "Jenny Sanders"
+				if "Britney" in newActor:
+                    newActor == "Liz Honey"
+				if "Jenny" in newActor:
+                    newActor == "Jenni Lee"
+				if "Zeina" in newActor:
+                    newActor == "Zeina Heart"
+				if "Leah" in newActor:
+                    newActor == "Leah Luv"
+				if "Courtney" in newActor:
+                    newActor == "Courtney Cummz"
+				if "Celeste" in newActor:
+                    newActor == "Celeste Star"
+				if "Valerie" in newActor:
+                    newActor == "Valerie Herrera"
+				if "Smokie" in newActor:
+                    newActor == "Smokie Flame"
+				if "Charlie" in newActor:
+                    newActor == "Charlie Laine"
+				if "Dana" in newActor:
+                    newActor == "Monica Sweet"
+				if "Rachel" in newActor:
+                    newActor == "Yasmine Gold"
 
             if not skip:
                 if newPhoto == '':
