@@ -62,7 +62,7 @@ class PhoenixActors:
                     newActor == "Denisa Heaven"
                 if newActor == "Abigail":
                     newActor = "Abigaile Johnson"
-			if metadata.studio == "NubilesNet":
+			if metadata.studio == "Nubiles":
                 if "Lilian" in newActor:
                     newActor == "Lillian Lee"
                 if "Kimmie" in newActor:
@@ -87,32 +87,54 @@ class PhoenixActors:
                     newActor == "Belicia"
                 if "Layna" in newActor:
                     newActor == "Brigitte Hunter"
-				if "Nicole" in newActor:
+                if "Nicole" in newActor:
                     newActor == "Nikita G."
-				if "Andrea" in newActor:
+                if "Andrea" in newActor:
                     newActor == "Jenny Sanders"
-				if "Britney" in newActor:
+                if "Britney" in newActor:
                     newActor == "Liz Honey"
-				if "Jenny" in newActor:
+                if "Jenny" in newActor:
                     newActor == "Jenni Lee"
-				if "Zeina" in newActor:
+                if "Zeina" in newActor:
                     newActor == "Zeina Heart"
-				if "Leah" in newActor:
+                if "Leah" in newActor:
                     newActor == "Leah Luv"
-				if "Courtney" in newActor:
+                if "Courtney" in newActor:
                     newActor == "Courtney Cummz"
-				if "Celeste" in newActor:
+                if "Celeste" in newActor:
                     newActor == "Celeste Star"
-				if "Valerie" in newActor:
+                if "Valerie" in newActor:
                     newActor == "Valerie Herrera"
-				if "Smokie" in newActor:
+                if "Smokie" in newActor:
                     newActor == "Smokie Flame"
-				if "Charlie" in newActor:
+                if "Charlie" in newActor:
                     newActor == "Charlie Laine"
-				if "Dana" in newActor:
+                if "Dana" in newActor:
                     newActor == "Monica Sweet"
-				if "Rachel" in newActor:
+                if "Rachel" in newActor:
                     newActor == "Yasmine Gold"
+                if "Jane" in newActor:
+                    newActor == "Mellie Williams"
+                if "Sheridan" in newActor:
+                    newActor == "Jana Sheridan"
+                if "Ariel" in newActor:
+                    newActor == "Ariel Rebel"
+                if "Judith" in newActor:
+                    newActor == "Judith Fox"
+                if "Amy" in newActor:
+                    newActor == "Amy Reid"
+                if "Amber" in newActor:
+                    newActor == "Roxy Carter"
+                if "Crystal" in newActor:
+                    newActor == "Nesty"
+                if "Dina" in newActor:
+                    newActor == "Dana Sinnz"
+                if "Eve" in newActor:
+                    newActor == "Eve Angel"
+                if "Carrie" in newActor:
+                    newActor == "Sandra Kalermen"
+                if "Kelly" in newActor:
+                    newActor == "Adrienn Levai"
 
             if not skip:
                 if newPhoto == '':
