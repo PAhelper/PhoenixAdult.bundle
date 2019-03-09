@@ -663,6 +663,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 342:
                     results = PAsearchSites.siteVirtualReal.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## CzechVR Network
+            ###############
+            if siteNum == 578:
+                if searchSiteID == 9999 or (searchSiteID >= 578 and searchSiteID <= 580):
+                    results = PAsearchSites.networkCzechVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1055,6 +1062,13 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 342:
             metadata = PAsearchSites.siteVirtualReal.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  CzechVR Network                                         ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 578 and siteID <= 580):
+            metadata = PAsearchSites.networkCzechVR.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

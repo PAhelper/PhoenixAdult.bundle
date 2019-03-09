@@ -40,8 +40,9 @@ import siteSisLovesMe
 import siteManyvids
 import siteVirtualReal
 import siteVirtualTaboo
+import networkCzechVR
 
-searchSites = [None] * 578
+searchSites = [None] * 581
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -620,6 +621,9 @@ searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","ht
 searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[578] = ["CzechVR","CzechVR","https://www.czechvr.com","https://www.czechvr.com/model-"]
+searchSites[579] = ["CzechVR Fetish","CzechVR Fetish","https://www.czechvrfetish.com","https://www.czechvrfetish.com/model-"]
+searchSites[580] = ["CzechVR Casting","CzechVR Casting","https://www.czechvrcasting.com","https://www.czechvrcasting.com/model-"]
 # searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
 
 def getSearchBaseURL(siteID):
