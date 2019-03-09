@@ -93,14 +93,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Brazzers
             ###############
             if siteNum == 2:
-                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81):
+                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81) or searchSiteID == 582:
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468:
+                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581:
                     results = PAsearchSites.siteNaughtyAmerica.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -394,7 +394,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mofos
             ###############
             if siteNum == 261:
-                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270):
+                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270) or searchSiteID == 583:
                     results = PAsearchSites.siteMofos.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -707,7 +707,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Brazzers                                               ##
         ##                                                          ##
         ##############################################################
-        if siteID == 2 or (siteID >= 54 and siteID <= 81):
+        if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582:
             metadata = PAsearchSites.siteBrazzers.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -723,7 +723,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -804,7 +804,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Mofos                                                  ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 261 and siteID <= 270:
+        if siteID >= 261 and siteID <= 270 or siteID == 583:
             metadata = PAsearchSites.siteMofos.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
