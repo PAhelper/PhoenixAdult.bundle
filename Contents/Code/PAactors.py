@@ -62,7 +62,7 @@ class PhoenixActors:
                     newActor == "Denisa Heaven"
                 if newActor == "Abigail":
                     newActor = "Abigaile Johnson"
-			if metadata.studio == "Nubiles":
+            if metadata.studio == "Nubiles":
                 if "Lilian" in newActor:
                     newActor == "Lillian Lee"
                 if "Kimmie" in newActor:
@@ -135,6 +135,22 @@ class PhoenixActors:
                     newActor == "Sandra Kalermen"
                 if "Kelly" in newActor:
                     newActor == "Adrienn Levai"
+                if "Lauren" in newActor:
+                    newActor == "Afrodite Night"
+                if "Gabina" in newActor:
+                    newActor == "Piper Fawn"
+                if "Lucy" in newActor:
+                    newActor == "Lucy Ive"
+                if "Nancy" in newActor:
+                    newActor == "Nancy Bell"
+                if "Lora" in newActor:
+                    newActor == "Lora Craft"
+                if "Mili" in newActor:
+                    newActor == "Mili Jay"
+                if "Charlotte" in newActor:
+                    newActor == "Charlotte Stokely"
+                if "Katerin" in newActor or "Kathleen" in newActor:
+                    newActor == "Lis"
 
             if not skip:
                 if newPhoto == '':
