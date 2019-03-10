@@ -1,13 +1,12 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    searchString = encodedTitle.replace(" ","+")
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
+    searchString = searchTitle.replace(" ","+")
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
     for searchResult in searchResults.xpath('//section[@class="compact wrap"]//article'):
         titleNoFormatting = searchResult.xpath('.//a//h3')[0].get("title")
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
-        # curID = curID[:-26]
         curID = curID.replace('/','_').replace('?','!')
         Log("curID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
@@ -30,12 +29,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="contentContainer"]//h2')[0].text_content()
 
     # Studio/Tagline/Collection
-    metadata.studio = "WankzVR"
+    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = metadata.studio
     metadata.collections.clear()
     metadata.collections.add(metadata.studio)
 
-    # Summary 
+    # Summary
     metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
 
     # Date
@@ -80,7 +79,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

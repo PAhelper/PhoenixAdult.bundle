@@ -33,6 +33,8 @@ class PhoenixActors:
                 newActor = "Krystal Boyd"
             if "Nathaly" == newActor or "Nathalie Cherie" == newActor:
                 newActor = "Nathaly Cherie"
+            if "Katarina" == newActor:
+                newActor = "Katerina Hartlova"
             if newActor == "Alex D":
                 newActor = "Alex D."
             if "Crissy Kay" == newActor or "Emma Hicks" == newActor or "Emma Hixx" == newActor:
@@ -164,7 +166,7 @@ class PhoenixActors:
 
 # https://www.indexxx.com/models/59558/anjelica-1/
 
-# For sites without a proper actor profile picture, this method looks in external databases based on actorName            
+# For sites without a proper actor profile picture, this method looks in external databases based on actorName
 def actorDBfinder(actorName):
     try:
         databaseName = "AdultDVDEmpire"
