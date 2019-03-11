@@ -140,7 +140,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                     paragraph = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
                 except:
                     paragraph = ''
-    metadata.summary = paragraph.strip()
+    metadata.summary = paragraph.replace('</br>','\n').replace('<br>','\n').strip()
     metadata.collections.clear()
 
     # Tagline
@@ -224,7 +224,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("Trying mobile site for actors")
             HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19'
             mobilePageElements = HTML.ElementFromURL(url.replace('www','m'))
-            actors = mobilePageElements.xpath('//a[@class="pornstarName"]')
+            actors = mobilePageElements.xpath('//a[@class="pornstarName"] | //a[@class="pornstarImageLink"]')
             HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
         except Exception as e:
             Log("Error: " + str(e))
