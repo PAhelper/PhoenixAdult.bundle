@@ -42,7 +42,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
                 results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
 
-# From when site had search functionality, don't want to delete it if it comes back
+# From when site had search functionality
     # searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     # for searchResult in searchResults.xpath('//h4//a'):
     #     Log(str(searchResult.get('href')))
@@ -54,7 +54,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
     metadata.studio = 'New Sensations'
     # Scene(details) page
     detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('tour/ns','tour_ns'))
@@ -94,6 +93,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     # DVD Cover as first poster
     posterNum = 1
     dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
+    if dvdPosterURL == None:
+        Log('dvdPosterURL src not found, trying data-src')
+        dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
+    else:
+        Log('dvdPosterURL src found')
     metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
     Log("added dvd poster: " + dvdPosterURL)
     posterNum += 1
@@ -104,12 +108,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         # background on details page is first
         background = detailsPageElements.xpath('//span[@id="trailer_thumb"]//img')[0].get('src')
-        Log("BG DL: " + background)
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
-        bgNum += 1
-        # also possible poster
-        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        posterNum +=1
+        if background != None:
+            Log("BG DL: " + background)
+            metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
+            bgNum += 1
+            # also possible poster
+            metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+            posterNum +=1
+        else:
+            Log("BG not found")
     except:
         pass
 
@@ -119,7 +126,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
-            Log("Genre Found: "+genreName)
             movieGenres.addGenre(genreName)
 
     # Actors
@@ -132,14 +138,27 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
+            if actorPhotoURL == None:
+                Log('actorPhotoURL src not found, trying data-src')
+                actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("data-src")
+                Log('actorPhotoURL data-src: ' + actorPhotoURL)
+            else:
+                Log('actorPhotoURL src: ' + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
-            # add actress image as possible poster
-            if actors < 3:
+            # add actor image as possible poster
+            if len(actors) < 3:
+                Log("actor image to poster option")
                 metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
                 posterNum += 1
     # DVD page only place with more thumbs
     for dvdThumb in dvdPageElements.xpath('//div[@class="dvdScenePic"]//img'):
         dvdThumbURL = dvdThumb.get("src")
+        if dvdThumbURL == None:
+            Log("dvdThumbURL src not found, trying data-src")
+            dvdThumbURL = dvdThumb.get("data-src")
+            Log('dvdThumbURL data-src: ' + dvdThumbURL)
+        else:
+            Log("dvdThumbURL src: " + dvdThumbURL)
         metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
         Log("added dvd scene background: " + dvdThumbURL)
         bgNum += 1
