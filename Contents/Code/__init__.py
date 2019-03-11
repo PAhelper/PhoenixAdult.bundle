@@ -93,14 +93,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Brazzers
             ###############
             if siteNum == 2:
-                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81):
+                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81) or searchSiteID == 582:
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468:
+                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581:
                     results = PAsearchSites.siteNaughtyAmerica.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -394,7 +394,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mofos
             ###############
             if siteNum == 261:
-                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270):
+                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270) or searchSiteID == 583:
                     results = PAsearchSites.siteMofos.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -641,13 +641,34 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 567:
                 if searchSiteID == 9999 or searchSiteID == 567:
                     results = PAsearchSites.siteSisLovesMe.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
-            
+
             ###############
             ## Manyvids
             ###############
             if siteNum == 568:
                 if searchSiteID == 9999 or searchSiteID == 568:
                     results = PAsearchSites.siteManyvids.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## VirtualTaboo
+            ###############
+            if siteNum == 292:
+                if searchSiteID == 9999 or searchSiteID == 292:
+                    results = PAsearchSites.siteVirtualTaboo.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## VirtualRealPorn
+            ###############
+            if siteNum == 342:
+                if searchSiteID == 9999 or searchSiteID == 342:
+                    results = PAsearchSites.siteVirtualReal.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## CzechVR Network
+            ###############
+            if siteNum == 578:
+                if searchSiteID == 9999 or (searchSiteID >= 578 and searchSiteID <= 580):
+                    results = PAsearchSites.networkCzechVR.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -686,7 +707,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Brazzers                                               ##
         ##                                                          ##
         ##############################################################
-        if siteID == 2 or (siteID >= 54 and siteID <= 81):
+        if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582:
             metadata = PAsearchSites.siteBrazzers.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -702,7 +723,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -783,7 +804,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Mofos                                                  ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 261 and siteID <= 270:
+        if siteID >= 261 and siteID <= 270 or siteID == 583:
             metadata = PAsearchSites.siteMofos.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1008,7 +1029,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 566:
             metadata = PAsearchSites.siteBlackValleyGirls.update(metadata,siteID,movieGenres,movieActors)
-        
+
         ##############################################################
         ##                                                          ##
         ##  SisLovesMe                                              ##
@@ -1023,8 +1044,33 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 568:
-            metadata = PAsearchSites.siteSisLovesMe.update(metadata,siteID,movieGenres,movieActors)
-            
+            metadata = PAsearchSites.siteManyvids.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VirtualTaboo                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 292:
+            metadata = PAsearchSites.siteVirtualTaboo.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VirtualRealPorn                                         ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 342:
+            metadata = PAsearchSites.siteVirtualReal.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  CzechVR Network                                         ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 578 and siteID <= 580):
+            metadata = PAsearchSites.networkCzechVR.update(metadata,siteID,movieGenres,movieActors)
+
+
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")

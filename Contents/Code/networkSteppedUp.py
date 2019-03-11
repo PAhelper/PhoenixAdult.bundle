@@ -4,17 +4,7 @@ import PAgenres
 def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    temp = searchTitle.split(' ')[0]
-    caps=True
-    searchTitle=''
-    for s in range(len(temp)):
-        if caps:
-            searchTitle+=temp[s].upper()
-            caps=False
-        else:
-            searchTitle+=temp[s].lower()
-            caps=True
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
     if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
@@ -37,17 +27,7 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
 def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    temp = searchTitle.split(' ')[0]
-    caps=True
-    searchTitle=''
-    for s in range(len(temp)):
-        if caps:
-            searchTitle+=temp[s].upper()
-            caps=False
-        else:
-            searchTitle+=temp[s].lower()
-            caps=True
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
     if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
@@ -70,8 +50,7 @@ def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByD
 def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchTitle = searchTitle.split(' ')[0].lower()
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-card-info"]'))))
     for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
         titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()

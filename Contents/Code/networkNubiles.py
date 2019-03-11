@@ -43,7 +43,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     art = []
 
     # Title
-    metadata.title = detailsPageElements.xpath('//span[contains(@class,"wp-title")]')[0].text_content().strip()
+    title = detailsPageElements.xpath('//span[contains(@class,"wp-title")]')[0].text_content().strip()
+    metadata.title = title
+    #episode = title.split(' - ')[-1].strip()
+    #Log("Sort Title: "+episode + " - " + title[:title.rfind('-')])
+    #metadata.sort_title = episode + " - " + title[:title.rfind('-')]
 
     # Studio
     metadata.studio = "Nubiles"

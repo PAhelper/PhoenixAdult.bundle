@@ -48,6 +48,16 @@ Examples:
 
 The site can be missing from the filename, but all sites will then be searched possibly causing a mismatch.
 
+###### Direct Match
+
+Some sites do not have a search function available, but are still supported through direct matching.
+It will usually require you to import the file into Plex (filename not important), then manually "Match..." and enter a specific ID number or a part of the URL from the original site.
+
+Examples:
+- PornPros **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands) to direct match
+- MomsTeachSex **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://momsteachsex.com/tube/watch/314082) to direct match
+- BadoinkVR **turkey_day_lay-324295** (taken from the URL [https://badoinkvr.com/vrpornvideo/**turkey_day_lay-324295**/](https://badoinkvr.com/vrpornvideo/turkey_day_lay-324295/)) to direct match
+
 ## Installation
 
 Here is how to find the plug-in folder location:
@@ -282,6 +292,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 -   Teens Like It Black
 -   Racks and Blacks
 -   Butts and Blacks
+-   ZZ Series
 #### - Kelly Madison *Title Search *Date/Actor Search
 #### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
@@ -291,6 +302,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 -   LA Sluts
 -   Big Cock Bully
 -   Slut Stepsister
+-   Slut Stepmom
 -   Teens Love Cream
 -   Latina Stepmom
 -   My First Sex Teacher
@@ -460,6 +472,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 -   BraceFaced
 -   TeenJoi
 -   StepSiblings
+#### - Black Valley Girls *Scene ID Search only
 #### - Sis Loves Me *Scene ID Search only
 #### - TeenFidelity *Title Search *Date/Actor Search
 #### - Tushy *Title Search *Date/Actor Search
@@ -476,6 +489,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  Mofos B Sides
  -  She's A Freak
  -  Public Pickups
+ -  Latina Sextapes
 #### - Babes Network *Title Search *Actor Search (adding Date will help match either)
  -  Babes
  -  Babes Unleashed
@@ -594,7 +608,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  House of Taboo
  -  Euro Girls on Girls
  -  1By-Day
- -  ddf Network VR
+ -  DDF Network VR
  -  Euro Teen Erotica
  -  Hot Legs & Feet
  -  Only Blowjob
@@ -637,17 +651,24 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
  -  PurePOV
  -  SpermSwap
  -  TamedTeens
-#### - BaDoinkVR Network *No Search available, exact URL match only
+#### - BaDoinkVR Network *Actor search*, *Title Search* (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
  -  BaDoinkVR
  -  18VR
  -  BabeVR
  -  KinkVR
  -  VRCosplayX
+#### - CzechVR *Actor Search* (exact spelling)
+ - CzechVR
+ - CzechVR Casting
+ - CzechVR Fetish
+#### - VirtualRealPorn *Title Search* (exact spelling)
+#### - VirtualTaboo *Title Search* (true search, partial name allowed)
 #### - VRBangers *Title Search
-#### - SexBabesVR *Title (+SceneNumber) Search
+#### - SexBabesVR *No Search available, exact URL match only (e.g. https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/ => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
 #### - WankzVR Network *Title Search *Actor search
   - WankzVR
   - MilfVR
+
 #### - Joymii *Title Search *Actor search
 #### - PornPros Network *No Search available, exact URL match only
   - RealExGirlfriends
