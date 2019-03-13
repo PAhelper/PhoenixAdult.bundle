@@ -1,30 +1,35 @@
 
-# PhoenixAdult metadata agent
+PhoenixAdult metadata agent
+===========================
+This metadata agent helps fill Plex with information for your adult videos by pulling from the original site.
 
-This metadata agent will receive data from multiple sites for scene video releases.
-
-## Features
-
-The agent searches in a few ways depending on the site: Scene title, Actress name, Scene ID or exact URL match are the most common. Also the release date can often be used to increase the accuracy of the match.
-
+Features
+--------
 Currently the features of this metadata agent are:
 - Grabs all available Metadata
-- Title
+- Video title
 - Studio
-- Site (Saved as the Tagline, and also a Collection)
+- Originating site (saved as the Tagline, and also a Collection for easy searching)
 - Release Date
-- Genres/Categories
-- Porn Stars stored in Actors with photo
+- Genres/Categories/Tags
+- Porn Stars stored as Actors with photo
 - Scene director (if available)
-- Movie Poster(s) / Background art
-- Functions to help clean up extraneous Genres
-- Functions to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
+- Movie Poster(s) / Background art (if available)
 
-## File Naming
+- Function to strip common "scene" tags from filenames to assist with matching
+- Function to help replace abbreviations in filenames with the full names to assist with matching
+- Function to help clean up extraneous Genres
+- Function to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
+- Function to locate an image for actresses where the original site doesn't provide one
 
+File Naming
+-----------
+The agent will try to match your file automatically, usually based on the filename. You can help it match by renaming your video appropriately (see below).
+If the video is not successfully matched, you can manually try to match it using the [Match...] function in Plex, and entering as much information as you have in the format examples below.
+Which type of search each site accepts is listed at the bottom of this README.
 **Plex Video Files Scanner needs to be set as the library scanner for best results.
 
-For best results, file names should follow the layout below. The release date can be added to the filename for more accurate matching. Date can use a 2-digit year or 4-digit year.
+The release date can optionally be added to the filename or search terms for more accurate matching. Date can use a 2-digit year or 4-digit year.
 
 ###### Title Search
 
@@ -46,19 +51,17 @@ Examples:
 - Blacked - 18-09-04 - Haley Reed.mp4
 - Blacked - 2018-09-04 - Haley Reed Jason Luv.mp4
 
-The site can be missing from the filename, but all sites will then be searched possibly causing a mismatch.
-
 ###### Direct Match
 
 Some sites do not have a search function available, but are still supported through direct matching.
-It will usually require you to import the file into Plex (filename not important), then manually "Match..." and enter a specific ID number or a part of the URL from the original site.
+These usually don't make the most intuitive filenames, so it is often better to use the [Match...] function in Plex and enter a specific ID number or a part of the URL from the original site.
 
 Examples:
-- PornPros **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match
-- MomsTeachSex **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match
+- PornPros - **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match)
+- MomsTeachSex - **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match)
 
-## Installation
-
+Installation
+------------
 Here is how to find the plug-in folder location:
 [https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-](https://linkthe.net/?https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-)
 
@@ -82,23 +85,21 @@ Get the latest source zip in GitHub release at https://github.com/PAhelper/Phoen
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
 - Rename folder to "PhoenixAdult.bundle" (remove -master)
 
-## Usage Notes
-If you are doing a manual search in Plex and you wish to only search a single site, prefix your title with "Sitename - " followed by the title of the scene you wish to search.
-
-## Notice
-
+Notice
+------
 I try to maintain bug-free code, but sometimes bugs happen. If you are having difficulty matching a scene, [create an issue on Github](https://github.com/PAhelper/PhoenixAdult.bundle/issues) and I will do my best to address it.
 
 ** Plex Video Files Scanner needs to be set as the library scanner for best results. **
 
-## Known Limitations
-- Teen Fidelity, Porn Fidelity, Kelly Madison, and X-Art will sometimes not pull metadata when many files from that site are being added at once. This is a limitation on the number of requests to their website. Just go back to that video and hit Refresh Metadata (or Match if it didn't make it that far) and everything should then be added.
+Known Limitations
+-----------------
+Some sites do not have a search function, we do our best to support those through direct matching.
+Some sites do not have many high quality images that can be used as poster or background art. I have found the forums at [ViperGirls.to](https://linkthe.net/?https://www.vipergirls.to) to be a great resource for artwork in these situations.
+Due to a bug in code, some sites are unavailable for matching on Linux installations of Plex. We're working on it.
+Some sites with lots of content may return matching results, but still not include the specific scene you're trying to match. In some cases a means of direct match might work better, or choosing more unique search terms might help.
 
-- LegalPorno does not have high quality pictures to be used for metadata artwork.
-
-- GloryholeSecrets only searches by their video title, and their title is very structured and limited. Best to just search for girl's first name only e.g. "GloryholeSecrets - Rachele"
-
-## Change Log/Updates
+Change Log/Updates
+------------------
 - 2019-03-02 4:45PM CST - Bugfixes for SexBabesVR, added support for sister sites SinsVR and StasyQ VR
 - 2019-03-02 11:00AM EST - Added Manyvids (by id)
 - 2019-03-02 3:30PM AEST - Added Sis Loves Me (a TeemSkeet site) functional but can be refined.
@@ -206,271 +207,19 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 - 2018-09-10 2:30PM CST - Added Bang Bros Network and X-Art. Fixed some Brazzers bugs.
 - 2018-09-09 6:00PM CST - Initial Upload
 
-## Supported Networks/Site
-
+Supported Networks
+------------------
 #### - Bang Bros Network *Title Search *Date/Actor Search
--   Ass Parade
--   AvaSpice
--   Back Room Facials
--   Backroom MILF
--   Ball Honeys
--   Bang Bus
--   Bang Casting
--   Bang POV
--   Bang Tryouts
--   BangBros 18
--   BangBros Angels
--   Bangbros Clips
--   BangBros Remastered
--   Big Mouthfuls
--   Big Tit Cream Pie
--   Big Tits Round Asses
--   BlowJob Fridays
--   Blowjob Ninjas
--   Boob Squad
--   Brown Bunnies
--   Can He Score
--   Casting
--   Chongas
--   Colombia Fuck Fest
--   Dirty World Tour
--   Dorm Invasion
--   Facial Fest
--   Fuck Team Five
--   Glory Hole Loads
--   Latina Rampage
--   Living With Anna
--   Magical Feet
--   MILF Lessons
--   Milf Soup
--   MomIsHorny
--   Monsters of Cock
--   Mr CamelToe
--   Mr Anal
--   My Dirty Maid
--   My Life In Brazil
--   Newbie Black
--   Party of 3
--   Pawg
--   Penny Show
--   Porn Star Spa
--   Power Munch
--   Public Bang
--   Slutty White Girls
--   Stepmom Videos
--   Street Ranger
--   Tugjobs
--   Working Latinas
 #### - Blacked *Title Search *Date/Actor Search
 #### - BlackedRaw *Title Search *Date/Actor Search
 #### - Brazzers Network *Title Search
--   Moms in Control
--   Pornstars Like It Big
--   Big Tits at Work
--   Big Tits at School
--   Baby Got Boobs
--   Real Wife Stories
--   Teens Like It Big
--   ZZ Series
--   Mommy Got Boobs
--   Milfs Like It Big
--   Big Tits in Uniform
--   Doctor Adventures
--   Exxtra
--   Big Tits in Sports
--   Big Butts like it big
--   Big Wet Butts
--   Dirty Masseur
--   Hot and Mean
--   Shes Gonna Squirt
--   Asses In Public
--   Busty Z
--   Busty and Real
--   Hot Chicks Big Asses
--   CFNM Clothed Female Male Nude
--   Teens Like It Black
--   Racks and Blacks
--   Butts and Blacks
--   ZZ Series
 #### - Kelly Madison *Title Search *Date/Actor Search
 #### - LegalPorno *Title Search
 #### - Naughty America Network *Date/Actor Search
--   Anal College
--   Watch Your Wife
--   My Friends Hot Mom
--   LA Sluts
--   Big Cock Bully
--   Slut Stepsister
--   Slut Stepmom
--   Teens Love Cream
--   Latina Stepmom
--   My First Sex Teacher
--   Seduced By A Cougar
--   My Daughters Hot Friend
--   My Wife is My Pornstar
--   Tonights Girlfriend Class
--   Wives on Vacation
--   My Sisters Hot Friend
--   Naughty Weddings
--   Dirty Wives Club
--   My Dads Hot Girlfriend
--   My Girl Loves Anal
--   Lesbian Girl on Girl
--   Naughty Office
--   I have a Wife
--   Naughty Bookworms
--   Housewife 1 on 1
--   My Wifes Hot Friend
--   Latin Adultery
--   Ass Masterpiece
--   2 Chicks Same Time
--   My Friends Hot Girl
--   Neighbor Affair
--   My Girlfriends Busty Friend
--   Naughty Athletics
--   My Naughty Massage
--   Fast Times
--   The Passenger
--   Milf Sugar Babes Classic
--   Perfect Fucking Strangers Classic
--   Asian 1 on 1
--   American Daydreams
--   SoCal Coeds
--   Naughty Country Girls
--   Diary of a Milf
--   Naughty Rich Girls
--   My Naughty Latin Maid
--   Naughty America
--   Diary of a Nanny
--   Naughty Flipside
--   Live Party Girl
--   Live Naughty Student
--   Live Naughty Secretary
--   Live Gym Cam
--   Live Naughty Teacher
--   Live Naughty Milf
--   Live Naughty Nurse
-#### - Porndoe Premium Network *Title Search *Date/Actor Search
--   Porndoe Premium
--   The White Boxxx
--   Scam Angels
--   Chicas Loca
--   Her Limit
--   A Girl Knows
--   Porno Academie
--   Xchimera
--   Carne Del Mercado
--   XXXShades
--   BumsBus
--   Bitches Abroad
--   La Cochonne
--   Crowd Bondage
--   Relaxxxed
--   My Naughty Album
--   Tu Venganza
--   Bums Buero
--   Los Consoladores
--   Quest for Orgasm
--   Transbella
--   Her Big Ass
--   Narcos X
--   Fucked In Traffic
--   Las Folladoras
--   Badtime Stories
--   Exposed Casting
--   Kinky Inlaws
--   Doe Projects
--   Porndoepedia
--   Casting Francais
--   Bums Besuch
--   Special Feet Force
--   Trans Taboo
--   Operacion Limpieza
--   La Novice
--   Casting Alla Italiana
--   PinUp Sex
--   Hausfrau Ficken
--   Deutchland Report
--   Reife Swinger
--   Scambisti Maturi
--   STG
--   XXX Omas
+#### - LetsDoeIt / Porndoe Premium Network *Title Search *Date/Actor Search
 #### - PornFidelity *Title Search *Date/Actor Search
 #### - Reality Kings Network *Title Search
--   40 Inch Plus
--   8th Street Latinas
--   Bad Tow Truck
--   Big Naturals
--   Big Tits Boss
--   Bikini Crashers
--   Captain Stabbin
--   CFNM Secret
--   Cum Fiesta
--   Cum Girls
--   Dangerous Dongs
--   Euro Sex Parties
--   Extreme Asses
--   Extreme Naturals
--   First Time Auditions
--   Flower Tucci
--   Girls of Naked
--   Happy Tugs
--   HD Love
--   Hot Bush
--   In the VIP
--   Mike in Brazil
--   Mike's Apartment
--   Milf Hunter
--   Milf Next Door
--   Moms Bang Teens
--   Moms Lick Teens
--   Money Talks
--   Monster Curves
--   No Faces
--   Pure 18
--   Real Orgasms
--   RK Prime
--   Round and Brown
--   Saturday Night Latinas
--   See My Wife
--   Sneaky Sex
--   Street BlowJobs
--   Team Squirt
--   Teens Love Huge Cocks
--   Top Shelf Pussy
--   Tranny Surprise
--   VIP Crew
--   We Live Together
--   Wives in Pantyhose
 #### - TeamSkeet Network *Title Search *Date/Actor Search
--   Exxxtra small
--   Teen Pies
--   Innocent High
--   Teen Curves
--   CFNM Teens
--   Teens Love Anal
--   My Babysitters Club
--   She's New
--   Teens Do Porn
--   POV Life
--   The Real Workout
--   This Girl Sucks
--   Teens Love Money
--   Oye Loca
--   Titty Attack
--   Teeny Black
--   Lust HD
--   Rub A Teen
--   Her Freshman Year
--   Self Desire
--   Solo Interviews
--   Team Skeet Extras
--   Dyked
--   Badmilfs
--   Gingerpatch
--   BraceFaced
--   TeenJoi
--   StepSiblings
 #### - Black Valley Girls *Scene ID Search only
 #### - Sis Loves Me *Scene ID Search only
 #### - TeenFidelity *Title Search *Date/Actor Search
@@ -478,280 +227,45 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 #### - Vixen *Title Search *Date/Actor Search
 #### - X-Art *Title Search
 #### - Mofos Network *Title Search *Actor Search (adding Date will help match either)
- -  Mofos
- -  Share My BF
- -  Don't Break Me
- -  I Know That Girl
- -  Let's Try Anal
- -  Pervs On Patrol
- -  Stranded Teens
- -  Mofos B Sides
- -  She's A Freak
- -  Public Pickups
- -  Latina Sextapes
 #### - Babes Network *Title Search *Actor Search (adding Date will help match either)
- -  Babes
- -  Babes Unleashed
- -  Black is Better
- -  Elegant Anal
- -  Office Obsession
- -  Stepmom Lessons
 #### - Gloryhole Secrets *Title Search (Title includes actress first name)
 #### - New Sensations
 #### - Swallowed / TrueAnal / Nymphos *Title Search (Title includes actress first name)
 #### - SexyHub *Title Search
- -  Dane Jones
- -  Fitness Rooms
- -  Girlfriends
- -  Lesbea
- -  Massage Rooms
- -  MomXXX
 #### - FakeHub *Title Search
- -  FakeTaxi
- -  Fakehub Originals
- -  Public Agent
- -  Fake Agent
- -  Female Agent
- -  Fake Hospital
- -  Fake Agent UK
- -  Fake Cop
- -  #Fake Driving School
- -  #Fake Hostel
 #### - Full Porn Network *Title Search *Actor Search (adding Date will help match either)
- -  Analized
- -  James Deen
- -  Twisted Visual
- -  Only Prince
- -  Bad Daddy POV
- -  POV Perverts
- -  Pervert Gallery
- -  DTF Sluts
 #### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  Hardx
- -  Darkx
- -  Lesbianx
- -  Eroticax
 #### - Blowpass *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  Throated
- -  MommyBlowsBest
- -  OnlyTeenBlowjobs
- -  1000 Facials
- -  ImmoralLive
 #### - FantasyMassage *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  FantasyMassage
- -  AllGirlMassage
- -  NuruMassage
- -  SoapyMassage
- -  MilkingTable
- -  MassageParlor
- -  TrickySpa
 #### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  CherryPop
- -  SweetSinner
- -  RealityJunkies
- -  SweetheartVideo
- -  LesbianOlderYounger
- -  DoghouseDigital
 #### - 21Sextury *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  AnalTeenAngels
- -  DeepthroatFrenzy
- -  DPFanatics
- -  FootsieBabes
- -  Gapeland
- -  LezCuties
- -  PixandVideo
 #### - 21Sextreme *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  LustyGrandmas
- -  GrandpasFuckTeens
- -  TeachMeFisting
- -  Zoliboy
- -  DominatedGirls
 #### - 21Naturals *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  21Naturals
- -  21FootArt
- -  21EroticAnal
 #### - Girlsway *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  MommysGirl
- -  WebYoung
- -  GirlsTryAnal
- -  SextapeLesbians
- -  GirlswayOriginals
 #### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  DevilsFilm
- -  PeterNorth
- -  RoccoSiffredi
- -  TeraPatrick
 #### - OpenlifeNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
- -  SunnyLeone
- -  LaneSisters
- -  DylanRyder
- -  AbbeyBrooks
- -  AshleyFires
- -  DevonLee
- -  HannaHilton
 #### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - GirlfriendsFilms *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - JulesJordan network - *Title Search/Actress
- -  JulesJordan
- -  ManuelFerarra
- -  TheAssFactory
- -  SpermSwallowers
 #### - DDFNetwork - *Title Search/Actress
- -  DDF Hardcore
- -  DDF Busty
- -  DDF Xtreme
- -  Hands on Hardcore
- -  House of Taboo
- -  Euro Girls on Girls
- -  1By-Day
- -  DDF Network VR
- -  Euro Teen Erotica
- -  Hot Legs & Feet
- -  Only Blowjob
- -  Sandy's Fantasies
- -  Cherry Jul
- -  Eve Angel Official
- -  Sex Video Casting
- -  Hairy Twatter
 #### - Dogfart - *Title Search/Actress
- -  BlacksOnBlondes
- -  InterracialBlowbang
- -  CuckoldSessions
- -  GloryHole
- -  InterracialBlowbang
- -  InterracialPickups
- -  BlacksOnCougars
- -  WeFuckBlackGirls
- -  WatchingMyMomGoBlack
- -  CumBang
- -  WatchingMyDaughterGoBlack
- -  ZebraGirls
- -  Gloryhole-Initiations
- -  DogfarBehindTheScenes
- -  BlackMeatWhiteFeet
- -  SpringThomas
- -  KatieThomas
- -  RuthBlackwell
- -  CandyMonroe
- -  WifeWriting
- -  BarbCummings
- -  TheMinion
- -  BlacksOnBoys
- -  GloryholesAndHandjobs
 #### - PerfectGonzo Network *Actor Search
- -  PerfectGonzo
- -  AllInternal
- -  AssTraffic
- -  CumForCover
- -  PrimeCups
- -  PurePOV
- -  SpermSwap
- -  TamedTeens
 #### - BaDoinkVR Network *Actor search*, *Title Search* (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
- -  BaDoinkVR
- -  18VR
- -  BabeVR
- -  KinkVR
- -  VRCosplayX
 #### - CzechVR *Actor Search* (exact spelling)
- - CzechVR
- - CzechVR Casting
- - CzechVR Fetish
 #### - VirtualRealPorn *Title Search* (exact spelling)
 #### - VirtualTaboo *Title Search* (true search, partial name allowed)
 #### - VRBangers *Title Search
 #### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
 #### - WankzVR Network *Title Search *Actor search
-  - WankzVR
-  - MilfVR
-
 #### - Joymii *Title Search *Actor search
 #### - PornPros Network *No Search available, exact URL match only
-  - RealExGirlfriends
-  - 18YearsOld
-  - MassageCreep
-  - DeepThroatLove
-  - PornPros
-  - TeenBFF
-  - ShadyPi
-  - CrueltyParty
-  - Disgraced18
-  - MilfHumiliation
-  - CumshotSurprise
-  - 40ozBounce
-  - JurassicCock
-  - FreaksOfCock
-  - EuroHumpers
-  - FreaksOfBoobs
-  - CumDisgrace
-  - CockCompetition
-  - PimpParade
-  - SquirtDisgrace
 #### - Other PornPros sites *No Search available, exact URL match only
-  - POVD
-  - Tiny4k
-  - Cum4K
-  - Exotic4k
-  - PureMature
-  - MyVeryFirstTime
-  - Holed
-  - Lubed
-  - Passion-HD
-  - FantasyHD
-  - NannySpy
-  - CastingCouch-X
-  - SpyFam
 #### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + Shoot ID
-  - BoundGangBangs
-  - BrutalSessions
-  - DeviceBondage
-  - FamiliesTied
-  - HardcoreGangbang
-  - Hogtied
-  - KinkFeatures
-  - KinkUniversity
-  - PublicDisgrace
-  - SadisticRope
-  - SexAndSubmission
-  - TheTrainingOfO
-  - TheUpperFloor
-  - WaterBondage
-  - EverythingButt
-  - FootWorship
-  - FuckingMachines
-  - TSPussyHunters
-  - TSSeduction
-  - UltimateSurrender
-  - 30MinutesofTorment
-  - BoundGods
-  - BoundinPublic
-  - ButtMachineBoys
-  - MenOnEdge
-  - NakedKombat
-  - DivineBitches
-  - Electrosluts
-  - MenInPain
-  - WhippedAss
-  - WiredPussy
 #### - Nubiles.net *Shoot ID (NubilesNet - id) *Date search
 #### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
-  - Nubiles Porn
-  - Step Siblings Caught
-  - Moms Teach Sex  
-  - Bad Teens Punished
-  - Princess Cum
-  - Nubiles Unscripted
-  - Nubiles Casting
-  - Petite Hd Porn
-  - Driver XXX
-  - Petite Ballerinas Fucked
-  - Teacher Fucks Teens
-  - Bountyhunter Porn
-  - Daddy's Lil Angel
-  - My Family Pies
 #### - Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
 #### - Bratty Sis *shoot ID (BrattySis - id) *Date search
 #### - Anilos *shoot ID (Anilos - id) *Date search
@@ -759,35 +273,16 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 #### - NF Busty *shoot ID (NFBusty - id) *Date search
 #### - That Sitcom Show *shoot ID (ThatSitcomShow - id) *Date search
 #### - BellaPass *Title Search
-  - Bryci
-  - KatieBanks
-  - AlexisMonroe
-  - CaliCarter
-  - TaliaShepard
-  - JanaFox
-  - MonroeLee
-  - AleahJasmine
-  - CeceSeptember
-  - HunterLeigh
-  - AvaDawn
-  - BellaNextDoor
-  - JoePerv
-  - HD19
-  - BellaHD
 #### - Amateur Allure *Title Search *Actor Search
 #### - Swallow Salon *Title Search *Actor Search
 #### - Manyvids (Manyvids - id)
 #### - Spizoo *Title Search *Actor Search
-  - FirstClassPOV
-  - IntimateLesbians
-  - TheStripperExperience
-  - PornGoesPro
-  - JessicaJaymesXXX
-  - PornstarTease
-  - RawAttack
 #### - DigitalPlayground *Title Search *Actor Search
 #### - NewSensations *Actress Search* *DVD search* (exact spellings)
 #### - FinishesTheJob *Title Search* *Actor Search*
-  - ManoJob
-  - TheDickSuckers
-  - MrPOV
+
+To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
+
+If you like my work... I like beer :)
+
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K5NFB6DYPCZQA&item_name=Plex+Agent+code+development&currency_code=USD&source=url)
