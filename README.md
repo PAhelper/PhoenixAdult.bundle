@@ -282,7 +282,7 @@ Supported Networks
 #### - FinishesTheJob *Title Search* *Actor Search*
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
-If your favorite site isn't supported, head over to Issue #1 to add your request to the list, or vote on the current requests
+If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests
 
 If you like my work... I like beer :)
 
