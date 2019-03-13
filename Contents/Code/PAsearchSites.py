@@ -41,8 +41,9 @@ import siteManyvids
 import siteVirtualReal
 import siteVirtualTaboo
 import networkCzechVR
+import siteFinishesTheJob
 
-searchSites = [None] * 584
+searchSites = [None] * 587
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -627,6 +628,9 @@ searchSites[580] = ["CzechVR Casting","CzechVR Casting","https://www.czechvrcast
 searchSites[581] = ["Slut Stepmom","Slut Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[582] = ["ZZ Series","ZZ Series","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[583] = ["Latina Sex Tapes","Latina Sex Tapes","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
+searchSites[584] = ["Mano Job","Mano Job","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
+searchSites[585] = ["The Dick Suckers","The Dick Suckers","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
+searchSites[586] = ["Mr POV","Mister POV","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
 
 # searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
 
@@ -673,6 +677,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlc ', 'TeensLoveCream ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tgs ', 'ThisGirlSucks ', mediaTitle, flags=re.IGNORECASE)
@@ -689,6 +694,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^passion-hd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nw ', 'NaughtyWeddings ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^num ', 'NuruMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nrg ', 'NaughtyRichGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^no ', 'NaughtyOffice ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nf ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
@@ -751,6 +757,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^aa ', 'AmateurAllure ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
