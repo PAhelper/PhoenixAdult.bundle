@@ -786,3 +786,8 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - PornstarTease
   - RawAttack
 #### - DigitalPlayground *Title Search *Actor Search
+#### - NewSensations *Actress Search* *DVD search* (exact spellings)
+#### - FinishesTheJob *Title Search* *Actor Search*
+  - ManoJob
+  - TheDickSuckers
+  - MrPOV
