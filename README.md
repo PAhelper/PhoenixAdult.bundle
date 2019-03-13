@@ -54,14 +54,13 @@ Some sites do not have a search function available, but are still supported thro
 It will usually require you to import the file into Plex (filename not important), then manually "Match..." and enter a specific ID number or a part of the URL from the original site.
 
 Examples:
-- PornPros **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands) to direct match
-- MomsTeachSex **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://momsteachsex.com/tube/watch/314082) to direct match
-- BadoinkVR **turkey_day_lay-324295** (taken from the URL [https://badoinkvr.com/vrpornvideo/**turkey_day_lay-324295**/](https://badoinkvr.com/vrpornvideo/turkey_day_lay-324295/)) to direct match
+- PornPros **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match
+- MomsTeachSex **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match
 
 ## Installation
 
 Here is how to find the plug-in folder location:
-https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-
+[https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-](https://linkthe.net/?https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-)
 
 Plex main folder location:
 
@@ -664,7 +663,7 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
 #### - VirtualRealPorn *Title Search* (exact spelling)
 #### - VirtualTaboo *Title Search* (true search, partial name allowed)
 #### - VRBangers *Title Search
-#### - SexBabesVR *No Search available, exact URL match only (e.g. https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/ => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
+#### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
 #### - WankzVR Network *Title Search *Actor search
   - WankzVR
   - MilfVR
@@ -787,3 +786,8 @@ I try to maintain bug-free code, but sometimes bugs happen. If you are having di
   - PornstarTease
   - RawAttack
 #### - DigitalPlayground *Title Search *Actor Search
+#### - NewSensations *Actress Search* *DVD search* (exact spellings)
+#### - FinishesTheJob *Title Search* *Actor Search*
+  - ManoJob
+  - TheDickSuckers
+  - MrPOV
