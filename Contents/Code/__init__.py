@@ -674,8 +674,20 @@ class PhoenixAdultAgent(Agent.Movies):
             ## FinishesTheJob
             ###############
             if siteNum == 584:
-                if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 587):
+                if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 586):
                     results = PAsearchSites.siteFinishesTheJob.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Wankz Network
+            ###############
+            if siteNum == 587:
+                if searchSiteID == 9999 or (searchSiteID >= 587 and searchSiteID <= 619):
+                    results = PAsearchSites.networkWankz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## SexArt
+            ###############
+            if siteNum == 620:
+                if searchSiteID == 9999 or (searchSiteID == 620):
+                    results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1082,8 +1094,24 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  FinishesTheJob                                          ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 584 and siteID <= 587):
+        if (siteID >= 584 and siteID <= 586):
             metadata = PAsearchSites.siteFinishesTheJob.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Wankz Network                                          ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 587 and siteID <= 619):
+            metadata = PAsearchSites.networkWankz.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  SexArt                                          ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID == 620):
+            metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

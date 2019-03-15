@@ -42,8 +42,10 @@ import siteVirtualReal
 import siteVirtualTaboo
 import networkCzechVR
 import siteFinishesTheJob
+import networkWankz
+import siteSexArt
 
-searchSites = [None] * 587
+searchSites = [None] * 621
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -631,8 +633,40 @@ searchSites[583] = ["Latina Sex Tapes","Latina Sex Tapes","https://www.mofos.com
 searchSites[584] = ["Mano Job","Mano Job","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
 searchSites[585] = ["The Dick Suckers","The Dick Suckers","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
 searchSites[586] = ["Mr POV","Mister POV","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
-
-# searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
+searchSites[587] = ["4K Desire","4K Desire","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[588] = ["All Interracial","All Interracial","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[589] = ["Bang My Stepmom","Bang My Stepmom","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[590] = ["Big Tits Like Big Dicks","Big Tits Like Big Dicks","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[591] = ["Bubbly Massage","Bubbly Massage","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[592] = ["Cougar Sex Club","Cougar Sex Club","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[593] = ["Ebony Internal","Ebony Internal","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[594] = ["Escort Trick","Escort Trick","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[595] = ["Exploited 18","Exploited 18","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[596] = ["Handjob Harry","Handjob Harry","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[597] = ["I am Eighteen","I am Eighteen","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[598] = ["Lesbian Sistas","Lesbian Sistas","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[599] = ["Make Them Gag","Make Them Gag","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[600] = ["My Milf Boss","My Milf Boss","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[601] = ["Not So Innocent Teens","Not So Innocent Teens","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[602] = ["Rap Video Auditions","Rap Video Auditions","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[603] = ["Real Blowjob Auditions","Real Blowjob Auditions","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[604] = ["Round Juicy Butts","Round Juicy Butts","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[605] = ["Schoolgirl Internal","Schoolgirl Internal","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[606] = ["Service Whores","Service Whores","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[607] = ["Sex For Grades","Sex For Grades","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[608] = ["Spoiled Slut","Spoiled Slut","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[609] = ["Swallow For Cash","Swallow For Cash","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[610] = ["Tight Holes Big Poles","Tight Holes Big Poles","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[611] = ["Wank My Wood","Wank My Wood","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[612] = ["Wankz TV","Wankz TV","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[613] = ["Whale Tail'n","Whale Tail'n","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[614] = ["Wild Massage","Wild Massage","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[615] = ["XXX At Work","XXX At Work","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[616] = ["Young Dirty Lesbians","Young Dirty Lesbians","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[617] = ["Young Sluts Hardcore","Young Sluts Hardcore","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[618] = ["Matrix Models","Matrix Models","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[619] = ["Blow Patrol","Blow Patrol","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[620] = ["SexArt","SexArt","https://www.sexart.com","https://www.sexart.com/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -747,6 +781,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btra ', 'BigTitsRoundAsses ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^btlbd ', 'BigTitsLikeBigDicks ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btiu ', 'BigTitsinUniform ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btis ', 'BigTitsinSports ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btc', 'BigTitCreampie ', mediaTitle, flags=re.IGNORECASE)
