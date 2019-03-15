@@ -5,16 +5,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL('https://www.mofos.com/tour/search/?q=' + encodedTitle)
-    for searchResult in searchResults.xpath('//div[contains(@class,"title details-only")]//a'):
-        titleNoFormatting = searchResult.text_content()
-        subSite = searchResults.xpath('//a[@class="site-name"]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('//span[@class="date-added"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        curID = searchResult.get('href').replace('/','_').replace('?','!')
+    for searchResult in searchResults.xpath('//div[@class="widget-release-card"]'):
+        titleNoFormatting = searchResult.xpath('.//div[@class="title details-only"]//a')[0].text_content().strip()
+        subSite = searchResult.xpath('.//a[@class="site-name"]')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//span[@class="date-added"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mofos/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
