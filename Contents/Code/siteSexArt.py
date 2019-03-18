@@ -3,29 +3,30 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="custom-list-item-default"]'):
-        titleNoFormatting = searchResult.xpath('.//a[@class="custom-list-item-name"]')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a[@class="custom-list-item-name"]')[0].get('href').replace('/','_').replace('?','!')
-        Log("curID: " + curID)
-        releaseDateRaw = searchResult.xpath('.//span[@class="custom-list-item-date"]//span')[0].text_content()
-        Log("releaseDateRaw: " + releaseDateRaw)
-        releaseDateFixed = searchResult.xpath('.//span[@class="custom-list-item-date"]')[0].text_content().replace(releaseDateRaw, "").strip()
-        Log("releaseDateFixed: " + releaseDateFixed)
-        releaseDate = parse(releaseDateFixed).strftime('%Y-%m-%d')
-        Log("releaseDate: " + releaseDate)
-
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [SexArt] " + releaseDate, score = score, lang = lang))
-
+    searchPageNum = 1
+    while searchPageNum <= 2:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/relevance~0~4~-~-~-~-~-~-/" + str(searchPageNum))
+        for searchResult in searchResults.xpath('//div[@class="custom-list-item-default"]'):
+            if len(searchResult.xpath('.//a[@class="custom-list-item-name"]')) > 0:
+                titleNoFormatting = searchResult.xpath('.//a[@class="custom-list-item-name"]')[0].text_content()
+                Log("Result Title: " + titleNoFormatting)
+                curID = searchResult.xpath('.//a[@class="custom-list-item-name"]')[0].get('href').replace('_','+').replace('/','_').replace('?','!')
+                Log("curID: " + curID)
+                releaseDateRaw = searchResult.xpath('.//span[@class="custom-list-item-date"]//span')[0].text_content()
+                Log("releaseDateRaw: " + releaseDateRaw)
+                releaseDateFixed = searchResult.xpath('.//span[@class="custom-list-item-date"]')[0].text_content().replace(releaseDateRaw, "").strip()
+                Log("releaseDateFixed: " + releaseDateFixed)
+                releaseDate = parse(releaseDateFixed).strftime('%Y-%m-%d')
+                Log("releaseDate: " + releaseDate)
+                if searchDate:
+                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                else:
+                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [SexArt] " + releaseDate, score = score, lang = lang))
+        searchPageNum += 1
     return results
 def update(metadata,siteID,movieGenres,movieActors):
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('+','_')
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Title
