@@ -259,7 +259,8 @@ Supported Networks
 #### - VirtualTaboo *Title Search* (true search, partial name allowed)
 #### - VRBangers *Title Search
 #### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
-#### - WankzVR Network *Title Search *Actor search
+#### - WankzVR Network *Title Search* *Actor search*
+#### - Wankz Network *Title Search* *Actor search*
 #### - Joymii *Title Search *Actor search
 #### - PornPros Network *No Search available, exact URL match only
 #### - Other PornPros sites *No Search available, exact URL match only
@@ -280,6 +281,7 @@ Supported Networks
 #### - DigitalPlayground *Title Search *Actor Search
 #### - NewSensations *Actress Search* *DVD search* (exact spellings)
 #### - FinishesTheJob *Title Search* *Actor Search*
+#### - SexArt *Title Search* *Actor Search*
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
 If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests
