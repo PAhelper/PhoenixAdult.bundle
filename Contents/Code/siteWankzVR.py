@@ -7,7 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//a//h3')[0].get("title")
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
-        curID = curID.replace('/','_').replace('?','!')
+        curID = curID.replace('/preview','').replace('/','_').replace('?','!')
         Log("curID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         Log("releaseDate: " + releaseDate.strip())
@@ -26,7 +26,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="contentContainer"]//h2')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//h2')[0].text_content()
 
     # Studio/Tagline/Collection
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
