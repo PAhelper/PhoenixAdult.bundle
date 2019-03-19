@@ -39,11 +39,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         if siteName.lower() == "Cum4K".lower():
         
             summaryurl = "https://cum4k.tube/" + temp
- 
+            Log(summaryurl)
             summaryPageElements = HTML.ElementFromURL(summaryurl)
             metadata.summary = summaryPageElements.xpath('//p[@class="more"]/text()')[0].strip()
     except:
-        Log("Did not pull cum4k.tube summary")
+        Log("did not pull tube summary")
         pass
 
     # Actors
@@ -80,6 +80,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "PureMature".lower():
         for genreName in ['MILF', 'Mature']:
             movieGenres.addGenre(genreName)
+    elif siteName.lower() == "Cum4K".lower():
+        for genreName in ['Creampie']:
+            movieGenres.addGenre(genreName)
     # Based on number of actors
     if len(actors) == 3:
         movieGenres.addGenre('Threesome')
@@ -114,6 +117,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         urls = search('"AnalPornfan "' + actorName + ' ' + metadata.title , stop=2)
     elif siteName.lower() == "SpyFam".lower():
         urls = search('site:SpyFams.com ' + actorName + ' ' + metadata.title , stop=2)
+    elif siteName.lower() == "Cum4K".lower():
+        urls = search('site:hqsluts.com ' + actorName + ' ' + metadata.title , stop=2)
 
     match = 0
     for url in urls:
@@ -127,6 +132,8 @@ def update(metadata,siteID,movieGenres,movieActors):
                         nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[2]')[0].text_content()
                     elif siteName.lower() == "SpyFam".lower():
                         nameinheader = fanPageElements.xpath('(//span[@itemprop="articleSection"])')[0].text_content()
+                    elif siteName.lower() == "Cum4K".lower():
+                        nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]')[0].text_content()
                     else:
                         nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
                     Log("Actress name in header: " + nameinheader)
@@ -162,6 +169,9 @@ def update(metadata,siteID,movieGenres,movieActors):
                             metadata.summary = summary.strip()
                         else:
                             metadata.summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
+                    elif siteName.lower() == "Cum4K".lower():
+                        #do nothing
+                        pass
                     else:
                         metadata.summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
                     
@@ -175,6 +185,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                     elif siteName.lower() == "Holed".lower():
                         Log("Searching AnalPornFan")
                         for posterURL in fanPageElements.xpath('//div[contains(@class, "rgg-imagegrid")]//a'):
+                            art.append(posterURL.get('href'))
+                    elif siteName.lower() == "Cum4K".lower():
+                        Log("Searching HQ Sluts")
+                        for posterURL in fanPageElements.xpath('//ul[@class="set gallery"]//li[@class="item i"]//a'):
                             art.append(posterURL.get('href'))
                     else:
                         # Works for PassionHD and SpyFam
@@ -191,9 +205,9 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("Artwork found: " + str(len(art)))
         # Return, first, last and randóm selection of images
         # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
-        sample = [art[0], art[-1]] + random.sample(art, 4)     
+        sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
         art = sample
-        Log("Selecting first, last and random 4 images from set")
+        Log("Selecting first 5, last and random 4 images from set")
 
         j = 1
 											  
@@ -219,7 +233,3 @@ def update(metadata,siteID,movieGenres,movieActors):
                     pass
 
     return metadata
-
-
-
-
