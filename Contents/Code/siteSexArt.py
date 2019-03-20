@@ -41,8 +41,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[contains(@class,"custom-description-long")]//p')[0].text_content().replace("Synopsis:","").strip()
-    Log("Scene Summary: " + metadata.summary[:20])
+    try:
+        summary = detailsPageElements.xpath('//div[contains(@class,"custom-description-long")]//p')[0].text_content().replace("Synopsis:","").strip()
+        Log("Scene Summary found")
+    except:
+        Log("Scene Summary not found")
+        summary = ''
+    metadata.summary = summary
 
     # Date
     date = detailsPageElements.xpath('//div[contains(@class,"details")]//li[2]')[0].text_content().replace("Released:","").strip()
@@ -67,10 +72,10 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = ["Glamcore", "Glamour Porn"] # site has no genres listed, but some should be put in manually describing the overall genre of the site?
+    genres = ["Glamcore", "Glam"] # site has no genres listed, but some should be put in manually describing the overall genre of the site?
     for genre in genres:
         movieGenres.addGenre(genre)
-        Log("Genre: " + genre)
+        # Log("Genre: " + genre)
 
     # Posters/Background
     valid_names = list()
