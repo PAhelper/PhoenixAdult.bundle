@@ -95,7 +95,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
     if dvdPosterURL == None:
         dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
-    else:
     metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
     posterNum += 1
 
@@ -136,7 +135,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
             if actorPhotoURL == None:
                 actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("data-src")
-            else:
             movieActors.addActor(actorName,actorPhotoURL)
             # add actor image as possible poster
             if len(actors) < 3:
@@ -147,7 +145,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         dvdThumbURL = dvdThumb.get("src")
         if dvdThumbURL == None:
             dvdThumbURL = dvdThumb.get("data-src")
-        else:
         metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
         bgNum += 1
 
