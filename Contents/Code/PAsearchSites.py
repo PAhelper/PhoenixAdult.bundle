@@ -521,7 +521,7 @@ searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrgir
 searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-performer/"]
 searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaygirl/"]
 searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/?post_type=video&s="]
-searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
+searchSites[475] = ["SexBabesVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"]
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
 searchSites[478] = ["Joymii","Joymii","https://www.joymii.com","https://www.joymii.com/search?query="]
@@ -727,6 +727,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^tdp ', 'TeensDoPorn ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
@@ -766,6 +767,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mdhg ', 'MyDadsHotGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mdhf ', 'MyDaughtersHotFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mbb ', 'MommyBlowsBest ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mcu ', 'MonsterCurves ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mc ', 'MassageCreep ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^maj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
@@ -810,6 +812,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bex ', 'BrazzersExxtra ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcb ', 'BigCockBully ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
