@@ -94,19 +94,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     posterNum = 1
     dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
     if dvdPosterURL == None:
-        Log('dvdPosterURL src not found, trying data-src')
         dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
-    else:
-        Log('dvdPosterURL src found')
     metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-    Log("added dvd poster: " + dvdPosterURL)
     posterNum += 1
 
 
     # Background
     bgNum = 1
     try:
-        # background on details page is first
         background = detailsPageElements.xpath('//span[@id="trailer_thumb"]//img')[0].get('src')
         if background != None:
             Log("BG DL: " + background)
@@ -139,28 +134,18 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
             if actorPhotoURL == None:
-                Log('actorPhotoURL src not found, trying data-src')
                 actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("data-src")
-                Log('actorPhotoURL data-src: ' + actorPhotoURL)
-            else:
-                Log('actorPhotoURL src: ' + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
             # add actor image as possible poster
             if len(actors) < 3:
-                Log("actor image to poster option")
                 metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
                 posterNum += 1
     # DVD page only place with more thumbs
     for dvdThumb in dvdPageElements.xpath('//div[@class="dvdScenePic"]//img'):
         dvdThumbURL = dvdThumb.get("src")
         if dvdThumbURL == None:
-            Log("dvdThumbURL src not found, trying data-src")
             dvdThumbURL = dvdThumb.get("data-src")
-            Log('dvdThumbURL data-src: ' + dvdThumbURL)
-        else:
-            Log("dvdThumbURL src: " + dvdThumbURL)
         metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
-        Log("added dvd scene background: " + dvdThumbURL)
         bgNum += 1
 
 

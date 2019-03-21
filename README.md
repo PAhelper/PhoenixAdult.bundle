@@ -258,7 +258,7 @@ Supported Networks
 #### - VirtualRealPorn *Title Search* (exact spelling)
 #### - VirtualTaboo *Title Search* (true search, partial name allowed)
 #### - VRBangers *Title Search
-#### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBVR **225-welcum_sexy_architect**" in the agent to match)
+#### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBabesVR **225-welcum_sexy_architect**" in the agent to match)
 #### - WankzVR Network *Title Search* *Actor search*
 #### - Wankz Network *Title Search* *Actor search*
 #### - Joymii *Title Search *Actor search
