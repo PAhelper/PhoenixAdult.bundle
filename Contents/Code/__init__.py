@@ -688,6 +688,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
                     results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Family Strokes
+            ###############
+            if siteNum == 626:
+                if searchSiteID == 9999 or searchSiteID == 626:
+                    results = PAsearchSites.siteFamilyStrokes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1112,6 +1118,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 621 and siteID <= 623):
             metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Family Strokes                                          ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 626:
+            metadata = PAsearchSites.siteFamilyStrokes.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
