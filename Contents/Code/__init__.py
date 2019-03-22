@@ -694,6 +694,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 626:
                 if searchSiteID == 9999 or searchSiteID == 626:
                     results = PAsearchSites.siteFamilyStrokes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Tonights Girlfriend
+            ###############
+            if siteNum == 627:
+                if searchSiteID == 9999 or searchSiteID == 627:
+                    results = PAsearchSites.siteTonightsGirlfriend.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1126,6 +1132,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 626:
             metadata = PAsearchSites.siteFamilyStrokes.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Tonights Girlfriend                                          ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 627:
+            metadata = PAsearchSites.siteTonightsGirlfriend.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

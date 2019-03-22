@@ -45,8 +45,9 @@ import siteFinishesTheJob
 import networkWankz
 import siteSexArt
 import siteFamilyStrokes
+import siteTonightsGirlfriend
 
-searchSites = [None] * 627
+searchSites = [None] * 628
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -674,6 +675,7 @@ searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https:/
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://www.familystrokes.com/scenes/"]
+searchSites[627] = ["Tonights Girlfriend","Tonights GIrlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
