@@ -75,6 +75,10 @@ class PhoenixActors:
                 newActor = "Nika Noire"
             if "Jessica Blue" == newActor or "Jessica Cute" == newActor:
                 newActor = "Jessica Foxx"
+            if "Nadya Nabakova" == newActor or "Nadya Nabokova" == newActor:
+                newActor = "Bunny Colby"
+            if "April ONeil" == newActor or "April Oneil" == newActor or "April O'neil" == newActor:
+                newActor == "April O'Neil"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury" and "Abbie" == newActor:
@@ -822,7 +826,7 @@ class PhoenixActors:
                 if newActor == "Kristinarose":
                     newActor = "Kristina Rose"
                 if newActor == "Krystyna":
-                    newActor = "Kristina Manson"	
+                    newActor = "Kristina Manson"
                 if newActor == "Kyra":
                     newActor = "Kyra Steele"
                 if newActor == "Lady D":
@@ -906,7 +910,7 @@ class PhoenixActors:
                 if newActor == "Marlie":
                     newActor = "Marlie Moore"
                 if newActor == "Marsa":
-                    newActor = "Jessi Gold"	
+                    newActor = "Jessi Gold"
                 if newActor == "Marsha":
                     newActor = "Monica Sweat"
                 if newActor == "Marta":
@@ -1170,7 +1174,7 @@ class PhoenixActors:
                 if newActor == "Xenia":
                     newActor = "Zena Little"
                 if newActor == "Yanka":
-                    newActor = "Sasha Rose"			
+                    newActor = "Sasha Rose"
                 if newActor == "Yvonne":
                     newActor = "Cindy Shine"
                 if newActor == "Zara":
@@ -1377,9 +1381,10 @@ class PhoenixActors:
 
 # For sites without a proper actor profile picture, this method looks in external databases based on actorName
 def actorDBfinder(actorName):
+    actorEncoded = urllib.quote(actorName)
     try:
         databaseName = "AdultDVDEmpire"
-        actorsearch = HTML.ElementFromURL("https://www.adultdvdempire.com/performer/search?q=" + actorName.replace(' ','%20'))
+        actorsearch = HTML.ElementFromURL("https://www.adultdvdempire.com/performer/search?q=" + actorEncoded)
         actorPageURL = actorsearch.xpath('//div[@class="col-xs-6 col-sm-3 grid-item grid-item-performer grid-item-performer-145"]/a')[0].get("href")
         actorPageURL = "https://www.adultdvdempire.com" + actorPageURL
         actorPage = HTML.ElementFromURL(actorPageURL)
@@ -1395,7 +1400,7 @@ def actorDBfinder(actorName):
             # actorSearch = HTML.ElementFromURL(searchURL)
             # actorPageURL = actorSearch.xpath('//div[@class="mw-search-result-heading"]/a')[0].get("href")
             # actorPageURL = "http://www.boobpedia.com" + actorPageURL
-            actorPageURL = "http://www.boobpedia.com/boobs/" + actorName.lower().replace(" ", "_")
+            actorPageURL = "http://www.boobpedia.com/boobs/" + actorName.title().replace(" ", "_")
             # Log(databaseName + "-PageURL: " + actorPageURL)
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//table[@class="infobox"]//a[@class="image"]//img')[0].get("src")
@@ -1409,7 +1414,7 @@ def actorDBfinder(actorName):
                 # Log(databaseName + "-searchURL: " + searchURL)
                 # actorSearch = HTML.ElementFromURL(searchURL)
                 # actorPageURL = actorSearch.xpath('//div[contains(@class,"thumb")]//a')[0].get("href")
-                actorPageURL = "http://www.babesandstars.com/" + actorName[0:1] + "/" + actorName.lower().replace(" ","-") +"/"
+                actorPageURL = "http://www.babesandstars.com/" + actorName[0:1].lower() + "/" + actorName.lower().replace(" ","-").replace("'","-") +"/"
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = actorPage.xpath('//div[@class="profile"]//div[@class="thumb"]/img')[0].get("src")
                 Log(actorName + " found in " + databaseName)
@@ -1417,7 +1422,7 @@ def actorDBfinder(actorName):
             except:
                 try:
                     databaseName = "IAFD"
-                    searchURL = "http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=" + actorName.replace(' ', '+')
+                    searchURL = "http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=" + actorEncoded
                     actorSearch = HTML.ElementFromURL(searchURL)
                     actorPageURL = actorSearch.xpath('//table[@id="tblFem"]//tbody//a')[0].get("href")
                     actorPageURL = "http://www.iafd.com" + actorPageURL

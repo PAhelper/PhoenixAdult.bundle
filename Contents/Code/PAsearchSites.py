@@ -830,6 +830,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
     # Search Site ID of 9999 is all

@@ -26,7 +26,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), firstActor.lower())
         Log("score: " + str(score))
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Tonight's Girlfriend]" + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Tonight's Girlfriend] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -72,13 +72,22 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     backgroundURL = detailsPageElements.xpath('//img[@class="playcard"]')[0].get("src")
     metadata.art[backgroundURL] = Proxy.Preview(HTTP.Request(backgroundURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[backgroundURL] = Proxy.Preview(HTTP.Request(backgroundURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     Log("BG URL: " + backgroundURL)
 
     # add actress image as possible poster if only one actress (could be picture from scene)
+    posterBGNum = 1
     if len(actors) == 1:
-        metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
-        Log("actor photo to poster #2")
+        actorScenes = actorPageElements.xpath('//div[@class="panel-body"]')
+        if len(actorScenes) == 1:
+            # poster 1 if actress only has one scene (must be from current scene)
+            Log("actor photo to poster 1")
+            metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+            posterBGNum = 2
+        else:
+            # poster 2 if actress has > 1 scene (possibly from current scene)
+            Log("actor photo to poster 2")
+            metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+    metadata.posters[backgroundURL] = Proxy.Preview(HTTP.Request(backgroundURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterBGNum)
 
     # rest of actors (male actors without pages on the site)
     sceneInfo = sceneInfo.replace(dateRaw,'')
