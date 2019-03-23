@@ -22,14 +22,10 @@ def pa_parse_dir(dir):
     logger.info("The Dir is: %s" % search_string)
 
     # logger.info("Processing: %s" % search_string)
-    search_string = search_string.split('\')[-1]
-    logger.info("The search_string after replacing spaces is: %s" % search_string)
+    search_string = search_string.split('\\')[-1]
     search_string = search_string.split('.XXX')[0]
-    logger.info("The String is now: %s" % search_string)
     search_string = search_string.split(' XXX')[0]
-    logger.info("The String is now: %s" % search_string)
-    dir_pattern = re.compile(r'^([a-zA-Z0-9-]+)\s([0-9]{2,4})\s([0-9]{2})\s([0-9]{2})\s([\sa-zA-Z0-9]+)')
-    logger.info("The Dir Pattern is: %s" % dir_pattern)
+    dir_pattern = re.compile(r'^([a-zA-Z0-9-]+)[\s|.]([0-9]{2,4})[\s|.]([0-9]{2})[\s|.]([0-9]{2})[\s|.]([\s.a-zA-Z0-9]+)')
     
 
     match_object = re.search(dir_pattern, search_string)
