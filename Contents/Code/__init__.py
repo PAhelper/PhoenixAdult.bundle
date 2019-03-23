@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -100,7 +100,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581:
+                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625:
                     results = PAsearchSites.siteNaughtyAmerica.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -464,7 +464,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## PornPros Network
             ###############
             if (siteNum >= 306 and siteNum <= 308) or (siteNum >= 479 and siteNum <= 489):
-                if searchSiteID == 9999 or (searchSiteID >= 306 and searchSiteID <= 327) or (searchSiteID >= 479 and searchSiteID <= 489):
+                if searchSiteID == 9999 or (searchSiteID >= 306 and searchSiteID <= 327) or (searchSiteID >= 479 and searchSiteID <= 489) or searchSiteID == 624:
                     results = PAsearchSites.networkPornPros.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -674,8 +674,20 @@ class PhoenixAdultAgent(Agent.Movies):
             ## FinishesTheJob
             ###############
             if siteNum == 584:
-                if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 587):
+                if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 586):
                     results = PAsearchSites.siteFinishesTheJob.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Wankz Network
+            ###############
+            if siteNum == 587:
+                if searchSiteID == 9999 or (searchSiteID >= 587 and searchSiteID <= 619):
+                    results = PAsearchSites.networkWankz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## SexArt / TheLifeErotic / VivThomas
+            ###############
+            if siteNum == 621:
+                if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
+                    results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -730,7 +742,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -875,7 +887,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   PornPros Network                                       ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489):
+        if (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or siteID == 624:
             metadata = PAsearchSites.networkPornPros.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1082,8 +1094,24 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  FinishesTheJob                                          ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 584 and siteID <= 587):
+        if (siteID >= 584 and siteID <= 586):
             metadata = PAsearchSites.siteFinishesTheJob.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Wankz Network                                          ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 587 and siteID <= 619):
+            metadata = PAsearchSites.networkWankz.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  SexArt / TheLifeErotic / VivThomas                      ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 621 and siteID <= 623):
+            metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

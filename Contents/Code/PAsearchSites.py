@@ -42,8 +42,10 @@ import siteVirtualReal
 import siteVirtualTaboo
 import networkCzechVR
 import siteFinishesTheJob
+import networkWankz
+import siteSexArt
 
-searchSites = [None] * 587
+searchSites = [None] * 626
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -519,7 +521,7 @@ searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrgir
 searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-performer/"]
 searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaygirl/"]
 searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/?post_type=video&s="]
-searchSites[475] = ["SexBVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"] #typo purposeful to avoid detection as babes.com
+searchSites[475] = ["SexBabesVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"]
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
 searchSites[477] = ["MilfVR","MilfVR","https://www.milfvr.com","https://www.milfvr.com/search?q="]
 searchSites[478] = ["Joymii","Joymii","https://www.joymii.com","https://www.joymii.com/search?query="]
@@ -631,8 +633,45 @@ searchSites[583] = ["Latina Sex Tapes","Latina Sex Tapes","https://www.mofos.com
 searchSites[584] = ["Mano Job","Mano Job","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
 searchSites[585] = ["The Dick Suckers","The Dick Suckers","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
 searchSites[586] = ["Mr POV","Mister POV","https://www.finishesthejob.com","https://www.finishesthejob.com/search?search="]
-
-# searchSites[578] = ["TranzVR","TranzVR","https://www.tranzvr.com","https://www.tranzvr.com/search?q="]
+searchSites[587] = ["4K Desire","4K Desire","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[588] = ["All Interracial","All Interracial","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[589] = ["Bang My Stepmom","Bang My Stepmom","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[590] = ["Big Tits Like Big Dicks","Big Tits Like Big Dicks","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[591] = ["Bubbly Massage","Bubbly Massage","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[592] = ["Cougar Sex Club","Cougar Sex Club","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[593] = ["Ebony Internal","Ebony Internal","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[594] = ["Escort Trick","Escort Trick","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[595] = ["Exploited 18","Exploited 18","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[596] = ["Handjob Harry","Handjob Harry","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[597] = ["I am Eighteen","I am Eighteen","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[598] = ["Lesbian Sistas","Lesbian Sistas","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[599] = ["Make Them Gag","Make Them Gag","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[600] = ["My Milf Boss","My Milf Boss","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[601] = ["Not So Innocent Teens","Not So Innocent Teens","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[602] = ["Rap Video Auditions","Rap Video Auditions","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[603] = ["Real Blowjob Auditions","Real Blowjob Auditions","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[604] = ["Round Juicy Butts","Round Juicy Butts","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[605] = ["Schoolgirl Internal","Schoolgirl Internal","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[606] = ["Service Whores","Service Whores","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[607] = ["Sex For Grades","Sex For Grades","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[608] = ["Spoiled Slut","Spoiled Slut","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[609] = ["Swallow For Cash","Swallow For Cash","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[610] = ["Tight Holes Big Poles","Tight Holes Big Poles","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[611] = ["Wank My Wood","Wank My Wood","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[612] = ["Wankz TV","Wankz TV","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[613] = ["Whale Tail'n","Whale Tail'n","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[614] = ["Wild Massage","Wild Massage","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[615] = ["XXX At Work","XXX At Work","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[616] = ["Young Dirty Lesbians","Young Dirty Lesbians","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[617] = ["Young Sluts Hardcore","Young Sluts Hardcore","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[618] = ["Matrix Models","Matrix Models","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[619] = ["Blow Patrol","Blow Patrol","https://www.wankz.com","https://www.wankz.com/search?q="]
+searchSites[620] = ["Sleazy Stepdad","Sleazy Stepdad","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[621] = ["SexArt","SexArt","https://www.sexart.com","https://www.sexart.com/search/"]
+searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.com","https://www.thelifeerotic.com/search/"]
+searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/search/"]
+searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
+searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -676,23 +715,38 @@ def getSearchSettings(mediaTitle):
     Log("mediaTitle w/ possible abbrieviation: " + mediaTitle)
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlc ', 'TeensLoveCream ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^these ', 'TheStripperExperience ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tgs ', 'ThisGirlSucks ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tf ', 'TeenFidelity ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ted ', 'Throated ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tds ', 'TheDickSuckers ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tdp ', 'TeensDoPorn ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^rkp ', 'RKPrime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^reg ', 'RealExGirlfriends ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^pud ', 'PublicDisgrace ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^prdi ', 'PrettyDirty ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ppu ', 'PublicPickups ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pop ', 'PervsOnPatrol ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^plib ', 'PornstarsLikeitBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^phd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^pf ', 'PornFidelity ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^pav ', 'PixAndVideo ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^passion-hd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^otb ', 'OnlyTeenBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nw ', 'NaughtyWeddings ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^num ', 'NuruMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nrg ', 'NaughtyRichGirls ', mediaTitle, flags=re.IGNORECASE)
@@ -702,13 +756,14 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mwhf ', 'MyWivesHotFriend ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mwhf ', 'MyWifesHotFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mshf ', 'MySistersHotFriend ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mpov ', 'MrPOV ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mnm ', 'MyNaughtyMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mgbf ', 'MyGirlfriendsBustyFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mfst ', 'MyFirstSexTeacher ', mediaTitle, flags=re.IGNORECASE)
@@ -716,6 +771,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mfhg ', 'MyFriendsHotGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mdhg ', 'MyDadsHotGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mdhf ', 'MyDaughtersHotFriend ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mbb ', 'MommyBlowsBest ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mcu ', 'MonsterCurves ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mc ', 'MassageCreep ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^maj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
@@ -734,8 +792,10 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^fka ', 'FakeAgent ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fho ', 'FakehubOriginals ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fhl ', 'FakeHostel ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^fhd ', 'FantasyHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fft ', 'FemaleFakeTaxi ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fds ', 'FakeDrivingSchool ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^fams ', 'FamilyStrokes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dwp ', 'DayWithAPornstar ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dwc ', 'DirtyWivesClub ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
@@ -745,22 +805,27 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btra ', 'BigTitsRoundAsses ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^btlbd ', 'BigTitsLikeBigDicks ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btiu ', 'BigTitsinUniform ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btis ', 'BigTitsinSports ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btc', 'BigTitCreampie ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btaw ', 'BigTitsatWork ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btas ', 'BigTitsatSchool ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^bjf ', 'BlowjobFridays ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bin ', 'BigNaturals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^bgbs ', 'BoundGangbangs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bgb ', 'BabyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bex ', 'BrazzersExxtra ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcb ', 'BigCockBully ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^aa ', 'AmateurAllure ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
     # Search Site ID of 9999 is all
