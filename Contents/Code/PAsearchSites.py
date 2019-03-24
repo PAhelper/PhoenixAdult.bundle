@@ -46,8 +46,9 @@ import networkWankz
 import siteSexArt
 import siteFamilyStrokes
 import siteTonightsGirlfriend
+import siteKarups
 
-searchSites = [None] * 628
+searchSites = [None] * 631
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -675,7 +676,10 @@ searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https:/
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://www.familystrokes.com/scenes/"]
-searchSites[627] = ["Tonights Girlfriend","Tonights GIrlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
+searchSites[627] = ["Tonights Girlfriend","Tonights Girlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
+searchSites[628] = ["KarupsPC","Karups Private Collection","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[629] = ["KarupsHA","Karups Hometown Amateurs","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[630] = ["KarupsOW","Karups Older Women","https://www.karups.com","https://www.karups.com/models/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -782,6 +786,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^la ', 'LatinAdultery ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kpc ', 'KarupsPC ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kow ', 'KarupsOW ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kha ', 'KarupsHA ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^iktg ', 'IKnowThatGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ihaw ', 'IHaveAWife ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)

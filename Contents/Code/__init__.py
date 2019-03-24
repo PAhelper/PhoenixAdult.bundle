@@ -700,6 +700,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 627:
                 if searchSiteID == 9999 or searchSiteID == 627:
                     results = PAsearchSites.siteTonightsGirlfriend.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Karups
+            ###############
+            if siteNum == 628:
+                if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
+                    results = PAsearchSites.siteKarups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1135,12 +1141,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Tonights Girlfriend                                          ##
+        ##  Tonights Girlfriend                                     ##
         ##                                                          ##
         ##############################################################
         if siteID == 627:
             metadata = PAsearchSites.siteTonightsGirlfriend.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  Karups                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 628 and siteID <= 630):
+            metadata = PAsearchSites.siteKarups.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
