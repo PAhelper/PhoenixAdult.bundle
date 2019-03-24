@@ -706,6 +706,12 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 628:
                 if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
                     results = PAsearchSites.siteKarups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## TeenMegaWorld
+            ###############
+            if siteNum == 631:
+                if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 665):
+                    results = PAsearchSites.networkTMW.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1154,6 +1160,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 628 and siteID <= 630):
             metadata = PAsearchSites.siteKarups.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TeenMegaWorld                                           ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 631 and siteID <= 665):
+            metadata = PAsearchSites.networkTMW.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

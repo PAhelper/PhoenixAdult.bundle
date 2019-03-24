@@ -47,8 +47,9 @@ import siteSexArt
 import siteFamilyStrokes
 import siteTonightsGirlfriend
 import siteKarups
+import networkTMW
 
-searchSites = [None] * 631
+searchSites = [None] * 667
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -680,6 +681,41 @@ searchSites[627] = ["Tonights Girlfriend","Tonights Girlfriend","https://www.ton
 searchSites[628] = ["KarupsPC","Karups Private Collection","https://www.karups.com","https://www.karups.com/models/search/"]
 searchSites[629] = ["KarupsHA","Karups Hometown Amateurs","https://www.karups.com","https://www.karups.com/models/search/"]
 searchSites[630] = ["KarupsOW","Karups Older Women","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[631] = ["Teen Mega World","Teen Mega World","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[632] = ["18 First Sex","18 First Sex","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[633] = ["ATMovs","ATMovs","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[634] = ["About Girls Love","About Girls Love","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[635] = ["Anal Angels","Anal Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[636] = ["Anal Beauty","Anal Beauty","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[637] = ["Beauty 4K","Beauty 4K","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[638] = ["BeautyAngels","BeautyAngels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[639] = ["Coeds Reality","Coeds Reality","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[640] = ["Creampie Angels","Creampie Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[641] = ["Dirty Coach","Dirty Coach","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[642] = ["Dirty Doctor","Dirty Doctor","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[643] = ["el Porno Latino","el Porno Latino","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[644] = ["ExGfBox","ExGfBox","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[645] = ["First BGG","First BGG","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[646] = ["Fuck Studies","Fuck Studies","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[647] = ["Gag N Gape","Gag N Gape","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[648] = ["Home Teen Vids","Home Teen Vids","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[649] = ["Home Toy Teens","Home Toy Teens","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[650] = ["Lolly Hardcore","Lolly Hardcore","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[651] = ["No Boring","No Boring","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[652] = ["Nubile Girls HD","Nubile Girls HD","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[653] = ["NylonsX","NylonsX","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[654] = ["Old N Young","Old N Young","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[655] = ["Private Teen Video","Private Teen Video","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[656] = ["Solo Teen Girls","Solo Teen Girls","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[657] = ["Squirting Virgin","Squirting Virgin","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[658] = ["Teen Sex Mania","Teen Sex Mania","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[659] = ["Teen Stars Only","Teen Stars Only","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[660] = ["Teens 3 Some","Teens 3 Some","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[661] = ["TmwVRnet","TmwVRnet","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[662] = ["Tricky Masseur","Tricky Masseur","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[663] = ["WOW Orgasms","WOW Orgasms","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[664] = ["Watch Me Fucked","Watch Me Fucked","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[665] = ["X Angels","X Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -726,6 +762,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)

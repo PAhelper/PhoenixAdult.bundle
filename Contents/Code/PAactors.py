@@ -79,6 +79,8 @@ class PhoenixActors:
                 newActor = "Bunny Colby"
             if "April ONeil" == newActor or "April Oneil" == newActor or "April O'neil" == newActor:
                 newActor == "April O'Neil"
+            if "Tiny Teen" == newActor or "Tieny Mieny" == newActor or "Lady Jay" == newActor:
+                newActor == "Eva Elfie"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury" and "Abbie" == newActor:
