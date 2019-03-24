@@ -710,7 +710,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeenMegaWorld
             ###############
             if siteNum == 631:
-                if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 665):
+                if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 666):
                     results = PAsearchSites.networkTMW.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
@@ -1166,7 +1166,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  TeenMegaWorld                                           ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 631 and siteID <= 665):
+        if (siteID >= 631 and siteID <= 666):
             metadata = PAsearchSites.networkTMW.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

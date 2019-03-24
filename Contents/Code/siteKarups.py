@@ -43,6 +43,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = subSite
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
+    metadata.collections.add(metadata.studio)
+
 
     # Summary
     try:

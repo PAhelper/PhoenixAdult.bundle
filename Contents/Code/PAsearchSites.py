@@ -716,6 +716,8 @@ searchSites[662] = ["Tricky Masseur","Tricky Masseur","https://teenmegaworld.net
 searchSites[663] = ["WOW Orgasms","WOW Orgasms","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
 searchSites[664] = ["Watch Me Fucked","Watch Me Fucked","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
 searchSites[665] = ["X Angels","X Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -875,6 +877,8 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('4k$ ', '', mediaTitle, flags=re.IGNORECASE)
+
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
     # Search Site ID of 9999 is all
