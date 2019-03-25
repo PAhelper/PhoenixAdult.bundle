@@ -36,7 +36,7 @@ def pa_parse_dir(dir):
     # Studio Match
     # TODO: determine based on collections.txt
 
-    shoot['studio'] = match_object.group(1)
+    shoot['studio'] = match_object.group(1).replace('-','')
 
     # Date match
     year = match_object.group(2)
