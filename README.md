@@ -282,6 +282,12 @@ Supported Networks
 #### - NewSensations *Actress Search* *DVD search* (exact spellings)
 #### - FinishesTheJob *Title Search* *Actor Search*
 #### - SexArt *Title Search* *Actor Search*
+#### - TeenMegaWorld Network *Title Search* *Actor Search*
+#### - Karups Network *Actor Search*
+#### - Tonight's Girlfriend *Actor Search*
+#### - FamilyStrokes *url Match* *Unofficial Scene Title match*
+
+
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
 If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests
