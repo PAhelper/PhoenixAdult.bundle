@@ -48,8 +48,10 @@ import siteFamilyStrokes
 import siteTonightsGirlfriend
 import siteKarups
 import networkTMW
+import siteScrewbox
+import siteTrenchcoatX
 
-searchSites = [None] * 667
+searchSites = [None] * 669
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -717,6 +719,8 @@ searchSites[663] = ["WOW Orgasms","WOW Orgasms","https://teenmegaworld.net","htt
 searchSites[664] = ["Watch Me Fucked","Watch Me Fucked","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
 searchSites[665] = ["X Angels","X Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
 searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https://trenchcoatx.com/search.php?query="]
+searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 
 
 def getSearchBaseURL(siteID):

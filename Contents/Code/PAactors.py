@@ -1445,7 +1445,6 @@ def actorDBfinder(actorName):
                         # actorPhotoURL = actorPage.xpath('//div[@id="profimg"]//a')[0].get("href")
                         # actorPhotoURL = "http://www.babepedia.com" + actorPhotoURL
                         actorPhotoURL = "http://www.babepedia.com/pics/" + actorName.title().replace(" ", "%20") + ".jpg"
-                        Log(actorName + " found in " + databaseName)
                         Log("PhotoURL: " + actorPhotoURL)
                     except:
                         Log(actorName + "not found.")

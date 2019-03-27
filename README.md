@@ -286,6 +286,8 @@ Supported Networks
 #### - Karups Network *Actor Search*
 #### - Tonight's Girlfriend *Actor Search*
 #### - FamilyStrokes *url Match* *Unofficial Scene Title match*
+#### - TrenchcoatX *Title Search* *Actor Search*
+#### - Screwbox *Title Search* *Actor Search*
 
 
 
