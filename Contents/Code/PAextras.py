@@ -12,12 +12,16 @@ def getFanArt(site, art, actors, actorName, title):
         actress = "Ariela"
         actorName = actress
         Log("Actress Name changed to: " + actress)
+    elif actorName.lower() == "Rebel Lynn (Contract Star)".lower():
+        actress = "Rebel Lynn"
+        actorName = actress
+        Log("Actress Name changed to: " + actress)
             
     try:
         urls = search('site:'+ site + ' ' + actorName + ' ' + title , stop=2)
-    
+        Log('Searching Google for: (site:'+ site + ' ' + actorName + ' ' + title +')')
         for url in urls:
-            if match is 0:
+            if match is 0 or matsh is 2:
                 googleSearchURL = url
                 fanPageElements = HTML.ElementFromURL(googleSearchURL)
 
@@ -28,7 +32,7 @@ def getFanArt(site, art, actors, actorName, title):
                             nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[2]')[0].text_content()
                         elif site == "EroticBeauties.net/pics":
                             nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]')[0].text_content()
-                        elif site =="HQSluts.com":
+                        elif site == "HQSluts.com":
                             nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]')[0].text_content()
                         elif site == "Nude-Gals.com":
                             nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
@@ -46,7 +50,7 @@ def getFanArt(site, art, actors, actorName, title):
                         Log("No Actress found in the site header")
                         
                 #CHECK IF WE HAVE A FANSITE MATCH USING ACTOR NAMES    
-                    if actorName in nameinheader or actress in nameinheader:
+                    if actorName in nameinheader:
                         Log("Fansite Match Found on " + site)
                         match = 1
                     else:
