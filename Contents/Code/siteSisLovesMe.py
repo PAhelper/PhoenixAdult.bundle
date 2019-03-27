@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAextras
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -92,78 +93,24 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     #Extra Posters
     import random
-    from googlesearch import search
-	
-    # Check first X google results. Set Stop = X to search more
-    urls = search('site:teamskeetfans.com" ' + actorName + ' ' + metadata.title , stop=2)
-
-    match = 0
-    for url in urls:
-        if match is 0:
-            googleSearchURL = url
-            fanPageElements = HTML.ElementFromURL(googleSearchURL)
-
-            try:
-                try:
-                    nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"]')[0].text_content()
-                    Log("Actress name in header: " + nameinheader)
-                except:
-                    Log("No Actress found in the fansite header")
-                    pass
-                    
-                if actorName.lower() in nameinheader.lower():
-                    Log(siteName + " Fansite Match Found")
-                    match = 1
-                else:
-                # When there are multiple actors listed we need to check all of them.
-                    try:
-                        for actor in actors:
-                            for name in nameinheader:
-                                if actor.lower() == name.lower():
-                                    Log(siteName + " Fansite Match Found")
-                                    match = 1
-                    except:
-                        Log("No Match")
-                        pass
-                        
-                if match is 1:
-                    # Summary
-                    try:
-                        paragraphs = fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]')[0].text_content().split('\n')
-                        Log(len(paragraphs))
-                        if len(paragraphs) > 13:
-                            summary = ""
-                            for paragraph in paragraphs:
-                                summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
-                            if len(metadata.summary) < len(summary):
-                                metadata.summary = summary.strip()
-                        else:
-                            summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
-                        if len(metadata.summary) < len(summary):
-                            metadata.summary = summary.strip()   
-                    except:
-                        Log("Error grabbing fansite summary")
-                        pass                    
-                     
-                    # Posters
-                    try:
-                        Log("Searching Fan site")
-                        for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
-                            art.append(posterURL.get('data-orig-file'))
-                    except:
-                        Log("No fansite images found")
-                        pass
-            except:
-                pass
     
-    if match is 1 and len(art) >= 10:
-        Log("Artwork found: " + str(len(art)))
-        # Return, first, last and randóm selection of images
+    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title)
+    summary = fanSite[1]
+    match = fanSite[2]
+
+    try:
+        if len(metadata.summary) < len(summary):
+            metadata.summary = summary 
+    except:
+        metadata.summary = summary  
+                    
+    if match is 1 and len(art) >= 10 or match is 2 and len(art) >= 10:
+        # Return, first, last and randóm selection of 4 more images
         # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
         sample = [art[0], art[-1]] + random.sample(art, 4)     
         art = sample
         Log("Selecting first, last and random 4 images from set")
-
+        
     j = 1
                                           
     for posterUrl in art:
@@ -186,8 +133,5 @@ def update(metadata,siteID,movieGenres,movieActors):
             except:
                 Log("there was an issue")
                 pass
-    
 
-
-    
     return metadata
