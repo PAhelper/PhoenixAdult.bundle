@@ -882,7 +882,6 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('4k$ ', '', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
