@@ -44,8 +44,14 @@ import networkCzechVR
 import siteFinishesTheJob
 import networkWankz
 import siteSexArt
+import siteFamilyStrokes
+import siteTonightsGirlfriend
+import siteKarups
+import networkTMW
+import siteScrewbox
+import siteTrenchcoatX
 
-searchSites = [None] * 626
+searchSites = [None] * 669
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -672,6 +678,50 @@ searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.c
 searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/search/"]
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://www.familystrokes.com/scenes/"]
+searchSites[627] = ["Tonights Girlfriend","Tonights Girlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
+searchSites[628] = ["KarupsPC","Karups Private Collection","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[629] = ["KarupsHA","Karups Hometown Amateurs","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[630] = ["KarupsOW","Karups Older Women","https://www.karups.com","https://www.karups.com/models/search/"]
+searchSites[631] = ["Teen Mega World","Teen Mega World","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[632] = ["18 First Sex","18 First Sex","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[633] = ["ATMovs","ATMovs","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[634] = ["About Girls Love","About Girls Love","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[635] = ["Anal Angels","Anal Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[636] = ["Anal Beauty","Anal Beauty","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[637] = ["Beauty 4K","Beauty 4K","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[638] = ["BeautyAngels","BeautyAngels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[639] = ["Coeds Reality","Coeds Reality","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[640] = ["Creampie Angels","Creampie Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[641] = ["Dirty Coach","Dirty Coach","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[642] = ["Dirty Doctor","Dirty Doctor","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[643] = ["el Porno Latino","el Porno Latino","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[644] = ["ExGfBox","ExGfBox","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[645] = ["First BGG","First BGG","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[646] = ["Fuck Studies","Fuck Studies","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[647] = ["Gag N Gape","Gag N Gape","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[648] = ["Home Teen Vids","Home Teen Vids","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[649] = ["Home Toy Teens","Home Toy Teens","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[650] = ["Lolly Hardcore","Lolly Hardcore","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[651] = ["No Boring","No Boring","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[652] = ["Nubile Girls HD","Nubile Girls HD","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[653] = ["NylonsX","NylonsX","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[654] = ["Old N Young","Old N Young","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[655] = ["Private Teen Video","Private Teen Video","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[656] = ["Solo Teen Girls","Solo Teen Girls","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[657] = ["Squirting Virgin","Squirting Virgin","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[658] = ["Teen Sex Mania","Teen Sex Mania","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[659] = ["Teen Stars Only","Teen Stars Only","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[660] = ["Teens 3 Some","Teens 3 Some","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[661] = ["TmwVRnet","TmwVRnet","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[662] = ["Tricky Masseur","Tricky Masseur","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[663] = ["WOW Orgasms","WOW Orgasms","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[664] = ["Watch Me Fucked","Watch Me Fucked","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[665] = ["X Angels","X Angels","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","https://teenmegaworld.net","https://teenmegaworld.net/search.php?query="]
+searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https://trenchcoatx.com/search.php?query="]
+searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -718,6 +768,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)
@@ -749,6 +800,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^otb ', 'OnlyTeenBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nw ', 'NaughtyWeddings ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^num ', 'NuruMassage ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^nubilef ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nrg ', 'NaughtyRichGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^no ', 'NaughtyOffice ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nf ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
@@ -778,6 +830,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^la ', 'LatinAdultery ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kpc ', 'KarupsPC ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kow ', 'KarupsOW ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^kha ', 'KarupsHA ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^iktg ', 'IKnowThatGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ihaw ', 'IHaveAWife ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
@@ -826,6 +881,8 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
+
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
     # Search Site ID of 9999 is all
