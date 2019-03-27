@@ -1,6 +1,7 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAextras
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
@@ -109,100 +110,29 @@ def update(metadata,siteID,movieGenres,movieActors):
 	
     #Extra Posters
     import random
-    from googlesearch import search
-	
-    # Check first X google results. Set Stop = X to search more
-    urls = search('"' + siteName + 'fan" ' + actorName + ' ' + metadata.title , stop=2)
+    
     if siteName.lower() == "Holed".lower():
-        urls = search('"AnalPornfan "' + actorName + ' ' + metadata.title , stop=2)
+        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title)
     elif siteName.lower() == "SpyFam".lower():
-        urls = search('site:SpyFams.com ' + actorName + ' ' + metadata.title , stop=2)
-    elif siteName.lower() == "Cum4K".lower():
-        urls = search('site:hqsluts.com ' + actorName + ' ' + metadata.title , stop=2)
+        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title)
+    elif siteName.lower() == "Lubed".lower():
+        fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title)
+    elif siteName.lower() == "PassionHD".lower():
+        for site in ["PassionHDFan.com", "HQSluts.com"]:
+            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title)
+    else: 
+        fanSite = PAextras.getFanArt("HQSluts.com", art, actors, actorName, metadata.title)
+    
+    summary = fanSite[1]
+    match = fanSite[2]
 
-    match = 0
-    for url in urls:
-        if match is 0:
-            googleSearchURL = url
-            fanPageElements = HTML.ElementFromURL(googleSearchURL)
-
-            try:
-                try:
-                    if siteName.lower() == "Holed".lower():
-                        nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[2]')[0].text_content()
-                    elif siteName.lower() == "SpyFam".lower():
-                        nameinheader = fanPageElements.xpath('(//span[@itemprop="articleSection"])')[0].text_content()
-                    elif siteName.lower() == "Cum4K".lower():
-                        nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]')[0].text_content()
-                    else:
-                        nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
-                    Log("Actress name in header: " + nameinheader)
-                except:
-                    pass
-                    
-                if actorName in nameinheader:
-                    Log(siteName + " Fansite Match Found")
-                    match = 1
-                else:
-                    # When there are multiple actors listed we need to check all of them.
-                    try:
-                        for actorLink in actors:
-                            actorName = actorLink.text_content()
-                            for name in nameinheader:
-                                if actorName.lower() == name.lower():
-                                    Log(siteName + " Fansite Match Found")
-                                    match = 1
-                    except:
-                        pass
-                        
-                if match is 1:
-                    # Summary
-                    if siteName.lower() == "SpyFam".lower():
-                        paragraphs = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[not(*[contains(@class, "jp-relatedposts-post")])]')
-                        if len(paragraphs) > 3:
-                            pNum = 1
-                            summary = ""
-                            for paragraph in paragraphs:
-                                if pNum >= 1 and pNum <= 7:
-                                    summary = summary + '\n\n' + paragraph.text_content()
-                                pNum += 1
-                            metadata.summary = summary.strip()
-                        else:
-                            metadata.summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
-                    elif siteName.lower() == "Cum4K".lower():
-                        #do nothing
-                        pass
-                    else:
-                        metadata.summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
-                    
-                     
-                # Various Poster xpaths needed for different sites
-                try:
-                    if siteName.lower() == "Lubed".lower():
-                        Log("Searching LubedFan")
-                        for posterURL in fanPageElements.xpath('(//div[@class="entry-inner"]//a)[position()>1][position()<last()]'):
-                            art.append(posterURL.get('href'))
-                    elif siteName.lower() == "Holed".lower():
-                        Log("Searching AnalPornFan")
-                        for posterURL in fanPageElements.xpath('//div[contains(@class, "rgg-imagegrid")]//a'):
-                            art.append(posterURL.get('href'))
-                    elif siteName.lower() == "Cum4K".lower():
-                        Log("Searching HQ Sluts")
-                        for posterURL in fanPageElements.xpath('//ul[@class="set gallery"]//li[@class="item i"]//a'):
-                            art.append(posterURL.get('href'))
-                    else:
-                        # Works for PassionHD and SpyFam
-                        Log("Searching Fan site")
-                        for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
-                            art.append(posterURL.get('data-orig-file'))
-                except:
-                    pass
-            except:
-                Log("No Actress found in the site header")
-                pass
+    try:
+        if len(metadata.summary) < len(summary):
+            metadata.summary = summary 
+    except:
+        metadata.summary = summary
     
     if match is 1:
-        Log("Artwork found: " + str(len(art)))
         # Return, first, last and randóm selection of images
         # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
         sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
@@ -230,6 +160,5 @@ def update(metadata,siteID,movieGenres,movieActors):
                     j = j + 1
                 except:
                     Log("there was an issue")
-                    pass
 
     return metadata
