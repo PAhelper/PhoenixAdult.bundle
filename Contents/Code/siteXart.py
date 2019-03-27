@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAextras
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     xartpost = {
         "input_search_sm" : encodedTitle
@@ -193,16 +194,24 @@ def update(metadata,siteID,movieGenres,movieActors):
                 if i is 1:
                     Log("Trying XartFan")
                     urls = search('site:xartfan.com ' + actorName + ' ' + metadata.title, stop=2)
+                 # Test PAextras match
                 elif i is 2:
-                    Log("Trying Nude-Gals")
-                    urls = search('site:nude-gals.com ' + actorName + ' ' + metadata.title, stop=2)
+                    fanSite = PAextras.getFanArt("hqsluts.com", art, actors, actorName, metadata.title)
+                    try:
+                        if str(len(art)) > 1:
+                            match = 1
+                    except:
+                        pass
                 elif i is 3:
                     Log("Trying XartBeauties")
                     urls = search('site:xartbeauties.com/galleries ' + actorName + ' ' + metadata.title, stop=2)
                 elif i is 4:
                     Log("Trying EroticBeauties")
                     urls = search('site:eroticbeauties.net/pics ' + actorName + ' ' + metadata.title, stop=2)
-                
+                elif i is 5:
+                    Log("Trying Nude-Gals")
+                    urls = search('site:nude-gals.com ' + actorName + ' ' + metadata.title, stop=2)
+                    
             for url in urls:
                 if match is 0 or match is 2:
                     if overrideSettings != 9999:
@@ -219,10 +228,6 @@ def update(metadata,siteID,movieGenres,movieActors):
                             # Xartfan
                             nameinheader = fanPageElements.xpath('//header[@class="entry-header"]/p//a')[0].text_content()
                             Log("Actress name in header: " + nameinheader)
-                        if i is 2:
-                            # Nude-Gals
-                            nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
-                            Log("Actress name in header: " + nameinheader)
                         if i is 3:
                             # Xart Beauties
                             nameinheader = fanPageElements.xpath('(//div[@id="header-text"]//p//a)[not(position()=last())]')[0].text_content()
@@ -230,6 +235,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                         if i is 4:
                             # Erotic Beauties
                             nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]')[0].text_content()
+                            Log("Actress name in header: " + nameinheader)
+                        if i is 5:
+                            # Nude-Gals
+                            nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
                             Log("Actress name in header: " + nameinheader)
                         try: 
                             for actorLink in actors:
@@ -251,17 +260,15 @@ def update(metadata,siteID,movieGenres,movieActors):
                                             
                                         except:
                                             Log("No Actress Match")
-                                            pass
                         except:
                             Log("No Actress Match")
-                            pass
                     except:
                         Log("No Actress found in the site header")
-                        pass
                     
-                    # found one example of a badmatch not working because tge actress match failed. this forces it to proceed.
+                    # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
                     if overrideSettings != 9999:
-                        match = 1 
+                        match = 1
+                    
                          
                     # Posters
                     if match is 1:
@@ -273,11 +280,6 @@ def update(metadata,siteID,movieGenres,movieActors):
                                     art.append(posterURL.get('data-orig-file').replace('images.', ''))
                                 Log("Images found on Xart Fan.")
 
-                            if i is 2:
-                                # Nude-Gals
-                                for posterURL in fanPageElements.xpath('(//div[@class="row row_margintop"]//a)[not(contains(@title, "#"))]'):
-                                    art.append("https://nude-gals.com/" + posterURL.get('href'))
-                                Log("Images found on Nude-Gals.")
                             if i is 3:
                                 # Xart Beauties
                                 for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
@@ -288,6 +290,11 @@ def update(metadata,siteID,movieGenres,movieActors):
                                 for posterURL in fanPageElements.xpath('//div[contains(@class, "my-gallery")]//a'):
                                     art.append(posterURL.get('href'))
                                 Log("Images found on Erotic Beauties.")
+                            if i is 5:
+                                # Nude-Gals
+                                for posterURL in fanPageElements.xpath('(//div[@class="row row_margintop"]//a)[not(contains(@title, "#"))]'):
+                                    art.append("https://nude-gals.com/" + posterURL.get('href'))
+                                Log("Images found on Nude-Gals.")
                         except:
                             Log("No Images Found")
                             pass
@@ -329,7 +336,5 @@ def update(metadata,siteID,movieGenres,movieActors):
                     j = j + 1
                 except:
                     Log("there was an issue")
-                    pass
-
     
     return metadata
