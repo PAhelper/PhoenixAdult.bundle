@@ -118,7 +118,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "Lubed".lower():
         fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title)
     elif siteName.lower() == "PassionHD".lower():
-        fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title)
+        for site in ["PassionHDFan.com", "HQSluts.com"]:
+            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title)
     else: 
         fanSite = PAextras.getFanArt("HQSluts.com", art, actors, actorName, metadata.title)
     
