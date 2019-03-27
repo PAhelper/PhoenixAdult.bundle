@@ -15,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("firstActor: " + firstActor)
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Screwbox] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = firstActor + " in " + titleNoFormatting + " [Screwbox] ", score = score, lang = lang))
     return results
 def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
