@@ -40,13 +40,10 @@ def getFanArt(site, art, actors, actorName, title):
                             nameinheader = fanPageElements.xpath('(//div[@id="header-text"]//p//a)[not(position()=last())]')[0].text_content()
                         elif site == "XartFan.com":
                             nameinheader = fanPageElements.xpath('//header[@class="entry-header"]/p//a')[0].text_content()
-                        
-
                             
                         Log("Actress name in header: " + nameinheader)
                     except:
                         Log("No Actress found in the site header")
-                        pass
                         
                 #CHECK IF WE HAVE A FANSITE MATCH USING ACTOR NAMES    
                     if actorName in nameinheader or actress in nameinheader:
@@ -68,7 +65,6 @@ def getFanArt(site, art, actors, actorName, title):
                                         match = 1
                         except:
                             Log("No Actress Match")
-                            pass
                          
                     
                     # POSTERS
@@ -97,16 +93,9 @@ def getFanArt(site, art, actors, actorName, title):
                             elif site == "XartFan.com":
                                 for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a//img'):
                                     art.append(posterURL.get('data-orig-file').replace('images.', ''))
-                                    
-                            
-                            
-                            
-                            
-                            
                                 
                         except:
                             Log("No Images Found")
-                            pass
                         
                         
                         Log("Artwork found: " + str(len(art)))
@@ -114,7 +103,6 @@ def getFanArt(site, art, actors, actorName, title):
                             match = 2
                 except:
                     Log("No Fansite Match")
-                    pass
                     
                 if match is 1 or match is 2:
                     # Summary
@@ -138,16 +126,10 @@ def getFanArt(site, art, actors, actorName, title):
                                 for paragraph in paragraphs:
                                     summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
                             else:
-                                summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content()
+                                summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
                     except:
-                        Log("Error grabbing fansite summary")
-                        pass  
+                        Log("Error grabbing fansite summary")  
                         
     except:
         Log("No Fansite Match")
-        pass
     return (art, summary, match)
-        
-
-
-                  
