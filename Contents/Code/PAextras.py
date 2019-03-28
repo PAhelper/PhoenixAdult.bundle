@@ -93,6 +93,11 @@ def getFanArt(site, art, actors, actorName, title):
     summary = ""
     actress = ""
     match = 0
+    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
+    
+    if site not in validSites:
+        Log("CAUTION: " + site + " is not an accepted PAextras search term. Sites are case sensitive: PassionHDFan.com is acceptable, Passionhdfan.com is not.")
+    return (art, summary, match)
     
     overrideSettings = getBadMatchID(title) 
     if overrideSettings != 9999:
