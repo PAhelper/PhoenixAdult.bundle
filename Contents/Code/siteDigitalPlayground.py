@@ -134,7 +134,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(genres) > 0:
         for genre in genres:
             genreName = str(genre.text_content().lower().strip())
-            movieGenres.addGenre(genreName)
+            if "episode" not in genreName:
+                movieGenres.addGenre(genreName)
 
     # Date
     try:

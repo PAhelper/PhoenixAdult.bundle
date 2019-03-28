@@ -63,10 +63,19 @@ def update(metadata,siteID,movieGenres,movieActors):
     valid_names = list()
     metadata.posters.validate_keys(valid_names)
     metadata.art.validate_keys(valid_names)
-    posters = detailsPageElements.xpath('//a[contains(@class,"scene-image")]')
-    background = "http:" + detailsPageElements.xpath('//video')[0].get("poster")
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    try:
+        background = "http:" + detailsPageElements.xpath('//video')[0].get("poster")
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
 
+    try:
+        background = "http:" + detailsPageElements.xpath('//img[@class="start-card"]')[0].get("src")
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
+    
+    posters = detailsPageElements.xpath('//a[contains(@class,"scene-image")]')
     posterNum = 1
     for posterCur in posters:
         posterURL = "http:" + posterCur.get("href")

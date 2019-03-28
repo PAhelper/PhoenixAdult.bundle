@@ -43,7 +43,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = subSite
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
-    metadata.collections.add(metadata.studio)
 
 
     # Summary
@@ -53,10 +52,9 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log('No summary found')
 
     # Date
-    dateRaw = detailsPageElements.xpath('//span[@class="date"]//span[@class="content"]')[0].text_content()
-    date = dateRaw.replace(subSite,"").replace('Video added on','').replace("th","").replace('st','').strip()
+    date = detailsPageElements.xpath('//span[@class="date"]/span[@class="content"]')[0].text_content().replace(subSite,"").replace('Video added on','').strip()
     Log("date: " + date)
-    date_object = datetime.strptime(date, '%b %d, %Y')
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
@@ -77,14 +75,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Genres
     movieGenres.clearGenres()
     if subSite == 'KarupsHA':
-        genres = []
+        genres = ["Amateur"]
     if subSite == 'KarupsPC':
         genres = []
     if subSite == 'KarupsOW':
         genres = ["MILF"]
     for genre in genres:
         movieGenres.addGenre(genre)
-        # Log("Genre: " + genre)
 
     # Posters/Background
     valid_names = list()

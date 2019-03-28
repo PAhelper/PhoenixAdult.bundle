@@ -113,7 +113,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = ["GFE", "Girlfriend Experience", "Pornstar", "Hotel", "PSE", "Pornstar Experience"]
+    genres = ["Girlfriend Experience", "Pornstar", "Hotel", "Pornstar Experience"]
     if (len(actors) + len(maleActors)) == 3:
         genres.append("Threesome")
         if len(actors) == 2:

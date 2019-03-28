@@ -100,6 +100,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-03-28 8:15AM CST - Cleaning up Genres all over the place, and made TeenMegaWorld Linux compatible :)
 - 2019-03-02 4:45PM CST - Bugfixes for SexBabesVR, added support for sister sites SinsVR and StasyQ VR
 - 2019-03-02 11:00AM EST - Added Manyvids (by id)
 - 2019-03-02 3:30PM AEST - Added Sis Loves Me (a TeemSkeet site) functional but can be refined.

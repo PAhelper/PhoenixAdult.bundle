@@ -40,8 +40,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().strip('\n').lower()
-            movieGenres.addGenre(genreName)
+            genreName = genreLink.text_content().strip().lower()
+            if "cumshots" not in genreName:
+                movieGenres.addGenre(genreName)
 
 
     # Release Date

@@ -67,6 +67,8 @@ class PhoenixActors:
                 newActor = "Sara Luvv"
             if newActor == "Kari Sweets":
                 newActor = "Kari Sweet"
+            if newActor == "Criss Strokes":
+                newActor = "Chris Strokes"
             if "Jassie Gold" == newActor or "Jaggie Gold" == newActor:
                 newActor = "Jessi Gold"
             if "Maria Rya" == newActor or "Melena Maria" == newActor:
