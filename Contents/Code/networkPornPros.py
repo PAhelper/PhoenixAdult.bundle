@@ -129,7 +129,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     match = fanSite[2]
 
     try:
-        if len(metadata.summary) < len(summary):
+        if len(summary) > 0:
             metadata.summary = summary 
     except:
         metadata.summary = summary
