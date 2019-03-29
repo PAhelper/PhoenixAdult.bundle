@@ -177,142 +177,27 @@ def update(metadata,siteID,movieGenres,movieActors):
         posterURL = background[:-21] + "2.jpg"
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = 1)
 
-    # Extra Posters
+
+    #Extra Posters
+    import random
     art=[]
-    match = 0
-    from googlesearch import search
+            
+    for site in ["XartFan.com", "HQSluts.com", "XartBeauties.com/galleries"]:
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title)
+        match = fanSite[2]
+        if match is 1:
+            break
 
-    overrideSettings = getBadMatchID(metadata.title) 
-    if overrideSettings != 9999:
-        overrideURL = overrideSettings[1]
-        overrideSite = overrideSettings[0]
-    
-    if getNoMatchID(metadata.title) == 9999:
-        for i in range(1,4):
-        
-            if match is 0 or match is 2:
-                if i is 1:
-                    Log("Trying XartFan")
-                    urls = search('site:xartfan.com ' + actorName + ' ' + metadata.title, stop=2)
-                 # Test PAextras match
-                elif i is 2:
-                    fanSite = PAextras.getFanArt("hqsluts.com", art, actors, actorName, metadata.title)
-                    try:
-                        if str(len(art)) > 1:
-                            match = 1
-                    except:
-                        pass
-                elif i is 3:
-                    Log("Trying XartBeauties")
-                    urls = search('site:xartbeauties.com/galleries ' + actorName + ' ' + metadata.title, stop=2)
-                elif i is 4:
-                    Log("Trying EroticBeauties")
-                    urls = search('site:eroticbeauties.net/pics ' + actorName + ' ' + metadata.title, stop=2)
-                elif i is 5:
-                    Log("Trying Nude-Gals")
-                    urls = search('site:nude-gals.com ' + actorName + ' ' + metadata.title, stop=2)
-                    
-            for url in urls:
-                if match is 0 or match is 2:
-                    if overrideSettings != 9999:
-                        url = overrideURL
-                        i = overrideSite
-                        Log("Title known for bad fan match. URL set manually.")
-
-                    googleSearchURL = url
-                    fanPageElements = HTML.ElementFromURL(googleSearchURL)
-
-                    try:
-                        # See if the actress name matches
-                        if i is 1:
-                            # Xartfan
-                            nameinheader = fanPageElements.xpath('//header[@class="entry-header"]/p//a')[0].text_content()
-                            Log("Actress name in header: " + nameinheader)
-                        if i is 3:
-                            # Xart Beauties
-                            nameinheader = fanPageElements.xpath('(//div[@id="header-text"]//p//a)[not(position()=last())]')[0].text_content()
-                            Log("Actress name in header: " + nameinheader)
-                        if i is 4:
-                            # Erotic Beauties
-                            nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]')[0].text_content()
-                            Log("Actress name in header: " + nameinheader)
-                        if i is 5:
-                            # Nude-Gals
-                            nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
-                            Log("Actress name in header: " + nameinheader)
-                        try: 
-                            for actorLink in actors:
-                                if match is 0 or match is 2:
-                                    actorName = actorLink.text_content()
-                                    Log("Comparing with " + actorName)
-                                    if actorName in nameinheader or nameinheader in actorName:
-                                        Log("Fansite Match Found")
-                                        match = 1
-                                    else:
-                                        try:
-                                        # When there are multiple actors listed we need to check all of them.
-                                            for name in nameinheader:
-                                                if match is 0 or match is 2:
-                                                    Log(name + " vs " + actorName)
-                                                    if actorName.lower() in name.lower():
-                                                        Log(siteName + " Fansite Match Found")
-                                                        match = 1
-                                            
-                                        except:
-                                            Log("No Actress Match")
-                        except:
-                            Log("No Actress Match")
-                    except:
-                        Log("No Actress found in the site header")
-                    
-                    # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
-                    if overrideSettings != 9999:
-                        match = 1
-                    
-                         
-                    # Posters
-                    if match is 1:
-                        try:
-                            Log("Searching for images")
-                            if i is 1:
-                                # Xart Fan
-                                for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a//img'):
-                                    art.append(posterURL.get('data-orig-file').replace('images.', ''))
-                                Log("Images found on Xart Fan.")
-
-                            if i is 3:
-                                # Xart Beauties
-                                for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
-                                    art.append(posterURL.get('src').replace('images.', 'www.').replace('/tn', ''))
-                                Log("Images found on Xart Beauties.")
-                            if i is 4:
-                                # Erotic Beauties
-                                for posterURL in fanPageElements.xpath('//div[contains(@class, "my-gallery")]//a'):
-                                    art.append(posterURL.get('href'))
-                                Log("Images found on Erotic Beauties.")
-                            if i is 5:
-                                # Nude-Gals
-                                for posterURL in fanPageElements.xpath('(//div[@class="row row_margintop"]//a)[not(contains(@title, "#"))]'):
-                                    art.append("https://nude-gals.com/" + posterURL.get('href'))
-                                Log("Images found on Nude-Gals.")
-                        except:
-                            Log("No Images Found")
-                            pass
-                            
-                        Log("Artwork found: " + str(len(art)))
-                        if len(art) < 9 and match is 1:
-                            Log("Less than 10 images found. Searching for more")
-                            match = 2
-                
-        if match is 1 or match is 2:
-            # Return, first few, last one and randóm selection of images
-            # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
-            try:
-                sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
-                art = sample
-                Log("Selecting subset of " + str(len(art)) + " images from the set.")
-            except:
-                pass
+ 
+    if match is 1 or match is 2:
+        # Return, first few, last one and randóm selection of images
+        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
+        try:
+            sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
+            art = sample
+            Log("Selecting subset of " + str(len(art)) + " images from the set.")
+        except:
+            pass
                         
         j = 1
                                                       
@@ -336,5 +221,5 @@ def update(metadata,siteID,movieGenres,movieActors):
                     j = j + 1
                 except:
                     Log("there was an issue")
-    
+
     return metadata
