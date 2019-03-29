@@ -94,15 +94,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     
-    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title)
+    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title, 0)
     summary = fanSite[1]
     match = fanSite[2]
 
-    try:
-        if len(metadata.summary) < len(summary):
-            metadata.summary = summary 
-    except:
-        metadata.summary = summary  
+    if len(metadata.summary) < len(summary):
+        metadata.summary = summary.strip()   
                     
     if match is 1 and len(art) >= 10 or match is 2 and len(art) >= 10:
         # Return, first, last and randóm selection of 4 more images
