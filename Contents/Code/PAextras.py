@@ -240,7 +240,6 @@ def getFanArt(site, art, actors, actorName, title, match):
                                             summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
                                     else:
                                         summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
-                                Log(summary)
                             except:
                                 Log("Error grabbing fansite summary")  
                         
