@@ -155,7 +155,7 @@ def getFanArt(site, art, actors, actorName, title, match):
                                         if site == "TeamSkeetFans.com":
                                             actorName = actorLink
                                         else:
-                                            actorName = actorLink.text_content()
+                                            actorName = actorLink.text_content().strip()
                                         Log(actorName + " vs " + nameinheader)
                                         try:
                                             if actorName.lower() in nameinheader.lower() or actress.lower() in nameinheader.lower():
@@ -240,8 +240,10 @@ def getFanArt(site, art, actors, actorName, title, match):
                                             summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
                                     else:
                                         summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
+                                Log(summary)
                             except:
-                                Log("Error grabbing fansite summary")
+                                Log("Error grabbing fansite summary")  
+                        
         except:
             Log("No Fansite Match")
     return (art, summary, match)
