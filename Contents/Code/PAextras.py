@@ -88,11 +88,10 @@ def getBadMatchID(scene):
     return 9999
 
 # HQ Sluts Fansite Search
-def getFanArt(site, art, actors, actorName, title):
+def getFanArt(site, art, actors, actorName, title, match):
 
     summary = ""
     actress = "notarealperson"
-    match = 0
     validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
     
     if site not in validSites:
@@ -242,8 +241,7 @@ def getFanArt(site, art, actors, actorName, title):
                                     else:
                                         summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
                             except:
-                                Log("Error grabbing fansite summary")  
-                        
+                                Log("Error grabbing fansite summary")
         except:
             Log("No Fansite Match")
     return (art, summary, match)
