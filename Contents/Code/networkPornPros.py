@@ -21,7 +21,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
-    art = []
 
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
     Log('scene url: ' + url)
@@ -110,6 +109,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 	
     #Extra Posters
     import random
+    art = []
     
     if siteName.lower() == "Holed".lower():
         fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title)
