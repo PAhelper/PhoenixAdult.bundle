@@ -92,11 +92,14 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # DVD Cover as first poster
     posterNum = 1
-    dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
-    if dvdPosterURL == None:
-        dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
-    metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-    posterNum += 1
+    try:
+        dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
+        if dvdPosterURL == None:
+            dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
+        metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+        posterNum += 1
+    except:
+        Log("DVD Cover not found")
 
 
     # Background

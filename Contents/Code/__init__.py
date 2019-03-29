@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace('XXX','').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -688,6 +688,42 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
                     results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Family Strokes
+            ###############
+            if siteNum == 626:
+                if searchSiteID == 9999 or searchSiteID == 626:
+                    results = PAsearchSites.siteFamilyStrokes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Tonights Girlfriend
+            ###############
+            if siteNum == 627:
+                if searchSiteID == 9999 or searchSiteID == 627:
+                    results = PAsearchSites.siteTonightsGirlfriend.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Karups
+            ###############
+            if siteNum == 628:
+                if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
+                    results = PAsearchSites.siteKarups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## TeenMegaWorld
+            ###############
+            if siteNum == 631:
+                if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 666):
+                    results = PAsearchSites.networkTMW.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## TrenchcoatX
+            ###############
+            if siteNum == 667:
+                if searchSiteID == 9999 or searchSiteID == 667:
+                    results = PAsearchSites.siteTrenchcoatX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            ###############
+            ## Screwbox
+            ###############
+            if siteNum == 668:
+                if searchSiteID == 9999 or searchSiteID == 668:
+                    results = PAsearchSites.siteScrewbox.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1112,6 +1148,54 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 621 and siteID <= 623):
             metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Family Strokes                                          ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 626:
+            metadata = PAsearchSites.siteFamilyStrokes.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Tonights Girlfriend                                     ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 627:
+            metadata = PAsearchSites.siteTonightsGirlfriend.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Karups                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 628 and siteID <= 630):
+            metadata = PAsearchSites.siteKarups.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TeenMegaWorld                                           ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 631 and siteID <= 666):
+            metadata = PAsearchSites.networkTMW.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TrenchcoatX                                     ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 667:
+            metadata = PAsearchSites.siteTrenchcoatX.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Tonights Girlfriend                                     ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 668:
+            metadata = PAsearchSites.siteScrewbox.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

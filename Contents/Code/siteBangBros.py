@@ -34,7 +34,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "Bang Bros"
-    metadata.summary = detailsPageElements.xpath('//div[@class="vdoDesc"]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[@class="vdoDesc"]')[0].text_content().strip()
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
     releaseID = detailsPageElements.xpath('//div[@class="vdoCast"]')[1].text_content()[9:]
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + releaseID)

@@ -5,8 +5,6 @@ class PhoenixGenres:
         self.genresTable = [None] * 100
         self.genresNum = 0
     def addGenre(self,newGenre):
-        #Log("GenresNum: " + str(self.genresNum))
-        #Log("SizeOf: " + str(len(self.genresTable)))
         self.genresTable[self.genresNum] = newGenre
         self.genresNum = self.genresNum + 1
     def clearGenres(self):
@@ -15,27 +13,21 @@ class PhoenixGenres:
         genresProcessed = 0
         while genresProcessed < self.genresNum:
             skip = False
-            #Log(str(skip))
-            newGenre = self.genresTable[genresProcessed]
+            newGenre = self.genresTable[genresProcessed].replace('"','').strip()
+
             ##### Skips
             if "4k" == newGenre.lower():
                 skip = True
-                #Log("skip1")
             if "18+teens" == newGenre.lower():
                 skip = True
-                #Log("skip2")
             if "18+ teens" == newGenre.lower():
                 skip = True
-                #Log("skip3")
             if "babes" == newGenre.lower():
                 skip = True
-                #Log("skip4")
             if "bonus" == newGenre.lower():
                 skip = True
-                #Log("skip5")
             if "gonzo" == newGenre.lower():
                 skip = True
-                #Log("skip6")
             if "18" == newGenre.lower():
                 skip = True
             if "18 year" == newGenre.lower():
@@ -52,11 +44,15 @@ class PhoenixGenres:
                 skip = True
             if "60fps" in newGenre.lower():
                 skip = True
+            if "hd" in newGenre.lower():
+                skip = True
 
             ##### Replace
+            if "atm" == newGenre.lower():
+                newGenre = "Ass to Mouth"
             if "big ass" == newGenre.lower() or "big booty" == newGenre.lower() or "bib booty" == newGenre.lower() or "girl big ass" == newGenre.lower():
                 newGenre = "Big Butt"
-            if "3some" == newGenre.lower():
+            if "3some" == newGenre.lower() or "3 way" == newGenre.lower():
                 newGenre = "threesome"
             if "ball licking" == newGenre.lower() or "ball sucking" == newGenre.lower():
                 newGenre = "ball play"
@@ -124,10 +120,10 @@ class PhoenixGenres:
                 newGenre = "fake tits"
             if "trimmed" == newGenre.lower():
                 newGenre = "trimmed pussy"
-
-            
-            
-            
+            if "pse" == newGenre.lower():
+                newGenre = "Pornstar Experience"
+            if "gfe" == newGenre.lower():
+                newGenre = "Girlfriend Experience"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower():
@@ -138,8 +134,6 @@ class PhoenixGenres:
                 newGenre = "reverse cowgirl (Position)"
             if "missionary" == newGenre.lower() or "missionary (pov)" == newGenre.lower():
                 newGenre = "missionary (Position)"
-
-
 
             if len(newGenre) > 25:
                 skip = True
@@ -156,11 +150,6 @@ class PhoenixGenres:
                 if 3 < len(newGenre.split(" ")):
                     skip = True
                     
-            #if skip:
-                #Log("Skip genre")
-            
-
-            #Log("Genre: " + newGenre)
             if not skip:
                 metadata.genres.add(newGenre.title())
             genresProcessed = genresProcessed + 1

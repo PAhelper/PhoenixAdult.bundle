@@ -100,6 +100,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-03-28 8:15AM CST - Cleaning up Genres all over the place, and made TeenMegaWorld Linux compatible :)
 - 2019-03-02 4:45PM CST - Bugfixes for SexBabesVR, added support for sister sites SinsVR and StasyQ VR
 - 2019-03-02 11:00AM EST - Added Manyvids (by id)
 - 2019-03-02 3:30PM AEST - Added Sis Loves Me (a TeemSkeet site) functional but can be refined.
@@ -282,6 +283,14 @@ Supported Networks
 #### - NewSensations *Actress Search* *DVD search* (exact spellings)
 #### - FinishesTheJob *Title Search* *Actor Search*
 #### - SexArt *Title Search* *Actor Search*
+#### - TeenMegaWorld Network *Title Search* *Actor Search*
+#### - Karups Network *Actor Search*
+#### - Tonight's Girlfriend *Actor Search*
+#### - FamilyStrokes *url Match* *Unofficial Scene Title match*
+#### - TrenchcoatX *Title Search* *Actor Search*
+#### - Screwbox *Title Search* *Actor Search*
+
+
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
 If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests
