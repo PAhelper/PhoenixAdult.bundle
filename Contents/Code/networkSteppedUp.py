@@ -77,7 +77,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h2[@class="title"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
 
     # Genres
     movieGenres.clearGenres()
