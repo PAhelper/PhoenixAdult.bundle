@@ -725,6 +725,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 668:
                     results = PAsearchSites.siteScrewbox.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## MissaX / AllHerLuv
+            ###############
+            if siteNum == 669:
+                if searchSiteID == 9999 or searchSiteID == 669 or searchSiteID == 670:
+                    results = PAsearchSites.siteMissaX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1183,7 +1190,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  TrenchcoatX                                     ##
+        ##  TrenchcoatX                                             ##
         ##                                                          ##
         ##############################################################
         if siteID == 667:
@@ -1191,11 +1198,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Tonights Girlfriend                                     ##
+        ##  Screwbox                                                ##
         ##                                                          ##
         ##############################################################
         if siteID == 668:
             metadata = PAsearchSites.siteScrewbox.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MissaX / AllHerLuv                                      ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 669 or siteID == 670:
+            metadata = PAsearchSites.siteMissaX.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
