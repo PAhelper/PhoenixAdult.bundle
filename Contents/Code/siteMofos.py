@@ -69,12 +69,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     #Posters
-    background = "https:" + detailsPageElements.xpath('//*[@id="trailer-player"]/img')[0].get('src')
-    Log("BG DL: " + background)
+    try:
+        background = "https:" + detailsPageElements.xpath('//*[@id="trailer-player"]/img')[0].get('src')
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
     posterURL = background[:-5]
-    Log("Poster: " + posterURL)
     for i in range(1, 6):
-        metadata.art[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 6-i)
-        metadata.posters[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        try:
+            metadata.art[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 6-i)
+            metadata.posters[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        except:
+            pass
 
     return metadata

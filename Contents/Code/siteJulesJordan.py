@@ -33,12 +33,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
 
-    metadata.summary = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//span[@class="update_dvds"]/a')[0].text_content().strip()
     tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     tagline = tagline.strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+    try:
+        dvdName = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content().strip()
+        metadata.collections.add(dvdName)
+    except:
+        pass
     metadata.title = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content().strip()
 
     # Genres

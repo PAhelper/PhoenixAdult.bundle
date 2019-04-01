@@ -10,8 +10,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             searchString = searchTitle.replace(" ","-")
             searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
         except:
-            searchString = searchTitle.replace(" ","")
-            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
+            try:
+                searchString = searchTitle.replace(" ","")
+                searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
+            except:
+                searchString = searchTitle.replace(" ","")
+                searchInt = int(searchString)
+                searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
         for searchResult in searchResults.xpath('//div[contains(@class,"videoBlock")]'):
             titleNoFormatting = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].text_content()
             Log("titleNoFormatting: " + titleNoFormatting)
