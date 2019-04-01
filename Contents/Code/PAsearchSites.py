@@ -811,6 +811,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mwhf ', 'MyWifesHotFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
