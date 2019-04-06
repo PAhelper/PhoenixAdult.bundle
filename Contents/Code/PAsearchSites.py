@@ -51,8 +51,10 @@ import networkTMW
 import siteScrewbox
 import siteTrenchcoatX
 import siteMissaX
+import siteMylf
 
-searchSites = [None] * 671
+
+searchSites = [None] * 681
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -724,6 +726,16 @@ searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 searchSites[669] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
 searchSites[670] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]
+searchSites[671] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[672] = ["MylfBoss","MylfBoss","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[673] = ["MylfBlows","MylfBlows","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[674] = ["Mylfty","Mylfty","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[675] = ["GotMylf","GotMylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[676] = ["MomDrips","MomDrips","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[677] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[678] = ["MylfBody","MylfBody","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[679] = ["LoneMylf","LoneMylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[680] = ["FullOfJOI","FullOfJOI","https://mylf.com","https://www.mylf.com/movies/"]
 
 
 def getSearchBaseURL(siteID):

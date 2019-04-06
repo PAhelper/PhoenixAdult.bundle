@@ -732,6 +732,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 669 or searchSiteID == 670:
                     results = PAsearchSites.siteMissaX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Mylf
+            ###############
+            if siteNum == 671:
+                if searchSiteID == 9999 or (searchSiteID >= 671 and searchSiteID <= 680):
+                    results = PAsearchSites.siteMylf.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1211,6 +1218,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 669 or siteID == 670:
             metadata = PAsearchSites.siteMissaX.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Mylf                                                    ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 671 or siteID == 680:
+            metadata = PAsearchSites.siteMylf.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
