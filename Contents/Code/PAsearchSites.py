@@ -50,8 +50,9 @@ import siteKarups
 import networkTMW
 import siteScrewbox
 import siteTrenchcoatX
+import siteDorcelClub
 
-searchSites = [None] * 669
+searchSites = [None] * 670
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -721,6 +722,7 @@ searchSites[665] = ["X Angels","X Angels","http://teenmegaworld.net","http://tee
 searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","http://teenmegaworld.net","http://teenmegaworld.net/search.php?query="]
 searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https://trenchcoatx.com/search.php?query="]
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
+searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
 
 
 def getSearchBaseURL(siteID):
@@ -770,6 +772,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tlhc ', 'TeensLoveHugeCocks ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlc ', 'TeensLoveCream ', mediaTitle, flags=re.IGNORECASE)
