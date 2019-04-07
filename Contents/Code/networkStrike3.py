@@ -109,7 +109,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     director = metadata.directors.new()
     alpha = bigScript.find('directorNames')+16
     omega = bigScript.find('"',alpha)
-    director.name = bigScript[alpha:omega]
+    dirName = bigScript[alpha:omega]
+    if dirName == "ull," or dirName == '':
+        dirName = "Greg Lansky"
+    director.name = dirName
 
     # Posters/Background
     valid_names = list()
