@@ -630,7 +630,7 @@ searchSites[573] = ["The Stripper Experience","The Stripper Experience","https:/
 searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
-searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[577] = ["Raw Attack","Raw Attack","https://www.rawattack.com","https://rawattack.com/search.php?query="]
 searchSites[578] = ["CzechVR","CzechVR","https://www.czechvr.com","https://www.czechvr.com/model-"]
 searchSites[579] = ["CzechVR Fetish","CzechVR Fetish","https://www.czechvrfetish.com","https://www.czechvrfetish.com/model-"]
 searchSites[580] = ["CzechVR Casting","CzechVR Casting","https://www.czechvrcasting.com","https://www.czechvrcasting.com/model-"]
