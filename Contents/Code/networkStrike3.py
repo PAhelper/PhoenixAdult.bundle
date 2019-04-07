@@ -6,25 +6,21 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     if siteNum != 670: # If it's any of the sites besides TushyRaw that have a search function, let's use that
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-        for searchResult in searchResults.xpath('//article[@class="videolist-item"]'):
-            titleNoFormatting = searchResult.xpath('.//h4[@class="videolist-caption-title"]')[0].text_content()
-            curID = searchResult.xpath('.//a[contains(@class,"videolist-link")]')[0].get('href')
-            curID = curID.replace('/','_').replace('?','!')
-            releaseDate = parse(searchResult.xpath('.//div[@class="videolist-caption-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-            if searchDate:
+        for searchResult in searchResults.xpath('//div[@class="pb6v16-1 fNpwyc"]'):
+            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
+            scenePage = searchResult.xpath('.//a')[0].get('href')
+            curID = scenePage.replace('/','_').replace('?','!')
+            detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + scenePage)
+            bigScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
+            alpha = bigScript.find('"releaseDate":"')+15
+            omega = bigScript.find('"',alpha)
+            date = bigScript[alpha:omega]
+            releaseDate = parse(date).strftime('%Y-%m-%d')
+            if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
-
-        # I'm getting redirected to https://beta.blacked.com for searches, unsure if everybody else is; this should pull results from the beta search:
-        for searchResult in searchResults.xpath('//div[@class="pb6v16-1 fNpwyc"]'):
-            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
-            curID = searchResult.xpath('.//a')[0].get('href')
-            curID = curID.replace('/','_').replace('?','!')
-            score = 102 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            titleNoFormatting = titleNoFormatting + " [" + PAsearchSites.searchSites[siteNum][1] + "]"
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
     else: # Special parsing for TushyRaw exact match until they get a search function put in
         encodedTitle = searchTitle.lower().strip().replace(' ','-')
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + '/' + encodedTitle)
@@ -35,7 +31,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         omega = bigScript.find('"',alpha)
         date = bigScript[alpha:omega]
         releaseDate = parse(date).strftime('%Y-%m-%d')
-        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        score = 100
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
@@ -55,26 +51,18 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
 
     # Summary
-    try:
-        paragraph = detailsPageElements.xpath('//span[@class="moreless js-readmore"]')[0].text_content().strip()
-    except:
-        paragraph = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').strip()
-    metadata.summary = paragraph
+    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').strip()
 
     # Title
-    metadata.title = detailsPageElements.xpath('//*[@id="castme-title"] | //h1[@data-test-component="VideoTitle"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@data-test-component="VideoTitle"]')[0].text_content().strip()
 
     # Release Date
-    try:
-        date = detailsPageElements.xpath('//span[@class="right"]/span[@class="info"] | //span[@class="player-description-detail"]/span[@class="info"]')[0].text_content()
-        date_object = datetime.strptime(date, '%B %d, %Y')
-    except:
-        bigScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
-        alpha = bigScript.find('"releaseDate":"')+15
-        omega = bigScript.find('"',alpha)
-        date = bigScript[alpha:omega]
-        date_object = parse(date)
-        Log("Must be beta...")
+    wholeScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
+    bigScript = wholeScript[:wholeScript.find("itsUpAds")] # This should truncate bigScript to just the parts relevant to the current scene
+    alpha = bigScript.find('"releaseDate":"')+15
+    omega = bigScript.find('"',alpha)
+    date = bigScript[alpha:omega]
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year    
 
@@ -101,67 +89,101 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//p[@id="castme-subtitle"]/a | //span[@id="castme-subtitle"]/a | //div[@data-test-component="VideoModels"]/a')
+    actors = detailsPageElements.xpath('//div[@data-test-component="VideoModels"]/a')
 
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
-            try:
-                actorPhotoURL = actorPage.xpath('//img[@class="thumb-img"]')[0].get("src")
-            except:
-                actorBigScript = actorPage.xpath('//footer/following::script[1]')[0].text_content()
-                alpha = actorBigScript.find('"src":"')+7
-                omega = actorBigScript.find('"',alpha)
-                actorPhotoURL = actorBigScript[alpha:omega].decode('unicode_escape')
-                if 'http' not in actorPhotoURL:
-                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID)+actorPhotoURL
+            actorBigScript = actorPage.xpath('//footer/following::script[1]')[0].text_content()
+            alpha = actorBigScript.find('"src":"')+7
+            omega = actorBigScript.find('"',alpha)
+            actorPhotoURL = actorBigScript[alpha:omega].decode('unicode_escape')
+            if 'http' not in actorPhotoURL:
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID)+actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Director
     metadata.directors.clear()
     director = metadata.directors.new()
-    director.name = 'Greg Lansky'
+    alpha = bigScript.find('directorNames')+16
+    omega = bigScript.find('"',alpha)
+    director.name = bigScript[alpha:omega]
 
     # Posters/Background
     valid_names = list()
     metadata.posters.validate_keys(valid_names)
     metadata.art.validate_keys(valid_names)
-    try:
-        art.append(detailsPageElements.xpath('//img[contains(@class,"player-img")]')[0].get("src"))
-    except:
-        # This is where beta.*.com code will go
-        alpha = bigScript.find('"width":1200,"height":800,"src"')+33
-        omega = bigScript.find('"',alpha)
-        background = bigScript[alpha:omega].decode('unicode_escape')
-        if 'http' not in background:
-            background = PAsearchSites.getSearchBaseURL(siteID)+background
-        Log("background: "+background)
-        art.append(background)
 
-    try:
-        posters = detailsPageElements.xpath('//div[@class="swiper-slide"]')
-        posterNum = 1
-        for posterCur in posters:
-            posterURL = posterCur.xpath('.//img[@class="swiper-content-img"]')[0].get("src")
-            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-            posterNum = posterNum + 1
-    except:
-        # This is where beta.*.com code will go
-        i = 1
-        alpha = 0
-        omega = 0
-        imageCount = bigScript.count('"width":1200,"height":800,"src"')
-        while i <= imageCount:
-            alpha = bigScript.find('"width":1200,"height":800,"src"',omega)+33
-            omega = bigScript.find('"',alpha)
-            posterUrl = bigScript[alpha:omega].decode('unicode_escape')
-            if 'http' not in posterUrl:
-                posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
-            Log("artwork: "+posterUrl)
-            art.append(posterUrl)
-            i = i + 1
+    # Background
+    alpha = 0
+    omega = 0
+    alpha = bigScript.find('mainLandscape_1920x1080')
+    alpha = bigScript.find('3x',alpha)
+    alpha = bigScript.find('http',alpha)
+    omega = bigScript.find('"',alpha)
+    posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+    if 'http' not in posterUrl and posterUrl != '':
+        posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+    Log("Background: "+posterUrl)
+    art.append(posterUrl)
+
+    # Promo Portait
+    alpha = 0
+    omega = 0
+    alpha = bigScript.find('promoPortrait_')
+    alpha = bigScript.find('3x',alpha)
+    alpha = bigScript.find('http',alpha)
+    omega = bigScript.find('"',alpha)
+    posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+    if 'http' not in posterUrl and posterUrl != '':
+        posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+    Log("Promo Portait: "+posterUrl)
+    art.append(posterUrl)
+
+    # Promo Portait (Landscape)
+    alpha = 0
+    omega = 0
+    alpha = bigScript.find('promoLandscape_')
+    alpha = bigScript.find('3x',alpha)
+    alpha = bigScript.find('http',alpha)
+    omega = bigScript.find('"',alpha)
+    posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+    if 'http' not in posterUrl and posterUrl != '':
+        posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+    Log("Promo Landscape: "+posterUrl)
+    art.append(posterUrl)
+
+    # Tall pictures
+    i = 1
+    alpha = 0
+    omega = 0
+    imageCount = bigScript.count('"width":800,"height":1200,"src"')
+    while i <= imageCount:
+        alpha = bigScript.find('"width":800,"height":1200,"src"',omega)+33
+        omega = bigScript.find('"',alpha)
+        posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+        if 'http' not in posterUrl and posterUrl != '':
+            posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+        Log("artwork: "+posterUrl)
+        art.append(posterUrl)
+        i = i + 1
+
+    # Wide pictures
+    i = 1
+    alpha = 0
+    omega = 0
+    imageCount = bigScript.count('"width":1200,"height":800,"src"')
+    while i <= imageCount:
+        alpha = bigScript.find('"width":1200,"height":800,"src"',omega)+33
+        omega = bigScript.find('"',alpha)
+        posterUrl = bigScript[alpha:omega].decode('unicode_escape')
+        if 'http' not in posterUrl and posterUrl != '':
+            posterUrl = PAsearchSites.getSearchBaseURL(siteID)+posterUrl
+        Log("artwork: "+posterUrl)
+        art.append(posterUrl)
+        i = i + 1
 
     # Posters
     j = 1
