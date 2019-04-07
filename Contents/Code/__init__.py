@@ -732,6 +732,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 669:
                     results = PAsearchSites.siteDorcelClub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Tushy
+            ###############
+            if siteNum == 670:
+                if searchSiteID == 9999 or searchSiteID == 670:
+                    results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -819,7 +826,6 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 136:
             metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
-
 
         ##############################################################
         ##                                                          ##
@@ -1211,6 +1217,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 669:
             metadata = PAsearchSites.siteDorcelClub.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   TushyRaw                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 670:
+            metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

@@ -100,6 +100,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-07 11:15AM CST - Added temporary TushyRaw support through direct match (until they have enough scenes to add a search function to the site). Direct Match URL usually is the video title...
 - 2019-04-06 8:30PM CST - Added DorcelClub support
 - 2019-04-05 8:00AM CST - Bugfix for BadoinkVR scene match
 - 2019-03-28 8:15AM CST - Cleaning up Genres all over the place, and made TeenMegaWorld Linux compatible :)
