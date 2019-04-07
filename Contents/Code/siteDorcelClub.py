@@ -9,7 +9,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="scene"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('.//div[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
+        curID = searchResult.xpath('.//div[@class="title"]/a')[0].get('href').replace('/','`').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().replace('Published','').strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -22,7 +22,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="movie"]'):
         titleNoFormatting = searchResult.xpath('./a/p')[0].text_content().strip()
         movieLink = searchResult.xpath('./a')[0].get('href')
-        curID = movieLink.replace('/','_').replace('?','!')
+        curID = movieLink.replace('/','`').replace('?','!')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " Full Movie ["+PAsearchSites.getSearchSiteName(siteNum)+"]", score = score, lang = lang))
@@ -31,7 +31,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         moviePageElements = HTML.ElementFromURL(movieLink)
         for movieScene in moviePageElements.xpath('//div[@class="scene"]'):
             titleNoFormatting = movieScene.xpath('.//div[@class="title"]/a')[0].text_content().strip()
-            curID = movieScene.xpath('.//div[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
+            curID = movieScene.xpath('.//div[@class="title"]/a')[0].get('href').replace('/','`').replace('?','!')
             releaseDate = parse(movieScene.xpath('.//span[@class="date"]')[0].text_content().replace('Published','').strip()).strftime('%Y-%m-%d')
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -45,7 +45,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.studio = 'Marc Dorcel'
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
+    url = str(metadata.id).split("|")[0].replace('`','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
     movieGenres.clearGenres()
     movieActors.clearActors()
@@ -78,21 +78,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre("French porn")
 
     # Actors
-    actors = detailsPageElements.xpath('//div[@class="actors"]/a')
-    if len(actors) > 0:
-        if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
-        if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
-        if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="profil"]/img')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
-
+    try: # For individual scene page
+        actors = detailsPageElements.xpath('//section[@id="pornstar"]//a')
+        if len(actors) > 0:
+            if "porn-movie" not in url and len(actors) == 3:
+                movieGenres.addGenre("Threesome")
+            if "porn-movie" not in url and len(actors) == 4:
+                movieGenres.addGenre("Foursome")
+            if "porn-movie" not in url and len(actors) > 4:
+                movieGenres.addGenre("Orgy")
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                actorPhotoURL = actorLink.xpath('./img')[0].get('src')
+                movieActors.addActor(actorName,actorPhotoURL)
+    except:
+        pass   
+    
     # Release Date
     date = detailsPageElements.xpath('//span[@class="date"]')[0].text_content().replace('Published','').strip()
     date_object = parse(date)
