@@ -1224,7 +1224,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Mylf                                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 671 or siteID == 680:
+        if (siteID >= 671 and siteID <= 680):
             metadata = PAsearchSites.siteMylf.update(metadata,siteID,movieGenres,movieActors)
 
 

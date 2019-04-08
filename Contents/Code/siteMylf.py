@@ -5,8 +5,12 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","")
+    Log("searchString: " + searchString)
+    if "/" not in searchString:
+        searchString = searchString.replace("-","/",1)
+        Log("searchString formatted")
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
 
     titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-7"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
     Log("titleNoFormatting: " + titleNoFormatting)
@@ -18,9 +22,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("firstActor: " + firstActor)
     subSite = searchResults.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').title()
     Log("subSite: " + subSite)
-
+    if searchDate == None:
+        searchDate = ''
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + searchDate , name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
 
     return results
 
@@ -33,42 +38,41 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     movieGenres.clearGenres()
     movieActors.clearActors()
-
+    urlBase = PAsearchSites.getSearchBaseURL(siteID)
     # Studio
     metadata.studio = 'Mylf'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="col-12 col-md-7"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//span[contains(@class,"m_scenetitle")]')[0].text_content().strip()
     Log("title: " + metadata.title)
 
     #Tagline and Collection(s)
-    subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').strip().title()
+    subSite = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = subSite
     metadata.collections.add(subSite)
     Log("subSite: " + subSite)
 
-    # Genres
-    # genres = detailsPageElements.xpath('//span[@class="update_tags"]/a')
-    # if len(genres) > 0:
-    #     for genreLink in genres:
-    #         genreName = genreLink.text_content().strip().lower()
-    #         movieGenres.addGenre(genreName)
+    # Summary
+    summary = detailsPageElements.xpath('//div[contains(@class,"text-light")]')[0].text_content().strip()
+    metadata.summary = summary.replace('See full video here >', '')
+
 
     # Release Date
-    # date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content().strip()
-    # if len(date) > 0:
-    #     date_object = parse(date)
-    #     metadata.originally_available_at = date_object
-    #     metadata.year = metadata.originally_available_at.year
+    date = str(metadata.id).split("|")[2]
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
 
     # Actors
     actors = detailsPageElements.xpath('//div[@class="col-12 col-md-8"]//a')
     if len(actors) > 0:
         for actor in actors:
-            actorName = actor.xpath('./span').text_content().strip()
-            actorPageURL = actorLink.get("href")
+            actorName = actor.xpath('./span')[0].text_content().strip()
+            actorPageURL = urlBase + actor.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//img[contains(@class,"girlthumb")]')[0].get("src")
+            actorPhotoURL = actorPage.xpath('//img[contains(@class,"girlthumb")]')[0].get("data-original")
             movieActors.addActor(actorName,actorPhotoURL)
             Log('actor: ' + actorName + ", " + actorPhotoURL)
 
@@ -78,18 +82,56 @@ def update(metadata,siteID,movieGenres,movieActors):
     posterNum = 1
     posters = detailsPageElements.xpath('//div[contains(@class,"trailer-small-images")]//a')
     for poster in posters:
-        posterLink = poster.get("href")
-        if posterLink != "/join":
-            posterURL = poster.xpath('.//img')[0].get('data-original')
+        posterURL = poster.get("href")
+        if posterURL != "/join":
+            if 'http' not in posterURL:
+                posterURL = urlBase + posterURL
             metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
             metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+            posterNum += 1
             Log('posterURL: ' + posterURL)
 
     # Video trailer background image
-    preview = detailsPageElements.xpath('//video[@id="my-video"]')[0].get('poster')
-    metadata.art[preview] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-    Log('previewIMG: ' + preview)
+    previewBG = detailsPageElements.xpath('//video[@id="my-video"]')[0].get('poster')
+    if 'http' not in previewBG:
+        previewBG = urlBase + previewBG
+    metadata.art[previewBG] = Proxy.Preview(HTTP.Request(previewBG, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+    Log('previewIMG: ' + previewBG)
 
-
+    # Genres
+    movieGenres.clearGenres()
+    genres = ["MILF", "Mature"]
+        # Based on site
+    if subSite.lower() == "MylfBoss".lower():
+        for genreName in ['Office', 'Boss']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "MylfBlows".lower():
+        for genreName in ['Blowjob']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Milfty".lower():
+        for genreName in ['Cheating']:
+            movieGenres.addGenre(genreName)
+    # elif subSite.lower() == "Got Mylf".lower():
+    #     for genreName in []:
+    #         movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Mom Drips".lower():
+        for genreName in ['Creampie']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Milf Body".lower():
+        for genreName in ['Gym', 'Fitness']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Lone Milf".lower():
+        for genreName in ['Solo']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Full Of JOI".lower():
+        for genreName in ['JOI']:
+            movieGenres.addGenre(genreName)
+    elif subSite.lower() == "Mylfed".lower():
+        for genreName in ['Lesbian', 'Girl on Girl', 'GG']:
+            movieGenres.addGenre(genreName)
+    if (len(actors) > 1) and subSite != "Mylfed":
+        genres.append("Threesome")
+    for genre in genres:
+        movieGenres.addGenre(genre)
 
     return metadata

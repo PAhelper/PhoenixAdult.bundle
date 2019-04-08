@@ -729,13 +729,13 @@ searchSites[670] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://all
 searchSites[671] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[672] = ["MylfBoss","MylfBoss","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[673] = ["MylfBlows","MylfBlows","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[674] = ["Mylfty","Mylfty","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[675] = ["GotMylf","GotMylf","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[676] = ["MomDrips","MomDrips","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[674] = ["Milfty","Milfty","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[675] = ["Got Mylf","Got Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[676] = ["Mom Drips","Mom Drips","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[677] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[678] = ["MylfBody","MylfBody","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[679] = ["LoneMylf","LoneMylf","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[680] = ["FullOfJOI","FullOfJOI","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[678] = ["Milf Body","Milf Body","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[679] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[680] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 
 
 def getSearchBaseURL(siteID):
