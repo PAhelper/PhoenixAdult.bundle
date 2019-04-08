@@ -50,11 +50,11 @@ import siteKarups
 import networkTMW
 import siteScrewbox
 import siteTrenchcoatX
+import siteDorcelClub
 import siteMissaX
 import siteMylf
 
-
-searchSites = [None] * 681
+searchSites = [None] * 683
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -361,28 +361,28 @@ searchSites[302] = ["Russian Teen Ass","Russian Teen Ass","https://www.private.c
 searchSites[303] = ["Sex on the beach","Sex on the beach","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[304] = ["Private Stars","Private Stars","https://www.private.com","https://www.private.com/search.php?query="]
 searchSites[305] = ["Tight and Teen","Tight and Teen","https://www.private.com","https://www.private.com/search.php?query="]
-searchSites[306] = ["PassionHD","PassionHD","http://www.passion-hd.com","http://passion-hd.com/video/"]
-searchSites[307] = ["FantasyHD","FantasyHD","http://www.fantasyhd.com","http://fantasyhd.com/video/"]
-searchSites[308] = ["PornPros","PornPros","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[309] = ["18YearsOld","18YearsOld","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[310] = ["RealExGirlfriends","RealExGirlfriends","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[311] = ["MassageCreep","MassageCreep","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[312] = ["DeepThroatLove","DeepThroatLove","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[313] = ["TeenBFF","TeenBFF","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[314] = ["ShadyPi","ShadyPi","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[315] = ["CrueltyParty","CrueltyParty","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[316] = ["Disgraced18","Disgraced18","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[317] = ["MilfHumiliation","MilfHumiliation","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[318] = ["CumshotSurprise","CumshotSurprise","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[319] = ["40ozBounce","40ozBounce","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[320] = ["JurassicCock","JurassicCock","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[321] = ["FreaksOfCock","FreaksOfCock","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[322] = ["EuroHumpers","EuroHumpers","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[323] = ["FreaksOfBoobs","FreaksOfBoobs","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[324] = ["CumDisgrace","CumDisgrace","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[325] = ["CockCompetition","CockCompetition","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[326] = ["PimpParade","PimpParade","http://www.pornpros.com","http://pornpros.com/video/"]
-searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","http://www.pornpros.com","http://pornpros.com/video/"]
+searchSites[306] = ["PassionHD","PassionHD","https://www.passion-hd.com","https://passion-hd.com/video/"]
+searchSites[307] = ["FantasyHD","FantasyHD","https://www.fantasyhd.com","https://fantasyhd.com/video/"]
+searchSites[308] = ["PornPros","PornPros","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[309] = ["18YearsOld","18YearsOld","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[310] = ["RealExGirlfriends","RealExGirlfriends","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[311] = ["MassageCreep","MassageCreep","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[312] = ["DeepThroatLove","DeepThroatLove","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[313] = ["TeenBFF","TeenBFF","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[314] = ["ShadyPi","ShadyPi","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[315] = ["CrueltyParty","CrueltyParty","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[316] = ["Disgraced18","Disgraced18","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[317] = ["MilfHumiliation","MilfHumiliation","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[318] = ["CumshotSurprise","CumshotSurprise","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[319] = ["40ozBounce","40ozBounce","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[320] = ["JurassicCock","JurassicCock","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[321] = ["FreaksOfCock","FreaksOfCock","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[322] = ["EuroHumpers","EuroHumpers","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[323] = ["FreaksOfBoobs","FreaksOfBoobs","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[324] = ["CumDisgrace","CumDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[325] = ["CockCompetition","CockCompetition","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https://pornpros.com/video/"]
+searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com/search/videos/"]
 searchSites[329] = ["Throated","Throated","https://www.blowpass.com","https://www.blowpass.com/en/search/throated/scene/"]
 searchSites[330] = ["Sweetheart Video","Sweetheart Video","https://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
@@ -632,7 +632,7 @@ searchSites[573] = ["The Stripper Experience","The Stripper Experience","https:/
 searchSites[574] = ["Porn Goes Pro","Porn Goes Pro","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[575] = ["Jessica Jaymes XXX","Jessica Jaymes XXX","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[576] = ["Pornstar Tease","Pornstar Tease","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
-searchSites[577] = ["Raw Attack","Raw Attack","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
+searchSites[577] = ["Raw Attack","Raw Attack","https://www.rawattack.com","https://rawattack.com/search.php?query="]
 searchSites[578] = ["CzechVR","CzechVR","https://www.czechvr.com","https://www.czechvr.com/model-"]
 searchSites[579] = ["CzechVR Fetish","CzechVR Fetish","https://www.czechvrfetish.com","https://www.czechvrfetish.com/model-"]
 searchSites[580] = ["CzechVR Casting","CzechVR Casting","https://www.czechvrcasting.com","https://www.czechvrcasting.com/model-"]
@@ -724,19 +724,20 @@ searchSites[665] = ["X Angels","X Angels","http://teenmegaworld.net","http://tee
 searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","http://teenmegaworld.net","http://teenmegaworld.net/search.php?query="]
 searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https://trenchcoatx.com/search.php?query="]
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
-searchSites[669] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
-searchSites[670] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]
-searchSites[671] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[672] = ["MylfBoss","MylfBoss","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[673] = ["MylfBlows","MylfBlows","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[674] = ["Milfty","Milfty","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[675] = ["Got Mylf","Got Mylf","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[676] = ["Mom Drips","Mom Drips","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[677] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[678] = ["Milf Body","Milf Body","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[679] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf.com/movies/"]
-searchSites[680] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
-
+searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
+searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/videos"]
+searchSites[671] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
+searchSites[672] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]
+searchSites[673] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[674] = ["MylfBoss","MylfBoss","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[675] = ["MylfBlows","MylfBlows","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[676] = ["Milfty","Milfty","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[677] = ["Got Mylf","Got Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[678] = ["Mom Drips","Mom Drips","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[679] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[680] = ["Milf Body","Milf Body","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[681] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[682] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -785,6 +786,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tlhc ', 'TeensLoveHugeCocks ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tlc ', 'TeensLoveCream ', mediaTitle, flags=re.IGNORECASE)

@@ -4,21 +4,19 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    searchResults = HTML.ElementFromURL('https://www.spizoo.com/search.php?query=' + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="category_listing_wrapper_updates"]'):
 
-        titleNoFormatting = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]//h3')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
         if titleNoFormatting[-3:] == " 4k":
             titleNoFormatting = titleNoFormatting[:-3].strip()
-        curID = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_').replace('?','!')
+        curID = searchResult.xpath('.//a[@class="ampLink"]')[0].get('href').replace('/','_').replace('?','!')
+        try:
+            releaseDate = parse(searchResult.xpath('.//div[@class="date-label"]')[0].text_content()[22:].strip()).strftime('%Y-%m-%d')
+        except:
+            releaseDate = ''
 
-        releaseDate = parse(searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="date-label"]')[0].text_content()[22:].strip()).strftime('%Y-%m-%d')
-
-        girlName = searchResult.xpath('.//div[@class="model-update row"]//div[@class="col-sm-6"]')[1].xpath('.//div[@class="row model-update-data"]//div[@class="col-5 col-md-5"]//div[@class="model-labels"]//span[@class="update_models"]//a')[0].get('title').strip()
-
-        Log("CurID" + str(curID))
-        
-        if searchDate:
+        if searchDate and releaseDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -30,19 +28,21 @@ def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace('_', '/').replace('!','?')
 
     url = temp
-    Log('url :' + url)
     detailsPageElements = HTML.ElementFromURL(url)
 
     metadata.studio = "Spizoo"
 
     # Summary
-    paragraph = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+    paragraph = detailsPageElements.xpath('//p[@class="description"] | //p[@class="description-scene"]')[0].text_content().strip()
     metadata.summary = paragraph
     metadata.collections.clear()
     try:
         tagline = detailsPageElements.xpath('//i[@id="site"]')[0].get('value').strip()
     except:
-        tagline = "Spizoo"
+        if 'rawattack' in url:
+            tagline = "RawAttack"
+        else:
+            tagline = "Spizoo"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
     title = detailsPageElements.xpath('//h1')[0].text_content().strip()
@@ -58,6 +58,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().lower().strip()
             movieGenres.addGenre(genreName)
+    else: #Manual genres for Rawattack
+        if siteID == 577:
+            movieGenres.addGenre('Unscripted')
+            movieGenres.addGenre('Raw')
+            movieGenres.addGenre('Hardcore')
 
     # Date
     date = detailsPageElements.xpath('//p[@class="date"]')
@@ -69,27 +74,33 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    titleActors = ""
-    actors = detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row line"]//div[@class="col-3"]//a')
+    actors = detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row line"]//div[@class="col-3"]//a | //p[@class="featuring"]/a')
     if len(actors) > 0:
         for actorLink in actors:
-            actorPageURL = 'https://www.spizoo.com' + actorLink.get("href")
+            actorName = actorLink.text_content().replace('.','').strip()
+            actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorName = actorPage.xpath('//div[@class="model-titular col-12"]//h1')[0].text_content()
-            titleActors = titleActors + actorName + " & "
-            actorPhotoURL = "https://www.spizoo.com" + actorPage.xpath('//div[@class="model-bio-pic"]//img')[0].get("src")
+            try:
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//div[@class="model-bio-pic"]//img')[0].get("src")
+            except:
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//div[@class="model-bio-pic"]//img')[0].get("src0_1x")
             movieActors.addActor(actorName,actorPhotoURL)
-        titleActors = titleActors[:-3]
-        metadata.title = metadata.title
 
 
     # Posters
-    background = "https://www.spizoo.com/" + detailsPageElements.xpath('//img[@class="update_thumb thumbs"]')[0].get('src')
-    Log("BG DL: " + background)
+    try:
+        background = PAsearchSites.getSearchBaseURL(siteID) + "/" + detailsPageElements.xpath('//img[contains(@class,"update_thumb thumbs")]')[0].get('src')
+        Log("Background: " + background)
+    except:
+        pass
+
     posterURL = background[:-5]
     Log("Poster: " + posterURL)
     for i in range(1, 8):
-        metadata.art[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 8-i)
-        metadata.posters[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        try:
+            metadata.art[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 8-i)
+            metadata.posters[posterURL + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request(posterURL + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
+        except:
+            pass
 
     return metadata
