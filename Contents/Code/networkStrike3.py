@@ -84,6 +84,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre("Boy Girl")
             movieGenres.addGenre("Caucasian Men")
             movieGenres.addGenre("Glamcore")
+        if 'Deeper' in metadata.tagline:
+            movieGenres.addGenre("Bondage")
         movieGenres.addGenre("Hardcore")
         movieGenres.addGenre("Heterosexual")
 

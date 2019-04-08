@@ -739,6 +739,12 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 670:
                     results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Deeper
+            ###############
+            if siteNum == 671:
+                if searchSiteID == 9999 or searchSiteID == 671:
+                    results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -755,6 +761,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         siteID = int(str(metadata.id).split("|")[1])
         Log(str(siteID))
+
         ##############################################################
         ##                                                          ##
         ##   Blacked                                                ##
@@ -1226,6 +1233,13 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 670:
             metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Deeper                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 671:
+            metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

@@ -52,7 +52,7 @@ import siteScrewbox
 import siteTrenchcoatX
 import siteDorcelClub
 
-searchSites = [None] * 671
+searchSites = [None] * 672
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -724,6 +724,7 @@ searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
 searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/videos"]
+searchSites[671] = ["Deeper","Deeper","https://www.deeper.com","https://www.deeper.com/search?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
