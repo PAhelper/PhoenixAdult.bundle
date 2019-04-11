@@ -53,8 +53,9 @@ import siteTrenchcoatX
 import siteDorcelClub
 import siteMissaX
 import siteMylf
+import manualActors
 
-searchSites = [None] * 684
+searchSites = [None] * 685
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -739,6 +740,7 @@ searchSites[680] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/m
 searchSites[681] = ["Milf Body","Milf Body","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -894,6 +896,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^add ', 'ManualAddActors ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^aa ', 'AmateurAllure ', mediaTitle, flags=re.IGNORECASE)
