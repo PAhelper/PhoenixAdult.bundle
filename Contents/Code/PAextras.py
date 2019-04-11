@@ -30,7 +30,7 @@ noMatch[23] = ["The Rich Girl - part one"]
 
 # Scenes with incorrect matches
     #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 34
+badMatch = [None] * 35
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -65,6 +65,7 @@ badMatch[30] = ["I will See You In the Morning", None, "XartBeauties.com/galleri
 badMatch[31] = ["Just Watch Part 1", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/kate-in-just-watch-part-i-6432.html"]
 badMatch[32] = ["A Pleasing Pussy", "Rebel Lynn", "HQSluts.com", "https://www.hqsluts.com/Rebel+Lynn+-+A+Pleasing+Pussy-404357/"]
 badMatch[33] = ["Little Firecracker", "Ariela", "HQSluts.com", "https://www.hqsluts.com/Ariela+B+-+Little+Firecracker-400815/"]
+badMatch[34] = ["Close Shave", None, "HQSluts.com", "https://www.hqsluts.com/Ivy+Wolfe+-+Close+Shave-405025/"]
 
 def getNoMatchID(scene):
     matchID = 0
