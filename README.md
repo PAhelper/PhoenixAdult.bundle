@@ -21,6 +21,7 @@ Currently the features of this metadata agent are:
 - Function to help clean up extraneous Genres
 - Function to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
 - Function to locate an image for actresses where the original site doesn't provide one
+- Workaround to manually set actors for unsupported sites
 
 File Naming
 -----------
@@ -295,9 +296,10 @@ Supported Networks
 #### - FamilyStrokes *url Match *Unofficial Scene Title match
 #### - TrenchcoatX *Title Search *Actor Search
 #### - Screwbox *Title Search *Actor Search
+#### - Dorcel Club *Title Search
 #### - AllHerLuv *Title Search *Actor Search
 #### - MissaX *Title Search *Actor Search
-#### - Dorcel Club *Title Search
+#### - Mylf Network *URL Match
 
 
 
