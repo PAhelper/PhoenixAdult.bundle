@@ -60,6 +60,7 @@ These usually don't make the most intuitive filenames, so it is often better to 
 Examples:
 - PornPros - **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match)
 - MomsTeachSex - **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match)
+- Mylfed - **1645 straight until wet** (taken from the URL [https://www.mylf.com/movies/**1645/straight-until-wet**](https://linkthe.net/?https://www.mylf.com/movies/**1645/straight-until-wet**) to direct match)
 
 Installation
 ------------
