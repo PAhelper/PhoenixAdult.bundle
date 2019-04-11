@@ -725,6 +725,26 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 668:
                     results = PAsearchSites.siteScrewbox.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## DorcelClub
+            ###############
+            if siteNum == 669:
+                if searchSiteID == 9999 or searchSiteID == 669:
+                    results = PAsearchSites.siteDorcelClub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Tushy
+            ###############
+            if siteNum == 670:
+                if searchSiteID == 9999 or searchSiteID == 670:
+                    results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Deeper
+            ###############
+            if siteNum == 671:
+                if searchSiteID == 9999 or searchSiteID == 671:
+                    results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -741,6 +761,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         siteID = int(str(metadata.id).split("|")[1])
         Log(str(siteID))
+
         ##############################################################
         ##                                                          ##
         ##   Blacked                                                ##
@@ -812,7 +833,6 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 136:
             metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
-
 
         ##############################################################
         ##                                                          ##
@@ -1183,7 +1203,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  TrenchcoatX                                     ##
+        ##  TrenchcoatX                                             ##
         ##                                                          ##
         ##############################################################
         if siteID == 667:
@@ -1191,12 +1211,35 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Tonights Girlfriend                                     ##
+        ##  ScrewBox                                                ##
         ##                                                          ##
         ##############################################################
         if siteID == 668:
             metadata = PAsearchSites.siteScrewbox.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  DorcelClub                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 669:
+            metadata = PAsearchSites.siteDorcelClub.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   TushyRaw                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 670:
+            metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   Deeper                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 671:
+            metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

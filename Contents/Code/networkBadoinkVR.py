@@ -33,7 +33,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             scenePageBase = "/vrpornvideo/"
         Log('scenePageBase: ' + scenePageBase)
-        searchString = searchTitle.lower().replace(" ","_").replace("'","_").replace(".","_").replace(",","")
+        searchString = title.lower().replace(" ","_").replace("'","_").replace(".","_").replace(",","").replace('_','-',-1)
         url = PAsearchSites.getSearchBaseURL(searchSiteID) + scenePageBase + searchString
         Log("Scene Page url: " + url)
         searchResults = HTML.ElementFromURL(url)

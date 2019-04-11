@@ -122,9 +122,12 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
-        background = detailsPageElements.xpath('//div[@class="video-join-box after_video_join"]/a/img')[0].get("src")
-        Log("BG DL: " + str(background))
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        try:
+            background = detailsPageElements.xpath('//div[@class="video-join-box after_video_join"]/a/img')[0].get("src")
+            Log("BG DL: " + str(background))
+            metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        except:
+            pass
     i = 1
     #Searchposter = detailsPageElements.xpath('//div[@class="cell content_tab"]/a')[0].get("href")
     for posterUrls in detailsPageElements.xpath('//img[@class="card-img-top"]'):

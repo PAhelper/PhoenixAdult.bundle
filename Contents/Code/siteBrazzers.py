@@ -43,11 +43,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             # If it's part of a series, add an extra Collection tag with the series name... Trouble is there's no standard for locating the series name, so this might not work 100% of the time
-            if "series" in genreName or "800 Phone Sex: Line " in metadata.title or ": Part" in metadata.title or "Porn Logic" in metadata.title:
+            if "series" in genreName or "800 Phone Sex: Line " in metadata.title or ": Part" in metadata.title or "Porn Logic" in metadata.title or "- Ep" in metadata.title or tagline == "ZZ Series":
                 seriesName = metadata.title
-                k = seriesName.rfind(':')
-                if (k != -1):
-                    metadata.collections.add(seriesName[:k])
+                if (seriesName.rfind(':')):
+                    metadata.collections.add(seriesName[:seriesName.rfind(':')])
+                elif (seriesName.rfind('- Ep')):
+                    metadata.collections.add(seriesName[:seriesName.rfind('- Ep')])
                 else:
                     metadata.collections.add(seriesName.rstrip('1234567890 '))
             if "office 4-play" in metadata.title.lower() or "office 4-play" in genreName:

@@ -100,6 +100,12 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-08 6:30PM CST - Blindly added support for new Greg Lansky site Deeper, will test / confirm once I have some content downloaded
+- 2019-04-07 4:15PM CST - PornPros (and related sites) now work on Linux
+- 2019-04-07 2:00PM CST - Cleaned out old code from Blacked/Tushy/Vixen, improved search results (now pulls release date), improved artwork support
+- 2019-04-07 11:15AM CST - Added temporary TushyRaw support through direct match (until they have enough scenes to add a search function to the site). Direct Match URL usually is the video title...
+- 2019-04-06 8:30PM CST - Added DorcelClub support
+- 2019-04-05 8:00AM CST - Bugfix for BadoinkVR scene match
 - 2019-03-28 8:15AM CST - Cleaning up Genres all over the place, and made TeenMegaWorld Linux compatible :)
 - 2019-03-02 4:45PM CST - Bugfixes for SexBabesVR, added support for sister sites SinsVR and StasyQ VR
 - 2019-03-02 11:00AM EST - Added Manyvids (by id)
@@ -289,7 +295,7 @@ Supported Networks
 #### - FamilyStrokes *url Match* *Unofficial Scene Title match*
 #### - TrenchcoatX *Title Search* *Actor Search*
 #### - Screwbox *Title Search* *Actor Search*
-
+#### - Dorcel Club *Title Search
 
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).

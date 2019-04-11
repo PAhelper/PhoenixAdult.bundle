@@ -106,7 +106,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"Tags:")]/a')
+    genres = detailsPageElements.xpath('//p[@class="tag-list" and contains(text(),"categories:")]/a')
 
     if len(genres) > 0:
         for genreLink in genres:

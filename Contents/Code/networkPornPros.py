@@ -35,7 +35,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         response = urllib.urlopen(url)
         htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring
+        detailsPageElements = fromstring(htmlstring)
 
     metadata.studio = "Porn Pros"
 
@@ -50,6 +50,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').strip()
     except:
         pass
+
     try:
         if siteName.lower() == "Cum4K".lower():
         
