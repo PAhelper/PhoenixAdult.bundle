@@ -53,7 +53,7 @@ import siteTrenchcoatX
 import siteDorcelClub
 import siteMissaX
 import siteMylf
-import manualActors
+import addActors
 
 searchSites = [None] * 685
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
