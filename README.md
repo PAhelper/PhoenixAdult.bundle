@@ -100,6 +100,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-08 6:30PM CST - Blindly added support for new Greg Lansky site Deeper, will test / confirm once I have some content downloaded
 - 2019-04-07 4:15PM CST - PornPros (and related sites) now work on Linux
 - 2019-04-07 2:00PM CST - Cleaned out old code from Blacked/Tushy/Vixen, improved search results (now pulls release date), improved artwork support
 - 2019-04-07 11:15AM CST - Added temporary TushyRaw support through direct match (until they have enough scenes to add a search function to the site). Direct Match URL usually is the video title...
