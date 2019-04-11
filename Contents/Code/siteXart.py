@@ -181,12 +181,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     art=[]
+    match = 0
             
     for site in ["XartFan.com", "HQSluts.com", "XartBeauties.com/galleries"]:
-        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title)
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
         match = fanSite[2]
-        if match is 1:
-            break
 
  
     if match is 1 or match is 2:
@@ -221,5 +220,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                     j = j + 1
                 except:
                     Log("there was an issue")
+                    pass
 
+    
     return metadata
