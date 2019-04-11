@@ -2,12 +2,18 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAextras
+from lxml.html.soupparser import fromstring
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
-    searchResults = HTML.ElementFromURL(url)
+    try:
+        searchResults = HTML.ElementFromURL(url)
+    except:
+        response = urllib.urlopen(url)
+        htmlstring = response.read()
+        searchResults = fromstring(htmlstring)
 
     searchResult = searchResults.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]')[0]
     titleNoFormatting = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//h1')[0].text_content()
@@ -24,7 +30,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
     Log('scene url: ' + url)
-    detailsPageElements = HTML.ElementFromURL(url)
+    try:
+        detailsPageElements = HTML.ElementFromURL(url)
+    except:
+        response = urllib.urlopen(url)
+        htmlstring = response.read()
+        detailsPageElements = fromstring(htmlstring
 
     metadata.studio = "Porn Pros"
 
@@ -35,6 +46,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(siteName)
     
     # Summary
+    try:
+        metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').strip()
+    except:
+        pass
     try:
         if siteName.lower() == "Cum4K".lower():
         
