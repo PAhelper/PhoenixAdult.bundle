@@ -51,8 +51,11 @@ import networkTMW
 import siteScrewbox
 import siteTrenchcoatX
 import siteDorcelClub
+import siteMissaX
+import siteMylf
+import addActors
 
-searchSites = [None] * 672
+searchSites = [None] * 685
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -725,6 +728,19 @@ searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwb
 searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
 searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/videos"]
 searchSites[671] = ["Deeper","Deeper","https://www.deeper.com","https://www.deeper.com/search?q="]
+searchSites[672] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
+searchSites[673] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]
+searchSites[674] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[675] = ["MylfBoss","MylfBoss","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[676] = ["MylfBlows","MylfBlows","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[677] = ["Milfty","Milfty","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[678] = ["Got Mylf","Got Mylf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[679] = ["Mom Drips","Mom Drips","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[680] = ["Mylfed","Mylfed","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[681] = ["Milf Body","Milf Body","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -812,6 +828,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mwhf ', 'MyWifesHotFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
@@ -879,6 +896,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^add ', 'ManualAddActors ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^aa ', 'AmateurAllure ', mediaTitle, flags=re.IGNORECASE)

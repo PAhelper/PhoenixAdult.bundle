@@ -81,6 +81,8 @@ class PhoenixActors:
                 newActor = "Bunny Colby"
             if "April ONeil" == newActor or "April Oneil" == newActor or "April O'neil" == newActor:
                 newActor == "April O'Neil"
+            if "Maddy OReilly" == newActor or "Maddy Oreilly" == newActor or "Maddy O'reilly" == newActor:
+                newActor == "Maddy O'Reilly"
             if "Tiny Teen" == newActor or "Tieny Mieny" == newActor or "Lady Jay" == newActor:
                 newActor == "Eva Elfie"
             if "Rebel Lynn (Contract Star)" == newActor:

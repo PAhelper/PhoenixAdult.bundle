@@ -745,6 +745,28 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 671:
                 if searchSiteID == 9999 or searchSiteID == 671:
                     results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## MissaX / AllHerLuv
+            ###############
+            if siteNum == 672:
+                if searchSiteID == 9999 or searchSiteID == 672 or searchSiteID == 673:
+                    results = PAsearchSites.siteMissaX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Mylf
+            ###############
+            if siteNum == 674:
+                if searchSiteID == 9999 or (searchSiteID >= 674 and searchSiteID <= 683):
+                    results = PAsearchSites.siteMylf.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Manually Add Actors
+            ###############
+            if siteNum == 684:
+                if searchSiteID == 684:
+                    results = PAsearchSites.addActors.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1240,6 +1262,31 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 671:
             metadata = PAsearchSites.networkStrike3.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MissaX / AllHerLuv                                      ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 672 or siteID == 673:
+            metadata = PAsearchSites.siteMissaX.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Mylf                                                    ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 674 and siteID <= 683):
+            metadata = PAsearchSites.siteMylf.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Manually Add Actors                                     ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 684:
+            metadata = PAsearchSites.addActors.update(metadata,siteID,movieGenres,movieActors)
+
 
         ##############################################################
         ## Cleanup Genres and Add

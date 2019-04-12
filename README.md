@@ -21,6 +21,7 @@ Currently the features of this metadata agent are:
 - Function to help clean up extraneous Genres
 - Function to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
 - Function to locate an image for actresses where the original site doesn't provide one
+- Workaround to manually set actors for unsupported sites
 
 File Naming
 -----------
@@ -59,6 +60,7 @@ These usually don't make the most intuitive filenames, so it is often better to 
 Examples:
 - PornPros - **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match)
 - MomsTeachSex - **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match)
+- Mylfed - **1645 straight until wet** (taken from the URL [https://www.mylf.com/movies/**1645/straight-until-wet**](https://linkthe.net/?https://www.mylf.com/movies/**1645/straight-until-wet**) to direct match)
 
 Installation
 ------------
@@ -260,14 +262,14 @@ Supported Networks
 #### - DDFNetwork - *Title Search/Actress
 #### - Dogfart - *Title Search/Actress
 #### - PerfectGonzo Network *Actor Search
-#### - BaDoinkVR Network *Actor search*, *Title Search* (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
-#### - CzechVR *Actor Search* (exact spelling)
-#### - VirtualRealPorn *Title Search* (exact spelling)
-#### - VirtualTaboo *Title Search* (true search, partial name allowed)
+#### - BaDoinkVR Network *Actor search, *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
+#### - CzechVR *Actor Search (exact spelling)
+#### - VirtualRealPorn *Title Search (exact spelling)
+#### - VirtualTaboo *Title Search (true search, partial name allowed)
 #### - VRBangers *Title Search
-#### - SexBabesVR *No Search available, exact URL match only* (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBabesVR **225-welcum_sexy_architect**" in the agent to match)
-#### - WankzVR Network *Title Search* *Actor search*
-#### - Wankz Network *Title Search* *Actor search*
+#### - SexBabesVR *No Search available, exact URL match only (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBabesVR **225-welcum_sexy_architect**" in the agent to match)
+#### - WankzVR Network *Title Search *Actor search
+#### - Wankz Network *Title Search *Actor search
 #### - Joymii *Title Search *Actor search
 #### - PornPros Network *No Search available, exact URL match only
 #### - Other PornPros sites *No Search available, exact URL match only
@@ -286,16 +288,21 @@ Supported Networks
 #### - Manyvids (Manyvids - id)
 #### - Spizoo *Title Search *Actor Search
 #### - DigitalPlayground *Title Search *Actor Search
-#### - NewSensations *Actress Search* *DVD search* (exact spellings)
-#### - FinishesTheJob *Title Search* *Actor Search*
-#### - SexArt *Title Search* *Actor Search*
-#### - TeenMegaWorld Network *Title Search* *Actor Search*
-#### - Karups Network *Actor Search*
-#### - Tonight's Girlfriend *Actor Search*
-#### - FamilyStrokes *url Match* *Unofficial Scene Title match*
-#### - TrenchcoatX *Title Search* *Actor Search*
-#### - Screwbox *Title Search* *Actor Search*
+#### - NewSensations *Actress Search *DVD search (exact spellings)
+#### - FinishesTheJob *Title Search *Actor Search
+#### - SexArt *Title Search *Actor Search
+#### - TeenMegaWorld Network *Title Search *Actor Search
+#### - Karups Network *Actor Search
+#### - Tonight's Girlfriend *Actor Search
+#### - FamilyStrokes *url Match *Unofficial Scene Title match
+#### - TrenchcoatX *Title Search *Actor Search
+#### - Screwbox *Title Search *Actor Search
 #### - Dorcel Club *Title Search
+#### - AllHerLuv *Title Search *Actor Search
+#### - MissaX *Title Search *Actor Search
+#### - Mylf Network *URL Match
+
+
 
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
