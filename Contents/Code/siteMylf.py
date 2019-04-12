@@ -22,15 +22,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("firstActor: " + firstActor)
     subSite = searchResults.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').title()
     Log("subSite: " + subSite)
-    if searchDate == None:
-        searchDate = ''
+    if searchDate:
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+    else:
+        releaseDate = ''
+
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + searchDate , name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
 
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
@@ -75,8 +77,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPhotoURL = actorPage.xpath('//img[contains(@class,"girlthumb")]')[0].get("data-original")
             movieActors.addActor(actorName,actorPhotoURL)
             Log('actor: ' + actorName + ", " + actorPhotoURL)
-
-
 
     ### Posters and artwork ###
     posterNum = 1
