@@ -108,10 +108,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieGenres.addGenre('Orgy')
 
     # Posters
-    background = "http:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
-    Log("BG DL: " + background)
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    try:
+        background = "http:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
+        Log("BG DL: " + background)
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        pass
 
     # Date
     date = detailsPageElements.xpath('//div[contains(@class,"details")]//p')[0].text_content().strip()

@@ -80,13 +80,13 @@ class PhoenixActors:
             if "Nadya Nabakova" == newActor or "Nadya Nabokova" == newActor:
                 newActor = "Bunny Colby"
             if "April ONeil" == newActor or "April Oneil" == newActor or "April O'neil" == newActor:
-                newActor == "April O'Neil"
+                newActor = "April O'Neil"
             if "Maddy OReilly" == newActor or "Maddy Oreilly" == newActor or "Maddy O'reilly" == newActor:
-                newActor == "Maddy O'Reilly"
+                newActor = "Maddy O'Reilly"
             if "Tiny Teen" == newActor or "Tieny Mieny" == newActor or "Lady Jay" == newActor:
-                newActor == "Eva Elfie"
+                newActor = "Eva Elfie"
             if "Rebel Lynn (Contract Star)" == newActor:
-                newActor == "Rebel Lynn"
+                newActor = "Rebel Lynn"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury" and "Abbie" == newActor:
