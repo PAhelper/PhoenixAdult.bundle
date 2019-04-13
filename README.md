@@ -102,6 +102,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-13 3:15PM CST - Added support for First Anal Quest
 - 2019-04-08 6:30PM CST - Blindly added support for new Greg Lansky site Deeper, will test / confirm once I have some content downloaded
 - 2019-04-07 4:15PM CST - PornPros (and related sites) now work on Linux
 - 2019-04-07 2:00PM CST - Cleaned out old code from Blacked/Tushy/Vixen, improved search results (now pulls release date), improved artwork support
@@ -301,7 +302,7 @@ Supported Networks
 #### - AllHerLuv *Title Search *Actor Search
 #### - MissaX *Title Search *Actor Search
 #### - Mylf Network *URL Match
-
+#### - First Anal Quest *Title Search *Actor Search
 
 
 
