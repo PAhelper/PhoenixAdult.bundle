@@ -102,6 +102,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-13 4:30PM CST - Added support for PervMom (direct match only)
 - 2019-04-13 3:15PM CST - Added support for First Anal Quest
 - 2019-04-08 6:30PM CST - Blindly added support for new Greg Lansky site Deeper, will test / confirm once I have some content downloaded
 - 2019-04-07 4:15PM CST - PornPros (and related sites) now work on Linux
@@ -232,6 +233,7 @@ Supported Networks
 #### - TeamSkeet Network *Title Search *Date/Actor Search
 #### - Black Valley Girls *Scene ID Search only
 #### - Sis Loves Me *Scene ID Search only
+#### - PervMom *URL match only (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
 #### - TeenFidelity *Title Search *Date/Actor Search
 #### - Tushy *Title Search *Date/Actor Search
 #### - Vixen *Title Search *Date/Actor Search
@@ -303,7 +305,6 @@ Supported Networks
 #### - MissaX *Title Search *Actor Search
 #### - Mylf Network *URL Match
 #### - First Anal Quest *Title Search *Actor Search
-
 
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).

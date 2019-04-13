@@ -774,6 +774,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 685:
                     results = PAsearchSites.siteFirstAnalQuest.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## PervMom
+            ###############
+            if siteNum == 686:
+                if searchSiteID == 9999 or searchSiteID == 686:
+                    results = PAsearchSites.sitePervMom.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1301,6 +1308,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 685:
             metadata = PAsearchSites.siteFirstAnalQuest.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  PervMom                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 686:
+            metadata = PAsearchSites.sitePervMom.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

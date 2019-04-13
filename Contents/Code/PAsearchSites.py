@@ -55,8 +55,9 @@ import siteMissaX
 import siteMylf
 import addActors
 import siteFirstAnalQuest
+import sitePervMom
 
-searchSites = [None] * 686
+searchSites = [None] * 687
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -743,6 +744,7 @@ searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf
 searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 searchSites[685] = ["First Anal Quest","First Anal Quest","http://www.firstanalquest.com","http://www.firstanalquest.com/search/?q="]
+searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pervmom.com"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
