@@ -6,18 +6,39 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     Log('searchtitle ' + searchTitle) 
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle )
-    i = 0
-    for searchResult in searchResults.xpath('//div[@class="itemm"]/a'):
-        titleNoFormatting = searchResult.get("title")
-        releaseDate = parse(searchResult.xpath('//div[@class="itemm"]//span[@class="nm-date"]')[i].text_content().strip()).strftime('%Y-%m-%d')
-        curID = searchResult.get('href').replace('/','_').replace('?','!')
+    for searchResult in searchResults.xpath('//div[@class="itemm"]'):
+        titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
+        releaseDate = parse(searchResult.xpath('.//span[@class="nm-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('.//img[@class="domain-label"]')[0].get('src')
+        if 'allinternal' in subSite:
+            subSite = '/AllInternal'
+        elif 'asstraffic' in subSite:
+            subSite = '/AssTraffic'
+        elif 'givemepink' in subSite:
+            subSite = '/GiveMePink'
+        elif 'primecups' in subSite:
+            subSite = '/PrimeCups'
+        elif 'fistflush' in subSite:
+            subSite = '/FistFlush'
+        elif 'cumforcover' in subSite:
+            subSite = '/CumForCover'
+        elif 'tamedteens' in subSite:
+            subSite = '/TamedTeens'
+        elif 'spermswap' in subSite:
+            subSite = '/SpermSwap'
+        elif 'milfthing' in subSite:
+            subSite = '/MilfThing'
+        elif 'interview' in subSite:
+            subSite = '/Interview'
+        else:
+            subSite = PAsearchSites.getSearchSiteName(siteNum)
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Primecups] " + releaseDate , score = score, lang = lang ))
-        i = i + 1
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Perfect Gonzo"+subSite+"] " + releaseDate , score = score, lang = lang ))
     return results
 
 
@@ -25,24 +46,43 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    Log('temp :' + temp)
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
-    Log('Url : ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
+    art = []
 
+    # Summary
     paragraph = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content()
     metadata.summary = paragraph.strip()
 
+    # Studio / tagline / title
     metadata.studio = "Perfect Gonzo"
-    tagline = "Primecups"
-    tagline = tagline.strip()
+    subSite = detailsPageElements.xpath('.//img[@class="domain-label"]')[0].get('src')
+    if 'allinternal' in subSite:
+        tagline = 'All Internal'
+    elif 'asstraffic' in subSite:
+        tagline = 'Ass Traffic'
+    elif 'givemepink' in subSite:
+        tagline = 'Give Me Pink'
+    elif 'primecups' in subSite:
+        tagline = 'Prime Cups'
+    elif 'fistflush' in subSite:
+        tagline = 'Fist Flush'
+    elif 'cumforcover' in subSite:
+        tagline = 'Cum For Cover'
+    elif 'tamedteens' in subSite:
+        tagline = 'Tamed Teens'
+    elif 'spermswap' in subSite:
+        tagline = 'Sperm Swap'
+    elif 'milfthing' in subSite:
+        tagline = 'Milf Thing'
+    elif 'interview' in subSite:
+        tagline = 'Perfect Gonzo Interview'
+    else:
+        tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
-
     metadata.collections.clear()
-    collection = str(PAsearchSites.getSearchSiteName(siteID))
-    metadata.collections.add(collection)
-
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content()
+    metadata.collections.add(tagline)
+    metadata.title = detailsPageElements.xpath('//h2')[0].text_content()
 
     # Genres
     movieGenres.clearGenres()
@@ -55,61 +95,68 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right text-right"]/span')[0].text_content()
+    date = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right text-right"]/span')[0].text_content().replace('Added','').strip()
     if len(date) > 0:
-        date = date.strip('Added').strip()
-        date_object = datetime.strptime(date, '%B %d, %Y')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    metadata.roles.clear()
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right"]/h2')
+    actors = detailsPageElements.xpath('//div[@class="col-sm-3 col-md-3 col-md-offset-1 no-padding-side"]/p/a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
-            actorPageURL = "https://www.primecups.com/models/" + str(actorName.strip().lower().replace(" ","-"))
-            Log('acteur page : ' + str(actorPageURL))
+            actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="col-md-8 bigmodelpic"]/img')[0].get("src")
-            #actorPhotoURL= 'http:' + actorPhoto
-            #Log('acteur URL img: ' + str(actorPhotoURL))
             movieActors.addActor(actorName,actorPhotoURL)
-            role.photo = actorPhotoURL
-    #Posters
-        background = detailsPageElements.xpath('//video[@class="video-js vjs-default-skin"]')[0].get("poster")
-        Log("BG DL: " + str(background))
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    i = 1
-    #Searchposter = detailsPageElements.xpath('//div[@class="cell content_tab"]/a')[0].get("href")
-    for posterUrls in detailsPageElements.xpath('//ul[@class="bxslider_pics "]//img'):
-        if i < 5:
-            posterUrl = posterUrls.get("src")
-        else:
-            posterUrl = posterUrls.get("data-original")
-        Log('Url poster ' + str(posterUrl))
-            #Download image file for analysis
+
+    ### Artwork ###
+
+    # Background
+    art.append(detailsPageElements.xpath('//video')[0].get("poster"))
+
+    # Photos
+    photos = []
+    for poster in detailsPageElements.xpath('//ul[@class="bxslider_screenshots"]//img'):
         try:
-            img_file = urllib.urlopen(posterUrl)
-            im = StringIO(img_file.read())
-            resized_image = Image.open(im)
-            width, height = resized_image.size
-            #posterUrl = posterUrl[:-6] + "01.jpg"
-            #Add the image proxy items to the collection
-            if i == 1:
-                metadata.posters[background] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
-            i = i + 1
-            if i>10:
-                break
-
-
+            photos.append(poster.get('src'))
         except:
-            pass
+            photos.append(poster.get('data-original'))
+    for x in range(10):
+        art.append(photos[random.randint(1,len(photos))])
+
+    # Screencaps
+    vidcaps = []
+    for poster in detailsPageElements.xpath('//ul[@class="bxslider_screenshots"]//img'):
+        try:
+            vidcaps.append(poster.get('src'))
+        except:
+            vidcaps.append(poster.get('data-original'))
+    for x in range(10):
+        art.append(vidcaps[random.randint(1,len(vidcaps))])
+
+
+    j = 1
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if(width > 1):
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if(width > 100):
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
 
 
     return metadata
