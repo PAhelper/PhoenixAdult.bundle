@@ -1381,6 +1381,16 @@ class PhoenixActors:
                     newActor = "Alexa Grace"
                 if newActor == "Lena":
                     newActor = "Lena Anderson"
+                if newActor == "Anya":
+                    newActor = "Anya Olsen"
+                if newActor == "Caprice":
+                    newActor = "Little Caprice"
+                if newActor == "Kenna":
+                    newActor = "Kenna James"
+                if newActor == "Jenna":
+                    newActor = "Jenna Ross"
+                if newActor == "Lola":
+                    newActor = "Penelope Lynn"
 
 
             if not skip:
