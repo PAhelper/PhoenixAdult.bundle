@@ -1374,6 +1374,12 @@ class PhoenixActors:
                     newActor = "Aruna Aghora"
                 if newActor == "Zoi":
                     newActor = "Liona Levi"
+            if metadata.studio == "X-Art":
+                if newActor == "Alexa":
+                    newActor = "Alexa Grace"
+                if newActor == "Lena":
+                    newActor = "Lena Anderson"
+
 
             if not skip:
                 if newPhoto == '':
