@@ -87,6 +87,8 @@ class PhoenixActors:
                 newActor = "Eva Elfie"
             if "Rebel Lynn (Contract Star)" == newActor:
                 newActor = "Rebel Lynn"
+            if "Jo Jo Kiss" == newActor:
+                newActor = "Jojo Kiss"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury" and "Abbie" == newActor:
@@ -1374,6 +1376,22 @@ class PhoenixActors:
                     newActor = "Aruna Aghora"
                 if newActor == "Zoi":
                     newActor = "Liona Levi"
+            if metadata.studio == "X-Art":
+                if newActor == "Alexa":
+                    newActor = "Alexa Grace"
+                if newActor == "Lena":
+                    newActor = "Lena Anderson"
+                if newActor == "Anya":
+                    newActor = "Anya Olsen"
+                if newActor == "Caprice":
+                    newActor = "Little Caprice"
+                if newActor == "Kenna":
+                    newActor = "Kenna James"
+                if newActor == "Jenna":
+                    newActor = "Jenna Ross"
+                if newActor == "Lola":
+                    newActor = "Penelope Lynn"
+
 
             if not skip:
                 if newPhoto == '':
