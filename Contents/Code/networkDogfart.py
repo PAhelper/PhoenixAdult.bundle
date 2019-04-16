@@ -47,7 +47,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     collection = str(PAsearchSites.getSearchSiteName(siteID))
     metadata.collections.add(collection)
     metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a')[0].get("title")
-    metadata.studio = "Dofgart Network"
+    metadata.studio = "Dogfart Network"
 
     # Genres
     movieGenres.clearGenres()
