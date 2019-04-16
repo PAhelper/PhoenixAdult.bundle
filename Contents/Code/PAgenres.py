@@ -66,6 +66,16 @@ class PhoenixGenres:
                 skip = True
             if "Tj Cummings" in newGenre.lower():
                 skip = True
+            if "60P" in newGenre.lower():
+                skip = True
+            if "18-23" in newGenre.lower():
+                skip = True
+            if "babe" in newGenre.lower():
+                skip = True
+            if "exclusive" in newGenre.lower():
+                skip = True
+            if "Mr. Cummings" in newGenre.lower():
+                skip = True
 
             ##### Replace
             if "atm" == newGenre.lower():
@@ -172,8 +182,8 @@ class PhoenixGenres:
                 newGenre = "Solo"
             if "Squirt" == newGenre.lower():
                 newGenre = "Squirting"
-            if "Straight" == newGenre.lower():
-                newGenre = "Straight Porn"
+            if "Straight" or "Straight Porn" == newGenre.lower():
+                newGenre = "Heterosexual"
             if "Strap On" == newGenre.lower():
                 newGenre = "Strap-On"
             if "tanlines" == newGenre.lower():
@@ -190,6 +200,40 @@ class PhoenixGenres:
                 newGenre = "69"
             if "Buttplug" or "Acrylic Plug" == newGenre.lower():
                 newGenre = "Butt Plug"
+            if "Athlete" or "Athletic" == newGenre.lower():
+                newGenre = "Athletic Body"
+            if "bgg" or "Threesome Bgg" or "ffm" == newGenre.lower():
+                newGenre = "Girl-Girl-Boy"
+            if "Threesome bbg" or "mmf" == newGenre.lower():
+                newGenre = "Boy-Boy-Girl"
+            if "Dominance" == newGenre.lower():
+                newGenre = "Domination"
+            if "landing strip pussy" == newGenre.lower():
+                newGenre = "Landing Strip"
+            if "female slave" == newGenre.lower():
+                newGenre = "Female Sub"
+            if "gape" == newGenre.lower():
+                newGenre = "gaping"
+            if "Girl On Girl" or "Girl-On-Girl" == newGenre.lower():
+                newGenre = "Girl-Girl"
+            if "Group" == newGenre.lower():
+                newGenre = "Group Sex"
+            if "Heels" == newGenre.lower():
+                newGenre = "High Heels"
+            if "Indoors" == newGenre.lower():
+                newGenre = "Indoor"
+            if "Bed" == newGenre.lower():
+                newGenre = "Bedroom"
+            if "Mature & Milf" or "Milf & Mature" == newGenre.lower():
+                newGenre = "Milf"
+            if "Other Toys" or "Toys" == newGenre.lower():
+                newGenre = "Sex Toys"
+            if "Oral" == newGenre.lower():
+                newGenre = "Oral Sex"
+            if "Piercings" == newGenre.lower():
+                newGenre = "Piercing"
+            if "Schoolgirl" or "Schoolgirl Outfit" == newGenre.lower():
+                newGenre = "School Girl"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" or "Doggiestyle"== newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower():
