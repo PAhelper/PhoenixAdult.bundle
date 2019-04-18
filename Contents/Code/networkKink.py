@@ -95,6 +95,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "Whipped Ass"
     elif "wiredpussy" in channel:
         tagline = "Wired Pussy"
+    elif "chantasbitches" in channel:
+        tagline = "Chantas Bitches"
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
