@@ -604,7 +604,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Kink
             ###############
             if siteNum == 490:
-                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521):
+                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521) or searchSiteID == 687:
                     Log("Made it to Kink")
                     results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             ###############
@@ -1107,7 +1107,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Kink                                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 490 and siteID <= 521:
+        if siteID >= 490 and siteID <= 521 or siteID == 687:
             metadata = PAsearchSites.networkKink.update(metadata,siteID,movieGenres,movieActors)
         ##############################################################
         ##                                                          ##
