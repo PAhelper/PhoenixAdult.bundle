@@ -139,6 +139,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
+
+            # Prepend base url if actorPage is a sets.php
+            if actorPageURL.startswith("sets.php"):
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + "/tour_ns/" + actorPageURL
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
             if actorPhotoURL == None:
