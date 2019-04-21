@@ -145,16 +145,21 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("data-src")
             movieActors.addActor(actorName,actorPhotoURL)
             # add actor image as possible poster
-            if len(actors) < 3:
-                metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-                posterNum += 1
+            try:
+                if len(actors) < 3:
+                    metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+                    posterNum += 1
+            except:
+                pass
     # DVD page only place with more thumbs
     for dvdThumb in dvdPageElements.xpath('//div[@class="dvdScenePic"]//img'):
         dvdThumbURL = dvdThumb.get("src")
-        if dvdThumbURL == None:
-            dvdThumbURL = dvdThumb.get("data-src")
-        metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
-        bgNum += 1
-
+        try:
+            if dvdThumbURL == None:
+                dvdThumbURL = dvdThumb.get("data-src")
+            metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
+            bgNum += 1
+        except:
+            pass
 
     return metadata
