@@ -27,6 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = seriesName + ": " + titleNoFormatting + " [TrenchcoatX] " + releaseDate, score = score, lang = lang))
         searchPageNum += 1
     return results
+
 def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
@@ -47,11 +48,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
     metadata.collections.add(metadata.studio)
 
-
     # Summary
     try:
         metadata.summary = detailsPageElements.xpath('//div[@class="col-sm-8 pad-md-bottom"]//p[2]')[0].text_content().strip()
     except:
+        metadata.summary = ''
         Log('No summary found')
 
     # Date
@@ -79,7 +80,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genre = genreLink.text_content()
             movieGenres.addGenre(genre)
-        # Log("Genre: " + genre)
 
     # Posters/Background
     valid_names = list()
@@ -96,8 +96,5 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     posterURL = detailsPageElements.xpath('//img[contains(@class,"img-full-width")]')[0].get("src0_1x")
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-
-
-
 
     return metadata

@@ -102,6 +102,8 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-04-23 9:45AM CST - Added Hegre.com support
+- 2019-04-15 9:00AM CST - Cleaned up Perfect Gonzo code, other minor bugfixes and additions
 - 2019-04-13 4:30PM CST - Added support for PervMom (direct match only)
 - 2019-04-13 3:15PM CST - Added support for First Anal Quest
 - 2019-04-08 6:30PM CST - Blindly added support for new Greg Lansky site Deeper, will test / confirm once I have some content downloaded

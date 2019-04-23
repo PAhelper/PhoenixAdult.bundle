@@ -56,8 +56,9 @@ import siteMylf
 import addActors
 import siteFirstAnalQuest
 import sitePervMom
+import siteHegre
 
-searchSites = [None] * 688
+searchSites = [None] * 689
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -746,6 +747,7 @@ searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 searchSites[685] = ["First Anal Quest","First Anal Quest","http://www.firstanalquest.com","http://www.firstanalquest.com/search/?q="]
 searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pervmom.com"]
 searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","http://www.kink.com/search?channelIds=chantasbitches&q="]
+searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -865,6 +867,8 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^ihaw ', 'IHaveAWife ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^hegre-art ', 'Hegre ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^hart ', 'Hegre ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ham ', 'HotAndMean ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^h1o1 ', 'Housewife1on1 ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ftx ', 'FakeTaxi ', mediaTitle, flags=re.IGNORECASE)

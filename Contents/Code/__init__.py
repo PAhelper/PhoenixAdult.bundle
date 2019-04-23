@@ -781,6 +781,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 686:
                     results = PAsearchSites.sitePervMom.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Hegre
+            ###############
+            if siteNum == 688:
+                if searchSiteID == 9999 or searchSiteID == 688:
+                    results = PAsearchSites.siteHegre.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1316,6 +1323,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 686:
             metadata = PAsearchSites.sitePervMom.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Hegre                                                   ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 688:
+            metadata = PAsearchSites.siteHegre.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
