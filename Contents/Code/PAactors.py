@@ -33,7 +33,7 @@ class PhoenixActors:
                 newActor = "Gina Gerson"
             if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
                 newActor = "Krystal Boyd"
-            if newActor == "Nathaly" or newActor == "Nathalie Cherie":
+            if newActor == "Nathaly" or newActor == "Nathalie Cherie" or newActor == "Natalie Cherie":
                 newActor = "Nathaly Cherie"
             if newActor == "Katarina":
                 newActor = "Katerina Hartlova"
