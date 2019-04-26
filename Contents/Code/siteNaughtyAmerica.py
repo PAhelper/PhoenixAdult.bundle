@@ -25,14 +25,14 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "Naughty America"
-    metadata.summary = detailsPageElements.xpath('//p[@class="synopsis_txt"]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//div[@class="synopsis grey-text"]')[0].text_content().strip().strip("Synopsis")
     subSite = detailsPageElements.xpath(('//div[@class="scene-info"]/a[@class="site-title grey-text link"]'))[0].text_content().strip()
     metadata.tagline = subSite
     metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
 
     metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
-    date = detailsPageElements.xpath('//p[@class="scenedate"]//span')[0].text_content()
+    date = detailsPageElements.xpath('//span[@class="entry-date light-grey-text"]')[0].text_content()
     date_object = datetime.strptime(date, '%b %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year    
