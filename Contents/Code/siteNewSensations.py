@@ -33,7 +33,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
 
     except:
         # search by DVD
@@ -50,7 +50,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:
                     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
 
 # From when site had search functionality
     # searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
