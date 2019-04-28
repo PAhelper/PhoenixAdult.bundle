@@ -5,13 +5,13 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
-    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
+    if len(searchResults.xpath('//div[@class="content-item exclusive"]')) == 0:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
-    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
+    if len(searchResults.xpath('//div[@class="content-item exclusive"]')) == 0:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
     for searchResult in searchResults.xpath('//div[@class="info-wrap"]'):
         titleNoFormatting = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
@@ -20,7 +20,7 @@ def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchBy
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
@@ -43,7 +43,7 @@ def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByD
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
@@ -60,7 +60,7 @@ def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDat
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
     return results
 
@@ -135,7 +135,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
