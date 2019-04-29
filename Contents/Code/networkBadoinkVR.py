@@ -1,62 +1,31 @@
 import PAsearchSites
 import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    # try Actress Search
-    try:
-        url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","")
-        Log('Actress Page: ' + url)
-        searchResults = HTML.ElementFromURL(url)
-        Log('Actress Search')
-        for searchResult in searchResults.xpath('//section[1]//div[@class="tile-grid-item"]'):
-            titleNoFormatting = searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('title')
-            Log("Result Title: " + titleNoFormatting)
-            curID = searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('href')
-            curID = curID.replace("_","+").replace("/","_")
-            Log("curID: " + curID)
-            releaseDate = parse(searchResult.xpath('.//span[@class="video-card-upload-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-            Log("releaseDate: " + releaseDate)
-            girlName = searchResult.xpath('.//a[@itemprop="actor"]')[0].text_content().strip()
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), girlName.lower())
-
-            results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
-    # revert to scene title search
-    except:
-        Log("Scene Title Search")
-        siteName = PAsearchSites.getSearchFilter(searchSiteID)
-        if siteName == "KinkVR":
-            scenePageBase = "/bdsm-vr-video/"
-        elif siteName == "VRCosplayX":
-            scenePageBase = "/cosplaypornvideo/"
-        else:
-            scenePageBase = "/vrpornvideo/"
-        Log('scenePageBase: ' + scenePageBase)
-        searchString = title.lower().replace(" ","_").replace("'","_").replace(".","_").replace(",","").replace('_','-',-1)
-        url = PAsearchSites.getSearchBaseURL(searchSiteID) + scenePageBase + searchString
-        Log("Scene Page url: " + url)
-        searchResults = HTML.ElementFromURL(url)
-        searchResult = searchResults.xpath('//div[@class="video-rating-and-details"]')[0]
-        titleNoFormatting = searchResult.xpath('.//h1[@class="heading heading--2 video-title"]')[0].text_content()
-        Log("SceneTitle: " + titleNoFormatting)
-        curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href')
-        curID = curID.replace("_","+").replace("/","_")
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+    Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
+    for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
+        titleNoFormatting = searchResult.xpath('.//span[@itemprop="name"]')[0].text_content().strip()
+        Log("Result Title: " + titleNoFormatting)
+        curID = searchResult.xpath('.//a')[0].get('href').replace("/","+")
         Log("curID: " + curID)
-        releaseDate = parse(searchResult.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].get('content').strip()).strftime('%Y-%m-%d')
-        Log("ReleaseDate: " + releaseDate)
-        girlName = searchResult.xpath('.//a[contains(@class,"video-actor-link")]')[0].text_content()
-        Log("firstActressName: " + girlName)
+        releaseDate = parse(searchResult.xpath('.//span[@itemprop="datePublished"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        Log("releaseDate: " + releaseDate)
+        girlName = searchResult.xpath('.//a[@itemprop="actor"]')[0].text_content().strip()
+        Log("firstGirlname: " + girlName)
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        Log("Score: " + str(score))
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace("_","/").replace("+","_")
+    temp = str(metadata.id).split("|")[0].replace("+","/")
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
 
