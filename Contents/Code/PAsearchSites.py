@@ -58,7 +58,7 @@ import siteFirstAnalQuest
 import sitePervMom
 import siteHegre
 
-searchSites = [None] * 691
+searchSites = [None] * 692
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -750,6 +750,7 @@ searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","h
 searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 searchSites[689] = ["Watch Your Mom","Watch Your Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[690] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[691] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

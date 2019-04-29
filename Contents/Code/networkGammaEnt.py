@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network = 'XEmpire'
     elif siteNum == 329 or (siteNum >= 351 and siteNum <= 354):
         network = 'Blowpass'
-    elif siteNum == 331 or (siteNum >= 355 and siteNum <= 360):
+    elif siteNum == 331 or (siteNum >= 355 and siteNum <= 360) or siteNum == 691:
         network = 'Fantasy Massage'
     elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 364):
         network = 'Mile High Network'
@@ -90,7 +90,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         director.name = 'Mason'
     elif siteID == 329 or (siteID >= 351 and siteID <= 354):
         metadata.studio = 'Blowpass'
-    elif siteID == 331 or (siteID >= 355 and siteID <= 360):
+    elif siteID == 331 or (siteID >= 355 and siteID <= 360) or siteID == 691:
         metadata.studio = 'Fantasy Massage'
     elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
         metadata.studio = 'Mile High Network'
