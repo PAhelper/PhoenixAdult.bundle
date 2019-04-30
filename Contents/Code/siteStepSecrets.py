@@ -73,12 +73,12 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
-    posterNum = 1
     background = detailsPageElements.xpath('//video[@id="videoPlayer"]')[0].get("poster")
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Possible extra posters
+    posterNum = 2
     posters = detailsPageElements.xpath('//div[contains(@class,"carousel")]//img')
     Log("num posters: " + str(len(posters)))
     try:
