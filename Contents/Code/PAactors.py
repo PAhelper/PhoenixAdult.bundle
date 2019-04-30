@@ -2095,7 +2095,10 @@ def actorDBfinder(actorName):
         actorPageURL = actorsearch.xpath('//div[@class="col-xs-6 col-sm-3 grid-item grid-item-performer grid-item-performer-145"]/a')[0].get("href")
         actorPageURL = "https://www.adultdvdempire.com" + actorPageURL
         actorPage = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPage.xpath('//a[@class="fancy headshot"]')[0].get("href")
+        try:
+            actorPhotoURL = actorPage.xpath('//a[@class="fancy headshot"]')[0].get("href")
+        except:
+            actorPhotoURL = actorPage.xpath('//div[@class="fancy headshot"]')[0].get("style").replace('background-image:url(','').replace(');','')
         Log(actorName + " found in " + databaseName)
         Log("PhotoURL: " + actorPhotoURL)
     except:
