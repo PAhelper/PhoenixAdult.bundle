@@ -10,8 +10,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href').replace("/","+")
         Log("curID: " + curID)
-        releaseDate = parse(searchResult.xpath('.//span[@itemprop="datePublished"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        Log("releaseDate: " + releaseDate)
+        try:
+            releaseDate = parse(searchResult.xpath('.//span[@itemprop="datePublished"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            Log("releaseDate: " + releaseDate)
+        except:
+            releaseDate = ""
+            Log("No date found (BabeVR)")
         girlName = searchResult.xpath('.//a[@itemprop="actor"]')[0].text_content().strip()
         Log("firstGirlname: " + girlName)
         if searchDate:
@@ -78,11 +82,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.art[backgroundURL[0]] = Proxy.Preview(HTTP.Request(backgroundURL[0], headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Date
-    date = detailsPageElements.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].text_content().split(":")
-    dateFixed = date[1].strip()
-    Log('DateFixed: ' + dateFixed)
-    date_object = datetime.strptime(dateFixed, '%B %d, %Y')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    try:
+        date = detailsPageElements.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].text_content().split(":")
+        dateFixed = date[1].strip()
+        Log('DateFixed: ' + dateFixed)
+        date_object = datetime.strptime(dateFixed, '%B %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    except:
+        Log("No date found")
 
     return metadata
