@@ -5,7 +5,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     # actress search
-    searchString = searchTitle.lower().split('and')[0].strip().replace(" ","-")
+    searchString = searchTitle.lower().split('and ')[0].strip().replace(" ","-")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString + "/")
     for searchResult in searchResults.xpath('//div[@class="panel-body"]'):
         actorList = []
