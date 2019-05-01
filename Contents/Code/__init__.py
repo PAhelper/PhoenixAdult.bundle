@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('Vrdesktophd','').replace('Gearvr','').replace('Vrdesktopsd','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('Vrdesktophd','').replace('Gearvr','').replace('Vrdesktopsd','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
