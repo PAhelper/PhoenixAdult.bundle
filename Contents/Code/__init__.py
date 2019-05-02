@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace(' 6k',' ').replace(' 5k',' ').replace(' 4k',' ').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('Vrdesktophd','').replace('Gearvr','').replace('Vrdesktopsd','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('Hevc','').replace('Avc','').replace(' 6k',' ').replace(' 5k',' ').replace(' 4k',' ').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('Vrdesktophd','').replace('Gearvr','').replace('Vrdesktopsd','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -795,6 +795,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 692:
                     results = PAsearchSites.siteStepSecrets.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## VRHush
+            ###############
+            if siteNum == 693:
+                if searchSiteID == 9999 or searchSiteID == 693:
+                    results = PAsearchSites.siteVRHush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1347,6 +1354,13 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 692:
             metadata = PAsearchSites.siteStepSecrets.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  VRHush                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 693:
+            metadata = PAsearchSites.siteVRHush.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
