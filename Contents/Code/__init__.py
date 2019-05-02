@@ -687,7 +687,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
-                    results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             ###############
             ## Family Strokes
             ###############
@@ -801,6 +801,20 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 693:
                 if searchSiteID == 9999 or searchSiteID == 693:
                     results = PAsearchSites.siteVRHush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## MetArt
+            ###############
+            if siteNum == 694:
+                if searchSiteID == 9999 or searchSiteID == 694:
+                    results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## MetArtX
+            ###############
+            if siteNum == 695:
+                if searchSiteID == 9999 or searchSiteID == 695:
+                    results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1224,7 +1238,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if (siteID >= 621 and siteID <= 623):
-            metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.networkMetArt.updateSexArt(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1361,6 +1375,23 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 693:
             metadata = PAsearchSites.siteVRHush.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MetArt                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 694:
+            metadata = PAsearchSites.networkMetArt.updateMetArt(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MetArtX                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 695:
+            metadata = PAsearchSites.networkMetArt.updateSexArt(metadata,siteID,movieGenres,movieActors)
+
 
         ##############################################################
         ## Cleanup Genres and Add

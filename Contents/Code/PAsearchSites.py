@@ -43,7 +43,6 @@ import siteVirtualTaboo
 import networkCzechVR
 import siteFinishesTheJob
 import networkWankz
-import siteSexArt
 import siteFamilyStrokes
 import siteTonightsGirlfriend
 import siteKarups
@@ -59,8 +58,9 @@ import sitePervMom
 import siteHegre
 import siteStepSecrets
 import siteVRHush
+import networkMetArt
 
-searchSites = [None] * 694
+searchSites = [None] * 696
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -755,6 +755,8 @@ searchSites[690] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com",
 searchSites[691] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
 searchSites[692] = ["Step Secrets","Step Seccrets","http://www.stepsecrets.com","https://stepsecrets.com/?query="]
 searchSites[693] = ["VRHush","VRHush","https://www.vrhush.com","https://vrhush.com/scenes/"]
+searchSites[694] = ["MetArt","MetArt","https://www.metart.com","https://www.metart.com/search/"]
+searchSites[695] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.metartx.com/search/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
