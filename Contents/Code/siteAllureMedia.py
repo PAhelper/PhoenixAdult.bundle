@@ -174,6 +174,111 @@ def update(metadata,siteID,movieGenres,movieActors):
             	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
+    # Manually Add Actors
+    # Add Actor Based on Title
+    if "Faith" == metadata.title:
+        actorName = "Faith"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+
+    # Search for Actor Name in Title and Summary
+    if "Nikki Rhodes" in metadata.title or "Nikki Rhodes" in metadata.summary:
+        actorName = "Nikki Rhodes"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Talia Tyler" in metadata.title or "Talia Tyler" in metadata.summary:
+        actorName = "Talia Tyler"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Hadley" in metadata.title or "Hadley" in metadata.summary:
+        actorName = "Hadley"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Evangeline" in metadata.title or "Evangeline" in metadata.summary:
+        actorName = "Tanner Mayes"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Zoe Voss" in metadata.title or "Zoe Voss" in metadata.summary:
+        actorName = "Zoe Voss"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Raquel Diamond" in metadata.title or "Raquel Diamond" in metadata.summary:
+        actorName = "Raquel Diamond"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Shay Golden" in metadata.title or "Shay Golden" in metadata.summary:
+        actorName = "Shay Golden"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Emily Grey" in metadata.title or "Emily Grey" in metadata.summary:
+        actorName = "Emily Grey"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Allyssa Hall" in metadata.title or "Allyssa Hall" in metadata.summary:
+        actorName = "Allyssa Hall"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Alexa Grace" in metadata.title or "Alexa Grace" in metadata.summary:
+        actorName = "Alexa Grace"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Remy LaCroix" in metadata.title or "Remy LaCroix" in metadata.summary:
+        actorName = "Remy LaCroix"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Nadine Sage" in metadata.title or "Nadine Sage" in metadata.summary:
+        actorName = "Nadine Sage"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Chloe Starr" in metadata.title or "Chloe Starr" in metadata.summary:
+        actorName = "Chloe Starr"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Melissa Moore" in metadata.title or "Melissa Moore" in metadata.summary:
+        actorName = "Melissa Moore"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Taylor Renae" in metadata.title or "Taylor Renae" in metadata.summary:
+        actorName = "Taylor Renae"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Veronica Rodriguez" in metadata.title or "Veronica Rodriguez" in metadata.summary:
+        actorName = "Veronica Rodriguez"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Naomi Woods" in metadata.title or "Naomi Woods" in metadata.summary:
+        actorName = "Naomi Woods"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Amanda Aimes" in metadata.title or "Amanda Aimes" in metadata.summary:
+        actorName = "Amanda Aimes"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Alice Green" in metadata.title or "Alice Green" in metadata.summary:
+        actorName = "Alice Green"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Kimber Woods" in metadata.title or "Kimber Woods" in metadata.summary:
+        actorName = "Kimber Woods"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Alina Li" in metadata.title or "Alina Li" in metadata.summary:
+        actorName = "Alina Li"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Holly Michaels" in metadata.title or "Holly Michaels" in metadata.summary:
+        actorName = "Holly Michaels"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Layla London" in metadata.title or "Layla London" in metadata.summary:
+        actorName = "Layla London"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Dakota Brookes" in metadata.title or "Dakota Brookes" in metadata.summary:
+        actorName = "Dakoda Brookes"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
