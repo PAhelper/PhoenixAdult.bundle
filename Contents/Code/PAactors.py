@@ -115,6 +115,9 @@ class PhoenixActors:
                 newActor = "Khloe Kapri"
             if newActor == "Sybil Kailena" or newActor == "Sybil":
                 newActor = "Sybil A"
+            if newActor == "Jane Doux":
+                newActor = "Pristine Edge"
+
 
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
