@@ -11,12 +11,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
         except:
             try:
-                searchString = searchTitle.replace(" ","")
+                # Random actors have a trailing dash
+                searchString = searchString + '-'
                 searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
             except:
-                searchString = searchTitle.replace(" ","")
-                searchInt = int(searchString)
-                searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
+                try:
+                    searchString = searchTitle.replace(" ","")
+                    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
+                except:
+                    searchString = searchTitle.replace(" ","")
+                    searchInt = int(searchString)
+                    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
         for searchResult in searchResults.xpath('//div[contains(@class,"videoBlock")]'):
             titleNoFormatting = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].text_content()
             Log("titleNoFormatting: " + titleNoFormatting)
@@ -28,7 +33,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
 
     except:
         # search by DVD
@@ -45,7 +50,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:
                     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
 
 # From when site had search functionality
     # searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)

@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('180','').replace('Hevc','').replace('Avc','').replace('5k','').replace('4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').strip()
         Log('*******MEDIA TITLE****** ' + str(title))
 
         # Search for year
@@ -788,6 +788,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 688:
                     results = PAsearchSites.siteHegre.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Femdom Empire
+            ###############
+            if siteNum == 689:
+                if searchSiteID == 9999 or searchSiteID == 689:
+                    results = PAsearchSites.siteFemdomEmpire.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1331,6 +1338,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 688:
             metadata = PAsearchSites.siteHegre.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  FemdomEmpire                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 689:
+            metadata = PAsearchSites.siteFemdomEmpire.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
