@@ -370,12 +370,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     for paragraph in paragraphs:
         summary = summary + '\n\n' + paragraph.text_content()
     metadata.summary = summary.strip()
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content()[8:]
+    metadata.title = detailsPageElements.xpath('//div[@class="row info"]//div[@class="small-12 medium-12 large-12 columns"]')[0].text_content()
     date = detailsPageElements.xpath('//h2')[2].text_content()[:-1]
     date_object = datetime.strptime(date, '%b %d, %Y')
     metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year    
-        
+    metadata.year = metadata.originally_available_at.year
+
+    #Tagline and Collection(s)
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
     
     # Genres
     movieGenres.clearGenres()
