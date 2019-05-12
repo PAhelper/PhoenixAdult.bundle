@@ -93,7 +93,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Brazzers
             ###############
             if siteNum == 2:
-                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81) or searchSiteID == 582:
+                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
                     results = PAsearchSites.siteBrazzers.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -833,7 +833,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Brazzers                                               ##
         ##                                                          ##
         ##############################################################
-        if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582:
+        if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
             metadata = PAsearchSites.siteBrazzers.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
