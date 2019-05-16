@@ -156,21 +156,28 @@ def update(metadata,siteID,movieGenres,movieActors):
         dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
     except:
-        dvdTitle = 'This is some damn nonsense that should never match the scene title'
+        try:
+            dvdTitle = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+            metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
+        except:
+            dvdTitle = 'This is some damn nonsense that should never match the scene title'
 
     try:
         title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
     except:
         try:
-            title = detailsPageElements.xpath('//h1 | //h3[@class="dvdTitle"]')[0].text_content().strip()
+            # Title DVD
+            title = detailsPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
         except:
             try:
-                dataLayer = detailsPageElements.xpath('//script[contains(text(),"dataLayer")]')[0].text_content()
-                alpha = dataLayer.find('"sceneTitle"')+14
-                omega = dataLayer.find('"',alpha)
-                title = dataLayer[alpha:omega]
+                # Title Scene
+                title = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
             except:
-                title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
+                try:
+                    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+                except:
+                    title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
+
 
     if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
         pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
