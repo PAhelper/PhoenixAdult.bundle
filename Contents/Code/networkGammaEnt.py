@@ -12,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network = 'Fantasy Massage'
     elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 364):
         network = 'Mile High Network'
-    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466:
+    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466 or siteNum == 690:
         network = '21Sextury'
     elif siteNum == 183 or (siteNum >= 373 and siteNum <= 374):
         network = '21Naturals'
@@ -94,7 +94,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Fantasy Massage'
     elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
         metadata.studio = 'Mile High Network'
-    elif (siteID >= 365 and siteID <= 372) or siteID == 466:
+    elif (siteID >= 365 and siteID <= 372) or siteID == 466 or siteID == 690:
         metadata.studio = '21Sextury'
     elif siteID == 183 or (siteID >= 373 and siteID <= 374):
         metadata.studio = '21Naturals'
@@ -290,6 +290,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href').replace("https:","http:")
         photoPage = HTML.ElementFromURL(photoPageUrl)
+        unlockedPhotoImg = photoPage.xpath('//div[@class="previewImage"]/img')[0].get('src').replace("https:","http:")
+        art.append(unlockedPhotoImg)
         unlockedPhotos = photoPage.xpath('//a[@class="imgLink"] | //a[@class="imgLink pgUnlocked"]')
         for unlockedPhoto in unlockedPhotos:
             art.append(unlockedPhoto.get('href').replace("https:","http:"))
