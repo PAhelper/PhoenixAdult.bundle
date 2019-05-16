@@ -111,6 +111,8 @@ class PhoenixActors:
                 newActor = "Annika Albrite"
             if newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
+            if newActor == "Jade Indica":
+                newActor = "Miss Jade Indica"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":
