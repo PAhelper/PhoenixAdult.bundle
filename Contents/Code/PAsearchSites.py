@@ -968,6 +968,7 @@ def getSearchSettings(mediaTitle):
 
     Log("searchTitle (before date processing): " + searchTitle)
     #Search Type
+    searchTitle = searchTitle.replace("#",'')
     if unicode(searchTitle[:4], 'utf-8').isnumeric():
         if unicode(searchTitle[5:7], 'utf-8').isnumeric():
             if unicode(searchTitle[8:10], 'utf-8').isnumeric():

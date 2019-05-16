@@ -40,10 +40,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     else:
         network = network + "/"
 
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
+    #searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/scene")
+    searchResult = searchResults.xpath('//div[@class="tlcDetails"]')[0]
+    titleText = searchResult.xpath('.//a[1]')[0]
+    resultfirst = titleText.get('href').replace('/','_').replace('?','!')
     for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
         curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
+        actor = searchResult.xpath('.//div[@class="tlcActors"]/a')[0].text_content().strip()
         try:
             releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         except:
@@ -57,7 +62,40 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " - " + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+
+    # Other pages
+    i = 2
+    while i < 10:
+        searchResultsSec = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/scene/" + str(i))
+        i += 1
+        searchResultSec = searchResultsSec.xpath('//div[@class="tlcDetails"]')[0]
+        titleText = searchResultSec.xpath('.//a[1]')[0]
+        resultSEARCH = titleText.get('href').replace('/','_').replace('?','!')
+        if resultSEARCH == resultfirst:
+            i = 100
+
+        for searchResultSec in searchResultsSec.xpath('//div[@class="tlcDetails"]'):
+            titleText = searchResultSec.xpath('.//a[1]')[0]
+            titleNoFormatting = titleText.text_content().strip()
+            curID = titleText.get('href').replace('/','_').replace('?','!')
+            actor = searchResultSec.xpath('.//div[@class="tlcActors"]/a')[0].text_content().strip()
+            try:
+                releaseDate = parse(searchResultSec.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            except:
+                try:
+                    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResultSec.xpath('.//a[1]')[0].get('href'))
+                    releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+                except:
+                    releaseDate = ''
+
+            if searchDate and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " - " + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+
 
     try:
         dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
@@ -160,7 +198,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             dvdTitle = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
             metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
         except:
-            dvdTitle = 'This is some damn nonsense that should never match the scene title'
+            dvdTitle = "This is some damn nonsense that should never match the scene title"
 
     try:
         title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
