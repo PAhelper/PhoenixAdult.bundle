@@ -49,7 +49,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     elif siteNum >= 383 and siteNum <= 386:
         network = 'Fame Digital'
         if siteNum == 383:
-            networkdvd = False
             network_sep_scene = "/scene"
             network_sep_scene_pages = "/scene/"
             network_sep_dvd = "/dvd"
