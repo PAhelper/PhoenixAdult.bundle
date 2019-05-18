@@ -109,6 +109,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
             titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
             titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
+
+            if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
+                if "Scene 0" in titleNoFormatting or "scene 0" in titleNoFormatting or "SCENE 0" in titleNoFormatting:
+                    titleNoFormatting = titleNoFormatting.replace("Scene 0"+1, "").replace("scene 0"+1, "").replace("SCENE 0"+1, "")
+                if "Scene 1" in titleNoFormatting or "scene 1" in titleNoFormatting or "SCENE 1" in titleNoFormatting:
+                    titleNoFormatting = titleNoFormatting.replace("Scene 1"+1, "").replace("scene 1"+1, "").replace("SCENE 1"+1, "")
+                
+
             curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
             resultfirst.append(curID)
             try:
@@ -278,7 +286,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Title
+    # Title DVD
     try:
         dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
@@ -293,32 +301,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         except:
             dvdTitle = "This is some damn nonsense that should never match the scene title"
 
-    try:
-        title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
-    except:
-        try:
-            # Title DVD
-            title = detailsPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
-        except:
-            try:
-                # Title Scene
-                title = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
-            except:
-                try:
-                    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-                except:
-                    title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
-
-
-    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
-        pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
-        alpha = pageTitle.find('Scene')+6
-        omega = pageTitle.find(' ',alpha)
-        title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
-
-    title = title.replace("BONUS-", "BONUS - ").replace("BTS-", "BTS - ")
-
-    metadata.title = title
 
     # Director
     try:
@@ -401,6 +383,46 @@ def update(metadata,siteID,movieGenres,movieActors):
                 i = int(i) + 1
         except:
             pass
+
+    # Title
+    try:
+        title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
+    except:
+        try:
+            # Title DVD
+            title = detailsPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+        except:
+            try:
+                # Title Scene
+                title = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+            except:
+                try:
+                    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+                except:
+                    title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
+
+
+    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
+        pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
+        alpha = pageTitle.find('Scene')+6
+        omega = pageTitle.find(' ',alpha)
+        title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
+
+    if "BONUS" in title or "BTS" in title:
+        if len(actors) > 0:
+            actorTitle = ' - '
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                    actorTitle = actorTitle + actorName + ", "
+
+            title = title + actorTitle
+            title = title.strip()
+            title = title.strip(",")
+
+    title = title.replace("BONUS-", "BONUS - ").replace("BTS-", "BTS - ")
+
+    metadata.title = title
 
     #Posters
 
