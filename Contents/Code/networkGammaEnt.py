@@ -110,17 +110,22 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
             titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
 
-            if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
-                if "Scene 0" in titleNoFormatting or "scene 0" in titleNoFormatting or "SCENE 0" in titleNoFormatting:
-                    titleNoFormatting = titleNoFormatting.replace("Scene 0"+1, "").replace("scene 0"+1, "").replace("SCENE 0"+1, "")
-                if "Scene 1" in titleNoFormatting or "scene 1" in titleNoFormatting or "SCENE 1" in titleNoFormatting:
-                    titleNoFormatting = titleNoFormatting.replace("Scene 1"+1, "").replace("scene 1"+1, "").replace("SCENE 1"+1, "")
-                
-
             curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
             resultfirst.append(curID)
+
             try:
-                actor = searchResult.xpath('.//div[@class="tlcActors"]/a')[0].text_content().strip()
+                actorLink = searchResult.xpath('.//div[@class="tlcActors"]/a')
+                actor = ' - '
+                if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
+                    for actorText in actorLink:
+                        actorName = str(actorText.text_content().strip())
+                        if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                            actor = actor + actorName + ", "
+                else:
+                    actor = actor + str(actorLink[0].text_content().strip())
+                actor = actor.strip()
+                actor = actor.strip(",")
+                actor = " " + actor
             except:
                 actor = ''
     
@@ -137,7 +142,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " - " + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
 
         if networkscenepages:
             # Other pages
@@ -163,11 +168,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                         titleNoFormatting = titleText.text_content().strip()
                         titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
                         titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
+
                         curID = titleText.get('href').replace('/','_').replace('?','!')
                         resultsecond.append(curID)
 
                         try:
-                            actor = searchResultSec.xpath('.//div[@class="tlcActors"]/a')[0].text_content().strip()
+                            actorLink = searchResultSec.xpath('.//div[@class="tlcActors"]/a')
+                            actor = ' - '
+                            if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
+                                for actorText in actorLink:
+                                    actorName = str(actorText.text_content().strip())
+                                    if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                                        actor = actor + actorName + ", "
+                            else:
+                                actor = actor + str(actorLink[0].text_content().strip())
+                            actor = actor.strip()
+                            actor = actor.strip(",")
+                            actor = " " + actor
                         except:
                             actor = ''
 
@@ -185,7 +202,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                         else:
                             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-                        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " - " + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+                        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
             
                     resultfirst = resultsecond
                     resultsecond = []

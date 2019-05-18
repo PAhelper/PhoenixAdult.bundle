@@ -795,6 +795,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 689:
                     results = PAsearchSites.siteFemdomEmpire.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Dorcel Vision
+            ###############
+            if siteNum == 691:
+                if searchSiteID == 9999 or searchSiteID == 691:
+                    results = PAsearchSites.siteDorcelVision.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1346,6 +1353,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 689:
             metadata = PAsearchSites.siteFemdomEmpire.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  DorcelVision                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 691:
+            metadata = PAsearchSites.siteDorcelVision.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
