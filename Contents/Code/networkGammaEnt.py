@@ -49,6 +49,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     elif siteNum >= 383 and siteNum <= 386:
         network = 'Fame Digital'
         if siteNum == 383:
+            networkdvd = False
             network_sep_scene = "/scene"
             network_sep_scene_pages = "/scene/"
             network_sep_dvd = "/dvd"
@@ -106,6 +107,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_prev + encodedTitle + network_sep_scene)
         for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
             titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
+            titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
+            titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
             curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
             resultfirst.append(curID)
             try:
@@ -150,6 +153,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     for searchResultSec in searchResultsSec.xpath('//div[@class="tlcDetails"]'):
                         titleText = searchResultSec.xpath('.//a[1]')[0]
                         titleNoFormatting = titleText.text_content().strip()
+                        titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
+                        titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
                         curID = titleText.get('href').replace('/','_').replace('?','!')
                         resultsecond.append(curID)
 
@@ -280,6 +285,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         try:
             dvdTitle = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+            dvdTitle = dvdTitle.replace("BONUS-", "").replace("BONUS - ", "")
+            dvdTitle = dvdTitle.replace("BONUS", "")
+            dvdTitle = dvdTitle.replace("BTS-", "").replace("BTS - ", "")
+            dvdTitle = dvdTitle.replace("BTS", "")
             metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
         except:
             dvdTitle = "This is some damn nonsense that should never match the scene title"
@@ -306,6 +315,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         alpha = pageTitle.find('Scene')+6
         omega = pageTitle.find(' ',alpha)
         title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
+
+    title = title.replace("BONUS-", "BONUS - ").replace("BTS-", "BTS - ")
 
     metadata.title = title
 
