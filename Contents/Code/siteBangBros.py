@@ -39,7 +39,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     releaseID = detailsPageElements.xpath('//div[@class="vdoCast"]')[1].text_content()[9:]
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + releaseID)
     searchResult = searchResults.xpath('//div[@class="echThumb"]')[0]
-    releaseDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().replace("\n","")
+    releaseDate = searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().strip().replace("\n","")
     date_object = datetime.strptime(releaseDate, '%b %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year 
@@ -82,10 +82,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     for poster in posters:
         posterURL = "http:" + poster.xpath('.//img')[0].get("src")
         posterURL = posterURL[:-5] + "big" + posterURL[-5:]
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-        posterNum += 1
-    
+        try:
+            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
+            posterNum += 1
+        except:
+            pass
 
-
-    
     return metadata
