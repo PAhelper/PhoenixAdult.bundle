@@ -71,6 +71,12 @@ class PhoenixGenres:
                 skip = True
             if "18-23" == newGenre.lower():
                 skip = True
+            if "smart" == newGenre.lower():
+                skip = True
+            if "ryan mclane" == newGenre.lower():
+                skip = True
+            if "destruction" == newGenre.lower():
+                skip = True
 
             #Search and Skip
             if "5k" in newGenre.lower():
@@ -95,7 +101,7 @@ class PhoenixGenres:
                 newGenre = "threesome"
             if "ball licking" == newGenre.lower() or "ball sucking" == newGenre.lower():
                 newGenre = "ball play"
-            if "big cock" == newGenre.lower() or "big cocks" == newGenre.lower() or "big dicks" == newGenre.lower():
+            if "big cock" == newGenre.lower() or "big cocks" == newGenre.lower() or "big dicks" == newGenre.lower() or "2 big cocks" == newGenre.lower():
                 newGenre = "big dick"
             if "bikin" == newGenre.lower():
                 newGenre = "bikini"
@@ -143,7 +149,7 @@ class PhoenixGenres:
                 newGenre = "tattoo"
             if "white" == newGenre.lower() or "white girl" == newGenre.lower() or "while" == newGenre.lower():
                 newGenre = "Caucasian"
-            if "amatuer" == newGenre.lower():
+            if "amatuer" == newGenre.lower() or "amateur pre auditions" == newGenre.lower():
                 newGenre = "amateur"
             if "cumswap" == newGenre.lower() or "cum swapping" == newGenre.lower():
                 newGenre = "cum swap"
@@ -235,7 +241,7 @@ class PhoenixGenres:
                 newGenre = "Boy-Boy-Boy-Girl"
             if "fffmm" == newGenre.lower():
                 newGenre = "Boy-Boy-Girl-Girl-Girl"
-            if "swallow" == newGenre.lower():
+            if "swallow" == newGenre.lower() or "amateur swallow" == newGenre.lower():
                 newGenre = "swallowing"
             if "housewives" == newGenre.lower():
                 newGenre = "Housewife"
@@ -269,6 +275,10 @@ class PhoenixGenres:
                 newGenre = "Lesbian"
             if "straight" == newGenre.lower() or "straight porn" == newGenre.lower():
                 newGenre = "Heterosexual"
+            if "asian amateur" == newGenre.lower():
+                newGenre = "Asian"
+            if "curly" == newGenre.lower():
+                newGenre = "curly hair"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower():
