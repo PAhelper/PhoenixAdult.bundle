@@ -44,6 +44,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
+    movieGenres.addGenre("Amateur")
 
 
     # Release Date
