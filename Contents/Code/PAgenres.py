@@ -77,6 +77,14 @@ class PhoenixGenres:
                 skip = True
             if "destruction" == newGenre.lower():
                 skip = True
+            if "site member" == newGenre.lower():
+                skip = True
+            if "st patrick's day" == newGenre.lower():
+                skip = True
+            if "workitout" == newGenre.lower():
+                skip = True
+            if "little runaway" == newGenre.lower():
+                skip = True
 
             #Search and Skip
             if "5k" in newGenre.lower():
@@ -99,8 +107,8 @@ class PhoenixGenres:
                 newGenre = "Big Butt"
             if "3some" == newGenre.lower() or "3 way" == newGenre.lower():
                 newGenre = "threesome"
-            if "ball licking" == newGenre.lower() or "ball sucking" == newGenre.lower():
-                newGenre = "ball play"
+            if "ball licking" == newGenre.lower() or "ball sucking" == newGenre.lower() or "ball lick" == newGenre.lower():
+                newGenre = "ball licking"
             if "big cock" == newGenre.lower() or "big cocks" == newGenre.lower() or "big dicks" == newGenre.lower() or "2 big cocks" == newGenre.lower():
                 newGenre = "big dick"
             if "bikin" == newGenre.lower():
@@ -125,7 +133,7 @@ class PhoenixGenres:
                 newGenre = "face fucking"
             if "facesitting" == newGenre.lower():
                 newGenre = "face sitting"
-            if "facial (multiple)" == newGenre.lower() or "facial (pov)" == newGenre.lower() or "cumshot facial" == newGenre.lower():
+            if "facial (multiple)" == newGenre.lower() or "facial (pov)" == newGenre.lower() or "cumshot facial" == newGenre.lower() or "open mouth facial" == newGenre.lower():
                 newGenre = "Facial"
             if "cum-in-mouth" == newGenre.lower():
                 newGenre = "Cum In Mouth"
@@ -279,6 +287,24 @@ class PhoenixGenres:
                 newGenre = "Asian"
             if "curly" == newGenre.lower():
                 newGenre = "curly hair"
+            if "thongs" == newGenre.lower():
+                newGenre = "thong"
+            if "college" == newGenre.lower() or "university" == newGenre.lower():
+                newGenre = "coed"
+            if "oiled" == newGenre.lower():
+                newGenre = "oil"
+            if "thick" == newGenre.lower():
+                newGenre = "curvy"
+            if "reality" == newGenre.lower():
+                newGenre = "reality porn"
+            if "group" == newGenre.lower():
+                newGenre = "group sex"
+            if "hooded" == newGenre.lower():
+                newGenre = "hood"
+            if "p.o.v." == newGenre.lower() or "femdom pov" == newGenre.lower():
+                newGenre = "pov"
+            if "body massage" == newGenre.lower():
+                newGenre = "massage"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower():
