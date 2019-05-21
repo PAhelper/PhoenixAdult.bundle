@@ -5,25 +5,31 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     if unicode(searchTitle, 'utf-8').isnumeric():
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-        searchResult = searchResults
-        
-        titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
-        Log(titleNoFormatting)
-        curID = searchResult.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-        Log("ID: " + curID)
-#        releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
+        try:
+            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+            searchResult = searchResults
+            titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
+            Log(titleNoFormatting)
+            curID = searchResult.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
+            Log("ID: " + curID)
+            #releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
+
+        except:
+            searchResults = HTML.ElementFromURL('https://www.sislovesme.com/' + encodedTitle + '/banner/1')
+            searchResult = searchResults
+            titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
+            Log(titleNoFormatting)
+            curID = 'https:__' + searchResult.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
+            Log("ID: " + curID)
+            # releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
 
         score = 100
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
-
     return results
-
-
 
 def update(metadata,siteID,movieGenres,movieActors):
     art =[]
-    Log('******UPDATE CALLED*******')   
+    Log('******UPDATE CALLED*******')
     detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/'))
     Log("urlName: " + detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5])
     urlName = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5]
