@@ -322,7 +322,7 @@ searchSites[257] = ["Scambisti Maturi","Scambisti Maturi", "https://letsdoeit.co
 searchSites[258] = ["Sextape Germany","Sextape Germany", "https://letsdoeit.com","https://letsdoeit.com/videos/site/sextape-germany?keywords="]
 searchSites[259] = ["XXX Omas","XXX Omas", "https://letsdoeit.com","https://letsdoeit.com/videos/site/xxx-omas?keywords="]
 searchSites[260] = ["LegalPorno","LegalPorno","https://www.legalporno.com","https://www.legalporno.com/search/?query="]
-searchSites[261] = ["Mofos","Mofos","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
+searchSites[261] = ["Mofos","Mofos","https://www.mofos.com","https://www.mofos.com/search?q="]
 searchSites[262] = ["ShareMyBF","ShareMyBF","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
 searchSites[263] = ["Dont Break Me","Don't Break Me","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
 searchSites[264] = ["I Know That Girl","I Know That Girl","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
