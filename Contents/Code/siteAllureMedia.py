@@ -5,10 +5,11 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
+    Log('****SEARCH*****')
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="update_details"]'):
-        titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
-        releaseDate = parse(searchResult.xpath('.//div[contains(@class,"update_date")]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
+        titleNoFormatting = searchResult.xpath('.//div[@class="update_title"]/a')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
         curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)

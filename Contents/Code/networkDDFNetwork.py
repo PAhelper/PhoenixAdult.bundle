@@ -6,11 +6,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     i = 0
-    for searchResult in searchResults.xpath('//div[@class="card m-1"]/a'):
+    for searchResult in searchResults.xpath('//div[@class="card text-white bg-dark m-1"]/a'):
         Log('Url : ' + str(searchResult.get('href')))
         titleNoFormatting = searchResult.get("title")
         Log('Titre ' + str(titleNoFormatting))
-        releaseDate = parse(searchResult.xpath('//div[@class="card-footer d-flex justify-content-between"]//small')[i].text_content().strip()).strftime('%Y-%m-%d')
+        releaseDate = parse(searchResult.xpath('//div[@class="d-flex p-0 m-0 lh-1 pb-1"]//small')[i].text_content().strip()).strftime('%Y-%m-%d')
         #coverURL = searchResults.xpath('//div[@class="card m-1"]/a/img')[i].get('data-src')
         #Log('CoverUrl : ' + str(coverURL) )
         curID = searchResult.get('href').replace('/','_').replace('?','!')
@@ -35,8 +35,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     searchcovers = HTML.ElementFromURL('https://ddfnetwork.com/videos/freeword/' + titre_search )
     j = int(indice)
     k=0
-    for searchcover in searchcovers.xpath('//div[@class="card m-1"]/a') :
-        coverURL = searchcover.xpath('//div[@class="card m-1"]/a/img')[k].get('data-src')
+    for searchcover in searchcovers.xpath('//div[@class="card text-white bg-dark m-1"]/a') :
+        coverURL = searchcover.xpath('//div[@class="card text-white bg-dark m-1"]/a/img')[k].get('data-src')
         if k == j:
             Good_CoverURL = coverURL
         k = k + 1
@@ -46,7 +46,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="px-2 col-12 col-md-7 video-titles "]/h1')[0].text_content()
 
     # Summary
-    metadata.summary  = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content().strip()
+    try:
+        summaryp1 = detailsPageElements.xpath('//div[@id="descriptionBox"]/p[2]')[0].text_content().strip()
+        summaryp2 = detailsPageElements.xpath('//div[@id="descriptionBox"]/p[3]')[0].text_content().strip()
+        summaryp3 = detailsPageElements.xpath('//div[@id="descriptionBox"]/p[4]')[0].text_content().strip()
+        summary = summaryp1 + '\n' + summaryp2 + '\n' + summaryp3
+    except:
+        summary = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content().strip()
+    metadata.summary = summary
 
     # Studio
     metadata.studio = "DDFProd"
