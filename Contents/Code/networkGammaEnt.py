@@ -35,7 +35,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
         network_sep_dvd = "/dvd"
-    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466 or siteNum == 690:
+    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466 or siteNum == 692:
         network = '21Sextury'
         networkdvd = False
     elif siteNum == 183 or (siteNum >= 373 and siteNum <= 374):
