@@ -60,7 +60,7 @@ import siteHegre
 import siteFemdomEmpire
 import siteDorcelVision
 
-searchSites = [None] * 692
+searchSites = [None] * 694
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -606,7 +606,7 @@ searchSites[541] = ["Bratty Sis", "Bratty Sis", "https://brattysis.com","https:/
 searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com/video/" ]
 searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/" ]
 searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/" ]
-searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomporn.com","https://thatsitcomporn.com/video/" ]
+searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomshow.com","https://thatsitcomshow.com/video/" ]
 searchSites[546] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
 searchSites[547] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/" ]
 searchSites[548] = ["BellaPass", "BellaPass", "https://www.bellapass.com","https://bellapass.com/search.php?query=" ]
@@ -751,8 +751,10 @@ searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pe
 searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","http://www.kink.com/search?channelIds=chantasbitches&q="]
 searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 searchSites[689] = ["Femdom Empire","Femdom Empire","https://femdomempire.com","https://femdomempire.com/tour/search.php?query="]
-searchSites[690] = ["Butt Plays","Butt Plays","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[691] = ["Dorcel Vision","Dorcel Vision","https://www.dorcelvision.com","https://www.dorcelvision.com/en/search?type=4&keyword="]
+searchSites[690] = ["Day With A Porn Star","Day With A Porn Star","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
+searchSites[691] = ["Watch Your Mom","Watch Your Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[692] = ["Butt Plays","Butt Plays","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[693] = ["Dorcel Vision","Dorcel Vision","https://www.dorcelvision.com","https://www.dorcelvision.com/en/search?type=4&keyword="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -972,7 +974,7 @@ def getSearchSettings(mediaTitle):
                 searchTitle = searchTitle + word + " "
 
     # Gamma Ent remove Scene number from BONUS and BTS
-    if searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 392) or (searchSiteID >= 460 and searchSiteID <= 466) or searchSiteID == 690:
+    if searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 392) or (searchSiteID >= 460 and searchSiteID <= 466) or searchSiteID == 692:
         if "Bonus" in searchTitle or "Bts" in searchTitle:
             alpha = searchTitle.find('Scene ',0)
             omega = searchTitle.find('Scene ',0)+9
