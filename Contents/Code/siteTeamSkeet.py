@@ -59,14 +59,25 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//a[contains(@href,"/profile/")]')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = actorLink.text_content()
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@id="profile_image"]')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
+    try:
+        actors = detailsPageElements.xpath('//a[contains(@href,"/profile/")]')
+        if len(actors) > 0:
+            for actorLink in actors:
+                actorName = actorLink.text_content()
+                actorPageURL = actorLink.get("href")
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                actorPhotoURL = actorPage.xpath('//img[@id="profile_image"]')[0].get("src")
+                movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
+
+    # Manually Add Actors
+    # Add Actor Based on Title
+    if "Finger Fucking Debut" == metadata.title:
+        actorName = "Lily Lebeau"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+
 
     # Posters/Background
     valid_names = list()
