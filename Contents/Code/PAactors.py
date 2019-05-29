@@ -35,6 +35,8 @@ class PhoenixActors:
                 newActor = "Alex D."
             if newActor == "Amia Moretti":
                 newActor = "Amia Miley"
+            if newActor == "Amy Reid":
+                newActor = "Amy Ried"
             if newActor == "Anikka Albrite":
                 newActor = "Annika Albrite"
             if newActor == "Anita Bellini":
@@ -45,6 +47,10 @@ class PhoenixActors:
                 newActor = "Anastasia Morna"
             if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
                 newActor = "April O'Neil"
+            if newActor == "Capri Cavalli":
+                newActor = "Capri Cavanni"
+            if newActor == "Ce Ce Capella":
+                newActor = "CeCe Capella"
             if newActor == "Charlotte Lee":
                 newActor = "Jaye Summers"
             if newActor == "Criss Strokes":
@@ -57,6 +63,8 @@ class PhoenixActors:
                 newActor = "Gina Gerson"
             if newActor == "Elsa Dream":
                 newActor = "Elsa Jean"
+            if newActor == "Eve Lawrence":
+                newActor = "Eve Laurence"
             if newActor == "Grace Hartley":
                 newActor = "Pinky June"
             if newActor == "Hailey Reed":
@@ -95,6 +103,8 @@ class PhoenixActors:
                 newActor = "Moe Johnson"
             if newActor == "Nadya Nabakova" or newActor == "Nadya Nabokova":
                 newActor = "Bunny Colby"
+            if newActor == "Nancy A." or newActor == "Nancy A":
+                newActor = "Nancy Ace"
             if newActor == "Nathaly" or newActor == "Nathalie Cherie":
                 newActor = "Nathaly Cherie"
             if newActor == "Nika Noir":
@@ -107,6 +117,8 @@ class PhoenixActors:
                 newActor = "Riley Jensen"
             if newActor == "Sara Luv":
                 newActor = "Sara Luvv"
+            if newActor == "Sedona" or newActor == "Stefanie Renee":
+                newActor = "Stephanie Renee"
             if newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
                 newActor = "Stella Banxxx"
             if newActor == "Steven St.Croix":
@@ -2070,6 +2082,14 @@ class PhoenixActors:
                     newActor = "Jana Mrhacova"
                 if newActor == "Zazie":
                     newActor = "Zazie Sky"
+            if metadata.studio == "DDFProd":
+                if newActor == "Ms White-Kitten":
+                    newActor = "Goldie Baby"
+                if newActor == "Helen":
+                    newActor = "Alena H"
+            if metadata.studio == "Reality Kings":
+                if newActor == "Morgan":
+                    newActor = "Morgan Layne"
 
             if not skip:
                 if newPhoto == '':
