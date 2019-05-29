@@ -123,6 +123,18 @@ class PhoenixActors:
                 newActor = "Stella Banxxx"
             if newActor == "Steven St.Croix":
                 newActor = "Steven St. Croix"
+            if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
+                newActor = "Jenna Ross"
+            if newActor == "Kagney Lynn Karter":
+                newActor = "Kagney Linn Karter"
+            if newActor == "Kendra May Lust":
+                newActor = "Kendra Lust"
+            if newActor == "Anikka Albrite":
+                newActor = "Annika Albrite"
+            if newActor == "Anna Morna":
+                newActor = "Anastasia Morna"
+            if newActor == "Jade Indica":
+                newActor = "Miss Jade Indica"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
 

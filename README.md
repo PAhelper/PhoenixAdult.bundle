@@ -83,7 +83,9 @@ Plex main folder location:
     * '/raid0/data/module/Plex/sys/Plex Media Server/',                          # Thecus
     * '/raid0/data/PLEX_CONFIG/Plex Media Server/'                               # Thecus Plex community    
 
-Get the latest source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
+Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
+Or
+Get the dxm2891 source zip in GitHub release at https://github.com/dxm2891/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
 - Rename folder to "PhoenixAdult.bundle" (remove -master)
 
@@ -102,6 +104,34 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+#### Merge branch
+
+- 2019-05-22:
+    - Add Butt Plays (21Sextury subsite)
+    - Add DorcelVision
+    - Add Day With A Porn Star (Brazzers subsite)
+    - Add Watch Your Mom (Naughty America subsite)
+    - Fix Title DevilsFilm
+    - Fix That Sitcom Show
+    - Fix Search Page for DDF Network
+    - Fix Search Page for Allure Media
+    - Fix Search Page for network Gamma Entertainment
+        - Get all pages for scenes
+        - Get actress in search
+    - Amateur Allure improvements:
+        - More Actress Additions
+    - SisLovesMe improvements:
+        - Add alternate scene match method
+        - Add genre "Step Sister" to all scenes
+        - Poster bugfix
+    - Merged multiple genres
+    - Actress Aliases
+    - Other fixes:
+        - Term "180" was being stripped from scene titles. Was causing issues with multiple sites (ie. Kink, Evil Angel) where a numeric Scene ID is necessary/beneficial for scene matching
+        - Term "4k" was being stripped from search. Causing issues with Cum4k, other sites with "4k" in title. Client now strips " 4k" or ".4k", instead
+
+
+#### Original
 - 2019-04-23 9:45AM CST - Added Hegre.com support
 - 2019-04-15 9:00AM CST - Cleaned up Perfect Gonzo code, other minor bugfixes and additions
 - 2019-04-13 4:30PM CST - Added support for PervMom (direct match only)
@@ -244,6 +274,7 @@ Supported Networks
 #### - DigitalPlayground *Title Search *Actor Search
 #### - Dogfart - *Title Search/Actress
 #### - Dorcel Club *Title Search
+#### - Dorcel Vision *Title Search
 #### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - FakeHub *Title Search
 #### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
