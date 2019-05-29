@@ -27,7 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchString.lower(), titleNoFormatting.lower())
 
         titleNoFormatting = actors + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + ", " + releaseDate +"]"
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releasedDate, name = titleNoFormatting, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting, score = score, lang = lang))
 
     return results
 def update(metadata,siteID,movieGenres,movieActors):
@@ -43,8 +43,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Date
     date = str(metadata.id).split("|")[2]
-    Log('date: ' + date)
-    date_object = datetime.strptime(date.strip(), '%B %d, %Y')
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
