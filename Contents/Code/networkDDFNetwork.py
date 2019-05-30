@@ -52,47 +52,57 @@ def update(metadata,siteID,movieGenres,movieActors):
         summaryp3 = detailsPageElements.xpath('//div[@id="descriptionBox"]/p[4]')[0].text_content().strip()
         summary = summaryp1 + '\n' + summaryp2 + '\n' + summaryp3
     except:
-        summary = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content().strip()
+        try:
+            summary = detailsPageElements.xpath('//div[@id="descriptionBox"]//p[2]')[0].text_content().strip()
+        except:
+            try:
+                summary = detailsPageElements.xpath('//p[@class="box-container"]')[0].text_content().strip()
+            except:
+                pass
     metadata.summary = summary
+
 
     # Studio
     metadata.studio = "DDFProd"
 
     # Tagline / Collection
-    itempropURL = detailsPageElements.xpath('//meta[@itemprop="url"]')[0].get('content').strip()
-    if "ddfhardcore" in itempropURL:
-        tagline = "DDF Hardcore"
-    elif "ddfbusty" in itempropURL:
-        tagline = "DDFBusty"
-    elif "ddfxtreme" in itempropURL:
-        tagline = "DDF Xtreme"
-    elif "handsonhardcore" in itempropURL:
-        tagline = "Hands on Hardcore"
-    elif "houseoftaboo" in itempropURL:
-        tagline = "House of Taboo"
-    elif "onlyblowjob" in itempropURL:
-        tagline = "Only Blowjob"
-    elif "hotlegsandfeet" in itempropURL:
-        tagline = "Hot Legs & Feet"
-    elif "eurogirlsongirls" in itempropURL:
-        tagline = "Euro Girls on Girls"
-    elif "1by-day" in itempropURL:
-        tagline = "1By-Day"
-    elif "cherryjul" in itempropURL:
-        tagline = "Cherry Jul"
-    elif "ddfnetworkvr" in itempropURL:
-        tagline = "DDF Network VR"
-    elif "euroteenerotica" in itempropURL:
-        tagline = "Euro Teen Erotica"
-    elif "sandysfantasies" in itempropURL:
-        tagline = "Sandy's Fantasies"
-    elif "eveangelofficial" in itempropURL:
-        tagline = "Eve Angel Official"
-    elif "sexvideocasting" in itempropURL:
-        tagline = "Sex Video Casting"
-    elif "hairytwatter" in itempropURL:
-        tagline = "Hairy Twatter"
-    else:
+    try:
+        itempropURL = detailsPageElements.xpath('//meta[@itemprop="url"]')[0].get('content').strip()
+        if "ddfhardcore" in itempropURL:
+            tagline = "DDF Hardcore"
+        elif "ddfbusty" in itempropURL:
+            tagline = "DDFBusty"
+        elif "ddfxtreme" in itempropURL:
+            tagline = "DDF Xtreme"
+        elif "handsonhardcore" in itempropURL:
+            tagline = "Hands on Hardcore"
+        elif "houseoftaboo" in itempropURL:
+            tagline = "House of Taboo"
+        elif "onlyblowjob" in itempropURL:
+            tagline = "Only Blowjob"
+        elif "hotlegsandfeet" in itempropURL:
+            tagline = "Hot Legs & Feet"
+        elif "eurogirlsongirls" in itempropURL:
+            tagline = "Euro Girls on Girls"
+        elif "1by-day" in itempropURL:
+            tagline = "1By-Day"
+        elif "cherryjul" in itempropURL:
+            tagline = "Cherry Jul"
+        elif "ddfnetworkvr" in itempropURL:
+            tagline = "DDF Network VR"
+        elif "euroteenerotica" in itempropURL:
+            tagline = "Euro Teen Erotica"
+        elif "sandysfantasies" in itempropURL:
+            tagline = "Sandy's Fantasies"
+        elif "eveangelofficial" in itempropURL:
+            tagline = "Eve Angel Official"
+        elif "sexvideocasting" in itempropURL:
+            tagline = "Sex Video Casting"
+        elif "hairytwatter" in itempropURL:
+            tagline = "Hairy Twatter"
+        else:
+            tagline = str(PAsearchSites.getSearchSiteName(siteID).strip())
+    except:
         tagline = str(PAsearchSites.getSearchSiteName(siteID).strip())
 
     metadata.tagline = tagline
