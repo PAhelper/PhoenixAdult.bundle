@@ -16,7 +16,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = "http://www.xconfessions.com" + (str(metadata.id).split("|"))[0].replace('_','/').replace('?','!')
+    url = PAsearchSites.getSearchBaseURL(siteID) + (str(metadata.id).split("|"))[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
