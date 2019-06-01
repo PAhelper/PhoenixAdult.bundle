@@ -57,10 +57,11 @@ import addActors
 import siteFirstAnalQuest
 import sitePervMom
 import siteHegre
-import siteFemdomEmpire
+import networkFemdomEmpire
 import siteDorcelVision
+import siteXConfessions
 
-searchSites = [None] * 694
+searchSites = [None] * 696
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -755,6 +756,8 @@ searchSites[690] = ["Day With A Porn Star","Day With A Porn Star","http://www.br
 searchSites[691] = ["Watch Your Mom","Watch Your Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[692] = ["Butt Plays","Butt Plays","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[693] = ["Dorcel Vision","Dorcel Vision","https://www.dorcelvision.com","https://www.dorcelvision.com/en/search?type=4&keyword="]
+searchSites[694] = ["Feminized","Feminized","http://feminized.com","http://feminized.com/tour/search.php?query="]
+searchSites[695] = ["XConfessions","XConfessions","https://xconfessions.com","https://xconfessions.com/search?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

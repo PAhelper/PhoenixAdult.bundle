@@ -36,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]//p')[0].text_content().strip()
 
     #Tagline and Collection(s)
-    tagline = "Femdom Empire"
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -45,7 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     genres = detailsPageElements.xpath('//div[@class="featuring clear"][2]//ul//li')
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower().replace('categories:', '')
+            genreName = genreLink.text_content().strip().lower().replace('categories:', '').replace('tags:', '')
             movieGenres.addGenre(genreName)
     movieGenres.addGenre("Femdom")
 
@@ -66,5 +66,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     ### Posters and artwork ###
+    # Video trailer background image
 
     return metadata
