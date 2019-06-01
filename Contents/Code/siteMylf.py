@@ -92,7 +92,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log('posterURL: ' + posterURL)
 
     # Video trailer background image
-    previewBG = detailsPageElements.xpath('//video[@id="my-video"]')[0].get('poster')
+    previewBG = detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get('poster')
     if 'http' not in previewBG:
         previewBG = urlBase + previewBG
     metadata.art[previewBG] = Proxy.Preview(HTTP.Request(previewBG, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
