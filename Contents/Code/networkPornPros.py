@@ -75,6 +75,18 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
 
+    # Manually Add Actors
+    # Add Actor Based on Title
+    if "Poke Her In The Front" == metadata.title:
+        actorName = "Sara Luv"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+        actorName = "Dillion Harper"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+
+
+
     # Genres
     movieGenres.clearGenres()
         # Based on site

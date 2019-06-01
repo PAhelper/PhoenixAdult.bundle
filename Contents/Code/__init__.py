@@ -792,8 +792,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Femdom Empire
             ###############
             if siteNum == 689:
-                if searchSiteID == 9999 or searchSiteID == 689:
-                    results = PAsearchSites.siteFemdomEmpire.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                if searchSiteID == 9999 or searchSiteID == 689 or searchSiteID == 694:
+                    results = PAsearchSites.networkFemdomEmpire.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Dorcel Vision
@@ -801,6 +801,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 693:
                 if searchSiteID == 9999 or searchSiteID == 693:
                     results = PAsearchSites.siteDorcelVision.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## XConfessions
+            ###############
+            if siteNum == 695:
+                if searchSiteID == 9999 or searchSiteID == 695:
+                    results = PAsearchSites.siteXConfessions.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1351,8 +1358,8 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  FemdomEmpire                                            ##
         ##                                                          ##
         ##############################################################
-        if siteID == 689:
-            metadata = PAsearchSites.siteFemdomEmpire.update(metadata,siteID,movieGenres,movieActors)
+        if siteID == 689 or siteID == 694:
+            metadata = PAsearchSites.networkFemdomEmpire.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1361,6 +1368,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 693:
             metadata = PAsearchSites.siteDorcelVision.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  XConfessions                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 695:
+            metadata = PAsearchSites.siteXConfessions.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
