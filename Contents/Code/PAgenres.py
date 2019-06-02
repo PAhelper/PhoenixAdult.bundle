@@ -89,6 +89,12 @@ class PhoenixGenres:
                 skip = True
             if "get sprung" == newGenre.lower():
                 skip = True
+            if "daylight savings" == newGenre.lower():
+                skip = True
+            if "heavymetal" == newGenre.lower():
+                skip = True
+            if "public disgrace's best" == newGenre.lower():
+                skip = True
 
             #Search and Skip
             if "5k" in newGenre.lower():
@@ -123,9 +129,9 @@ class PhoenixGenres:
                 newGenre = "ebony"
             if "shaved pussy" == newGenre.lower() or "bald pussy" == newGenre.lower() or "shaved" == newGenre.lower():
                 newGenre = "shaven pussy"
-            if "blowjob" == newGenre.lower() or "blowjob (pov)" == newGenre.lower() or "blowjob (double)" == newGenre.lower() or "bj" == newGenre.lower() or "amateur blowjobs" == newGenre.lower() or "blowjobs" == newGenre.lower():
+            if "blowjob" == newGenre.lower() or "blowjob (pov)" == newGenre.lower() or "blowjob (double)" == newGenre.lower() or "bj" == newGenre.lower() or "amateur blowjobs" == newGenre.lower() or "blowjobs" == newGenre.lower() or "blowjob - pov" == newGenre.lower():
                 newGenre = "blow job"
-            if "handjob" == newGenre.lower() or "handjob (pov)" == newGenre.lower() or "handjobs" == newGenre.lower():
+            if "handjob" == newGenre.lower() or "handjob (pov)" == newGenre.lower() or "handjobs" == newGenre.lower() or "handjob - pov" == newGenre.lower():
                 newGenre = "hand job"
             if "tittyfuck (pov)" == newGenre.lower() or "tittyfuck" == newGenre.lower() or "tit fuck" == newGenre.lower() or "titty fucking" == newGenre.lower():
                 newGenre = "titty fuck"
@@ -135,7 +141,7 @@ class PhoenixGenres:
                 newGenre = "Double Penetration (DP)"
             if "face fuck" == newGenre.lower() or "facefucking" == newGenre.lower():
                 newGenre = "face fucking"
-            if "facesitting" == newGenre.lower():
+            if "facesitting" == newGenre.lower() or "queening" == newGenre.lower():
                 newGenre = "face sitting"
             if "facial (multiple)" == newGenre.lower() or "facial (pov)" == newGenre.lower() or "cumshot facial" == newGenre.lower() or "open mouth facial" == newGenre.lower():
                 newGenre = "Facial"
@@ -199,7 +205,7 @@ class PhoenixGenres:
                 newGenre = "piercing"
             if "pussy lick" == newGenre.lower() or "pussy licking" == newGenre.lower() or "cunilingus" == newGenre.lower():
                 newGenre = "Pussy Eating"
-            if "completely naked" == newGenre.lower():
+            if "completely naked" == newGenre.lower() or "naked" == newGenre.lower():
                 newGenre = "Nude"
             if "boot" == newGenre.lower():
                 newGenre = "Boots"
@@ -223,7 +229,7 @@ class PhoenixGenres:
                 newGenre = "Small Tits"
             if "nurse" == newGenre.lower():
                 newGenre = "Nurse Play"
-            if "electrical play" == newGenre.lower():
+            if "electrical play" == newGenre.lower() or "electrode punishments" == newGenre.lower():
                 newGenre = "Electro Play"
             if "chastity" == newGenre.lower():
                 newGenre = "Chastity Play"
@@ -235,7 +241,7 @@ class PhoenixGenres:
                 newGenre = "uniform"
             if "latex darlings" == newGenre.lower():
                 newGenre = "latex"
-            if "red head" == newGenre.lower():
+            if "red head" == newGenre.lower() or "red heads" == newGenre.lower():
                 newGenre = "Redhead"
             if "school girl" == newGenre.lower() or "schoolgirl" == newGenre.lower():
                 newGenre = "Schoolgirl Outfit"
@@ -245,7 +251,7 @@ class PhoenixGenres:
                 newGenre = "Boy-Girl-Girl"
             if "girl-on-girl" == newGenre.lower() or "girl on girl" == newGenre.lower():
                 newGenre = "Girl-Girl"
-            if "girl-boy" == newGenre.lower():
+            if "girl-boy" == newGenre.lower() or "girl/boy" == newGenre.lower():
                 newGenre = "Boy-Girl"
             if "threesome bbg" == newGenre.lower() or "mmf" == newGenre.lower():
                 newGenre = "Boy-Boy-Girl"
@@ -311,7 +317,7 @@ class PhoenixGenres:
                 newGenre = "pov"
             if "body massage" == newGenre.lower():
                 newGenre = "massage"
-            if "gape" == newGenre.lower() or "gaping playlist" == newGenre.lower():
+            if "gape" == newGenre.lower() or "gaping playlist" == newGenre.lower() or "gaping" == newGenre.lower():
                 newGenre = "Gaping"
             if "tanlines" == newGenre.lower():
                 newGenre = "Tan Lines"
@@ -333,9 +339,25 @@ class PhoenixGenres:
                 newGenre = "Piss Play"
             if "fisting's finest" == newGenre.lower():
                 newGenre = "Fisting"
+            if "ass fingering" == newGenre.lower():
+                newGenre = "Anal Fingering"
+            if "big toy" == newGenre.lower():
+                newGenre = "big toys"
+            if "butt" == newGenre.lower():
+                newGenre = "ass"
+            if "couples" == newGenre.lower():
+                newGenre = "couple"
+            if "first time anal" == newGenre.lower():
+                newGenre = "first anal"
+            if "sci fi" == newGenre.lower():
+                newGenre = "sci-fi and fantasy"
+            if "scissoring" == newGenre.lower():
+                newGenre = "tribbing"
+            if "tease & denial" == newGenre.lower():
+                newGenre = "Tease And Denial"
 
             ##### Position
-            if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower():
+            if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower() or "doggystyle - standing" == newGenre.lower():
                 newGenre = "doggystyle (Position)"
             if "cow girl" == newGenre.lower() or "cowgirl" == newGenre.lower() or "cowgirl (pov)" == newGenre.lower():
                 newGenre = "cowgirl (Position)"
