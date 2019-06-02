@@ -102,6 +102,7 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-06-02 2:15PM CST - Bugfix for FamilyStrokes
 - 2019-05-29 3:30PM CST - Bugfixes for VirtualTaboo
 - 2019-05-22:
     - Add Butt Plays (21Sextury subsite)

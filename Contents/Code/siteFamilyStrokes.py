@@ -81,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPhotoURL = ''
                 movieActors.addActor(actorName,actorPhotoURL)
         firstActorName = actors[0]
-        backgroundURL = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster")
+        backgroundURL = detailsPageElements.xpath('//video')[0].get("poster")
     else:
         Log("Fan info Site")
         date = detailsPageElements.xpath('.//div[@id="title-single"]//span[1]')[0].text_content().strip()
