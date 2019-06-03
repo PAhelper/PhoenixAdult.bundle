@@ -60,8 +60,9 @@ import siteHegre
 import networkFemdomEmpire
 import siteDorcelVision
 import siteXConfessions
+import networkCzechAV
 
-searchSites = [None] * 696
+searchSites = [None] * 729
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -758,6 +759,39 @@ searchSites[692] = ["Butt Plays","Butt Plays","http://www.21sextury.com","http:/
 searchSites[693] = ["Dorcel Vision","Dorcel Vision","https://www.dorcelvision.com","https://www.dorcelvision.com/en/search?type=4&keyword="]
 searchSites[694] = ["Feminized","Feminized","http://feminized.com","http://feminized.com/tour/search.php?query="]
 searchSites[695] = ["XConfessions","XConfessions","https://xconfessions.com","https://xconfessions.com/search?query="]
+searchSites[696] = ["Czech Amateurs","Czech Amateurs","https://czechamateurs.com","https://czechamateurs.com/tour/search/?q="]
+searchSites[697] = ["Czech Bangbus","Czech Bangbus","https://czechbangbus.com","https://czechbangbus.com/tour/search/?q="]
+searchSites[698] = ["Czech Bitch","Czech Bitch","https://czechbitch.com","https://czechbitch.com/tour/search/?q="]
+searchSites[699] = ["Czech Cabins","Czech Cabins","https://czechcabins.com","https://czechcabins.com/tour/search/?q="]
+searchSites[700] = ["Czech Couples","Czech Couples","https://czechcouples.com","https://czechcouples.com/tour/search/?q="]
+searchSites[701] = ["Czech Dungeon","Czech Dungeon","https://czechdungeon.com","https://czechdungeon.com/tour/search/?q="]
+searchSites[702] = ["Czech Estrogenolit","Czech Estrogenolit","https://czechestrogenolit.com","https://czechestrogenolit.com/tour/search/?q="]
+searchSites[703] = ["Czech Experiment","Czech Experiment","https://czechexperiment.com","https://czechexperiment.com/tour/search/?q="]
+searchSites[704] = ["Czech Fantasy","Czech Fantasy","https://czechfantasy.com","https://czechfantasy.com/tour/search/?q="]
+searchSites[705] = ["Czech First Video","Czech First Video","https://czechfirstvideo.com","https://czechfirstvideo.com/tour/search/?q="]
+searchSites[706] = ["Czech Game","Czech Game","https://czechgame.com","https://czechgame.com/tour/search/?q="]
+searchSites[707] = ["Czech Gangbang","Czech Gangbang","https://czechgangbang.com","https://czechgangbang.com/tour/search/?q="]
+searchSites[708] = ["Czech Garden Party","Czech Garden Party","https://czechgardenparty.com","https://czechgardenparty.com/tour/search/?q="]
+searchSites[709] = ["Czech Harem","Czech Harem","https://czechharem.com","https://czechharem.com/tour/search/?q="]
+searchSites[710] = ["Czech Home Orgy","Czech Home Orgy","https://czechhomeorgy.com","https://czechhomeorgy.com/tour/search/?q="]
+searchSites[711] = ["Czech Lesbians","Czech Lesbians","https://czechlesbians.com","https://czechlesbians.com/tour/search/?q="]
+searchSites[712] = ["Czech Massage","Czech Massage","https://czechmassage.com","https://czechmassage.com/tour/search/?q="]
+searchSites[713] = ["Czech Mega Swingers","Czech Mega Swingers","https://czechmegaswingers.com","https://czechmegaswingers.com/tour/search/?q="]
+searchSites[714] = ["Czech Orgasm","Czech Orgasm","https://czechorgasm.com","https://czechorgasm.com/tour/search/?q="]
+searchSites[715] = ["Czech Parties","Czech Parties","https://czechparties.com","https://czechparties.com/tour/search/?q="]
+searchSites[716] = ["Czech Pawn Shop","Czech Pawn Shop","https://czechpawnshop.com","https://czechpawnshop.com/tour/search/?q="]
+searchSites[717] = ["Czech Pool","Czech Pool","https://czechpool.com","https://czechpool.com/tour/search/?q="]
+searchSites[718] = ["Czech Sauna","Czech Sauna","https://czechsauna.com","https://czechsauna.com/tour/search/?q="]
+searchSites[719] = ["Czech Sharking","Czech Sharking","https://czechsharking.com","https://czechsharking.com/tour/search/?q="]
+searchSites[720] = ["Czech Snooper","Czech Snooper","https://czechsnooper.com","https://czechsnooper.com/tour/search/?q="]
+searchSites[721] = ["Czech Solarium","Czech Solarium","https://czechsolarium.com","https://czechsolarium.com/tour/search/?q="]
+searchSites[722] = ["Czech Spy","Czech Spy","https://czechspy.com","https://czechspy.com/tour/search/?q="]
+searchSites[723] = ["Czech Streets","Czech Streets","https://czechstreets.com","https://czechstreets.com/tour/search/?q="]
+searchSites[724] = ["Czech Super Models","Czech Super Models","https://czechsupermodels.com","https://czechsupermodels.com/tour/search/?q="]
+searchSites[725] = ["Czech Taxi","Czech Taxi","https://czechtaxi.com","https://czechtaxi.com/tour/search/?q="]
+searchSites[726] = ["Czech Toilets","Czech Toilets","https://czechtoilets.com","https://czechtoilets.com/tour/search/?q="]
+searchSites[727] = ["Czech Twins","Czech Twins","https://czechtwins.com","https://czechtwins.com/tour/search/?q="]
+searchSites[728] = ["Czech Wife Swap","Czech Wife Swap","https://czechwifeswap.com","https://czechwifeswap.com/tour/search/?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
