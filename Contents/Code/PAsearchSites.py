@@ -61,8 +61,9 @@ import networkFemdomEmpire
 import siteDorcelVision
 import siteXConfessions
 import networkCzechAV
+import siteArchAngel
 
-searchSites = [None] * 729
+searchSites = [None] * 730
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -792,6 +793,7 @@ searchSites[725] = ["Czech Taxi","Czech Taxi","https://czechtaxi.com","https://c
 searchSites[726] = ["Czech Toilets","Czech Toilets","https://czechtoilets.com","https://czechtoilets.com/tour/search/?q="]
 searchSites[727] = ["Czech Twins","Czech Twins","https://czechtwins.com","https://czechtwins.com/tour/search/?q="]
 searchSites[728] = ["Czech Wife Swap","Czech Wife Swap","https://czechwifeswap.com","https://czechwifeswap.com/tour/search/?q="]
+searchSites[729] = ["ArchAngel","ArchAngel","https://www.archangelvideo.com","https://www.archangelvideo.com/tour/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

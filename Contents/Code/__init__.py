@@ -816,6 +816,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 696 and searchSiteID <= 728):
                     results = PAsearchSites.networkCzechAV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## ArchAngel
+            ###############
+            if siteNum == 729:
+                if searchSiteID == 9999 or searchSiteID == 729:
+                    results = PAsearchSites.siteArchAngel.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1391,6 +1398,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 696 and siteID <= 728):
             metadata = PAsearchSites.networkCzechAV.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  ArchAngel                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 729:
+            metadata = PAsearchSites.siteArchAngel.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################
