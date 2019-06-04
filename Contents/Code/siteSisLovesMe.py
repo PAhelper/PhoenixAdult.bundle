@@ -15,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             #releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
 
         except:
-            searchResults = HTML.ElementFromURL('https://www.sislovesme.com/' + encodedTitle + '/banner/1')
+            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + "/" + encodedTitle + '/banner/1')
             searchResult = searchResults
             titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
             Log(titleNoFormatting)

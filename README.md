@@ -252,76 +252,78 @@ Supported Networks
 #### - 21Sextury *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - AllHerLuv *Title Search *Actor Search
 #### - Amateur Allure *Title Search *Actor Search
-#### - Anilos *shoot ID (Anilos - id) *Date search
+#### - Anilos *SceneID (Anilos - id) *Date Search
+#### - ArchAngel *Title Search *Actor Search
 #### - Babes Network *Title Search *Actor Search (adding Date will help match either)
-#### - BaDoinkVR Network *Actor search, *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
+#### - BaDoinkVR Network *Actor Search *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
 #### - Bang Bros Network *Title Search *Date/Actor Search
 #### - BellaPass *Title Search
 #### - BlackedRaw *Title Search *Date/Actor Search
 #### - Blacked *Title Search *Date/Actor Search
-#### - Black Valley Girls *Scene ID Search only
+#### - Black Valley Girls *SceneID Search only
 #### - Blowpass *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Bratty Sis *shoot ID (BrattySis - id) *Date search
+#### - Bratty Sis *SceneID (BrattySis - id) *Date Search
 #### - Brazzers Network *Title Search
 #### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - CzechAV Network *Title Search
 #### - CzechVR *Actor Search (exact spelling)
-#### - DDFNetwork - *Title Search/Actress
+#### - DDFNetwork *Title Search *Actor Search
 #### - DigitalPlayground *Title Search *Actor Search
-#### - Dogfart - *Title Search/Actress
+#### - Dogfart Network *Title Search/Actress
 #### - Dorcel Club *Title Search
 #### - Dorcel Vision *Title Search
 #### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - FakeHub *Title Search
 #### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - FamilyStrokes *url Match *Unofficial Scene Title match
+#### - FamilyStrokes *Url Match *Unofficial Scene Title match
 #### - FantasyMassage *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Femdom Empire *Title Search *Actor Search
+#### - Femdom Empire / Feminized *Title Search *Actor Search (adding Date will help match either)
 #### - FinishesTheJob *Title Search *Actor Search
 #### - First Anal Quest *Title Search *Actor Search
 #### - Full Porn Network *Title Search *Actor Search (adding Date will help match either)
 #### - GirlfriendsFilms *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Girlsway *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Gloryhole Secrets *Title Search (Title includes actress first name)
-#### - Hot Crazy Mess *shoot ID (HotCrazyMess - id) *Date search
-#### - Joymii *Title Search *Actor search
-#### - JulesJordan network - *Title Search/Actress
+#### - Hot Crazy Mess *SceneID (HotCrazyMess - id) *Date Search
+#### - Joymii *Title Search *Actor Search
+#### - JulesJordan Network - *Title Search *Actor Search
 #### - Karups Network *Actor Search
 #### - Kelly Madison *Title Search *Date/Actor Search
 #### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + Shoot ID
 #### - LegalPorno *Title Search
 #### - LetsDoeIt / Porndoe Premium Network *Title Search *Date/Actor Search
-#### - Manyvids (Manyvids - id)
+#### - Manyvids *SceneID (Manyvids - id)
 #### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - MissaX *Title Search *Actor Search
 #### - Mofos Network *Title Search *Actor Search (adding Date will help match either)
 #### - Mylf Network *URL Match
 #### - Naughty America Network *Date/Actor Search
-#### - NewSensations *Actress Search *DVD search (exact spellings)
-#### - NF Busty *shoot ID (NFBusty - id) *Date search
-#### - Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
-#### - Nubiles.net *Shoot ID (NubilesNet - id) *Date search
-#### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
+#### - NewSensations *Actor Search *DVD Search (exact spelling)
+#### - NF Busty *SceneID (NFBusty - id) *Date Search
+#### - Nubilesfilms *SceneID (Nubilesfilms - id) *Date Search
+#### - Nubiles.net *SceneID (NubilesNet - id) *Date Search
+#### - Nubiles-porn.com Network *SceneID (Nubilesporn - id) *Date Search
 #### - OpenlifeNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Other PornPros sites *No Search available, exact URL match only
+#### - Other PornPros sites *URL Match
 #### - PerfectGonzo Network *Actor Search
-#### - PervMom *URL match only (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
+#### - PervMom *URL Match (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
 #### - PornFidelity *Title Search *Date/Actor Search
-#### - PornPros Network *No Search available, exact URL match only
+#### - PornPros Network *URL Match
 #### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Reality Kings Network *Title Search
 #### - Screwbox *Title Search *Actor Search
 #### - SexArt *Title Search *Actor Search
-#### - SexBabesVR *No Search available, exact URL match only (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBabesVR **225-welcum_sexy_architect**" in the agent to match)
+#### - SexBabesVR *URL Match (e.g. 225-welcum_sexy_architect)
 #### - SexyHub *Title Search
-#### - Sis Loves Me *Scene ID Search only
+#### - Sis Loves Me *SceneID Search
 #### - Spizoo *Title Search *Actor Search
 #### - Swallowed / TrueAnal / Nymphos *Title Search (Title includes actress first name)
 #### - Swallow Salon *Title Search *Actor Search
 #### - TeamSkeet Network *Title Search *Date/Actor Search
 #### - TeenFidelity *Title Search *Date/Actor Search
 #### - TeenMegaWorld Network *Title Search *Actor Search
-#### - That Sitcom Show *shoot ID (ThatSitcomShow - id) *Date search
+#### - That Sitcom Show *SceneID (ThatSitcomShow - id) *Date Search
 #### - Tonight's Girlfriend *Actor Search
 #### - TrenchcoatX *Title Search *Actor Search
 #### - Tushy *Title Search *Date/Actor Search
@@ -329,10 +331,11 @@ Supported Networks
 #### - VirtualTaboo *Title Search (true search, partial name allowed)
 #### - Vixen *Title Search *Date/Actor Search
 #### - VRBangers *Title Search
-#### - Wankz Network *Title Search *Actor search
-#### - WankzVR Network *Title Search *Actor search
+#### - Wankz Network *Title Search *Actor Search
+#### - WankzVR Network *Title Search *Actor Search
 #### - X-Art *Title Search
 #### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - XConfessions *Title Search *Actor Search
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
 If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests

@@ -6,17 +6,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class=" grid__item  "]'):
-        titleNoFormatting = searchResult.xpath('//img')[0].get('alt')
-        curID = searchResult.xpath('//a[@class="movie-cover movie-cover--landscape"]')[0].get('href').replace('/','_').replace('?','!')
+    for searchResult in searchResults.xpath('//div[@class="episode preview episode__preview"]'):
+        titleNoFormatting = searchResult.xpath('//h2[@class="nice-title"]')[0].text_content().strip()
+        curID = searchResult.xpath('//a[@class="title"]')[0].get('href').replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('//head//title')[0].text_content().strip()
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [XConfessions] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id=curID + "|" + str(siteNum) + "|" + releaseDate, name=titleNoFormatting + " [CzechAV/"+subSite+"] ", score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = PAsearchSites.getSearchBaseURL(siteID) + (str(metadata.id).split("|"))[0].replace('_','/').replace('?','!')
+
+    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -24,18 +30,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Erika Lust Films'
+    metadata.studio = 'Czech Authentic Videos'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()[:-14]
+    metadata.title = detailsPageElements.xpath('//h2[@class="nice-title"]')[0].text_content().strip()
 
     # Summary
-    Description = detailsPageElements.xpath('//div[@class="film__details-description-title"]')[0].text_content().strip()
     try:
-        Erika = "Erika's Comment: " + detailsPageElements.xpath('//div[@class="film__erika-comment-text"]//p')[0].text_content().strip()
-        metadata.summary = Description + "\n" + Erika
+        metadata.summary = detailsPageElements.xpath('//div[@class="desc-text"]//p')[0].text_content().strip()
     except:
-        metadata.summary = Description
+        pass
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -43,39 +47,44 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Genres
-    movieGenres.addGenre("Artistic")
-
-    # Release Date
-    year = detailsPageElements.xpath('//div[@class="video-new-design__overview-data"]//p[1]')[0].text_content().strip()[:4]
-    date = "January 1, " + year
-    if len(date) > 0:
-        date_object = datetime.strptime(date, '%B %d, %Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-
-    # Actors
-    actors = detailsPageElements.xpath('//div[@class="video-new-design__overview-data"]/p[3]/a')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPhotoURL = ''
-            movieActors.addActor(actorName,actorPhotoURL)
-
-    # Director
-    director = metadata.directors.new()
     try:
-        directors = detailsPageElements.xpath('//a[@class="video-new-design__description-highlight"]')
-        for dirname in directors:
-            director.name = dirname.text_content().strip()
+        genres = detailsPageElements.xpath('//ul[@class="tags"]/li')
+        if len(genres) > 0:
+            for genreLink in genres:
+                genreName = genreLink.text_content().strip().lower()
+                movieGenres.addGenre(genreName)
     except:
         pass
 
+
+
+
+    # Release Date
+    date = str(metadata.id).split("|")[2]
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
+
+    # Actors
+
     ### Posters and artwork ###
 
-    # Poster
+    # Video trailer background image
     try:
-        poster = detailsPageElements.xpath('//div[@class="film__details-cover-image"]//img')[0].get('src')
-        art.append(poster)
+        twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
+        art.append(twitterBG)
+    except:
+        pass
+
+    # Photos
+    try:
+        photos = detailsPageElements.xpath('//img[@class="thumb"]')
+        if len(photos) > 0:
+            for photoLink in photos:
+                photo = photoLink.get('src')
+                art.append(photo)
     except:
         pass
 
