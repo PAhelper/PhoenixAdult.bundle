@@ -49,11 +49,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
+    movieGenres.addGenre("Genre")
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content().strip()
     if len(date) > 0:
-        date_object = parse(date)
+        date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -74,6 +75,15 @@ def update(metadata,siteID,movieGenres,movieActors):
             if 'http' not in actorPhotoURL:
             	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
+
+    # Director
+    director = metadata.directors.new()
+    try:
+        directors = detailsPageElements.xpath('//p[@class="director"]/a')
+        for dirname in directors:
+            director.name = dirname.text_content().strip()
+    except:
+        pass
 
     ### Posters and artwork ###
 
