@@ -31,7 +31,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//h4/a')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+    try:
+        metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+    except:
+        pass
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -57,14 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     ### Posters and artwork ###
 
-    # Video trailer background image
-    try:
-        twitterBG = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//div[@class="player-thumb"]/img')[0].get('src0_3x')
-        art.append(twitterBG)
-    except:
-        pass
-
-    photos = detailsPageElements.xpath('//img[@id="set-target-334"]')
+    photos = detailsPageElements.xpath('//img[contains(@class, "update_thumb thumbs stdimage")]')
     if len(photos) > 0:
         for photoLink in photos:
             photo = PAsearchSites.getSearchBaseURL(siteID) + photoLink.get('src0_3x')
