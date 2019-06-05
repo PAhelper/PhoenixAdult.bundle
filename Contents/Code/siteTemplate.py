@@ -15,14 +15,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [SexyHub/"+subSite+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/"+subSite+"] " + releaseDate, score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('/vids.html','_vids.html')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -30,10 +30,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Studio Name here'
+    metadata.studio = 'Studio Name'
 
     # Title
     metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
+
+    # Summary
+    metadata.summary = detailsPageElements.xpath('//div[@class="summary"]/p')[0].text_content().strip()
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -57,6 +60,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     actors = detailsPageElements.xpath('span[@class="update_models"]/a')
     if len(actors) > 0:
+        if len(actors) == 3:
+            movieGenres.addGenre("Threesome")
+        if len(actors) == 4:
+            movieGenres.addGenre("Foursome")
+        if len(actors) > 4:
+            movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
