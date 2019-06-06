@@ -7,10 +7,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
-        titleNoFormatting = searchResult.xpath('./div[@class="card-title/a"]')[0].text_content().strip()
-        curID = searchResult.xpath('./div[@class="card-title/a"]')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('./div[@class="site-domain"]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('./div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].text_content().strip()
+        curID = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href').replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -59,7 +59,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('span[@class="update_models"]/a')
+    actors = detailsPageElements.xpath('//span[@class="update_models"]/a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -93,6 +93,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         art.append(twitterBG)
     except:
         pass
+
+    # Photos
+    photos = detailsPageElements.xpath('//img[contains(@class, "update_thumbs")]')
+    if len(photos) > 0:
+        for photoLink in photos:
+            photo = PAsearchSites.getSearchBaseURL(siteID) + photoLink.get('poster')
+            art.append(photo)
 
     # Scene photos page
     try:
