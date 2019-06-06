@@ -60,6 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     ### Posters and artwork ###
 
+    # Photos
     photos = detailsPageElements.xpath('//img[contains(@class, "update_thumb thumbs stdimage")]')
     if len(photos) > 0:
         for photoLink in photos:
