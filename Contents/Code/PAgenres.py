@@ -215,7 +215,7 @@ class PhoenixGenres:
                 newGenre = "milf"
             if "mature & milf" == newGenre.lower():
                 newGenre = "Milf & Mature"
-            if "sex toys" == newGenre.lower():
+            if "sex toys" == newGenre.lower() or "toy insertions" == newGenre.lower():
                 newGenre = "toys"
             if "interviews" == newGenre.lower():
                 newGenre = "interview"
@@ -355,9 +355,13 @@ class PhoenixGenres:
                 newGenre = "tribbing"
             if "tease & denial" == newGenre.lower():
                 newGenre = "Tease And Denial"
+            if "four or more" == newGenre.lower():
+                newGenre = "orgy"
+            if "nude stockings" == newGenre.lower() or "stockings" == newGenre.lower() or "nylons stockings" == newGenre.lower() or "pantyhose" == newGenre.lower():
+                newGenre = "pantyhose & stockings"
 
             ##### Position
-            if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower() or "doggystyle - standing" == newGenre.lower():
+            if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower() or "doggystyle - standing" == newGenre.lower() or "standing doggystyle" == newGenre.lower():
                 newGenre = "doggystyle (Position)"
             if "cow girl" == newGenre.lower() or "cowgirl" == newGenre.lower() or "cowgirl (pov)" == newGenre.lower():
                 newGenre = "cowgirl (Position)"

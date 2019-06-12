@@ -289,9 +289,10 @@ Supported Networks
 #### - JulesJordan Network - *Title Search *Actor Search
 #### - Karups Network *Actor Search
 #### - Kelly Madison *Title Search *Date/Actor Search
-#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + Shoot ID
+#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + SceneID
 #### - LegalPorno *Title Search
 #### - LetsDoeIt / Porndoe Premium Network *Title Search *Date/Actor Search
+#### - LoveHerFeet *Title Search *Date/Actor Search
 #### - Manyvids *SceneID (Manyvids - id)
 #### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - MissaX *Title Search *Actor Search
@@ -333,6 +334,7 @@ Supported Networks
 #### - VRBangers *Title Search
 #### - Wankz Network *Title Search *Actor Search
 #### - WankzVR Network *Title Search *Actor Search
+#### - WeAreHairy *Title Search *Date/Actor Search
 #### - X-Art *Title Search
 #### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - XConfessions *Title Search *Actor Search

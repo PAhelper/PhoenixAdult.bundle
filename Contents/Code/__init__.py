@@ -823,6 +823,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 729:
                     results = PAsearchSites.siteArchAngel.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## We Are Hairy
+            ###############
+            if siteNum == 730:
+                if searchSiteID == 9999 or searchSiteID == 730:
+                    results = PAsearchSites.siteWeAreHairy.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Love Her Feet
+            ###############
+            if siteNum == 731:
+                if searchSiteID == 9999 or searchSiteID == 731:
+                    results = PAsearchSites.siteLoveHerFeet.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1406,6 +1420,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 729:
             metadata = PAsearchSites.siteArchAngel.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  We Are Hairy                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 730:
+            metadata = PAsearchSites.siteWeAreHairy.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Love Her Feet                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 731:
+            metadata = PAsearchSites.siteLoveHerFeet.update(metadata,siteID,movieGenres,movieActors)
 
 
         ##############################################################

@@ -86,9 +86,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("Fan info Site")
         date = detailsPageElements.xpath('.//div[@id="title-single"]//span[1]')[0].text_content().strip()
         try:
-            date_object = datetime.strptime(date, '%B %d, %Y')
+            date_object = datetime.strptime(date, '%B %dst, %Y')
         except:
-            date_object = None
+            try:
+                date_object = datetime.strptime(date, '%B %dnd, %Y')
+            except:
+                try:
+                    date_object = datetime.strptime(date, '%B %drd, %Y')
+                except:
+                    try:
+                        date_object = datetime.strptime(date, '%B %dth, %Y')
+                    except:
+                        date_object = None
         summary = detailsPageElements.xpath('.//p[@class="more"]')[0].text_content().replace("Story:","").strip()
         actors = detailsPageElements.xpath('//div[@id="title-single"]//a')
         if len(actors) > 0:
