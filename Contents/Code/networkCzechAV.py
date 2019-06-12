@@ -6,10 +6,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="episode preview episode__preview"]'):
-        titleNoFormatting = searchResult.xpath('//h2[@class="nice-title"]')[0].text_content().strip()
-        curID = searchResult.xpath('//a[@class="title"]')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('//head//title')[0].text_content().strip()
+    for searchResult in searchResults.xpath('//div[@class="episode__title"]'):
+        titleNoFormatting = searchResult.xpath('./a/h2')[0].text_content().strip()
+        curID = searchResult.xpath('./a')[0].get('href').replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('//head/title')[0].text_content().strip()
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
         else:
