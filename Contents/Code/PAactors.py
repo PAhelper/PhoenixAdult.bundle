@@ -142,6 +142,8 @@ class PhoenixActors:
             if metadata.studio == "21Sextury":
                 if newActor == "Abbie":
                     newActor = "Krystal Boyd"
+                if newActor == "Ariel Temple":
+                    newActor = "Katarina Muti"
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
