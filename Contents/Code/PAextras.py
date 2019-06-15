@@ -93,7 +93,7 @@ def getFanArt(site, art, actors, actorName, title, match):
 
     summary = ""
     actress = "notarealperson"
-    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
+    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PornGirlsErotica.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
     
     if site not in validSites:
         Log("CAUTION: " + site + " is not an accepted PAextras search term. Sites are case sensitive: PassionHDFan.com is acceptable, Passionhdfan.com is not.")
@@ -129,10 +129,17 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]')[0].text_content()
                                 elif site == "HQSluts.com":
                                     nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]')[0].text_content()
+                                elif site == "ImagePost.com":
+                                    try:
+                                        nameinheader = fanPageElements.xpath('//h3/a[contains(@href, "star")]')[0].text_content()
+                                    except:
+                                        nameinheader = fanPageElements.xpath('//h3//strong')[0].text_content()
                                 elif site == "Nude-Gals.com":
                                     nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
                                 elif site in ["PassionHDFan.com", "LubedFan.com"]:
                                     nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
+                                elif site == "PornGirlsErotica.com":
+                                    nameinheader = fanPageElements.xpath('//h2[@class="title"]')[0].text_content()
                                 elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
                                     nameinheader = fanPageElements.xpath('(//span[@itemprop="articleSection"])')[0].text_content()
                                 elif site == "XartBeauties.com/galleries":
@@ -195,12 +202,28 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     elif site == "HQSluts.com":
                                         for posterURL in fanPageElements.xpath('//li[@class="item i"]//a'):
                                             art.append(posterURL.get('href'))
+                                    elif site == "ImagePost.com":
+                                        counter = 1
+                                        try:
+                                            for posterURL in fanPageElements.xpath('//div[@id="theGallery"]//a'):
+                                                sceneTitleSegment = str(googleSearchURL.split("/")[-2:-1]).split("'")[1]
+                                                if counter > 9:
+                                                    finalurl = "https://www.imagepost.com/videos/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "0" + str(counter) + ".jpg"
+                                                else:
+                                                    finalurl = "https://www.imagepost.com/videos/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "00" + str(counter) + ".jpg"
+                                                art.append(str(finalurl))
+                                                counter += 1
+                                        except:
+                                            Log("Issue Creating Image URL")
                                     elif site == "Nude-Gals.com":
                                         for posterURL in fanPageElements.xpath('(//div[@class="row row_margintop"]//a)[not(contains(@title, "#"))]'):
                                             art.append("https://nude-gals.com/" + posterURL.get('href'))
                                     elif site in ["PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com"]:
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
                                             art.append(posterURL.get('data-orig-file'))
+                                    elif site == "PornGirlsErotica.com":
+                                        for posterURL in fanPageElements.xpath('//div[@class="ngg-galleryoverview"]//a'):
+                                            art.append(posterURL.get('href'))
                                     elif site == "XartBeauties.com/galleries":
                                         for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
                                             art.append(posterURL.get('src').replace('images.', 'www.').replace('/tn', ''))
@@ -223,6 +246,8 @@ def getFanArt(site, art, actors, actorName, title, match):
                             try:
                                 if site in ["AnalPornFan.com", "LubedFan.com", "PassionHDFan.com"]:
                                     summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
+                                elif site == "ImagePost.com":
+                                    summary = fanPageElements.xpath('//div[@class="central-section-content"]/p')[0].text_content().strip()
                                 elif site == "SpyFams.com":
                                     paragraphs = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[not(*[contains(@class, "jp-relatedposts-post")])]')
                                     if len(paragraphs) > 3:
