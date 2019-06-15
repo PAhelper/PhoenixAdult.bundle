@@ -6,9 +6,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     Log("searchTitle.replace: " + searchTitle.replace(' ','-'))
     searchResult = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-'))
-    
     titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
-    curID = searchResult.xpath('//div[@class="col-sm-12 col-md-4"]/a')[0].get('href').replace('/','_').replace('?','!')
+    curID =(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-')).replace('/','_').replace('?','!')
+    Log("curID: " + curID)
     releaseDate = parse(searchResult.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
