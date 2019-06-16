@@ -296,7 +296,7 @@ Supported Networks
 #### - Manyvids *SceneID (Manyvids - id)
 #### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - MissaX *Title Search *Actor Search
-#### - Mofos Network *Title Search *Actor Search (adding Date will help match either)
+#### - Mofos Network *SceneID
 #### - Mylf Network *URL Match
 #### - Naughty America Network *Date/Actor Search
 #### - NewSensations *Actor Search *DVD Search (exact spelling)
