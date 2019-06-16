@@ -339,12 +339,12 @@ searchSites[267] = ["Stranded Teens","Stranded Teens","https://www.mofos.com","h
 searchSites[268] = ["Mofos B Sides","Mofos B Sides","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
 searchSites[269] = ["Shes a Freak","She's a Freak","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
 searchSites[270] = ["Public Pickups","Public Pickups","https://www.mofos.com","https://www.mofos.com/tour/search/?q="]
-searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
-searchSites[272] = ["Babes Unleashed","Babes Unleashed","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
-searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
-searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
-searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
-searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/tour/search/all/keyword/"]
+searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[272] = ["Babes Unleashed","Babes Unleashed","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
@@ -1011,14 +1011,6 @@ def getSearchSettings(mediaTitle):
         Log("6")
     else:
         searchTitle = mediaTitle
-
-    # Babes site search doesn't seem to handle words with apostrophes very well, so let's strip those words out
-    if searchSiteID >= 271 and searchSiteID <= 276:
-        words = searchTitle.split(" ")
-        searchTitle = ""
-        for word in words:
-            if "'" not in word:
-                searchTitle = searchTitle + word + " "
 
     # Gamma Ent remove Scene number from BONUS and BTS
     if searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 392) or (searchSiteID >= 460 and searchSiteID <= 466) or searchSiteID == 692:

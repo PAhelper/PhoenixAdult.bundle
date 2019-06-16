@@ -254,7 +254,7 @@ Supported Networks
 #### - Amateur Allure *Title Search *Actor Search
 #### - Anilos *SceneID (Anilos - id) *Date Search
 #### - ArchAngel *Title Search *Actor Search
-#### - Babes Network *Title Search *Actor Search (adding Date will help match either)
+#### - Babes Network *SceneID
 #### - BaDoinkVR Network *Actor Search *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
 #### - Bang Bros Network *Title Search *Date/Actor Search
 #### - BellaPass *Title Search
