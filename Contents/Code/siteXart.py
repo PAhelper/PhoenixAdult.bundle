@@ -417,9 +417,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     background = detailsPageElements.xpath('//img[contains(@src,"/videos")]')[0].get("src")
     metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
     try:
-        posterURL = poster[:-21] + "2.jpg"
+        posterURL = poster[:-5] + "2.jpg"
     except:
-        posterURL = background[:-21] + "2.jpg"
+        posterURL = background[:-5] + "2.jpg"
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = 1)
 
 
