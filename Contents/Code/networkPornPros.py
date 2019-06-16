@@ -19,11 +19,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     titleNoFormatting = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//h1')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
     releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content().strip()).strftime('%Y-%m-%d')
-
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
-    return results
 
+    return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]

@@ -18,7 +18,7 @@ class PhoenixActors:
             skip = False
             # Save the potentional new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
             newActor = self.actorsTable[actorsProcessed].replace("\xc2\xa0", " ").replace(',','').strip().title()
-            newPhoto = self.photosTable[actorsProcessed].strip()
+            newPhoto = str(self.photosTable[actorsProcessed]).strip()
 
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if newActor == "Bad Name":

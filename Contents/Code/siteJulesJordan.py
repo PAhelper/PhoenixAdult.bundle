@@ -79,7 +79,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0_1x")
             if (str(actorPhotoURL) == 'None' ) :
                 actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0")
-            if 'http' not in actorPhotoURL:
+            else:
+                actorPhotoURL = ''
+            if (str(actorPhotoURL) != 'None' and 'http' not in actorPhotoURL):
             	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
