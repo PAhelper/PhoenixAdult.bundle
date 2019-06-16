@@ -329,6 +329,7 @@ Supported Networks
 #### - Tonight's Girlfriend *Actor Search
 #### - TrenchcoatX *Title Search *Actor Search
 #### - Tushy *Title Search *Date/Actor Search
+#### - Twistys Network *SceneID
 #### - VirtualRealPorn *Title Search (exact spelling)
 #### - VirtualTaboo *Title Search (true search, partial name allowed)
 #### - Vixen *Title Search *Date/Actor Search
