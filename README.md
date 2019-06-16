@@ -311,6 +311,7 @@ Supported Networks
 #### - PornFidelity *Title Search *Date/Actor Search
 #### - PornPros Network *URL Match
 #### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - PropertySex *SceneID
 #### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Reality Kings Network *Title Search
 #### - Screwbox *Title Search *Actor Search
