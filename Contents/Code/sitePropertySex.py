@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Scene Title: " + sceneTitle)
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
-        titleNoFormatting = searchResult.xpath('.//div[1]/h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
         curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID).replace('/','_').replace('?','!')
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())

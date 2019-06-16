@@ -62,8 +62,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Release Date
     if metadata.summary:
         date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[3]')
-    else:
+    elif genres:
         date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
+    else:
+        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]')
 
     if len(date) > 0:
         date = date[0].text_content().strip().replace('Release Date:','')
