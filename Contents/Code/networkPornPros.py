@@ -141,26 +141,24 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     art = []
-    match = 0
     
     if siteName.lower() == "Holed".lower():
-        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "SpyFam".lower():
-        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "Lubed".lower():
-        for site in ["PornGirlsErotica.com", "LubedFan.com", "ImagePost.com"]:
-            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
-            match = fanSite[2]
+        fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "PassionHD".lower():
-        for site in ["PassionHDFan.com", "HQSluts.com", "PornGirlsErotica.com"]:
-            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
-            match = fanSite[2]
-    else: 
-        fanSite = PAextras.getFanArt("HQSluts.com", art, actors, actorName, metadata.title, match)
-    
+        fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title, 0)
+        
+    for site in ["HQSluts.com", "ImagePost.com", "PornGirlsErotica.com"]:
+        match = fanSite[2]
+        if match is 1:	
+            break
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+        
     summary = fanSite[1]
-    match = fanSite[2]
-
+    
     try:
         if len(summary) > 0:
             metadata.summary = summary 
