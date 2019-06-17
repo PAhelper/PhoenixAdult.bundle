@@ -682,42 +682,49 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 587:
                 if searchSiteID == 9999 or (searchSiteID >= 587 and searchSiteID <= 619):
                     results = PAsearchSites.networkWankz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## SexArt / TheLifeErotic / VivThomas
             ###############
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
                     results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Family Strokes
             ###############
             if siteNum == 626:
                 if searchSiteID == 9999 or searchSiteID == 626:
                     results = PAsearchSites.siteFamilyStrokes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Tonights Girlfriend
             ###############
             if siteNum == 627:
                 if searchSiteID == 9999 or searchSiteID == 627:
                     results = PAsearchSites.siteTonightsGirlfriend.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Karups
             ###############
             if siteNum == 628:
                 if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
                     results = PAsearchSites.siteKarups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## TeenMegaWorld
             ###############
             if siteNum == 631:
                 if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 666):
                     results = PAsearchSites.networkTMW.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## TrenchcoatX
             ###############
             if siteNum == 667:
                 if searchSiteID == 9999 or searchSiteID == 667:
                     results = PAsearchSites.siteTrenchcoatX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Screwbox
             ###############
@@ -850,6 +857,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 733:
                 if searchSiteID == 9999 or searchSiteID == 733:
                     results = PAsearchSites.sitePropertySex.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## FuckedHard18
+            ###############
+            if siteNum == 734:
+                if searchSiteID == 9999 or searchSiteID == 734:
+                    results = PAsearchSites.siteFuckedHard18.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1466,6 +1480,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 733:
             metadata = PAsearchSites.sitePropertySex.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  FuckedHard18                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 734:
+            metadata = PAsearchSites.siteFuckedHard18.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

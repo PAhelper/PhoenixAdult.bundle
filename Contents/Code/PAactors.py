@@ -152,6 +152,11 @@ class PhoenixActors:
             if metadata.studio == "Bang Bros":
                if newActor == "Amy":
                     newActor = "Abella Anderson"
+            if metadata.studio == "FuckedHard18":
+               if newActor == "Allie H":
+                    newActor = "Allie Haze"
+               if newActor == "Remy":
+                   newActor = "Remy LaCroix"
             if metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
