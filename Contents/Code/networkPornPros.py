@@ -152,7 +152,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title, 0)
         
     for site in ["HQSluts.com", "ImagePost.com", "PornGirlsErotica.com"]:
-        match = fanSite[2]
+        try:
+            match = fanSite[2]
+        except:
+            pass
         if match is 1:	
             break
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
