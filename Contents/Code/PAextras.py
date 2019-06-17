@@ -1,7 +1,7 @@
 from googlesearch import search
 
 # Scenes with No matches but will get false match
-noMatch = [None] * 24
+noMatch = [None] * 25
 noMatch[0] = ["Close to The Edge"]
 noMatch[1] = ["After Sunset"]
 noMatch[2] = ["No Turning Back Part Two"]
@@ -26,11 +26,12 @@ noMatch[20] = ["If Only"]
 noMatch[21] = ["Poolside Pleasure"]
 noMatch[22] = ["She Bad"]
 noMatch[23] = ["The Rich Girl - part one"]
+noMatch[24] = ["She Cums in Colors"]
 
 
 # Scenes with incorrect matches
     #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 35
+badMatch = [None] * 36
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -66,6 +67,7 @@ badMatch[31] = ["Just Watch Part 1", None, "XartBeauties.com/galleries", "http:/
 badMatch[32] = ["A Pleasing Pussy", "Rebel Lynn", "HQSluts.com", "https://www.hqsluts.com/Rebel+Lynn+-+A+Pleasing+Pussy-404357/"]
 badMatch[33] = ["Little Firecracker", "Ariela", "HQSluts.com", "https://www.hqsluts.com/Ariela+B+-+Little+Firecracker-400815/"]
 badMatch[34] = ["Close Shave", None, "HQSluts.com", "https://www.hqsluts.com/Ivy+Wolfe+-+Close+Shave-405025/"]
+badMatch[35] = ["Slippery Pool Sex", None, "ImagePost.com", "https://www.imagepost.com/videos/rebel-lynn-on-lubed-in-slippery-pool-sex/"]
 
 def getNoMatchID(scene):
     matchID = 0
@@ -99,23 +101,24 @@ def getFanArt(site, art, actors, actorName, title, match):
         Log("CAUTION: " + site + " is not an accepted PAextras search term. Sites are case sensitive: PassionHDFan.com is acceptable, Passionhdfan.com is not.")
         return (art, summary, match)
     
-    overrideSettings = getBadMatchID(title) 
-    if overrideSettings != 9999:
-        Log("Title known for bad fan match. URL/actress set manually.")
-        if overrideSettings[0] != None:
-            actress = overrideSettings[0]
-            actorName = actress
-        site = overrideSettings[1]
+    overrideSettings = getBadMatchID(title)
         
     if getNoMatchID(title) == 9999:    
         try:
             if match is 0 or match is 2:
                 urls = search('site:'+ site + ' ' + actorName + ' ' + title , stop=2)
                 Log('Searching Google for: (site:'+ site + ' ' + actorName + ' ' + title +')')
-                for url in urls: 
+                for url in urls:
                     if match is 0 or match is 2:
                         if overrideSettings != 9999:
+                            site = overrideSettings[1]
                             url = overrideSettings[2]
+                            if overrideSettings[0] != None:
+                                actress = overrideSettings[0]
+                                actorName = actress
+                            Log("Title known for bad fan match. URL/actress set manually.")
+                            # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
+                            match = 1
                         
                         googleSearchURL = url
                         fanPageElements = HTML.ElementFromURL(googleSearchURL)
@@ -183,10 +186,6 @@ def getFanArt(site, art, actors, actorName, title, match):
                                             pass
                                 except:
                                     Log("No Actress Match")
-                                 
-                            # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
-                            if overrideSettings != 9999:
-                                match = 1
                             
                             # POSTERS
                             if match is 1:
@@ -206,11 +205,12 @@ def getFanArt(site, art, actors, actorName, title, match):
                                         counter = 1
                                         try:
                                             for posterURL in fanPageElements.xpath('//div[@id="theGallery"]//a'):
+                                                sceneTypeSegment = str(googleSearchURL.split("/")[-3:-2]).split("'")[1]
                                                 sceneTitleSegment = str(googleSearchURL.split("/")[-2:-1]).split("'")[1]
                                                 if counter > 9:
-                                                    finalurl = "https://www.imagepost.com/videos/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "0" + str(counter) + ".jpg"
+                                                    finalurl = "https://www.imagepost.com/" + str(sceneTypeSegment) + "/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "0" + str(counter) + ".jpg"
                                                 else:
-                                                    finalurl = "https://www.imagepost.com/videos/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "00" + str(counter) + ".jpg"
+                                                    finalurl = "https://www.imagepost.com/" + str(sceneTypeSegment) + "/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "00" + str(counter) + ".jpg"
                                                 art.append(str(finalurl))
                                                 counter += 1
                                         except:
@@ -238,6 +238,7 @@ def getFanArt(site, art, actors, actorName, title, match):
                                 Log("Artwork found: " + str(len(art)))
                                 if len(art) < 9 and match is 1:
                                     match = 2
+                                    
                         except:
                             Log("No Fansite Match")
                             
@@ -268,7 +269,7 @@ def getFanArt(site, art, actors, actorName, title, match):
                                         summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
                             except:
                                 Log("Error grabbing fansite summary")  
-                        
+                            
         except:
             Log("No Fansite Match")
     return (art, summary, match)
