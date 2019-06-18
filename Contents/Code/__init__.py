@@ -676,6 +676,7 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 584:
                 if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 586):
                     results = PAsearchSites.siteFinishesTheJob.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Wankz Network
             ###############
@@ -864,6 +865,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 734:
                 if searchSiteID == 9999 or searchSiteID == 734:
                     results = PAsearchSites.siteFuckedHard18.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## TransAngels
+            ###############
+            if siteNum == 737:
+                if searchSiteID == 9999 or searchSiteID == 737:
+                    results = PAsearchSites.siteTransAngels.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1488,6 +1496,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 734:
             metadata = PAsearchSites.siteFuckedHard18.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TransAngels                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 737:
+            metadata = PAsearchSites.siteTransAngels.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

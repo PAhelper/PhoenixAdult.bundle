@@ -346,6 +346,7 @@ Supported Networks
 #### - TeenMegaWorld Network *Title Search *Actor Search
 #### - That Sitcom Show *SceneID (ThatSitcomShow - id) *Date Search
 #### - Tonight's Girlfriend *Actor Search
+#### - TransAngels *Title Search *Date/Actor Search
 #### - TrenchcoatX *Title Search *Actor Search
 #### - Tushy *Title Search *Date/Actor Search
 #### - Twistys Network *SceneID
