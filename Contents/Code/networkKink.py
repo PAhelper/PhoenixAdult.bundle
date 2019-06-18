@@ -23,7 +23,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Kink'
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url,headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
     art = []
@@ -97,11 +96,21 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "Wired Pussy"
     elif "chantasbitches" in channel:
         tagline = "Chantas Bitches"
+    elif "fuckedandbound" in channel:
+        tagline = "Fucked and Bound"
+    elif "captivemale" in channel:
+        tagline = "Captive Male"
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
+    # Studio
+    if tagline == "Chantas Bitches" or tagline == "Fucked and Bound" or tagline == "Captive Male":
+        metadata.studio = 'Twisted Factory'
+    else:
+        metadata.studio = 'Kink'
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()[:-1]
