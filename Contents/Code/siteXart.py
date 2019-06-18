@@ -420,7 +420,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         posterURL = str((thumbs[0]))[:-5] + "2.jpg"
     except:
-        posterURL = background[:-5] + "2.jpg"
+        posterURL = background.replace("1.jpg", "2.jpg").replace("1-lrg.jpg", "2-lrg.jpg")
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = 1)
 
 
