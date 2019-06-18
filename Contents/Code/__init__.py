@@ -423,21 +423,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 282:
                 if searchSiteID == 9999 or searchSiteID == 282:
-                    results = PAsearchSites.networkSteppedUp.searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## TrueAnal
             ###############
             if siteNum == 283:
                 if searchSiteID == 9999 or searchSiteID == 283:
-                    results = PAsearchSites.networkSteppedUp.searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Nympho
             ###############
             if siteNum == 284:
                 if searchSiteID == 9999 or searchSiteID == 284:
-                    results = PAsearchSites.networkSteppedUp.searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Twistys
@@ -605,8 +605,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 490:
                 if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521) or searchSiteID == 687 or searchSiteID == 735 or searchSiteID == 736:
-                    Log("Made it to Kink")
                     results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Nubiles
             ###############
