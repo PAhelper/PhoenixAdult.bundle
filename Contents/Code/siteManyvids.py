@@ -49,7 +49,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
     if summary == '':
         try:
-            summary = detailsPageElements.xpath('//div[@class="desc-text"]')[0].text_content().replace(' ','%20').strip()
+            summary = detailsPageElements.xpath('//div[@class="desc-text"]')[0].text_content().strip()
         except:
             pass
     metadata.summary = summary.strip()
