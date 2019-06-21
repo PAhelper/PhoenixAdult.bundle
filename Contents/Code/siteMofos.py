@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Scene Title: " + sceneTitle)
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1")
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
-        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace('Trailer','').strip()
         curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1").replace('/','_').replace('?','!')
         subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
         if sceneTitle:
@@ -39,7 +39,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'Mofos'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
 
     # Summary
     try:
@@ -86,7 +86,13 @@ def update(metadata,siteID,movieGenres,movieActors):
             if len(actors) > 0:
                 for actorLink in actors:
                     actorName = str(actorLink.text_content().strip())
-                    actorPhotoURL = ''
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    Log("actorPageURL: " + actorPageURL)
+                    actorPage = HTML.ElementFromURL(actorPageURL)
+                    try:
+                        actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
+                    except:
+                        actorPhotoURL = ''
                     movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass

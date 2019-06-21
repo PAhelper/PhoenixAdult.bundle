@@ -69,7 +69,7 @@ import sitePropertySex
 import siteFuckedHard18
 import siteTransAngels
 
-searchSites = [None] * 738
+searchSites = [None] * 741
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -333,9 +333,9 @@ searchSites[259] = ["XXX Omas","XXX Omas", "https://letsdoeit.com","https://lets
 searchSites[260] = ["LegalPorno","LegalPorno","https://www.legalporno.com","https://www.legalporno.com/search/?query="]
 searchSites[261] = ["Mofos","Mofos","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[262] = ["ShareMyBF","ShareMyBF","https://www.mofos.com","https://www.mofos.com/scene/"]
-searchSites[263] = ["Dont Break Me","Don't Break Me","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[263] = ["Don't Break Me","Don't Break Me","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[264] = ["I Know That Girl","I Know That Girl","https://www.mofos.com","https://www.mofos.com/scene/"]
-searchSites[265] = ["Lets Try Anal","Let's Try Anal","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[265] = ["Let's Try Anal","Let's Try Anal","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[266] = ["Pervs On Patrol","Pervs On Patrol","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[267] = ["Stranded Teens","Stranded Teens","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[268] = ["Mofos B Sides","Mofos B Sides","https://www.mofos.com","https://www.mofos.com/scene/"]
@@ -808,6 +808,9 @@ searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","htt
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
 searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","https://www.transangels.com/search/?q="]
+searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
