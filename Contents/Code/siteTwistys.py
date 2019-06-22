@@ -1,97 +1,126 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL('https://www.twistys.com/tour/search/list/keyword/?keyword=' + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="video-ui-wrapper"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//h2//a')[0].text_content().strip()
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        Log("ID: " + curID)
-        releaseDate = parse(searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-right"]//div[@class="info-box-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        girlName = searchResult.xpath('.//div[@class="video-ui"]//div[@class="ui-info-box"]//div[@class="info-box-inner-left"]//div[@class="info-box-models-name"]//div//a')[0].text_content()
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1")
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
+        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
+        curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1").replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
+        if sceneTitle:
+            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+        else:
+            score = 90
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Twistys/" + subSite + "] ", score = score, lang = lang))
 
-        subSite = searchResult.xpath('.//img[@class="new-video-thumb"] | .//img[@class="old-video-thumb"]')[0].get('alt')
-        subSite = subSite[subSite.rfind('-')+2:].strip()
-        if subSite == "Twistys":
-            subSite = ''
-        else:
-            subSite = '/' + subSite
-        
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Twistys" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
-
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    Log('******UPDATE CALLED*******')
 
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
-    Log('url :' + url)
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
+    art = []
+    metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
 
-    metadata.studio = "Twistys"
+    # Studio
+    metadata.studio = 'Twistys'
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
 
     # Summary
-    # paragraph = detailsPageElements.xpath('//p[@class="desc"]')[0].text_content()
-    # paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n', '').replace('  ', '') + "\n\n"
-    # metadata.summary = paragraph[:-10]
-    tagline = detailsPageElements.xpath('//h3[@class="site-name"]//a')[0].text_content()
-    metadata.collections.clear()
+    try:
+        metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]/div[2]')[0].text_content().strip()
+    except:
+        pass
+
+    # Tagline and Collection(s)
+    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bKVlBB"]')[0].text_content().strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1[@class="scene-name"]//span')[0].text_content()
 
     # Genres
-    movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[contains(@class,"tags-date clearfix")]//ul//li//a')
-
+    genres = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]/a')
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().lower()
+            genreName = genreLink.text_content().replace(',', '').strip().lower()
             movieGenres.addGenre(genreName)
 
-    date = detailsPageElements.xpath('//div[@class="date"]')
+    # Release Date
+    if metadata.summary:
+        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[3]')
+    elif genres:
+        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
+    else:
+        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]')
+
     if len(date) > 0:
-        date = date[0].text_content()[10:]
-        date_object = datetime.strptime(date, '%b-%d-%Y')
+        date = date[0].text_content().strip().replace('Release Date:', '')
+        date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    movieActors.clearActors()
-    titleActors = ""
-    actors = detailsPageElements.xpath('//div[@class="left"]//h2//a')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorPageURL = 'https://www.twistys.com' + actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorName = actorPage.xpath('//div[@class="profile-bio-box"]//h1')[0].text_content()
-            titleActors = titleActors + actorName + " & "
-            actorPhotoURL = "https:" + actorPage.xpath('//div[@class="profile-pic"]//img')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
-        titleActors = titleActors[:-3]
-        metadata.title = metadata.title
+    try:
+        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
+        if len(actors) > 0:
+            if len(actors) == 3:
+                movieGenres.addGenre("Threesome")
+            if len(actors) == 4:
+                movieGenres.addGenre("Foursome")
+            if len(actors) > 4:
+                movieGenres.addGenre("Orgy")
+            if len(actors) > 0:
+                for actorLink in actors:
+                    actorName = str(actorLink.text_content().strip())
+                    actorPhotoURL = ''
+                    movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
 
+    ### Posters and artwork ###
 
-    #Posters
-    sceneID = detailsPageElements.xpath('//div[@id="video-player"]')[0].get('data-release-id')
-    metadata.art["http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters["http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/"+sceneID+"/s1002x564.jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    # Video trailer background image
+    try:
+        twitterBG = detailsPageElements.xpath('//div[@class="tg5e7m-2 evtSOm"]/img')[0].get('src')
+        art.append(twitterBG)
+    except:
+        pass
 
-    for i in range(1, 6):
-        try:
-            metadata.posters["http://i3-hw.twistyscontent.com/scenes/" + sceneID + "/s300x225_" + str(i) + ".jpg"] = Proxy.Preview(HTTP.Request("http://i3-hw.twistyscontent.com/scenes/" + sceneID + "/s300x225_" + str(i) + ".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
-        except:
-            pass
-    for i in range(1, 3):
-        try:
-            metadata.posters["http://i1-hw.twistyscontent.com/photos/"+sceneID+"/p300x225_"+str(i)+".jpg"] = Proxy.Preview(HTTP.Request("http://i1-hw.twistyscontent.com/photos/"+sceneID+"/p300x225_"+str(i)+".jpg", headers={'Referer': 'http://www.google.com'}).content, sort_order = i)
-        except:
-            pass
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(
+                        HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(
+                        HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+                j = j + 1
+            except:
+                pass
+
     return metadata

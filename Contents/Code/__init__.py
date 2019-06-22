@@ -394,7 +394,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mofos
             ###############
             if siteNum == 261:
-                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270) or searchSiteID == 583:
+                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270) or searchSiteID == 583 or (searchSiteID >= 738 and searchSiteID <= 740):
                     results = PAsearchSites.siteMofos.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -423,21 +423,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 282:
                 if searchSiteID == 9999 or searchSiteID == 282:
-                    results = PAsearchSites.networkSteppedUp.searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## TrueAnal
             ###############
             if siteNum == 283:
                 if searchSiteID == 9999 or searchSiteID == 283:
-                    results = PAsearchSites.networkSteppedUp.searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Nympho
             ###############
             if siteNum == 284:
                 if searchSiteID == 9999 or searchSiteID == 284:
-                    results = PAsearchSites.networkSteppedUp.searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Twistys
@@ -604,9 +604,9 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Kink
             ###############
             if siteNum == 490:
-                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521) or searchSiteID == 687:
-                    Log("Made it to Kink")
+                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521) or searchSiteID == 687 or searchSiteID == 735 or searchSiteID == 736:
                     results = PAsearchSites.networkKink.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Nubiles
             ###############
@@ -676,48 +676,56 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 584:
                 if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 586):
                     results = PAsearchSites.siteFinishesTheJob.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Wankz Network
             ###############
             if siteNum == 587:
                 if searchSiteID == 9999 or (searchSiteID >= 587 and searchSiteID <= 619):
                     results = PAsearchSites.networkWankz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## SexArt / TheLifeErotic / VivThomas
             ###############
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
                     results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Family Strokes
             ###############
             if siteNum == 626:
                 if searchSiteID == 9999 or searchSiteID == 626:
                     results = PAsearchSites.siteFamilyStrokes.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Tonights Girlfriend
             ###############
             if siteNum == 627:
                 if searchSiteID == 9999 or searchSiteID == 627:
                     results = PAsearchSites.siteTonightsGirlfriend.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Karups
             ###############
             if siteNum == 628:
                 if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
                     results = PAsearchSites.siteKarups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## TeenMegaWorld
             ###############
             if siteNum == 631:
                 if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 666):
                     results = PAsearchSites.networkTMW.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## TrenchcoatX
             ###############
             if siteNum == 667:
                 if searchSiteID == 9999 or searchSiteID == 667:
                     results = PAsearchSites.siteTrenchcoatX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             ###############
             ## Screwbox
             ###############
@@ -843,6 +851,27 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 732:
                 if searchSiteID == 9999 or searchSiteID == 732:
                     results = PAsearchSites.siteMomPOV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Property Sex
+            ###############
+            if siteNum == 733:
+                if searchSiteID == 9999 or searchSiteID == 733:
+                    results = PAsearchSites.sitePropertySex.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## FuckedHard18
+            ###############
+            if siteNum == 734:
+                if searchSiteID == 9999 or searchSiteID == 734:
+                    results = PAsearchSites.siteFuckedHard18.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## TransAngels
+            ###############
+            if siteNum == 737:
+                if searchSiteID == 9999 or searchSiteID == 737:
+                    results = PAsearchSites.siteTransAngels.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -978,7 +1007,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Mofos                                                  ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 261 and siteID <= 270 or siteID == 583:
+        if siteID >= 261 and siteID <= 270 or siteID == 583 or siteID >= 738 and siteID <= 740:
             metadata = PAsearchSites.siteMofos.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1170,7 +1199,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Kink                                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 490 and siteID <= 521 or siteID == 687:
+        if siteID >= 490 and siteID <= 521 or siteID == 687 or siteID == 735 or siteID == 736:
             metadata = PAsearchSites.networkKink.update(metadata,siteID,movieGenres,movieActors)
         ##############################################################
         ##                                                          ##
@@ -1452,6 +1481,29 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 732:
             metadata = PAsearchSites.siteMomPOV.update(metadata,siteID,movieGenres,movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  Property Sex                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 733:
+            metadata = PAsearchSites.sitePropertySex.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  FuckedHard18                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 734:
+            metadata = PAsearchSites.siteFuckedHard18.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TransAngels                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 737:
+            metadata = PAsearchSites.siteTransAngels.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

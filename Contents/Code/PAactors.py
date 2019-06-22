@@ -96,7 +96,7 @@ class PhoenixActors:
             if newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
                 newActor = "Lily Labeau"
             if newActor == "Lilly Lit":
-            	newactor = "Lilly Ford"
+                newActor = "Lilly Ford"
             if newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
                 newActor = "Maddy O'Reilly"
             if newActor == "Maria Rya" or newActor == "Melena Maria":
@@ -131,14 +131,14 @@ class PhoenixActors:
                 newActor = "Kagney Linn Karter"
             if newActor == "Kendra May Lust":
                 newActor = "Kendra Lust"
-            if newActor == "Anikka Albrite":
-                newActor = "Annika Albrite"
             if newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
             if newActor == "Jade Indica":
                 newActor = "Miss Jade Indica"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
+            if newActor == "Bridgette B.":
+                newActor = "Bridgette B"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":
@@ -149,6 +149,14 @@ class PhoenixActors:
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
+            if metadata.studio == "Bang Bros":
+               if newActor == "Amy":
+                    newActor = "Abella Anderson"
+            if metadata.studio == "FuckedHard18":
+               if newActor == "Allie H":
+                    newActor = "Allie Haze"
+               if newActor == "Remy":
+                   newActor = "Remy LaCroix"
             if metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
