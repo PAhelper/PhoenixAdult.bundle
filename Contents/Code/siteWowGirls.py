@@ -6,15 +6,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    index = 0
-    for searchResult in searchResults.xpath('//div[@class="videos-list"]'):
-        titleNoFormatting = searchResult.xpath('.//article/a')[0].text_content().strip()
-        curID = searchResult.xpath('.//article/a')[0].get('href').replace('/','_').replace('?','!')
-        # no Date aviable on Site => taking Date from File
-        releaseDate = searchDate
+    for searchResult in searchResults.xpath('//div[@class="videos-list"]/article'):
+        titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
+        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [WowPorn/WowGirls] " + releaseDate, score = score, lang = lang))
-        index += 1
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [WowPorn/WowGirls] ", score = score, lang = lang))
 
     return results
 
@@ -48,7 +44,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Genre")
 
     # Release Date
     date = ""
@@ -68,12 +63,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            #actorPage = HTML.ElementFromURL(actorPageURL)
-            #actorPhotoURL = "actorPage.xpath('//img[@class="model_bio_thumb"]')[0].get("src")"
-            #if 'http' not in actorPhotoURL:
-            #	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
-            movieActors.addActor(actorName,actorPageURL)
+            actorPhotoURL = ''
+            movieActors.addActor(actorName,actorPhotoURL)
 
 
     ### Posters and artwork ###
