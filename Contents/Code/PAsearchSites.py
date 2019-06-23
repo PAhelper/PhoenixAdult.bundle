@@ -68,8 +68,10 @@ import siteMomPOV
 import sitePropertySex
 import siteFuckedHard18
 import siteTransAngels
+import siteLittleCaprice
+import siteWowGirls
 
-searchSites = [None] * 741
+searchSites = [None] * 743
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -811,6 +813,8 @@ searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","h
 searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[741] = ["LittleCaprice", "LittleCaprice", "https://www.littlecaprice-dreams.com","https://www.littlecaprice-dreams.com/?s="]
+searchSites[742] = ["WowGirls", "WowGirls", "https://www.wowgirls.xxx","https://www.wowgirls.xxx/?s="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -982,6 +986,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bp ', 'ButtPlays ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
