@@ -9,16 +9,21 @@ from patools import pa_parse_dir
 
 def main():
     dryrun=False
+    batch=False
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
         parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
+        parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action ="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
             dryrun=True
+        if args.batch:
+            print "Batch mode enabled. Logging disabled!"
+            batch=True
         dir = args.directory
 
     debug=False
@@ -30,7 +35,7 @@ def main():
 
     logger = logging.getLogger('pa_renamer')
     formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
-    if not dryrun:
+    if not dryrun and not batch:
         hdlr = logging.FileHandler('C:\Program Files\SABnzbd\scripts\pa_post.log')
         hdlr.setFormatter(formatter)
         logger.addHandler(hdlr)
@@ -49,11 +54,13 @@ def main():
     if shoot is not None:
         # filename should be: "Studio - Model Names.mp4" or "Studio - Title Words.mp4"
         # TODO: figure out if we should use titles or models
-        filename_new = shoot['studio'] + ' - ' + shoot['filename_title'] + '.mp4'
+        filename_new = shoot['studio'] + ' - ' + shoot['filename_title'] + ' (' + shoot['date'] + ').mp4'
         logger.debug("New file name: %s" % filename_new)
 
         for item in os.listdir(dir):
-            if item.endswith(".mp4"):
+            if item.endswith(".avi"):
+                filename_new = filename_new.replace(".mp4", ".avi")
+            if item.endswith(".mp4") or item.endswith(".avi"):
                 item = os.path.join(dir, item)
                 newname = os.path.join(dir, filename_new)
                 if dryrun:
