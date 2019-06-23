@@ -9,8 +9,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     try:
+        Log('This is repeating')
         searchResults = HTML.ElementFromURL(url)
     except:
+        Log('That is repeating')
         response = urllib.urlopen(url)
         htmlstring = response.read()
         searchResults = fromstring(htmlstring)
