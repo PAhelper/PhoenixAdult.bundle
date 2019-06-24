@@ -30,26 +30,39 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Dogfart'
     temp = str(metadata.id).split("|")[0].replace('_','/').replace("$","_")
     Log(temp)
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     Log(url)
     detailsPageElements = HTML.ElementFromURL(url)
 
+    # Studio
+    metadata.studio = "Dogfart Network"
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a')[0].get("title")
+
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="description shorten"]')[0].text_content().strip()
+    summary = detailsPageElements.xpath('//div[@class="description shorten"]')[0].text_content().strip().replace('...read more','').replace('\n', ' ')
+    metadata.summary = summary
 
-    metadata.summary = paragraph.strip()
-    tagline = detailsPageElements.xpath('//h3 [@class="site-name"]')[0].text_content()
-    tagline = tagline.strip()
+    # Collections / Tagline
+    tagline = detailsPageElements.xpath('//h3 [@class="site-name"]')[0].text_content().strip()
     metadata.tagline = tagline
-
     metadata.collections.clear()
     collection = str(PAsearchSites.getSearchSiteName(siteID))
     metadata.collections.add(collection)
-    metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a')[0].get("title")
-    metadata.studio = "Dogfart Network"
+
+    # Release Date
+    try:
+        date = str(metadata.id).split("|")[2]
+        if len(date) > 0:
+            date_object = parse(date)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+            Log("Date from file")
+    except:
+        pass
 
     # Genres
     movieGenres.clearGenres()
@@ -59,15 +72,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
-
-
-    # Release Date
-    date = str(metadata.id).split("|")[2]
-    if len(date) > 0:
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-        Log("Date from file")
 
     # Actors
     metadata.roles.clear()
