@@ -35,7 +35,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "TeamSkeet"
-    metadata.summary = detailsPageElements.xpath('//div[@class="gray"]')[1].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[@class="gray"]')[1].text_content().replace('ï¿½', '')
     metadata.title = detailsPageElements.xpath('//title')[0].text_content().split(" | ")[1]
     releaseDate = detailsPageElements.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:].replace("th,",",").replace("st,",",").replace("nd,",",").replace("rd,",",")
     date_object = datetime.strptime(releaseDate, '%B %d, %Y')
@@ -59,14 +59,16 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//a[contains(@href,"/profile/")]')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = actorLink.text_content()
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@id="profile_image"]')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
+    try:
+        actortext = detailsPageElements.xpath('//title')[0].text_content().split('|')[0].strip()
+        actors = actortext.split('and')
+        if len(actors) > 0:
+            for actorLink in actors:
+                actorName = actorLink
+                actorPhotoURL = ''
+                movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
 
     # Posters/Background
     valid_names = list()

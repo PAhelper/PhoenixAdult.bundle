@@ -5,10 +5,11 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
+    Log('****SEARCH*****')
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="update_details"]'):
-        titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
-        releaseDate = parse(searchResult.xpath('.//div[contains(@class,"update_date")]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
+        titleNoFormatting = searchResult.xpath('.//div[@class="update_title"]/a')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
         curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -44,6 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
+    movieGenres.addGenre("Amateur")
 
 
     # Release Date
@@ -276,6 +278,66 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
     if "Dakota Brookes" in metadata.title or "Dakota Brookes" in metadata.summary:
         actorName = "Dakoda Brookes"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Adriana Chechik" in metadata.title or "Adriana Chechik" in metadata.summary:
+        actorName = "Adriana Chechik"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Belle Noire" in metadata.title or "Belle Noire" in metadata.summary:
+        actorName = "Belle Noire"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Lilly Banks" in metadata.title or "Lilly Banks" in metadata.summary:
+        actorName = "Lilly Banks"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Linda Lay" in metadata.title or "Linda Lay" in metadata.summary:
+        actorName = "Linda Lay"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Miley May" in metadata.title or "Miley May" in metadata.summary:
+        actorName = "Miley May"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Belle Knox" in metadata.title or "Belle Knox" in metadata.summary:
+        actorName = "Belle Knox"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Ava Taylor" in metadata.title or "Ava Taylor" in metadata.summary:
+        actorName = "Ava Taylor"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Stella May" in metadata.title or "Stella May" in metadata.summary:
+        actorName = "Stella May"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Claire Heart" in metadata.title or "Claire Heart" in metadata.summary:
+        actorName = "Claire Heart"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Kennedy Leigh" in metadata.title or "Kennedy Leigh" in metadata.summary:
+        actorName = "Kennedy Leigh"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Lucy Tyler" in metadata.title or "Lucy Tyler" in metadata.summary:
+        actorName = "Lucy Tyler"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Cadence Lux" in metadata.title or "Cadence Lux" in metadata.summary:
+        actorName = "Cadence Lux"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Goldie Glock" in metadata.title or "Goldie Glock" in metadata.summary:
+        actorName = "Goldie Glock"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Jayma Reid" in metadata.title or "Jayma Reid" in metadata.summary:
+        actorName = "Jayma Reid"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Samantha Sin" in metadata.title or "Samantha Sin" in metadata.summary:
+        actorName = "Samantha Sin"
         actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
 

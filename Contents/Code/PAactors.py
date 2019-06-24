@@ -18,7 +18,7 @@ class PhoenixActors:
             skip = False
             # Save the potentional new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
             newActor = self.actorsTable[actorsProcessed].replace("\xc2\xa0", " ").replace(',','').strip().title()
-            newPhoto = self.photosTable[actorsProcessed].strip()
+            newPhoto = str(self.photosTable[actorsProcessed]).strip()
 
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if newActor == "Bad Name":
@@ -27,78 +27,102 @@ class PhoenixActors:
                 skip = True
 
             ##### Replace by actor name; for actors that have different aliases in the industry
-            if newActor == "Josephine" or newActor == "Conny" or newActor == "Conny Carter" or newActor == "Connie":
-                newActor = "Connie Carter"
-            if newActor == "Doris Ivy":
-                newActor = "Gina Gerson"
-            if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
-                newActor = "Krystal Boyd"
-            if newActor == "Nathaly" or newActor == "Nathalie Cherie":
-                newActor = "Nathaly Cherie"
-            if newActor == "Katarina":
-                newActor = "Katerina Hartlova"
-            if newActor == "Alex D":
-                newActor = "Alex D."
-            if newActor == "Crissy Kay" or newActor == "Emma Hicks" or newActor == "Emma Hixx":
-                newActor = "Emma Hix"
-            if newActor == "Elsa Dream":
-                newActor = "Elsa Jean"
-            if newActor == "Hailey Reed":
-                newActor = "Haley Reed"
-            if newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
-                newActor = "Lily Labeau"
-            if newActor == "Noe Milk" or newActor == "Noemiek":
-                newActor = "Noemilk"
-            if newActor == "Riley Jenson" or newActor == "Riley Anne" or newActor == "Rilee Jensen":
-                newActor = "Riley Jensen"
-            if newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
-                newActor = "Stella Banxxx"
-            if newActor == "Lara Craft":
-                newActor = "Lora Craft"
-            if newActor == "Amia Moretti":
-                newActor = "Amia Miley"
+            if newActor == "Aaliyah Love2":
+                newActor = "Aaliyah Love"
             if newActor == "Abby Rains":
                 newActor = "Abbey Rain"
-            if newActor == "Charlotte Lee":
-                newActor = "Jaye Summers"
-            if newActor == "Grace Hartley":
-                newActor = "Pinky June"
-            if newActor == "Jenny Ferri":
-                newActor = "Jenny Fer"
-            if newActor == "Sara Luv":
-                newActor = "Sara Luvv"
-            if newActor == "Kari Sweets":
-                newActor = "Kari Sweet"
-            if newActor == "Criss Strokes":
-                newActor = "Chris Strokes"
-            if newActor == "Jassie Gold" or newActor == "Jaggie Gold":
-                newActor = "Jessi Gold"
-            if newActor == "Maria Rya" or newActor == "Melena Maria":
-                newActor = "Melena Maria Rya"
-            if newActor == "Nika Noir":
-                newActor = "Nika Noire"
-            if newActor == "Jessica Blue" or newActor == "Jessica Cute":
-                newActor = "Jessica Foxx"
-            if newActor == "Nadya Nabakova" or newActor == "Nadya Nabokova":
-                newActor = "Bunny Colby"
-            if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
-                newActor = "April O'Neil"
-            if newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
-                newActor = "Maddy O'Reilly"
-            if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
-                newActor = "Eva Elfie"
-            if newActor == "Rebel Lynn (Contract Star)":
-                newActor = "Rebel Lynn"
-            if newActor == "Jo Jo Kiss":
-                newActor = "Jojo Kiss"
             if newActor == "Adrianna Chechik":
                 newActor = "Adriana Chechik"
+            if newActor == "Alex D":
+                newActor = "Alex D."
+            if newActor == "Amia Moretti":
+                newActor = "Amia Miley"
+            if newActor == "Amy Reid":
+                newActor = "Amy Ried"
+            if newActor == "Anikka Albrite":
+                newActor = "Annika Albrite"
             if newActor == "Anita Bellini":
                 newActor = "Anita Bellini Berlusconi"
+            if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
+                newActor = "Krystal Boyd" 
+            if newActor == "Anna Morna":
+                newActor = "Anastasia Morna"
+            if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
+                newActor = "April O'Neil"
+            if newActor == "Capri Cavalli":
+                newActor = "Capri Cavanni"
+            if newActor == "Ce Ce Capella":
+                newActor = "CeCe Capella"
+            if newActor == "Charlotte Lee":
+                newActor = "Jaye Summers"
+            if newActor == "Criss Strokes":
+                newActor = "Chris Strokes"
+            if newActor == "Crissy Kay" or newActor == "Emma Hicks" or newActor == "Emma Hixx":
+                newActor = "Emma Hix"
             if newActor == "Crystal Rae":
                 newActor = "Cyrstal Rae"
+            if newActor == "Doris Ivy":
+                newActor = "Gina Gerson"
+            if newActor == "Elsa Dream":
+                newActor = "Elsa Jean"
+            if newActor == "Eve Lawrence":
+                newActor = "Eve Laurence"
+            if newActor == "Grace Hartley":
+                newActor = "Pinky June"
+            if newActor == "Hailey Reed":
+                newActor = "Haley Reed"
+            if newActor == "Jassie Gold" or newActor == "Jaggie Gold":
+                newActor = "Jessi Gold"
+            if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
+                newActor = "Jenna Ross"
+            if newActor == "Jenny Ferri":
+                newActor = "Jenny Fer"
+            if newActor == "Jessica Blue" or newActor == "Jessica Cute":
+                newActor = "Jessica Foxx"
+            if newActor == "Jo Jo Kiss":
+                newActor = "Jojo Kiss"
+            if newActor == "Josephine" or newActor == "Conny" or newActor == "Conny Carter" or newActor == "Connie":
+                newActor = "Connie Carter"
+            if newActor == "Kagney Lynn Karter":
+                newActor = "Kagney Linn Karter"
+            if newActor == "Kari Sweets":
+                newActor = "Kari Sweet"
+            if newActor == "Katarina":
+                newActor = "Katerina Hartlova"
+            if newActor == "Kendra May Lust":
+                newActor = "Kendra Lust"
+            if newActor == "Lara Craft":
+                newActor = "Lora Craft"
+            if newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
+                newActor = "Lily Labeau"
+            if newActor == "Lilly Lit":
+                newActor = "Lilly Ford"
+            if newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
+                newActor = "Maddy O'Reilly"
+            if newActor == "Maria Rya" or newActor == "Melena Maria":
+                newActor = "Melena Maria Rya"
             if newActor == "Moe The Monster Johnson":
                 newActor = "Moe Johnson"
+            if newActor == "Nadya Nabakova" or newActor == "Nadya Nabokova":
+                newActor = "Bunny Colby"
+            if newActor == "Nancy A." or newActor == "Nancy A":
+                newActor = "Nancy Ace"
+            if newActor == "Nathaly" or newActor == "Nathalie Cherie":
+                newActor = "Nathaly Cherie"
+            if newActor == "Nika Noir":
+                newActor = "Nika Noire"
+            if newActor == "Noe Milk" or newActor == "Noemiek":
+                newActor = "Noemilk"
+            if newActor == "Rebel Lynn (Contract Star)":
+                newActor = "Rebel Lynn"
+            if newActor == "Riley Jenson" or newActor == "Riley Anne" or newActor == "Rilee Jensen":
+                newActor = "Riley Jensen"
+            if newActor == "Sara Luv":
+                newActor = "Sara Luvv"
+            if newActor == "Sedona" or newActor == "Stefanie Renee":
+                newActor = "Stephanie Renee"
+            if newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
+                newActor = "Stella Banxxx"
             if newActor == "Steven St.Croix":
                 newActor = "Steven St. Croix"
             if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
@@ -107,18 +131,32 @@ class PhoenixActors:
                 newActor = "Kagney Linn Karter"
             if newActor == "Kendra May Lust":
                 newActor = "Kendra Lust"
-            if newActor == "Anikka Albrite":
-                newActor = "Annika Albrite"
             if newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
+            if newActor == "Jade Indica":
+                newActor = "Miss Jade Indica"
+            if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
+                newActor = "Eva Elfie"
+            if newActor == "Bridgette B.":
+                newActor = "Bridgette B"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":
                 if newActor == "Abbie":
                     newActor = "Krystal Boyd"
+                if newActor == "Ariel Temple":
+                    newActor = "Katarina Muti"
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
+            if metadata.studio == "Bang Bros":
+               if newActor == "Amy":
+                    newActor = "Abella Anderson"
+            if metadata.studio == "FuckedHard18":
+               if newActor == "Allie H":
+                    newActor = "Allie Haze"
+               if newActor == "Remy":
+                   newActor = "Remy LaCroix"
             if metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
@@ -2068,6 +2106,14 @@ class PhoenixActors:
                     newActor = "Jana Mrhacova"
                 if newActor == "Zazie":
                     newActor = "Zazie Sky"
+            if metadata.studio == "DDFProd":
+                if newActor == "Ms White-Kitten":
+                    newActor = "Goldie Baby"
+                if newActor == "Helen":
+                    newActor = "Alena H"
+            if metadata.studio == "Reality Kings":
+                if newActor == "Morgan":
+                    newActor = "Morgan Layne"
 
             if not skip:
                 if newPhoto == '':

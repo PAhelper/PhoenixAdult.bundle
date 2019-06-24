@@ -82,10 +82,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     for poster in posters:
         posterURL = "http:" + poster.xpath('.//img')[0].get("src")
         posterURL = posterURL[:-5] + "big" + posterURL[-5:]
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-        posterNum += 1
-    
+        try:
+            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
+            posterNum += 1
+        except:
+            pass
 
-
-    
     return metadata

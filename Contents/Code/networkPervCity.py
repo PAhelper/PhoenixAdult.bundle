@@ -5,23 +5,23 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","")
-    Log("searchString: " + searchString)
-    if "/" not in searchString:
-        searchString = searchString.replace("-","/",1)
-        Log("searchString formatted")
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
+    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").replace('html','').strip()
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString + ".html")
 
-    titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-7"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
-    Log("titleNoFormatting: " + titleNoFormatting)
-    curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-    Log("curID: " + curID)
-    actors = searchResults.xpath('//div[@class="col-12 col-md-8"]//a//span')
-    Log("# actors: " + str(len(actors)))
-    firstActor = actors[0].text_content()
-    Log("firstActor: " + firstActor)
-    subSite = searchResults.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').title()
-    Log("subSite: " + subSite)
+    titleNoFormatting = searchResults.xpath('//title')[0].text_content().strip()
+    curID = (PAsearchSites.getSearchSearchURL(siteNum) + searchString + ".html").replace('/','_').replace('?','!')
+    if 'upherasshole' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+        subSite = 'Up Her Asshole'
+    elif 'oraloverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+        subSite = 'Oral Overdose'
+    elif 'analoverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+        subSite = 'Anal Overdose'
+    elif 'chocolatebjs' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+        subSite = 'Chocolate BJs'
+    elif 'bangingbeauties' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+        subSite = 'Banging Beauties'
+    else:
+        subSite = PAsearchSites.getSearchSiteName(siteNum)
     if searchDate:
         releaseDate = parse(searchDate).strftime('%Y-%m-%d')
     else:
@@ -92,7 +92,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log('posterURL: ' + posterURL)
 
     # Video trailer background image
-    previewBG = detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get('poster')
+    previewBG = detailsPageElements.xpath('//video[@id="my-video"]')[0].get('poster')
     if 'http' not in previewBG:
         previewBG = urlBase + previewBG
     metadata.art[previewBG] = Proxy.Preview(HTTP.Request(previewBG, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)

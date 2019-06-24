@@ -90,12 +90,23 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     try:
         background = detailsPageElements.xpath('//div[@class="video-player"]//video')[0].get("poster")
+        metadata.art[background] = Proxy.Preview(
+            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+        metadata.posters[background] = Proxy.Preview(
+            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+        Log("BG URL: " + background)
     except:
+        pass
+    try:
         background = detailsPageElements.xpath('//img[@class="poster"]')[0].get("src")
+        metadata.art[background] = Proxy.Preview(
+            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+        metadata.posters[background] = Proxy.Preview(
+            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+        Log("BG URL: " + background)
+    except:
+        pass
 
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    Log("BG URL: " + background)
 
     posters = detailsPageElements.xpath('//div[@class="video-thumbs"]//img')
     Log(str(len(posters)) + " thumbs found.")

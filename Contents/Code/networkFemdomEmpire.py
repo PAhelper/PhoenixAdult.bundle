@@ -36,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]//p')[0].text_content().strip()
 
     #Tagline and Collection(s)
-    tagline = "Femdom Empire"
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -45,7 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     genres = detailsPageElements.xpath('//div[@class="featuring clear"][2]//ul//li')
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower().replace('categories:', '')
+            genreName = genreLink.text_content().strip().lower().replace('categories:', '').replace('tags:', '')
             movieGenres.addGenre(genreName)
     movieGenres.addGenre("Femdom")
 
@@ -66,5 +66,33 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     ### Posters and artwork ###
+
+    # Video trailer background image
+    try:
+        twitterBG = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="fake_trailer"]//img')[0].get('src0_1x')
+        art.append(twitterBG)
+    except:
+        pass
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
 
     return metadata

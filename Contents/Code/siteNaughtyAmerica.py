@@ -25,7 +25,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     metadata.studio = "Naughty America"
-    metadata.summary = detailsPageElements.xpath('//div[@class="synopsis grey-text"]')[0].text_content().strip().strip("Synopsis")
+    metadata.summary = detailsPageElements.xpath('//div[@class="synopsis grey-text"]')[0].text_content().strip().replace('Synopsis','')
     subSite = detailsPageElements.xpath(('//div[@class="scene-info"]/a[@class="site-title grey-text link"]'))[0].text_content().strip()
     metadata.tagline = subSite
     metadata.collections.clear()

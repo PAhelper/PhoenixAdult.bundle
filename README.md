@@ -6,15 +6,16 @@ This metadata agent helps fill Plex with information for your adult videos by pu
 Features
 --------
 Currently the features of this metadata agent are:
-- Grabs all available Metadata
-- Video title
-- Studio
-- Originating site (saved as the Tagline, and also a Collection for easy searching)
-- Release Date
-- Genres/Categories/Tags
-- Porn Stars stored as Actors with photo
-- Scene director (if available)
-- Movie Poster(s) / Background art (if available)
+- Scrapes any available Metadata, including:
+  - Scene Title
+  - Scene Summary
+  - Studio
+  - Originating Site (saved as the Tagline, and also a Collection for easy searching)
+  - Release Date
+  - Genres / Categories / Tags
+  - Porn Stars (stored as Actors, with photo)
+  - Scene Director
+  - Movie Poster(s) / Background Art
 
 - Function to strip common "scene" tags from filenames to assist with matching
 - Function to help replace abbreviations in filenames with the full names to assist with matching
@@ -30,37 +31,54 @@ If the video is not successfully matched, you can manually try to match it using
 Which type of search each site accepts is listed at the bottom of this README.
 **Plex Video Files Scanner needs to be set as the library scanner for best results.
 
-The release date can optionally be added to the filename or search terms for more accurate matching. Date can use a 2-digit year or 4-digit year.
+The release date can optionally be added to the filename or search terms for more accurate matching (referred to below as "Date Match" or "Date Search"). 
+In select instances where a site does not make release dates available, the agent can manually add a release date if it is included in the filename or search term.  
+Dates can use a 2-digit year or 4-digit year, and should always be listed directly after the Site Name.
 
 ###### Title Search
 
 - Site - YYYY-MM-DD - Scene Title.[ext]
+- Site - Scene Title.[ext]
 
 Examples:
-- Blacked - Hot Vacation Adventures.mp4
 - Blacked - 2018-12-11 - The Real Thing.mp4
-- Blackedraw - Pass Me Around.mp4
+- Blacked - Hot Vacation Adventures.mp4
 
 ###### Actor Search
 
-- Site - YYYY-MM-DD - Porn Star Names.[ext]
-- Site - Porn Star Name Porn Star Name.[ext]
+- Site - YYYY-MM-DD - Porn Star Name(s).[ext]
+- Site - Porn Star Name(s).[ext]
 
 Examples:
 - Blacked - 2018-09-07 - Alecia Fox.mp4
-- Blacked - 18-09-07 - Alecia Fox Joss Lescaf.mp4
-- Blacked - 18-09-04 - Haley Reed.mp4
-- Blacked - 2018-09-04 - Haley Reed Jason Luv.mp4
+- Blacked - Alecia Fox Joss Lescaf.mp4
 
-###### Direct Match
+Some sites do not have a search function available, but are still supported through direct matching. This is where SceneID Search/Match and Direct URL Match come in to play.
+These usually don't make the most intuitive filenames, so it is often better to use the [Match...] function in Plex.
 
-Some sites do not have a search function available, but are still supported through direct matching.
-These usually don't make the most intuitive filenames, so it is often better to use the [Match...] function in Plex and enter a specific ID number or a part of the URL from the original site.
+###### SceneID Search/Match
+A numeric value found in the URL of a scene. 
+Some sites rely entirely on SceneID for matching, while others only utilize it for more accurate matching. 
+
+- Site - YYYY-MM-DD - SceneID.[ext]
+- Site - SceneID.[ext]
+- Site - SceneID - Scene Title.[ext]
 
 Examples:
-- PornPros - **eager-hands** (taken from the URL [https://pornpros.com/video/**eager-hands**](https://linkthe.net/?https://pornpros.com/video/eager-hands) to direct match)
-- MomsTeachSex - **314082** (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://linkthe.net/?https://momsteachsex.com/tube/watch/314082) to direct match)
-- Mylfed - **1645 straight until wet** (taken from the URL [https://www.mylf.com/movies/**1645/straight-until-wet**](https://linkthe.net/?https://www.mylf.com/movies/**1645/straight-until-wet**) to direct match)
+- EvilAngel - 2016-10-02 - 119883 (taken from the URL [https://www.evilangel.com/en/video/Allie--Lilys-Slobbery-Anal-Threesome/**119883**](https://www.evilangel.com/en/video/Allie--Lilys-Slobbery-Anal-Threesome/119883))
+- MomsTeachSex - 314082 (taken from the URL [https://momsteachsex.com/tube/watch/**314082**](https://momsteachsex.com/tube/watch/314082))
+- Babes - 3075191 - Give In to Desire (taken from the URL [https://www.babes.com/scene/**3075191**/1](https://www.babes.com/scene/3075191/1))
+
+###### Direct URL Match
+A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Scene Actor.
+
+- Site - YYYY-MM-DD - URL.[ext]
+- Site - URL.[ext]
+
+Examples:
+- Mylf - 2019.01.01 - 1809 manicured-milf-masturbation (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
+- PornPros - eager-hands (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands))
+
 
 Installation
 ------------
@@ -83,7 +101,7 @@ Plex main folder location:
     * '/raid0/data/module/Plex/sys/Plex Media Server/',                          # Thecus
     * '/raid0/data/PLEX_CONFIG/Plex Media Server/'                               # Thecus Plex community    
 
-Get the latest source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
+Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
 - Rename folder to "PhoenixAdult.bundle" (remove -master)
 
@@ -102,6 +120,31 @@ Some sites with lots of content may return matching results, but still not inclu
 
 Change Log/Updates
 ------------------
+- 2019-06-02 2:15PM CST - Bugfix for FamilyStrokes
+- 2019-05-29 3:30PM CST - Bugfixes for VirtualTaboo
+- 2019-05-22:
+    - Add Butt Plays (21Sextury subsite)
+    - Add DorcelVision
+    - Add Day With A Porn Star (Brazzers subsite)
+    - Add Watch Your Mom (Naughty America subsite)
+    - Fix Title DevilsFilm
+    - Fix That Sitcom Show
+    - Fix Search Page for DDF Network
+    - Fix Search Page for Allure Media
+    - Fix Search Page for network Gamma Entertainment
+        - Get all pages for scenes
+        - Get actress in search
+    - Amateur Allure improvements:
+        - More Actress Additions
+    - SisLovesMe improvements:
+        - Add alternate scene match method
+        - Add genre "Step Sister" to all scenes
+        - Poster bugfix
+    - Merged multiple genres
+    - Actress Aliases
+    - Other fixes:
+        - Term "180" was being stripped from scene titles. Was causing issues with multiple sites (ie. Kink, Evil Angel) where a numeric Scene ID is necessary/beneficial for scene matching
+        - Term "4k" was being stripped from search. Causing issues with Cum4k, other sites with "4k" in title. Client now strips " 4k" or ".4k", instead
 - 2019-04-23 9:45AM CST - Added Hegre.com support
 - 2019-04-15 9:00AM CST - Cleaned up Perfect Gonzo code, other minor bugfixes and additions
 - 2019-04-13 4:30PM CST - Added support for PervMom (direct match only)
@@ -227,86 +270,96 @@ Supported Networks
 #### - 21Sextury *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - AllHerLuv *Title Search *Actor Search
 #### - Amateur Allure *Title Search *Actor Search
-#### - Anilos *shoot ID (Anilos - id) *Date search
-#### - Babes Network *Title Search *Actor Search (adding Date will help match either)
-#### - BaDoinkVR Network *Actor search, *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
+#### - Anilos *SceneID (Anilos - id) *Date Search
+#### - ArchAngel *Title Search *Actor Search
+#### - Babes Network *SceneID
+#### - BaDoinkVR Network *Actor Search *Title Search (exact spelling)(e.g. Search for "BadoinkVR **actress name**" to choose from all scenes from actress OR .../**scene_title**-#####/ => Search for "BadoinkVR **Scene Title**" in the agent to match specific scene
 #### - Bang Bros Network *Title Search *Date/Actor Search
 #### - BellaPass *Title Search
 #### - BlackedRaw *Title Search *Date/Actor Search
 #### - Blacked *Title Search *Date/Actor Search
-#### - Black Valley Girls *Scene ID Search only
+#### - Black Valley Girls *SceneID Search only
 #### - Blowpass *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Bratty Sis *shoot ID (BrattySis - id) *Date search
+#### - Bratty Sis *SceneID (BrattySis - id) *Date Search
 #### - Brazzers Network *Title Search
 #### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - CzechAV Network *Title Search
 #### - CzechVR *Actor Search (exact spelling)
-#### - DDFNetwork - *Title Search/Actress
+#### - DDFNetwork *Title Search *Actor Search
 #### - DigitalPlayground *Title Search *Actor Search
-#### - Dogfart - *Title Search/Actress
+#### - Dogfart Network *Title Search/Actress
 #### - Dorcel Club *Title Search
+#### - Dorcel Vision *Title Search
 #### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - FakeHub *Title Search
 #### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - FamilyStrokes *url Match *Unofficial Scene Title match
+#### - FamilyStrokes *Url Match *Unofficial Scene Title match
 #### - FantasyMassage *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Femdom Empire *Title Search *Actor Search
+#### - Femdom Empire / Feminized *Title Search *Actor Search (adding Date will help match either)
 #### - FinishesTheJob *Title Search *Actor Search
 #### - First Anal Quest *Title Search *Actor Search
+#### - FuckedHard18 *Title Search *Actor/Date Search
 #### - Full Porn Network *Title Search *Actor Search (adding Date will help match either)
 #### - GirlfriendsFilms *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Girlsway *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Gloryhole Secrets *Title Search (Title includes actress first name)
-#### - Hot Crazy Mess *shoot ID (HotCrazyMess - id) *Date search
-#### - Joymii *Title Search *Actor search
-#### - JulesJordan network - *Title Search/Actress
+#### - Hot Crazy Mess *SceneID (HotCrazyMess - id) *Date Search
+#### - Joymii *Title Search *Actor Search
+#### - JulesJordan Network - *Title Search *Actor Search
 #### - Karups Network *Actor Search
 #### - Kelly Madison *Title Search *Date/Actor Search
-#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + Shoot ID
+#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + SceneID
 #### - LegalPorno *Title Search
 #### - LetsDoeIt / Porndoe Premium Network *Title Search *Date/Actor Search
-#### - Manyvids (Manyvids - id)
+#### - LoveHerFeet *Title Search *Date/Actor Search
+#### - Manyvids *SceneID (Manyvids - id)
 #### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - MissaX *Title Search *Actor Search
-#### - Mofos Network *Title Search *Actor Search (adding Date will help match either)
+#### - Mofos Network *SceneID
 #### - Mylf Network *URL Match
 #### - Naughty America Network *Date/Actor Search
-#### - NewSensations *Actress Search *DVD search (exact spellings)
-#### - NF Busty *shoot ID (NFBusty - id) *Date search
-#### - Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
-#### - Nubiles.net *Shoot ID (NubilesNet - id) *Date search
-#### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
+#### - NewSensations *Actor Search *DVD Search (exact spelling)
+#### - NF Busty *SceneID (NFBusty - id) *Date Search
+#### - Nubilesfilms *SceneID (Nubilesfilms - id) *Date Search
+#### - Nubiles.net *SceneID (NubilesNet - id) *Date Search
+#### - Nubiles-porn.com Network *SceneID (Nubilesporn - id) *Date Search
 #### - OpenlifeNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Other PornPros sites *No Search available, exact URL match only
+#### - Other PornPros sites *URL Match
 #### - PerfectGonzo Network *Actor Search
-#### - PervMom *URL match only (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
+#### - PervMom *URL Match (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
 #### - PornFidelity *Title Search *Date/Actor Search
-#### - PornPros Network *No Search available, exact URL match only
+#### - PornPros Network *URL Match
 #### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - PropertySex *SceneID
 #### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
 #### - Reality Kings Network *Title Search
 #### - Screwbox *Title Search *Actor Search
 #### - SexArt *Title Search *Actor Search
-#### - SexBabesVR *No Search available, exact URL match only (e.g. [https://sexbabesvr.com/virtualreality/scene/id/**225-welcum_sexy_architect**/](https://linkthe.net/?https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/) => Search for "SexBabesVR **225-welcum_sexy_architect**" in the agent to match)
+#### - SexBabesVR *URL Match (e.g. 225-welcum_sexy_architect)
 #### - SexyHub *Title Search
-#### - Sis Loves Me *Scene ID Search only
+#### - Sis Loves Me *SceneID Search
 #### - Spizoo *Title Search *Actor Search
 #### - Swallowed / TrueAnal / Nymphos *Title Search (Title includes actress first name)
 #### - Swallow Salon *Title Search *Actor Search
 #### - TeamSkeet Network *Title Search *Date/Actor Search
 #### - TeenFidelity *Title Search *Date/Actor Search
 #### - TeenMegaWorld Network *Title Search *Actor Search
-#### - That Sitcom Show *shoot ID (ThatSitcomShow - id) *Date search
+#### - That Sitcom Show *SceneID (ThatSitcomShow - id) *Date Search
 #### - Tonight's Girlfriend *Actor Search
+#### - TransAngels *Title Search *Date/Actor Search
 #### - TrenchcoatX *Title Search *Actor Search
 #### - Tushy *Title Search *Date/Actor Search
+#### - Twistys Network *SceneID
 #### - VirtualRealPorn *Title Search (exact spelling)
 #### - VirtualTaboo *Title Search (true search, partial name allowed)
 #### - Vixen *Title Search *Date/Actor Search
 #### - VRBangers *Title Search
-#### - Wankz Network *Title Search *Actor search
-#### - WankzVR Network *Title Search *Actor search
+#### - Wankz Network *Title Search *Actor Search
+#### - WankzVR Network *Title Search *Actor Search
+#### - WeAreHairy *Title Search *Date/Actor Search
 #### - X-Art *Title Search
 #### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - XConfessions *Title Search *Actor Search
 
 To see the full list of all supported sites, [check out the wiki](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/Full-site-support-list).
 If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests

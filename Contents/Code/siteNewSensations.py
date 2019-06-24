@@ -79,9 +79,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(date) > 0:
         date = date[0].text_content().strip()
         date = date[10:20]
-        date_object = datetime.strptime(date, '%m/%d/%Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+        try:
+            date_object = datetime.strptime(date, '%m/%d/%Y')
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+        except:
+            pass
 
     # DVD name
     tagline = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[4]//a')[0].text_content().strip()

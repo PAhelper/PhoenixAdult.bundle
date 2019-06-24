@@ -12,16 +12,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1")
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
-        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace('Trailer','').strip()
-        curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1").replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
+        curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID).replace('/','_').replace('?','!')
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mofos/" + subSite + "] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Property Sex] ", score = score, lang = lang))
 
     return results
 
@@ -36,10 +35,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Mofos'
+    metadata.studio = 'VixenX'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
 
     # Summary
     try:
@@ -48,7 +47,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bKVlBB"]')[0].text_content().strip()
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -62,10 +61,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Release Date
     if metadata.summary:
         date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[3]')
-    elif genres:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
     else:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]')
+        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
 
     if len(date) > 0:
         date = date[0].text_content().strip().replace('Release Date:','')
@@ -86,13 +83,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             if len(actors) > 0:
                 for actorLink in actors:
                     actorName = str(actorLink.text_content().strip())
-                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                    Log("actorPageURL: " + actorPageURL)
-                    actorPage = HTML.ElementFromURL(actorPageURL)
-                    try:
-                        actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
-                    except:
-                        actorPhotoURL = ''
+                    actorPhotoURL = ''
                     movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass
@@ -109,7 +100,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
