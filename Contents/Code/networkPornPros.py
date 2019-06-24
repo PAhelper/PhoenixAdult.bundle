@@ -141,6 +141,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     art = []
+    match = 0
     
     if siteName.lower() == "Holed".lower():
         fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, 0)
@@ -155,7 +156,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         try:
             match = fanSite[2]
         except:
-	    pass
+            pass
         if match is 1:	
             break
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
