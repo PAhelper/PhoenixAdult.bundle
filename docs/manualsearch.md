@@ -10,26 +10,29 @@ Each search query will be comprised of *up to* 5 parts:
 Depending on the capability of any one network/site, you can try a few combiations of the above. 
 
 Here are some examples:
-- A full search, with all available details:
++ A full search, with all available details:
   - `SiteName` `19 06 15` `Jane Doe` `An Interesting Plot`
-- A minimal search, with fewer details:
++ A minimal search, with fewer details:
   - `SiteName` `Jane Doe`
-- Another minimal search, using the site shorthand:
++ Another minimal search, using the site shorthand:
   - `SN` `An Interesting Plot`
-- A search using alternate site name, and just an ID.
++ A search using alternate site name, and just an ID.
   - `SName` `Scene ID`
 
 # Search definitions and capabilities
 ## Includes the functioning search methods as well
 
-## `SceneID Search` | `SceneID Match` | `SceneID Only`
+### **Level 1:** `SceneID Match` | **Level 2:** `SceneID Search` | **Level 3:** `SceneID Only`
 
-- **SceneID Search:** Scene ID can be entered as the *ONLY* search term and the agent will locate results
-  - Example: Though EvilAngel has a full-fledged title/actor search function, you can also just search by Scene ID and find results
-
+#### Level 1
 - **SceneID Match:** SceneID can be entered as a search term alongside other search terms (Title, Actor) to increase the possibility for a match, but cannot be entered as a standalone search term.
   - Example: Though Kink has a full-fledged title/actor search function, you cannot enter just a SceneID and find results. However, if a SceneID is entered alongside a title/actor, it will increase the possibility of locating the correct scene
 
+#### Level 2
+- **SceneID Search:** Scene ID can be entered as the *ONLY* search term and the agent will locate results
+  - Example: Though EvilAngel has a full-fledged title/actor search function, you can also just search by Scene ID and find results
+
+#### Level 3
 - **SceneID Only:** Search relies solely on SceneID. You may add additional terms to your search (Title, Actor, Date), but if a SceneID is not entered you will not receive any results
   - Example: Babes/PropertySex/etc. The agent strips the SceneID from your search term and plugs it into a URL. I've implemented some code so that adding a title to your search term increases the "score" you see, without a SceneID your search will return no results
 
