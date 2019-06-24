@@ -31,7 +31,7 @@ noMatch[24] = ["She Cums in Colors"]
 
 # Scenes with incorrect matches
     #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 36
+badMatch = [None] * 38
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -68,6 +68,8 @@ badMatch[32] = ["A Pleasing Pussy", "Rebel Lynn", "HQSluts.com", "https://www.hq
 badMatch[33] = ["Little Firecracker", "Ariela", "HQSluts.com", "https://www.hqsluts.com/Ariela+B+-+Little+Firecracker-400815/"]
 badMatch[34] = ["Close Shave", None, "HQSluts.com", "https://www.hqsluts.com/Ivy+Wolfe+-+Close+Shave-405025/"]
 badMatch[35] = ["Slippery Pool Sex", None, "ImagePost.com", "https://www.imagepost.com/videos/rebel-lynn-on-lubed-in-slippery-pool-sex/"]
+badMatch[36] = ["Lubed For St. Patty’s Day", None, "ImagePost.com", "https://www.imagepost.com/movies/katie-kush-on-lubed-in-st-pattys-day/"]   
+badMatch[37] = ["Busy GF? At Least Stepmom Wants To Fuck!", None, "SkeetScenes.com", "https://skeetscenes.com/video/Fucking%20Stepmom%20Like%20Its%20A%20Game/i60021/"]
 
 def getNoMatchID(scene):
     matchID = 0
@@ -95,7 +97,7 @@ def getFanArt(site, art, actors, actorName, title, match):
 
     summary = ""
     actress = "notarealperson"
-    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PornGirlsErotica.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
+    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PornGirlsErotica.com", "SkeetScenes.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
     
     if site not in validSites:
         Log("CAUTION: " + site + " is not an accepted PAextras search term. Sites are case sensitive: PassionHDFan.com is acceptable, Passionhdfan.com is not.")
@@ -143,6 +145,8 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
                                 elif site == "PornGirlsErotica.com":
                                     nameinheader = fanPageElements.xpath('//h2[@class="title"]')[0].text_content()
+                                elif site == "SkeetScenes.com":
+                                    nameinheader = fanPageElements.xpath('//h5//a')[0].text_content()
                                 elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
                                     nameinheader = fanPageElements.xpath('(//span[@itemprop="articleSection"])')[0].text_content()
                                 elif site == "XartBeauties.com/galleries":
@@ -224,6 +228,9 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     elif site == "PornGirlsErotica.com":
                                         for posterURL in fanPageElements.xpath('//div[@class="ngg-galleryoverview"]//a'):
                                             art.append(posterURL.get('href'))
+                                    elif site == "SkeetScenes.com":
+                                        for posterURL in fanPageElements.xpath('//div[@class="row"]/div[contains(@class, "col-xl-2")]//source[position()=1]'):
+                                            art.append("https:" + posterURL.get('srcset').replace('_thumb', '').replace('.webp', '.jpg'))
                                     elif site == "XartBeauties.com/galleries":
                                         for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
                                             art.append(posterURL.get('src').replace('images.', 'www.').replace('/tn', ''))
@@ -240,13 +247,13 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     match = 2
                                     
                         except:
-                            Log("No Fansite Match")
+                            Log("No Fan site Match")
                             
                         if match is 1 or match is 2:
                             # Summary
                             try:
                                 if site in ["AnalPornFan.com", "LubedFan.com", "PassionHDFan.com"]:
-                                    summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
+                                    summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').replace("Click Here for More Wet & Oiled Up Sex!", '').strip()
                                 elif site == "ImagePost.com":
                                     summary = fanPageElements.xpath('//div[@class="central-section-content"]/p')[0].text_content().strip()
                                 elif site == "SpyFams.com":
