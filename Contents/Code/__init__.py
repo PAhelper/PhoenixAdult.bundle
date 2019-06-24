@@ -873,6 +873,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 737:
                     results = PAsearchSites.siteTransAngels.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Straplezz
+            ###############
+            if siteNum == 741:
+                if searchSiteID == 9999 or searchSiteID == 741:
+                    results = PAsearchSites.siteStraplezz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1504,6 +1511,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 737:
             metadata = PAsearchSites.siteTransAngels.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Straplezz                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 741:
+            metadata = PAsearchSites.siteStraplezz.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
