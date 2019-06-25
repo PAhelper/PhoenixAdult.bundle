@@ -32,10 +32,10 @@ Which type of search each site accepts is listed in the [sitelist document](./do
 **Plex Video Files Scanner needs to be set as the library scanner for best results.**
 
 #### Here are some naming structures we recommend:
-- `SiteName` - `YYYY-MM-DD` - `Scene Name`.[ext]
-- `SiteName` - `Scene Name`.[ext]
-- `SiteName` - `YYYY-MM-DD` - `Actor(s)`.[ext]
-- `SiteName` - `Actor(s)`.[ext]
+- `SiteName` - `YYYY-MM-DD` - `Scene Name` `.[ext]`
+- `SiteName` - `Scene Name` `.[ext]`
+- `SiteName` - `YYYY-MM-DD` - `Actor(s)` `.[ext]`
+- `SiteName` - `Actor(s)` `.[ext]`
 
 Real world examples:
 - `Blacked - 2018-12-11 - The Real Thing.mp4`
@@ -48,9 +48,9 @@ These usually don't make the most intuitive filenames, so it is often better to 
 
 #### If you would like to name your files with SceneIDs instead of just matching in Plex, here are some examples:
 
-- `SiteName` - `YYYY-MM-DD` - `SceneID`.[ext]
-- `SiteName` - `SceneID`.[ext]
-- `SiteName` - `SceneID` - `Scene Name`.[ext]
+- `SiteName` - `YYYY-MM-DD` - `SceneID` `.[ext]`
+- `SiteName` - `SceneID` `.[ext]`
+- `SiteName` - `SceneID` - `Scene Name` `.[ext]`
 
 Real world examples:
 - `EvilAngel - 2016-10-02 - 119883` (taken from the URL [https://www.evilangel.com/en/video/Allie--Lilys-Slobbery-Anal-Threesome/**119883**](https://www.evilangel.com/en/video/Allie--Lilys-Slobbery-Anal-Threesome/119883))
