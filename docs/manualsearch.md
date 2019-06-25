@@ -2,10 +2,10 @@
 
 Each search query will be comprised of *up to* 5 parts, depending on the supported *level*:
 - `Site` - Either the shorthand abbreviation, or full site name.
-- `Date` (more on this below)
+- `Date` - in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
 - `Actor(s)`
 - `Scene Name` - The title/name of the scene.
-- `Scene ID` (more on this below)
+- `Scene ID` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
 
 Depending on the capability of any one network/site, you can try a few combiations of the above.
 
