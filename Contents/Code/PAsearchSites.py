@@ -68,8 +68,9 @@ import siteMomPOV
 import sitePropertySex
 import siteFuckedHard18
 import siteTransAngels
+import siteStraplezz
 
-searchSites = [None] * 741
+searchSites = [None] * 742
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -479,15 +480,15 @@ searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.femalefak
 searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakedrivingschool.com","https://www.fakedrivingschool.com/search/videos/"]
 searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehostel.com","https://www.fakehostel.com/search/videos/"]
 searchSites[408] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[409] = ["BlacksOnBlondes","Blacks On Blondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[410] = ["CuckoldSessions","Cuckold Sessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[411] = ["GloryHole","Glory Hole","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[412] = ["BlacksOnCougars","Blacks On Cougars","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[409] = ["BlacksOnBlondes","BlacksOnBlondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[410] = ["CuckoldSessions","CuckoldSessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[411] = ["GloryHole","GloryHole","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[412] = ["BlacksOnCougars","BlacksOnCougars","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[413] = ["WeFuckBlackGirls","WeFuckBlackGirls","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[414] = ["WatchingMyMomGoBlack","WatchingMyMomGoBlack","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[415] = ["InterracialBlowbang","Interracial Blowbang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[415] = ["InterracialBlowbang","InterracialBlowbang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[416] = ["CumBang","CumBang","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[417] = ["InterracialPickups","Interracial Pickups","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
+searchSites[417] = ["InterracialPickups","InterracialPickups","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[418] = ["WatchingMyDaughterGoBlack","WatchingMyDaughterGoBlack","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[419] = ["ZebraGirls","ZebraGirls","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[420] = ["GloryHoleInitiations","GloryHoleInitiations","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
@@ -811,6 +812,7 @@ searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","h
 searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[741] = ["Straplezz","Straplezz","https://straplezz.com","https://straplezz.com/updates/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
