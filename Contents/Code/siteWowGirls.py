@@ -13,8 +13,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
         else:
-        releaseDate = ''
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [WowPorn/WowGirls] " + releaseDate, score = score, lang = lang))
+            releaseDate = ''
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowPorn/WowGirls] ", score = score, lang = lang))
 
     return results
 
@@ -50,11 +50,12 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Release Date
-    date = ""
+    date = str(metadata.id).split("|")[2]
     if len(date) > 0:
-        date_object = datetime.strptime(date, '%Y-%m-%d')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+    Log("Date from file")
     
     # Actors
     actors = detailsPageElements.xpath('//div[@class="tags-list"]/a[i[@class="fa fa-tag"]]')
