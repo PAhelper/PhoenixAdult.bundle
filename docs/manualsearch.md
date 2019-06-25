@@ -5,7 +5,8 @@ Each search query will be comprised of *up to* 5 parts, depending on the support
 - `Date` - in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
 - `Actor(s)`
 - `Scene Name` - The title/name of the scene.
-- `Scene ID` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
+- `Scene ID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
+- `URL Suffix` - A string of characters at the end of a URL
 
 Depending on the capability of any one network/site, you can try a few combiations of the above.
 
@@ -31,6 +32,11 @@ Here are some examples, within each level:
     - `SiteName` `Scene ID`
   - An exact search using site shorthand and ID:
     - `SN` `Scene ID`
+  - A direct url match, using only a suffix:
+    - `SiteName` `URL Suffix`
+      - `PornPros eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands))
+    - `SiteName` `Date` `URL Suffix`
+      - `Mylf 2019.01.01 1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
 
 # Search Levels and their capabilities
 There are 3 available levels, as listed below:
@@ -55,3 +61,4 @@ There are 3 available levels, as listed below:
 #### Exact matching only.
 + **SceneID Only:** Search relies solely on SceneID. You may add additional terms to your search (Title, Actor, Date), but if a SceneID is not entered you will not receive any results
   - Example: Babes/PropertySex/etc. The agent strips the SceneID from your search term and plugs it into a URL. I've implemented some code so that adding a title to your search term increases the "score" you see, without a SceneID your search will return no results
++ **Direct URL Match:** A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Scene Actor.
