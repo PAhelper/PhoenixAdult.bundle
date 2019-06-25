@@ -323,10 +323,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a | //ul[@class="directedBy"]/li/a')
         Log("Directors found: "+str(len(directors)))
-        for dirname in directors:
-            Log("Director: "+str(dirname.text_content().strip()))
-            #metadata.directors.add(director.text_content().strip())
-            director.name = dirname.text_content().strip()
+        if len(directors) > 0:
+            for dirname in directors:
+                Log("Director: "+str(dirname.text_content().strip()))
+                #metadata.directors.add(director.text_content().strip())
+                director.name = dirname.text_content().strip()
     except:
         pass
 
@@ -341,13 +342,30 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Release Date
     try:
         date = detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().replace('|','').strip()
+        if len(date) > 0:
+            date_object = parse(date)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
     except:
-        date = detailsPageElements.xpath('//*[@class="updatedOn"]')[0].text_content().strip()
-        date = date[8:].strip()
-    if len(date) > 0:
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+        try:
+            date = detailsPageElements.xpath('//*[@class="updatedOn"]')[0].text_content().strip()
+            date = date[8:].strip()
+            if len(date) > 0:
+                date_object = parse(date)
+                metadata.originally_available_at = date_object
+                metadata.year = metadata.originally_available_at.year
+        except:
+            try:
+                datePublished = detailsPageElements.xpath('//script[contains(text(),"datePublished")]')[0].text_content()
+                alpha = datePublished.find('"datePublished"')+17
+                omega = datePublished.find('"',alpha)
+                date = datePublished[alpha:omega]
+                if len(date) > 0:
+                    date_object = parse(date)
+                    metadata.originally_available_at = date_object
+                    metadata.year = metadata.originally_available_at.year
+            except:
+                pass
 
     # Actors
     movieActors.clearActors()
@@ -523,3 +541,4 @@ def update(metadata,siteID,movieGenres,movieActors):
                 Log("Error: " + str(e))
 
     return metadata
+
