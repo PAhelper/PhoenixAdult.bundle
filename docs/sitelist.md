@@ -1,18 +1,22 @@
-# All supported networks and sites
-This is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
-## Includes the functioning search methods as well
+## Brief explanation of 'levels' of search
++ **[Level 1](./docs/manualsearch.md#level-1)** - Multi-search available. This includes, searching by actor, by scene name, or by date (or all of the above).
++ **[Level 2](./docs/manualsearch.md#level-2)** - Limited-search available. This is broken down into 2 sub-levels, which commonly cannot be used together. The sub-level will be indicated next to the relevant site(s)
++ **[Level 3](./docs/manualsearch.md#level-3)** - Exact matching only. This is also broken down into 2 sub-levels, and they will be indicated next to the main level of relevant site(s)
 
-#### - 21Naturals *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+The above is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
+# All supported networks and sites
+
+#### - 21Naturals | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  21Naturals
  -  21FootArt
  -  21EroticAnal
-#### - 21Sextreme *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - 21Sextreme | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  DominatedGirls
  -  GrandpasFuckTeens
  -  LustyGrandmas
  -  TeachMeFisting
  -  Zoliboy
-#### - 21Sextury *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - 21Sextury | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  AnalTeenAngels
  -  ButtPlays
  -  DeepthroatFrenzy
@@ -21,11 +25,11 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Gapeland
  -  LezCuties
  -  PixandVideo
-#### - AllHerLuv *Title Search *Actor Search
-#### - Amateur Allure *Title Search *Actor Search
-#### - Anilos *SceneID Match (Adding Date Helps) (ie. [Anilos - 58180](https://anilos.com/video/watch/58180/body-language))
-#### - ArchAngel *Title Search *Actor Search
-#### - Babes Network *SceneID Match (Adding Title Helps)
+#### - AllHerLuv | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Amateur Allure | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Anilos | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match | Search: *[Level 2](./docs/manualsearch.md#level-2)* - Date Search
+#### - ArchAngel | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Babes Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match
  -  Babes
  -  Babes Unleashed
  -  Black is Better
@@ -33,13 +37,13 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Office Obsession
  -  Stepmom Lessons
 #### - Baeb
-#### - BaDoinkVR Network *Title Search (exact spelling) *Actor Search (exact spelling)
+#### - BaDoinkVR Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  BaDoinkVR
  -  18VR
  -  BabeVR
  -  KinkVR
  -  VRCosplayX
-#### - Bang Bros Network *Title Search *Date/Actor Search
+#### - Bang Bros Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  Ass Parade
  -  AvaSpice
  -  Back Room Facials
@@ -92,7 +96,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Street Ranger
  -  Tugjobs
  -  Working Latinas
-#### - BellaPass *Title Search
+#### - BellaPass | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
   - AleahJasmine
   - AlexisMonroe
   - AvaDawn
@@ -108,16 +112,16 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - KatieBanks
   - MonroeLee
   - TaliaShepard
-#### - Blacked *Title Search *Date/Actor Search
-#### - BlackedRaw *Title Search *Date/Actor Search
+#### - Blacked | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - BlackedRaw | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 #### - Black Valley Girls *SceneID Search (ie. [BlackValleyGirls - 827](https://www.blackvalleygirls.com/827/my-date-with-a-pornstar/evi-rei))
-#### - Blowpass *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - Blowpass | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  1000 Facials
  -  ImmoralLive
  -  MommyBlowsBest
  -  OnlyTeenBlowjobs
  -  Throated
-#### - Brazzers Network *Title Search
+#### - Brazzers Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
 -   Asses In Public
 -   Baby Got Boobs
 -   Big Butts like it big
@@ -146,9 +150,9 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
 -   Teens Like It Big
 -   Teens Like It Black
 -   ZZ Series
-#### - Bratty Sis *SceneID (BrattySis - id) *Date Search
-#### - BurningAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - CzechAV Network *Title Search
+#### - Bratty Sis | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match | Search: *[Level 2](./docs/manualsearch.md#level-2)* - Date Search
+#### - BurningAngel | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - CzechAV Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
  -  Czech Amateurs
  -  Czech Bangbus
  -  Czech Bitch
@@ -182,11 +186,11 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Czech Toilets
  -  Czech Twins
  -  Czech Wife Swap
-#### - CzechVR *Actor Search (exact spelling)
+#### - CzechVR | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Actor only
  -  CzechVR
  -  CzechVR Casting
  -  CzechVR Fetish
-#### - DDFNetwork - *Title Search *Actor Search
+#### - DDFNetwork | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  1By-Day
  -  Cherry Jul
  -  DDF Busty
@@ -203,9 +207,9 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Only Blowjob
  -  Sandy's Fantasies
  -  Sex Video Casting
-#### - Deeper *Title Search *Date/Actor Search
-#### - DigitalPlayground *Title Search *Actor Search
-#### - Dogfart - *Title Search *Actor Search
+#### - Deeper | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - DigitalPlayground | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Dogfart | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  BarbCummings
  -  BlackMeatWhiteFeet
  -  BlacksOnBlondes
@@ -229,10 +233,10 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  WeFuckBlackGirls
  -  WifeWriting
  -  ZebraGirls
-#### - Dorcel Club *Title Search
-#### - Dorcel Vision *Title Search
-#### - EvilAngel *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - FakeHub *Title Search
+#### - Dorcel Club | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
+#### - Dorcel Vision | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
+#### - EvilAngel | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - FakeHub | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
  -  FakeTaxi
  -  Fakehub Originals
  -  Public Agent
@@ -243,13 +247,13 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Fake Cop
  -  Fake Driving School
  -  Fake Hostel
-#### - FameDigital *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - FameDigital | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  DevilsFilm
  -  PeterNorth
  -  RoccoSiffredi
  -  TeraPatrick
-#### - FamilyStrokes *URL Match (ie. [FamilyStrokes - 983/kali-roses/Try-This-Stepsis-Cooch-On-For-Size](https://www.familystrokes.com/scenes/983/kali-roses/Try-This-Stepsis-Cooch-On-For-Size)) *Unofficial Scene Title Match
-#### - FantasyMassage *Title Search *Date/Actor Search *SceneID Search
+#### - FamilyStrokes | Search: *[Level 1](./docs/manualsearch.md#level-1)* **newer scenes only** | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match (ie. [FamilyStrokes - 983/kali-roses/Try-This-Stepsis-Cooch-On-For-Size](https://www.familystrokes.com/scenes/983/kali-roses/Try-This-Stepsis-Cooch-On-For-Size))
+#### - FantasyMassage | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  AllGirlMassage
  -  FantasyMassage
  -  MassageParlor
@@ -257,14 +261,14 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  NuruMassage
  -  SoapyMassage
  -  TrickySpa
-#### - FemdomEmpire / Feminized *Title Search *Actor/Date Search
-#### - FinishesTheJob *Title Search *Actor Search
+#### - FemdomEmpire / Feminized | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - FinishesTheJob | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  ManoJob
  -  MrPOV
  -  TheDickSuckers
-#### - First Anal Quest *Title Search *Actor Search
-#### - FuckedHard18 *Title Search *Actor/Date Search
-#### - Full Porn Network *Title Search *Actor/Date Search
+#### - First Anal Quest | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - FuckedHard18 | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Full Porn Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  Analized
  -  Bad Daddy POV
  -  DTF Sluts
@@ -273,24 +277,24 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Pervert Gallery
  -  POV Perverts
  -  Twisted Visual
-#### - GirlfriendsFilms *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Girlsway *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - GirlfriendsFilms | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Girlsway | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  GirlsTryAnal
  -  GirlswayOriginals
  -  MommysGirl
  -  SextapeLesbians
  -  WebYoung
-#### - Gloryhole Secrets *Title Search (Title includes actress first name)
-#### - Hegre *Title Search
-#### - Hot Crazy Mess *SceneID Match (HotCrazyMess - id) *Date Search
-#### - Joymii *Title Search *Actor Search
-#### - JulesJordan network - *Title Search *Actor Search
+#### - Gloryhole Secrets | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only (Title includes actress first name)
+#### - Hegre | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
+#### - Hot Crazy Mess | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match | Search: *[Level 2](./docs/manualsearch.md#level-2)* - Date Search
+#### - Joymii | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - JulesJordan network - | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  JulesJordan
  -  ManuelFerarra
  -  SpermSwallowers
  -  TheAssFactory
-#### - Kelly Madison *Title Search *Date/Actor Search
-#### - Kink.com network *Title Search *Actor Search *Partial Title or Actor + SceneID
+#### - Kelly Madison | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Kink.com network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
   - 30MinutesofTorment
   - BoundGangBangs
   - BoundGods
@@ -330,17 +334,17 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Karups Hometown Amateurs
  -  Karups Older Women
 #### - LegalPorno *Title Search
-#### - Love Her Feet *Title Search *Actor/Date Search
-#### - ManyVids *SceneID Match (Adding Title Helps)
-#### - MileHighNetwork *Title Search *Date/Actor Search *SceneID Search
+#### - Love Her Feet | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - ManyVids | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match
+#### - MileHighNetwork | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  CherryPop
  -  DoghouseDigital
  -  LesbianOlderYounger
  -  RealityJunkies
  -  SweetheartVideo
  -  SweetSinner
-#### - MissaX *Title Search *Actor Search
-#### - Mofos Network *SceneID Match (Adding Title Helps)
+#### - MissaX | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Mofos Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match
  -  Don't Break Me
  -  I Know That Girl
  -  Latina Sextapes
@@ -352,8 +356,8 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Share My BF
  -  She's A Freak
  -  Stranded Teens
-#### - MomPOV *Title Search *Date Search
-#### - Mylf Network *URL Match (ie. [Mylf - 1809/manicured-milf-masturbation](https://www.mylf.com/movies/1809/manicured-milf-masturbation)) **[See Notes](https://github.com/PAhelper/PhoenixAdult.bundle/wiki/**Full-site-support-list**#notes)
+#### - MomPOV | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Mylf Network | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match (ie. [Mylf - 1809/manicured-milf-masturbation](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
  -  Mylf
  -  MylfBoss
  -  MylfBlows
@@ -364,7 +368,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Milf Body
  -  Lone Milf
  -  Full Of JOI
-#### - Naughty America Network *Title Search *Date/Actor Search
+#### - Naughty America Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 -   2 Chicks Same Time
 -   American Daydreams
 -   Anal College
@@ -442,7 +446,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - Step Siblings Caught
   - Teacher Fucks Teens
 #### - Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
-#### - OpenlifeNetwork *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - OpenlifeNetwork | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  AbbeyBrooks
  -  AshleyFires
  -  DevonLee
@@ -450,7 +454,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  HannaHilton
  -  LaneSisters
  -  SunnyLeone
-#### - PerfectGonzo Network *Actor Search
+#### - PerfectGonzo Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Actor only
  -  AllInternal
  -  AssTraffic
  -  CumForCover
@@ -459,8 +463,8 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  PurePOV
  -  SpermSwap
  -  TamedTeens
-#### - PervMom *URL Match (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
-#### - Porndoe Premium Network *Title Search *Date/Actor Search
+#### - PervMom | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match (e.g. /61/nuts-about-my-stepmom/aaliyah-love/part-1)
+#### - Porndoe Premium Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 -   A Girl Knows
 -   Badtime Stories
 -   Bitches Abroad
@@ -505,8 +509,8 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
 -   Xchimera
 -   XXX Omas
 -   XXXShades
-#### - PornFidelity *Title Search *Date/Actor Search
-#### - PornPros Network *URL Match
+#### - PornFidelity | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - PornPros Network | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match
   - 18YearsOld
   - 40ozBounce
   - CockCompetition
@@ -527,7 +531,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-#### - Other PornPros sites *URL Match
+#### - Other PornPros sites | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match
   - CastingCouch-X
   - Cum4K
   - Exotic4k
@@ -541,7 +545,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - PureMature
   - SpyFam
   - Tiny4k
-#### - PrettyDirty *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - PrettyDirty | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 #### - Private
   - Anal Introductions
   - Blacks on Sluts
@@ -555,9 +559,9 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - Russian Teen Ass
   - Sex on the beach
   - Tight and Teen
-#### - PropertySex *SceneID Match (Adding Title Helps)
-#### - PureTaboo *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
-#### - Reality Kings Network *Title Search
+#### - PropertySex | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match
+#### - PureTaboo | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Reality Kings Network | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
 -   40 Inch Plus
 -   8th Street Latinas
 -   Bad Tow Truck
@@ -605,12 +609,12 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
 -   Wives in Pantyhose
 #### - SexArt
 #### - SexyHub *Title Search
-#### - Screwbox *Title Search *Actor Search
-#### - SexArt *Title Search *Actor Search
-#### - SexBabesVR *URL Match (ie. [SexBabesVR - 225-welcum_sexy_architect](https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/))
+#### - Screwbox | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - SexArt | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - SexBabesVR | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match (ie. [SexBabesVR - 225-welcum_sexy_architect](https://sexbabesvr.com/virtualreality/scene/id/225-welcum_sexy_architect/))
 #### - SinsVR
 #### - Sis Loves Me *SceneID Search (ie. [SisLovesMe - 43](https://www.sislovesme.com/43/Relatively-Hot-Relations/Alexa-Grace))
-#### - Spizoo *Title Search *Actor Search
+#### - Spizoo | Search: *[Level 1](./docs/manualsearch.md#level-1)*
   - FirstClassPOV
   - IntimateLesbians
   - JessicaJaymesXXX
@@ -619,9 +623,9 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
   - RawAttack
   - TheStripperExperience
 #### - StasyQ VR
-#### - Swallowed / TrueAnal / Nymphos *Title Search (Title includes actress first name)
-#### - Swallow Salon *Title Search *Actor Search
-#### - TeamSkeet Network *Title Search *Date/Actor Search
+#### - Swallowed / TrueAnal / Nymphos | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only (Title includes actress first name)
+#### - Swallow Salon | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - TeamSkeet Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 -   Badmilfs
 -   BraceFaced
 -   CFNM Teens
@@ -650,7 +654,7 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
 -   The Real Workout
 -   This Girl Sucks
 -   Titty Attack
-#### - TeenFidelity *Title Search *Date/Actor Search
+#### - TeenFidelity | Search: *[Level 1](./docs/manualsearch.md#level-1)*
 #### - TeenMegaWorld Network
  -  18 First Sex
  -  ATMovs
@@ -687,22 +691,22 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  Watch Me Fucked
  -  X Angels
  -  Teen Sex Movs
-#### - That Sitcom Show *SceneID (ThatSitcomShow - id) *Date Search
+#### - That Sitcom Show | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match | Search: *[Level 2](./docs/manualsearch.md#level-2)* - Date Search
 #### - Tonights Girlfriend
-#### - TrenchcoatX *Title Search *Actor Search
-#### - Tushy *Title Search *Date/Actor Search
-#### - TushyRaw *URL Match
-#### - Twistys *SceneID Match (Adding Title Helps)
+#### - TrenchcoatX | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Tushy | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - TushyRaw | Search: *[Level 3](./docs/manualsearch.md#level-3)* - Direct URL Match
+#### - Twistys | Search: *[Level 1](./docs/manualsearch.md#level-1)* - SceneID Match
  -  Mom Knows Best
  -  Twistys
  -  Twistys Hard
  -  When Girls Play
-#### - Viv Thomas *Title Search
+#### - Viv Thomas | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
 #### - VRBangers
-#### - VirtualRealPorn *Title Search (exact spelling)
-#### - VirtualTaboo *Title Search
-#### - Vixen *Title Search *Date/Actor Search
-#### - Wankz Network *Title Search *Actor Search
+#### - VirtualRealPorn | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
+#### - VirtualTaboo | Search: *[Level 1](./docs/manualsearch.md#level-1)* - Title only
+#### - Vixen | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Wankz Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  4K Desire
  -  All Interracial
  -  Bang My Stepmom
@@ -736,24 +740,20 @@ This is a reference list. Please see [the manualsearch doc](./manualsearch.md) f
  -  XXX At Work
  -  Young Dirty Lesbians
  -  Young Sluts Hardcore
-#### - WankzVR Network *Title Search *Actor Search
+#### - WankzVR Network | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  WankzVR
  -  MilfVR
-#### - We Are Hairy *Title Search *Actor/Date Search
-#### - X-Art *Title Search *Actor/Date Search
+#### - We Are Hairy | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - X-Art | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  Dane Jones
  -  Fitness Rooms
  -  Girlfriends
  -  Lesbea
  -  Massage Rooms
  -  MomXXX
-#### - XConfessions *Title Search *Actor Search
-#### - Xempire *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
+#### - XConfessions | Search: *[Level 1](./docs/manualsearch.md#level-1)*
+#### - Xempire | Search: *[Level 1](./docs/manualsearch.md#level-1)*
  -  Darkx
  -  Eroticax
  -  Hardx
  -  Lesbianx
-
-#### Notes:
-
-** Date can be added manually via filename/search term (ie. Mylf - 2019.01.01 - 1809/manicured-milf-masturbation)
