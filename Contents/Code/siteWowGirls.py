@@ -10,7 +10,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
         curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [WowPorn/WowGirls] ", score = score, lang = lang))
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+        releaseDate = ''
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [WowPorn/WowGirls] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -70,17 +74,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     ### Posters and artwork ###
 
     # Video trailer background image
-    try:
-        twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
-        art.append(twitterBG)
-    except:
-        pass
+    twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
+    Log("TwitterBG: " + twitterBG)
+    art.append(twitterBG)
 
-    # Photos
-    photos = detailsPageElements.xpath('//meta[@property="og:image"]')
-    if len(photos) > 0:
-        for photoLink in photos:
-            photo = PAsearchSites.getSearchBaseURL(siteID) + photoLink.get('content')
-            art.append(photo)
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+            j = j + 1
 
     return metadata
