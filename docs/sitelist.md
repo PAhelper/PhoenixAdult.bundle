@@ -1,5 +1,5 @@
 # All supported networks and sites
-This is a reference list. Please see ./manualsearch.md for how to use these further.
+This is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
 ## Includes the functioning search methods as well
 
 #### - 21Naturals *Title Search *Date/Actor Search *SceneID Search (found at the end of the URL)
