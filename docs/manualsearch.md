@@ -4,8 +4,8 @@ Each search query will be comprised of *up to* 5 parts, depending on the support
 - `Site` - Either the shorthand abbreviation, or full site name.
 - `Date` - Follows immediately after site name, in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `Actor(s)`
-- `Scene Name` - The title/name of the scene.
-- `Scene ID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
+- `Title` - The title/name of the scene.
+- `SceneID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `Direct URL` - A string of characters at the end of a URL
 
 # Search types and their capabilities
@@ -47,8 +47,8 @@ Here are some examples for each type of search:
 + **Enhanced Search** examples:
   - A full search, with all available details:
     - `SiteName` `YY-MM-DD` `Jane Doe` `An Interesting Plot`
-  - A minimal search, with fewer details, but includes scene ID:
-    - `SiteName` `Jane Doe` `Scene ID`
+  - A minimal search, with fewer details, but includes SceneID:
+    - `SiteName` `Jane Doe` `SceneID`
   - A basic search with the most common details:
     - `SiteName` `Jane Doe` `An Interesting Plot`
   - Another minimal search, using the site shorthand:
@@ -64,9 +64,9 @@ Here are some examples for each type of search:
     
 + **Exact Match** examples:
   - An exact search using site name and ID:
-    - `SiteName` `Scene ID`
+    - `SiteName` `SceneID`
   - An exact search using site shorthand and ID:
-    - `SN` `Scene ID`
+    - `SN` `SceneID`
   - A direct url match, using only a suffix:
     - `SiteName` `Direct URL`
       - `PornPros` `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands))
