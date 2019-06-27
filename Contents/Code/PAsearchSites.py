@@ -69,8 +69,9 @@ import sitePropertySex
 import siteFuckedHard18
 import siteTransAngels
 import siteStraplezz
+import siteVIPissy
 
-searchSites = [None] * 742
+searchSites = [None] * 743
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -813,6 +814,7 @@ searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com",
 searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[741] = ["Straplezz","Straplezz","https://straplezz.com","https://straplezz.com/updates/"]
+searchSites[742] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.vipissy.com/advanced-search/?search=search&query[]="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
