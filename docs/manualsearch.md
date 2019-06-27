@@ -1,6 +1,6 @@
 # Manual Search Usage
 
-Each search query will be comprised of *up to* 5 parts, depending on the supported *level*:
+Each search query will be comprised of *up to* 5 parts, depending on the supported *search type*:
 - `Site` - Either the shorthand abbreviation, or full site name.
 - `Date` - in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
 - `Actor(s)`
@@ -11,7 +11,7 @@ Each search query will be comprised of *up to* 5 parts, depending on the support
 Depending on the capability of any one network/site, you can try a few combiations of the above.
 
 Here are some examples, within each level:
-+ **Level 1** examples:
++ **Enhanced Search** examples:
   - A full search, with all available details:
     - `SiteName` `19 06 15` `Jane Doe` `An Interesting Plot`
   - A minimal search, with fewer details:
@@ -19,7 +19,7 @@ Here are some examples, within each level:
   - Another minimal search, using the site shorthand:
     - `SN` `An Interesting Plot`
   
-+ **Level 2** examples:
++ **Limited Search** examples:
   - A search using site name and the scene date:
     - `SiteName` `19 06 15`
   - A search using site shorthand with date + scene ID:
@@ -27,7 +27,7 @@ Here are some examples, within each level:
   - A **Level 2/3** search using site name and just an ID:
     - `SiteName` `Scene ID`
     
-+ **Level 3** examples:
++ **Exact Match** examples:
   - An exact search using site name and ID:
     - `SiteName` `Scene ID`
   - An exact search using site shorthand and ID:
@@ -38,27 +38,34 @@ Here are some examples, within each level:
     - `SiteName` `Date` `URL Suffix`
       - `Mylf 2019.01.01 1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
 
-# Search Levels and their capabilities
-There are 3 available levels, as listed below:
-+ **Level 1:** `SceneID Match`, `Date Match` and `Date Add`
-+ **Level 2:** `SceneID Search` and `Date Search`
-+ **Level 3:** `SceneID Only`
+# Search types and their capabilities
+There are 3 available search/matching methods, as listed below:
++ **Enhanced Search:** `Title` `Actor` `Date` `SceneID` (SceneID is only used to potentially enhance the search)
++ **Limited Search:** `Title` `Actor`
++ **Exact Match:** `SceneID` `Direct URL`
 
-## Level 1
-#### Multi-search available. This includes, searching by actor, by scene name, or by date (or all of the above).
+## Enhanced Search
+#### Multi-search available.
++ Available search methods
+  - **Title**
+  - **Actor**
+  - **Date**
+  - **SceneID** (where available)
+
 + **SceneID Match:** SceneID can be entered as a search term alongside other search terms (Title, Actor) to increase the possibility for a match, but cannot be entered as a standalone search term.
   - Example: Though Kink has a full-fledged title/actor search function, you cannot enter just a SceneID and find results. However, if a SceneID is entered alongside a title/actor, it will increase the possibility of locating the correct scene
 + **Date Match:** Date can be entered alongside other search terms to improve search results
-+ **Date Add:** If Date is entered as a search term and the site doesn't provide a publish date, the agent will strip the search date and attach it to the scene
 
-## Level 2
-#### Limited-search available. This is broken down into 2 sub-levels, which commonly cannot be used together:
-+ **SceneID Search:** Scene ID can be entered as the *ONLY* search term and the agent will locate results
-  - Example: Though EvilAngel has a full-fledged title/actor search function, you can also just search by Scene ID and find results
-+ **Date Search:** Date can be entered as the only search term and results will be found (not sure if this is implemented anywhere)
+## Limited Search
+#### Limited-search available.
++ Available search methods:
+  - **Title**
+  - **Actor**
 
-## Level 3
-#### Exact matching only.
-+ **SceneID Only:** Search relies solely on SceneID. You may add additional terms to your search (Title, Actor, Date), but if a SceneID is not entered you will not receive any results
+## Exact Match
+#### No search available.
++ **SceneID Only:** Matching relies solely on SceneID. You may add additional terms to your search (Title, Actor, Date), but if a SceneID is not entered you will not receive any results
+  - Title/Actor may be added after the SceneID, however this will only serve to improve the score of releavnt results.
   - Example: Babes/PropertySex/etc. The agent strips the SceneID from your search term and plugs it into a URL. I've implemented some code so that adding a title to your search term increases the "score" you see, without a SceneID your search will return no results
 + **Direct URL Match:** A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Scene Actor.
+  - Note: Nothing can be added after the URL as it will cause issues
