@@ -2,10 +2,10 @@
 
 Each search query will be comprised of *up to* 5 parts, depending on the supported *search type*:
 - `Site` - Either the shorthand abbreviation, or full site name.
-- `Date` - in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
+- `Date` - in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `Actor(s)`
 - `Scene Name` - The title/name of the scene.
-- `Scene ID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-levels-and-their-capabilities))
+- `Scene ID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `URL Suffix` - A string of characters at the end of a URL
 
 Depending on the capability of any one network/site, you can try a few combiations of the above.
@@ -14,18 +14,18 @@ Here are some examples, within each level:
 + **Enhanced Search** examples:
   - A full search, with all available details:
     - `SiteName` `19 06 15` `Jane Doe` `An Interesting Plot`
-  - A minimal search, with fewer details:
-    - `SiteName` `Jane Doe`
+  - A minimal search, with fewer details, but includes scene ID:
+    - `SiteName` `Jane Doe` `Scene ID`
   - Another minimal search, using the site shorthand:
     - `SN` `An Interesting Plot`
   
 + **Limited Search** examples:
-  - A search using site name and the scene date:
-    - `SiteName` `19 06 15`
-  - A search using site shorthand with date + scene ID:
-    - `SN` `19 06 15` `Scene ID`
-  - A **Level 2/3** search using site name and just an ID:
-    - `SiteName` `Scene ID`
+  - A search using both actor and scene title:
+    - `SiteName` `Jane Doe` `An Interesting Plot`
+  - A search using site name and an actor from the scene:
+    - `SiteName` `Jane Doe`
+  - A search using site shorthand with the scene title:
+    - `SN` `An Interesting Plot`
     
 + **Exact Match** examples:
   - An exact search using site name and ID:
@@ -40,7 +40,7 @@ Here are some examples, within each level:
 
 # Search types and their capabilities
 There are 3 available search/matching methods, as listed below:
-+ **Enhanced Search:** `Title` `Actor` `Date` `SceneID` (SceneID is only used to potentially enhance the search)
++ **Enhanced Search:** `Title` `Actor` `Date` `SceneID`
 + **Limited Search:** `Title` `Actor`
 + **Exact Match:** `SceneID` `Direct URL`
 
@@ -50,7 +50,7 @@ There are 3 available search/matching methods, as listed below:
   - **Title**
   - **Actor**
   - **Date**
-  - **SceneID** (where available)
+  - **SceneID** (where available, and is only used to potentially enhance the search)
 
 + **SceneID Match:** SceneID can be entered as a search term alongside other search terms (Title, Actor) to increase the possibility for a match, but cannot be entered as a standalone search term.
   - Example: Though Kink has a full-fledged title/actor search function, you cannot enter just a SceneID and find results. However, if a SceneID is entered alongside a title/actor, it will increase the possibility of locating the correct scene
