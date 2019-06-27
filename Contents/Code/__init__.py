@@ -894,6 +894,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 743:
                     results = PAsearchSites.siteGirlsOutWest.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Girls Rimming
+            ###############
+            if siteNum == 744:
+                if searchSiteID == 9999 or searchSiteID == 744:
+                    results = PAsearchSites.siteGirlsRimming.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1549,6 +1556,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 743:
             metadata = PAsearchSites.siteGirlsOutWest.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Girls Rimming                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 744:
+            metadata = PAsearchSites.siteGirlsRimming.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
