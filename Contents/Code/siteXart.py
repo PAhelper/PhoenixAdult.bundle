@@ -409,17 +409,18 @@ def update(metadata,siteID,movieGenres,movieActors):
     valid_names = list()
     metadata.posters.validate_keys(valid_names)
     metadata.art.validate_keys(valid_names)
+    thumbs = []
     try:
-        posters = detailsPageElements.xpath('//div[@class="gallery-item"]')[0]
-        poster = posters.xpath('.//img')[0].get('src')
+        for posterURL in detailsPageElements.xpath('//div[@class="gallery-item"]//img'):
+            thumbs.append((posterURL.get('src')).replace(" ", "_"))
     except:
-        pass
+        Log("No Thumbnails found")
     background = detailsPageElements.xpath('//img[contains(@src,"/videos")]')[0].get("src")
     metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
     try:
-        posterURL = poster[:-21] + "2.jpg"
+        posterURL = str((thumbs[0]))[:-5] + "2.jpg"
     except:
-        posterURL = background[:-21] + "2.jpg"
+        posterURL = background.replace("1.jpg", "2.jpg").replace("1-lrg.jpg", "2-lrg.jpg")
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = 1)
 
 
@@ -428,7 +429,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     art=[]
     match = 0
             
-    for site in ["XartFan.com", "HQSluts.com", "XartBeauties.com/galleries"]:
+    for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "XartBeauties.com/galleries"]:
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
         match = fanSite[2]
         if match is 1:	
@@ -445,26 +446,34 @@ def update(metadata,siteID,movieGenres,movieActors):
         except:
             pass
                         
-        j = 1
-                                                      
-        for posterUrl in art:
-            Log("Trying next Image")
-            Log(posterUrl)
-            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
-                try:
-                    img_file = urllib.urlopen(posterUrl)
-                    im = StringIO(img_file.read())
-                    resized_image = Image.open(im)
-                    width, height = resized_image.size
-                    #Add the image proxy items to the collection
-                    if width > 1 or height > width:
-                        # Item is a poster
-                        metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                    if width > 100 and width > height:
-                        # Item is an art item
+    #else:
+    #    art = thumbs
+    
+        try:
+            j = 1
+                                                          
+            for posterUrl in art:
+                Log("Trying next Image")
+                Log(posterUrl)
+                if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+                #Download image file for analysis
+                    try:
+                        img_file = urllib.urlopen(posterUrl)
+                        im = StringIO(img_file.read())
+                        resized_image = Image.open(im)
+                        width, height = resized_image.size
+                        #Add the image proxy items to the collection
+                        if width > 1 or height > width:
+                            # Item is a poster
+                            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                        if width > 100 and width > height:
+                            # Item is an art item
+                            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                        j = j + 1
+                    except:
+                        Log("there was an issue")
                         metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                    j = j + 1
-                except:
-                    Log("there was an issue")
+        except:
+            pass
+
     return metadata

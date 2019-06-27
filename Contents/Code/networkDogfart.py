@@ -1,53 +1,68 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     encodedTitle = encodedTitle.replace('%20a%20','%20')
-    i=0
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("resultat" + str(searchResults) )
-    for searchResult in searchResults.xpath('//a[@class="thumbnail clearfix"]'):
-        Log(str(searchResult.get('href')))
-        titleNoFormatting = searchResult.xpath('//div/h3[@class="scene-title"]')[i].text_content()
-        Log(titleNoFormatting)
-        curID = searchResult.get('href').replace("_","$").replace("/","_").split("?")[0]
-        Log(curID)
-        subSite = searchResult.xpath('//div/p[@class="help-block"]')[i].text_content()
-        Log("subsite: "+ subSite)
 
-        site = " [Dogfart"
-        if len(subSite) > 0 and subSite != "Dogfart":
-            site = site + " / " + subSite
-        site = site + "] "
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + site , score = score, lang = lang))
-        i = i + 1
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//a[@class="thumbnail clearfix"]'):
+        titleNoFormatting = searchResult.xpath('.//div/h3[@class="scene-title"]')[0].text_content()
+        curID = searchResult.get('href').replace("_","$").replace("/","_").split("?")[0]
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
+        fullSubSite = searchResult.xpath('.//div/p[@class="help-block"]')[0].text_content()
+        Log("Full subSite: "+ fullSubSite)
+        if 'BehindTheScenes' in fullSubSite and 'BTS' not in titleNoFormatting:
+            titleNoFormatting = titleNoFormatting + ' BTS'
+        subSite = fullSubSite.split('.com')[0]
+        Log("Subsite: " + subSite)
+        if subSite == PAsearchSites.getSearchSiteName(siteNum):
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        else:
+            score = 60 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [Dogfart/" + subSite + "] ", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Dogfart'
     temp = str(metadata.id).split("|")[0].replace('_','/').replace("$","_")
     Log(temp)
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     Log(url)
     detailsPageElements = HTML.ElementFromURL(url)
 
+    # Studio
+    metadata.studio = "Dogfart Network"
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a')[0].get("title")
+
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="description shorten"]')[0].text_content().strip()
+    summary = detailsPageElements.xpath('//div[@class="description shorten"]')[0].text_content().strip().replace('...read more','').replace('\n', ' ')
+    metadata.summary = summary
 
-    metadata.summary = paragraph.strip()
-    tagline = detailsPageElements.xpath('//h3 [@class="site-name"]')[0].text_content()
-    tagline = tagline.strip()
+    # Collections / Tagline
+    tagline = detailsPageElements.xpath('//h3 [@class="site-name"]')[0].text_content().strip()
     metadata.tagline = tagline
-
     metadata.collections.clear()
     collection = str(PAsearchSites.getSearchSiteName(siteID))
     metadata.collections.add(collection)
-    metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a')[0].get("title")
-    metadata.studio = "Dogfart Network"
+
+    # Release Date
+    try:
+        date = str(metadata.id).split("|")[2]
+        if len(date) > 0:
+            date_object = parse(date)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+            Log("Date from file")
+    except:
+        pass
 
     # Genres
     movieGenres.clearGenres()
@@ -58,18 +73,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
 
-
-    # Release Date
-    try:
-        date = " "
-        if len(date) > 0:
-            date = date[0].text_content().strip()
-            date_object = datetime.strptime(date, '%b %d, %Y')
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-
-    except:
-        pass
     # Actors
     metadata.roles.clear()
     actors = detailsPageElements.xpath('//h4[@class="more-scenes"]/a')

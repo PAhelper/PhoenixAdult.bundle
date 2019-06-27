@@ -42,8 +42,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.studio)
 
     # Date
-    date = str(metadata.id).split("|")[2].strip()
-    Log('date: ' + date)
+    date = str(metadata.id).split("|")[2]
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year

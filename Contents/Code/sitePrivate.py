@@ -34,10 +34,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     paragraph = detailsPageElements.xpath('//meta[@itemprop="description"]')[0].get('content')
     # paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n', '').replace('  ', '') + "\n\n"
     metadata.summary = paragraph
-    tagline = detailsPageElements.xpath('//span[@class="title-site"]')[0].text_content()
-    metadata.collections.clear()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    try:
+        tagline = detailsPageElements.xpath('//span[@class="title-site"]')[0].text_content()
+        metadata.collections.clear()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+    except:
+        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+        metadata.collections.clear()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
     # Genres

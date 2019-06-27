@@ -1,67 +1,26 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 
-def searchSwallowed(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
-    if len(searchResults.xpath('//div[@class="content-item exclusive"]')) == 0:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
-    if len(searchResults.xpath('//div[@class="content-item exclusive"]')) == 0:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-item exclusive"]'))))
-    for searchResult in searchResults.xpath('//div[@class="info-wrap"]'):
-        titleNoFormatting = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('./div/div/h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//time')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
-    return results
-
-def searchTrueAnal(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
-    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.upper())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
-    if len(searchResults.xpath('//div[@class="content-meta"]')) == 0:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower())
-        Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-meta"]'))))
+    searchString = encodedTitle.replace("%20", '-').lower()
+    Log("searchString: " + searchString)
+    if "/" not in searchString:
+        searchString = searchString.replace("-", "/", 1)
+        Log("searchString formatted")
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
-        titleNoFormatting = searchResult.xpath('./h3[@class="title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('./h3[@class="title"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        titleNoFormatting = searchResult.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
+        curID = (PAsearchSites.getSearchSearchURL(siteNum) + searchString).replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('//span[contains(@class,"date")]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
-    return results
-
-def searchNympho(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Matches found: " + str(len(searchResults.xpath('//div[@class="content-card-info"]'))))
-    for searchResult in searchResults.xpath('//div[@class="content-card-info"]'):
-        titleNoFormatting = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('./h4[@class="content-title-wrap"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="date hidden-xs"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id=curID + "|" + str(siteNum), name=titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score=score, lang=lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -135,7 +94,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

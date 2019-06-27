@@ -6,23 +6,22 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+    for searchResult in searchResults.xpath('//div[@class="c-scene-info"]'):
+        titleNoFormatting = searchResult.xpath('.//a[@class="c-scene-info__title"]')[0].text_content().strip()
+        curID = searchResult.xpath('.//a[@class="c-scene-info__title"]')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//span[@class="c-scene-info__date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/"+subSite+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TransAngels" + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -30,13 +29,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Studio Name'
+    metadata.studio = 'TransAngels'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="c-video__details__title"]')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="summary"]/p')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//div[@class="c-video-info__descsription l-small-spacer"]/p')[0].text_content().strip()
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -44,22 +43,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Genres
-    genres = detailsPageElements.xpath('//span[@class="update_tags"]/a')
+    genres = detailsPageElements.xpath('//li[@class="c-tags-slider__col"]/a')
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Genre")
+    movieGenres.addGenre("Transsexual")
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[@class="c-video__details__date"]')[0].text_content().strip()
     if len(date) > 0:
         date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('//span[@class="update_models"]/a')
+    actors = detailsPageElements.xpath('//div[@class="c-video__details__models"]/a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -68,51 +67,27 @@ def update(metadata,siteID,movieGenres,movieActors):
         if len(actors) > 4:
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb"]')[0].get("src")
-            if 'http' not in actorPhotoURL:
-            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            actorName = str(actorLink.text_content().replace(',','').strip())
+            actorPhotoURL = ''
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Director
-    director = metadata.directors.new()
-    try:
-        directors = detailsPageElements.xpath('//p[@class="director"]/a')
-        for dirname in directors:
-            director.name = dirname.text_content().strip()
-    except:
-        pass
 
     ### Posters and artwork ###
 
     # Video trailer background image
     try:
-        twitterBG = detailsPageElements.xpath('//meta[@name="twitter:image"]')[0].get('content')
+        twitterBG = detailsPageElements.xpath('//img[@class="c-video__poster-img"]')[0].get('src')
         art.append(twitterBG)
     except:
         pass
 
     # Photos
-    photos = detailsPageElements.xpath('//img[contains(@class, "update_thumbs")]')
+    photos = detailsPageElements.xpath('//img[contains(@class, "c-image-info__img js-image-load-check")]')
     if len(photos) > 0:
         for photoLink in photos:
-            photo = PAsearchSites.getSearchBaseURL(siteID) + photoLink.get('poster')
+            photo = photoLink.get('src')
             art.append(photo)
-
-    # Scene photos page
-    try:
-        photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="photo_page"]')[0].get('href')
-        photoPage = HTML.ElementFromURL(photoPageUrl)
-        unlockedPhotos = photoPage.xpath('//a[@class="imgLink"]')
-        for unlockedPhoto in unlockedPhotos:
-            if 'http' not in unlockedPhoto.get('href'):
-                art.append(PAsearchSites.getSearchBaseURL(siteID) + unlockedPhoto.get('href'))
-            else:
-                art.append(unlockedPhoto.get('href'))
-    except:
-        pass
 
     j = 1
     Log("Artwork found: " + str(len(art)))

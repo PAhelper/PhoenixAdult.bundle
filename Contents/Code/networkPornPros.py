@@ -9,8 +9,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     try:
+        Log('This is repeating')
         searchResults = HTML.ElementFromURL(url)
     except:
+        Log('That is repeating')
         response = urllib.urlopen(url)
         htmlstring = response.read()
         searchResults = fromstring(htmlstring)
@@ -19,11 +21,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     titleNoFormatting = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//h1')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
     releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content().strip()).strftime('%Y-%m-%d')
-
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
-    return results
 
+    return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
@@ -74,6 +75,18 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("actorPhoto: " + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
         titleActors = titleActors[:-3]
+
+    # Manually Add Actors
+    # Add Actor Based on Title
+    if "Poke Her In The Front" == metadata.title:
+        actorName = "Sara Luv"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+        actorName = "Dillion Harper"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+
+
 
     # Genres
     movieGenres.clearGenres()

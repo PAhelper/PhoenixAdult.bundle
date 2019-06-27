@@ -77,6 +77,11 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("actorPhotoURL: " + str(actorPhotoURL))
             movieActors.addActor(actorName,actorPhotoURL)
 
+    #Manually Add Actors Based on Scene Title
+    if metadata.title == "Kate England Incites a Backroom Orgy in Las Vegas Sex Trip Part 2":
+        movieActors.addActor('Marilyn Moore','')
+        movieActors.addActor('Prince Yahshua','')
+
     # Posters
     art.append(detailsPageElements.xpath('//img[contains(@class,"videos-preload")]')[0].get('src0_2x'))
 

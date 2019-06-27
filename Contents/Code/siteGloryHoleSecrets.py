@@ -5,8 +5,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL('http://www.gloryholesecrets.com/tour/search.php?query=' + encodedTitle)
     for searchResult in searchResults.xpath('//li[@class="featured-video morestdimage grid_4 mb"]'):
         detailsPage = searchResult.xpath('./a')[0].get('href')
-        titleNoFormatting = searchResult.xpath('./div[@class="details"]//h5[2]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('./div[@class="details"]//text()')[8].strip()).strftime('%Y-%m-%d')
+        titleNoFormatting = searchResult.xpath('./div[@class="details"]//h5')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('./div[@class="details"]/p/strong')[0].text_content().strip()).strftime('%Y-%m-%d')
         curID = detailsPage.replace('/','_').replace('?','!')
         Log(curID + "|" + str(siteNum))
         if searchDate:
@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [GloryHoleSecrets] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [GloryHoleSecrets] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -32,7 +32,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     tagline = tagline.strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h2[@class="H_underline"]')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//h2[@class="H_underline"]')[0].text_content().strip()
 
     # Genres
     movieGenres.clearGenres()
@@ -52,14 +52,19 @@ def update(metadata,siteID,movieGenres,movieActors):
         date_object = datetime.strptime(date[12:], '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+    else:
+        date = str(metadata.id).split("|")[2]
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//h5[@class="featuring_model"]//a')
+    actors = detailsPageElements.xpath('//div[@class="video_details mb mt0"]/h5[1]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
-            sceneImg = detailsPageElements.xpath('//div[@class="grid_10 alpha"]/a/img')[0].get('src')
+            sceneImg = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
             actorFullName = sceneImg.split('/')[4]
             actorFirstName = actorName.split(' ')[0]
             if actorFirstName.lower() == actorFullName[:len(actorFirstName)].lower() and len(actorFullName) > len(actorName):

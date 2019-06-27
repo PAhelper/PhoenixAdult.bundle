@@ -2,89 +2,241 @@ import PAsearchSites
 import PAgenres
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
+
+    networkscene = True
+    networkscenepages = True
+    networkdvd = True
+    network_sep_scene_prev = ""
+    network_sep_scene = ""
+    network_sep_scene_pages_prev = ""
+    network_sep_scene_pages = "/"
+    network_sep_scene_pages_next = ""
+    network_sep_dvd_prev = ""
+    network_sep_dvd = "/1/dvd"
+
     if searchSiteID != 9999:
         siteNum = searchSiteID
     if siteNum == 278 or (siteNum >= 285 and siteNum <= 287):
         network = 'XEmpire'
+        network_sep_scene_prev = "scene/"
+        network_sep_scene_pages_prev = "scene/"
+        network_sep_dvd_prev = "dvd/"
+        network_sep_dvd = "/1"
     elif siteNum == 329 or (siteNum >= 351 and siteNum <= 354):
         network = 'Blowpass'
-    elif siteNum == 331 or (siteNum >= 355 and siteNum <= 360) or siteNum == 691:
+        networkdvd = False
+    elif siteNum == 331 or (siteNum >= 355 and siteNum <= 360) or siteNum == 743:
         network = 'Fantasy Massage'
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
     elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 364):
         network = 'Mile High Network'
-    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466:
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
+        network_sep_dvd = "/dvd"
+    elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466 or siteNum == 692:
         network = '21Sextury'
+        networkdvd = False
     elif siteNum == 183 or (siteNum >= 373 and siteNum <= 374):
         network = '21Naturals'
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
     elif siteNum == 53 or (siteNum >= 375 and siteNum <= 379):
         network = 'Girlsway'
+        networkdvd = False
     elif siteNum >= 383 and siteNum <= 386:
         network = 'Fame Digital'
+        if siteNum == 383:
+            networkdvd = False
+            network_sep_scene = "/scene"
+            network_sep_scene_pages = "/scene/"
+            network_sep_dvd = "/dvd"
+        if siteNum == 386:
+            networkscene = False
+            networkscenepages = False
+            networkdvd = False
     elif siteNum >= 387 and siteNum <= 392:
         network = 'Open Life Network'
+        networkdvd = False
     elif siteNum == 281:
         network = 'Pure Taboo'
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
     elif siteNum == 380:
         network = 'Girlfriends Films'
+        network_sep_scene = "?query=&pscenes=0&tab=scenes"
+        network_sep_scene_pages = "?query=&pscenes="
+        network_sep_scene_pages_next = "&tab=scenes"
+        network_sep_dvd = "&tab=movies"
     elif siteNum == 381:
         network = 'Burning Angel'
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
     elif siteNum == 277:
         network = 'Evil Angel'
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
+        network_sep_dvd = "/dvd"
     elif siteNum == 382:
         network = 'Pretty Dirty'
-    elif siteNum >= 460 and siteNum <= 466:
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
+    elif siteNum >= 460 and siteNum <= 465:
         network = '21Sextreme'
+        networkdvd = False
+        network_sep_scene = "/scene"
+        network_sep_scene_pages = "/scene/"
 
     if network == PAsearchSites.getSearchSiteName(siteNum):
         network = ''
     else:
         network = network + "/"
 
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
-        titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
-        curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
-        try:
-            releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        except:
+    if networkscene:
+        # Result to check
+        resultfirst = []
+        # Result next page
+        resultsecond = []
+
+        #searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_prev + encodedTitle + network_sep_scene)
+        for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
+            titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
+            titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
+            titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
+
+            curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
+            resultfirst.append(curID)
+
             try:
-                detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href'))
-                releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+                actorLink = searchResult.xpath('.//div[@class="tlcActors"]/a')
+                actor = ' - '
+                if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
+                    for actorText in actorLink:
+                        actorName = str(actorText.text_content().strip())
+                        if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                            actor = actor + actorName + ", "
+                else:
+                    actor = actor + str(actorLink[0].text_content().strip())
+                actor = actor.strip()
+                actor = actor.strip(",")
+                actor = " " + actor
             except:
-                releaseDate = ''
-        if searchDate and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                actor = ''
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
-
-    try:
-        dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/dvd")
-        for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
-            titleNoFormatting = dvdResult.xpath('.//div[@class="tlcTitle"]/a')[0].get('title').strip()
-            curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
             try:
-                releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
+                releaseDate = parse(searchResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             except:
                 try:
-                    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + dvdResult.xpath('.//a[1]')[0].get('href'))
-                    releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip())
+                    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href'))
+                    releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
                 except:
                     releaseDate = ''
-            
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if searchDate and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+PAsearchSites.getSearchSiteName(siteNum)+"]", score = score, lang = lang))
-    except:
-        pass
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+
+        if networkscenepages:
+            # Other pages
+            i = 2
+            while i < 90:
+                pagenum = i
+                if siteNum == 380:
+                    pagenum = i - 1
+                searchResultsSec = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_pages_prev + encodedTitle + network_sep_scene_pages + str(pagenum) + network_sep_scene_pages_next)
+                i += 1
+                searchResultSec = searchResultsSec.xpath('//div[@class="tlcDetails"]')
+                if searchResultSec:
+                    titleText = searchResultSec[0].xpath('.//a[1]')[0]
+                    resultSEARCH = titleText.get('href').replace('/','_').replace('?','!')
+
+                    for resultCheck in resultfirst:
+                        if resultCheck == resultSEARCH:
+                            i = 100
+                            break
+
+                    for searchResultSec in searchResultsSec.xpath('//div[@class="tlcDetails"]'):
+                        titleText = searchResultSec.xpath('.//a[1]')[0]
+                        titleNoFormatting = titleText.text_content().strip()
+                        titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
+                        titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
+
+                        curID = titleText.get('href').replace('/','_').replace('?','!')
+                        resultsecond.append(curID)
+
+                        try:
+                            actorLink = searchResultSec.xpath('.//div[@class="tlcActors"]/a')
+                            actor = ' - '
+                            if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
+                                for actorText in actorLink:
+                                    actorName = str(actorText.text_content().strip())
+                                    if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                                        actor = actor + actorName + ", "
+                            else:
+                                actor = actor + str(actorLink[0].text_content().strip())
+                            actor = actor.strip()
+                            actor = actor.strip(",")
+                            actor = " " + actor
+                        except:
+                            actor = ''
+
+                        try:
+                            releaseDate = parse(searchResultSec.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+                        except:
+                            try:
+                                detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResultSec.xpath('.//a[1]')[0].get('href'))
+                                releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+                            except:
+                                releaseDate = ''
+
+                        if searchDate and releaseDate:
+                            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                        else:
+                            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+                        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + actor + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+
+                    resultfirst = resultsecond
+                    resultsecond = []
+                else:
+                    i = 100
+
+    if networkdvd:
+        try:
+            dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_dvd_prev + encodedTitle + network_sep_dvd)
+            for dvdResult in dvdResults.xpath('//div[contains(@class,"tlcItem playlistable_dvds")] | //div[@class="tlcDetails"]'):
+                titleNoFormatting = dvdResult.xpath('.//div[@class="tlcTitle"]/a')[0].get('title').strip()
+                curID = dvdResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
+                try:
+                    releaseDate = parse(dvdResult.xpath('.//div[@class="tlcSpecs"]/span[@class="tlcSpecsDate"]/span[@class="tlcDetailsValue"]')[0].text_content().strip())
+                except:
+                    try:
+                        detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + dvdResult.xpath('.//a[1]')[0].get('href'))
+                        releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip())
+                    except:
+                        releaseDate = ''
+
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ("+releaseDate.strftime('%Y')+") - Full Movie ["+PAsearchSites.getSearchSiteName(siteNum)+"]", score = score, lang = lang))
+        except:
+            pass
+
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata.directors.clear()
     director = metadata.directors.new()
-    
+
     if siteID == 278 or (siteID >= 285 and siteID <= 287):
         metadata.studio = 'XEmpire'
         director.name = 'Mason'
@@ -94,7 +246,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Fantasy Massage'
     elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
         metadata.studio = 'Mile High Network'
-    elif (siteID >= 365 and siteID <= 372) or siteID == 466:
+    elif (siteID >= 365 and siteID <= 372) or siteID == 466 or siteID == 690:
         metadata.studio = '21Sextury'
     elif siteID == 183 or (siteID >= 373 and siteID <= 374):
         metadata.studio = '21Naturals'
@@ -127,7 +279,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         paragraph = detailsPageElements.xpath('//meta[@name="twitter:description"]')[0].get('content').strip()
     except:
         paragraph = ""
-    
+
     if paragraph == "":
         try:
             paragraph = detailsPageElements.xpath('//div[@class="sceneDesc bioToRight showMore"]')[0].text_content().strip()
@@ -151,43 +303,31 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Title
+    # Title DVD
     try:
         dvdTitle = detailsPageElements.xpath('//a[contains(@class,"dvdLink")][1]')[0].get('title').strip()
         metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
     except:
-        dvdTitle = 'This is some damn nonsense that should never match the scene title'
-
-    try:
-        title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
-    except:
         try:
-            title = detailsPageElements.xpath('//h1 | //h3[@class="dvdTitle"]')[0].text_content().strip()
+            dvdTitle = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+            dvdTitle = dvdTitle.replace("BONUS-", "").replace("BONUS - ", "")
+            dvdTitle = dvdTitle.replace("BONUS", "")
+            dvdTitle = dvdTitle.replace("BTS-", "").replace("BTS - ", "")
+            dvdTitle = dvdTitle.replace("BTS", "")
+            metadata.collections.add(dvdTitle.replace('#0','').replace('#',''))
         except:
-            try:
-                dataLayer = detailsPageElements.xpath('//script[contains(text(),"dataLayer")]')[0].text_content()
-                alpha = dataLayer.find('"sceneTitle"')+14
-                omega = dataLayer.find('"',alpha)
-                title = dataLayer[alpha:omega]
-            except:
-                title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
+            dvdTitle = "This is some damn nonsense that should never match the scene title"
 
-    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
-        pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
-        alpha = pageTitle.find('Scene')+6
-        omega = pageTitle.find(' ',alpha)
-        title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
-
-    metadata.title = title
 
     # Director
     try:
         directors = detailsPageElements.xpath('//div[@class="sceneCol sceneColDirectors"]//a | //ul[@class="directedBy"]/li/a')
         Log("Directors found: "+str(len(directors)))
-        for dirname in directors:
-            Log("Director: "+str(dirname.text_content().strip()))
-            #metadata.directors.add(director.text_content().strip())
-            director.name = dirname.text_content().strip()
+        if len(directors) > 0:
+            for dirname in directors:
+                Log("Director: "+str(dirname.text_content().strip()))
+                #metadata.directors.add(director.text_content().strip())
+                director.name = dirname.text_content().strip()
     except:
         pass
 
@@ -202,13 +342,30 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Release Date
     try:
         date = detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().replace('|','').strip()
+        if len(date) > 0:
+            date_object = parse(date)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
     except:
-        date = detailsPageElements.xpath('//*[@class="updatedOn"]')[0].text_content().strip()
-        date = date[8:].strip()
-    if len(date) > 0:
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+        try:
+            date = detailsPageElements.xpath('//*[@class="updatedOn"]')[0].text_content().strip()
+            date = date[8:].strip()
+            if len(date) > 0:
+                date_object = parse(date)
+                metadata.originally_available_at = date_object
+                metadata.year = metadata.originally_available_at.year
+        except:
+            try:
+                datePublished = detailsPageElements.xpath('//script[contains(text(),"datePublished")]')[0].text_content()
+                alpha = datePublished.find('"datePublished"')+17
+                omega = datePublished.find('"',alpha)
+                date = datePublished[alpha:omega]
+                if len(date) > 0:
+                    date_object = parse(date)
+                    metadata.originally_available_at = date_object
+                    metadata.year = metadata.originally_available_at.year
+            except:
+                pass
 
     # Actors
     movieActors.clearActors()
@@ -262,6 +419,46 @@ def update(metadata,siteID,movieGenres,movieActors):
         except:
             pass
 
+    # Title
+    try:
+        title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
+    except:
+        try:
+            # Title DVD
+            title = detailsPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+        except:
+            try:
+                # Title Scene
+                title = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+            except:
+                try:
+                    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+                except:
+                    title = "I couldn't find the title, please report this on github: https://github.com/PAhelper/PhoenixAdult.bundle/issues"
+
+
+    if "Scene #" in detailsPageElements.xpath('//title')[0].text_content().strip() and "Scene #" not in title:
+        pageTitle = detailsPageElements.xpath('//title')[0].text_content().strip()
+        alpha = pageTitle.find('Scene')+6
+        omega = pageTitle.find(' ',alpha)
+        title = (title + " - Scene " + pageTitle[alpha:omega].strip()).replace('#0','').replace('#','')
+
+    if "BONUS" in title or "BTS" in title:
+        if len(actors) > 0:
+            actorTitle = ' - '
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
+                    actorTitle = actorTitle + actorName + ", "
+
+            title = title + actorTitle
+            title = title.strip()
+            title = title.strip(",")
+
+    title = title.replace("BONUS-", "BONUS - ").replace("BTS-", "BTS - ")
+
+    metadata.title = title
+
     #Posters
 
     # Video trailer background image
@@ -285,11 +482,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         art.append(sceneImg)
     except:
         pass
-    
+
     # Scene photos page
     try:
         photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href').replace("https:","http:")
         photoPage = HTML.ElementFromURL(photoPageUrl)
+        unlockedPhotoImg = photoPage.xpath('//div[@class="previewImage"]/img')[0].get('src').replace("https:","http:")
+        art.append(unlockedPhotoImg)
         unlockedPhotos = photoPage.xpath('//a[@class="imgLink"] | //a[@class="imgLink pgUnlocked"]')
         for unlockedPhoto in unlockedPhotos:
             art.append(unlockedPhoto.get('href').replace("https:","http:"))
@@ -314,7 +513,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 art.append(sceneImg.get('src').replace("https:","http:"))
         except:
             pass
-        
+
         try:
             sceneImgs = detailsPageElements.xpath('//img[@class="img lazy"]')
             for sceneImg in sceneImgs:
@@ -323,7 +522,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             pass
     j = 1
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
