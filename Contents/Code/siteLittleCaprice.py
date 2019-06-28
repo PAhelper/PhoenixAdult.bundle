@@ -42,15 +42,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Genres
-    # no Genres aviable
-    #genres = detailsPageElements.xpath('//span[@class="update_tags"]/a')
-    #if len(genres) > 0:
-    #    for genreLink in genres:
-    #        genreName = genreLink.text_content().strip().lower()
-    #        movieGenres.addGenre(genreName)
-    #movieGenres.addGenre("Genre")
-
     # Release Date
     date = detailsPageElements.xpath('//div[contains(@class,"et_pb_text_align_left")]/ul/li[contains(.,"Date")]')[0].text_content().strip().split(": ")[1]
     if len(date) > 0:
@@ -75,16 +66,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             if 'http' not in actorPhotoURL:
                 actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
-
-    # Director
-    # Director not aviable
-    #director = metadata.directors.new()
-    #try:
-    #    directors = detailsPageElements.xpath('//p[@class="director"]/a')
-    #    for dirname in directors:
-    #        director.name = dirname.text_content().strip()
-    #except:
-    #    pass
 
     ### Posters and artwork ###
 

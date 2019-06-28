@@ -874,17 +874,24 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteTransAngels.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             
             ###############
-            ## LittleCaprice
+            ## Straplezz
             ###############
             if siteNum == 741:
                 if searchSiteID == 9999 or searchSiteID == 741:
+                    results = PAsearchSites.siteStraplezz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            
+            ###############
+            ## LittleCaprice
+            ###############
+            if siteNum == 742:
+                if searchSiteID == 9999 or searchSiteID == 742:
                     results = PAsearchSites.siteLittleCaprice.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
     	    ###############
             ## WowGirls
             ###############
-            if siteNum == 742:
-                if searchSiteID == 9999 or searchSiteID == 742:
+            if siteNum == 743:
+                if searchSiteID == 9999 or searchSiteID == 743:
                     results = PAsearchSites.siteWowGirls.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
@@ -1521,10 +1528,18 @@ class PhoenixAdultAgent(Agent.Movies):
         
         ##############################################################
         ##                                                          ##
-        ##  LittleCaprice                                           ##
+        ##  Straplezz                                               ##
         ##                                                          ##
         ##############################################################
         if siteID == 741:
+            metadata = PAsearchSites.siteStraplezz.update(metadata,siteID,movieGenres,movieActors)
+        
+        ##############################################################
+        ##                                                          ##
+        ##  LittleCaprice                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 742:
             metadata = PAsearchSites.siteLittleCaprice.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1532,7 +1547,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  WowGirls                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 742:
+        if siteID == 743:
             metadata = PAsearchSites.siteWowGirls.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
