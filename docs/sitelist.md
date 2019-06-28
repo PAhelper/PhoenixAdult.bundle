@@ -159,7 +159,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Czech Cabins
   - Czech Couples
   - Czech Dungeon
- - Czech Estrogenolit
+  - Czech Estrogenolit
   - Czech Experiment
   - Czech Fantasy
   - Czech First
