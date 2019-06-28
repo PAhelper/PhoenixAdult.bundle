@@ -47,19 +47,19 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actor in actors:
             actorName = actor
-            posterUrl = detailsPageElements.xpath('//img[@class="img-fluid scene-trailer"]')[0].get("src")
-            actorPhotoURL = posterUrl.replace('trailer_tour',posterUrl.split('/')[8])
-            Log("posterUrl: " + posterUrl)
-            Log("actorPhoto: " + actorPhotoURL)
+            try:
+                posterUrl = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster")
+                actorPhotoURL = posterUrl.replace('trailer_tour', posterUrl.split('/')[8])
+            except:
+                actorPhotoURL = ''
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
     try:
-        art.append(detailsPageElements.xpath('//img[@class="img-fluid scene-trailer"]')[0].get("src"))
+        art.append(detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster"))
     except:
-        pass
+        art.append(detailsPageElements.xpath('//img[@class="img-fluid scene-trailer"]')[0].get("src"))
 
-    
     #Extra Posters
     import random
     
@@ -71,8 +71,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.summary = summary.strip()   
                     
     if match is 1 and len(art) >= 10 or match is 2 and len(art) >= 10:
-        # Return, first, last and randóm selection of 4 more images
-        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
+        # Return, first, last and random selection of 4 more images
+        # If you want more or less posters edit the value in random.sample below or refresh metadata to get a different sample.
         sample = [art[0], art[-1]] + random.sample(art, 4)     
         art = sample
         Log("Selecting first, last and random 4 images from set")
