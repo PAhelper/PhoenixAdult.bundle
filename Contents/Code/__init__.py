@@ -901,6 +901,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 744:
                     results = PAsearchSites.siteGirlsRimming.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Gangbang Creampie
+            ###############
+            if siteNum == 745:
+                if searchSiteID == 9999 or searchSiteID == 745:
+                    results = PAsearchSites.siteGangbangCreampie.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1564,6 +1571,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 744:
             metadata = PAsearchSites.siteGirlsRimming.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Gangbang Creampie                                       ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 745:
+            metadata = PAsearchSites.siteGangbangCreampie.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
