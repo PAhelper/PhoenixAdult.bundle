@@ -6,7 +6,7 @@ Each search query will be comprised of *up to* 5 parts, depending on the support
 - `Actor(s)`
 - `Title` - The title/name of the scene.
 - `SceneID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
-- `Direct URL` - A string of characters at the end of a URL
+- `Direct URL` - A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Actor.
 
 # Search types and their capabilities
 There are 3 available search/matching methods, as listed below:
@@ -16,11 +16,13 @@ There are 3 available search/matching methods, as listed below:
 
 ## Enhanced Search
 #### Multi-search available.
-+ Available search methods
++ **Available search methods**
   - **Title**
-  - **Actor**
+  - **Actor(s)**
++ **Available match methods**
+*These can be used in conjunction with available search methods and will increase the possibility of locating the correct scene. However, they cannot be used as standalone search terms. At least one of these can be utilized, depending on the site.*
   - **Date**
-  - **SceneID** (where available, and is only used to potentially enhance the search)
+  - **SceneID** 
 
 + **SceneID Match:** SceneID can be entered as a search term alongside other search terms (Title, Actor) to increase the possibility for a match, but cannot be entered as a standalone search term.
   - Example: Though Kink has a full-fledged title/actor search function, you cannot enter just a SceneID and find results. However, if a SceneID is entered alongside a title/actor, it will increase the possibility of locating the correct scene
@@ -34,11 +36,13 @@ There are 3 available search/matching methods, as listed below:
 
 ## Exact Match
 #### No search available.
-+ **SceneID Only:** Matching relies solely on SceneID. You may add additional terms to your search (Title, Actor, Date), but if a SceneID is not entered you will not receive any results
-  - Title/Actor may be added after the SceneID, however this will only serve to improve the score of releavnt results.
-  - Example: Babes/PropertySex/etc. The agent strips the SceneID from your search term and plugs it into a URL. I've implemented some code so that adding a title to your search term increases the "score" you see, without a SceneID your search will return no results
-+ **Direct URL Match:** A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Scene Actor.
-  - Note: Nothing can be added after the URL as it will cause issues
+*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In some cases, you may add additional terms to your search. However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
++ **SceneID**
+  - Can add the the Date (before the SceneID)
+  - Can typically add a Title/Actor (after the SceneID).
++ **Direct URL**
+  - Can add the the Date (before the URL)
+  - Adding any terms, such as Title/Actors, after the URL will cause issues with matching.
 
 # Search Examples
 Depending on the capability of any one network/site, you can try a few combiations of the above.
@@ -46,9 +50,9 @@ Depending on the capability of any one network/site, you can try a few combiatio
 Here are some examples for each type of search:
 + **Enhanced Search** examples:
   - A full search, with all available details:
-    - `SiteName` `YY-MM-DD` `Jane Doe` `An Interesting Plot`
+    - `SiteName` `YY-MM-DD` `SceneID` `Jane Doe` `An Interesting Plot`
   - A minimal search, with fewer details, but includes SceneID:
-    - `SiteName` `Jane Doe` `SceneID`
+    - `SiteName` `SceneID` `Jane Doe`
   - A basic search with the most common details:
     - `SiteName` `Jane Doe` `An Interesting Plot`
   - Another minimal search, using the site shorthand:
@@ -71,4 +75,4 @@ Here are some examples for each type of search:
     - `SiteName` `Direct URL`
       - `PornPros` `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands))
     - `SiteName` `YY-MM-DD` `Direct URL`
-      - `Mylf 2019.01.01 1809` `manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
+      - `Mylf` `2019.01.01` `1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
