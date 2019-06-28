@@ -122,34 +122,34 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - OnlyTeenBlowjobs
   - Throated
 + #### Brazzers Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
--   Asses In Public
--   Baby Got Boobs
--   Big Butts like it big
--   Big Tits at School
--   Big Tits at Work
--   Big Tits in Sports
--   Big Tits in Uniform
--   Big Wet Butts
--   Busty and Real
--   Busty Z
--   Butts and Blacks
--   CFNM Clothed Female Male Nude
--   Day With A Porn Star
--   Dirty Masseur
--   Doctor Adventures
--   Exxtra
--   Hot and Mean
--   Hot Chicks Big Asses
--   Milfs Like It Big
--   Mommy Got Boobs
--   Moms in Control
--   Pornstars Like It Big
--   Racks and Blacks
--   Real Wife Stories
--   Shes Gonna Squirt
--   Teens Like It Big
--   Teens Like It Black
--   ZZ Series
+  - Asses In Public
+  - Baby Got Boobs
+  - Big Butts like it big
+  - Big Tits at School
+  - Big Tits at Work
+  - Big Tits in Sports
+  - Big Tits in Uniform
+  - Big Wet Butts
+  - Busty and Real
+  - Busty Z
+  - Butts and Blacks
+  - CFNM Clothed Female Male Nude
+  - Day With A Porn Star
+  - Dirty Masseur
+  - Doctor Adventures
+  - Exxtra
+  - Hot and Mean
+  - Hot Chicks Big Asses
+  - Milfs Like It Big
+  - Mommy Got Boobs
+  - Moms in Control
+  - Pornstars Like It Big
+  - Racks and Blacks
+  - Real Wife Stories
+  - Shes Gonna Squirt
+  - Teens Like It Big
+  - Teens Like It Black
+  - ZZ Series
 + #### Bratty Sis | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
@@ -372,64 +372,64 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Lone Milf
   - Full Of JOI
 + #### Naughty America Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
--   2 Chicks Same Time
--   American Daydreams
--   Anal College
--   Asian 1 on 1
--   Ass Masterpiece
--   Big Cock Bully
--   Diary of a Milf
--   Diary of a Nanny
--   Dirty Wives Club
--   Fast Times
--   Housewife 1 on 1
--   I have a Wife
--   LA Sluts
--   Latin Adultery
--   Latina Stepmom
--   Lesbian Girl on Girl
--   Live Gym Cam
--   Live Naughty Milf
--   Live Naughty Nurse
--   Live Naughty Secretary
--   Live Naughty Student
--   Live Naughty Teacher
--   Live Party Girl
--   Milf Sugar Babes Classic
--   My Dads Hot Girlfriend
--   My Daughters Hot Friend
--   My First Sex Teacher
--   My Friends Hot Girl
--   My Friends Hot Mom
--   My Girlfriends Busty Friend
--   My Girl Loves Anal
--   My Naughty Latin Maid
--   My Naughty Massage
--   My Sisters Hot Friend
--   My Wife is My Pornstar
--   My Wifes Hot Friend
--   Naughty America
--   Naughty Athletics
--   Naughty Bookworms
--   Naughty Country Girls
--   Naughty Flipside
--   Naughty Office
--   Naughty Rich Girls
--   Naughty Weddings
--   Neighbor Affair
--   Open Family
--   Perfect Fucking Strangers Classic
--   Seduced By A Cougar
--   Sleazy Stepdad
--   Slut Stepmom
--   Slut Stepsister
--   SoCal Coeds
--   Teens Love Cream
--   The Passenger
--   Tonights Girlfriend Class
--   Watch Your Mom
--   Watch Your Wife
--   Wives on Vacation
+  - 2 Chicks Same Time
+  - American Daydreams
+  - Anal College
+  - Asian 1 on 1
+  - Ass Masterpiece
+  - Big Cock Bully
+  - Diary of a Milf
+  - Diary of a Nanny
+  - Dirty Wives Club
+  - Fast Times
+  - Housewife 1 on 1
+  - I have a Wife
+  - LA Sluts
+  - Latin Adultery
+  - Latina Stepmom
+  - Lesbian Girl on Girl
+  - Live Gym Cam
+  - Live Naughty Milf
+  - Live Naughty Nurse
+  - Live Naughty Secretary
+  - Live Naughty Student
+  - Live Naughty Teacher
+  - Live Party Girl
+  - Milf Sugar Babes Classic
+  - My Dads Hot Girlfriend
+  - My Daughters Hot Friend
+  - My First Sex Teacher
+  - My Friends Hot Girl
+  - My Friends Hot Mom
+  - My Girlfriends Busty Friend
+  - My Girl Loves Anal
+  - My Naughty Latin Maid
+  - My Naughty Massage
+  - My Sisters Hot Friend
+  - My Wife is My Pornstar
+  - My Wifes Hot Friend
+  - Naughty America
+  - Naughty Athletics
+  - Naughty Bookworms
+  - Naughty Country Girls
+  - Naughty Flipside
+  - Naughty Office
+  - Naughty Rich Girls
+  - Naughty Weddings
+  - Neighbor Affair
+  - Open Family
+  - Perfect Fucking Strangers Classic
+  - Seduced By A Cougar
+  - Sleazy Stepdad
+  - Slut Stepmom
+  - Slut Stepsister
+  - SoCal Coeds
+  - Teens Love Cream
+  - The Passenger
+  - Tonights Girlfriend Class
+  - Watch Your Mom
+  - Watch Your Wife
+  - Wives on Vacation
 + #### NewSensations *Actress Search *DVD Search (exact spelling)
 + #### NF Busty *shoot ID (NFBusty - id) *Date search
 + #### Nubiles.net | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -468,50 +468,50 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - TamedTeens
 + #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Porndoe Premium Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
--   A Girl Knows
--   Badtime Stories
--   Bitches Abroad
--   Bums Besuch
--   Bums Buero
--   BumsBus
--   Carne Del Mercado
--   Casting Alla Italiana
--   Casting Francais
--   Chicas Loca
--   Crowd Bondage
--   Deutchland Report
--   Doe Projects
--   Exposed Casting
--   Fucked In Traffic
--   Hausfrau Ficken
--   Her Big Ass
--   Her Limit
--   Kinky Inlaws
--   La Cochonne
--   La Novice
--   Las Folladoras
--   Los Consoladores
--   My Naughty Album
--   Narcos X
--   Operacion Limpieza
--   PinUp Sex
--   Porndoepedia
--   Porndoe Premium
--   Porno Academie
--   Quest for Orgasm
--   Reife Swinger
--   Relaxxxed
--   Scam Angels
--   Scambisti Maturi
--   Special Feet Force
--   STG
--   The White Boxxx
--   Transbella
--   Trans Taboo
--   Tu Venganza
--   Xchimera
--   XXX Omas
--   XXXShades
+  - A Girl Knows
+  - Badtime Stories
+  - Bitches Abroad
+  - Bums Besuch
+  - Bums Buero
+  - BumsBus
+  - Carne Del Mercado
+  - Casting Alla Italiana
+  - Casting Francais
+  - Chicas Loca
+  - Crowd Bondage
+  - Deutchland Report
+  - Doe Projects
+  - Exposed Casting
+  - Fucked In Traffic
+  - Hausfrau Ficken
+  - Her Big Ass
+  - Her Limit
+  - Kinky Inlaws
+  - La Cochonne
+  - La Novice
+  - Las Folladoras
+  - Los Consoladores
+  - My Naughty Album
+  - Narcos X
+  - Operacion Limpieza
+  - PinUp Sex
+  - Porndoepedia
+  - Porndoe Premium
+  - Porno Academie
+  - Quest for Orgasm
+  - Reife Swinger
+  - Relaxxxed
+  - Scam Angels
+  - Scambisti Maturi
+  - Special Feet Force
+  - STG
+  - The White Boxxx
+  - Transbella
+  - Trans Taboo
+  - Tu Venganza
+  - Xchimera
+  - XXX Omas
+  - XXXShades
 + #### PornFidelity | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)*
   - 18YearsOld
@@ -565,51 +565,51 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### PropertySex | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title supported to improve score)
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Reality Kings Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
--   40 Inch Plus
--   8th Street Latinas
--   Bad Tow Truck
--   Big Naturals
--   Big Tits Boss
--   Bikini Crashers
--   Captain Stabbin
--   CFNM Secret
--   Cum Fiesta
--   Cum Girls
--   Dangerous Dongs
--   Euro Sex Parties
--   Extreme Asses
--   Extreme Naturals
--   First Time Auditions
--   Flower Tucci
--   Girls of Naked
--   Happy Tugs
--   HD Love
--   Hot Bush
--   In the VIP
--   Mike in Brazil
--   Mike's Apartment
--   Milf Hunter
--   Milf Next Door
--   Moms Bang Teens
--   Moms Lick Teens
--   Money Talks
--   Monster Curves
--   No Faces
--   Pure 18
--   Real Orgasms
--   RK Prime
--   Round and Brown
--   Saturday Night Latinas
--   See My Wife
--   Sneaky Sex
--   Street BlowJobs
--   Team Squirt
--   Teens Love Huge Cocks
--   Top Shelf Pussy
--   Tranny Surprise
--   VIP Crew
--   We Live Together
--   Wives in Pantyhose
+  - 40 Inch Plus
+  - 8th Street Latinas
+  - Bad Tow Truck
+  - Big Naturals
+  - Big Tits Boss
+  - Bikini Crashers
+  - Captain Stabbin
+  - CFNM Secret
+  - Cum Fiesta
+  - Cum Girls
+  - Dangerous Dongs
+  - Euro Sex Parties
+  - Extreme Asses
+  - Extreme Naturals
+  - First Time Auditions
+  - Flower Tucci
+  - Girls of Naked
+  - Happy Tugs
+  - HD Love
+  - Hot Bush
+  - In the VIP
+  - Mike in Brazil
+  - Mike's Apartment
+  - Milf Hunter
+  - Milf Next Door
+  - Moms Bang Teens
+  - Moms Lick Teens
+  - Money Talks
+  - Monster Curves
+  - No Faces
+  - Pure 18
+  - Real Orgasms
+  - RK Prime
+  - Round and Brown
+  - Saturday Night Latinas
+  - See My Wife
+  - Sneaky Sex
+  - Street BlowJobs
+  - Team Squirt
+  - Teens Love Huge Cocks
+  - Top Shelf Pussy
+  - Tranny Surprise
+  - VIP Crew
+  - We Live Together
+  - Wives in Pantyhose
 + #### SexArt
 + #### SexyHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
@@ -629,34 +629,34 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Swallowed / TrueAnal / Nymphos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
--   Badmilfs
--   BraceFaced
--   CFNM Teens
--   Dyked
--   Exxxtra small
--   Gingerpatch
--   Her Freshman Year
--   Innocent High
--   Lust HD
--   My Babysitters Club
--   Oye Loca
--   POV Life
--   Rub A Teen
--   Self Desire
--   She's New
--   Solo Interviews
--   StepSiblings
--   Team Skeet Extras
--   Teen Curves
--   TeenJoi
--   Teen Pies
--   Teens Do Porn
--   Teens Love Anal
--   Teens Love Money
--   Teeny Black
--   The Real Workout
--   This Girl Sucks
--   Titty Attack
+  - Badmilfs
+  - BraceFaced
+  - CFNM Teens
+  - Dyked
+  - Exxxtra small
+  - Gingerpatch
+  - Her Freshman Year
+  - Innocent High
+  - Lust HD
+  - My Babysitters Club
+  - Oye Loca
+  - POV Life
+  - Rub A Teen
+  - Self Desire
+  - She's New
+  - Solo Interviews
+  - StepSiblings
+  - Team Skeet Extras
+  - Teen Curves
+  - TeenJoi
+  - Teen Pies
+  - Teens Do Porn
+  - Teens Love Anal
+  - Teens Love Money
+  - Teeny Black
+  - The Real Workout
+  - This Girl Sucks
+  - Titty Attack
 + #### TeenFidelity | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeenMegaWorld Network
   - 18 First Sex
