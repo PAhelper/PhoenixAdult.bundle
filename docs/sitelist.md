@@ -761,3 +761,42 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  -  Eroticax
  -  Hardx
  -  Lesbianx
+
+## Adding sites to this list
+When this plugin is inevitably updated to add or update a sites' types of searching, you can use the below markdown formatting in a PR to easily add the site in question here
+
+### It is important to go over styling each match type, before proceeding
+  + #### Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* 
+    - `*[Enhanced](./manualsearch.md#enhanced-search)*`
+  + #### Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title/Actor only** (Some subtitle or note)
+    - Use the subtitle to denote if a site can only use title or actor for searching. No subtitle means both are supported.
+    - `*[Limited](./manualsearch.md#limited-search)* - **Title only** (Some subtitle or note)`
+  + #### Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID/Direct URL** (Some subtitle or note)
+    - Use the subtitle to denote if a site uses SceneID or Direct URL.
+    - `*[Exact](./manualsearch.md#exact-match)* - **SceneID** (Some subtitle or note)`
+
+### For a single site or studio:
+```
+#### - Some Example Site | Matching type: {Enhanced,Limited,Exact}
+```
+For example:
+```
+#### - XConfessions | Matching type: *[Limited](./manualsearch.md#limited-search)*
+```
+
+### For a parent network or studio (with sub-sites):
+```
+#### - Some Example Network | Matching type: {Enhanced,Limited,Exact}
+  - Subsite 1
+  - Subsite 2
+  - Subsite 3...
+```
+
+For example:
+```
+#### - Xempire | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+ -  Darkx
+ -  Eroticax
+ -  Hardx
+ -  Lesbianx
+ ```
