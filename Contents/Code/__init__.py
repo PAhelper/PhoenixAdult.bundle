@@ -908,6 +908,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 745:
                     results = PAsearchSites.siteGangbangCreampie.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## DadCrush
+            ###############
+            if siteNum == 746:
+                if searchSiteID == 9999 or searchSiteID == 746:
+                    results = PAsearchSites.siteDadCrush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1579,6 +1586,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 745:
             metadata = PAsearchSites.siteGangbangCreampie.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  DadCrush                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 746:
+            metadata = PAsearchSites.siteDadCrush.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
