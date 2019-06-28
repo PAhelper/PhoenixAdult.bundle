@@ -1,5 +1,5 @@
 ## Brief explanation of the types of search
-+ **[Enhanced Search](./manualsearch.md#enhanced-search)** - Multi-search available. This includes searching by actor, title or by date (or all of the above).
++ **[Enhanced Search](./manualsearch.md#enhanced-search)** - Multi-search available. This includes searching by title and/or actor(s), enhanced with date and/or SceneID matching.
 + **[Limited Search](./manualsearch.md#limited-search)** - Limited-search available. Only title and/or actor can be used.
 + **[Exact Match](./manualsearch.md#exact-match)** - Exact matching only. Either using a numerical SceneID or a Direct URL.
 
@@ -43,7 +43,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  -  BabeVR
  -  KinkVR
  -  VRCosplayX
-#### - Bang Bros Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
+#### - Bang Bros Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
  -  Ass Parade
  -  AvaSpice
  -  Back Room Facials
@@ -112,8 +112,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - KatieBanks
   - MonroeLee
   - TaliaShepard
-#### - Blacked | Matching type: *[Limited](./manualsearch.md#limited-search)*
-#### - BlackedRaw | Matching type: *[Limited](./manualsearch.md#limited-search)*
+#### - Blacked | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+#### - BlackedRaw | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 #### - Black Valley Girls | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - Blowpass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
  -  1000 Facials
@@ -150,7 +150,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 -   Teens Like It Big
 -   Teens Like It Black
 -   ZZ Series
-#### - Bratty Sis *SceneID (BrattySis - id) *Date Search
+#### - Bratty Sis | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 #### - CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
  -  Czech Amateurs
@@ -235,7 +235,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  -  ZebraGirls
 #### - Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 #### - Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-#### - EvilAngel | Matching type: *[Limited](./manualsearch.md#limited-search)* - (SceneID + date will improve score)
+#### - EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 #### - FakeHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
  -  FakeTaxi
  -  Fakehub Originals
@@ -286,7 +286,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  -  WebYoung
 #### - Gloryhole Secrets | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only** (Title includes actress first name)
 #### - Hegre | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-#### - Hot Crazy Mess *SceneID Match (HotCrazyMess - id) *Date Search
+#### - Hot Crazy Mess | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 #### - JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
  -  JulesJordan
@@ -432,7 +432,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 -   Wives on Vacation
 #### - NewSensations *Actress Search *DVD Search (exact spelling)
 #### - NF Busty *shoot ID (NFBusty - id) *Date search
-#### - Nubiles.net *Shoot ID (NubilesNet - id) *Date search
+#### - Nubiles.net | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
   - Bad Teens Punished
   - Bountyhunter Porn
@@ -626,9 +626,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RawAttack
   - TheStripperExperience
 #### - StasyQ VR
-#### - Swallowed / TrueAnal / Nymphos *SceneID Only *Date Match
+#### - Swallowed / TrueAnal / Nymphos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
-#### - TeamSkeet Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
+#### - TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 -   Badmilfs
 -   BraceFaced
 -   CFNM Teens
@@ -694,11 +694,11 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  -  Watch Me Fucked
  -  X Angels
  -  Teen Sex Movs
-#### - That Sitcom Show *SceneID (ThatSitcomShow - id) *Date Search
+#### - That Sitcom Show | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 #### - Tonights Girlfriend 
 #### - TransAngels | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 #### - TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
-#### - Tushy | Matching type: *[Limited](./manualsearch.md#limited-search)*
+#### - Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 #### - TushyRaw | Matching type: *[Exact](./manualsearch.md#exact-match)*
 #### - Twistys | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title supported to improve score)
  -  Mom Knows Best
@@ -747,8 +747,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 #### - WankzVR Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
  -  MilfVR
  -  WankzVR
-#### - We Are Hairy | Matching type: *[Limited](./manualsearch.md#limited-search)*
-#### - X-Art | Matching type: *[Limited](./manualsearch.md#limited-search)*
+#### - We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+#### - X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
  -  Dane Jones
  -  Fitness Rooms
  -  Girlfriends
