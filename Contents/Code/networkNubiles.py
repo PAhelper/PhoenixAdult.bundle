@@ -196,6 +196,17 @@ def update(metadata,siteID,movieGenres,movieActors):
             art.append("http:" + posterUrl.get('src').replace('/tn',''))
     except:
         pass
+    
+    if len(art)is 0:
+        try:
+            photoPageURL = "https://stepsiblingscaught.com/galleries/" + title.split(' -')[0].replace(' ', '_') +  "/videos"
+            Log("photoPageURL: " + str(photoPageURL))
+            photoPageElements = HTML.ElementFromURL(photoPageURL)
+            for posterUrl in photoPageElements.xpath('//div[@class="row grid photogrid"]//img'):
+                art.append(posterUrl.get('src').replace('/tn',''))
+        except:
+            pass
+                
 
     j = 1
     Log("Artwork found: " + str(len(art)))
