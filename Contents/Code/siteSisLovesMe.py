@@ -4,33 +4,37 @@ import PAextras
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    if unicode(searchTitle, 'utf-8').isnumeric():
-        try:
-            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-            searchResult = searchResults
-            titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
-            Log(titleNoFormatting)
-            curID = searchResult.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-            Log("ID: " + curID)
-            #releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
-
-        except:
-            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + "/" + encodedTitle + '/banner/1')
-            searchResult = searchResults
-            titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
-            Log(titleNoFormatting)
-            curID = 'https:__' + searchResult.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-            Log("ID: " + curID)
-            # releaseDate = parse(searchResult.xpath(no    clue     .text_content().strip()).strftime('%Y-%m-%d')
-
-        score = 100
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20', ' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    Log("Try Default URL")
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
+    searchResult = HTML.ElementFromURL(url)
+    if len(searchResult.xpath('//div[@class="red_big"]/text()')) == 0:
+        Log("Try Alternate URL")
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/" + sceneID + '/banner/1'
+        searchResult = HTML.ElementFromURL(url)
+    titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
+    curID = url.replace('/','_').replace('?','!')
+    if searchDate:
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+    else:
+        releaseDate = ''
+    if sceneTitle:
+        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 90
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     art =[]
     Log('******UPDATE CALLED*******')
-    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/'))
+    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/').replace('!','?'))
     try:
         Log("urlName: " + detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster").split('/')[5])
         urlName = detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster").split('/')[5]
@@ -38,17 +42,28 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("urlName: " + detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5])
         urlName = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5]
 
-    # Summary
+    # Studio
     metadata.studio = "TeamSkeet"
-    metadata.summary = detailsPageElements.xpath('(//div[@class="vid-desc-mobile"]/span)[not(position()=1)][not(position()=last())]')[0].text_content()
+
+    # Title
     metadata.title = detailsPageElements.xpath('//div[@class="red_big"]/text()')[0].strip()
-#    releaseDate = detailsPageElements.xpath
+
+    # Summary
+    metadata.summary = detailsPageElements.xpath('(//div[@class="vid-desc-mobile"]/span)[not(position()=1)][not(position()=last())]')[0].text_content()
 
     # Collections / Tagline
     siteName = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
+
+    # Date
+    date = str(metadata.id).split("|")[2]
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
 
     # Genres
     movieGenres.addGenre("Step Sister")
