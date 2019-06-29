@@ -242,7 +242,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         director.name = 'Mason'
     elif siteID == 329 or (siteID >= 351 and siteID <= 354):
         metadata.studio = 'Blowpass'
-    elif siteID == 331 or (siteID >= 355 and siteID <= 360) or siteID == 691:
+    elif siteID == 331 or (siteID >= 355 and siteID <= 360) or siteID == 750:
         metadata.studio = 'Fantasy Massage'
     elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
         metadata.studio = 'Mile High Network'
