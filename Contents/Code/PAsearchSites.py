@@ -43,7 +43,6 @@ import siteVirtualTaboo
 import networkCzechVR
 import siteFinishesTheJob
 import networkWankz
-import siteSexArt
 import siteFamilyStrokes
 import siteTonightsGirlfriend
 import siteKarups
@@ -69,8 +68,19 @@ import sitePropertySex
 import siteFuckedHard18
 import siteTransAngels
 import siteStraplezz
+import siteLittleCaprice
+import siteWowGirls
+import siteVIPissy
+import siteGirlsOutWest
+import siteGirlsRimming
+import siteGangbangCreampie
+import siteDadCrush
+import siteStepSecrets
+import siteVRHush
+import networkMetArt
 
-searchSites = [None] * 742
+searchSites = [None] * 755
+
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -540,11 +550,11 @@ searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com
 searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[467] = ["Anal College","Anal College","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[468] = ["Watch Your Wife","Watch Your Wife","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[469] = ["BadoinkVR","BadoinkVR","https://www.badoinkvr.com","https://badoinkvr.com/vr-pornstar/"]
-searchSites[470] = ["BabeVR","BabeVR","https://www.babevr.com","https://babevr.com/vrbabe/"]
-searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrgirl/"]
-searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-performer/"]
-searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaygirl/"]
+searchSites[469] = ["BadoinkVR","BadoinkVR","https://www.badoinkvr.com","https://badoinkvr.com/vrpornvideos/search/"]
+searchSites[470] = ["BabeVR","BabeVR","https://www.babevr.com","https://babevr.com/vrpornvideos/search/"]
+searchSites[471] = ["18VR","18VR","https://www.18vr.com","https://18vr.com/vrpornvideos/search/"]
+searchSites[472] = ["KinkVR","KinkVR","http://www.kinkvr.com","https://kinkvr.com/bdsm-vr-videos/search/"]
+searchSites[473] = ["VRCosplayX","VRCosplayX","https://www.vrcosplayx.com","https://vrcosplayx.com/cosplaypornvideos/search/"]
 searchSites[474] = ["VRBangers","VRBangers","https://www.vrbangers.com","https://vrbangers.com/?post_type=video&s="]
 searchSites[475] = ["SexBabesVR","SexBabesVR","https://www.sexbabesvr.com","https://sexbabesvr.com/virtualreality/scene/id/"]
 searchSites[476] = ["WankzVR","WankzVR","https://www.wankzvr.com","https://www.wankzvr.com/search?q="]
@@ -813,6 +823,20 @@ searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com",
 searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[741] = ["Straplezz","Straplezz","https://straplezz.com","https://straplezz.com/updates/"]
+searchSites[742] = ["LittleCaprice","LittleCaprice","https://www.littlecaprice-dreams.com","https://www.littlecaprice-dreams.com/?s="]
+searchSites[743] = ["WowGirls","WowGirls","https://www.wowgirls.xxx","https://www.wowgirls.xxx/?s="]
+searchSites[744] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.vipissy.com/advanced-search/?search=search&query[]="]
+searchSites[745] = ["GirlsOutWest","GirlsOutWest","https://tour.girlsoutwest.com","https://tour.girlsoutwest.com/trailers/"]
+searchSites[746] = ["Girls Rimming","Girls Rimming","https://www.girlsrimming.com","https://www.girlsrimming.com/tour/trailers/"]
+searchSites[747] = ["Gangbang Creampie","Gangbang Creampie","https://gangbangcreampie.com","https://gangbangcreampie.com/tour/search.php?query="]
+searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://www.dadcrush.com/"]
+searchSites[749] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
+searchSites[750] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
+searchSites[751] = ["Step Secrets","Step Secrets","http://www.stepsecrets.com","https://stepsecrets.com/?query="]
+searchSites[752] = ["VRHush","VRHush","https://www.vrhush.com","https://vrhush.com/scenes/"]
+searchSites[753] = ["MetArt","MetArt","https://www.metart.com","https://www.metart.com/search/"]
+searchSites[754] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.metartx.com/search/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -855,6 +879,7 @@ def getSearchSettings(mediaTitle):
     # Using Regex instead of .replace or .startswith so it can be case insensitive
     Log("mediaTitle w/ possible abbrieviation: " + mediaTitle)
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
@@ -875,6 +900,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^smb ', 'ShareMyBF ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
@@ -900,6 +926,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^news ', 'NewSensations ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^nam ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mwhf ', 'MyWifesHotFriend ', mediaTitle, flags=re.IGNORECASE)
@@ -953,7 +980,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^dwc ', 'DirtyWivesClub ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dbm ', 'DontBreakMe', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^dbm ', 'DontBreakMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
@@ -984,6 +1011,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bp ', 'ButtPlays ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
