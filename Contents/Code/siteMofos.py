@@ -16,7 +16,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
         titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace('Trailer','').strip()
         curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1").replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
+        subSite = searchResult.xpath('.//div[@class="sc-11m21lp-2 bKVlBB"]')[0].text_content().strip()
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
@@ -60,12 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Release Date
-    if metadata.summary:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[3]')
-    elif genres:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
-    else:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]')
+    date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')
 
     if len(date) > 0:
         date = date[0].text_content().strip().replace('Release Date:','')
