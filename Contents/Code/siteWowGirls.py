@@ -50,12 +50,16 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Release Date
-    date = str(metadata.id).split("|")[2]
+    try:
+        date = detailsPageElements.xpath('//meta[@property="article:published_time"]')[0].get('content')
+    except:
+        date = str(metadata.id).split("|")[2]
+        Log("Date from file")
+
     if len(date) > 0:
         date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
-    Log("Date from file")
     
     # Actors
     actors = detailsPageElements.xpath('//div[@class="tags-list"]/a[i[@class="fa fa-tag"]]')
