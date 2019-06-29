@@ -71,9 +71,13 @@ import siteTransAngels
 import siteStraplezz
 import siteLittleCaprice
 import siteWowGirls
+import siteVIPissy
+import siteGirlsOutWest
+import siteGirlsRimming
+import siteGangbangCreampie
+import siteDadCrush
 
-searchSites = [None] * 744
-
+searchSites = [None] * 749
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -818,6 +822,11 @@ searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www
 searchSites[741] = ["Straplezz","Straplezz","https://straplezz.com","https://straplezz.com/updates/"]
 searchSites[742] = ["LittleCaprice", "LittleCaprice", "https://www.littlecaprice-dreams.com","https://www.littlecaprice-dreams.com/?s="]
 searchSites[743] = ["WowGirls", "WowGirls", "https://www.wowgirls.xxx","https://www.wowgirls.xxx/?s="]
+searchSites[744] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.vipissy.com/advanced-search/?search=search&query[]="]
+searchSites[745] = ["GirlsOutWest","GirlsOutWest","https://tour.girlsoutwest.com","https://tour.girlsoutwest.com/trailers/"]
+searchSites[746] = ["Girls Rimming","Girls Rimming","https://www.girlsrimming.com","https://www.girlsrimming.com/tour/trailers/"]
+searchSites[747] = ["Gangbang Creampie","Gangbang Creampie","https://gangbangcreampie.com","https://gangbangcreampie.com/tour/search.php?query="]
+searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://www.dadcrush.com/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
