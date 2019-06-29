@@ -896,45 +896,38 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteWowGirls.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
-            ## Straplezz
-            ###############
-            if siteNum == 741:
-                if searchSiteID == 9999 or searchSiteID == 741:
-                    results = PAsearchSites.siteStraplezz.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
-
-            ###############
             ## VIPissy
             ###############
-            if siteNum == 742:
-                if searchSiteID == 9999 or searchSiteID == 742:
+            if siteNum == 744:
+                if searchSiteID == 9999 or searchSiteID == 744:
                     results = PAsearchSites.siteVIPissy.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## GirlsOutWest
             ###############
-            if siteNum == 743:
-                if searchSiteID == 9999 or searchSiteID == 743:
+            if siteNum == 745:
+                if searchSiteID == 9999 or searchSiteID == 745:
                     results = PAsearchSites.siteGirlsOutWest.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Girls Rimming
             ###############
-            if siteNum == 744:
-                if searchSiteID == 9999 or searchSiteID == 744:
+            if siteNum == 746:
+                if searchSiteID == 9999 or searchSiteID == 746:
                     results = PAsearchSites.siteGirlsRimming.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Gangbang Creampie
             ###############
-            if siteNum == 745:
-                if searchSiteID == 9999 or searchSiteID == 745:
+            if siteNum == 747:
+                if searchSiteID == 9999 or searchSiteID == 747:
                     results = PAsearchSites.siteGangbangCreampie.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## DadCrush
             ###############
-            if siteNum == 746:
-                if searchSiteID == 9999 or searchSiteID == 746:
+            if siteNum == 748:
+                if searchSiteID == 9999 or searchSiteID == 748:
                     results = PAsearchSites.siteDadCrush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
