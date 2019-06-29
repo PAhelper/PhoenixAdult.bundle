@@ -32,6 +32,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    sceneID = url.split("/")[3]
+    Log("sceneID: "+str(sceneID))
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -83,11 +85,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         if len(actors) > 4:
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
-            actorName = str(actorLink.strip())
+            actorName = str(actorLink.replace('2','').strip())
             actorPhotoURL = ''
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
+    
+    # Girls page image
+    girlsPageElements = HTML.ElementFromURL('https://www.dadcrush.com/girls')
+    try:
+        art.append(girlsPageElements.xpath('//a[contains(@href,"'+sceneID+'")]//img')[0].get('data-src'))
+    except:
+        pass
 
     # Video trailer background image
     try:
@@ -95,6 +104,23 @@ def update(metadata,siteID,movieGenres,movieActors):
         art.append(twitterBG)
     except:
         pass
+    
+    # Sometimes hi.jpg is just a bigger version of med.jpg, sometimes it's a different image entirely; grabbing both to be safe
+    try:
+        twitterBG = detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get('poster').replace('med.jpg','hi.jpg')
+        art.append(twitterBG)
+    except:
+        pass
+
+    # Scenes page images
+    scenesPageElements = HTML.ElementFromURL('https://www.dadcrush.com/scenes')
+    posters = scenesPageElements.xpath('//a[@id="'+sceneID+'"]/img[contains(@class,"bio")]')
+    for poster in posters:
+        try:
+            art.append(poster.get('src'))
+        except:
+            pass
+
 
     j = 1
     Log("Artwork found: " + str(len(art)))
