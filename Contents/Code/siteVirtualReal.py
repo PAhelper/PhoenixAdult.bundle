@@ -2,32 +2,44 @@ import PAsearchSites
 import PAgenres
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-")
     searchPage = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchPage.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
     Log("Result Title: " + titleNoFormatting)
-    curID = searchTitle.lower().replace(" ","-")
-    Log("ID: " + curID)
-    resultActors = searchPage.xpath('//div[@class="w-portfolio-item-image modelBox"]//img')
-    actorList = []
-    for actor in resultActors:
-        actorList.append(actor.get("alt"))
-    actors = ", ".join(actorList)
+    curID = searchPage.xpath('//link[@rel="canonical"]')[0].get("href").replace('/','_').replace('?','!')
+    Log("curID: " + curID)
+    actors = searchPage.xpath('//div[@class="w-portfolio-item-image modelBox"]//img')
+    firstActor = actors[0].get('alt')
 
-    titleNoFormatting = actors + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "]"
-    score = 100
+    script_text = searchPage.xpath('//script[@type="application/ld+json"]')[1].text_content()
+    alpha = script_text.find('datePublished')
+    omega = script_text.find('"',alpha+16)
+    script_date = script_text[alpha+16:omega]
+    releaseDate = parse(script_date).strftime('%Y-%m-%d')
+    Log("releaseDate:" + releaseDate)
+    resultTitle = firstActor + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate
+    if searchDate:
+        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+    else:
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = resultTitle, score = score, lang = lang))
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0]
-    Log('temp: ' + temp)
-    url = PAsearchSites.getSearchSearchURL(siteID) + temp
+
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log('url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
+
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
+    Log('Title: ' + metadata.title)
+
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
     Log('Studio: ' + metadata.studio)
@@ -45,7 +57,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     genres = detailsPageElements.xpath('//a[@class="g-btn type_default"]//span')
     if len(genres) > 0:
         for genre in genres:
-            Log('genre: ' + genre.text_content())
             movieGenres.addGenre(genre.text_content())
 
     # Actors
@@ -54,7 +65,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.get("alt")
-            Log('actor: ' + actorName)
             actorPhotoURL = actorLink.get("src")
             movieActors.addActor(actorName,actorPhotoURL)
 
@@ -72,9 +82,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     backgroundURL = detailsPageElements.xpath('//dl8-video')[0].get("poster")
     metadata.art[backgroundURL] = Proxy.Preview(HTTP.Request(backgroundURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
-
-    # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
-    Log('Title: ' + metadata.title)
+    # Date
+    script_text = detailsPageElements.xpath('//script[@type="application/ld+json"]')[1].text_content()
+    alpha = script_text.find('datePublished')
+    omega = script_text.find('"',alpha+16)
+    date = script_text[alpha+16:omega]
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     return metadata

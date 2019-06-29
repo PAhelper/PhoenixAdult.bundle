@@ -101,7 +101,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691:
+                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
                     results = PAsearchSites.siteNaughtyAmerica.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -213,7 +213,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Fantasy Massage
             ###############
             if siteNum == 331:
-                if searchSiteID == 9999 or searchSiteID == 331 or (searchSiteID >= 355 and searchSiteID <= 360):
+                if searchSiteID == 9999 or searchSiteID == 331 or (searchSiteID >= 355 and searchSiteID <= 360) or searchSiteID == 750:
                     results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -690,8 +690,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 621:
                 if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
-                    results = PAsearchSites.siteSexArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
-
+                    results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
             ###############
             ## Family Strokes
             ###############
@@ -888,7 +887,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 742:
                     results = PAsearchSites.siteLittleCaprice.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
-    	    ###############
+      	    ###############
             ## WowGirls
             ###############
             if siteNum == 743:
@@ -929,6 +928,27 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 748:
                 if searchSiteID == 9999 or searchSiteID == 748:
                     results = PAsearchSites.siteDadCrush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## StepSecrets
+            ###############
+            if siteNum == 751:
+                if searchSiteID == 9999 or searchSiteID == 751:
+                    results = PAsearchSites.siteStepSecrets.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## VRHush
+            ###############
+            if siteNum == 752:
+                if searchSiteID == 9999 or searchSiteID == 752:
+                    results = PAsearchSites.siteVRHush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## MetArt
+            ###############
+            if siteNum == 753:
+                if searchSiteID == 9999 or searchSiteID == 753 or searchSiteID == 754:
+                    results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -984,7 +1004,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 742:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1152,7 +1172,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 692:
+        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 743:
             metadata = PAsearchSites.networkGammaEnt.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1352,7 +1372,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if (siteID >= 621 and siteID <= 623):
-            metadata = PAsearchSites.siteSexArt.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.networkMetArt.updateSexArt(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1588,18 +1608,10 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Straplezz                                               ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 741:
-            metadata = PAsearchSites.siteStraplezz.update(metadata,siteID,movieGenres,movieActors)
-
-        ##############################################################
-        ##                                                          ##
         ##  VIPissy                                                 ##
         ##                                                          ##
         ##############################################################
-        if siteID == 742:
+        if siteID == 744:
             metadata = PAsearchSites.siteVIPissy.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1607,7 +1619,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  GirlsOutWest                                            ##
         ##                                                          ##
         ##############################################################
-        if siteID == 743:
+        if siteID == 745:
             metadata = PAsearchSites.siteGirlsOutWest.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1615,7 +1627,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Girls Rimming                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID == 744:
+        if siteID == 746:
             metadata = PAsearchSites.siteGirlsRimming.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1623,7 +1635,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Gangbang Creampie                                       ##
         ##                                                          ##
         ##############################################################
-        if siteID == 745:
+        if siteID == 747:
             metadata = PAsearchSites.siteGangbangCreampie.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1631,8 +1643,32 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  DadCrush                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 746:
+        if siteID == 748:
             metadata = PAsearchSites.siteDadCrush.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  StepSecrets                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 751:
+            metadata = PAsearchSites.siteStepSecrets.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VRHush                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 752:
+            metadata = PAsearchSites.siteVRHush.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MetArt / MetArtX                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 753 or siteID == 754:
+            metadata = PAsearchSites.networkMetArt.updateMetArt(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
