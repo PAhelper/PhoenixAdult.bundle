@@ -933,14 +933,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## StepSecrets
             ###############
             if siteNum == 751:
-                if searchSiteID == 9999 or searchSiteID == 744:
+                if searchSiteID == 9999 or searchSiteID == 751:
                     results = PAsearchSites.siteStepSecrets.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## VRHush
             ###############
             if siteNum == 752:
-                if searchSiteID == 9999 or searchSiteID == 745:
+                if searchSiteID == 9999 or searchSiteID == 752:
                     results = PAsearchSites.siteVRHush.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
