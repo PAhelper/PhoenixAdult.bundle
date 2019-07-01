@@ -337,7 +337,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### LegalPorno | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### ManyVids
++ #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### MetArt Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - MetArt
   - MetArtX
@@ -438,7 +438,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
-+ #### NewSensations *Actress Search *DVD Search (exact spelling)
++ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Nubiles-porn.com Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
