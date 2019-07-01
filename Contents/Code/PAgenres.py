@@ -410,9 +410,9 @@ class PhoenixGenres:
             if "ass licking" == newGenre.lower():
                 newGenre = "ass eating"
             if "poolparty" == newGenre.lower():
-                newGenre = pool
+                newGenre = "pool"
             if "holidayparty" == newGenre.lower():
-                newGenre = holidays
+                newGenre = "holidays"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower() or "doggystyle - standing" == newGenre.lower() or "standing doggystyle" == newGenre.lower() or "doggystyle - pov" == newGenre.lower():

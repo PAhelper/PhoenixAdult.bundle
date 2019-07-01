@@ -12,10 +12,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
+    searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
         titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
-        curID = (PAsearchSites.getSearchSearchURL(siteNum) + sceneID).replace('/','_').replace('?','!')
+        curID = url.replace('/','_').replace('?','!')
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
@@ -59,11 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Release Date
-    if metadata.summary:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[3]')
-    else:
-        date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]')
-
+    date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')
     if len(date) > 0:
         date = date[0].text_content().strip().replace('Release Date:','')
         date_object = datetime.strptime(date, '%B %d, %Y')
@@ -80,11 +77,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieGenres.addGenre("Foursome")
             if len(actors) > 4:
                 movieGenres.addGenre("Orgy")
-            if len(actors) > 0:
-                for actorLink in actors:
-                    actorName = str(actorLink.text_content().strip())
-                    actorPhotoURL = ''
-                    movieActors.addActor(actorName, actorPhotoURL)
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                actorPhotoURL = ''
+                movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass
 
