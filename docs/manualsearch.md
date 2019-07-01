@@ -44,6 +44,9 @@ There are 3 available search/matching methods, as listed below:
   - Can add the the Date (before the URL)
   - Adding any terms, such as Title/Actors, after the URL will cause issues with matching.
 
+## Notes
++ **Date Add** - Some sites don't make release dates available, so the agent will strip the date from your filename/search term instead"
+
 # Search Examples
 Depending on the capability of any one network/site, you can try a few combiations of the above.
 
