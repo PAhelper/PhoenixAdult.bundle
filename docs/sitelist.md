@@ -187,6 +187,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
++ #### DadCrush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID and Date Add**
 + #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 1By-Day
   - Cherry Jul
@@ -275,7 +276,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Pervert Gallery
   - POV Perverts
   - Twisted Visual
++ #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlfriendsFilms | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### Girls Rimming | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Girlsway | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - GirlsTryAnal
   - GirlswayOriginals
@@ -331,8 +335,14 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Karups Older Women
   - Karups Private Collection
 + #### LegalPorno | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids
++ #### MetArt Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
+  - MetArt
+  - MetArtX
+  - SexArt
+  - Viv Thomas
 + #### MileHighNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)* (SceneID will improve score)
   - CherryPop
   - DoghouseDigital
@@ -616,7 +626,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Wives in Pantyhose
 + #### SexyHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### SexArt | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### SexBabesVR | Matching type: *[Exact](./manualsearch.md#exact-match)*
 + #### SinsVR | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### SisLovesMe | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title + date supported to improve score)
@@ -629,6 +638,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RawAttack
   - TheStripperExperience
 + #### StasyQ VR | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Steps Secrets | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Swallowed / TrueAnal / Nymphos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -707,11 +717,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Twistys
   - Twistys Hard
   - When Girls Play
-+ #### Viv Thomas | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Vixen | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
   - All Interracial
@@ -750,6 +761,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MilfVR
   - WankzVR
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### WowGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Dane Jones
   - Fitness Rooms
