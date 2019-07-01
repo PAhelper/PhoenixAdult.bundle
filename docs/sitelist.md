@@ -27,7 +27,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PixandVideo
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Anilos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (date supported to improve score)
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title supported to improve score)
   - Babes
@@ -36,7 +35,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Elegant Anal
   - Office Obsession
   - Stepmom Lessons
-+ #### Baeb
 + #### BaDoinkVR Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - BaDoinkVR
   - 18VR
@@ -150,7 +148,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Teens Like It Big
   - Teens Like It Black
   - ZZ Series
-+ #### Bratty Sis | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Czech Amateurs
@@ -286,7 +283,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WebYoung
 + #### Gloryhole Secrets | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only** (Title includes actress first name)
 + #### Hegre | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### Hot Crazy Mess | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - JulesJordan
@@ -335,7 +331,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Karups Private Collection
 + #### LegalPorno | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Love Her Feet | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title supported to improve score)
++ #### ManyVids
 + #### MileHighNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)* (SceneID will improve score)
   - CherryPop
   - DoghouseDigital
@@ -431,8 +427,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Wife
   - Wives on Vacation
 + #### NewSensations *Actress Search *DVD Search (exact spelling)
-+ #### NF Busty *shoot ID (NFBusty - id) *Date search
-+ #### Nubiles.net | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Nubiles-porn.com Network *Shoot ID (Nubilesporn - id) *Date search
   - Bad Teens Punished
   - Bountyhunter Porn
@@ -448,7 +442,14 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Princess Cum
   - Step Siblings Caught
   - Teacher Fucks Teens
-+ #### Nubilesfilms *shoot ID (Nubilesfilms - id) *Date search
++ #### Other Nubiles Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - Anilos
+  - Bratty Sis
+  - Hot Crazy Mess
+  - NF Busty
+  - Nubilesfilms
+  - NubilesNet
+  - That Sitcom Show
 + #### OpenlifeNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AbbeyBrooks
   - AshleyFires
@@ -535,6 +536,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SquirtDisgrace
   - TeenBFF
 + #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)*
+  - Baeb
   - CastingCouch-X
   - Cum4K
   - Exotic4k
@@ -694,7 +696,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Me Fucked
   - X Angels
   - Teen Sex Movs
-+ #### That Sitcom Show | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Tonights Girlfriend 
 + #### TransAngels | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
