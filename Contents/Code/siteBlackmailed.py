@@ -7,11 +7,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum))
 
     for searchResult in searchResults.xpath('//article[@class="single"]/div[1]/div[4]'):
-        searchSceneName = encodedTitle.replace("%20", " ")
+        searchSceneName = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").lower()
         Log("searchSceneName " + searchSceneName)
-        titleNoFormatting = searchResult.xpath('//a[contains(text(),"' + searchSceneName + '")]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('//a[contains(@href,"' + searchSceneName + '")]')[0].text_content().strip()
         Log("titleNoFormatting: " + titleNoFormatting)
-        sceneUrl = searchResults.xpath('//a[contains(text(),"' + searchSceneName + '")]')[0].get('href')
+        sceneUrl = searchResults.xpath('//a[contains(@href,"' + searchSceneName + '")]')[0].get('href')
         curID = (PAsearchSites.getSearchBaseURL(siteNum) + sceneUrl).replace('/','_').replace('?','!')
         Log("curID: " + curID)
         #releaseDate = parse(searchResults.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
