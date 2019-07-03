@@ -367,7 +367,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - She's A Freak
   - Stranded Teens
 + #### MomPOV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title and Date Match**
-+ #### Mylf Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Date Add**
++ #### Mylf Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**, **Date Add**
   - Mylf
   - MylfBoss
   - MylfBlows
