@@ -12,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("searchString formatted")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
 
-    titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-7"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
+    titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-8"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
     Log("titleNoFormatting: " + titleNoFormatting)
     curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
     Log("curID: " + curID)
