@@ -151,10 +151,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         Log("fanUrl failed")
         metadata.posters[backgroundURL] = Proxy.Preview(HTTP.Request(backgroundURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        
+        #try for PAextras match
         art=[]
-        fanSite = PAextras.getFanArt("SkeetScenes.com", art, actors, actorName, metadata.title, 0)
-        summary = fanSite[1]
-        match = fanSite[2]
+        match = 0
+        for site in ["TeamSkeetFans.com", "SkeetScenes.com"]:
+            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+            match = fanSite[2]
+            if match is 1:	
+                break
         
         if match is 1 and len(art) >= 10 or match is 2 and len(art) >= 10:
         # Return, first, last and randóm selection of 4 more images
@@ -166,7 +171,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         j = 1
                                           
         for posterUrl in art:
-            Log("Trying next Image: " + posterUrl)
+            Log("Trying next Image")
             
             if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
