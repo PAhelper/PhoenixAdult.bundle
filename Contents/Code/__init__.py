@@ -956,6 +956,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 755:
                 if searchSiteID == 9999 or searchSiteID == 755:
                     results = PAsearchSites.siteBlackmailed.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    
+            ###############
+            ## VogoV
+            ###############
+            if siteNum == 756:
+                if searchSiteID == 9999 or searchSiteID == 756:
+                    results = PAsearchSites.siteVogoV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1685,7 +1692,14 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteID == 755:
             metadata = PAsearchSites.siteBlackmailed.update(metadata,siteID,movieGenres,movieActors)
 
-
+        ##############################################################
+        ##                                                          ##
+        ##  VogoV                                                   ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 756:
+            metadata = PAsearchSites.siteVogoV.update(metadata,siteID,movieGenres,movieActors)
+            
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")
