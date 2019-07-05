@@ -80,8 +80,9 @@ import siteVRHush
 import networkMetArt
 import siteBlackmailed
 import siteVogoV
+import siteUltrafilmsxxx
 
-searchSites = [None] * 757
+searchSites = [None] * 758
 
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
@@ -840,6 +841,7 @@ searchSites[753] = ["MetArt","MetArt","https://www.metart.com","https://www.meta
 searchSites[754] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.metartx.com/search/"]
 searchSites[755] = ["Blackmailed","Blackmailed","https://www.blackmailed.com","https://www.blackmailed.com/en/sitemap"]
 searchSites[756] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
+searchSites[757] = ["Ultrafilmsxxx","Ultra Films","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
 
 
 def getSearchBaseURL(siteID):
