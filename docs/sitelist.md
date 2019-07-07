@@ -291,7 +291,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - JulesJordan
-  - ManuelFerarra
+  - ManuelFerrara
   - SpermSwallowers
   - TheAssFactory
 + #### Kelly Madison | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
