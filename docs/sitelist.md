@@ -443,10 +443,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Bad Teens Punished
   - Bountyhunter Porn
   - Daddy's Lil Angel
+  - Detention Girls
   - Driver XXX
   - Moms Teach Sex  
   - My Family Pies
   - Nubiles Casting
+  - Nubiles ET
   - Nubiles Porn
   - Nubiles Unscripted
   - Petite Ballerinas Fucked
