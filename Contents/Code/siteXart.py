@@ -387,7 +387,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre("Artistic")
     movieGenres.addGenre("Glamcore")
 
-    # Actors
+    # Actors 
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//h2//a')
     if len(actors) > 0:
@@ -429,7 +429,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     art=[]
     match = 0
             
-    for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "XartBeauties.com/galleries"]:
+    for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "Nude-Gals.com"]:
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
         match = fanSite[2]
         if match is 1:	
@@ -446,8 +446,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         except:
             pass
                         
-    #else:
-    #    art = thumbs
+    else:
+        try:
+            art = thumbs
+        except:
+            pass
     
         try:
             j = 1
@@ -458,7 +461,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
                 #Download image file for analysis
                     try:
-                        img_file = urllib.urlopen(posterUrl)
+                        #hdr needed to get images from some fansites. No adverse effects seen so far.
+                        hdr = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
+                        req = urllib.Request(posterUrl, headers=hdr)
+                        img_file = urllib.urlopen(req)
                         im = StringIO(img_file.read())
                         resized_image = Image.open(im)
                         width, height = resized_image.size
@@ -472,7 +478,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                         j = j + 1
                     except:
                         Log("there was an issue")
-                        metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                        #metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
         except:
             pass
 

@@ -1,7 +1,7 @@
 from googlesearch import search
 
 # Scenes with No matches but will get false match
-noMatch = [None] * 24
+noMatch = [None] * 26
 noMatch[0] = ["Close to The Edge"]
 noMatch[1] = ["After Sunset"]
 noMatch[2] = ["No Turning Back Part Two"]
@@ -26,11 +26,13 @@ noMatch[20] = ["If Only"]
 noMatch[21] = ["Poolside Pleasure"]
 noMatch[22] = ["She Bad"]
 noMatch[23] = ["The Rich Girl - part one"]
+noMatch[24] = ["She Cums in Colors"]
+noMatch[25] = ["Hot Fitness Sex"]
 
 
 # Scenes with incorrect matches
-    #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 35
+#if actorName needs fixing replace second field with correct name
+badMatch = [None] * 53
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -66,11 +68,29 @@ badMatch[31] = ["Just Watch Part 1", None, "XartBeauties.com/galleries", "http:/
 badMatch[32] = ["A Pleasing Pussy", "Rebel Lynn", "HQSluts.com", "https://www.hqsluts.com/Rebel+Lynn+-+A+Pleasing+Pussy-404357/"]
 badMatch[33] = ["Little Firecracker", "Ariela", "HQSluts.com", "https://www.hqsluts.com/Ariela+B+-+Little+Firecracker-400815/"]
 badMatch[34] = ["Close Shave", None, "HQSluts.com", "https://www.hqsluts.com/Ivy+Wolfe+-+Close+Shave-405025/"]
+badMatch[35] = ["Slippery Pool Sex", None, "ImagePost.com", "https://www.imagepost.com/videos/rebel-lynn-on-lubed-in-slippery-pool-sex/"]
+badMatch[36] = ["Lubed For St. Patty’s Day", None, "ImagePost.com", "https://www.imagepost.com/movies/katie-kush-on-lubed-in-st-pattys-day/"]   
+badMatch[37] = ["Busy GF? At Least Stepmom Wants To Fuck!", None, "SkeetScenes.com", "https://skeetscenes.com/video/Fucking%20Stepmom%20Like%20Its%20A%20Game/i60021/"]
+badMatch[38] = ["Fucking My Mothers Sisters Husband (?!)", None, "TeamSkeetFans.com", "https://teamskeetfans.com/family-strokes-averie-moore-fucking-mothers-sisters-husband/"]
+badMatch[39] = ["The Secrets Of Seduction", None, "TeamSkeetFans.com", "https://teamskeetfans.com/family-strokes-gia-vendetti-in-the-secrets-of-seduction/"]
+badMatch[40] = ["The Sex Crazed Stepkids", None, "SkeetScenes.com", "http://skeetscenes.com/video/The%20Sex%20Crazed%20Stepkids/i68557/"]
+badMatch[41] = ["What Mommy Says Daughter Performs!", None, "SkeetScenes.com", "http://skeetscenes.com/video/Following%20Stepmoms%20Instructions/i59185/"]
+badMatch[42] = ["Stepdad Zaps Stepdaughter's Pussy", None, "ImagePost.com", "https://www.imagepost.com/videos/jada-doll-on-spy-fam/"]
+badMatch[43] = ["Stepsister Walks In On Stepbro Jerkin It", None, "ImagePost.com", "https://www.imagepost.com/videos/natalia-nix-on-spy-fame-walking-in-on-step-brother/"]
+badMatch[44] = ["Purely Perfect Pink", None, "XartFan.com", "https://xartfan.com/naomi-b-purely-perfect-pink/"]
+badMatch[45] = ["Thinking of You", None, "Nude-Gals.com", "https://nude-gals.com/photoshoot.php?photoshoot_id=22220"]
+badMatch[46] = ["Sexy movies Cum Inside", None, "Nude-Gals.com", "https://nude-gals.com/photoshoot.php?photoshoot_id=22652"]
+badMatch[47] = ["Hot Fucking with Sexy Sybil and Jake", None, "Nude-Gals.com", "https://nude-gals.com/photoshoot.php?photoshoot_id=22850"]
+badMatch[48] = ["New Year’s Party", None, "ImagePost.com", "https://www.imagepost.com/movies/scarlett-bloom-on-passion-hd-in-new-years-party/"]
+badMatch[49] = ["Couch Coach", None, "ImagePost.com", "https://www.imagepost.com/videos/jada-doll-couch-coach-passion-hd/"]
+badMatch[50] = ["Honey, I’m Home", None, "ImagePost.com", "https://www.imagepost.com/movies/kyler-quinn-on-passion-hd-in-honey-im-home/"]
+badMatch[51] = ["A Stepdaughter’s Gift", None,  "ImagePost.com", "https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-a-stepdaughters-gift/"]
+badMatch[52] = ["Picnic At The Park", None, "ImagePost.com", "https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-picnic-at-the-park/"]
 
 def getNoMatchID(scene):
     matchID = 0
     for match in noMatch:
-        if scene.lower().replace(" ","").replace("'","") == match[0].lower().replace(" ","").replace("'",""):
+        if scene.lower().replace(" ","").replace("'","").replace("’","").replace("\\","").replace("&","and").replace(",","").strip() == match[0].lower().replace(" ","").replace("'","").replace("’","").replace("&","and").replace(",","").strip():
             Log("Title Registered as having no fansite matches.")
             return 0
             
@@ -80,7 +100,7 @@ def getNoMatchID(scene):
 def getBadMatchID(scene):
     badID = 0
     for match in badMatch:
-        if scene.lower().replace(" ","").replace("'","").replace("\\","").replace("&","and") == match[0].lower().replace(" ","").replace("'","").replace("&","and"):
+        if scene.lower().replace(" ","").replace("'","").replace("\\","").replace("&","and").strip() == match[0].lower().replace(" ","").replace("'","").replace("&","and").strip():
             overrideActor = badMatch[badID][1]
             overrideSite = badMatch[badID][2]
             overrideURL = badMatch[badID][3]
@@ -93,93 +113,118 @@ def getFanArt(site, art, actors, actorName, title, match):
 
     summary = ""
     actress = "notarealperson"
-    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
+    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PornGirlsErotica.com", "SkeetScenes.com", "SpyFams.com", "TeamSkeetFans.com", "XartBeauties.com/galleries", "XartFan.com"]
     
     if site not in validSites:
         Log("CAUTION: " + site + " is not an accepted PAextras search term. Sites are case sensitive: PassionHDFan.com is acceptable, Passionhdfan.com is not.")
         return (art, summary, match)
     
-    overrideSettings = getBadMatchID(title) 
-    if overrideSettings != 9999:
-        Log("Title known for bad fan match. URL/actress set manually.")
-        if overrideSettings[0] != None:
-            actress = overrideSettings[0]
-            actorName = actress
-        site = overrideSettings[1]
+    overrideSettings = getBadMatchID(title)
         
     if getNoMatchID(title) == 9999:    
         try:
             if match is 0 or match is 2:
                 urls = search('site:'+ site + ' ' + actorName + ' ' + title , stop=2)
                 Log('Searching Google for: (site:'+ site + ' ' + actorName + ' ' + title +')')
-                for url in urls: 
+                if overrideSettings != 9999:
+                    urls = [None] * 1
+                    urls[0] = ["test.com"]
+                for url in urls:
                     if match is 0 or match is 2:
                         if overrideSettings != 9999:
+                            site = overrideSettings[1]
                             url = overrideSettings[2]
+                            Log("Title known for bad fan match. URL/actress set manually.")
+                            if overrideSettings[0] != None:
+                                actress = overrideSettings[0]
+                                actorName = actress
+                            
+                            # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
+                            match = 1
                         
                         googleSearchURL = url
                         fanPageElements = HTML.ElementFromURL(googleSearchURL)
 
+                        
                         try:
-                            #Determine where to look for the Actor Name/s
-                            try:
-                                if site == "AnalPornFan.com": 
-                                    nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[2]')[0].text_content()
-                                elif site == "EroticBeauties.net/pics":
-                                    nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]')[0].text_content()
-                                elif site == "HQSluts.com":
-                                    nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]')[0].text_content()
-                                elif site == "Nude-Gals.com":
-                                    nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]')[0].text_content()
-                                elif site in ["PassionHDFan.com", "LubedFan.com"]:
-                                    nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a')[0].text_content()
-                                elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
-                                    nameinheader = fanPageElements.xpath('(//span[@itemprop="articleSection"])')[0].text_content()
-                                elif site == "XartBeauties.com/galleries":
-                                    nameinheader = fanPageElements.xpath('(//div[@id="header-text"]//p//a)[not(position()=last())]')[0].text_content()
-                                elif site == "XartFan.com":
-                                    nameinheader = fanPageElements.xpath('//header[@class="entry-header"]/p//a')[0].text_content()
-                                    
-                                Log("Actress name in header: " + nameinheader)
-                            except:
-                                Log("No Actress found in the site header")
-                                
-                        #CHECK IF WE HAVE A FANSITE MATCH USING ACTOR NAMES    
-                            
-                            if actorName in nameinheader or actress in nameinheader:
-                                Log("Fansite Match Found on " + site)
-                                match = 1
-                            else:
-                                # When there are multiple actors listed we need to check all of them.
+                            if overrideSettings == 9999:
+                                #Determine where to look for the Actor Name/s
                                 try:
-                                    for actorLink in actors:
-                                        if site == "TeamSkeetFans.com":
-                                            actorName = actorLink
-                                        else:
-                                            actorName = actorLink.text_content().strip()
-                                        Log(actorName + " vs " + nameinheader)
+                                    if site in ["AnalPornFan.com", "PassionHDFan.com", "LubedFan.com"]:
+                                        nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[not(contains(@href, "respond"))][not(contains(@href, "comments"))]/text()')
+                                    elif site == "EroticBeauties.net/pics":
+                                        nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]/text()')
+                                    elif site == "HQSluts.com":
+                                        nameinheader = fanPageElements.xpath('//p[@class="details"]//a[contains(@href, "sluts")]/text()')
+                                    elif site == "ImagePost.com":
                                         try:
-                                            if actorName.lower() in nameinheader.lower() or actress.lower() in nameinheader.lower():
-                                                Log(site + " Fansite Match Found")
-                                                match = 1
-                                                break
+                                            nameinheader = fanPageElements.xpath('//h3/a[contains(@href, "star")]/text()')
                                         except:
-                                            pass
+                                            nameinheader = fanPageElements.xpath('//h3//strong/text()')
+                                    elif site == "Nude-Gals.com":
+                                        nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]/text()')
+                                    elif site == "PornGirlsErotica.com":
+                                        nameinheader = fanPageElements.xpath('//h2[@class="title"]')[0].text_content()
+                                    elif site == "SkeetScenes.com":
+                                        nameinheader = fanPageElements.xpath('//div[@class="card-body"]//h5//a/text()')
+                                    elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
+                                        nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"][not(contains(text(), "Family"))]')
+                                    elif site == "XartBeauties.com/galleries":
+                                        nameinheader = fanPageElements.xpath('//a[contains(@href, "models")][not(contains(text(), "Models"))]/text()')
+                                    elif site == "XartFan.com":
+                                        nameinheader = fanPageElements.xpath('//header[@class="entry-header"]/p//a//text()')
+                                    
+                                    if len(nameinheader) <= 1:
                                         try:
-                                            for name in nameinheader:
-                                                Log("Comparing with: " + actorName) 
-                                                if actorName.lower() in name.lower() or actress.lower() in name.lower():
-                                                    Log(site + " Fansite Match Found")
-                                                    match = 1   
-                                                    break
+                                            nameinheader = nameinheader[0].text_content()
                                         except:
-                                            pass
+                                            nameinheader = nameinheader[0]
+                                        Log("Actress name in fansite header: " + nameinheader)
+                                    else:
+                                        Log("Actress names in fansite header: " + str(nameinheader))
+                                   
                                 except:
-                                    Log("No Actress Match")
-                                 
-                            # found one example of a badmatch not working because the actress match failed. this forces it to proceed.
-                            if overrideSettings != 9999:
-                                match = 1
+                                    Log("No Actress found in the fansite header")
+                                    
+                            #CHECK IF WE HAVE A FANSITE MATCH USING ACTOR NAMES    
+                                
+                                if actorName in nameinheader or actress in nameinheader:
+                                    Log("Fansite Match Found on " + site)
+                                    match = 1
+                                else:
+                                    # When there are multiple actors listed we need to check all of them.
+                                    try:
+                                        for actorLink in actors:
+                                            if site == "TeamSkeetFans.com":
+                                                actorName = actorLink
+                                            else:
+                                                actorName = actorLink.text_content().strip()
+
+                                            try:
+                                                Log(actorName + " vs " + nameinheader)
+                                            except:
+                                                pass
+                                                
+                                            try:
+                                                if actorName.lower() in nameinheader.lower() or actress.lower() in nameinheader.lower():
+                                                    Log(site + " Fansite Match Found")
+                                                    match = 1
+                                                    break
+                                            except:
+                                                pass
+                                            try:
+                                                for name in nameinheader:
+                                                    if match is 1:
+                                                        break
+                                                    Log("Comparing with: " + actorName) 
+                                                    if actorName.lower() in name.lower() or actress.lower() in name.lower():
+                                                        Log(site + " Fansite Match Found")
+                                                        match = 1   
+                                                        break
+                                            except:
+                                                pass
+                                    except:
+                                        Log("No Actress Match")
                             
                             # POSTERS
                             if match is 1:
@@ -195,12 +240,32 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     elif site == "HQSluts.com":
                                         for posterURL in fanPageElements.xpath('//li[@class="item i"]//a'):
                                             art.append(posterURL.get('href'))
+                                    elif site == "ImagePost.com":
+                                        counter = 1
+                                        try:
+                                            for posterURL in fanPageElements.xpath('//div[@id="theGallery"]//a'):
+                                                sceneTypeSegment = str(googleSearchURL.split("/")[-3:-2]).split("'")[1]
+                                                sceneTitleSegment = str(googleSearchURL.split("/")[-2:-1]).split("'")[1]
+                                                if counter > 9:
+                                                    finalurl = "https://www.imagepost.com/" + str(sceneTypeSegment) + "/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "0" + str(counter) + ".jpg"
+                                                else:
+                                                    finalurl = "https://www.imagepost.com/" + str(sceneTypeSegment) + "/" + str(sceneTitleSegment) + "/" + str(sceneTitleSegment) + "-" + "00" + str(counter) + ".jpg"
+                                                art.append(str(finalurl))
+                                                counter += 1
+                                        except:
+                                            Log("Issue Creating Image URL")
                                     elif site == "Nude-Gals.com":
                                         for posterURL in fanPageElements.xpath('(//div[@class="row row_margintop"]//a)[not(contains(@title, "#"))]'):
                                             art.append("https://nude-gals.com/" + posterURL.get('href'))
                                     elif site in ["PassionHDFan.com", "SpyFams.com", "TeamSkeetFans.com"]:
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a/img'):
                                             art.append(posterURL.get('data-orig-file'))
+                                    elif site == "PornGirlsErotica.com":
+                                        for posterURL in fanPageElements.xpath('//div[@class="ngg-galleryoverview"]//a'):
+                                            art.append(posterURL.get('href'))
+                                    elif site == "SkeetScenes.com":
+                                        for posterURL in fanPageElements.xpath('//div[@class="row"]/div[contains(@class, "col-xl-2")]//source[position()=1]'):
+                                            art.append("https:" + posterURL.get('srcset').replace('_thumb', '').replace('.webp', '.jpg'))
                                     elif site == "XartBeauties.com/galleries":
                                         for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
                                             art.append(posterURL.get('src').replace('images.', 'www.').replace('/tn', ''))
@@ -213,16 +278,20 @@ def getFanArt(site, art, actors, actorName, title, match):
                                 
                                 
                                 Log("Artwork found: " + str(len(art)))
-                                if len(art) < 9 and match is 1:
+                                if len(art) < 9 and match is 1 and overrideSettings == 9999:
                                     match = 2
+                                    
+                                    
                         except:
-                            Log("No Fansite Match")
+                            Log("No Fan site Match")
                             
                         if match is 1 or match is 2:
                             # Summary
                             try:
                                 if site in ["AnalPornFan.com", "LubedFan.com", "PassionHDFan.com"]:
-                                    summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').strip()
+                                    summary = fanPageElements.xpath('//div[@class="entry-inner"]//p')[0].text_content().replace("---->Click Here to Download<----", '').replace("Click Here for More Wet & Oiled Up Sex!", '').strip()
+                                elif site == "ImagePost.com":
+                                    summary = fanPageElements.xpath('//div[@class="central-section-content"]/p')[0].text_content().strip()
                                 elif site == "SpyFams.com":
                                     paragraphs = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[not(*[contains(@class, "jp-relatedposts-post")])]')
                                     if len(paragraphs) > 3:
@@ -238,12 +307,12 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     paragraphs = fanPageElements.xpath('//div[@class="entry-content g1-typography-xl"]')[0].text_content().split('\n')
                                     if len(paragraphs) > 13:
                                         for paragraph in paragraphs:
-                                            summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
+                                            summary = (summary + '\n\n' + paragraph).replace("LinkEmbedCopy and paste this HTML code into your webpage to embed.", '').replace("CLICK HERE FOR MORE FAMILY STROKES", '').replace("--> Click Here for More Sis Loves Me! <--", '').strip()
                                     else:
                                         summary = fanPageElements.xpath('(//div[@class="entry-content g1-typography-xl"]//p)[position()=1]')[0].text_content().strip()
                             except:
                                 Log("Error grabbing fansite summary")  
-                        
+                            
         except:
             Log("No Fansite Match")
     return (art, summary, match)

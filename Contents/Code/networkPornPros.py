@@ -145,21 +145,29 @@ def update(metadata,siteID,movieGenres,movieActors):
     match = 0
     
     if siteName.lower() == "Holed".lower():
-        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "SpyFam".lower():
-        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "Lubed".lower():
-        fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title, 0)
     elif siteName.lower() == "PassionHD".lower():
-        for site in ["PassionHDFan.com", "HQSluts.com"]:
-            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+        fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title, 0)
+        
+    for site in ["HQSluts.com", "ImagePost.com", "PornGirlsErotica.com"]:
+        try:
             match = fanSite[2]
-    else: 
-        fanSite = PAextras.getFanArt("HQSluts.com", art, actors, actorName, metadata.title, match)
-    
+        except:
+            pass
+        if match is 1:	
+            break
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+        
+    try:
+        match = fanSite[2]
+    except:
+        pass
     summary = fanSite[1]
-    match = fanSite[2]
-
+    
     try:
         if len(summary) > 0:
             metadata.summary = summary 
