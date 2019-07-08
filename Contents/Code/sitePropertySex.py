@@ -12,17 +12,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
     searchResults = HTML.ElementFromURL(url)
-    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 btKUEO"]'):
-        titleNoFormatting = searchResult.xpath('.//div[1]/h2')[0].text_content().strip()
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
+        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Babes/" + subSite + "] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Property Sex] ", score = score, lang = lang))
 
     return results
 
@@ -37,10 +36,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Babes'
+    metadata.studio = 'VixenX'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h2[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
 
     # Summary
     try:
@@ -49,7 +48,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -97,7 +96,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

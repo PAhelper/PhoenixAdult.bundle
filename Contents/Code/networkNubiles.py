@@ -209,8 +209,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             for posterUrl in photoPageElements.xpath('//figure[@class="photo-thumbnail"]//img'):
                 art.append("https:" + posterUrl.get('src').replace('/tn',''))
         except:
-            pass
-                
+            pass    
 
     j = 1
     Log("Artwork found: " + str(len(art)))

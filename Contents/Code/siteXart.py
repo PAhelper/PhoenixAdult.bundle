@@ -414,7 +414,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for posterURL in detailsPageElements.xpath('//div[@class="gallery-item"]//img'):
             thumbs.append((posterURL.get('src')).replace(" ", "_"))
     except:
-        pass
+        Log("No Thumbnails found")
     background = detailsPageElements.xpath('//img[contains(@src,"/videos")]')[0].get("src")
     metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
     try:
@@ -447,7 +447,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             pass
                         
     else:
-        art = thumbs
+        try:
+            art = thumbs
+        except:
+            pass
     
         try:
             j = 1
@@ -458,6 +461,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
                 #Download image file for analysis
                     try:
+                        #hdr needed to get images from some fansites. No adverse effects seen so far.
                         hdr = {'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'}
                         req = urllib.Request(posterUrl, headers=hdr)
                         img_file = urllib.urlopen(req)

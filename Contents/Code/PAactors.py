@@ -18,7 +18,7 @@ class PhoenixActors:
             skip = False
             # Save the potentional new Actor or Actress to a new variable, replace &nbsp; with a true space, and strip off any surrounding whitespace
             newActor = self.actorsTable[actorsProcessed].replace("\xc2\xa0", " ").replace(',','').strip().title()
-            newPhoto = self.photosTable[actorsProcessed].strip()
+            newPhoto = str(self.photosTable[actorsProcessed]).strip()
 
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if newActor == "Bad Name":
@@ -44,11 +44,13 @@ class PhoenixActors:
             if newActor == "Anita Bellini":
                 newActor = "Anita Bellini Berlusconi"
             if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
-                newActor = "Krystal Boyd" 
+                newActor = "Krystal Boyd"
             if newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
             if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
                 newActor = "April O'Neil"
+            if newActor == "Bridgette B.":
+                newActor = "Bridgette B"
             if newActor == "Capri Cavalli":
                 newActor = "Capri Cavanni"
             if newActor == "Ce Ce Capella":
@@ -71,6 +73,10 @@ class PhoenixActors:
                 newActor = "Pinky June"
             if newActor == "Hailey Reed":
                 newActor = "Haley Reed"
+            if newActor == "Jane Doux":
+                newActor = "Pristine Edge"
+            if newActor == "Jade Indica":
+                newActor = "Miss Jade Indica"
             if newActor == "Jassie Gold" or newActor == "Jaggie Gold":
                 newActor = "Jessi Gold"
             if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
@@ -91,12 +97,14 @@ class PhoenixActors:
                 newActor = "Katerina Hartlova"
             if newActor == "Kendra May Lust":
                 newActor = "Kendra Lust"
+            if newActor == "Khloe Capri" or newActor == "Chloe Capri":
+                newActor = "Khloe Kapri"
             if newActor == "Lara Craft":
                 newActor = "Lora Craft"
             if newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
                 newActor = "Lily Labeau"
             if newActor == "Lilly Lit":
-            	newactor = "Lilly Ford"
+                newActor = "Lilly Ford"
             if newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
                 newActor = "Maddy O'Reilly"
             if newActor == "Maria Rya" or newActor == "Melena Maria":
@@ -107,7 +115,7 @@ class PhoenixActors:
                 newActor = "Bunny Colby"
             if newActor == "Nancy A." or newActor == "Nancy A":
                 newActor = "Nancy Ace"
-            if newActor == "Nathaly" or newActor == "Nathalie Cherie":
+            if newActor == "Nathaly" or newActor == "Nathalie Cherie" or newActor == "Natalie Cherie":
                 newActor = "Nathaly Cherie"
             if newActor == "Nika Noir":
                 newActor = "Nika Noire"
@@ -125,18 +133,8 @@ class PhoenixActors:
                 newActor = "Stella Banxxx"
             if newActor == "Steven St.Croix":
                 newActor = "Steven St. Croix"
-            if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
-                newActor = "Jenna Ross"
-            if newActor == "Kagney Lynn Karter":
-                newActor = "Kagney Linn Karter"
-            if newActor == "Kendra May Lust":
-                newActor = "Kendra Lust"
-            if newActor == "Anikka Albrite":
-                newActor = "Annika Albrite"
-            if newActor == "Anna Morna":
-                newActor = "Anastasia Morna"
-            if newActor == "Jade Indica":
-                newActor = "Miss Jade Indica"
+            if newActor == "Sybil Kailena" or newActor == "Sybil":
+                newActor = "Sybil A"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
 
@@ -149,6 +147,14 @@ class PhoenixActors:
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
+            if metadata.studio == "Bang Bros":
+               if newActor == "Amy":
+                    newActor = "Abella Anderson"
+            if metadata.studio == "FuckedHard18":
+               if newActor == "Allie H":
+                    newActor = "Allie Haze"
+               if newActor == "Remy":
+                   newActor = "Remy LaCroix"
             if metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
@@ -242,7 +248,7 @@ class PhoenixActors:
                 if newActor == "Dani D.":
                     newActor = "Dani Daniels"
                 if newActor == "Davina E.":
-                    newActor = "Sybil"
+                    newActor = "Sybil A"
                 if newActor == "Dee":
                     newActor = "Lady Dee"
                 if newActor == "Defrancesca":
@@ -2128,7 +2134,10 @@ def actorDBfinder(actorName):
         actorPageURL = actorsearch.xpath('//div[@class="col-xs-6 col-sm-3 grid-item grid-item-performer grid-item-performer-145"]/a')[0].get("href")
         actorPageURL = "https://www.adultdvdempire.com" + actorPageURL
         actorPage = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPage.xpath('//a[@class="fancy headshot"]')[0].get("href")
+        try:
+            actorPhotoURL = actorPage.xpath('//a[@class="fancy headshot"]')[0].get("href")
+        except:
+            actorPhotoURL = actorPage.xpath('//div[@class="fancy headshot"]')[0].get("style").replace('background-image:url(','').replace(');','')
         Log(actorName + " found in " + databaseName)
         Log("PhotoURL: " + actorPhotoURL)
     except:
