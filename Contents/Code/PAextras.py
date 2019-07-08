@@ -104,7 +104,6 @@ def getBadMatchID(scene):
             overrideActor = badMatch[badID][1]
             overrideSite = badMatch[badID][2]
             overrideURL = badMatch[badID][3]
-            
             return [overrideActor, overrideSite, overrideURL]
         badID += 1
     return 9999
@@ -152,7 +151,7 @@ def getFanArt(site, art, actors, actorName, title, match):
                                 #Determine where to look for the Actor Name/s
                                 try:
                                     if site in ["AnalPornFan.com", "PassionHDFan.com", "LubedFan.com"]:
-                                        nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[not(contains(@href, "respond"))]/text()')
+                                        nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[not(contains(@href, "respond"))][not(contains(@href, "comments"))]/text()')
                                     elif site == "EroticBeauties.net/pics":
                                         nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]/text()')
                                     elif site == "HQSluts.com":
