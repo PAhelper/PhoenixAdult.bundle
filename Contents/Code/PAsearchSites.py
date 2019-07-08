@@ -986,6 +986,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^nubilef ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^num ', 'NuruMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nw ', 'NaughtyWeddings ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^obj ', 'OnlyBlowjob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^otb ', 'OnlyTeenBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^passion-hd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pav ', 'PixAndVideo ', mediaTitle, flags=re.IGNORECASE)
