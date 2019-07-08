@@ -161,6 +161,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             break
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
         
+    try:
+        match = fanSite[2]
+    except:
+        pass
     summary = fanSite[1]
     
     try:
