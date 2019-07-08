@@ -110,6 +110,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "NF Busty"
     elif "thatsitcomporn" in siteName.lower():
         tagline = "That Sitcom Show"
+    elif "detentiongirls" in siteName.lower():
+        tagline = "Detention Girls"
+    elif "nubileset" in siteName.lower():
+        tagline = "Nubiles ET"
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
@@ -196,6 +200,17 @@ def update(metadata,siteID,movieGenres,movieActors):
             art.append("http:" + posterUrl.get('src').replace('/tn',''))
     except:
         pass
+    
+    if len(art)is 0:
+        try:
+            photoPageURL = "https://nubiles-porn.com/photo/gallery/" + str(metadata.id).split("|")[0]
+            Log("photoPageURL: " + str(photoPageURL))
+            photoPageElements = HTML.ElementFromURL(photoPageURL)
+            for posterUrl in photoPageElements.xpath('//figure[@class="photo-thumbnail"]//img'):
+                art.append("https:" + posterUrl.get('src').replace('/tn',''))
+        except:
+            pass
+                
 
     j = 1
     Log("Artwork found: " + str(len(art)))
