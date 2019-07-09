@@ -38,9 +38,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'Joymii'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="color-title"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="font-cond"]')[0].text_content().strip()
 
-    #Tagline and Collection(s)
+    # Tagline and Collection(s)
     tagline = "Step Secrets"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -50,6 +50,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for genre in genres:
         movieGenres.addGenre(genre)
 
+    # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="descripton"]//p')[0].text_content().strip()
 
     # Release Date
