@@ -6,6 +6,11 @@
         - Update code to scrape cast photos
         - More actress additions based on Scene Title/Summary
     - StepSecrets Title Bugfix
+    - Mylf Network
+        - Title Bugfix
+        - Poster Bugfix
+        - MylfDom Subsite Added
+        - Code Cleanup
 - 2019-07-09 7:00AM AEST - Add NubilesET and Detention Girls
 - 2019-07-09 7:00AM AEST - PAextras improvements and related bugfixes
 - 2019-06-02 2:15PM CST - Bugfix for FamilyStrokes
