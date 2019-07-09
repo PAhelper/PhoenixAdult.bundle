@@ -6,6 +6,8 @@
         - Update code to scrape cast photos
         - More actress additions based on Scene Title/Summary
     - StepSecrets Title Bugfix
+- 2019-07-09 7:00AM AEST - Add NubilesET and Detention Girls
+- 2019-07-09 7:00AM AEST - PAextras improvements and related bugfixes
 - 2019-06-02 2:15PM CST - Bugfix for FamilyStrokes
 - 2019-05-29 3:30PM CST - Bugfixes for VirtualTaboo
 - 2019-05-22:
