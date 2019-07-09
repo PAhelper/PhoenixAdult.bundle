@@ -276,7 +276,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Pervert Gallery
   - POV Perverts
   - Twisted Visual
-+ #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Gangbang Creampie | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### GirlfriendsFilms | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Girls Rimming | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
