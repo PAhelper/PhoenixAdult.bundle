@@ -7,18 +7,34 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     Log('****SEARCH*****')
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="update_details"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="update_title"]/a')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
-        curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        if len(titleNoFormatting) > 29:
-            titleNoFormatting = titleNoFormatting[:32] + "..."
+    # Amateur Allure
+    if siteNum == 564:
+        for searchResult in searchResults.xpath('//div[@class="update_details"]'):
+            titleNoFormatting = searchResult.xpath('.//div[@class="update_title"]/a')[0].text_content().strip()
+            releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:','').strip()).strftime('%Y-%m-%d')
+            curID = searchResult.xpath('.//a[1]')[0].get('href').replace('/','_').replace('?','!')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if len(titleNoFormatting) > 29:
+                titleNoFormatting = titleNoFormatting[:32] + "..."
+            results.Append(MetadataSearchResult(id=curID + "|" + str(siteNum), name=titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score=score, lang=lang))
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+    # Swallow Salon
+    if siteNum == 565:
+        for searchResult in searchResults.xpath('//div[@class="update_details"]'):
+            titleNoFormatting = searchResult.xpath('./a[2]')[0].text_content().strip()
+            releaseDate = parse(searchResult.xpath('.//div[@class="cell update_date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            curID = searchResult.xpath('./a[2]')[0].get('href').replace('/','_').replace('?','!')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if len(titleNoFormatting) > 29:
+                titleNoFormatting = titleNoFormatting[:32] + "..."
+            results.Append(MetadataSearchResult(id=curID + "|" + str(siteNum), name=titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score=score, lang=lang))
+
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -40,13 +56,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//span[@class="update_tags"]//a')
-
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
     movieGenres.addGenre("Amateur")
-
 
     # Release Date
     date = detailsPageElements.xpath('//div[contains(@class,"update_date")]')[0].text_content().strip()
@@ -169,11 +183,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            #actorPhotoURL = art[2]
-            if 'http' not in actorPhotoURL:
-            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            try:
+                actorPageURL = actorLink.get("href")
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                actorPhotoURL = actorPage.xpath('//div[@class="cell_top cell_thumb"]/img').get('src')
+                if 'http' not in actorPhotoURL:
+            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            except:
+                actorPhotoURL = ''
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Manually Add Actors
@@ -338,6 +355,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
     if "Samantha Sin" in metadata.title or "Samantha Sin" in metadata.summary:
         actorName = "Samantha Sin"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Emma Hix" in metadata.title or "Emma Hix" in metadata.summary:
+        actorName = "Emma Hix"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Lexi Mansfield" in metadata.title or "Lexi Mansfield" in metadata.summary:
+        actorName = "Lexi Mansfield"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Emma Wilson" in metadata.title or "Emma Wilson" in metadata.summary:
+        actorName = "Emma Wilson"
         actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
 
