@@ -7,15 +7,15 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 # All supported networks and sites
 
 + #### 21Naturals | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-  - 21Naturals
-  - 21FootArt
-  - 21EroticAnal
+  - 21Naturals ✅
+  - 21FootArt  ✅
+  - 21EroticAnal ✅
 + #### 21Sextreme | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-  - DominatedGirls
-  - GrandpasFuckTeens
-  - LustyGrandmas
-  - TeachMeFisting
-  - Zoliboy
+  - DominatedGirls ✅ ID Search only
+  - GrandpasFuckTeens ✅
+  - LustyGrandmas✅
+  - TeachMeFisting ✅
+  - Zoliboy ✅
 + #### 21Sextury | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AnalTeenAngels
   - ButtPlays
