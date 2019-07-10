@@ -631,7 +631,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### SexBabesVR | Matching type: *[Exact](./manualsearch.md#exact-match)*
 + #### SinsVR | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### SisLovesMe | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (title + date supported to improve score)
-+ #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)* ✅⭕️Issue: Lower case title and always adds ( web at the end of the title)
   - FirstClassPOV
   - IntimateLesbians
   - JessicaJaymesXXX
