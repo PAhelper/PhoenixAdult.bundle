@@ -206,7 +206,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sandy's Fantasies
   - Sex Video Casting
 + #### Deeper | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### DigitalPlayground | Matching type: *[Limited](./manualsearch.md#limited-search)* ❌⚛️
++ #### DigitalPlayground | Matching type: *[Limited](./manualsearch.md#limited-search)* ❌❎
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
   - BlackMeatWhiteFeet
@@ -233,7 +233,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* ❌⚛️ 
++ #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* ❌❎
 + #### FakeHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - FakeTaxi
   - Fakehub Originals
