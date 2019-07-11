@@ -1,5 +1,6 @@
 # Changelog
 
+- 2019-07-10 - TransAngels Overhaul
 - 2019-07-09
     - Amateur Media Fixes / Improvements
         - Fix Search for Swallow Salon

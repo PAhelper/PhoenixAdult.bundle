@@ -818,7 +818,7 @@ searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com",
 searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?query="]
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
-searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","https://www.transangels.com/search/?q="]
+searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","https://www.transangels.com/scene/"]
 searchSites[738] = ["Girls Gone Pink","Girls Gone Pink","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[739] = ["Real Slut Party","Real Slut Party","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://www.mofos.com/scene/"]

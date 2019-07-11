@@ -711,7 +711,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - X Angels
   - Teen Sex Movs
 + #### Tonights Girlfriend | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only** 
-+ #### TransAngels | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### TransAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TushyRaw | Matching type: *[Exact](./manualsearch.md#exact-match)*

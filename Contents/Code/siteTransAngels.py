@@ -5,23 +5,31 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="c-scene-info"]'):
-        titleNoFormatting = searchResult.xpath('.//a[@class="c-scene-info__title"]')[0].text_content().strip()
-        curID = searchResult.xpath('.//a[@class="c-scene-info__title"]')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="c-scene-info__date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    searchResults = HTML.ElementFromURL(url)
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-2 fCFhuf"]'):
+        titleNoFormatting = searchResult.xpath('./h1')[0].text_content().replace('Trailer','').strip()
+        curID = url.replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')[0].text_content().replace('Release Date:','').strip()).strftime('%Y-%m-%d')
+        if sceneTitle:
+            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TransAngels" + "] " + releaseDate, score = score, lang = lang))
+            score = 90
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TransAngels] " + releaseDate, score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -32,10 +40,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'TransAngels'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="c-video__details__title"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="c-video-info__descsription l-small-spacer"]/p')[0].text_content().strip()
+    try:
+        metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]/div[2]')[0].text_content().strip()
+    except:
+        pass
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -43,51 +54,51 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Genres
-    genres = detailsPageElements.xpath('//li[@class="c-tags-slider__col"]/a')
+    genres = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]/a')
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower()
+            genreName = genreLink.text_content().replace(',','').strip().lower()
             movieGenres.addGenre(genreName)
     movieGenres.addGenre("Transsexual")
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="c-video__details__date"]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')
     if len(date) > 0:
+        date = date[0].text_content().strip().replace('Release Date:','')
         date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('//div[@class="c-video__details__models"]/a')
-    if len(actors) > 0:
-        if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
-        if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
-        if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().replace(',','').strip())
-            actorPhotoURL = ''
-            movieActors.addActor(actorName,actorPhotoURL)
-
-    # Director
+    try:
+        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
+        if len(actors) > 0:
+            if len(actors) == 3:
+                movieGenres.addGenre("Threesome")
+            if len(actors) == 4:
+                movieGenres.addGenre("Foursome")
+            if len(actors) > 4:
+                movieGenres.addGenre("Orgy")
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                try:
+                    actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
+                except:
+                    actorPhotoURL = ''
+                movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
 
     ### Posters and artwork ###
 
     # Video trailer background image
     try:
-        twitterBG = detailsPageElements.xpath('//img[@class="c-video__poster-img"]')[0].get('src')
+        twitterBG = detailsPageElements.xpath('//div[@class="tg5e7m-2 evtSOm"]/img')[0].get('src')
         art.append(twitterBG)
     except:
         pass
-
-    # Photos
-    photos = detailsPageElements.xpath('//img[contains(@class, "c-image-info__img js-image-load-check")]')
-    if len(photos) > 0:
-        for photoLink in photos:
-            photo = photoLink.get('src')
-            art.append(photo)
 
     j = 1
     Log("Artwork found: " + str(len(art)))
