@@ -1,5 +1,10 @@
 # Changelog
 
+- 2019-07-11
+    - TeamSkeet
+        - Manual Scene Addition
+        - Update code for scraping posters
+        - General Code Cleanup
 - 2019-07-10 - TransAngels Overhaul
 - 2019-07-09
     - Amateur Media Fixes / Improvements
