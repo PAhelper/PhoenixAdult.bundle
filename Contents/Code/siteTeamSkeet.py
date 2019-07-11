@@ -22,43 +22,55 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
+    if searchTitle == "Eavesdropping And Pussy Popping":
+        Log("Manual Search Match")
+        curID = ("www.teamskeet.com/t1/trailer/view/55019").replace('/','+')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Eavesdropping And Pussy Popping" + " [TeamSkeet/TeenPies] " + "2019-02-27", score = 101, lang = lang))
+
     return results
 
 
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('+','/')
-
-    url = "https://" + temp
+    url = "https://" + str(metadata.id).split("|")[0].replace('+','/')
     detailsPageElements = HTML.ElementFromURL(url)
+    art = []
+    metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
+
+    # Studio
+    metadata.studio = "TeamSkeet"
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//title')[0].text_content().split(" | ")[1]
 
     # Summary
-    metadata.studio = "TeamSkeet"
     metadata.summary = detailsPageElements.xpath('//div[@class="gray"]')[1].text_content().replace('ï¿½', '')
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().split(" | ")[1]
+
+    # Release Date
     releaseDate = detailsPageElements.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:].replace("th,",",").replace("st,",",").replace("nd,",",").replace("rd,",",")
     date_object = datetime.strptime(releaseDate, '%B %d, %Y')
     metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year 
+    metadata.year = metadata.originally_available_at.year
+
+    #Tagline and Collection(s)
     tagline = detailsPageElements.xpath('//div[@style="white-space:nowrap;"]')[0].text_content()[6:].strip()
     endofsubsite = tagline.find('.com')
     tagline = tagline[:endofsubsite].strip()
     metadata.tagline = tagline
-    metadata.collections.clear()
     metadata.collections.add(metadata.tagline)
 
     # Genres
-    movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//a[contains(@href,"?tags=")]')
-
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
 
     # Actors
-    movieActors.clearActors()
     try:
         actortext = detailsPageElements.xpath('//title')[0].text_content().split('|')[0].strip()
         actors = actortext.split('and')
@@ -70,25 +82,21 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         pass
 
-    # Posters/Background
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
+    ### Posters and artwork ###
 
-    background = detailsPageElements.xpath('//video')[0].get("poster")
+    # Video trailer background image
     try:
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
+        twitterBG = detailsPageElements.xpath('//video')[0].get("poster")
+        art.append(twitterBG)
     except:
         pass
-    
-    posters = detailsPageElements.xpath('//a[contains(@href,"/trailers/")]')
-    posterNum = 1
-    for poster in posters:
-        posterURL = poster.get("href")
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-        posterNum += 1
-    
 
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+            j = j + 1
 
-    
     return metadata
