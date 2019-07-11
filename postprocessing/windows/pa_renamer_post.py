@@ -92,7 +92,7 @@ def main():
                         os.rename(item, newname)
                         os.chmod(newname, 0775)
             if cleanup:
-                if filetype in ["txt", "jpg", "jpeg"]:
+                if filetype in ["txt", "jpg", "jpeg", "nfo"]:
                     os.remove(fullfilepath)
                     logger.info("Removed: %s" % item)
                 try:
@@ -100,23 +100,6 @@ def main():
                     logger.info("Empy Directory Deleted")
                 except:
                     pass
-                
-                
-#        for item in os.listdir(dir):
-#            if item.endswith(".avi"):
-#                filename_new = filename_new.replace(".mp4", ".avi")
-#            elif item.endswith(".mkv"):
-#                filename_new = filename_new.replace(".mp4", ".mkv")
-#            if item.endswith(".mp4") or item.endswith(".avi") or item.endswith(".mkv"):
-#                item = os.path.join(dir, item)
-#                newname = os.path.join(dir, filename_new)
-#                if dryrun:
-#                    logger.info("[DRYRUN] Renaming: %s -> %s" % (item, newname))
-#                else:
-#                    logger.info("Renaming: %s -> %s" % (item, newname))
-#                    os.rename(item, newname)
-#                    os.chmod(newname, 0775)
-#                exit(0)
     else:
         logger.critical("No match found for dir: %s" % dir)
 
