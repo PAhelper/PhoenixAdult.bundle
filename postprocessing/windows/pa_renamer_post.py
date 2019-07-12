@@ -15,6 +15,7 @@ def main():
     cleanup=False
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
+        #uncomment to enable cleanup when using sabnzbd
         #cleanup=True
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
@@ -62,34 +63,36 @@ def main():
     if shoot is not None:
         # filename should be: "Studio - Model Names.mp4" or "Studio - Title Words.mp4"
         # TODO: figure out if we should use titles or models
+        
+        # Capitalise the title (first letter of every word). Keep original studio in case we swap it out later.
         filename_new = shoot['studio'] + ' - ' + string.capwords(shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
         logger.debug("New file name: %s" % filename_new)
         
+        #check if any overrides are set in collections.py
         overrideSettings = collections.getSiteMatch(shoot['studio'], dir)
 
         for item in os.listdir(dir):
             fullfilepath = os.path.join(dir, item)
             filetype = item.split('.')[-1]
             logger.debug("The filetype is: %s" % filetype)
+            #if the file is over 50MB rename it
             if os.path.getsize(fullfilepath) > 50000000:
                 if overrideSettings != 9999:
                     filename_new = filename_new.replace(shoot['studio'], overrideSettings[0])
                     dir_new = dir.split(overrideSettings[1])[0] + overrideSettings[2]
                 else:
                     dir_new = dir
-                filename_new = filename_new.replace(".mp4", '.' + filetype)
                 if filetype in ["mp4", "avi", "mkv"]:
-                    item = os.path.join(dir, item)
-                    newname = os.path.join(dir_new, filename_new)
+                    newname = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
-                        logger.info("[DRYRUN] Renaming: %s -> %s" % (item, newname))
+                        logger.info("[DRYRUN] Renaming: %s -> %s" % (fullfilepath, newname))
                     else:
                         try:
                             os.makedirs(dir_new)
                         except:
                             pass
-                        logger.info("Renaming/Moving from: %s --> %s" % (item, newname))
-                        os.rename(item, newname)
+                        logger.info("Renaming/Moving from: %s --> %s" % (fullfilepath, newname))
+                        os.rename(fullfilepath, newname)
                         os.chmod(newname, 0775)
             if cleanup:
                 if filetype in ["txt", "jpg", "jpeg", "nfo"]:
@@ -97,9 +100,10 @@ def main():
                     logger.info("Removed: %s" % item)
                 try:
                     os.rmdir(dir)
-                    logger.info("Empy Directory Deleted")
+                    logger.info("Empty Directory Deleted")
                 except:
                     pass
+                
     else:
         logger.critical("No match found for dir: %s" % dir)
 
