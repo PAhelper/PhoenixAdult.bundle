@@ -16,12 +16,13 @@ def main():
     cleanup=False
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
+        #cleanup=True
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
         parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
         parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
-        parser.add_argument("-c", "--cleanup", help="Delete oleftover files and cleanup folders after rename", action="store_true")
+        parser.add_argument("-c", "--cleanup", help="Delete lefftover files and cleanup folders after rename", action="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
