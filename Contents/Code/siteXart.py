@@ -434,7 +434,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         match = fanSite[2]
         if match is 1:	
             break
-
+    try:
+        art = thumbs
+    except:
+        pass
  
     if match is 1 or match is 2:
         # Return, first few, last one and randóm selection of images
@@ -445,13 +448,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("Selecting subset of " + str(len(art)) + " images from the set.")
         except:
             pass
-                        
-    else:
-        try:
-            art = thumbs
-        except:
-            pass
-    
+            
         try:
             j = 1
                                                           
