@@ -206,7 +206,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sandy's Fantasies
   - Sex Video Casting
 + #### Deeper | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### DigitalPlayground | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
   - BlackMeatWhiteFeet
@@ -266,7 +266,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MrPOV
   - TheDickSuckers
 + #### First Anal Quest | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#limited-search)* - **SceneID, Date Add**
++ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### FuckedHard18 | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Analized

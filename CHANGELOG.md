@@ -4,6 +4,7 @@
     - Added Fitting-Room Support
     - Some Sitelist cleanup
     - Genre merges (related to Fitting-Room)
+    - DigitalPlayground Overhaul
 - 2019-07-11
     - TeamSkeet
         - Manual Scene Addition
