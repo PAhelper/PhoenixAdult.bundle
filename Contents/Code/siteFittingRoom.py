@@ -14,14 +14,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Scene Title: " + sceneTitle)
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResult = HTML.ElementFromURL(url)
-
     titleNoFormatting = searchResult.xpath('//title')[0].text_content().split("|")[1].strip()
     curID = url.replace('/','_').replace('?','!')
     if searchDate:
         releaseDate = parse(searchDate).strftime('%Y-%m-%d')
     else:
         releaseDate = ''
-    score = 100
+    if sceneTitle:
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 90
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate + "|" + sceneID, name = titleNoFormatting + " [Fitting-Room] ", score = score, lang = lang))
 
     return results
