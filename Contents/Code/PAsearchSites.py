@@ -78,8 +78,9 @@ import siteDadCrush
 import siteStepSecrets
 import siteVRHush
 import networkMetArt
+import siteFittingRoom
 
-searchSites = [None] * 758
+searchSites = [None] * 759
 
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
@@ -839,6 +840,7 @@ searchSites[754] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.m
 searchSites[755] = ["NubilesET","NubilesET","https://nubileset.com/","https://nubileset.com/video/"]
 searchSites[756] = ["Detention Girls","Detention Girls","https://detentiongirls.com","https://detentiongirls.com/video/"]
 searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.mylfdom.com/movies/"]
+searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com","https://www.fitting-room.com/videos/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -935,6 +937,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^frs ', 'FitnessRooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ft ', 'FastTimes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ftx ', 'FakeTaxi ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^fittingroom ', 'Fitting-Room ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gft ', 'GrandpasFuckTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gta ', 'GirlsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gw ', 'GirlsWay ', mediaTitle, flags=re.IGNORECASE)

@@ -1,5 +1,9 @@
 # Changelog
 
+- 2019-07-12
+    - Added Fitting-Room Support
+    - Some Sitelist cleanup
+    - Genre merges (related to Fitting-Room)
 - 2019-07-11
     - TeamSkeet
         - Manual Scene Addition
