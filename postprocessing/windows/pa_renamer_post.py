@@ -2,11 +2,10 @@
 # !/usr/bin/env python
 
 import sys
-import os, glob
+import os, glob, shutil
 import logging
 import argparse
 import string
-import re
 from patools import pa_parse_dir
 import collections
 
@@ -63,7 +62,7 @@ def main():
     if shoot is not None:
         # filename should be: "Studio - Model Names.mp4" or "Studio - Title Words.mp4"
         # TODO: figure out if we should use titles or models
-        filename_new = string.capwords(shoot['studio'] + ' - ' + shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
+        filename_new = shoot['studio'] + ' - ' + string.capwords(shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
         logger.debug("New file name: %s" % filename_new)
         
         overrideSettings = collections.getSiteMatch(shoot['studio'], dir)
@@ -71,10 +70,10 @@ def main():
         for item in os.listdir(dir):
             fullfilepath = os.path.join(dir, item)
             filetype = item.split('.')[-1]
-            logger.info("The filetype is: %s" % filetype)
+            logger.debug("The filetype is: %s" % filetype)
             if os.path.getsize(fullfilepath) > 50000000:
                 if overrideSettings != 9999:
-                    filename_new = re.sub(shoot['studio'], overrideSettings[0], filename_new, flags=re.IGNORECASE)
+                    filename_new = filename_new.replace(shoot['studio'], overrideSettings[0])
                     dir_new = dir.split(overrideSettings[1])[0] + overrideSettings[2]
                 else:
                     dir_new = dir
