@@ -22,7 +22,7 @@ def main():
         parser.add_argument("directory")
         parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
         parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
-        parser.add_argument("-c", "--cleanup", help="Delete lefftover files and cleanup folders after rename", action="store_true")
+        parser.add_argument("-c", "--cleanup", help="Delete leftover files and cleanup folders after rename", action="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
@@ -83,18 +83,18 @@ def main():
                 else:
                     dir_new = dir
                 if filetype in ["mp4", "avi", "mkv"]:
-                    newname = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
+                    newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
-                        logger.info("[DRYRUN] Renaming: %s -> %s" % (fullfilepath, newname))
+                        logger.info("[DRYRUN] Renaming: %s -> %s" % (fullfilepath, newpath))
                     else:
                         try:
                             os.makedirs(dir_new)
                         except:
                             pass
-                        logger.info("Renaming/Moving from: %s --> %s" % (fullfilepath, newname))
-                        os.rename(fullfilepath, newname)
-                        os.chmod(newname, 0775)
-            if cleanup:
+                        logger.info("Renaming/Moving from: %s --> %s" % (fullfilepath, newpath))
+                        os.rename(fullfilepath, newpath)
+                        os.chmod(newpath, 0775)
+            if cleanup and not dryrun:
                 if filetype in ["txt", "jpg", "jpeg", "nfo"]:
                     os.remove(fullfilepath)
                     logger.info("Removed: %s" % item)
