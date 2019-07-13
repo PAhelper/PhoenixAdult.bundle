@@ -1,5 +1,6 @@
 # Changelog
 
+- 2019-07-13 - DigitalPlayground Improvements / Bugfixes
 - 2019-07-12
     - Added Fitting-Room Support
     - Some Sitelist cleanup
