@@ -13,46 +13,19 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
 
-    url = "https://www.digitalplayground.com/movie/" + sceneID + "/1"
-    searchResults = HTML.ElementFromURL(url)
-    sceneType = searchResults.xpath('//div[@class="i01da7-0 bRuuus"]/a[1]')[0].text_content().strip()
-    if "Movie" in sceneType:
-        Log("Is Movie")
-        # Scenes From Movie
-        for searchResult in searchResults.xpath('//span[@class="dtkdna-5-span dtkdna-7 iFfrrf"]'):
-            titleNoFormatting = searchResult.xpath('.//a')[0].text_content().strip()
-            curID = url.replace('/','_').replace('?','!')
-            subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
-            if sceneTitle:
-                score = 100
-            else:
-                score = 90
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + titleNoFormatting, name = titleNoFormatting + " [DigitalPlayground/" + subSite + "] ", score = score, lang = lang))
-
-        # Movie
-        for searchResult in searchResults.xpath('//div[@class="wxt7nk-2 iHryst"]'):
-            titleNoFormatting = searchResult.xpath('.//h1')[0].text_content().strip()
-            curID = url.replace('/', '_').replace('?', '!')
-            subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
-            if sceneTitle:
-                score = 100
-            else:
-                score = 90
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + titleNoFormatting, name = titleNoFormatting + " [DigitalPlayground/" + subSite + "] ", score = score, lang = lang))
-
-    else:
-        Log("Is Scene")
-        url = "https://www.digitalplayground.com/scene/" + sceneID + "/1"
-        searchResult = HTML.ElementFromURL(url)
-        titleNoFormatting = searchResult.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
-        curID = url.replace('/','_').replace('?','!')
+    url = "https://www.digitalplayground.com/scene/" + sceneID + "/1"
+    searchResult = HTML.ElementFromURL(url)
+    titleNoFormatting = searchResult.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer for','').replace('Trailer','').strip()
+    curID = url.replace('/','_').replace('?','!')
+    try:
         subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
-        if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-        else:
-            score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [DigitalPlayground/" + subSite + "] ", score = score, lang = lang))
-
+    except:
+        subSite = ''
+    if sceneTitle:
+        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 90
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [DigitalPlayground/" + subSite + "] ", score = score, lang = lang))
     return results
 
 
@@ -65,15 +38,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     movieGenres.clearGenres()
     movieActors.clearActors()
+    sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
+    if "Movie" in sceneType:
+        Log("Is Movie")
 
     # Studio
     metadata.studio = 'DigitalPlayground'
 
     # Title
-    if "movie" in url:
-        metadata.title = str(metadata.id).split("|")[2]
-    else:
-        metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer for','').replace('Trailer','').strip()
 
     # Summary
     try:
@@ -82,12 +55,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    try:
+        tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+    except:
+        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
 
-    if "movie" in url:
-        movieCollection = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content()
+    # Movie Collection
+    if "Movie Info" == sceneType:
+        movieCollection = metadata.title
         metadata.collections.add(movieCollection)
 
     # Genres
@@ -143,12 +122,15 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
 
-    # Photos
-    photos = detailsPageElements.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')
-    if len(photos) > 0:
-        for photoLink in photos:
-            photo = photoLink.get('src')
-            art.append(photo)
+    # Movie Poster / Photos
+    if "Movie Info" == sceneType:
+        moviePageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//div[@class="i01da7-0 bRuuus"]/a[1]')[0].get('href')
+        moviePage = HTML.ElementFromURL(moviePageURL)
+        photos = moviePage.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')
+        if len(photos) > 0:
+            for photoLink in photos:
+                photo = photoLink.get('src')
+                art.append(photo)
 
     j = 1
     Log("Artwork found: " + str(len(art)))
