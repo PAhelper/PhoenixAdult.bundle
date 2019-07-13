@@ -9,17 +9,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         for searchResult in searchResults.xpath('//article'):
             if len(searchResult.xpath('//article')) > 0:
                 titleNoFormatting = searchResult.xpath('.//h1')[0].text_content().strip()
-                Log("Result Title: " + titleNoFormatting)
                 curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-                Log("curID: " + curID)
                 releaseDate = parse(searchResult.xpath('.//time')[0].text_content()).strftime('%Y-%m-%d')
-                Log("releaseDate: " + releaseDate)
-                actors = searchResult.xpath('.//ul[@class="actors"]//a')
-                Log("# actors: " + str(len(actors)))
-                firstActor = actors[0].text_content().strip()
-                Log("firstActor: " + firstActor)
                 subSite = searchResult.xpath('.//aside//div//a')[0].text_content().replace('.com','').strip()
-                Log("subSite: " + subSite)
                 if searchDate:
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:

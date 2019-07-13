@@ -6,6 +6,7 @@
     - Genre merges (related to Fitting-Room)
     - DigitalPlayground Overhaul
     - Added FamilyHookups Support
+    - TMW Search Bugfix
 - 2019-07-11
     - TeamSkeet
         - Manual Scene Addition
