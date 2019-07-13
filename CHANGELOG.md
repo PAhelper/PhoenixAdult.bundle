@@ -1,11 +1,29 @@
 # Changelog
 
+- 2019-07-12
+    - Added Fitting-Room Support
+    - Some Sitelist cleanup
+    - Genre merges (related to Fitting-Room)
+    - DigitalPlayground Overhaul
+    - Added FamilyHookups Support
+    - TMW Search Bugfix
+- 2019-07-11
+    - TeamSkeet
+        - Manual Scene Addition
+        - Update code for scraping posters
+        - General Code Cleanup
+- 2019-07-10 - TransAngels Overhaul
 - 2019-07-09
     - Amateur Media Fixes / Improvements
         - Fix Search for Swallow Salon
         - Update code to scrape cast photos
         - More actress additions based on Scene Title/Summary
     - StepSecrets Title Bugfix
+    - Mylf Network
+        - Title Bugfix
+        - Poster Bugfix
+        - MylfDom Subsite Added
+        - Code Cleanup
 - 2019-07-09 7:00AM AEST - Add NubilesET and Detention Girls
 - 2019-07-09 7:00AM AEST - PAextras improvements and related bugfixes
 - 2019-06-02 2:15PM CST - Bugfix for FamilyStrokes

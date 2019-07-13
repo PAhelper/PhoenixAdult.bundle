@@ -765,7 +765,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mylf
             ###############
             if siteNum == 674:
-                if searchSiteID == 9999 or (searchSiteID >= 674 and searchSiteID <= 683):
+                if searchSiteID == 9999 or (searchSiteID >= 674 and searchSiteID <= 683) or searchSiteID == 757:
                     results = PAsearchSites.siteMylf.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -949,6 +949,20 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 753:
                 if searchSiteID == 9999 or searchSiteID == 753 or searchSiteID == 754:
                     results = PAsearchSites.networkMetArt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Fitting-Room
+            ###############
+            if siteNum == 758:
+                if searchSiteID == 9999 or searchSiteID == 758:
+                    results = PAsearchSites.siteFittingRoom.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## FamilyHookups
+            ###############
+            if siteNum == 759:
+                if searchSiteID == 9999 or searchSiteID == 759:
+                    results = PAsearchSites.siteFamilyHookups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1459,7 +1473,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Mylf                                                    ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 674 and siteID <= 683):
+        if (siteID >= 674 and siteID <= 683) or siteID == 757:
             metadata = PAsearchSites.siteMylf.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1669,6 +1683,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 753 or siteID == 754:
             metadata = PAsearchSites.networkMetArt.updateMetArt(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Fitting-Room                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 758:
+            metadata = PAsearchSites.siteFittingRoom.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  FamilyHookups                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 759:
+            metadata = PAsearchSites.siteFamilyHookups.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

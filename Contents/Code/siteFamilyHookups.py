@@ -15,14 +15,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-2 fCFhuf"]'):
-        titleNoFormatting = searchResult.xpath('./h1')[0].text_content().replace('Trailer','').strip()
+        titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')[0].text_content().replace('Release Date:','').strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TransAngels] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [FamilyHookups] ", score = score, lang = lang))
 
     return results
 
@@ -37,10 +40,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'TransAngels'
+    metadata.studio = 'FamilyHookups'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    metadata.title = detailsPageElements.xpath('//h2[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
 
     # Summary
     try:
@@ -59,15 +62,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().replace(',','').strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Transsexual")
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')
+    date = str(metadata.id).split("|")[2]
     if len(date) > 0:
-        date = date[0].text_content().strip().replace('Release Date:','')
-        date_object = datetime.strptime(date, '%B %d, %Y')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
 
     # Actors
     try:
@@ -81,13 +83,17 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieGenres.addGenre("Orgy")
             for actorLink in actors:
                 actorName = str(actorLink.text_content().strip())
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                actorPage = HTML.ElementFromURL(actorPageURL)
-                try:
-                    actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
-                except:
-                    actorPhotoURL = ''
+                actorPhotoURL = ''
                 movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
+
+    # Director
+    director = metadata.directors.new()
+    try:
+        directors = detailsPageElements.xpath('//p[@class="director"]/a')
+        for dirname in directors:
+            director.name = dirname.text_content().strip()
     except:
         pass
 
@@ -103,7 +109,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     j = 1
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)

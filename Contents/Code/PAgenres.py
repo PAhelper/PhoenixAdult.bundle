@@ -413,6 +413,16 @@ class PhoenixGenres:
                 newGenre = "pool"
             if "holidayparty" == newGenre.lower():
                 newGenre = "holidays"
+            if "sexo" == newGenre.lower():
+                newGenre = "sex"
+            if "modelo" == newGenre.lower():
+                newGenre = "model"
+            if "braguitas" == newGenre.lower():
+                newGenre = "panties"
+            if "lenceria" == newGenre.lower():
+                newGenre = "lingerie"
+            if "masturbacion" == newGenre.lower():
+                newGenre = "masturbation"
 
             ##### Position
             if "doggystyle" == newGenre.lower() or "doggystyle (standing)" == newGenre.lower() or "doggystyle (pov)" == newGenre.lower() or "doggystye" == newGenre.lower() or "doggy style" == newGenre.lower() or "doggiestyle" == newGenre.lower() or "doggystyle - standing" == newGenre.lower() or "standing doggystyle" == newGenre.lower() or "doggystyle - pov" == newGenre.lower():
