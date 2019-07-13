@@ -889,6 +889,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^add ', 'ManualAddActors ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^analb ', 'AnalBeauty ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcasting ', 'BangCasting ', mediaTitle, flags=re.IGNORECASE)
