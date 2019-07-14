@@ -20,7 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     try:
         subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
     except:
-        subSite = ''
+        subSite = "Digital Playground"
     if sceneTitle:
         score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
     else:
@@ -38,8 +38,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     movieGenres.clearGenres()
     movieActors.clearActors()
-    sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
+    try:
+        sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[2]')[0].text_content().strip()
+    except:
+        sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
     if "Movie" in sceneType:
+        sceneType = "Movie"
         Log("Is Movie")
 
     # Studio
@@ -65,7 +69,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.collections.add(tagline)
 
     # Movie Collection
-    if "Movie Info" == sceneType:
+    if sceneType == "Movie":
         movieCollection = metadata.title
         metadata.collections.add(movieCollection)
 
@@ -123,7 +127,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
 
     # Movie Poster / Photos
-    if "Movie Info" == sceneType:
+    if sceneType == "Movie":
         moviePageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//div[@class="i01da7-0 bRuuus"]/a[1]')[0].get('href')
         moviePage = HTML.ElementFromURL(moviePageURL)
         photos = moviePage.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')
