@@ -20,7 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     try:
         subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
     except:
-        subSite = "Digital Playground"
+        subSite = "DigitalPlayground"
     if sceneTitle:
         score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
     else:
