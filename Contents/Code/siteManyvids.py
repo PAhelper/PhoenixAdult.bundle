@@ -17,11 +17,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('//h2[@class="h2 m-0"]')[0].text_content()
         curID = searchTitle.lower().replace(" ","-").replace("'","-")
         subSite = searchResult.xpath('//a[@class="username "]')[0].text_content().strip()
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [ManyVids/" + subSite + "] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [ManyVids/" + subSite + "] ", score = score, lang = lang))
     return results
 
 
@@ -60,7 +64,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Date
+    # Release Date
+    date = str(metadata.id).split("|")[2]
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
 
     # Actors
     movieActors.clearActors()
