@@ -149,6 +149,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Teens Like It Black
   - ZZ Series
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title/Actor Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Czech Amateurs
   - Czech Bangbus
@@ -206,7 +207,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sandy's Fantasies
   - Sex Video Casting
 + #### Deeper | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (Only standalone scenes and full movies supported)
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
   - BlackMeatWhiteFeet
@@ -251,7 +252,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RoccoSiffredi
   - TeraPatrick
 + #### FamilyHookups | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-+ #### FamilyStrokes | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **Title Search (doesn't always work)**
++ #### FamilyStrokes | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **DirectURL, Title Search available for some scenes**
 + #### FantasyMassage  | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllGirlMassage
   - FantasyMassage
@@ -267,7 +268,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MrPOV
   - TheDickSuckers
 + #### First Anal Quest | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
++ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID (as listed in URL), Date Add**
 + #### FuckedHard18 | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Analized
