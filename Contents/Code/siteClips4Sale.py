@@ -43,8 +43,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="clipTitle"]')[0].text_content().replace('(HD MP4)','').replace('(WMV)','').strip()
 
     # Summary
-    summary = detailsPageElements.xpath('//div[contains(@class, "dtext dheight")]/p[last()]')[0].text_content().strip()
-    summary = summary.split("--SCREEN SIZE")[0] #K Klixen
+    summary = detailsPageElements.xpath('//div[contains(@class, "dtext dheight")]')[0].text_content().strip()
+    summary = summary.split("--SCREEN SIZE")[0].strip() #K Klixen
+    summary = summary.split("Description:")[1].split("window.NREUM")[0].replace("**TOP 50 CLIP**","").replace("1920x1080 (HD1080)","").strip() # MHBHJ
     metadata.summary = summary
 
     #Tagline and Collection(s)
@@ -52,19 +53,60 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Genres
-    # Category
+    # Actors / Genres
+    # Main Category
     cat = detailsPageElements.xpath('//div[@class="clipInfo clip_details"]/div[1]/a')[0].text_content().strip().lower()
     movieGenres.addGenre(cat)
     # Related Categories / Keywords
     genreList =[]
     genres = detailsPageElements.xpath('//span[@class="relatedCatLinks"]/span/a')
     if len(genres) > 0:
-        for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower()
+        for genre in genres:
+            genreName = genre.text_content().strip().lower()
             genreList.append(genreName)
-            movieGenres.addGenre(genreName)
     Log(str(genreList))
+    # Add Actors
+    if "MARKS HEAD BOBBERS" in tagline:
+        movieActors.addActor("Mark Rockwell", "")
+        if "mark rockwell" in genreList:
+            genreList.remove("mark rockwell")
+        if "Alexa Grace" in metadata.summary or "alexa grace" in genreList:
+            movieActors.addActor("Alexa Grace","")
+            genreList.remove("alexa grace")
+        if "Remy LaCroix" in metadata.summary or "alexa grace" in genreList:
+            movieActors.addActor("Remy LaCroix","")
+            genreList.remove("remy lacroix")
+        if "Jade Indica" in metadata.summary or "jade indica" in genreList:
+            movieActors.addActor("Jade Indica","")
+            genreList.remove("jade indica")
+        if "Dillion Carter" in metadata.summary or "dillion carter" in genreList:
+            movieActors.addActor("Dillion Carter","")
+            genreList.remove("dillion carter")
+        if "Sierra Cure" in metadata.summary or "sierra cure" in genreList:
+            movieActors.addActor("Sierra Cure","")
+            genreList.remove("sierra cure")
+        if "Britney Stevens" in metadata.summary or "britney stevens" in genreList:
+            movieActors.addActor("Britney Stevens","")
+            genreList.remove("britney stevens")
+        if "Megan Piper" in metadata.summary or "megan piper" in genreList:
+            movieActors.addActor("Megan Piper","")
+            genreList.remove("megan piper")
+        if "Alexis Venton" in metadata.summary or "alexis venton" in genreList:
+            movieActors.addActor("Alexis Venton","")
+            genreList.remove("alexis venton")
+        if "Jessica Rayne" in metadata.summary or "jessica rayne" in genreList:
+            movieActors.addActor("Jessica Rayne","")
+            genreList.remove("jessica rayne")
+        if "Mandy Haze" in metadata.summary or "mandy haze" in genreList:
+            movieActors.addActor("Mandy Haze","")
+            genreList.remove("mandy haze")
+    else:
+        actorName = tagline
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    # Add Genres
+    for genre in genreList:
+        movieGenres.addGenre(genre)
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="clearfix infoRow2 clip_details"]/div/div[2]/div[3]/span/span')[0].text_content().strip()[:-8]
@@ -74,25 +116,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    if "MARKS HEAD BOBBERS" in tagline:
-        movieActors.addActor("Mark Rockwell", "")
-        if "Alexa Grace" in metadata.summary:
-            movieActors.addActor("Alexa Grace","")
-        if "Remy LaCroix" in metadata.summary:
-            movieActors.addActor("Remy LaCroix","")
-        if "jade indica" in genreList:
-                movieActors.addActor("Jade Indica","")
-    else:
-        actorName = tagline
-        actorPhotoURL = ''
-        movieActors.addActor(actorName, actorPhotoURL)
-
     ### Posters and artwork ###
 
     # Video trailer background image
-    twitterBG = "http://imagecdn.clips4sale.com/accounts99/" + userID + "/clip_images/previewlg_" + sceneID + ".jpg"
-    art.append(twitterBG)
+    try:
+        twitterBG = "http://imagecdn.clips4sale.com/accounts99/" + userID + "/clip_images/previewlg_" + sceneID + ".jpg"
+        art.append(twitterBG)
+    except:
+        pass
 
     j = 1
     Log("Artwork found: " + str(len(art)))
