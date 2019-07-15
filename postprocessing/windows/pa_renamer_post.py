@@ -103,6 +103,7 @@ def main():
                     logger.info("Empty Directory Deleted")
                 except:
                     pass
+        logger.info("Successful")
                 
     else:
         logger.critical("No match found for dir: %s" % dir)
