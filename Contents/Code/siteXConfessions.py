@@ -7,11 +7,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class=" grid__item  "]'):
-        titleNoFormatting = searchResult.xpath('//img')[0].get('alt')
-        curID = searchResult.xpath('//a[@class="movie-cover movie-cover--landscape"]')[0].get('href').replace('/','_').replace('?','!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [XConfessions] ", score = score, lang = lang))
-
+        try:
+            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
+            curID = searchResult.xpath('.//a')[0].get('href').replace('/', '_').replace('?', '!')
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [XConfessions] ", score = score, lang = lang))
+        except:
+            pass
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -79,6 +81,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         pass
 
+    # Photos
+    photos = detailsPageElements.xpath('//div[@class="picture"]/div')
+    if len(photos) > 0:
+        for photoLink in photos:
+            photo = photoLink.get('href')
+            art.append(photo)
 
     j = 1
     Log("Artwork found: " + str(len(art)))
