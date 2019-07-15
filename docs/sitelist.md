@@ -631,6 +631,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - We Live Together
   - Wives in Pantyhose
 + #### SexyHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
+  - Dane Jones
+  - Fitness Rooms
+  - Girlfriends.xxx
+  - Lesbea
+  - Massage Rooms
+  - MomXXX
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### SexBabesVR | Matching type: *[Exact](./manualsearch.md#exact-match)*
 + #### SinsVR | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -769,12 +775,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### WowGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-  - Dane Jones
-  - Fitness Rooms
-  - Girlfriends
-  - Lesbea
-  - Massage Rooms
-  - MomXXX
 + #### XConfessions | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Xempire | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Darkx
