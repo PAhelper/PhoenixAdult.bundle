@@ -7,6 +7,8 @@
     - Genre Merges
     - Perfect Gonzo Title Bugfix & Code Cleanup
     - DDF Search Bugfix, Remove Verbose Logging
+    - Babes Title Improvements
+    - Actress Merges
 - 2019-07-13 - DigitalPlayground Improvements / Bugfixes
 - 2019-07-12
     - Added Fitting-Room Support
