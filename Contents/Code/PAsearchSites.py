@@ -1016,6 +1016,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^smb ', 'ShareMyBF ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ssn ', 'ShesNew ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sts ', 'StrandedTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tdp ', 'TeensDoPorn ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tds ', 'TheDickSuckers ', mediaTitle, flags=re.IGNORECASE)
