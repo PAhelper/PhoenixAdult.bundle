@@ -1,5 +1,12 @@
 # Changelog
 
+- 2019-07-15
+    - Added Clips4Sale Support
+    - More Digital Playground Improvements / Bugfixes
+    - ManyVids now supports Date Add
+    - Genre Merges
+    - Perfect Gonzo Title Bugfix & Code Cleanup
+    - DDF Search Bugfix, Remove Verbose Logging
 - 2019-07-13 - DigitalPlayground Improvements / Bugfixes
 - 2019-07-12
     - Added Fitting-Room Support
