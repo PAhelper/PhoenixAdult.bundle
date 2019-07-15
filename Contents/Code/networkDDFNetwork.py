@@ -7,24 +7,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     i = 0
     for searchResult in searchResults.xpath('//div[@class="card text-white bg-dark m-1"]/a'):
-        Log('Url : ' + str(searchResult.get('href')))
         titleNoFormatting = searchResult.get("title")
-        Log('Titre ' + str(titleNoFormatting))
-        releaseDate = parse(searchResult.xpath('//div[@class="d-flex p-0 m-0 lh-1 pb-1"]//small')[i].text_content().strip()).strftime('%Y-%m-%d')
-        #coverURL = searchResults.xpath('//div[@class="card m-1"]/a/img')[i].get('data-src')
-        #Log('CoverUrl : ' + str(coverURL) )
         curID = searchResult.get('href').replace('/','_').replace('?','!')
-        Log('CurID : ' + curID )
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle) , name = titleNoFormatting + " [DDFNetwork] " + releaseDate , score = score, lang = lang ))
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle), name = titleNoFormatting + " [DDFNetwork] ", score = score, lang = lang ))
         i = i + 1
     return results
-
-
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -40,7 +28,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         if k == j:
             Good_CoverURL = coverURL
         k = k + 1
-    Log('Good Cover URL ' + Good_CoverURL )
+    Log('Good Cover URL ' + Good_CoverURL)
+
+    # Studio
+    metadata.studio = "DDFProd"
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[@class="px-2 col-12 col-md-7 video-titles "]/h1')[0].text_content()
@@ -60,10 +51,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             except:
                 pass
     metadata.summary = summary
-
-
-    # Studio
-    metadata.studio = "DDFProd"
 
     # Tagline / Collection
     try:
@@ -118,7 +105,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
 
-
     # Release Date
     date = detailsPageElements.xpath('//time')[0].text_content().strip()
     if len(date) > 0:
@@ -164,10 +150,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             i = i + 1
             if i>10:
                 break
-
-
         except:
             pass
-
 
     return metadata
