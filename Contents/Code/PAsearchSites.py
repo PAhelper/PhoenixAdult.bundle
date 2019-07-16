@@ -961,6 +961,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^kpc ', 'KarupsPC ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^la ', 'LatinAdultery ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^lhf ', 'LoveHerFeet ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
