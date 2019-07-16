@@ -80,8 +80,9 @@ import siteVRHush
 import networkMetArt
 import siteFittingRoom
 import siteFamilyHookups
+import siteClips4Sale
 
-searchSites = [None] * 760
+searchSites = [None] * 761
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -277,7 +278,7 @@ searchSites[191] = ["Teen Curves","Teen Curves", "https://www.teamskeet.com","ht
 searchSites[192] = ["CFNM Teens","CFNM Teens", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[193] = ["Teens Love Anal","Teens Love Anal", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[194] = ["My Babysitters Club","My Babysitters Club", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
-searchSites[195] = ["Shes New","She's New", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[195] = ["She's New","She's New", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[196] = ["Teens Do Porn","Teens Do Porn", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[197] = ["POV Life","POV Life", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[198] = ["The Real Workout","The Real Workout", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
@@ -842,6 +843,7 @@ searchSites[756] = ["Detention Girls","Detention Girls","https://detentiongirls.
 searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.mylfdom.com/movies/"]
 searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com","https://www.fitting-room.com/videos/"]
 searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.com","https://www.familyhookups.com/scene/"]
+searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1021,6 +1023,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub("^Shes New ", "She's New ", mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^smb ', 'ShareMyBF ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)

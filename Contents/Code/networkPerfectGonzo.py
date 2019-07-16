@@ -41,21 +41,27 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Perfect Gonzo"+subSite+"] " + releaseDate , score = score, lang = lang ))
     return results
 
-
-
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     url = PAsearchSites.getSearchBaseURL(siteID) + temp
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
+    metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
+
+    #Studio
+    metadata.studio = "Perfect Gonzo"
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h2')[0].text_content().strip()
 
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content()
-    metadata.summary = paragraph.strip()
+    paragraph = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content().strip()
+    metadata.summary = paragraph
 
-    # Studio / tagline / title
-    metadata.studio = "Perfect Gonzo"
+    # Tagline and Collection(s)
     subSite = detailsPageElements.xpath('.//img[@class="domain-label"]')[0].get('src')
     if 'allinternal' in subSite:
         tagline = 'All Internal'
@@ -80,19 +86,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
-    metadata.collections.clear()
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h2')[0].text_content()
 
     # Genres
-    movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side tag-container"]//a')
 
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
-
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right text-right"]/span')[0].text_content().replace('Added','').strip()
@@ -102,7 +104,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="col-sm-3 col-md-3 col-md-offset-1 no-padding-side"]/p/a')
     if len(actors) > 0:
         for actorLink in actors:
@@ -137,7 +138,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     for x in range(10):
         art.append(vidcaps[random.randint(1,len(vidcaps))])
 
-
     j = 1
     for posterUrl in art:
         if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
@@ -157,6 +157,5 @@ def update(metadata,siteID,movieGenres,movieActors):
                 j = j + 1
             except:
                 pass
-
 
     return metadata
