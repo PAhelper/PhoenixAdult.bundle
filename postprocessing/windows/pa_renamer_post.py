@@ -7,7 +7,7 @@ import logging
 import argparse
 import string
 from patools import pa_parse_dir
-import collections
+import siteOverrides
 
 def main():
     dryrun=False
@@ -16,7 +16,7 @@ def main():
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
         #uncomment to enable cleanup when using sabnzbd
-        #cleanup=True
+        cleanup=True
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
@@ -68,8 +68,9 @@ def main():
         filename_new = shoot['studio'] + ' - ' + string.capwords(shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
         logger.debug("New file name: %s" % filename_new)
         
-        #check if any overrides are set in collections.py
-        overrideSettings = collections.getSiteMatch(shoot['studio'], dir)
+        #check if any overrides are set in siteOverrides.py
+        overrideSettings = siteOverrides.getSiteMatch(shoot['studio'], dir)
+        correctName = siteOverrides.getRename(shoot['studio'], "fillername", shoot['date'])
 
         for item in os.listdir(dir):
             fullfilepath = os.path.join(dir, item)
@@ -82,6 +83,8 @@ def main():
                     dir_new = dir.split(overrideSettings[1])[0] + overrideSettings[2]
                 else:
                     dir_new = dir
+                if correctName != 9999:
+                    filename_new = filename_new.replace(string.capwords(shoot['filename_title']), string.capwords(correctName))
                 if filetype in ["mp4", "avi", "mkv"]:
                     newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
