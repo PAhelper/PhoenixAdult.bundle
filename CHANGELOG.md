@@ -1,5 +1,8 @@
 # Changelog
 
+- 2019-07-16
+    - Porndoe Search Bugfix
+    - TeamSkeet Search Bugfix
 - 2019-07-15
     - Added Clips4Sale Support
     - More Digital Playground Improvements / Bugfixes

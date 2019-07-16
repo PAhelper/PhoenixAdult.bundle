@@ -4,7 +4,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="col col-50 t-col-50 m-col-100"]'):
+    for searchResult in searchResults.xpath('//div[@class="col col-33 t-col-50 m-col-100"]'):
         #Log(searchResult.text_content())
         titleNoFormatting = searchResult.xpath('.//a[@class="main-url"]')[0].get('title')
         subSite = searchResult.xpath('.//a[@class="uppercase"]')[0].get('title')
@@ -63,8 +63,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
-    background = detailsPageElements.xpath('//picture[@class="poster"]/img')[0].get("src").replace("/1472x828/","/1920x1080/")
     try:
+        background = detailsPageElements.xpath('//picture[@class="poster"]/img')[0].get("src").replace("/1472x828/", "/1920x1080/")
         metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
     except:
         pass
