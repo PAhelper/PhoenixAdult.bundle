@@ -1,6 +1,11 @@
 #!/usr/local/sabnzbd/env/bin/python
 # !/usr/bin/env python
 
+# point sabnzbd to this file for automated postprocessing
+# configure and customise siteOverrides.py
+# install lxml if required -> pip install lxml
+# file/folder cleanup can be enabled below (line 24)
+
 import sys
 import os, glob, shutil
 import logging
@@ -16,7 +21,7 @@ def main():
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
         #uncomment to enable cleanup when using sabnzbd
-        cleanup=True
+        #cleanup=True
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
