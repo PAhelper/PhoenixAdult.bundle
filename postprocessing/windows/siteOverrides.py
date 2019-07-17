@@ -1,6 +1,7 @@
 from datetime import datetime
 from lxml import html
 import requests
+
 #Customise your siteList by creating a new entry per site
 #Each collection entry needs a Sitename and directory adjustment information.
 
@@ -63,9 +64,23 @@ def getSiteMatch(site, dir):
         ID += 1
     return 9999
     
-def getRename(site, actor, date):
+def getRename(site, actor, title, date):
     
-    if site.lower() == "danejones":
+    if site.lower() == "brattysis":
+        page = requests.get('https://brattysis.com/video/gallery')
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "date"]/text()'):
+            sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
+            title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
+            title = sceneID + " - " + title
+            #BrattySis Date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+    elif site.lower() == "danejones":
         page = requests.get('https://www.danejones.com/tour/videos')
         detailsPageElements = html.fromstring(page.content)
         i = 0
@@ -74,9 +89,10 @@ def getRename(site, actor, date):
             title = detailsPageElements.xpath('//article//div[@class ="card-title"]/a')[i].get("title")
             #Danejones Date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
-            siteDate = datetime_object.strftime('%Y-%m-%d')
-            if siteDate == date:
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
                 return title
             i += 1
-
+            
+    logger.debug("No match found in getRename")
     return 9999
