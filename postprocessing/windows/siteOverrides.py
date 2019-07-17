@@ -1,6 +1,9 @@
 from datetime import datetime
 from lxml import html
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
 
 #Customise your siteList by creating a new entry per site
 #Each collection entry needs a Sitename and directory adjustment information.
@@ -15,7 +18,7 @@ import requests
 #                               To: C:\\Different\Path\to\Site      Set: siteList[0] = ["Site", "Path", "Different\Path\to\Site"]
 #                               Leave in same location              Set: siteList[0] = ["Site", "", ""]
 
-siteList = [None] * 33
+siteList = [None] * 34
 
 siteList[0] = ["Babes", "New", "New\Babes"]
 siteList[1] = ["BrattySis", "New", "New\Bratty Sis"]
@@ -50,6 +53,7 @@ siteList[29] = ["ShareMyBF", "New", "New\Share My BF"]
 siteList[30] = ["StepSiblings", "New", "New\Step Siblings"]
 siteList[31] = ["Tiny4K", "New", "New\Tiny4K"]
 siteList[32] = ["NannySpy", "New", "New\NannySpy"]
+siteList[33] = ["PrincessCum", "New", "New\Nubiles\Princess Cum"]
 
 
 def getSiteMatch(site, dir):
@@ -65,6 +69,10 @@ def getSiteMatch(site, dir):
     return 9999
     
 def getRename(site, actor, title, date):
+    logger.debug(" Site: %s" % site)
+    logger.debug(" Actor: %s" % actor)
+    logger.debug(" Title: %s" % title)
+    logger.debug(" Date: %s" % date)
     
     if site.lower() == "brattysis":
         page = requests.get('https://brattysis.com/video/gallery')
@@ -74,12 +82,31 @@ def getRename(site, actor, title, date):
             sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
             title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
             title = sceneID + " - " + title
-            #BrattySis Date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+            #BrattySis date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
             releaseDate = datetime_object.strftime('%Y-%m-%d')
             if releaseDate == date:
                 return title
             i += 1
+    elif site.lower() in ["detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilefilms", "nubiles", "nubileset", "nubilesporn", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
+        #in theory you could add more pages "/30" "/45" etc to do a backdated match
+        for url in ["", "/15"]:
+            page = requests.get("https://nubiles-porn.com/video/gallery" + url)
+            detailsPageElements = html.fromstring(page.content)
+            i = 0
+            for releaseDate in detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "date"]/text()'):
+                sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
+                title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
+                title = sceneID + " - " + title
+                #NubilesPorn date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+                datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
+                releaseDate = datetime_object.strftime('%Y-%m-%d')                
+                
+                #extra check due to possibility of multiple releases on one date
+                releaseSite = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "site-link"]/text()')[i].replace("-", "").strip()
+                if releaseDate == date and site.lower() == releaseSite.lower():
+                    return title
+                i += 1       
     elif site.lower() == "danejones":
         page = requests.get('https://www.danejones.com/tour/videos')
         detailsPageElements = html.fromstring(page.content)
@@ -87,12 +114,12 @@ def getRename(site, actor, title, date):
         for scene in detailsPageElements.xpath('//article'):
             releaseDate = detailsPageElements.xpath('//article//div[@class ="release-date"]/text()')[i]
             title = detailsPageElements.xpath('//article//div[@class ="card-title"]/a')[i].get("title")
-            #Danejones Date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+            #Danejones date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
             releaseDate = datetime_object.strftime('%Y-%m-%d')
             if releaseDate == date:
                 return title
             i += 1
             
-    logger.debug("No match found in getRename")
+    logger.info(" No match found in getRename")
     return 9999
