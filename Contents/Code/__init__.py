@@ -41,7 +41,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('Hevc','').replace('Avc','').replace('5k','').replace(' 4k','').replace('.4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace('480p','').replace('540p','').replace(' XXX',' ').replace('MP4-KTR','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('-180_','').replace('TOWN.AG_','').strip()
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180x180','').replace('Hevc','').replace('Avc','').replace('5k','').replace(' 4k','').replace('.4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2160p','').replace('1080p','').replace('720p','').replace('480p','').replace('540p','').replace(' XXX',' ').replace('MP4-KTR','').replace('Sexors','').replace('3dh','').replace('Oculus','').replace('Lr','').replace('-180_','').replace('TOWN.AG_','').strip()
                 
         Log('*******MEDIA TITLE****** ' + str(title))
 
@@ -964,6 +964,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 759:
                     results = PAsearchSites.siteFamilyHookups.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Clips4Sale
+            ###############
+            if siteNum == 760:
+                if searchSiteID == 9999 or searchSiteID == 760:
+                    results = PAsearchSites.siteClips4Sale.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1699,6 +1706,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 759:
             metadata = PAsearchSites.siteFamilyHookups.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Clips4Sale                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 760:
+            metadata = PAsearchSites.siteClips4Sale.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

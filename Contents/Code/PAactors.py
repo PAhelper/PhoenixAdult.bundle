@@ -137,6 +137,8 @@ class PhoenixActors:
                 newActor = "Sybil A"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
+            if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
+                newActor = "Britney Beth"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":

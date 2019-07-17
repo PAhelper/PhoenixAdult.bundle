@@ -5,21 +5,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="info"]'):
-        titleURL = searchResult.xpath('.//a')[0].get("href")
-        scenePage = HTML.ElementFromURL(titleURL)
-        
-        titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get("href").split("?")[0][8:]
-        curID = curID.replace('/','+')
-        Log("ID: " + curID)
-        releaseDate = parse(scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:]).strftime('%Y-%m-%d')
-        Log(releaseDate)
-        Log(str(curID))
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        try:
+            sceneURL = searchResult.xpath('.//a')[0].get("href")
+            scenePage = HTML.ElementFromURL(sceneURL)
+            titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
+            curID = sceneURL.replace('/','+')
+            releaseDate = parse(scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:]).strftime('%Y-%m-%d')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        except:
+            pass
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     if searchTitle == "Eavesdropping And Pussy Popping":
@@ -27,10 +24,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = ("www.teamskeet.com/t1/trailer/view/55019").replace('/','+')
         Log(str(curID))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Eavesdropping And Pussy Popping" + " [TeamSkeet/TeenPies] " + "2019-02-27", score = 101, lang = lang))
+    if searchTitle == "Zoe's Fantasy":
+        Log("Manual Search Match")
+        curID = ("www.teamskeet.com/t1/trailer/view/47562").replace('/','+')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Zoe's Fantasy" + " [TeamSkeet/She's New] " + "2016-06-12", score = 101, lang = lang))
+    if searchTitle == "She Has Her Ways":
+        Log("Manual Search Match")
+        curID = ("www.teamskeet.com/t1/trailer/view/43061").replace('/','+')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "She Has Her Ways" + " [TeamSkeet/TeamSkeet Extras] " + "2014-08-28", score = 101, lang = lang))
 
     return results
-
-
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
