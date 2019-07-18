@@ -4,7 +4,10 @@
 # point sabnzbd to this file for automated postprocessing
 # configure and customise siteOverrides.py
 # install lxml if required -> pip install lxml
-# file/folder cleanup can be enabled below (line 24)
+
+#Media Info is a beta option and will require you to install two things.
+# install pymedia info -> pip install pymediainfo
+# https://mediaarea.net/en/MediaInfo the MediaInfo.DLL file for your system (NOTE: I did find this must have already been installed on my system and was not nedded)
 
 import sys
 import os, glob, shutil
@@ -18,26 +21,32 @@ def main():
     dryrun=False
     batch=False
     cleanup=False
+    mediainfo=False
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
-        #uncomment to enable cleanup when using sabnzbd
-        #cleanup=True
+        # set to True/False to enable/Disable when using sabnzbd
+        cleanup=False
+        mediainfo=False
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
         parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
         parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
         parser.add_argument("-c", "--cleanup", help="Delete leftover files and cleanup folders after rename", action="store_true")
+        parser.add_argument("-m", "--mediainfo", help="Add media info to the filename. Resolution and framerate", action="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
             dryrun=True
         if args.batch:
-            print "Batch mode enabled. Logging disabled!"
+            print "Batch mode enabled. Logging partially disabled!"
             batch=True
         if args.cleanup:
             print "Cleanup Enabled!"
             cleanup=True
+        if args.mediainfo:
+            print "MediaInfo enabled."
+            mediainfo=True
         dir = args.directory
 
     debug=False
@@ -75,7 +84,7 @@ def main():
         
         #check if any overrides are set in siteOverrides.py
         overrideSettings = siteOverrides.getSiteMatch(shoot['studio'], dir)
-        correctName = siteOverrides.getRename(shoot['studio'], "fillername", shoot['date'])
+        correctName = siteOverrides.getRename(shoot['studio'], "filleractor", shoot['filename_title'], shoot['date'])
 
         for item in os.listdir(dir):
             fullfilepath = os.path.join(dir, item)
@@ -90,6 +99,16 @@ def main():
                     dir_new = dir
                 if correctName != 9999:
                     filename_new = filename_new.replace(string.capwords(shoot['filename_title']), string.capwords(correctName))
+                    logger.debug("Pending rename to : %s" % filename_new)
+                #Add Media Info
+                if mediainfo:
+                    logger.debug(" Atempting to gather Media Info")
+                    media_Info = siteOverrides.getMediaInfo(fullfilepath)
+                    if media_Info != 9999:
+                        filename_new = filename_new.replace(" (", " " + media_Info + " (") 
+                        dir_new = dir_new + " " + media_Info
+                    else:
+                        logger.debug(" No Media info Found")
                 if filetype in ["mp4", "avi", "mkv"]:
                     newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
