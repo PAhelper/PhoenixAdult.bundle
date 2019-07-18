@@ -123,3 +123,14 @@ def getRename(site, actor, title, date):
             
     logger.info(" No match found in getRename")
     return 9999
+    
+def getMediaInfo(file):
+    from pymediainfo import MediaInfo
+    media_info = MediaInfo.parse(file)
+    for track in media_info.tracks:
+        if track.track_type == 'Video':
+            logger.debug(" Resolution: %sp, Framerate: %s" % (track.height, track.frame_rate))
+            #customise however you wish.
+            media_Info = str(track.height) + "p " + str(track.frame_rate).replace('.000', '') + "fps"
+            return media_Info
+    return 9999  
