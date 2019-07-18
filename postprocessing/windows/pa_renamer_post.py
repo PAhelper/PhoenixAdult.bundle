@@ -86,7 +86,7 @@ def main():
         
         # Capitalise the title (first letter of every word). Keep original studio in case we swap it out later.
         filename_new = shoot['studio'] + ' - ' + string.capwords(shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
-        logger.debug(" New file name: %s" % filename_new)
+        logger.debug(" Before overrides the name is : %s" % filename_new)
         
         #check if any overrides are set in siteOverrides.py
         overrideSettings = siteOverrides.getSiteMatch(shoot['studio'], dir)
@@ -105,7 +105,7 @@ def main():
                     dir_new = dir
                 if correctName != 9999:
                     filename_new = filename_new.replace(string.capwords(shoot['filename_title']), string.capwords(correctName))
-                    logger.debug("Pending rename to : %s" % filename_new)
+                    
                 #Add Media Info
                 if mediainfo or mediainfo2:
                     logger.debug(" Atempting to gather Media Info")
@@ -114,7 +114,10 @@ def main():
                         if mediainfo:
                             dir_new = dir_new + " " + media_Info
                         if mediainfo2:
-                            filename_new = filename_new.replace(" (", " " + media_Info + " (")
+                            filename_new = filename_new.replace(" (", " (" + media_Info + ") (")
+                logger.debug(" After:")
+                logger.debug("    New directory: %s" % dir_new)
+                logger.debug("    New file name: %s" % filename_new)
                 if filetype in ["mp4", "avi", "mkv"]:
                     newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
