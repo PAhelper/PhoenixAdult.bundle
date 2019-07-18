@@ -57,6 +57,9 @@ siteList[33] = ["PrincessCum", "New", "New\Nubiles\Princess Cum"]
 
 
 def getSiteMatch(site, dir):
+    logger.debug(" Before:")
+    logger.debug("    Site: %s" % site)
+    logger.debug("    Dir: %s" % dir)
     ID = 0
     for item in siteList:
         if site.lower() == item[0].lower():
@@ -69,11 +72,11 @@ def getSiteMatch(site, dir):
     return 9999
     
 def getRename(site, actor, title, date):
-    logger.debug(" Site: %s" % site)
-    logger.debug(" Actor: %s" % actor)
-    logger.debug(" Title: %s" % title)
-    logger.debug(" Date: %s" % date)
+    logger.debug("    Actor: %s" % actor)
+    logger.debug("    Title: %s" % title)
+    logger.debug("    Date: %s" % date)
     
+    #BRATTY SIS
     if site.lower() == "brattysis":
         page = requests.get('https://brattysis.com/video/gallery')
         detailsPageElements = html.fromstring(page.content)
@@ -88,7 +91,8 @@ def getRename(site, actor, title, date):
             if releaseDate == date:
                 return title
             i += 1
-    elif site.lower() in ["detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilefilms", "nubiles", "nubileset", "nubilesporn", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
+    # NUBILES NETWORK
+    elif site.lower() in ["badteenspunished", "bountyhunterporn", "daddyslilangel", "detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilefilms", "nubilescasting", "nubileset", "nubilesnet", "nubilesporn", "nubilesunscripted", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
         #in theory you could add more pages "/30" "/45" etc to do a backdated match
         for url in ["", "/15"]:
             page = requests.get("https://nubiles-porn.com/video/gallery" + url)
@@ -107,6 +111,7 @@ def getRename(site, actor, title, date):
                 if releaseDate == date and site.lower() == releaseSite.lower():
                     return title
                 i += 1       
+    #DANE JONES
     elif site.lower() == "danejones":
         page = requests.get('https://www.danejones.com/tour/videos')
         detailsPageElements = html.fromstring(page.content)
@@ -120,8 +125,22 @@ def getRename(site, actor, title, date):
             if releaseDate == date:
                 return title
             i += 1
-            
-    logger.info(" No match found in getRename")
+    #PASSION HD
+    elif site.lower() == "passionhd":
+        page = requests.get('https://passion-hd.com/?page=1')
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//p[@class= "date"]/text()'):
+            title = detailsPageElements.xpath('//div[@class= "information"]/a')[i].get("href").split("/")[-1].replace('-', ' ')
+            #PasssionHD date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+
+        
+    logger.info("No match found in getRename")
     return 9999
     
 def getMediaInfo(file):
