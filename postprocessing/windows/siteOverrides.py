@@ -91,6 +91,41 @@ def getRename(site, actor, title, date):
             if releaseDate == date:
                 return title
             i += 1
+    #CUM4K LUBED PASSION HD SPYFAM
+    elif site.lower() in ["cum4k", "lubed", "passionhd", "spyfam"]:
+        if site.lower == "cum4k":
+            page = requests.get('https://cum4k.com/?page=1')
+        elif site.lower == "lubed":
+            page = requests.get('https://lubed.com/?page=1')
+        elif site.lower == "passionhd":
+            page = requests.get('https://passion-hd.com/?page=1')
+        elif site.lower == "spyfam":
+            page = requests.get('https://spyfam.com/?page=1')
+        
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//p[@class= "date"]/text()'):
+            title = detailsPageElements.xpath('//div[@class= "information"]/a')[i].get("href").split("/")[-1].replace('-', ' ')
+            #PasssionHD date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+    #DANE JONES
+    elif site.lower() == "danejones":
+        page = requests.get('https://www.danejones.com/tour/videos')
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for scene in detailsPageElements.xpath('//article'):
+            releaseDate = detailsPageElements.xpath('//article//div[@class ="release-date"]/text()')[i]
+            title = detailsPageElements.xpath('//article//div[@class ="card-title"]/a')[i].get("title")
+            #Danejones date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
     # NUBILES NETWORK
     elif site.lower() in ["badteenspunished", "bountyhunterporn", "daddyslilangel", "detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilefilms", "nubilescasting", "nubileset", "nubilesnet", "nubilesporn", "nubilesunscripted", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
         #in theory you could add more pages "/30" "/45" etc to do a backdated match
@@ -111,33 +146,24 @@ def getRename(site, actor, title, date):
                 if releaseDate == date and site.lower() == releaseSite.lower():
                     return title
                 i += 1       
-    #DANE JONES
-    elif site.lower() == "danejones":
-        page = requests.get('https://www.danejones.com/tour/videos')
-        detailsPageElements = html.fromstring(page.content)
-        i = 0
-        for scene in detailsPageElements.xpath('//article'):
-            releaseDate = detailsPageElements.xpath('//article//div[@class ="release-date"]/text()')[i]
-            title = detailsPageElements.xpath('//article//div[@class ="card-title"]/a')[i].get("title")
-            #Danejones date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
-            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
-            releaseDate = datetime_object.strftime('%Y-%m-%d')
-            if releaseDate == date:
-                return title
-            i += 1
-    #PASSION HD
-    elif site.lower() == "passionhd":
-        page = requests.get('https://passion-hd.com/?page=1')
-        detailsPageElements = html.fromstring(page.content)
-        i = 0
-        for releaseDate in detailsPageElements.xpath('//p[@class= "date"]/text()'):
-            title = detailsPageElements.xpath('//div[@class= "information"]/a')[i].get("href").split("/")[-1].replace('-', ' ')
-            #PasssionHD date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
-            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
-            releaseDate = datetime_object.strftime('%Y-%m-%d')
-            if releaseDate == date:
-                return title
-            i += 1
+    # REALITY KINGS
+    elif site.lower() in ["40inchplus", "8thstreetlatinas", "badtowtruck", "bignaturals", "bigtitsboss", "bikinicrashers", "captainstabbin", "cfnmsecret", "cumfiesta", "cumgirls", "dangerousdongs", "eurosexparties", "extremeasses", "extremenaturals", "firsttimeauditions", "flowertucci", "girlsofnaked", "happytugs", "hdlove", "hotbush", "inthevip", "mikeinbrazil", "mikesapartment", "milfhunter", "milfnextdoor", "momsbangteens", "momslickteens", "moneytalks", "monstercurves", "nofaces", "pure18", "realorgasms", "rkprime", "roundandbrown", "saturdaynightlatinas", "seemywife", "sneakysex", "streetblowjobs", "teamsquirt", "teenslovehugecocks", "topshelfpussy", "trannysurprise", "vipcrew", "welivetogether", "wivesinpantyhose"]:
+        for url in ["1", "2"]:
+            page = requests.get("https://www.realitykings.com/tour/videos/all-sites/all-categories/all-time/recent/" + url)
+            detailsPageElements = html.fromstring(page.content)
+            i = 0
+            for releaseDate in detailsPageElements.xpath('//span[@class= "card-info__meta-date"]/text()'):
+                title = detailsPageElements.xpath('//h2[@class= "card-info__title"]/a')[i].get("title")
+                #Reality Kings date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+                datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+                releaseDate = datetime_object.strftime('%Y-%m-%d')                
+                
+                #extra check due to possibility of multiple releases on one date
+                releaseSite = detailsPageElements.xpath('//div[@class= "card-info__meta"]/a')[i].get("title").replace("-", "").replace(" ", "").strip()
+                if releaseDate == date and site.lower() == releaseSite.lower():
+                    return title
+                i += 1 
+    
 
         
     logger.info("No match found in getRename")
