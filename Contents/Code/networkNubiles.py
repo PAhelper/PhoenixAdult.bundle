@@ -8,13 +8,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchDate:
         url = PAsearchSites.getSearchSearchURL(siteNum) + "date/" + searchDate + "/" + searchDate
         searchResults = HTML.ElementFromURL(url)
-        for searchResult in searchResults.xpath('//div[contains(@class,"thumbnail-grid videoset")]'):
-            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
-            temp = searchResult.xpath('.//a[@class="title"]')[0].get('href')
-            alpha = temp.replace('/', '_', 2).find('/')+1
-            omega = temp.rfind('/')
-
-            curID = temp[alpha:omega].replace('/','_').replace('?','!')
+        for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
+            titleNoFormatting = searchResult.xpath('//a[@class= "title"]')[0].text_content().strip()
+            curID = searchResult.xpath('//a[@class="title"]')[0].get('href').split("/")[3]
             Log('curID: ' + str(curID))
             releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             if searchDate:
