@@ -22,18 +22,21 @@ def main():
     batch=False
     cleanup=False
     mediainfo=False
+    mediainfo2=False
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
         # set to True/False to enable/Disable when using sabnzbd
         cleanup=False
         mediainfo=False
+        mediainfo2=False
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
         parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
         parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
         parser.add_argument("-c", "--cleanup", help="Delete leftover files and cleanup folders after rename", action="store_true")
-        parser.add_argument("-m", "--mediainfo", help="Add media info to the filename. Resolution and framerate", action="store_true")
+        parser.add_argument("-m", "--mediainfo", help="Add media info to the folder. Resolution and framerate", action="store_true")
+        parser.add_argument("-m2", "--mediainfo2", help="Add media info to the filename. Resolution and framerate", action="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
@@ -45,8 +48,11 @@ def main():
             print "Cleanup Enabled!"
             cleanup=True
         if args.mediainfo:
-            print "MediaInfo enabled."
+            print "Folder MediaInfo enabled."
             mediainfo=True
+        if args.mediainfo2:
+            print "File MediaInfo enabled."
+            mediainfo2=True
         dir = args.directory
 
     debug=False
@@ -80,7 +86,7 @@ def main():
         
         # Capitalise the title (first letter of every word). Keep original studio in case we swap it out later.
         filename_new = shoot['studio'] + ' - ' + string.capwords(shoot['filename_title'] + ' (' + shoot['date'] + ').mp4')
-        logger.debug("New file name: %s" % filename_new)
+        logger.debug(" New file name: %s" % filename_new)
         
         #check if any overrides are set in siteOverrides.py
         overrideSettings = siteOverrides.getSiteMatch(shoot['studio'], dir)
@@ -89,7 +95,7 @@ def main():
         for item in os.listdir(dir):
             fullfilepath = os.path.join(dir, item)
             filetype = item.split('.')[-1]
-            logger.debug("The filetype is: %s" % filetype)
+            logger.debug(" The filetype is: %s" % filetype)
             #if the file is over 50MB rename it
             if os.path.getsize(fullfilepath) > 50000000:
                 if overrideSettings != 9999:
@@ -101,14 +107,14 @@ def main():
                     filename_new = filename_new.replace(string.capwords(shoot['filename_title']), string.capwords(correctName))
                     logger.debug("Pending rename to : %s" % filename_new)
                 #Add Media Info
-                if mediainfo:
+                if mediainfo or mediainfo2:
                     logger.debug(" Atempting to gather Media Info")
                     media_Info = siteOverrides.getMediaInfo(fullfilepath)
                     if media_Info != 9999:
-                        filename_new = filename_new.replace(" (", " " + media_Info + " (") 
-                        dir_new = dir_new + " " + media_Info
-                    else:
-                        logger.debug(" No Media info Found")
+                        if mediainfo:
+                            dir_new = dir_new + " " + media_Info
+                        if mediainfo2:
+                            filename_new = filename_new.replace(" (", " " + media_Info + " (")
                 if filetype in ["mp4", "avi", "mkv"]:
                     newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
                     if dryrun:
@@ -118,19 +124,19 @@ def main():
                             os.makedirs(dir_new)
                         except:
                             pass
-                        logger.info("Renaming/Moving from: %s --> %s" % (fullfilepath, newpath))
+                        logger.info(" Renaming/Moving from: %s --> %s" % (fullfilepath, newpath))
                         os.rename(fullfilepath, newpath)
                         os.chmod(newpath, 0775)
             if cleanup and not dryrun:
                 if filetype in ["txt", "jpg", "jpeg", "nfo"]:
                     os.remove(fullfilepath)
-                    logger.info("Removed: %s" % item)
+                    logger.info(" Removed: %s" % item)
                 try:
                     os.rmdir(dir)
-                    logger.info("Empty Directory Deleted")
+                    logger.info(" Empty Directory Deleted")
                 except:
                     pass
-        logger.info("Successful")
+        logger.info(" Successful")
                 
     else:
         logger.critical("No match found for dir: %s" % dir)
