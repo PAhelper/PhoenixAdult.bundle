@@ -20,13 +20,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
-    if unicode(searchTitle, 'utf-8').isnumeric():
-        url = PAsearchSites.getSearchBaseURL(siteNum) + "/video/watch/" + searchTitle.lower().replace(" ","-").replace("'","-")
+    if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/video/watch/" + searchTitle.split(" ")[0]
         searchResults = HTML.ElementFromURL(url)
 
         searchResult = searchResults.xpath('//div[contains(@class, "content-pane-title")]')[0]
         titleNoFormatting = searchResult.xpath('//h2')[0].text_content()
-        curID = searchTitle.lower().replace(" ","-").replace("'","-")
+        curID = searchTitle.split(" ")[0]
         releaseDate = parse(searchResult.xpath('//span[@class= "date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         score = 100
