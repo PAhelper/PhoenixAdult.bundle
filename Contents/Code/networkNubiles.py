@@ -67,51 +67,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = summary.strip()
 
     # Collections / Tagline
-    siteName = detailsPageElements.xpath('//div[contains(@class, "content-pane")]//a[@class= "site-link"]')[0].text_content().strip().replace(".com", "")
-    if "stepsiblingscaught" in siteName.lower():
-        tagline = "Step Siblings Caught"
-    elif "momsteachsex" in siteName.lower():
-        tagline = "Moms Teach Sex"
-    elif "badteenspunished" in siteName.lower():
-        tagline = "Bad Teens Punished"
-    elif "princesscum" in siteName.lower():
-        tagline = "Princess Cum"
-    elif "nubilesunscripted" in siteName.lower():
-        tagline = "Nubiles Unscripted"
-    elif "nubilescasting" in siteName.lower():
-        tagline = "Nubiles Casting"
-    elif "petitehdporn" in siteName.lower():
-        tagline = "Petite HD Porn"
-    elif "driverxxx" in siteName.lower():
-        tagline = "Driver XXX"
-    elif "petiteballerinasfucked" in siteName.lower():
-        tagline = "Petite Ballerinas Fucked"
-    elif "teacherfucksteens" in siteName.lower():
-        tagline = "Teacher Fucks Teens"
-    elif "bountyhunterporn" in siteName.lower():
-        tagline = "Bountyhunter Porn"
-    elif "daddyslilangel" in siteName.lower():
-        tagline = "Daddy's Lil Angel"
-    elif "myfamilypies" in siteName.lower():
-        tagline = "My Family Pies"
-    elif "nubiles.net" in siteName.lower():
-        tagline = "Nubiles"
-    elif "brattysis" in siteName.lower():
-        tagline = "Bratty Sis"
-    elif "anilos" in siteName.lower():
-        tagline = "Anilos"
-    elif "hotcrazymess" in siteName.lower():
-        tagline = "Hot Crazy Mess"
-    elif "nfbusty" in siteName.lower():
-        tagline = "NF Busty"
-    elif "thatsitcomporn" in siteName.lower():
-        tagline = "That Sitcom Show"
-    elif "detentiongirls" in siteName.lower():
-        tagline = "Detention Girls"
-    elif "nubileset" in siteName.lower():
-        tagline = "Nubiles ET"
-    else:
-        tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -125,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(@class, "content-pane-performers")]/a')
+    actors = detailsPageElements.xpath('//div[contains(@class, "content-pane-performer")]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content().strip()
@@ -181,7 +137,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         posters = detailsPageElements.xpath('//figure[@class=" "]')
         for poster in posters:
             posterName = poster.xpath('//a[@class= "title"]/text()')
-            if posterName == title:
+            if title in posterName:
                 Log('Cover image found')
                 posterLink = "http:" + poster.xpath('//img').get("src")
                 metadata.posters[posterLink] = Proxy.Preview(HTTP.Request(posterLink, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
@@ -189,7 +145,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     try:
-        photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//div[contains(@class, "content-pane-related-links")] " and contains(text(),"Pics")]')[0].get('href')
+        photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-responsive "][contains(text(),"Pics")]')[0].get('href')
         Log("photoPageURL: " + str(photoPageURL))
         photoPageElements = HTML.ElementFromURL(photoPageURL)
         for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
