@@ -134,34 +134,30 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Scene cover from related photosets
     try:
-        posters = detailsPageElements.xpath('//figure[@class=" "]')
+        posters = detailsPageElements.xpath('//div[@class="content-grid container-fluid "]//figure[@class=" "]')
+        i = 0
         for poster in posters:
-            posterName = poster.xpath('//a[@class= "title"]/text()')
-            if title in posterName:
+            posterName = poster.xpath('//div[@class="content-grid container-fluid "]//a[@class= "title"]')[i].text_content()
+            if title == posterName:
                 Log('Cover image found')
-                posterLink = "http:" + poster.xpath('//img').get("src")
+                posterLink = "http:" + poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
                 metadata.posters[posterLink] = Proxy.Preview(HTTP.Request(posterLink, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+                break
+            i+=1
     except:
         metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     try:
-        photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-responsive "][contains(text(),"Pics")]')[0].get('href')
+        try:
+            photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-responsive "][contains(text(),"Pics")]')[0].get('href')
+        except:
+            photoPageURL = "https://nubiles-porn.com/photo/gallery/" + str(metadata.id).split("|")[0]
         Log("photoPageURL: " + str(photoPageURL))
         photoPageElements = HTML.ElementFromURL(photoPageURL)
         for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
             art.append("http:" + posterUrl.get('src'))
     except:
         pass
-    
-    if len(art)is 0:
-        try:
-            photoPageURL = "https://nubiles-porn.com/photo/gallery/" + str(metadata.id).split("|")[0]
-            Log("photoPageURL: " + str(photoPageURL))
-            photoPageElements = HTML.ElementFromURL(photoPageURL)
-            for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
-                art.append("https:" + posterUrl.get('src'))
-        except:
-            pass    
 
     j = 1
     Log("Artwork found: " + str(len(art)))
