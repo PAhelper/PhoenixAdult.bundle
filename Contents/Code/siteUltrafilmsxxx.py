@@ -20,14 +20,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         htmlstring = response.read()
         searchResults = fromstring(htmlstring)
 
-    for searchResult in searchResults.xpath('//ul[@class="listing-videos listing-tube"]'):
-        titleNoFormatting = searchResult.xpath('li[@class="border-radius-5 box-shadow"]//a')[0].get('title')
+    for searchResult in searchResults.xpath('//ul[@class="listing-videos listing-tube"]/*[div[@class="format-infos"]/div[@class="time-infos"]]'):
+        titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
         Log("titleNoFormatting: " + titleNoFormatting)
-        actors = searchResults.xpath('//li[@class="border-radius-5 box-shadow"]//img')[0].get('alt').replace(' - ', '').replace(titleNoFormatting, '')
-        sceneUrl = searchResult.xpath('//li[@class="border-radius-5 box-shadow"]//a')[0].get('href')
+        actors = searchResult.xpath('.//img')[0].get('alt')
+        Log(actors)
+        sceneUrl = searchResult.xpath('.//a')[0].get('href')
         curID = sceneUrl.replace('/','_').replace('?','!')
         Log("curID: " + curID)
-        score = 100
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " with "+ actors + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
     return results
 
@@ -60,7 +61,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     try:
-        genres = detailsPageElements.xpath('//div[@itemprop="keywords"]//ul//li')
+        genres = detailsPageElements.xpath('//div[@itemprop="keywords"]//ul//li//a')
         if len(genres) > 0:
             for genreLink in genres:
                 genreName = genreLink.text_content().strip().lower()
