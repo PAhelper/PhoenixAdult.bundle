@@ -99,8 +99,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
             actorBigScript = actorPage.xpath('//footer/following::script[1]')[0].text_content()
-            alpha = actorBigScript.find('"src":"')+7
-            omega = actorBigScript.find('"',alpha)
+            alpha = actorBigScript.find('listing_150x256')
+            alpha = actorBigScript.find('3x',alpha)
+            alpha = actorBigScript.find('http', alpha)
+            omega = actorBigScript.find('"', alpha)
             actorPhotoURL = actorBigScript[alpha:omega].decode('unicode_escape')
             if 'http' not in actorPhotoURL:
                 actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID)+actorPhotoURL
