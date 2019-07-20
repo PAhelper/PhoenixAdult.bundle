@@ -81,8 +81,11 @@ import networkMetArt
 import siteFittingRoom
 import siteFamilyHookups
 import siteClips4Sale
+import siteBlackmailed
+import siteVogoV
+import siteUltrafilmsxxx
 
-searchSites = [None] * 761
+searchSites = [None] * 764
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -844,6 +847,9 @@ searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.m
 searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com","https://www.fitting-room.com/videos/"]
 searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.com","https://www.familyhookups.com/scene/"]
 searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
+searchSites[761] = ["Blackmailed","Blackmailed","https://www.blackmailed.com","https://www.blackmailed.com/en/sitemap"]
+searchSites[762] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
+searchSites[763] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
