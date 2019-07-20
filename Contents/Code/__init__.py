@@ -971,6 +971,27 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 760:
                     results = PAsearchSites.siteClips4Sale.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Blackmailed
+            ###############
+            if siteNum == 761:
+                if searchSiteID == 9999 or searchSiteID == 761:
+                    results = PAsearchSites.siteBlackmailed.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## VogoV
+            ###############
+            if siteNum == 762:
+                if searchSiteID == 9999 or searchSiteID == 762:
+                    results = PAsearchSites.siteVogoV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Ultrafilmsxxx
+            ###############
+            if siteNum == 763:
+                if searchSiteID == 9999 or searchSiteID == 763:
+                    results = PAsearchSites.siteUltrafilmsxxx.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1714,6 +1735,30 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 760:
             metadata = PAsearchSites.siteClips4Sale.update(metadata,siteID,movieGenres,movieActors)
+            
+        ##############################################################
+        ##                                                          ##
+        ##  Blackmailed                                             ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 761:
+            metadata = PAsearchSites.siteBlackmailed.update(metadata,siteID,movieGenres,movieActors)
+            
+        ##############################################################
+        ##                                                          ##
+        ##  VogoV                                                   ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 762:
+            metadata = PAsearchSites.siteVogoV.update(metadata,siteID,movieGenres,movieActors)
+            
+        ##############################################################
+        ##                                                          ##
+        ##  Ultrafilmsxxx                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 763:
+            metadata = PAsearchSites.Ultrafilms.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
