@@ -9,7 +9,7 @@ from lxml.html.soupparser import fromstring
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + encodedTitle + '%22'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
 
     try:
