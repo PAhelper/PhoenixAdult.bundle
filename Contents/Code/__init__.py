@@ -1758,7 +1758,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 763:
-            metadata = PAsearchSites.Ultrafilms.update(metadata,siteID,movieGenres,movieActors)
+            metadata = PAsearchSites.siteUltrafilmsxxx.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
