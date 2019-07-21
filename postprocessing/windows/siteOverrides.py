@@ -34,7 +34,7 @@ siteList[10] = ["DetentionGirls", "New", "Nubiles\Detention Girls"]
 siteList[11] = ["DriverXXX", "New", "Nubiles\Driver XXX"]
 siteList[12] = ["MomsTeachSex", "New", "Nubiles\Moms Teach Sex"]
 siteList[13] = ["MyFamilyPies", "New", "Nubiles\My Family Pies"]
-siteList[14] = ["NubileFilms", "New", "Nubiles\NubileFilms"]
+siteList[14] = ["NubileFilms", "New", "Nubiles\Nubile Films"]
 siteList[15] = ["Nubiles", "New", "Nubiles\Nubiles"]
 siteList[16] = ["NubilesET", "New", "Nubiles\Nubiles ET"]
 siteList[17] = ["NubilesPorn", "New", "Nubiles\Nubiles Porn"]
@@ -51,7 +51,7 @@ siteList[27] = ["XArt", "New", "New\X-Art"]
 siteList[28] = ["LittleCapriceDreams", "New", "New\Little Caprice Dreams"]
 siteList[29] = ["ShareMyBF", "New", "New\Share My BF"]
 siteList[30] = ["StepSiblings", "New", "New\Step Siblings"]
-siteList[31] = ["Tiny4K", "New", "New\Tiny4K"]
+siteList[31] = ["Tiny4K", "New", "Tiny4K"]
 siteList[32] = ["NannySpy", "New", "New\NannySpy"]
 siteList[33] = ["PrincessCum", "New", "Nubiles\Princess Cum"]
 
@@ -76,31 +76,21 @@ def getRename(site, actor, title, date):
     logger.debug("    Title: %s" % title)
     logger.debug("    Date: %s" % date)
     
-    #BRATTY SIS
-    if site.lower() == "brattysis":
-        page = requests.get('https://brattysis.com/video/gallery')
-        detailsPageElements = html.fromstring(page.content)
-        i = 0
-        for releaseDate in detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "date"]/text()'):
-            sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
-            title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
-            title = sceneID + " - " + title
-            #BrattySis date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
-            datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
-            releaseDate = datetime_object.strftime('%Y-%m-%d')
-            if releaseDate == date:
-                return title
-            i += 1
-    #CUM4K LUBED PASSION HD SPYFAM
-    elif site.lower() in ["cum4k", "lubed", "passionhd", "spyfam"]:
+  
+    # PORN PROS NETWORK
+    if site.lower() in ["cum4k", "lubed", "passionhd", "spyfam", "tiny4k"]:
         if site.lower() == "cum4k":
             page = requests.get('https://cum4k.com/?page=1')
+        elif site.lower() == "holed":
+            page = requests.get('https://holed.com/?page=1')
         elif site.lower() == "lubed":
             page = requests.get('https://lubed.com/?page=1')
         elif site.lower() == "passionhd":
             page = requests.get('https://passion-hd.com/?page=1')
         elif site.lower() == "spyfam":
             page = requests.get('https://spyfam.com/?page=1')
+        elif site.lower() == "tiny4k":
+            page = requests.get('https://tiny4k.com/?page=1')
         
         detailsPageElements = html.fromstring(page.content)
         i = 0
@@ -127,7 +117,28 @@ def getRename(site, actor, title, date):
                 return title
             i += 1
     # NUBILES NETWORK
-    elif site.lower() in ["badteenspunished", "bountyhunterporn", "daddyslilangel", "detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilefilms", "nubilescasting", "nubileset", "nubilesnet", "nubilesporn", "nubilesunscripted", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
+    elif site.lower() in ["anilos", "brattysis", "hotcrazymess", "nfbusty", "nubilefilms", "nubilesnet", "thatsitcomshow"]:
+        if site.lower() == "brattysis":
+            page = requests.get('https://brattysis.com/video/gallery')
+        elif site.lower() == "nubilefilms":
+            page = requests.get('https://nubilefilms.com/video/gallery')
+        else:
+            url = "https://" + site.lower() + "/video/gallery"
+            page = requests.get(url)
+
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "date"]/text()'):
+            sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
+            title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
+            title = sceneID + " - " + title
+            #date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+    elif site.lower() in ["badteenspunished", "bountyhunterporn", "daddyslilangel", "detentiongirls", "driverxxx", "momsteachsex", "myfamilypies", "nubilescasting", "nubileset", "nubilesporn", "nubilesunscripted", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens"]:
         #in theory you could add more pages "/30" "/45" etc to do a backdated match
         for url in ["", "/15"]:
             page = requests.get("https://nubiles-porn.com/video/gallery" + url)
