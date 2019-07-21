@@ -21,31 +21,31 @@ logger = logging.getLogger(__name__)
 siteList = [None] * 34
 
 siteList[0] = ["Babes", "New", "New\Babes"]
-siteList[1] = ["BrattySis", "New", "New\Bratty Sis"]
+siteList[1] = ["BrattySis", "New", "Bratty Sis"]
 siteList[2] = ["CreampieAngels", "New", "New\Creampie-Angels"]
-siteList[3] = ["Cum4K", "New", "New\Cum4K"]
-siteList[4] = ["DaneJones", "New", "New\Dane Jones"]
+siteList[3] = ["Cum4K", "New", "Cum4K"]
+siteList[4] = ["DaneJones", "New", "Dane Jones"]
 siteList[5] = ["FamilyStrokes", "New", "New\Family Strokes"]
 siteList[6] = ["JaysPOV", "New", "New\Jays POV"]
-siteList[7] = ["Lubed", "New", "New\Lubed"]
+siteList[7] = ["Lubed", "New", "Lubed"]
 siteList[8] = ["MissaX", "New", "New\MissaX"]
-siteList[9] = ["MomsBangTeens", "New", "New\Moms Bang Teens"]
-siteList[10] = ["DetentionGirls", "New", "New\Nubiles\Detention Girls"]
-siteList[11] = ["DriverXXX", "New", "New\Nubiles\Driver XXX"]
-siteList[12] = ["MomsTeachSex", "New", "New\Nubiles\Moms Teach Sex"]
-siteList[13] = ["MyFamilyPies", "New", "New\Nubiles\My Family Pies"]
-siteList[14] = ["NubileFilms", "New", "New\Nubiles\NubileFilms"]
-siteList[15] = ["Nubiles", "New", "New\Nubiles\Nubiles"]
-siteList[16] = ["NubilesET", "New", "New\Nubiles\Nubiles ET"]
-siteList[17] = ["NubilesPorn", "New", "New\Nubiles\Nubiles Porn"]
-siteList[18] = ["PetiteHDPorn", "New", "New\Nubiles\Petite HD Porn"]
-siteList[19] = ["StepSiblingsCaught", "New", "New\Nubiles\Step Siblings Caught"]
-siteList[20] = ["TeacherFucksTeens", "New", "New\Nubiles\Teacher Fucks Teens"]
-siteList[21] = ["PassionHD", "New", "New\Passion HD"]
+siteList[9] = ["MomsBangTeens", "New", "Moms Bang Teens"]
+siteList[10] = ["DetentionGirls", "New", "Nubiles\Detention Girls"]
+siteList[11] = ["DriverXXX", "New", "Nubiles\Driver XXX"]
+siteList[12] = ["MomsTeachSex", "New", "Nubiles\Moms Teach Sex"]
+siteList[13] = ["MyFamilyPies", "New", "Nubiles\My Family Pies"]
+siteList[14] = ["NubileFilms", "New", "Nubiles\NubileFilms"]
+siteList[15] = ["Nubiles", "New", "Nubiles\Nubiles"]
+siteList[16] = ["NubilesET", "New", "Nubiles\Nubiles ET"]
+siteList[17] = ["NubilesPorn", "New", "Nubiles\Nubiles Porn"]
+siteList[18] = ["PetiteHDPorn", "New", "Nubiles\Petite HD Porn"]
+siteList[19] = ["StepSiblingsCaught", "New", "Nubiles\Step Siblings Caught"]
+siteList[20] = ["TeacherFucksTeens", "New", "Nubiles\Teacher Fucks Teens"]
+siteList[21] = ["PassionHD", "New", "Passion HD"]
 siteList[22] = ["PublicAgent", "New", "New\Public Agent"]
 siteList[23] = ["SexArt", "New", "New\SexArt"]
 siteList[24] = ["SisLovesMe", "New", "New\Sis Loves Me"]
-siteList[25] = ["SpyFam", "New", "New\SpyFam"]
+siteList[25] = ["SpyFam", "New", "SpyFam"]
 siteList[26] = ["Vixen", "New", "New\Vixen"]
 siteList[27] = ["XArt", "New", "New\X-Art"]
 siteList[28] = ["LittleCapriceDreams", "New", "New\Little Caprice Dreams"]
@@ -53,7 +53,7 @@ siteList[29] = ["ShareMyBF", "New", "New\Share My BF"]
 siteList[30] = ["StepSiblings", "New", "New\Step Siblings"]
 siteList[31] = ["Tiny4K", "New", "New\Tiny4K"]
 siteList[32] = ["NannySpy", "New", "New\NannySpy"]
-siteList[33] = ["PrincessCum", "New", "New\Nubiles\Princess Cum"]
+siteList[33] = ["PrincessCum", "New", "Nubiles\Princess Cum"]
 
 
 def getSiteMatch(site, dir):
@@ -93,13 +93,13 @@ def getRename(site, actor, title, date):
             i += 1
     #CUM4K LUBED PASSION HD SPYFAM
     elif site.lower() in ["cum4k", "lubed", "passionhd", "spyfam"]:
-        if site.lower == "cum4k":
+        if site.lower() == "cum4k":
             page = requests.get('https://cum4k.com/?page=1')
-        elif site.lower == "lubed":
+        elif site.lower() == "lubed":
             page = requests.get('https://lubed.com/?page=1')
-        elif site.lower == "passionhd":
+        elif site.lower() == "passionhd":
             page = requests.get('https://passion-hd.com/?page=1')
-        elif site.lower == "spyfam":
+        elif site.lower() == "spyfam":
             page = requests.get('https://spyfam.com/?page=1')
         
         detailsPageElements = html.fromstring(page.content)
@@ -163,8 +163,26 @@ def getRename(site, actor, title, date):
                 if releaseDate == date and site.lower() == releaseSite.lower():
                     return title
                 i += 1 
-    
-
+    #VIXEN
+    elif site.lower() == "vixentest":
+        page = requests.get('https://www.vixen.com/search?q=' + title)
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for scene in detailsPageElements.xpath('//div[@data-test-component="VideoThumbnailContainer"]/div/a'):
+            scenePage = "https://www.vixen.com" + detailsPageElements.xpath('//div[@data-test-component="VideoThumbnailContainer"]/div/a')[i].get("href")
+            scenepage = requests.get(scenePage)
+            scenePageElements = html.fromstring(scenepage.content)
+            
+            #date is hidden by javascript. Json scraper might be able to retriev eit, need to work out how
+            releaseDate = scenePageElements.xpath('//button[@title="Release date"]/span')[0].text_content()
+            title = scenePageElements.xpath('//h1[@data-test-component="VideoTitle"]/text()')
+            #Vixen date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+        
         
     logger.info("No match found in getRename")
     return 9999
