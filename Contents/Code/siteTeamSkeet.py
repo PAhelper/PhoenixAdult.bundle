@@ -9,15 +9,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             sceneURL = searchResult.xpath('.//a')[0].get("href")
             scenePage = HTML.ElementFromURL(sceneURL)
             titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
-            curID = sceneURL.replace('/','+')
+            curID = sceneURL.replace('/','+').split("?", 1)[0]
             releaseDate = parse(scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:]).strftime('%Y-%m-%d')
+            subSite = scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//a[contains(@href,"/site/?site=")]')[0].text_content()
+
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         except:
             pass
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
     if searchTitle == "Eavesdropping And Pussy Popping":
         Log("Manual Search Match")
@@ -39,7 +41,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = "https://" + str(metadata.id).split("|")[0].replace('+','/')
+    url = str(metadata.id).split("|")[0].replace('+','/')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -53,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//title')[0].text_content().split(" | ")[1]
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="gray"]')[1].text_content().replace('ï¿½', '')
+    metadata.summary = detailsPageElements.xpath('//div[@class="gray"]')[1].text_content()
 
     # Release Date
     releaseDate = detailsPageElements.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:].replace("th,",",").replace("st,",",").replace("nd,",",").replace("rd,",",")
@@ -76,13 +78,28 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Actors
+
+    movieActors.clearActors()
+    actors = detailsPageElements.xpath('//a[contains(@href,"/profile/")]')
     try:
-        actortext = detailsPageElements.xpath('//title')[0].text_content().split('|')[0].strip()
-        actors = actortext.split('and')
         if len(actors) > 0:
             for actorLink in actors:
-                actorName = actorLink
-                actorPhotoURL = ''
+                actorName = actorLink.text_content()
+                actorPage = actorLink.get("href")
+
+                try:
+                    detailsActorPage = HTML.ElementFromURL(actorPage)
+                except:
+                    request = urllib.Request(actorPageURL, headers=headers)
+                    response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+                    htmlstring = response.read()
+                    detailsActorPage = fromstring(htmlstring)
+
+                try:
+                    actorPhotoURL = detailsActorPage.xpath('//img[@id="profile_image"]')[0].get('src')
+                except:
+                    actorPhotoURL = ''
+
                 movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass
