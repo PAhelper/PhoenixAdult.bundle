@@ -64,20 +64,20 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Posters/Background
     try:
-        background = detailsPageElements.xpath('//picture[@class="poster"]/img')[0].get("src").replace("/1472x828/", "/1920x1080/")
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
+        background = detailsPageElements.xpath('//div[@class="swiper-slide gallery-swiper-slide"]/a/picture/source')[0].get("data-srcset").replace("/0x250/", "/1920x1080/").replace(".webp",".jpg")
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
     except:
         pass
-    
-    posters = detailsPageElements.xpath('//img[@class="swiper-lazy"]')
+
+
+    posters = detailsPageElements.xpath('//div[@class="swiper-slide gallery-swiper-slide"]/a/picture/source')
     posterNum = 1
     for poster in posters:
-        posterURL = poster.get("data-src").replace("/0x250/","/1920x1080/")
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-        metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum + 1)
+        posterURL = poster.get("data-srcset").replace("/0x250/", "/1920x1080/").replace(".webp",".jpg")
+        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+        metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum + 1)
         posterNum += 1
-    
 
 
-    
+
     return metadata
