@@ -131,7 +131,7 @@ def main():
                         os.rename(fullfilepath, newpath)
                         os.chmod(newpath, 0775)
             if cleanup and not dryrun:
-                if filetype in ["txt", "jpg", "jpeg", "nfo", "sfv"]:
+                if filetype in ["txt", "jpg", "jpeg", "nfo", "sfv", "srr"]:
                     os.remove(fullfilepath)
                     logger.info(" Removed: %s" % item)
                 try:
