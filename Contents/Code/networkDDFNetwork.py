@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.get("title")
         curID = searchResult.get('href').replace('/','_').replace('?','!')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle), name = titleNoFormatting + " [DDFNetwork] ", score = score, lang = lang ))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang ))
         i = i + 1
     return results
 
@@ -20,7 +20,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     indice = str(metadata.id).split("|")[2]
     titre_search=str(metadata.id).split("|")[3]
     siteNum = str(metadata.id).split("|")[1]
-    searchcovers = HTML.ElementFromURL('https://ddfnetwork.com/videos/freeword/' + titre_search )
+    searchcovers = HTML.ElementFromURL( PAsearchSites.getSearchSearchURL(siteID) + titre_search )
     j = int(indice)
     k=0
     for searchcover in searchcovers.xpath('//div[@class="card text-white bg-dark m-1"]/a') :
