@@ -163,7 +163,12 @@ def getFanArt(site, art, actors, actorName, title, match):
                                         try:
                                             nameinheader = fanPageElements.xpath('//h3/a[contains(@href, "star")]/text()')
                                         except:
-                                            nameinheader = fanPageElements.xpath('//h3//strong/text()')
+                                            pass
+                                        if len(nameinheader) < 1:
+                                            try:
+                                                nameinheader = fanPageElements.xpath('//h3//strong/text()')
+                                            except:
+                                                pass
                                     elif site == "Nude-Gals.com":
                                         nameinheader = fanPageElements.xpath('//div[@class="row photoshoot-title row_margintop"]//a[contains(@href, "model")]/text()')
                                     elif site == "PinkWorld.com":
