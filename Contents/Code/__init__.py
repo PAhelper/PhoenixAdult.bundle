@@ -992,6 +992,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 763:
                     results = PAsearchSites.siteUltrafilmsxxx.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Hustler
+            ###############
+            if siteNum == 764:
+                if searchSiteID == 9999 or searchSiteID == 764:
+                    results = PAsearchSites.siteHustler.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1046,7 +1053,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 749:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 742:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1759,6 +1766,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 763:
             metadata = PAsearchSites.siteUltrafilmsxxx.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Hustler                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 764:
+            metadata = PAsearchSites.siteHustler.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
