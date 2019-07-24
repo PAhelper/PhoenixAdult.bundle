@@ -5,21 +5,19 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="info"]'):
-        try:
-            sceneURL = searchResult.xpath('.//a')[0].get("href")
-            scenePage = HTML.ElementFromURL(sceneURL)
-            titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
-            curID = sceneURL.replace('/','+').split("?", 1)[0]
-            releaseDate = parse(scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//div[@class="gray"]')[0].text_content()[12:]).strftime('%Y-%m-%d')
-            subSite = scenePage.xpath('//div[@style="width:430px;text-align:left;margin:8px;border-right:3px dotted #bbbbbb;position:relative;"]//a[contains(@href,"/site/?site=")]')[0].text_content()
-
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        except:
-            pass
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + subSite + "] " + releaseDate, score = score, lang = lang))
+        sceneURL = searchResult.xpath('.//span//a')[0].get("href").split("?", 1)[0]
+        if 'http' not in sceneURL:
+            sceneURL = 'https' + str(sceneURL)
+        scenePage = HTML.ElementFromURL(sceneURL)
+        titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
+        curID = sceneURL.replace('/','+').replace('?','!')
+        actors = scenePage.xpath('//a[contains(@href,"/profile/")]')[0].text_content()
+        releaseDate = parse(scenePage.xpath('//div[contains(text(),"Date Added:")]')[0].text_content().replace('Date Added:','').strip()).strftime('%Y-%m-%d')
+        if searchDate and releaseDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " w/ " + actors + " [TeamSkeet] " + releaseDate, score = score, lang = lang))
 
     if searchTitle == "Eavesdropping And Pussy Popping":
         Log("Manual Search Match")
