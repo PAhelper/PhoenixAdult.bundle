@@ -81,12 +81,8 @@ import networkMetArt
 import siteFittingRoom
 import siteFamilyHookups
 import siteClips4Sale
-import siteBlackmailed
-import siteVogoV
-import siteUltrafilmsxxx
-import siteHustler
 
-searchSites = [None] * 765
+searchSites = [None] * 761
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -523,7 +519,7 @@ searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com"
 searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[436] = ["House of Taboo","House of Taboo", "https://houseoftaboo.com","https://houseoftaboo.com/videos/freeword/"]
+searchSites[436] = ["House of Taboo","House of Taboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[437] = ["Euro Girls on Girls","Euro Girls on Girls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[438] = ["1By-Day","1By-Day", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[439] = ["DDF Network VR","DDF Network VR", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
@@ -848,10 +844,6 @@ searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.m
 searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com","https://www.fitting-room.com/videos/"]
 searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.com","https://www.familyhookups.com/scene/"]
 searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
-searchSites[761] = ["Blackmailed","Blackmailed","https://www.blackmailed.com","https://www.blackmailed.com/en/sitemap"]
-searchSites[762] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
-searchSites[763] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
-searchSites[764] = ["Hustler","Hustler","https://hustler.com","https://hustler.com/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -895,6 +887,8 @@ def getSearchSettings(mediaTitle):
     Log("mediaTitle w/ possible abbrieviation: " + mediaTitle)
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^1kf ', '1000Facials ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^21ea ', '21EroticAnal ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^21fa ', '21FootArt ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
@@ -996,6 +990,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mmgs ', 'MommysGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mnm ', 'MyNaughtyMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mpov ', 'MrPOV ', mediaTitle, flags=re.IGNORECASE)
