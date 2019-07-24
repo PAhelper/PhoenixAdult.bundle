@@ -9,8 +9,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="card text-white bg-dark m-1"]'):
         titleNoFormatting = searchResult.xpath('./a')[0].get("title")
         curID = searchResult.xpath('./a')[0].get('href').replace('/','_').replace('?','!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        releaseDate = parse(searchResult.xpath('//div[@class="d-flex p-0 m-0 lh-1 pb-1"]//small')[0].text_content().strip()).strftime('%Y-%m-%d')
+        releaseDate = parse(searchResult.xpath('./div//div[@class="d-flex p-0 m-0 lh-1 pb-1"]//small')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate and releaseDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + str(i) + "|" + str(encodedTitle), name = titleNoFormatting + " (" + releaseDate + ") [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang ))
         i = i + 1
     return results
