@@ -127,7 +127,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     
-    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title, 0)
+    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title, 0, siteName)
     summary = fanSite[1]
     match = fanSite[2]
 
