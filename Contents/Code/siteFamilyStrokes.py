@@ -156,7 +156,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         art=[]
         match = 0
         for site in ["TeamSkeetFans.com", "SkeetScenes.com"]:
-            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+            fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match, siteName)
             match = fanSite[2]
             if match is 1:	
                 break
