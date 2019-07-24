@@ -13,10 +13,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = sceneURL.replace('/','+').replace('?','!')
         actors = scenePage.xpath('//a[contains(@href,"/profile/")]')[0].text_content()
         releaseDate = parse(scenePage.xpath('//div[contains(text(),"Date Added:")]')[0].text_content().replace('Date Added:','').strip()).strftime('%Y-%m-%d')
-        if searchDate and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " w/ " + actors + " [TeamSkeet] " + releaseDate, score = score, lang = lang))
 
     if searchTitle == "Eavesdropping And Pussy Popping":
