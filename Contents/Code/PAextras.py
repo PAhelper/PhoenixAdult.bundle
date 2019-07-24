@@ -32,7 +32,7 @@ noMatch[25] = ["Hot Fitness Sex"]
 
 # Scenes with incorrect matches
 #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 54
+badMatch = [None] * 60
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -87,6 +87,12 @@ badMatch[50] = ["Honey, I’m Home", None, "ImagePost.com", "https://www.imagepo
 badMatch[51] = ["A Stepdaughter’s Gift", None,  "ImagePost.com", "https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-a-stepdaughters-gift/"]
 badMatch[52] = ["Picnic At The Park", None, "ImagePost.com", "https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-picnic-at-the-park/"]
 badMatch[53] = ["Horny StepDaughter Begs StepDad To Make Her Cum", None, "ImagePost.com", "https://www.imagepost.com/movies/mia-collins-on-spy-fam-begs-stepdad-to-make-her-cum/"]
+badMatch[54] = ["Dear Diary: Stepsister’s Confessions", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/jenni-jordan-dear-diary---stepsisters-confession"]
+badMatch[55] = ["Horny Stepsis Gets Stepbro To Massage Her Pussy", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/charity-crawford-puts-out-stepbro"]
+badMatch[56] = ["Injured Stepbro Needs Sexual Healing", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/eliza-ibarra-injuured-stepbro-needs-sexual-healing"]
+badMatch[57] = ["New Years Resolution: Blackmail Stepsister", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/adriana-chechik-new-years-resolution-blackmail-stepbro"]
+badMatch[58] = ["Stepbro Shocked By Stepsister’s Wet Pussy", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/emma-starletto-bangs-stepbro"]
+badMatch[59] = ["Stepdaughter Caught Stealing Easter Egg Money", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/allie-nicole-stepdaughter-caught-stealing"]
 
 def getNoMatchID(scene):
     matchID = 0
@@ -110,11 +116,11 @@ def getBadMatchID(scene):
     return 9999
 
 # HQ Sluts Fansite Search
-def getFanArt(site, art, actors, actorName, title, match):
+def getFanArt(site, art, actors, actorName, title, match, siteName):
 
     summary = ""
     actress = "notarealperson"
-    validSites = ["AnalPornFan.com", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PinkWorld.com", "PornGirlsErotica.com", "SkeetScenes.com", "SpyFams.com", "TeamSkeetFans.com", "Tiny4KFan.com", "XartBeauties.com/galleries", "XartFan.com"]
+    validSites = ["AnalPornFan.com", "CoedCherry.com/pics", "EroticBeauties.net/pics", "HQSluts.com", "ImagePost.com", "LubedFan.com", "Nude-Gals.com", "PassionHDFan.com", "PinkWorld.com", "PornGirlsErotica.com", "SkeetScenes.com", "SpyFams.com", "TeamSkeetFans.com", "Tiny4KFan.com", "XartBeauties.com/galleries", "XartFan.com"]
     backupMatch = match
     
     if site not in validSites:
@@ -131,6 +137,46 @@ def getFanArt(site, art, actors, actorName, title, match):
                 if overrideSettings != 9999:
                     urls = [None] * 1
                     urls[0] = ["test.com"]
+                #coed cherry needs extra help
+                elif site == "CoedCherry.com/pics":
+                    cherryurls = []
+                    #include any original google matches
+                    try:
+                        cherryurls.append(urls[0])                 
+                    except:
+                        Log("no good")
+                        pass
+                    #try direct match
+                    temp = ('https://' + site + '/' + actorName + ' ' + title.replace("’","").replace("'","").replace(":", "")).replace(" ", "-")
+                    Log("DirectURL: " + temp)
+                    cherryurls.append(temp)
+                    #built-in site search
+                    try:
+                        searchurl = ('https://' + site + '/search/' + actorName + ' ' + title.replace("’","").replace("'","").split(":")[0]).replace(" ", "+")
+                        Log("SearchURL: " + searchurl)
+                        searchPageElements = HTML.ElementFromURL(searchurl)
+                        for result in searchPageElements.xpath('//div[@class="thumbs "]//a'):
+                            cherryurls.append(result.get('href'))
+                    except:
+                        pass
+                    #actor search match
+                    try:
+                        for sitename in ["Cum 4K", "Passion HD", "Spy Fam", "Tiny 4K"]:
+                            if sitename.lower().replace(' ', '').replace('-', '') == siteName.lower().replace(' ', '').replace('-', ''):
+                                break
+                            else:
+                                sitename = siteName
+                        searchurl = ('https://' + site + '/search/' + actorName + ' '+ sitename).replace(" ", "+")
+                        Log("SearchURL: " + searchurl)
+                        searchPageElements = HTML.ElementFromURL(searchurl + '?sort=newest')
+                        for result in searchPageElements.xpath('//div[@class="thumbs "]//a'):
+                            result = result.get('href')
+                            cherryurls.append(result)
+                    except:
+                        pass
+                    
+                    urls = cherryurls
+                    
                 for url in urls:
                     if match is 0 or match is 2:
                         if overrideSettings != 9999:
@@ -145,16 +191,20 @@ def getFanArt(site, art, actors, actorName, title, match):
                             match = 1
                             backupmatch = match
                         
-                        googleSearchURL = url
-                        fanPageElements = HTML.ElementFromURL(googleSearchURL)
-
-                        
+                        try:
+                            googleSearchURL = url
+                            fanPageElements = HTML.ElementFromURL(googleSearchURL)
+                        except:
+                            pass
+                       
                         try:
                             if overrideSettings == 9999:
                                 #Determine where to look for the Actor Name/s
                                 try:
                                     if site in ["AnalPornFan.com", "PassionHDFan.com", "LubedFan.com", "Tiny4KFan.com"]:
                                         nameinheader = fanPageElements.xpath('//div[@class="page-title pad group"]//a[not(contains(@href, "respond"))][not(contains(@href, "comments"))]/text()')
+                                    elif site == "CoedCherry.com/pics":
+                                        nameinheader = fanPageElements.xpath('//div[@class="models"]//figcaption/text()')
                                     elif site == "EroticBeauties.net/pics":
                                         nameinheader = fanPageElements.xpath('//div[@class="clearfix"]//a[contains(@href, "model")]/text()')
                                     elif site == "HQSluts.com":
@@ -241,6 +291,8 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     try:
                                         if site in ["AnalPornFan.com", "LubedFan.com", "PassionHDFan.com", "Tiny4KFan.com"]:
                                             fanTitle = fanPageElements.xpath('//h1[@class= "post-title"]/text()')[0].strip()
+                                        elif site == "CoedCherry.com/pics":                                            
+                                            fanTitle = url.split("/")[-1].replace("-", " ")
                                         elif site == "EroticBeauties.net/pics":
                                             fanTitle = fanPageElements.xpath('//div[contains(@class, "gallery-title")]/h1/text()')[0].strip()
                                         elif site == "HQSluts.com":
@@ -263,9 +315,30 @@ def getFanArt(site, art, actors, actorName, title, match):
                                             fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                             
                                         Log(title.strip() + " vs " + str(fanTitle))
-                                        if not title.strip().lower() in str(fanTitle).lower():
+                                        #try percentage calculation of how many words match
+                                        a = [x for x in title.replace("’","").replace("'", "").replace(":","").replace(",","").strip().lower().split(" ")]
+                                        b = [x for x in fanTitle.replace("’","").replace("'", "").replace(":","").replace(",","").strip().lower().split(" ")]
+                                        c = len(a)
+                                        count = 0
+                                        Log("here")
+                                        Log(len(a))
+                                        Log(c)
+                                        for word in a:
+                                            if word in b:
+                                                Log(word)
+                                                count+=1
+                                        percentage = (float(count) / float(c)) * 100
+                                        Log("Percentage:")
+                                        Log(percentage)
+                                        
+                                        if not title.strip().lower() in str(fanTitle).lower() and not title.replace("’","").replace("'", "").replace(":"," -").strip().lower() in str(fanTitle).lower() and percentage < 80:
                                             Log("Title Mismatch: " + str(fanTitle))
                                             match = backupMatch
+                                        #coedCherry titles are often poor, try to confirm site also
+                                        #if site == "CoedCherry.com/pics":                                            
+                                        #    fanTitle = fanPageElements.xpath('//div[@class= "paysite_link "]/a/text()').replace("Continue to ", "").replace(" ", "").split()
+                                        #    if fanTitle == Originalsite?
+                                            
                                     except:
                                         Log("Something went wrong when trying to compare scene title:")
                                         Log(str(fanTitle))
@@ -277,6 +350,9 @@ def getFanArt(site, art, actors, actorName, title, match):
                                     Log("Searching " + site)
                                     if site in ["AnalPornFan.com", "LubedFan.com"]:
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "rgg-imagegrid")]//a'):
+                                            art.append(posterURL.get('href'))
+                                    elif site == "CoedCherry.com/pics":
+                                        for posterURL in fanPageElements.xpath('//div[@class= "thumbs "]//a[@class="track"]'):
                                             art.append(posterURL.get('href'))
                                     elif site == "EroticBeauties.net/pics":
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "my-gallery")]//a'):
