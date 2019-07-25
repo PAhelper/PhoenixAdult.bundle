@@ -32,7 +32,7 @@ noMatch[25] = ["Hot Fitness Sex"]
 
 # Scenes with incorrect matches
 #if actorName needs fixing replace second field with correct name
-badMatch = [None] * 60
+badMatch = [None] * 61
 badMatch[0] = ["Twice The Fun", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/aubrey-in-twice-the-fun-7688.html"]
 badMatch[1] = ["Party of Three", None, "XartFan.com", "https://xartfan.com/party-of-three/"]
 badMatch[2] = ["Fun for Three", None, "XartBeauties.com/galleries", "http://www.xartbeauties.com/galleries/angelica-heidi-in-fun-for-three-5994.html"]
@@ -93,6 +93,7 @@ badMatch[56] = ["Injured Stepbro Needs Sexual Healing", None, "CoedCherry.com/pi
 badMatch[57] = ["New Years Resolution: Blackmail Stepsister", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/adriana-chechik-new-years-resolution-blackmail-stepbro"]
 badMatch[58] = ["Stepbro Shocked By Stepsister’s Wet Pussy", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/emma-starletto-bangs-stepbro"]
 badMatch[59] = ["Stepdaughter Caught Stealing Easter Egg Money", None, "CoedCherry.com/pics", "https://www.coedcherry.com/pics/allie-nicole-stepdaughter-caught-stealing"]
+badMatch[60] = ["Stepsisters Sexual Message", None, "CoedCherry.com/pics", "https://www.coedcherry.com/site/sis-loves-me/pics/hot-coed-autumn-belle-has-pov-sex-with-stepbrother"]
 
 def getNoMatchID(scene):
     matchID = 0
@@ -255,7 +256,7 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                     
                             #CHECK IF WE HAVE A FANSITE MATCH USING ACTOR NAMES    
                                 
-                                if actorName in nameinheader or actress in nameinheader:
+                                if actorName.lower() in nameinheader.lower() or actress.lower() in nameinheader.lower():
                                     Log("Fansite Match Found on " + site)
                                     match = 1
                                 else:
@@ -266,7 +267,6 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                                 actorName = actorLink
                                             else:
                                                 actorName = actorLink.text_content().strip()
-
                                             try:
                                                 Log(actorName + " vs " + nameinheader)
                                             except:
