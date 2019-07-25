@@ -226,9 +226,16 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                     elif site == "PornGirlsErotica.com":
                                         nameinheader = fanPageElements.xpath('//h2[@class="title"]')[0].text_content()
                                     elif site == "SkeetScenes.com":
-                                        nameinheader = fanPageElements.xpath('//div[@class="card-body"]//h5//a/text()')
+                                        nameinheader = fanPageElements.xpath('//div[@class="card-body"]//h1/a[contains(@href,"model")]')
                                     elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
                                         nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"][not(contains(text(), "Family"))]')
+                                        if nameinheader[0].text_content() == "Uncategorized" or nameinheader[0] == "Uncategorized":
+                                            Log("Uncategorized name found, checking against title!")
+                                            fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
+                                            if actorName in fanTitle:
+                                                nameinheader = actorName
+                                            elif actress in fanTitle:
+                                                nameinheader = actress
                                     elif site == "XartBeauties.com/galleries":
                                         nameinheader = fanPageElements.xpath('//a[contains(@href, "models")][not(contains(text(), "Models"))]/text()')
                                     elif site == "XartFan.com":
@@ -304,7 +311,7 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                         elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
                                             fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                         elif site == "PinkWorld.com":
-                                            fanTitle = fanPageElements.xpath('//div[@class= "clearfix"]//a[contains(@href, "pornstar")]/text()')
+                                            fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                         elif site == "PornGirlsErotica.com":
                                             fanTitle = fanPageElements.xpath('//h2[@class= "title"]/text()')[0].strip()
                                         elif site == "SkeetScenes.com":
@@ -320,18 +327,16 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                         b = [x for x in fanTitle.replace("’","").replace("'", "").replace(":","").replace(",","").strip().lower().split(" ")]
                                         c = len(a)
                                         count = 0
-                                        Log("here")
-                                        Log(len(a))
-                                        Log(c)
                                         for word in a:
                                             if word in b:
                                                 Log(word)
                                                 count+=1
                                         percentage = (float(count) / float(c)) * 100
-                                        Log("Percentage:")
-                                        Log(percentage)
+                                        Log("Percentage of words that match: %s" % percentage)
+                                        threshold = 40
                                         
-                                        if not title.strip().lower() in str(fanTitle).lower() and not title.replace("’","").replace("'", "").replace(":"," -").strip().lower() in str(fanTitle).lower() and percentage < 80:
+                                        
+                                        if not title.strip().lower() in str(fanTitle).lower() and not title.replace("’","").replace("'", "").replace(":"," -").strip().lower() in str(fanTitle).lower() and percentage < threshold:
                                             Log("Title Mismatch: " + str(fanTitle))
                                             match = backupMatch
                                         #coedCherry titles are often poor, try to confirm site also
@@ -346,7 +351,7 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                             # POSTERS
                             if match is 1:
                                 try:
-                                # Various Poster xpaths needed for different sites
+                                    # Various Poster xpaths needed for different sites
                                     Log("Searching " + site)
                                     if site in ["AnalPornFan.com", "LubedFan.com"]:
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "rgg-imagegrid")]//a'):
@@ -387,22 +392,26 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                         for posterURL in fanPageElements.xpath('//div[@class="ngg-galleryoverview"]//a'):
                                             art.append(posterURL.get('href'))
                                     elif site == "SkeetScenes.com":
-                                        for posterURL in fanPageElements.xpath('//div[@class="row"]/div[contains(@class, "col-xl-2")]//source[position()=1]'):
-                                            art.append("https:" + posterURL.get('srcset').replace('_thumb', '').replace('.webp', '.jpg'))
+                                        Log("here")
+                                        for posterURL in fanPageElements.xpath('//div[@class="row"]/div[contains(@class, "col-xl-2")]//img'):
+                                            Log("here")
+                                            artlink = "https:" + posterURL.get('data-srcset').replace('_thumb', '').replace('.webp', '.jpg')
+                                            Log(artlink)
+                                            art.append(artlink)
                                     elif site == "XartBeauties.com/galleries":
                                         for posterURL in fanPageElements.xpath('//div[@id="gallery-thumbs"]//img'):
                                             art.append(posterURL.get('src').replace('images.', 'www.').replace('/tn', ''))
                                     elif site == "XartFan.com":
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a//img'):
                                             art.append(posterURL.get('data-orig-file').replace('images.', ''))
-                                        
-                                except:
-                                    Log("No Images Found")
                                 
-                                
-                                Log("Artwork found: " + str(len(art)))
-                                if len(art) < 9 and match is 1 and overrideSettings == 9999:
-                                    match = 2
+                            except:
+                                Log("No Images Found")
+                            
+                            
+                            Log("Artwork found: " + str(len(art)))
+                            if len(art) < 9 and match is 1 and overrideSettings == 9999:
+                                match = 2
                                     
                                     
                         except:
