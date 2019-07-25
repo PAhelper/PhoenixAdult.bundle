@@ -229,8 +229,8 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                     elif site == "SkeetScenes.com":
                                         nameinheader = fanPageElements.xpath('//div[@class="card-body"]//h1/a[contains(@href,"model")]')
                                     elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
-                                        nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"][not(contains(text(), "Family"))]')
-                                        if nameinheader[0].text_content() == "Uncategorized" or nameinheader[0] == "Uncategorized":
+                                        nameinheader = fanPageElements.xpath('//span[@itemprop="articleSection"][not(contains(text(), "Family"))][not(contains(text(), "Sis Loves Me"))]/text()')
+                                        if nameinheader == "Uncategorized" or nameinheader[0].text_content() == "Uncategorized" or nameinheader[0] == "Uncategorized":
                                             Log("Uncategorized name found, checking against title!")
                                             fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                             if actorName in fanTitle:
