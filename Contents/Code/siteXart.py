@@ -428,9 +428,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     import random
     art=[]
     match = 0
+    siteName = PAsearchSites.getSearchSiteName(siteID)
             
     for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "CoedCherry.com/pics", "Nude-Gals.com"]:
-        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match, siteName)
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title.strip(), match, siteName)
         match = fanSite[2]
         if match is 1:	
             break
