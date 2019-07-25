@@ -428,16 +428,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     import random
     art=[]
     match = 0
+    siteName = PAsearchSites.getSearchSiteName(siteID)
             
-    for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "Nude-Gals.com"]:
-        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+    for site in ["XartFan.com", "HQSluts.com", "ImagePost.com", "CoedCherry.com/pics", "Nude-Gals.com"]:
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title.strip(), match, siteName)
         match = fanSite[2]
         if match is 1:	
             break
-    try:
-        art = thumbs
-    except:
-        pass
+    #try:
+        #art = thumbs
+    #except:
+        #pass
  
     if match is 1 or match is 2:
         # Return, first few, last one and randóm selection of images
@@ -451,7 +452,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             
         try:
             j = 1
-                                                          
+                                                              
             for posterUrl in art:
                 Log("Trying next Image")
                 Log(posterUrl)
