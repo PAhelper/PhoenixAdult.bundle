@@ -43,7 +43,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     url = str(metadata.id).split("|")[0].replace('+','/')
     detailsPageElements = HTML.ElementFromURL(url)
-    art = []
     metadata.collections.clear()
     movieGenres.clearGenres()
     movieActors.clearActors()
@@ -94,27 +93,69 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Video trailer background image
     try:
         twitterBG = detailsPageElements.xpath('//video')[0].get("poster")
-        art.append(twitterBG)
+        metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(background).content, sort_order = 1)
     except:
         pass
     
+    #Extra Posters
+    import random
+    art = []
+    match = 0
+    
+    for site in ["SkeetScenes.com", "TeamSkeetFan.com"]:
+        try:
+            match = fanSite[2]
+        except:
+            pass
+        if match is 1:	
+            break
+        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match)
+        
     try:
+        match = fanSite[2]
+    except:
+        pass
+    
+    if match is 1:
+        # Return, first, last and randóm selection of images
+        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
+        sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
+        art = sample
+        Log("Selecting first 5, last and random 4 images from set")
+
+        j = 1
+											  
+        for posterUrl in art:
+            Log("Trying next Image")
+            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+            #Download image file for analysis
+                try:
+                    hdr = {
+                            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
+                    }
+                    req = urllib.Request(posterUrl, headers=hdr)
+                    img_file = urllib.urlopen(req)
+                    im = StringIO(img_file.read())
+                    resized_image = Image.open(im)
+                    width, height = resized_image.size
+                    #Add the image proxy items to the collection
+                    if width > 1 or height > width:
+                        # Item is a poster
+                        metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
+                    if width > 100 and width > height:
+                        # Item is an art item
+                        metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
+                    j = j + 1
+                except:
+                    Log("there was an issue")
+    else:
+    
         posterPageElements = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(" ", "_"))
         posterLink = posterPageElements.xpath('//img[contains(@src, "shared/scenes/new/")]')[0].get('src').split("0")[0]
         posterNum = 1
         for poster in ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"]:
-            poster = posterLink + poster
-            art.append(poster)
+            posterURL = posterLink + poster
+            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
             posterNum += 1
-    except:
-        pass
-
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-            j = j + 1
 
     return metadata
