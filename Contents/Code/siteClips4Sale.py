@@ -66,7 +66,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             genreList.append(genreName)
     Log(str(genreList))
     # Add Actors
-    if "MARKS HEAD BOBBERS" in tagline:
+    if "My cherry crush" in tagline:
+        genreList.remove("cherry")
+        genreList.remove("cherrycrush")
+    elif "MARKS HEAD BOBBERS" in tagline:
         movieActors.addActor("Mark Rockwell", "")
         if "mark rockwell" in genreList:
             genreList.remove("mark rockwell")
@@ -100,6 +103,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         if "Mandy Haze" in metadata.summary or "mandy haze" in genreList:
             movieActors.addActor("Mandy Haze","")
             genreList.remove("mandy haze")
+    elif "KLIXEN" in tagline:
+        actors = detailsPageElements.xpath('//div[@class="clipInfo clip_details"]/div[3]/span[2]/span/a')
+        for actor in actors:
+            actorName = str(actor.text_content().strip())
+            actorPhotoURL = ''
+            genreList.remove(actorName)
+            movieActors.addActor(actorName, actorPhotoURL)
     else:
         actorName = tagline
         actorPhotoURL = ''

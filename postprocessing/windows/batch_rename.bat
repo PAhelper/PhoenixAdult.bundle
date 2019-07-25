@@ -5,6 +5,7 @@
 
 :: change the -d argument to -b if you experience permissions issues with the log file (setup in other files)
 :: delete the -d argument to turn off dry run mode
+:: add -c argument to enable cleanup of leftover files and folders
 
 
 SET SORC="P:\Path\To\Folders\optional_wildcard*"

@@ -17,6 +17,27 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Femdom Empire] " + releaseDate, score = score, lang = lang))
 
+    if searchTitle == "Extreme Strap on Training":
+        Log("Manual Search Match")
+        curID = ("https://femdomempire.com/tour/trailers/EXTREMEStrap-OnTraining.html").replace('/','_')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "EXTREME Strap-On Training" + " [Femdom Empire] " + "2012.04.11", score = 101, lang = lang))
+    if searchTitle == "Tease  Stroke":
+        Log("Manual Search Match")
+        curID = ("https://femdomempire.com/tour/trailers/TeaseStroke.html").replace('/','_')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Tease & Stroke" + " [Femdom Empire] " + "2012.12.05", score = 101, lang = lang))
+    if searchTitle == "Cock Locked":
+        Log("Manual Search Match")
+        curID = ("https://femdomempire.com/tour/trailers/CockLocked.html").replace('/','_')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Cock Locked" + " [Femdom Empire] " + "2012.04.20", score = 101, lang = lang))
+    if searchTitle == "Oral Servitude":
+        Log("Manual Search Match")
+        curID = ("https://femdomempire.com/tour/trailers/OralServitude.html").replace('/','_')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Oral Servitude" + " [Femdom Empire] " + "2012.04.08", score = 101, lang = lang))
+
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -33,7 +54,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log("Scene Title: " + metadata.title)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]//p')[0].text_content().strip()
+    try:
+        metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]//p')[0].text_content().strip()
+    except:
+        pass
 
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
@@ -58,12 +82,17 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="featuring clear"][1]//ul//li')
+    actors = detailsPageElements.xpath('//div[@class="featuring clear"][1]/ul/li')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content().strip().replace('Featuring:', '')
             actorPhotoURL = ''
             movieActors.addActor(actorName, actorPhotoURL)
+
+    if metadata.title == "Owned by Alexis":
+        actorName = "Alexis Monroe"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
 
     ### Posters and artwork ###
 
