@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAextras
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -104,7 +105,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     siteName = PAsearchSites.getSearchSiteName(siteID)
 
     
-    for site in ["SkeetScenes.com", "TeamSkeetFan.com"]:
+    for site in ["SkeetScenes.com", "TeamSkeetFans.com"]:
         try:
             match = fanSite[2]
         except:
