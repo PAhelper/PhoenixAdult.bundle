@@ -64,19 +64,11 @@ Here is how to find the plug-in folder location:
 
 Plex main folder location:
 
-+ **Most common:**
-  - Windows: `%LOCALAPPDATA%\Plex Media Server\`
-  - Mac: `$HOME/Library/Application Support/Plex Media Server/`
-  - Debian/Fedora/CentOS/Ubuntu: `/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/`
-+ Others:
-  - FreeBSD: `/usr/local/plexdata/Plex Media Server/`
-  - FreeNAS: `/usr/pbi/plexmediaserver-amd64/plexdata/Plex Media Server/`
-  - FreeNAS: `${JAIL_ROOT}/var/db/plexdata/Plex Media Server/`
-  - ReadyNAS: `/c/.plex/Library/Application Support/Plex Media Server/`
-  - QNAP: `/share/MD0_DATA/.qpkg/PlexMediaServer/Library/Plex Media Server/`
-  - Synology Asustor: `/volume1/Plex/Library/Application Support/Plex Media Server/`
-  - Thecus: `/raid0/data/module/Plex/sys/Plex Media Server/`
-  - Thecus Plex community: `/raid0/data/PLEX_CONFIG/Plex Media Server/`
++ **Most common locations:**
+  - **Linux**: `/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/`
+  - **Mac**: `~/Library/Application Support/Plex Media Server/`
+  - **Windows**: `%LOCALAPPDATA%\Plex Media Server/`
+  - More paths listed in the [Plex documentation](https://support.plex.tv/articles/202915258-where-is-the-plex-media-server-data-directory-located/)
 
 Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
