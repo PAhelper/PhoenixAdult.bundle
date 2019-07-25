@@ -6,7 +6,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="info"]'):
         try:
-            sceneURL = searchResult.xpath('.//a')[0].get("href")
+            sceneURL = searchResult.xpath('.//a')[0].get("href").split("?")[0]
+            if 'http' not in sceneURL:
+                sceneURL = 'https' + str(sceneURL)
             scenePage = HTML.ElementFromURL(sceneURL)
             titleNoFormatting = scenePage.xpath('//title')[0].text_content().split(" | ")[1]
             curID = sceneURL.replace('/','+')
@@ -15,23 +17,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
         except:
             pass
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [TeamSkeet/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     if searchTitle == "Eavesdropping And Pussy Popping":
         Log("Manual Search Match")
-        curID = ("www.teamskeet.com/t1/trailer/view/55019").replace('/','+')
+        curID = ("https://www.teamskeet.com/t1/trailer/view/55019").replace('/','+')
         Log(str(curID))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Eavesdropping And Pussy Popping" + " [TeamSkeet/TeenPies] " + "2019-02-27", score = 101, lang = lang))
     if searchTitle == "Zoe's Fantasy":
         Log("Manual Search Match")
-        curID = ("www.teamskeet.com/t1/trailer/view/47562").replace('/','+')
+        curID = ("https://www.teamskeet.com/t1/trailer/view/47562").replace('/','+')
         Log(str(curID))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Zoe's Fantasy" + " [TeamSkeet/She's New] " + "2016-06-12", score = 101, lang = lang))
     if searchTitle == "She Has Her Ways":
         Log("Manual Search Match")
-        curID = ("www.teamskeet.com/t1/trailer/view/43061").replace('/','+')
+        curID = ("https://www.teamskeet.com/t1/trailer/view/43061").replace('/','+')
         Log(str(curID))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "She Has Her Ways" + " [TeamSkeet/TeamSkeet Extras] " + "2014-08-28", score = 101, lang = lang))
 
@@ -39,7 +41,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = "https://" + str(metadata.id).split("|")[0].replace('+','/')
+    url = str(metadata.id).split("|")[0].replace('+','/')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -78,7 +80,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     try:
         actortext = detailsPageElements.xpath('//title')[0].text_content().split('|')[0].strip()
-        actors = actortext.split('and')
+        actors = actortext.split(' and ')
         if len(actors) > 0:
             for actorLink in actors:
                 actorName = actorLink
