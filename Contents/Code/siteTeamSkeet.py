@@ -97,6 +97,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         art.append(twitterBG)
     except:
         pass
+    
+    try:
+        posterPageElements = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(" ", "_"))
+        posterLink = posterPageElements.xpath('//img[contains(@src, "shared/scenes/new/")]')[0].get('src').split("0")[0]
+        posterNum = 1
+        for poster in ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"]:
+            poster = posterLink + poster
+            art.append(poster)
+            posterNum += 1
+    except:
+        pass
 
     j = 1
     Log("Artwork found: " + str(len(art)))
