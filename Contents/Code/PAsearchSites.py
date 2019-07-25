@@ -348,7 +348,7 @@ searchSites[261] = ["Mofos","Mofos","https://www.mofos.com","https://www.mofos.c
 searchSites[262] = ["ShareMyBF","ShareMyBF","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[263] = ["Don't Break Me","Don't Break Me","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[264] = ["I Know That Girl","I Know That Girl","https://www.mofos.com","https://www.mofos.com/scene/"]
-searchSites[265] = ["Lets Try Anal","Let's Try Anal","https://www.mofos.com","https://www.mofos.com/scene/"]
+searchSites[265] = ["Let's Try Anal","Let's Try Anal","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[266] = ["Pervs On Patrol","Pervs On Patrol","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[267] = ["Stranded Teens","Stranded Teens","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[268] = ["Mofos B Sides","Mofos B Sides","https://www.mofos.com","https://www.mofos.com/scene/"]
@@ -1076,22 +1076,29 @@ def getSearchSettings(mediaTitle):
     if searchSiteID != 9999:
         Log("^^^^^^^ Shortening Title")
         Log(mediaTitle[:len(searchSites[searchSiteID][0])].lower() + " vs " + searchSites[searchSiteID][0].lower())
+        # searchSites [0] matches madiaTitle
         if mediaTitle[:len(searchSites[searchSiteID][0])].lower() == searchSites[searchSiteID][0].lower():
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0])+1:]
             Log("1")
+        # searchSites [0] contains an ' but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0]):]
+            Log("2")
+        # searchSites [0] contains an ' and spaces but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ","").replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))+1:]
+            Log("3")
+        # searchSites [0] and mediaTitle have the same punctuation but differnt spaces
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
+            Log("4")
         else:
             searchTitle = mediaTitle
-            Log("2")
-            if mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
-                searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
-                Log("3")
-            else:
-                searchTitle = mediaTitle
-                Log("4")
+            Log("5")
         if searchTitle[:4].lower() == "com ":
             searchTitle = searchTitle[4:]
-            Log("5")
-        Log("6")
+            Log("6")
+        Log("7")
     else:
         searchTitle = mediaTitle
 
