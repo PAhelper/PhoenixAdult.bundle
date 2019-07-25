@@ -405,8 +405,8 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                         for posterURL in fanPageElements.xpath('//div[contains(@class, "tiled-gallery")]//a//img'):
                                             art.append(posterURL.get('data-orig-file').replace('images.', ''))
                                 
-                            except:
-                                Log("No Images Found")
+                                except:
+                                    Log("No Images Found")
                             
                             
                             Log("Artwork found: " + str(len(art)))
