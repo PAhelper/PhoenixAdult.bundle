@@ -307,7 +307,7 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                         elif site == "ImagePost.com":
                                             fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                         elif site == "Nude-Gals.com":
-                                            fanTitle = fanPageElements.xpath('(//h1/small/text()')[0].strip()
+                                            fanTitle = fanPageElements.xpath('//h1/small/text()')[0].strip()
                                         elif site in ["SpyFams.com", "TeamSkeetFans.com"]:
                                             fanTitle = fanPageElements.xpath('//h1/text()')[0].strip()
                                         elif site == "PinkWorld.com":
