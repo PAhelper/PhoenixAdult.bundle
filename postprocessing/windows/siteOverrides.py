@@ -44,10 +44,10 @@ siteList[20] = ["TeacherFucksTeens", "New", "Nubiles\Teacher Fucks Teens"]
 siteList[21] = ["PassionHD", "New", "Passion HD"]
 siteList[22] = ["PublicAgent", "New", "New\Public Agent"]
 siteList[23] = ["SexArt", "New", "New\SexArt"]
-siteList[24] = ["SisLovesMe", "New", "New\Sis Loves Me"]
+siteList[24] = ["SisLovesMe", "New", "Sis Loves Me"]
 siteList[25] = ["SpyFam", "New", "SpyFam"]
 siteList[26] = ["Vixen", "New", "New\Vixen"]
-siteList[27] = ["XArt", "New", "New\X-Art"]
+siteList[27] = ["XArt", "New", "X-Art"]
 siteList[28] = ["LittleCaprice", "New", "Women\Caprice"]
 siteList[29] = ["ShareMyBF", "New", "Share My BF"]
 siteList[30] = ["StepSiblings", "New", "New\Step Siblings"]
@@ -239,6 +239,19 @@ def getRename(site, actor, title, date):
             title = scenePageElements.xpath('//h1[@data-test-component="VideoTitle"]/text()')
             #Vixen date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
+    # XART
+    elif site.lower() == "xart":
+        page = requests.get("https://www.x-art.com/videos/recent/all/")
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//div[@class="item-header"]//h2/text()'):
+            title = detailsPageElements.xpath('//div[@class="item-header"]/h1/text()')[i]
+            #Xart date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
             releaseDate = datetime_object.strftime('%Y-%m-%d')
             if releaseDate == date:
                 return title
