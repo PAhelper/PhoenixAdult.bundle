@@ -210,6 +210,20 @@ def getRename(site, actor, title, date):
                 if releaseDate == date and site.lower() == releaseSite.lower():
                     return title
                 i += 1 
+    # SISLOVESME
+    elif site.lower() == "sislovesme":
+        page = requests.get("https://www.sislovesme.com/")
+        detailsPageElements = html.fromstring(page.content)
+        i = 0
+        for releaseDate in detailsPageElements.xpath('//div[@class="thumb"]/div/a/div[@class="title_black pull-left"]/text()'):
+            sceneID = detailsPageElements.xpath('//div[@class="thumb"]/div/a')[i].get('href').split('/')[3]
+            title = sceneID + ' - ' + detailsPageElements.xpath('//div[@class="thumb"]/div/a/div[@class="title red pull-left"]/text()')[i]
+            #SisLovesMe date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
+            datetime_object = datetime.strptime(releaseDate, '%b %d, %Y ')
+            releaseDate = datetime_object.strftime('%Y-%m-%d')
+            if releaseDate == date:
+                return title
+            i += 1
     #VIXEN
     elif site.lower() == "vixentest":
         page = requests.get('https://www.vixen.com/search?q=' + title)
