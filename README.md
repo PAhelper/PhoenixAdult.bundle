@@ -64,19 +64,19 @@ Here is how to find the plug-in folder location:
 
 Plex main folder location:
 
-    * '%LOCALAPPDATA%\Plex Media Server\'                                        # Windows Vista/7/8
-    * '%USERPROFILE%\Local Settings\Application Data\Plex Media Server\'         # Windows XP, 2003, Home Server
-    * '$HOME/Library/Application Support/Plex Media Server/'                     # Mac OS
-    * '$PLEX_HOME/Library/Application Support/Plex Media Server/',               # Linux
-    * '/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/', # Debian,Fedora,CentOS,Ubuntu
-    * '/usr/local/plexdata/Plex Media Server/',                                  # FreeBSD
-    * '/usr/pbi/plexmediaserver-amd64/plexdata/Plex Media Server/',              # FreeNAS
-    * '${JAIL_ROOT}/var/db/plexdata/Plex Media Server/',                         # FreeNAS
-    * '/c/.plex/Library/Application Support/Plex Media Server/',                 # ReadyNAS
-    * '/share/MD0_DATA/.qpkg/PlexMediaServer/Library/Plex Media Server/',        # QNAP
-    * '/volume1/Plex/Library/Application Support/Plex Media Server/',            # Synology, Asustor
-    * '/raid0/data/module/Plex/sys/Plex Media Server/',                          # Thecus
-    * '/raid0/data/PLEX_CONFIG/Plex Media Server/'                               # Thecus Plex community    
++ **Most common:**
+  - Windows: `%LOCALAPPDATA%\Plex Media Server\`
+  - Mac: `$HOME/Library/Application Support/Plex Media Server/`
+  - Debian/Fedora/CentOS/Ubuntu: `/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/`
++ Others:
+  - FreeBSD: `/usr/local/plexdata/Plex Media Server/`
+  - FreeNAS: `/usr/pbi/plexmediaserver-amd64/plexdata/Plex Media Server/`
+  - FreeNAS: `${JAIL_ROOT}/var/db/plexdata/Plex Media Server/`
+  - ReadyNAS: `/c/.plex/Library/Application Support/Plex Media Server/`
+  - QNAP: `/share/MD0_DATA/.qpkg/PlexMediaServer/Library/Plex Media Server/`
+  - Synology Asustor: `/volume1/Plex/Library/Application Support/Plex Media Server/`
+  - Thecus: `/raid0/data/module/Plex/sys/Plex Media Server/`
+  - Thecus Plex community: `/raid0/data/PLEX_CONFIG/Plex Media Server/`
 
 Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
@@ -86,7 +86,7 @@ Notice
 ------
 I try to maintain bug-free code, but sometimes bugs happen. If you are having difficulty matching a scene, [create an issue on Github](https://github.com/PAhelper/PhoenixAdult.bundle/issues) and I will do my best to address it.
 
-** Plex Video Files Scanner needs to be set as the library scanner for best results. **
+**Plex Video Files Scanner needs to be set as the library scanner for best results.**
 
 Known Limitations
 -----------------
