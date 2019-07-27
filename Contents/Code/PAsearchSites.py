@@ -1059,6 +1059,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
