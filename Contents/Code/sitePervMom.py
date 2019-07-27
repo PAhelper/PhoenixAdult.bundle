@@ -6,7 +6,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     
     if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
-        url = PAsearchSites.getSearchBaseURL(siteNum) + searchTitle.split(" ")[0] + "/1/1/"
+        url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.split(" ")[0] + "/1/1/"
         searchResults = HTML.ElementFromURL(url)
 
         titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
