@@ -8,7 +8,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
         url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.split(" ")[0] + "/1/1/"
         searchResult = HTML.ElementFromURL(url)
-
         titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
         curID =(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-')).replace('/','_').replace('?','!')
         Log("curID: " + curID)
