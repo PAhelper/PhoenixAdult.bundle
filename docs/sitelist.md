@@ -235,7 +235,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### FakeHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
   - Fake Cop
@@ -243,8 +243,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Fake Hospital
   - Fake Hostel
   - Fakehub Originals
-  - FakeTaxi
+  - Fake Taxi
   - Female Agent
+  - Female Fake Taxi
   - Public Agent
 + #### FameDigital | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - DevilsFilm

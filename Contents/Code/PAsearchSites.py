@@ -81,6 +81,7 @@ import networkMetArt
 import siteFittingRoom
 import siteFamilyHookups
 import siteClips4Sale
+import siteFakeHub
 
 searchSites = [None] * 761
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
@@ -480,17 +481,17 @@ searchSites[393] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","htt
 searchSites[394] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[395] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[396] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[397] = ["Fake Taxi","Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[398] = ["Fakehub Originals","Fakehub Originals","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[399] = ["Public Agent","Public Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[400] = ["Fake Agent","Fake Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[401] = ["Female Agent","Female Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[402] = ["Fake Hospital","Fake Hospital","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[403] = ["Fake Agent UK","Fake Agent UK","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[404] = ["Fake Cop","Fake Cop","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.femalefaketaxi.com","https://www.femalefaketaxi.com/search/videos/"]
-searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakedrivingschool.com","https://www.fakedrivingschool.com/search/videos/"]
-searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehostel.com","https://www.fakehostel.com/search/videos/"]
+searchSites[397] = ["Fake Taxi","Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[398] = ["Fakehub Originals","Fakehub Originals","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[399] = ["Public Agent","Public Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[400] = ["Fake Agent","Fake Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[401] = ["Female Agent","Female Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[402] = ["Fake Hospital","Fake Hospital","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[403] = ["Fake Agent UK","Fake Agent UK","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[404] = ["Fake Cop","Fake Cop","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehub.com","https://www.fakehub.com/scene/"]
 searchSites[408] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[409] = ["BlacksOnBlondes","BlacksOnBlondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[410] = ["CuckoldSessions","CuckoldSessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
