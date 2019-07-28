@@ -1,7 +1,6 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import PAextras
 import ssl
 from lxml.html.soupparser import fromstring
 
