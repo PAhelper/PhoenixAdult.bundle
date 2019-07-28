@@ -9,7 +9,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.split(" ")[0] + "/1/1/"
         searchResult = HTML.ElementFromURL(url)
         titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
-        curID =(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-')).replace('/','_').replace('?','!')
+        curID =(PAsearchSites.getSearchSearchURL(siteNum) + (searchTitle.split(" ")[0] + "/1/1/").replace(' ','-')).replace('/','_').replace('?','!')
         Log("curID: " + curID)
         releaseDate = parse(searchResult.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         score = 100
