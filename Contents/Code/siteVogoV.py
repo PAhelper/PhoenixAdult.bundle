@@ -31,17 +31,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         Log("curID: " + curID)
         releaseDate = parse(searchResult.xpath('.//span[@class="video-data float-right"]//em')[0].text_content().strip()).strftime('%Y-%m-%d')
         Log("releaseDate: " + releaseDate)
-        ### special for claygoldfinch - start
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        ### special for claygoldfinch - end
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + femaleActor + "] [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    pageURL = str(metadata.id).split("|")[0].replace('_', '/')
+    pageURL = str(metadata.id).split("|")[0].replace('_', '/').replace('!','?')
     Log('scene url: ' + pageURL)
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
     try:
