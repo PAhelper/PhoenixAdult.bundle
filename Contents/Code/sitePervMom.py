@@ -4,14 +4,26 @@ import PAextras
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    Log("searchTitle.replace: " + searchTitle.replace(' ','-'))
-    searchResult = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-'))
-    titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
-    curID =(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-')).replace('/','_').replace('?','!')
-    Log("curID: " + curID)
-    releaseDate = parse(searchResult.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-    score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+    
+    if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
+        url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.split(" ")[0] + "/1/1/"
+        searchResult = HTML.ElementFromURL(url)
+        titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
+        curID =(PAsearchSites.getSearchSearchURL(siteNum) + (searchTitle.split(" ")[0] + "/1/1/").replace(' ','-')).replace('/','_').replace('?','!')
+        Log("curID: " + curID)
+        releaseDate = parse(searchResult.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+    
+    else:
+        Log("searchTitle.replace: " + searchTitle.replace(' ','-'))
+        searchResult = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-'))
+        titleNoFormatting = searchResult.xpath('//span[@class="p-small red"]')[0].text_content().strip()
+        curID =(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ','-')).replace('/','_').replace('?','!')
+        Log("curID: " + curID)
+        releaseDate = parse(searchResult.xpath('//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -63,7 +75,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Extra Posters
     import random
     
-    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title, 0)
+    fanSite = PAextras.getFanArt("TeamSkeetFans.com", art, actors, actorName, metadata.title, 0, siteName)
     summary = fanSite[1]
     match = fanSite[2]
 

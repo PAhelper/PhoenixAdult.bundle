@@ -136,40 +136,36 @@ def update(metadata,siteID,movieGenres,movieActors):
                     Log("there was an issue")
     else:
         art = []
+        
         try:
-            art.append(detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster"))
+            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/" +urlName+"/"+urlName+".jpg")
         except:
             pass
         try:
-            art.append(detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster"))
+            art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/hi.jpg")
+        except:
+            try:
+                art.append(detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster"))
+            except:
+                try:
+                    art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_big.jpg")
+                except:
+                    try:
+                        art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/med.jpg")
+                    except:
+                        try:
+                            art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/low.jpg")
+                        except:
+                            try:  
+                                art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/v2.jpg")
+                            except:
+                                pass
+        try:
+            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_small.jpg")
         except:
             pass
         try:
-            art.append("http://cdn1.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/v2.jpg")
-        except:
-            pass
-        try:
-            art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_small.jpg")
-        except:
-            pass
-        try:
-            art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_small2.jpg")
-        except:
-            pass
-        try:
-            art.append("https://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/bio_big.jpg")
-        except:
-            pass
-        try:
-            art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/low.jpg")
-        except:
-            pass
-        try:
-            art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/med.jpg")
-        except:
-            pass
-        try:
-            art.append("http://cdn.teamskeetimages.com/teamskeet/slm/"+urlName+"/shared/hi.jpg")
+            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_small2.jpg")
         except:
             pass
         
