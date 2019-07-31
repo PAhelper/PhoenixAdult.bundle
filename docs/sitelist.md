@@ -736,6 +736,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Vixen | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
   - All Interracial
