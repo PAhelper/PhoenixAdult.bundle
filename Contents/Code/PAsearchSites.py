@@ -1082,22 +1082,29 @@ def getSearchSettings(mediaTitle):
     if searchSiteID != 9999:
         Log("^^^^^^^ Shortening Title")
         Log(mediaTitle[:len(searchSites[searchSiteID][0])].lower() + " vs " + searchSites[searchSiteID][0].lower())
+        # searchSites [0] matches madiaTitle
         if mediaTitle[:len(searchSites[searchSiteID][0])].lower() == searchSites[searchSiteID][0].lower():
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0])+1:]
             Log("1")
+        # searchSites [0] contains an ' but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0]):]
+            Log("2")
+        # searchSites [0] contains an ' and spaces but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ","").replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))+1:]
+            Log("3")
+        # searchSites [0] and mediaTitle have the same punctuation but differnt spaces
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
+            Log("4")
         else:
             searchTitle = mediaTitle
-            Log("2")
-            if mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
-                searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
-                Log("3")
-            else:
-                searchTitle = mediaTitle
-                Log("4")
+            Log("5")
         if searchTitle[:4].lower() == "com ":
             searchTitle = searchTitle[4:]
-            Log("5")
-        Log("6")
+            Log("6")
+        Log("7")
     else:
         searchTitle = mediaTitle
 
