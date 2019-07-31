@@ -22,14 +22,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="video-post-content"]'):
         titleNoFormatting = searchResult.xpath('.//a[@class="video-post-main"]//img')[0].get('alt')
         sceneUrl = searchResult.xpath('.//a[@class="video-post-main"]')[0].get('href')
-        Log("titleNoFormatting: " + titleNoFormatting)
-        Log("sceneUrl: " + sceneUrl)
         femaleActor = searchResult.xpath('.//span[@class="video-model-list w-100"]//a')[0].text_content()
         Log("femaleActor: " + femaleActor) # I think dont need add Markus Dupree
         curID = sceneUrl.replace('/','_').replace('?','!')
-        Log("curID: " + curID)
         releaseDate = parse(searchResult.xpath('.//span[@class="video-data float-right"]//em')[0].text_content().strip()).strftime('%Y-%m-%d')
-        Log("releaseDate: " + releaseDate)
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -108,7 +104,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
-
     for poster in detailsPageElements.xpath('//div[@class="swiper-wrapper"]//figure//a'):
         posterUrl = poster.get('href')
         Log("DownLoad Posters/Arts: " + posterUrl)
