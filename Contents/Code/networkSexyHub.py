@@ -1,26 +1,20 @@
 import PAsearchSites
 import PAgenres
 
-def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article[contains(@class,"release-card scene")]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('title')
         curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//div[@class="card-title"]/a | .//a[@class="release-card__info__title"] | .//a[@class="card-title"]')[0].get('href')).replace('/','_').replace('?','!')
-        if "fakehostel" in PAsearchSites.getSearchSearchURL(siteNum):
-            subSite = "Fake Hostel"
-        elif "fitnessrooms" in PAsearchSites.getSearchSearchURL(siteNum):
+        if "fitnessrooms" in PAsearchSites.getSearchSearchURL(siteNum):
             subSite = "Fitness Rooms"
-        elif "fakedrivingschool" in PAsearchSites.getSearchSearchURL(siteNum):
-            subSite = "Fake Driving School"
         else:
             subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
 
-        if siteNum != 406 and siteNum != 407:
-            network = "SexyHub"
-        else:
-            network = "FakeHub"
+        network = "SexyHub"
+        
         try:
             releaseDate = parse(searchResult.xpath('.//div[@class="release-date"] | .//div[@class="release-card__info__release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         except:
@@ -34,34 +28,13 @@ def searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateA
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+"/"+subSite+"] " + releaseDate, score = score, lang = lang))
     return results
 
-def searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//a[@class="release-card"]'):
-        titleNoFormatting = searchResult.xpath('.//h2[@class="title"]')[0].text_content().strip()
-        curID = (PAsearchSites.getSearchBaseURL(siteNum) + searchResult.get('href')).replace('/','_').replace('?','!')
-        if PAsearchSites.getSearchSiteName(siteNum) == "Fitness Rooms":
-            subSite = "Fitness Rooms"
-        else:
-            subSite = searchResult.xpath('.//div[@class="sub-site-name"]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [FakeHub/"+subSite+"] " + releaseDate, score = score, lang = lang))
-    return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     # Studio
-    if siteID == 340 or (siteID >= 397 and siteID <= 407):
-        metadata.studio = 'FakeHub'
-    else:
-        metadata.studio = 'SexyHub'
+    
+    metadata.studio = 'SexyHub'
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
 
@@ -89,10 +62,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "Girlfriends"
     elif "massagerooms" in subSite:
         tagline = "Massage Rooms"
-    elif "Fakehostel" in subSite:
-        tagline = "Fake Hostel"
-    elif "Fakedrivingschool" in subSite:
-        tagline = "Fake Driving School"
     else:
         tagline = subSite
     metadata.tagline = tagline

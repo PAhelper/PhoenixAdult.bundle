@@ -31,6 +31,8 @@ class PhoenixActors:
                 newActor = "Aaliyah Love"
             if newActor == "Abby Rains":
                 newActor = "Abbey Rain"
+            if newActor == "Ms Addie Juniper":
+                newActor = "Addie Juniper"
             if newActor == "Adrianna Chechik":
                 newActor = "Adriana Chechik"
             if newActor == "Alex D":
@@ -49,6 +51,8 @@ class PhoenixActors:
                 newActor = "Anastasia Morna"
             if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
                 newActor = "April O'Neil"
+            if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
+                newActor = "Britney Beth"
             if newActor == "Bridgette B.":
                 newActor = "Bridgette B"
             if newActor == "Capri Cavalli":
@@ -137,8 +141,6 @@ class PhoenixActors:
                 newActor = "Sybil A"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
-            if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
-                newActor = "Britney Beth"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":

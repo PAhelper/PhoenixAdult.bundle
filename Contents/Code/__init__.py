@@ -475,12 +475,12 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 328:
                     results = PAsearchSites.siteDigitalPlayground.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
-            ###############
+             ###############
             ## SexyHub
             ###############
             if siteNum == 333 or siteNum == 335 or siteNum == 406 or siteNum == 407:
-                if searchSiteID == 9999 or (searchSiteID >= 333 and searchSiteID <= 339) or (searchSiteID >= 406 and searchSiteID <= 407):
-                    results = PAsearchSites.networkSexyHub.searchSexy(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                if searchSiteID == 9999 or (searchSiteID >= 333 and searchSiteID <= 339):
+                    results = PAsearchSites.networkSexyHub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## FullPornNetwork
@@ -500,8 +500,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ## FakeHub
             ###############
             if siteNum == 340:
-                if searchSiteID == 9999 or searchSiteID == 340 or (searchSiteID >= 397 and searchSiteID <= 404):
-                    results = PAsearchSites.networkSexyHub.searchFake(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                if searchSiteID == 9999 or searchSiteID == 340 or (searchSiteID >= 397 and searchSiteID <= 407):
+                    results = PAsearchSites.siteFakeHub.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## JulesJordan
@@ -971,6 +971,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 760:
                     results = PAsearchSites.siteClips4Sale.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## VogoV
+            ###############
+            if siteNum == 761:
+                if searchSiteID == 9999 or searchSiteID == 761:
+                    results = PAsearchSites.siteVogoV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1014,18 +1021,26 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##   SexyHub/FakeHub                                        ##
+        ##   SexyHub                                                ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 333 and siteID <= 340) or (siteID >= 397 and siteID <= 407):
+        if (siteID >= 333 and siteID <= 339):
             metadata = PAsearchSites.networkSexyHub.update(metadata,siteID,movieGenres,movieActors)
-
+            
+        ##############################################################
+        ##                                                          ##
+        ##   FakeHub                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 340 or (siteID >= 397 and siteID <= 407):
+            metadata = PAsearchSites.siteFakeHub.update(metadata,siteID,movieGenres,movieActors)
+        
         ##############################################################
         ##                                                          ##
         ##   Naughty America                                        ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 742:
+        if (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 749:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1714,6 +1729,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 760:
             metadata = PAsearchSites.siteClips4Sale.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VogoV                                                   ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 761:
+            metadata = PAsearchSites.siteVogoV.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

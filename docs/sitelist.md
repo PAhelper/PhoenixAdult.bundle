@@ -235,17 +235,18 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### FakeHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-  - FakeTaxi
-  - Fakehub Originals
-  - Public Agent
++ #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
-  - Female Agent
-  - Fake Hospital
   - Fake Agent UK
   - Fake Cop
   - Fake Driving School
+  - Fake Hospital
   - Fake Hostel
+  - Fakehub Originals
+  - Fake Taxi
+  - Female Agent
+  - Female Fake Taxi
+  - Public Agent
 + #### FameDigital | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - DevilsFilm
   - PeterNorth
@@ -485,7 +486,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PurePOV
   - SpermSwap
   - TamedTeens
-+ #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL, SceneID**
 + #### Porndoe Premium Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - A Girl Knows
   - Badtime Stories
@@ -735,6 +736,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Vixen | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
   - All Interracial

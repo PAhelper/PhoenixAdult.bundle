@@ -8,13 +8,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchDate:
         url = PAsearchSites.getSearchSearchURL(siteNum) + "date/" + searchDate + "/" + searchDate
         searchResults = HTML.ElementFromURL(url)
-        for searchResult in searchResults.xpath('//div[contains(@class,"thumbnail-grid videoset")]'):
-            titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
-            temp = searchResult.xpath('.//a[@class="title"]')[0].get('href')
-            alpha = temp.replace('/', '_', 2).find('/')+1
-            omega = temp.rfind('/')
-
-            curID = temp[alpha:omega].replace('/','_').replace('?','!')
+        for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
+            titleNoFormatting = searchResult.xpath('//a[@class= "title"]')[0].text_content().strip()
+            curID = searchResult.xpath('//a[@class="title"]')[0].get('href').split("/")[3]
             Log('curID: ' + str(curID))
             releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             if searchDate:
@@ -24,14 +20,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
-    if unicode(searchTitle, 'utf-8').isnumeric():
-        url = PAsearchSites.getSearchBaseURL(siteNum) + "/video/watch/" + searchTitle.lower().replace(" ","-").replace("'","-")
+    if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/video/watch/" + searchTitle.split(" ")[0]
         searchResults = HTML.ElementFromURL(url)
 
-        searchResult = searchResults.xpath('//div[@class="descrips"]')[0]
-        titleNoFormatting = searchResult.xpath('//span[@class="wp-title videotitle"]')[0].text_content()
-        curID = searchTitle.lower().replace(" ","-").replace("'","-")
-        releaseDate = parse(searchResult.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()).strftime('%Y-%m-%d')
+        searchResult = searchResults.xpath('//div[contains(@class, "content-pane-title")]')[0]
+        titleNoFormatting = searchResult.xpath('//h2')[0].text_content()
+        curID = searchTitle.split(" ")[0]
+        releaseDate = parse(searchResult.xpath('//span[@class= "date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         score = 100
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
@@ -43,7 +39,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     art = []
 
     # Title
-    title = detailsPageElements.xpath('//span[contains(@class,"wp-title")]')[0].text_content().strip()
+    title = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]/h2')[0].text_content().strip()
     metadata.title = title
     #episode = title.split(' - ')[-1].strip()
     #Log("Sort Title: "+episode + " - " + title[:title.rfind('-')])
@@ -54,7 +50,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     try:
-        paragraphs = detailsPageElements.xpath('//div[@class="video-description"]/article/p')
+        paragraphs = detailsPageElements.xpath('//div[contains(@class, "content-pane-container")]//p')
         pNum = 0
         summary = ""
         for paragraph in paragraphs:
@@ -71,57 +67,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = summary.strip()
 
     # Collections / Tagline
-    siteName = detailsPageElements.xpath('//span[@class="featuring-modelname model"]/preceding::a[1]')[0].text_content().strip()
-    if "stepsiblingscaught" in siteName.lower():
-        tagline = "Step Siblings Caught"
-    elif "momsteachsex" in siteName.lower():
-        tagline = "Moms Teach Sex"
-    elif "badteenspunished" in siteName.lower():
-        tagline = "Bad Teens Punished"
-    elif "princesscum" in siteName.lower():
-        tagline = "Princess Cum"
-    elif "nubilesunscripted" in siteName.lower():
-        tagline = "Nubiles Unscripted"
-    elif "nubilescasting" in siteName.lower():
-        tagline = "Nubiles Casting"
-    elif "petitehdporn" in siteName.lower():
-        tagline = "Petite HD Porn"
-    elif "driverxxx" in siteName.lower():
-        tagline = "Driver XXX"
-    elif "petiteballerinasfucked" in siteName.lower():
-        tagline = "Petite Ballerinas Fucked"
-    elif "teacherfucksteens" in siteName.lower():
-        tagline = "Teacher Fucks Teens"
-    elif "bountyhunterporn" in siteName.lower():
-        tagline = "Bountyhunter Porn"
-    elif "daddyslilangel" in siteName.lower():
-        tagline = "Daddy's Lil Angel"
-    elif "myfamilypies" in siteName.lower():
-        tagline = "My Family Pies"
-    elif "nubiles.net" in siteName.lower():
-        tagline = "Nubiles"
-    elif "brattysis" in siteName.lower():
-        tagline = "Bratty Sis"
-    elif "anilos" in siteName.lower():
-        tagline = "Anilos"
-    elif "hotcrazymess" in siteName.lower():
-        tagline = "Hot Crazy Mess"
-    elif "nfbusty" in siteName.lower():
-        tagline = "NF Busty"
-    elif "thatsitcomporn" in siteName.lower():
-        tagline = "That Sitcom Show"
-    elif "detentiongirls" in siteName.lower():
-        tagline = "Detention Girls"
-    elif "nubileset" in siteName.lower():
-        tagline = "Nubiles ET"
-    else:
-        tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Date
-    date = detailsPageElements.xpath('//div[@class="descrips"]//div[@class="row"]//div[@class="col-lg-6 col-sm-6"]//span')[10].text_content().strip()
+    date = detailsPageElements.xpath('//div[contains(@class, "content-pane")]//span[@class= "date"]')[0].text_content().strip()
     if len(date) > 0:
         date_object = parse(date)
         metadata.originally_available_at = date_object
@@ -129,13 +81,13 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//span[@class="featuring-modelname model"]/a')
+    actors = detailsPageElements.xpath('//div[contains(@class, "content-pane-performer")]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content().strip()
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL((PAsearchSites.getSearchBaseURL(siteID)+actorPageURL))
-            actorPhotoURL = "http:"+actorPage.xpath('//div[@id="modelprofile"]/img')[0].get("src")
+            actorPhotoURL = "http:"+actorPage.xpath('//div[contains(@class, "model-profile")]//img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
     if "Logan Long" in summary:
         movieActors.addActor('Logan Long','')
@@ -170,46 +122,42 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@class="tags categories"]/a')
+    genres = detailsPageElements.xpath('//div[@class="categories"]/a')
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
 
     # Posters
-    background = "http:" + detailsPageElements.xpath('//div[@id="watchpagevideo"]//div[@class="edgeCMSVideoPlayer"]//video')[0].get('poster')
+    background = "http:" + detailsPageElements.xpath('//video')[0].get('poster')
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
-    # Scene cover in NubileFilms
+    # Scene cover from related photosets
     try:
-        posters = detailsPageElements.xpath('//div[@class="thumbnail-grid photoset"]//img')
+        posters = detailsPageElements.xpath('//div[@class="content-grid container-fluid "]//figure[@class=" "]')
+        i = 0
         for poster in posters:
-            posterName = poster.get("alt")
-            if posterName == title:
+            posterName = poster.xpath('//div[@class="content-grid container-fluid "]//a[@class= "title"]')[i].text_content()
+            if title == posterName:
                 Log('Cover image found')
-                posterLink = "http:" + poster.get("src")
+                posterLink = "http:" + poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
                 metadata.posters[posterLink] = Proxy.Preview(HTTP.Request(posterLink, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+                break
+            i+=1
     except:
         metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     try:
-        photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-xs wptag " and contains(text(),"Pics")]')[0].get('href')
+        try:
+            photoPageURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="btn btn-primary btn-responsive "][contains(text(),"Pics")]')[0].get('href')
+        except:
+            photoPageURL = "https://nubiles-porn.com/photo/gallery/" + str(metadata.id).split("|")[0]
         Log("photoPageURL: " + str(photoPageURL))
         photoPageElements = HTML.ElementFromURL(photoPageURL)
-        for posterUrl in photoPageElements.xpath('//figure[@class="photo-thumbnail"]//img'):
-            art.append("http:" + posterUrl.get('src').replace('/tn',''))
+        for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
+            art.append("http:" + posterUrl.get('src'))
     except:
         pass
-    
-    if len(art)is 0:
-        try:
-            photoPageURL = "https://nubiles-porn.com/photo/gallery/" + str(metadata.id).split("|")[0]
-            Log("photoPageURL: " + str(photoPageURL))
-            photoPageElements = HTML.ElementFromURL(photoPageURL)
-            for posterUrl in photoPageElements.xpath('//figure[@class="photo-thumbnail"]//img'):
-                art.append("https:" + posterUrl.get('src').replace('/tn',''))
-        except:
-            pass    
 
     j = 1
     Log("Artwork found: " + str(len(art)))
