@@ -95,21 +95,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     ### Posters and artwork ###
 
     # Video trailer background image
-    if tagline == "Dane Jones":
-        site = "290"
-    elif tagline == "Fitness Rooms":
-        site = "294"
-    elif tagline == "Girlfriends":
-        site = "289"
-    elif tagline == "Lesbea":
-        site = "291"
-    elif tagline == "Massage Rooms":
-        site = "292"
-    elif tagline == "MomXXX":
-        site = "293"
+    site = detailsPageElements.xpath('//div[@class="wxt7nk-3 gsvQoQ"]/a')[0].get('href').split('=')[-1]
     BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
     BGPage = HTML.ElementFromURL(BGPageURL)
-    Log(len(BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]')))
     for scene in BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]'):
         if metadata.title in scene.xpath('.//a')[0].get('title'):
             BGPhotoURL = scene.xpath('.//img')[0].get("src")
