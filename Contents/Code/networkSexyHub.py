@@ -48,7 +48,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bKVlBB"]')[0].text_content().strip()
+    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bKVlBB"]/text()')[0].strip()
     if "Mom XXX" in tagline:
         tagline = "MomXXX"
     metadata.tagline = tagline
@@ -94,17 +94,26 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     ### Posters and artwork ###
 
-    # Video trailer background image (NOT WORKING)
-    try:
-        tmp = detailsPageElements.xpath('//div[contains(@style, "poster_01")]')[0].get("style")
-        Log(tmp)
-        k = tmp.find("url(")
-        j = tmp.find("jpg")
-        twitterBG = tmp[k+2:j+3]
-        Log(twitterBG)
-        art.append(twitterBG)
-    except:
-        pass
+    # Video trailer background image
+    if tagline == "Dane Jones":
+        site = "290"
+    elif tagline == "Fitness Rooms":
+        site = "294"
+    elif tagline == "Girlfriends":
+        site = "289"
+    elif tagline == "Lesbea":
+        site = "291"
+    elif tagline == "Massage Rooms":
+        site = "292"
+    elif tagline == "MomXXX":
+        site = "293"
+    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
+    BGPage = HTML.ElementFromURL(BGPageURL)
+    Log(len(BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]')))
+    for scene in BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]'):
+        if metadata.title in scene.xpath('.//a')[0].get('title'):
+            BGPhotoURL = scene.xpath('.//img')[0].get("src")
+            art.append(BGPhotoURL.replace("webp", ".jpg"))
 
     j = 1
     Log("Artwork found: " + str(len(art)))
