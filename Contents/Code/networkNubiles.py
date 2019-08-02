@@ -155,7 +155,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("photoPageURL: " + str(photoPageURL))
         photoPageElements = HTML.ElementFromURL(photoPageURL)
         for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
-            art.append("http:" + posterUrl.get('src'))
+            if "http" not in posterUrl.get('src'):
+                art.append("http:" + posterUrl.get('src'))
+            else:
+                art.append(posterUrl.get('src'))
     except:
         pass
 
