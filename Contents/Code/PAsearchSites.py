@@ -83,8 +83,9 @@ import siteFamilyHookups
 import siteClips4Sale
 import siteFakeHub
 import siteVogoV
+import siteUltrafilms
 
-searchSites = [None] * 762
+searchSites = [None] * 763
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -847,6 +848,7 @@ searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com"
 searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.com","https://www.familyhookups.com/scene/"]
 searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
 searchSites[761] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
+searchSites[762] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

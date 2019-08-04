@@ -886,8 +886,8 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 742:
                 if searchSiteID == 9999 or searchSiteID == 742:
                     results = PAsearchSites.siteLittleCaprice.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
-
-      	    ###############
+            
+            ###############
             ## WowGirls
             ###############
             if siteNum == 743:
@@ -977,6 +977,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 761:
                 if searchSiteID == 9999 or searchSiteID == 761:
                     results = PAsearchSites.siteVogoV.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            
+            ###############
+            ## Ultrafilms
+            ###############
+            if siteNum == 762:
+                if searchSiteID == 9999 or searchSiteID == 762:
+                    results = PAsearchSites.siteUltrafilms.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1737,6 +1744,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 761:
             metadata = PAsearchSites.siteVogoV.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Ultrafilms                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 762:
+            metadata = PAsearchSites.siteUltrafilms.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
