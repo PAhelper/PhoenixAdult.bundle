@@ -271,6 +271,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### First Anal Quest | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID (as listed in URL), Date Add**
 + #### FuckedHard18 | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### FuckingAwesome | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title, Actor and Date**
 + #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Analized
   - Bad Daddy POV
