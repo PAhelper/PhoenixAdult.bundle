@@ -730,6 +730,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Twistys
   - Twistys Hard
   - When Girls Play
++ #### Ultrafilms | Matching type *[Limited](./manualsearch.md#limited-search)*
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
