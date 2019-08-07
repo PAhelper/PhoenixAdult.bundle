@@ -631,7 +631,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - VIP Crew
   - We Live Together
   - Wives in Pantyhose
-+ #### SexyHub | Matching type: *[Limited](./manualsearch.md#exact-match)* - **SceneID**
++ #### SexyHub | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Dane Jones
   - Fitness Rooms
   - Girlfriends.xxx
