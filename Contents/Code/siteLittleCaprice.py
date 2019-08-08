@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@id="left-area"]/article'):
         titleNoFormatting = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].get('href').replace('/','_').replace('?','!')
+        curID = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].get('href').replace('_','*').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//span[@class="published"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -21,7 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('*','_')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()

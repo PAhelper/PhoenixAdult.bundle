@@ -129,7 +129,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Posters
-    background = "http:" + detailsPageElements.xpath('//video')[0].get('poster')
+    background = detailsPageElements.xpath('//video')[0].get('poster')
+    if "http" not in background:
+                    background = "http:" + background
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Scene cover from related photosets
@@ -140,7 +142,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             posterName = poster.xpath('//div[@class="content-grid container-fluid "]//a[@class= "title"]')[i].text_content()
             if title == posterName:
                 Log('Cover image found')
-                posterLink = "http:" + poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
+                posterLink = poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
+                if "http" not in posterLink:
+                    posterLink = "http:" + posterLink
                 metadata.posters[posterLink] = Proxy.Preview(HTTP.Request(posterLink, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
                 break
             i+=1
