@@ -585,7 +585,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Tight and Teen
 + #### PropertySex | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### Reality Kings Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### Reality Kings Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - 40 Inch Plus
   - 8th Street Latinas
   - Bad Tow Truck
@@ -631,7 +631,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - VIP Crew
   - We Live Together
   - Wives in Pantyhose
-+ #### SexyHub | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### SexyHub | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Dane Jones
   - Fitness Rooms
   - Girlfriends.xxx

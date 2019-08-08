@@ -1,147 +1,126 @@
 import PAsearchSites
 import PAgenres
+
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-
-    Log("searchDate: " + str(searchDate))
-
-    if searchDate:
-        Log("searchDate passed")
-    else:
-        Log("searchDate failed")
-    
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//article[@class="card card--release"]'):
-        titleNoFormatting = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('title')
-        curID = searchResult.xpath('.//p[@class="card-info__title"]//a[1]')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[@class="card-info__meta"]//a[1]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//span[@class="card-info__meta-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    searchResults = HTML.ElementFromURL(url)
+    for searchResult in searchResults.xpath('//h1'):
+        titleNoFormatting = searchResult.xpath('//h1')[0].text_content().replace('Trailer','').strip()
+        curID = url.replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
+        if sceneTitle:
+            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        if PAsearchSites.getSearchSiteName(siteNum) != "Reality Kings":
-            score = score - Util.LevenshteinDistance(PAsearchSites.getSearchSiteName(siteNum).lower(), subSite.lower())
-
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [RealityKings/"+subSite+"] "+releaseDate, score = score, lang = lang))    
+            score = 90
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [RealityKings/" + subSite + "] ", score = score, lang = lang))
 
     return results
 
-
-
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
 
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
-
-    # Studio / Summary / Title / Collections
-    metadata.studio = "Reality Kings"
-    paragraph = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//p')[0].text_content()
-    paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n','').replace('  ','') + "\n\n"
-    metadata.summary = paragraph.strip()
-    metadata.title = detailsPageElements.xpath('//h1[@class="section_title"]')[0].text_content()
-    metadata.tagline = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//div[@class="category"]//a')[0].text_content()
+    art = []
     metadata.collections.clear()
-    metadata.collections.add(metadata.tagline)
-
-    # Release Date
-    date_object = datetime.strptime(str(metadata.id).split("|")[2], '%Y-%m-%d')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year    
-        
-    
-    # Genres
     movieGenres.clearGenres()
-    # No Source for Genres, add manual
-    t = metadata.tagline
-    if t == "40 Inch Plus" or t == "Extreme Asses" or t == "Round and Brown":
-        movieGenres.addGenre("Big Butt")
-    if t == "First Time Auditions":
-        movieGenres.addGenre("Audition")
-    if t == "Dangerous Dongs" or t == "Teens Love Huge Cocks":
-        movieGenres.addGenre("Big Dick")
-    if t == "Big Naturals" or t == "Big Tits Boss":
-        movieGenres.addGenre("Big Tits")
-    if t == "Bikini Crashers":
-        movieGenres.addGenre("Bikini")
-    if t == "Street Blowjobs":
-        movieGenres.addGenre("Blowjob")
-    if t == "Captain Stabbin":
-        movieGenres.addGenre("Boat")
-    if t == "In The VIP":
-        movieGenres.addGenre("Club")
-    if t == "Round and Brown":
-        movieGenres.addGenre("Ebony")
-    if t == "Euro Sex Parties" or t == "Mikes Apartment":
-        movieGenres.addGenre("Euro")
-    if t == "Euro Sex Parties":
-        movieGenres.addGenre("Group")
-    if t == "Hot Bush":
-        movieGenres.addGenre("Hairy Pussy")
-    if t == "We Live Together" or t == "Moms Lick Teens":
-        movieGenres.addGenre("Lesbian")
-    if t == "8th Street Latinas" or t == "Saturday Night Latinas":
-        movieGenres.addGenre("Latina")
-    if t == "Happy Tugs":
-        movieGenres.addGenre("Massage")
-        movieGenres.addGenre("Handjob")
-    if t == "Milf Hunter" or t == "Milf Next Door" or t == "Moms Lick Teens" or t == "Moms Bang Teens":
-        movieGenres.addGenre("MILF")
-    if t == "Real Orgasms":
-        movieGenres.addGenre("Masturbation")
-        movieGenres.addGenre("Solo")
-    if t == "Wives in Pantyhouse":
-        movieGenres.addGenre("Pantyhouse")
-    if t == "Team Squirt":
-        movieGenres.addGenre("Squirt")
-    if t == "Pure 18" or t == "Teens Love Huge Cocks" or t == "Moms Bang Teens":
-        movieGenres.addGenre("Teen")
-    if t == "Tranny Surprise":
-        movieGenres.addGenre("Tranny")
-        movieGenres.addGenre("Shemale")
-    movieGenres.addGenre("Hardcore")
-    movieGenres.addGenre("Heterosexual")
-
-
-    # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@id="trailer-desc-txt"]//div[contains(@class,"models-name")]')
-    if len(actors) > 0:
-        if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
-        if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
-        if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
-        for actorLink in actors:
-            actorName = actorLink.xpath('.//a')[0].text_content()
-            actorPageURL = actorLink.xpath('.//a')[0].get("href")
-            actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[contains(@class,"model-picture__thumb js-model-picture__thumb")]')[0]
-            actorPhotoURL = actorPhotoURL.xpath('.//img')[0].get("data-bind").split("'")[1]
-            movieActors.addActor(actorName,actorPhotoURL)
 
-    # Posters/Background
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
-    posters = detailsPageElements.xpath('//a[@class="card-thumb__img"]')
-    background = detailsPageElements.xpath('//video')[0].get("poster")
+    # Studio
+    metadata.studio = 'RealityKings'
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+
+    # Summary
     try:
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-        posterNum = 1
-        for posterCur in posters:
-            posterURL = posterCur.get("href")
-            try:
-                metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-            except:
-                pass
-            posterNum = posterNum + 1
+        metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]/div[2]')[0].text_content().strip()
     except:
         pass
-    
+
+    #Tagline and Collection(s)
+    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 fOadtn"]/text()')[0].strip()
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
+    # Genres
+    genres = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]/a')
+    if len(genres) > 0:
+        for genreLink in genres:
+            genreName = genreLink.text_content().replace(',','').strip().lower()
+            movieGenres.addGenre(genreName)
+
+    # Release Date
+    date = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[last()]')
+    if len(date) > 0:
+        date = date[0].text_content().strip().replace('Release Date:','')
+        date_object = datetime.strptime(date, '%B %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
+    # Actors
+    try:
+        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
+        if len(actors) > 0:
+            if len(actors) == 3:
+                movieGenres.addGenre("Threesome")
+            if len(actors) == 4:
+                movieGenres.addGenre("Foursome")
+            if len(actors) > 4:
+                movieGenres.addGenre("Orgy")
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                Log("actorPageURL: " + actorPageURL)
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                try:
+                    actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
+                except:
+                    actorPhotoURL = ''
+                movieActors.addActor(actorName, actorPhotoURL)
+    except:
+        pass
+
+    ### Posters and artwork ###
+
+    # Video trailer background image
+    site = detailsPageElements.xpath('//div[@class="wxt7nk-3 fvcNzR"]/a')[0].get('href').split('=')[-1]
+    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
+    BGPage = HTML.ElementFromURL(BGPageURL)
+    for scene in BGPage.xpath('//div[@class="sc-ifAKCX eswYrG"]'):
+        if metadata.title in scene.xpath('.//a')[0].get('title'):
+            BGPhotoURL = scene.xpath('.//img')[0].get("src")
+            art.append(BGPhotoURL.replace("webp", ".jpg"))
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
+
     return metadata
