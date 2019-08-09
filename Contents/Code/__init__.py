@@ -985,6 +985,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 762:
                     results = PAsearchSites.siteUltrafilms.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## fuckingawesome.com
+            ###############
+            if siteNum == 763:
+                if searchSiteID == 9999 or searchSiteID == 763:
+                    results = PAsearchSites.siteFuckingAwesome.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Clubseventeen
+            ###############
+            if siteNum == 764:
+                if searchSiteID == 9999 or searchSiteID == 764:
+                    results = PAsearchSites.siteClubseventeen.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1752,6 +1766,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 762:
             metadata = PAsearchSites.siteUltrafilms.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  fuckingawesome.com                                      ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 763:
+            metadata = PAsearchSites.siteFuckingAwesome.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  clubseventeen.com                                      ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 764:
+            metadata = PAsearchSites.siteClubseventeen.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
