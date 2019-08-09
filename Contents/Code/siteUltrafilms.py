@@ -64,6 +64,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         
 
 def update(metadata,siteID,movieGenres,movieActors):
+    Log('******UPDATE CALLED*******')
     pageURL = str(metadata.id).split("|")[0].replace('_', '/').replace('?','!')
     Log('scene url: ' + pageURL)
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
@@ -75,15 +76,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         htmlstring = response.read()
         detailsPageElements = fromstring(htmlstring)
 
-    # Summary
+    # Studio
     siteName = PAsearchSites.getSearchSiteName(siteID)
     metadata.studio = siteName
+
+    # Title
     try:
-        #site dont give a description
-        metadata.summary = 'No description'
         metadata.title = detailsPageElements.xpath('//span[@property="name"]')[3].text_content().strip()
     except:
         pass
+
+    # Summary
+    metadata.summary = ''
 
     # Collections / Tagline
     metadata.collections.clear()
@@ -95,7 +99,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         genres = detailsPageElements.xpath('//div[@itemprop="keywords"]//ul//li//a')
         if len(genres) > 0:
             for genreLink in genres:
-                genreName = genreLink.text_content().strip().lower()
+                genreName = genreLink.text_content().replace('Movies','').strip().lower()
                 movieGenres.addGenre(genreName)
     except:
         pass
