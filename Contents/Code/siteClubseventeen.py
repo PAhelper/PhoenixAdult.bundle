@@ -32,10 +32,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Clubseventeen'
+    siteName = PAsearchSites.getSearchSiteName(siteID)
+    metadata.studio = siteName
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="top"]/h3/span')[0].text_content().strip()
+    try:
+        metadata.title = detailsPageElements.xpath('//div[@class="top"]/h3/span')[0].text_content().strip()
+    except:
+        pass
+    # Studio
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="bottom"]/p[@class="mt-0 hidden-lg"]')[0].text_content().strip()
@@ -49,9 +54,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     genres = detailsPageElements.xpath('//div[@class="top"]/div[@class="item-tag mt-5"]/a/span')
     if len(genres) > 0:
         for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower()
+            genreName = genreLink.text_content().replace('Movies','').strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Genre")
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="top"]/p[@class="mt-10 letter-space-1"]')[0].text_content().split("|")[0].strip().split(' ')[2]
@@ -76,16 +80,16 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="profile-image-container"]/a/img')[0].get("src")
             if 'http' not in actorPhotoURL:
-            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
 
     # Video trailer background image
-    #twitterBG = detailsPageElements.xpath('//div[@class="ratio-16-9 video-item static-item progressive-load loaded"]')[0].get('data-image')
-    #Log('twitterBG: ' + str(twitterBG))
+    twitterBG = detailsPageElements.xpath('//div[@class="ratio-16-9 video-item static-item progressive-load"]')[0].get('data-image')
+    Log('twitterBG: ' + str(twitterBG))
     try:
-        twitterBG = detailsPageElements.xpath('//div[@class="video-wrapper static-video-wrapper"]/div[@class="ratio-16-9 video-item static-item progressive-load loaded"]')[0].get_attribute('data-image')
+        twitterBG = detailsPageElements.xpath('//div[@class="ratio-16-9 video-item static-item progressive-load"]')[0].get('data-image')
         Log('twitterBG: ' + twitterBG)
         art.append(twitterBG)
     except:
