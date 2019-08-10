@@ -75,7 +75,13 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = actorLink.xpath('.//a[1]')[0].text_content().strip()
             actorPhotoURL = actorLink.xpath('.//a[2]//img')[0].get('src')
             movieActors.addActor(actorName,actorPhotoURL)
-
+            try:
+                actorName = actorLink.xpath('.//a[3]')[0].text_content().strip()
+                actorPhotoURL = actorLink.xpath('.//a[4]//img')[0].get('src')
+                movieActors.addActor(actorName, actorPhotoURL)
+            except:
+                pass
+            
     # Posters/Background
     posters = HTML.ElementFromURL(detailsPageElements.xpath('//dd[1]//a')[0].get('href'))
 
