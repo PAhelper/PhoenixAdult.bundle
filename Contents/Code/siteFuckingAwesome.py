@@ -54,7 +54,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Genre")
+
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="videodate"]/strong')[0].text_content().strip()
