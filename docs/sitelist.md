@@ -269,7 +269,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MrPOV
   - TheDickSuckers
 + #### First Anal Quest | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID (as listed in URL), Date Add**
++ #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### FuckedHard18 | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### FuckingAwesome | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
