@@ -41,7 +41,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[2]')[0].text_content().strip()
     except:
-        sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
+        try:
+            sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
+        except:
+            sceneType = 'Scene'
     if "Movie" in sceneType:
         sceneType = "Movie"
         Log("Is Movie")
@@ -100,7 +103,12 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieGenres.addGenre("Orgy")
             for actorLink in actors:
                 actorName = str(actorLink.text_content().strip())
-                actorPhotoURL = ''
+                try:
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    detailsActorPage = HTML.ElementFromURL(actorPageURL)
+                    actorPhotoURL = detailsActorPage.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get('src')
+                except:
+                    actorPhotoURL = ''
                 movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass
