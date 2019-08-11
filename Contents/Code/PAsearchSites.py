@@ -84,8 +84,9 @@ import siteClips4Sale
 import siteFakeHub
 import siteVogoV
 import siteUltrafilms
+import siteFuckingAwesome
 
-searchSites = [None] * 763
+searchSites = [None] * 764
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -849,6 +850,7 @@ searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.c
 searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
 searchSites[761] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
 searchSites[762] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
+searchSites[763] = ["FuckingAwesome","FuckingAwesome","https://fuckingawesome.com","https://fuckingawesome.com/search/videos/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -929,10 +931,12 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^clip ', 'LegalPorno ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^cws ', 'CzechWifeSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dbm ', 'DontBreakMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ddfb ', 'DDFBusty ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ddfvr ', 'DDFNetworkVR ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^Digital Playground ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
@@ -1000,7 +1004,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mmgs ', 'MommysGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mnm ', 'MyNaughtyMassage ', mediaTitle, flags=re.IGNORECASE)
-    ediaTitle = re.sub('^mom ', 'MomXXX ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mom ', 'MomXXX ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mpov ', 'MrPOV ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mshf ', 'MySistersHotFriend ', mediaTitle, flags=re.IGNORECASE)
