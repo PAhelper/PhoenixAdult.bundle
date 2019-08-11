@@ -10,12 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
             scenePage = searchResult.xpath('.//a')[0].get('href')
             curID = scenePage.replace('/','_').replace('?','!')
-            detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + scenePage)
-            bigScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
-            alpha = bigScript.find('"releaseDate":"')+15
-            omega = bigScript.find('"',alpha)
-            date = bigScript[alpha:omega]
-            releaseDate = parse(date).strftime('%Y-%m-%d')
+            releaseDate = parse(searchResult.xpath('.//span[@class="sc-10d9zl9-8 qTMhg"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
@@ -109,9 +104,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Director
     metadata.directors.clear()
-    director = metadata.directors.new()
-    dirName = detailsPageElements.xpath('//span[@class="sc-1m0b17d-9 jiOfQd"]')[0].text_content().strip()
-    director.name = dirName
+    try:
+        director = metadata.directors.new()
+        dirName = detailsPageElements.xpath('//div[@data-test-component="DirectorSection"]//span[2]')[0].text_content().strip()
+        director.name = dirName
+    except:
+        pass
 
     # Posters/Background
     valid_names = list()
