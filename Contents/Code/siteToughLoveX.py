@@ -22,6 +22,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
+    Log('******UPDATE CALLED*******')
+
     pageURL = str(metadata.id).split("|")[0].replace('_', '/').replace('!','?')
     Log('scene url: ' + pageURL)
     detailsPageElements = HTML.ElementFromURL(pageURL)
@@ -81,7 +83,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieActors.addActor(actorName, actorPhotoURL)
             except:
                 pass
-            
+
     # Posters/Background
     posters = HTML.ElementFromURL(detailsPageElements.xpath('//dd[1]//a')[0].get('href'))
 

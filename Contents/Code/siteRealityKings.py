@@ -41,7 +41,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Title
     try:
-        metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
+        metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
     except:
         pass
 

@@ -45,6 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             sceneType = detailsPageElements.xpath('//div[contains(@class, "i01da7-0 bRuuus")]/a[1]')[0].text_content().strip()
         except:
             sceneType = 'Scene'
+            Log("SceneType check failed, assuming SceneType is Scene")
     if "Movie" in sceneType:
         sceneType = "Movie"
         Log("Is Movie")
