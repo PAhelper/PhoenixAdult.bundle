@@ -17,7 +17,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//h1'):
         titleNoFormatting = searchResult.xpath('//h1')[0].text_content().replace('Trailer','').strip()
         curID = url.replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 fOadtn"]')[0].text_content().strip()
+        subSite = searchResults.xpath('//a[contains(@href,"/scenes?site=")]//div[2]')[0].text_content().strip()
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
@@ -40,7 +40,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'RealityKings'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    try:
+        metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    except:
+        pass
 
     # Summary
     try:
@@ -49,9 +52,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 fOadtn"]/text()')[0].strip()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    try:
+        tagline = detailsPageElements.xpath('//a[contains(@href,"/scenes?site=")]//div[2]')[0].text_content().strip()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+    except:
+        pass
 
     # Genres
     genres = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]/a')
@@ -94,10 +100,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     ### Posters and artwork ###
 
     # Video trailer background image
-    site = detailsPageElements.xpath('//div[@class="wxt7nk-3 fvcNzR"]/a')[0].get('href').split('=')[-1]
-    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
+    site = detailsPageElements.xpath('//a[contains(@href,"/scenes?site=")]')[0].get('href').split('=')[-1]
+    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[contains(@class,"sc-1ji9c7-0")]')[0].get('href').replace("&sortby=date", "&site=") + site
     BGPage = HTML.ElementFromURL(BGPageURL)
-    for scene in BGPage.xpath('//div[@class="sc-ifAKCX eswYrG"]'):
+    for scene in BGPage.xpath('//div[contains(@class,"sc-ifAKCX")]'):
         if metadata.title in scene.xpath('.//a')[0].get('title'):
             BGPhotoURL = scene.xpath('.//img')[0].get("src")
             art.append(BGPhotoURL.replace("webp", ".jpg"))
