@@ -34,6 +34,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
+    Log('******UPDATE CALLED*******')
+
     pageURL = str(metadata.id).split("|")[0].replace('_', '/').replace('!','?')
     Log('scene url: ' + pageURL)
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}

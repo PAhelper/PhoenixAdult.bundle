@@ -992,6 +992,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 763:
                     results = PAsearchSites.siteFuckingAwesome.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## ToughLoveX
+            ###############
+            if siteNum == 764:
+                if searchSiteID == 9999 or searchSiteID == 764:
+                    results = PAsearchSites.siteToughLoveX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1767,6 +1774,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 763:
             metadata = PAsearchSites.siteFuckingAwesome.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  ToughLoveX                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 764:
+            metadata = PAsearchSites.siteToughLoveX.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
