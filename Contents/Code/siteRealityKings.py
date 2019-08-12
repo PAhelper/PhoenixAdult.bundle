@@ -101,9 +101,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Video trailer background image
     site = detailsPageElements.xpath('//a[contains(@href,"/scenes?site=")]')[0].get('href').split('=')[-1]
-    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
+    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[contains(@class,"sc-1ji9c7-0")]')[0].get('href').replace("&sortby=date", "&site=") + site
     BGPage = HTML.ElementFromURL(BGPageURL)
-    for scene in BGPage.xpath('//div[@class="sc-ifAKCX eswYrG"]'):
+    for scene in BGPage.xpath('//div[contains(@class,"sc-ifAKCX")]'):
         if metadata.title in scene.xpath('.//a')[0].get('title'):
             BGPhotoURL = scene.xpath('.//img')[0].get("src")
             art.append(BGPhotoURL.replace("webp", ".jpg"))
