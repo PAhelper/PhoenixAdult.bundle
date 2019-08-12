@@ -53,7 +53,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         if len(genres) > 0:
             for genreLink in genres:
                 genreName = genreLink.text_content().strip().lower()
-                movieGenres.addGenre(genreName)
+                Log("Genre for >" + metadata.title + "<: " + genreName)
+                movieGenres.addGenre('All Sex')
     except:
         pass
 
