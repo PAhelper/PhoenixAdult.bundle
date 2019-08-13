@@ -105,6 +105,8 @@ class PhoenixGenres:
                 skip = True
             if "twistys hard" == newGenre.lower():
                 skip = True
+            if "featured" == newGenre.lower():
+                skip = True
 
             #Search and Skip
             if "5k" in newGenre.lower():
@@ -120,6 +122,22 @@ class PhoenixGenres:
             if "chibbles" in newGenre.lower():
                 skip = True
             if "folsom" in newGenre.lower():
+                skip = True
+            if "2d" == newGenre.lower():
+                skip = True
+            if "3d" == newGenre.lower():
+                skip = True
+            if "60 fps" == newGenre.lower():
+                skip = True
+            if "dslr" == newGenre.lower():
+                skip = True
+            if "dv" == newGenre.lower():
+                skip = True
+            if "fullhd" == newGenre.lower():
+                skip = True
+            if "hdv" == newGenre.lower():
+                skip = True
+            if "vr" == newGenre.lower():
                 skip = True
 
             ##### Replace
