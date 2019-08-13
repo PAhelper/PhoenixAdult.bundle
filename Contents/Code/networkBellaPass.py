@@ -9,8 +9,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="item-video hover"]'):
         titleNoFormatting = searchResult.xpath('./div[1]/a')[0].get('title').strip()
         curID = "http:" + searchResult.xpath('./div[1]/a')[0].get('href').replace('/','_').replace('?','!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + PAsearchSites.getSearchSiteName(siteNum), score = score, lang = lang))
+        scenePage = HTML.ElementFromURL("http:" + searchResult.xpath('./div[1]/a')[0].get('href'))
+        releaseDate = parse(scenePage.xpath('//p[contains(., "Date Added")]')[0].text_content().replace('Date Added:','').strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "]", score = score, lang = lang))
 
     return results
 
@@ -31,8 +37,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="videoDetails clear"]/h3')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]/p')[0].text_content().strip()
-    
+    try:
+        metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails clear"]/p')[0].text_content().strip()
+    except:
+        pass
+
     #Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
@@ -46,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Actors
-    actors = detailsPageElements.xpath('//div[@class="inner-area clear"]/div[4]/ul/li')
+    actors = detailsPageElements.xpath('//li[@class="update_models"]//a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -55,9 +64,16 @@ def update(metadata,siteID,movieGenres,movieActors):
         if len(actors) > 4:
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
-            actorName = str(actorLink.text_content().replace('Featuring:','').strip())
+            actorName = str(actorLink.text_content().strip())
             try:
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                if 'BellaPass' in tagline:
+                    # <a href="//bellapass.com/models/bryci_1.html">Bryci</a>
+                    actorPageURL = "http:" + actorLink.get("href")
+                    Log("actorPageURL: " + actorPageURL)
+                else:
+                    # <a href="/models/bryci.html">Bryci</a>
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    Log("actorPageURL: " + actorPageURL)
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//div[@class="profile-pic"]/img')[0].get("src0_3x")
             except:
@@ -65,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="videoInfo clear"]/p')[0].text_content().replace('Date Added:','').strip()
+    date = detailsPageElements.xpath('//p[contains(., "Date Added")]')[0].text_content().replace('Date Added:','').strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
@@ -73,7 +89,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Artwork
 
     # Video background
-    setID = detailsPageElements.xpath('//img[@class="update_thumb thumbs stdimage"]')[0].get('id')
+    try:
+        setID = detailsPageElements.xpath('//img[@class="update_thumb thumbs stdimage"]')[0].get('id')
+    except:
+        #for pixs scenes (ex Bryci - Purple POV)
+        setID = detailsPageElements.xpath('//img[@class="fullWidthImage stdimage"]')[0].get('id')
 
     try:
         art.append(PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//img[@class="update_thumb thumbs stdimage"]')[0].get('src0_3x'))
