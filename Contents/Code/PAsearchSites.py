@@ -1016,7 +1016,6 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nam ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^naf ', 'Neighbor Affair ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^news ', 'NewSensations ', mediaTitle, flags=re.IGNORECASE)
@@ -1172,3 +1171,22 @@ def posterAlreadyExists(posterUrl,metadata):
         if p.lower() == posterUrl.lower():
             return True
     return False
+
+def api(searchURL,method):
+    YOURAPIKEY = Prefs['scraperapikey'].strip()
+    if method == 1: # Rendering Javascript
+        module = '&render=true'
+    elif method == 2: # Geographic Location (US only)
+        module = '&country_code=us'
+    else:
+        module = '' # Basic request w/o JS render
+
+    if YOURAPIKEY != '':
+        finallyURL = 'http://api.scraperapi.com/?api_key=' + YOURAPIKEY + '&url=' + searchURL + module
+        Log("request with scraperapikey")
+    else:
+        finallyURL = ''
+        Log("Enter YOURAPIKEY in preferences")
+
+    return finallyURL
+
