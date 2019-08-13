@@ -94,7 +94,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Street Ranger
   - Tugjobs
   - Working Latinas
-+ #### BellaPass | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### BellaPass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only**
   - AleahJasmine
   - AlexisMonroe
   - AvaDawn
@@ -189,7 +189,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR Casting
   - CzechVR Fetish
 + #### DadCrush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
-+ #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 1By-Day
   - Cherry Jul
   - DDF Busty
