@@ -24,6 +24,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 90
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Twistys/" + subSite + "] ", score = score, lang = lang))
 
+    # Especially Problematic Scenes
+    if searchTitle == "3406841" or searchTitle == "3406841 - Fix Her, Up Her":
+        Log("Manual Search Match")
+        curID = ("https://www.twistys.com/scene/3406841/fix-her-up-her")
+        curID = curID.replace('/','_')
+        Log(str(curID))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Fix Her, Up Her" + " [Twistys/TwistysHard]", score = 101, lang = lang))
+
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

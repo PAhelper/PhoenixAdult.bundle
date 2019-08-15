@@ -41,27 +41,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Title
     title = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]/h2')[0].text_content().strip()
     metadata.title = title
-    #episode = title.split(' - ')[-1].strip()
-    #Log("Sort Title: "+episode + " - " + title[:title.rfind('-')])
-    #metadata.sort_title = episode + " - " + title[:title.rfind('-')]
 
     # Studio
     metadata.studio = "Nubiles"
 
     # Summary
     try:
-        paragraphs = detailsPageElements.xpath('//div[contains(@class, "content-pane-container")]//p')
-        pNum = 0
-        summary = ""
-        for paragraph in paragraphs:
-            if pNum >= 0 and pNum < (len(paragraphs)):
-                summary = summary + '\n\n' + paragraph.text_content()
-            pNum += 1
+        summary = detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]/div')[0].text_content().strip()
     except:
-        pass
-    if summary == '':
         try:
-            summary = detailsPageElements.xpath('//div[@class="video-description"]/article')[0].text_content().strip()
+            paragraphs = detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]//p')
+            pNum = 0
+            summary = ""
+            for paragraph in paragraphs:
+                if pNum >= 0 and pNum < (len(paragraphs)):
+                    summary = summary + '\n\n' + paragraph.text_content()
+                    pNum += 1
         except:
             pass
     metadata.summary = summary.strip()

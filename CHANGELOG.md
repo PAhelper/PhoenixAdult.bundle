@@ -1,5 +1,6 @@
 # Changelog
-
+- 2019-08-14
+    - Bugfixes for DDFNetwork
 - 2019-07-16
     - Porndoe Search Bugfix
     - TeamSkeet Search Bugfix
