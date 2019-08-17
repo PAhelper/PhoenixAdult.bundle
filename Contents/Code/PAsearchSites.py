@@ -1171,22 +1171,3 @@ def posterAlreadyExists(posterUrl,metadata):
         if p.lower() == posterUrl.lower():
             return True
     return False
-
-def api(searchURL,method):
-    YOURAPIKEY = Prefs['scraperapikey'].strip()
-    if method == 1: # Rendering Javascript
-        module = '&render=true'
-    elif method == 2: # Geographic Location (US only)
-        module = '&country_code=us'
-    else:
-        module = '' # Basic request w/o JS render
-
-    if YOURAPIKEY != '':
-        finallyURL = 'http://api.scraperapi.com/?api_key=' + YOURAPIKEY + '&url=' + searchURL + module
-        Log("request with scraperapikey")
-    else:
-        finallyURL = searchURL
-        Log("Enter YOURAPIKEY in preferences")
-
-    return finallyURL
-
