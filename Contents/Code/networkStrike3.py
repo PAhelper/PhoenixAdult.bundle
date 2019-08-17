@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
             scenePage = searchResult.xpath('.//a')[0].get('href')
             curID = scenePage.replace('/','_').replace('?','!')
-            releaseDate = parse(searchResult.xpath('.//span[@class="sc-10d9zl9-8 qTMhg"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            releaseDate = parse(searchResult.xpath('.//div[@class="sc-10d9zl9-5 gfkBpA"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
