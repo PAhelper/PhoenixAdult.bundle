@@ -4,6 +4,8 @@ import urllib
 import urllib2 as urllib
 import urlparse
 import json
+import certifi
+import requests
 from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO

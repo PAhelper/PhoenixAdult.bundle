@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import ssl
-from lxml.html.soupparser import fromstring
+from lxml import html
+# from lxml.html.soupparser import fromstring
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
@@ -14,10 +14,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(url)
     except:
         # its helpful for linux users, who has "sslv3 alert handshake failure (_ssl.c:590)>" @kamuk90
-        req = urllib.Request(url, headers=headers)
-        resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = resp.read()
-        searchResults = fromstring(htmlstring)
+        # req = urllib.Request(url, headers=headers)
+        # resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        # htmlstring = resp.read()
+        # searchResults = fromstring(htmlstring)
+        response = requests.get(url, headers=headers, verify=certifi.where())
+        searchResults = html.fromstring(response.text)
 
     for searchResult in searchResults.xpath('//div[@class="video-post-content"]'):
         titleNoFormatting = searchResult.xpath('.//a[@class="video-post-main"]//img')[0].get('alt')
@@ -42,10 +44,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         detailsPageElements = HTML.ElementFromURL(pageURL)
     except:
-        req = urllib.Request(pageURL, headers=headers)
-        resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = resp.read()
-        detailsPageElements = fromstring(htmlstring)
+        # req = urllib.Request(pageURL, headers=headers)
+        # resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        # htmlstring = resp.read()
+        # detailsPageElements = fromstring(htmlstring)
+        response = requests.get(pageURL, headers=headers, verify=certifi.where())
+        detailsPageElements = html.fromstring(response.text)
 
     # Summary
     siteName = PAsearchSites.getSearchSiteName(siteID)
@@ -98,10 +102,12 @@ def update(metadata,siteID,movieGenres,movieActors):
             try:
                 detailsActorPage = HTML.ElementFromURL(actorPageURL)
             except:
-                req = urllib.Request(actorPageURL, headers=headers)
-                resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                htmlstring = resp.read()
-                detailsActorPage = fromstring(htmlstring)
+                # req = urllib.Request(actorPageURL, headers=headers)
+                # resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+                # htmlstring = resp.read()
+                # detailsActorPage = fromstring(htmlstring)
+                response = requests.get(actorPageURL, headers=headers, verify=certifi.where())
+                detailsActorPage = html.fromstring(response.text)
             actorPhotoURL = detailsActorPage.xpath('//div[@class="m-images"]//img')[0].get('src')
             movieActors.addActor(actorName,actorPhotoURL)
 
@@ -114,9 +120,11 @@ def update(metadata,siteID,movieGenres,movieActors):
                 metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
                 metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
             except:
-                req = urllib.Request(posterUrl, headers=headers)
-                resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                content = resp.read()
+                # req = urllib.Request(posterUrl, headers=headers)
+                # resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+                # content = resp.read()
+                response = requests.get(posterUrl, headers=headers, verify=certifi.where())
+                content = html.fromstring(response.text)
                 metadata.art[posterUrl] = Proxy.Media(content)
                 metadata.posters[posterUrl] = Proxy.Media(content)
 
