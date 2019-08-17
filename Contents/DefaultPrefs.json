@@ -16,11 +16,5 @@
         "label": "A semicolon delimited array of tag maps",
         "type": "text",
         "default": ""
-    },
-	{
-        "id": "scraperapikey",
-        "label": "API key from scraperapi.com",
-        "type": "text",
-        "default": ""
     }
 ]
