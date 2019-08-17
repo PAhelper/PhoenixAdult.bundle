@@ -1185,7 +1185,7 @@ def api(searchURL,method):
         finallyURL = 'http://api.scraperapi.com/?api_key=' + YOURAPIKEY + '&url=' + searchURL + module
         Log("request with scraperapikey")
     else:
-        finallyURL = ''
+        finallyURL = searchURL
         Log("Enter YOURAPIKEY in preferences")
 
     return finallyURL
