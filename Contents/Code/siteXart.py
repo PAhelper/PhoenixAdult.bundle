@@ -12,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if len(link) > 0:
             if link[0].get("alt") is not None:
                 
-                titleNoFormatting = link[0].get("alt")
+                titleNoFormatting = link[0].get("alt").strip()
                 releaseDate = parse(searchResult.xpath('.//h2[2]')[0].text_content().strip()).strftime('%Y-%m-%d')
                 curID = searchResult.get("href")[21:]
                 curID = curID.replace('/','+')
@@ -370,7 +370,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for paragraph in paragraphs:
         summary = summary + '\n\n' + paragraph.text_content()
     metadata.summary = summary.strip()
-    metadata.title = detailsPageElements.xpath('//div[@class="row info"]//div[@class="small-12 medium-12 large-12 columns"]')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//div[@class="row info"]//div[@class="small-12 medium-12 large-12 columns"]')[0].text_content().strip()
     date = detailsPageElements.xpath('//h2')[2].text_content()[:-1]
     date_object = datetime.strptime(date, '%b %d, %Y')
     metadata.originally_available_at = date_object
