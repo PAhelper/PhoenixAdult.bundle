@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
-import ssl
-from lxml.html.soupparser import fromstring
+import PAactors
+from lxml import html
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
@@ -9,12 +9,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchString = searchTitle.replace(" ","-")
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
     try:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     except:
-        request = urllib.Request(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        searchResults = fromstring(htmlstring)
+        response = requests.get(PAsearchSites.getSearchSearchURL(siteNum) + searchString, headers=headers, verify=certifi.where())
+        searchResults = html.fromstring(response.text)
 
 
     for searchResult in searchResults.xpath('//div[contains(@class,"postTag")]'):
@@ -48,14 +46,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     url = urlBase + temp
     Log('url :' + url)
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
-    
     try:
         detailsPageElements = HTML.ElementFromURL(url)
     except:
-        request = urllib.Request(url, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring)
+        response = requests.get(url, headers=headers, verify=certifi.where())
+        detailsPageElements = html.fromstring(response.text)
+
 
     # Studio
     metadata.collections.clear()

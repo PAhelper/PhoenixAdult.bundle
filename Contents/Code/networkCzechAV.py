@@ -1,11 +1,18 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+from lxml import html
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
+    try:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    except:
+        response = requests.get(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle, headers=headers, verify=certifi.where())
+        searchResults = html.fromstring(response.text)
+
     for searchResult in searchResults.xpath('//div[@class="episode__title"]'):
         titleNoFormatting = searchResult.xpath('./a/h2')[0].text_content().strip()
         curID = searchResult.xpath('./a')[0].get('href').replace('/','_').replace('?','!')
@@ -23,7 +30,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
-    detailsPageElements = HTML.ElementFromURL(url)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
+
+    try:
+        detailsPageElements = HTML.ElementFromURL(url)
+    except:
+        response = requests.get(url, headers=headers, verify=certifi.where())
+        detailsPageElements = html.fromstring(response.text)
+
     art = []
     metadata.collections.clear()
     movieGenres.clearGenres()
