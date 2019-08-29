@@ -27,13 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             Log("titleNoFormatting: " + titleNoFormatting)
             curID = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].get('href').replace('/', '_').replace('?', '!')
             Log("curID: " + curID)
-            releaseDate = parse(searchResult.xpath('.//p[2]')[0].text_content()[8:20].strip()).strftime('%Y-%m-%d')
-            Log("releaseDate: " + releaseDate)
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
 
     except:
         # search by DVD
@@ -74,18 +68,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="trailerInfo"]//p')[0].text_content().strip()
 
-    # Release Date
-    date = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[2]')
-    if len(date) > 0:
-        date = date[0].text_content().strip()
-        date = date[10:20]
-        try:
-            date_object = datetime.strptime(date, '%m/%d/%Y')
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-        except:
-            pass
-
     # DVD name
     tagline = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[4]//a')[0].text_content().strip()
     Log("DVD name/tagline: " + tagline)
@@ -102,6 +84,19 @@ def update(metadata,siteID,movieGenres,movieActors):
     valid_names = list()
     metadata.posters.validate_keys(valid_names)
     metadata.art.validate_keys(valid_names)
+
+    # Release Date (only available on DVD page)
+    date = dvdPageElements.xpath('//div[@class="dvdScene"]//div[@class="date"]')
+    if len(date) > 0:
+        date = date[0].text_content().strip()
+        date = date[10:20]
+        try:
+            date_object = datetime.strptime(date, '%m/%d/%Y')
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+        except:
+            pass
+
 
     # DVD Cover as first poster
     posterNum = 1
