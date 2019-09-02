@@ -454,7 +454,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Bad Teens Punished
   - Bountyhunter Porn
   - Daddy's Lil Angel
-  - Deep Lush
   - Detention Girls
   - Driver XXX
   - Moms Teach Sex  
@@ -471,6 +470,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Other Nubiles Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Anilos
   - Bratty Sis
+  - Deep Lush
   - Hot Crazy Mess
   - NF Busty
   - Nubilesfilms
