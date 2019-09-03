@@ -5,32 +5,43 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     try:
-        # actress search
+        # scene search based on URL match
+        searchString = searchTitle.replace(" ","-")
+        url = PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/updates/" + searchString + ".html"
+        searchResult = HTML.ElementFromURL(url)
+        titleNoFormatting = searchResult.xpath('//div[contains(@class,"title")]//h3')[0].text_content()
+        Log("titleNoFormatting: " + titleNoFormatting)
+        curID = url.replace('/','_').replace('?','!')
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
+    except Exception as err:
+        Log(err);
         try:
-            searchString = searchTitle.replace(" ","-")
-            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
-        except:
+            # actress search
             try:
-                # Random actors have a trailing dash
-                searchString = searchString + '-'
+                searchString = searchTitle.replace(" ","-")
                 searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
             except:
                 try:
-                    searchString = searchTitle.replace(" ","")
+                    # Random actors have a trailing dash
+                    searchString = searchString + '-'
                     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
                 except:
-                    searchString = searchTitle.replace(" ","")
-                    searchInt = int(searchString)
-                    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
-        for searchResult in searchResults.xpath('//div[contains(@class,"videoBlock")]'):
-            titleNoFormatting = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].text_content()
-            Log("titleNoFormatting: " + titleNoFormatting)
-            curID = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].get('href').replace('/', '_').replace('?', '!')
-            Log("curID: " + curID)
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
+                    try:
+                        searchString = searchTitle.replace(" ","")
+                        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
+                    except:
+                        searchString = searchTitle.replace(" ","")
+                        searchInt = int(searchString)
+                        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
+            for searchResult in searchResults.xpath('//div[contains(@class,"videoBlock")]'):
+                titleNoFormatting = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].text_content()
+                Log("titleNoFormatting: " + titleNoFormatting)
+                curID = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].get('href').replace('/', '_').replace('?', '!')
+                Log("curID: " + curID)
+                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
 
-    except:
-        # search by DVD
+        except:
+            # search by DVD
             searchString = searchTitle.lower().replace(" ","-").replace("#","").replace("'","").replace("vol. ","").replace("volume ","")
             searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/dvds/" + searchString + ".html")
             for searchResult in searchResults.xpath('//div[@class="dvdScene"]'):
