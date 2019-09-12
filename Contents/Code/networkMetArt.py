@@ -11,10 +11,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(url)
         pageTitle = searchResults.xpath('//h1')[0].text_content().lower()
         if "found" in pageTitle:
-            resultsNum = len(searchResults.xpath('//li[@class="list-group-item"] | //div[@class="item   sc-1wwemg3-0 cQkKzD"]'))
+            resultsNum = len(searchResults.xpath('//li[@class="list-group-item"] | //div[contains(@class,"item")]'))
             Log("resultsNum: " + str(resultsNum))
             if resultsNum > 0:
-                for searchResult in searchResults.xpath('//li[@class="list-group-item"] | //div[@class="item   sc-1wwemg3-0 cQkKzD"]'):
+                for searchResult in searchResults.xpath('//li[@class="list-group-item"] | //div[contains(@class,"item")]'):
                     curID = searchResult.xpath('.//a[contains(@class,"item-name")]')[0].get('href').replace('/','+').replace('?','!')
                     if "+movie+" in curID: # model page and photos in search results
                         Log(">>>VALID RESULT<<<")
@@ -65,7 +65,7 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
 
 
     # Title
-    sceneTitle = detailsPageElements.xpath('//a[contains(@class,"gallery-title")] | //a[@class="title"]')[0].text_content().split("(")[0].strip()
+    sceneTitle = detailsPageElements.xpath('//a[contains(@class,"gallery-title")] | //a[contains(@class,"title")]')[0].text_content().split("(")[0].strip()
     metadata.title = sceneTitle
     Log("Scene Title: " + metadata.title)
 
@@ -86,7 +86,7 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
         Log("Scene Summary not found")
 
     # Date
-    date = detailsPageElements.xpath('//div[contains(@class,"details font-13")]//li[2] | //span[contains(@class,"penel")]//span[2]')[0].text_content().replace("Released:","").strip()
+    date = detailsPageElements.xpath('//div[contains(@class,"details font-13")]//li[2] | //span[contains(@class,"penel")]//span[2] | //span[contains(@class,"about")]//span[2]')[0].text_content().replace("Released:","").strip()
     Log("Scene Date: " + date)
     date_object = parse(date)
     metadata.originally_available_at = date_object
@@ -94,7 +94,7 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(@class,"details")]//span[@itemprop="actor"]//a | //span[contains(@class,"penel")]//a')
+    actors = detailsPageElements.xpath('//div[contains(@class,"details")]//span[@itemprop="actor"]//a | //span[contains(@class,"penel")]//a | //span[contains(@class,"about")]//a')
     Log("actors #: " + str(len(actors)))
     if len(actors) > 0:
         for actorObject in actors:
