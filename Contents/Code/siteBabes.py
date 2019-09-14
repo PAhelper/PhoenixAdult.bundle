@@ -5,6 +5,9 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
+    Log("siteNum: " + str(siteNum))
+
+    # Use encodedTitle as sceneId, if provided
     sceneID = encodedTitle.split('%20', 1)[0]
     Log("SceneID: " + sceneID)
     try:
@@ -12,18 +15,32 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    url = "https://www.babes.com/scene/" + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 btKUEO"]'):
         titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace("SML-","").replace("Trailer","").strip()
         curID = url.replace('/','_').replace('?','!')
         subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
-        if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-        else:
-            score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Babes/" + subSite + "] ", score = score, lang = lang))
+        releaseDate = parse(searchResult.xpath('.//div[@class="tjb798-2 flgKJM"]/span[2]')[0].text_content().strip().replace('Release Date:','')).strftime('%Y-%m-%d')
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Babes/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
+    if len(results) > 0:
+        return results
+
+    # Use search on site
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="dtkdna-1 cPNxux"]'):
+        titleNoFormatting = searchResult.xpath('.//a[1]')[0].get('title')
+        curID = (PAsearchSites.getSearchBaseURL(int(siteNum)) + searchResult.xpath('.//a[1]')[0].get('href')).replace('/','_').replace('?','!')
+        subSite = searchResult.xpath('.//div[2]/div[4]/a/div[2]')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//div[2]/div[3]/div[1]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Babes/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
