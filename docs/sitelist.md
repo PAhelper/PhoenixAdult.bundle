@@ -28,7 +28,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Babes Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  ##### Note: SceneID works better e.g. "Babes [4393845](https://www.babes.com/scene/4393845/strip-tease-studying)" vs "Babes strip tease studying"
   - Babes
   - Babes Unleashed
   - Black is Better
@@ -297,7 +298,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### HighTechVR Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - SexBabesVR
   - SinsVR
-  - StasyQVR 
+  - StasyQVR
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - JulesJordan
@@ -724,8 +725,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Me Fucked
   - X Angels
   - Teen Sex Movs
-+ #### Tonights Girlfriend | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only** 
-+ #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only** 
++ #### Tonights Girlfriend | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only**
++ #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
 + #### TransAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -794,7 +795,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 When this plugin is inevitably updated to add or update a sites' types of searching, you can use the below markdown formatting in a PR to easily add the site in question here
 
 ### It is important to go over styling each match type, before proceeding
-  + #### Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* 
+  + #### Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
     - `*[Enhanced](./manualsearch.md#enhanced-search)*`
   + #### Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title/Actor only** (Some subtitle or note)
     - Use the subtitle to denote if a site can only use title or actor for searching. No subtitle means both are supported.
