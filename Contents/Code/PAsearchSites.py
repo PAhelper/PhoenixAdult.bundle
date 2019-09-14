@@ -856,7 +856,7 @@ searchSites[763] = ["FuckingAwesome","FuckingAwesome","https://fuckingawesome.co
 searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","https://tour.toughlovex.com/models?letter="]
 searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
-searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
+searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/search/"]
 
 
 def getSearchBaseURL(siteID):
