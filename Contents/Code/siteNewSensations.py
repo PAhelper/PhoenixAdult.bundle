@@ -11,7 +11,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResult = HTML.ElementFromURL(url)
         titleNoFormatting = searchResult.xpath('//div[contains(concat(" ",normalize-space(@class)," "),"title")]//h3')[0].text_content().strip()
         curID = url.replace('/','+').replace('?','!')
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
     except:
         # URL DVD Search
         searchString = searchTitle.replace(" ","-")
@@ -65,7 +69,16 @@ def update(metadata,siteID,movieGenres,movieActors):
                 genreName = genreLink.text_content().strip().lower()
                 movieGenres.addGenre(genreName)
 
-        # Release Date Not Available
+        # Release Date
+        try:
+            date = str(metadata.id).split("|")[2]
+            if len(date) > 0:
+                date_object = parse(date)
+                metadata.originally_available_at = date_object
+                metadata.year = metadata.originally_available_at.year
+                Log("Date from file")
+        except:
+            pass
 
         # Actors
         actors = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[1]/span/a')
