@@ -150,6 +150,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZZ Series
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
++ #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Czech Amateurs
   - Czech Bangbus
@@ -469,6 +470,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Other Nubiles Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Anilos
   - Bratty Sis
+  - Deep Lush
   - Hot Crazy Mess
   - NF Busty
   - Nubilesfilms

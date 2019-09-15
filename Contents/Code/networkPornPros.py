@@ -10,17 +10,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     try:
         Log('This is repeating')
-        searchResults = HTML.ElementFromURL(url)
+        searchResult = HTML.ElementFromURL(url)
     except:
         Log('That is repeating')
         response = urllib.urlopen(url)
         htmlstring = response.read()
-        searchResults = fromstring(htmlstring)
-
-    searchResult = searchResults.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]')[0]
-    titleNoFormatting = searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//h1')[0].text_content()
+        searchResult = fromstring(htmlstring)
+        
+    titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
-    releaseDate = parse(searchResult.xpath('.//div[@class="row"]//div[@class="col-6 col-md-12"]//p')[0].text_content().strip()).strftime('%Y-%m-%d')
+    releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
@@ -48,7 +47,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').strip()
+        metadata.summary = detailsPageElements.xpath('//div[contains(@id, "description")]')[0].text_content().strip()
     except:
         pass
 
@@ -66,7 +65,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     movieActors.clearActors()
     titleActors = ""
-    actors = detailsPageElements.xpath('//div[@class="details col-sm-6 col-md-3 order-md-2 mb-2"]//div[@class="row"]//div[@class="col-6 col-md-12"]//a')
+    actors = detailsPageElements.xpath('//div[contains(@class, "pt-md")]//a[contains(@href, "/girls/")]')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content()
@@ -130,14 +129,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Date
-    date = detailsPageElements.xpath('//div[contains(@class,"details")]//p')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()
     Log('Date: ' + date)
     date_object = datetime.strptime(date, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[contains(@class,"details")]//h1')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 	
     #Extra Posters
     import random
@@ -210,12 +209,13 @@ def update(metadata,siteID,movieGenres,movieActors):
                     Log("there was an issue")
     else:
         #Smaller background images
+        Log("Match is not 1")
         try:
-            for image in detailsPageElements.xpath('(//div[@class="col"]/a[@href= "/join"]/img)[position() <5]'):
+            for image in detailsPageElements.xpath('(//img[contains(@src, "handtouched")])[position() <5]'):
                 background = "http:" + image.get('src')
                 Log("BG DL: " + background)
-                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-                metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+                metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
         except:
             pass
 

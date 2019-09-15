@@ -1,10 +1,22 @@
 import PAsearchSites
 import PAgenres
+import ssl
+from lxml.html.soupparser import fromstring
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchString = searchTitle.replace(" ","-")
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
+    try:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
+    except:
+        request = urllib.Request(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString, headers=headers)
+        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        htmlstring = response.read()
+        searchResults = fromstring(htmlstring)
+
+
     for searchResult in searchResults.xpath('//div[contains(@class,"postTag")]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="nazev"]//h2//a')[0].text_content()
         Log('title: ' + titleNoFormatting)
@@ -35,7 +47,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     urlBase = PAsearchSites.getSearchBaseURL(siteID)
     url = urlBase + temp
     Log('url :' + url)
-    detailsPageElements = HTML.ElementFromURL(url)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
+    
+    try:
+        detailsPageElements = HTML.ElementFromURL(url)
+    except:
+        request = urllib.Request(url, headers=headers)
+        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        htmlstring = response.read()
+        detailsPageElements = fromstring(htmlstring)
 
     # Studio
     metadata.collections.clear()
@@ -67,7 +87,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="nazev"]//div[@class="featuring"]//a')
+    actors = detailsPageElements.xpath('(//div[@class="nazev"])[1]//div[@class="featuring"]//a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content().strip()
@@ -76,7 +96,13 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Background
     background = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//div[@class="foto"]//dl8-video')[0].get("poster")[1:]
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    try:
+        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    except:
+        request = urllib.Request(background, headers=headers)
+        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+        content = response.read()
+        metadata.art[background] = Proxy.Media(content, sort_order=1)
     Log("BG DL: " + background)
 
     # Poster
@@ -84,8 +110,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     posterNum = 1
     for posterCur in posters:
         posterURL = urlBase + posterCur.get("href")[1:]
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = (posterNum + 1))
+        try:
+            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+            metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = (posterNum + 1))
+        except:
+            request = urllib.Request(posterURL, headers=headers)
+            response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+            content = response.read()
+            metadata.art[posterURL] = Proxy.Media(content, sort_order=1)
+            metadata.posters[posterURL] = Proxy.Media(content, sort_order=1)
         Log("Poster: " + posterURL)
 
 
