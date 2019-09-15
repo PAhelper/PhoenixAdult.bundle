@@ -50,7 +50,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieGenres.addGenre('gaping')
     elif tagline == "Nympho":
         movieGenres.addGenre('nympho')
-    elif tagling == "AllAnal":
+    elif tagline == "AllAnal":
         movieGenres.addGenre('anal')
         movieGenres.addGenre('gaping')
 
