@@ -81,10 +81,9 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieGenres.addGenre("Orgy")
             for actorLink in actors:
                 actorName = str(actorLink.text_content().strip())
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                Log("actorPageURL: " + actorPageURL)
-                actorPage = HTML.ElementFromURL(actorPageURL)
                 try:
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    actorPage = HTML.ElementFromURL(actorPageURL)
                     actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
                 except:
                     actorPhotoURL = ''
@@ -95,13 +94,16 @@ def update(metadata,siteID,movieGenres,movieActors):
     ### Posters and artwork ###
 
     # Video trailer background image
-    site = detailsPageElements.xpath('//div[@class="wxt7nk-3 gsvQoQ"]/a')[0].get('href').split('=')[-1]
-    BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
-    BGPage = HTML.ElementFromURL(BGPageURL)
-    for scene in BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]'):
-        if metadata.title in scene.xpath('.//a')[0].get('title'):
-            BGPhotoURL = scene.xpath('.//img')[0].get("src")
-            art.append(BGPhotoURL.replace("webp", ".jpg"))
+    try:
+        site = detailsPageElements.xpath('//div[@class="wxt7nk-3 gsvQoQ"]/a')[0].get('href').split('=')[-1]
+        BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
+        BGPage = HTML.ElementFromURL(BGPageURL)
+        for scene in BGPage.xpath('//div[@class="sc-ifAKCX kPnAZA"]'):
+            if metadata.title in scene.xpath('.//a')[0].get('title'):
+                BGPhotoURL = scene.xpath('.//img')[0].get("src")
+                art.append(BGPhotoURL.replace("webp", ".jpg"))
+    except:
+        pass
 
     j = 1
     Log("Artwork found: " + str(len(art)))
