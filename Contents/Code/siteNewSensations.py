@@ -5,179 +5,195 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     try:
-        # scene search based on URL match
+        # URL Scene Search
         searchString = searchTitle.replace(" ","-")
-        url = PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/updates/" + searchString + ".html"
+        url = PAsearchSites.getSearchSearchURL(siteNum) + "updates/" + searchString + ".html"
         searchResult = HTML.ElementFromURL(url)
-        titleNoFormatting = searchResult.xpath('//div[contains(concat(" ",normalize-space(@class)," "),"title")]//h3')[0].text_content()
-        Log("titleNoFormatting: " + titleNoFormatting)
-        curID = url.replace('/','_').replace('?','!')
+        titleNoFormatting = searchResult.xpath('//div[contains(concat(" ",normalize-space(@class)," "),"title")]//h3')[0].text_content().strip()
+        curID = url.replace('/','+').replace('?','!')
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
+    except:
+        # URL DVD Search
+        searchString = searchTitle.replace(" ","-")
+        url = PAsearchSites.getSearchSearchURL(siteNum) + "dvds/" + searchString + ".html"
+        searchResult = HTML.ElementFromURL(url)
+        titleNoFormatting = searchResult.xpath('//div[@class="dvdSections clear"]/div[1]')[0].text_content().replace("DVDS /","").strip()
+        curID = url.replace('/','+').replace('?','!')
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
-    except Exception as err:
-        Log(err);
-        try:
-            # actress search
-            try:
-                searchString = searchTitle.replace(" ","-")
-                searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
-            except:
-                try:
-                    # Random actors have a trailing dash
-                    searchString = searchString + '-'
-                    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
-                except:
-                    try:
-                        searchString = searchTitle.replace(" ","")
-                        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/models/" + searchString + ".html")
-                    except:
-                        searchString = searchTitle.replace(" ","")
-                        searchInt = int(searchString)
-                        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/sets.php?id=" + searchString)
-            for searchResult in searchResults.xpath('//div[contains(@class,"videoBlock")]'):
-                titleNoFormatting = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].text_content()
-                Log("titleNoFormatting: " + titleNoFormatting)
-                curID = searchResult.xpath('.//div[contains(@class,"caption")]//h4//a')[0].get('href').replace('/', '_').replace('?', '!')
-                Log("curID: " + curID)
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
-
-        except:
-            # search by DVD
-            searchString = searchTitle.lower().replace(" ","-").replace("#","").replace("'","").replace("vol. ","").replace("volume ","")
-            searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(searchSiteID) + "/tour_ns/dvds/" + searchString + ".html")
-            for searchResult in searchResults.xpath('//div[@class="dvdScene"]'):
-                titleNoFormatting = searchResult.xpath('.//h4//a')[0].text_content()
-                Log("titleNoFormatting: " + titleNoFormatting)
-                curID = searchResult.xpath('.//h4//a')[0].get('href').replace('/','_').replace('?','!')
-                Log("curID: " + curID)
-                releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().split(' l ')[0].replace("Released","").strip()).strftime('%Y-%m-%d')
-                Log("releaseDate: " + releaseDate)
-                if searchDate:
-                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-                else:
-                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] " + releaseDate, score = score, lang = lang))
-
-# From when site had search functionality
-    # searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    # for searchResult in searchResults.xpath('//h4//a'):
-    #     Log(str(searchResult.get('href')))
-    #     titleNoFormatting = searchResult.text_content()
-    #     curID = searchResult.get('href').replace('/','_').replace('?','!')
-    #     score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
-    #
-    #     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations]", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
-    metadata.studio = 'New Sensations'
-    # Scene(details) page
-    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('tour/ns','tour_ns'))
+    Log('******UPDATE CALLED*******')
 
-    # Scene Title
-    metadata.title = detailsPageElements.xpath('//div[@class="trailerVideos clear"]//div[@class="title clear"]//h3')[0].text_content()
-
-    # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="trailerInfo"]//p')[0].text_content().strip()
-
-    # DVD name
-    tagline = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[4]//a')[0].text_content().strip()
-    Log("DVD name/tagline: " + tagline)
+    url = str(metadata.id).split("|")[0].replace('+','/').replace('?','!')
+    if "dvds" in url:
+        sceneType = "DVD"
+        Log("Is DVD")
+    else:
+        sceneType = "Scene"
+        Log("Is Scene")
+    detailsPageElements = HTML.ElementFromURL(url)
+    art = []
     metadata.collections.clear()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    movieGenres.clearGenres()
+    movieActors.clearActors()
 
-    # DVD Page
-    dvdPageLink = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[4]//a')[0].get("href")
-    Log("dvdPageLink: " + dvdPageLink)
-    dvdPageElements = HTML.ElementFromURL(dvdPageLink)
+    # Studio
+    metadata.studio = 'New Sensations'
 
-    #
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
+    if sceneType == "Scene":
+        Log("SceneUpdate")
+        # Title
+        metadata.title = detailsPageElements.xpath('//div[@class="trailerVideos clear"]/div[1]')[0].text_content().strip()
 
-    # Release Date (only available on DVD page)
-    date = dvdPageElements.xpath('//div[@class="dvdScene"]//div[@class="date"]')
-    if len(date) > 0:
-        date = date[0].text_content().strip()
-        date = date[10:20]
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//div[@class="trailerInfo"]/p')[0].text_content().strip()
+
+        # Tagline and Collection(s)
+        # DVD Name
+        dvdName = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]')[0].text_content().strip()
+        metadata.tagline = dvdName
+        metadata.collections.add(dvdName)
+        #Site Name
+        siteName = PAsearchSites.getSearchSiteName(siteID).strip()
+        metadata.collections.add(siteName)
+
+        # Genres
+        genres = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[3]/a')
+        if len(genres) > 0:
+            for genreLink in genres:
+                genreName = genreLink.text_content().strip().lower()
+                movieGenres.addGenre(genreName)
+
+        # Release Date
         try:
-            date_object = datetime.strptime(date, '%m/%d/%Y')
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
+            date = str(metadata.id).split("|")[2]
+            if len(date) > 0:
+                date_object = parse(date)
+                metadata.originally_available_at = date_object
+                metadata.year = metadata.originally_available_at.year
+                Log("Date from file")
         except:
             pass
 
+        # Actors
+        actors = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[1]/span/a')
+        if len(actors) > 0:
+            if len(actors) == 3:
+                movieGenres.addGenre("Threesome")
+            if len(actors) == 4:
+                movieGenres.addGenre("Foursome")
+            if len(actors) > 4:
+                movieGenres.addGenre("Orgy")
+            for actorLink in actors:
+                actorName = str(actorLink.text_content().strip())
+                try:
+                    actorPageURL = actorLink.get("href")
+                    actorPage = HTML.ElementFromURL(actorPageURL)
+                    actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]/div/img')[0].get("src0_3x")
+                except:
+                    actorPhotoURL = ''
+                movieActors.addActor(actorName, actorPhotoURL)
 
-    # DVD Cover as first poster
-    posterNum = 1
-    try:
-        dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
-        if dvdPosterURL == None:
-            dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
-        metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        posterNum += 1
-    except:
-        Log("DVD Cover not found")
+        ### Posters and artwork ###
 
-
-    # Background
-    bgNum = 1
-    try:
-        background = detailsPageElements.xpath('//span[@id="trailer_thumb"]//img')[0].get('src')
-        if background != None:
-            Log("BG DL: " + background)
-            metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
-            bgNum += 1
-            # also possible poster
-            metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-            posterNum +=1
-        else:
-            Log("BG not found")
-    except:
-        pass
-
-    # Genres
-    movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li[3]//a')
-    if len(genres) > 0:
-        for genreLink in genres:
-            genreName = genreLink.text_content().strip('\n').lower()
-            movieGenres.addGenre(genreName)
-
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="trailerInfo"]//ul//li//span[@class="tour_update_models"]//a')
-    Log("Actors found: "+str(len(actors)))
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-
-            # Prepend base url if actorPage is a sets.php
-            if actorPageURL.startswith("sets.php"):
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + "/tour_ns/" + actorPageURL
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("src")
-            if actorPhotoURL == None:
-                actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]//img')[0].get("data-src")
-            movieActors.addActor(actorName,actorPhotoURL)
-            # add actor image as possible poster
-            try:
-                if len(actors) < 3:
-                    metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-                    posterNum += 1
-            except:
-                pass
-    # DVD page only place with more thumbs
-    for dvdThumb in dvdPageElements.xpath('//div[@class="dvdScenePic"]//img'):
-        dvdThumbURL = dvdThumb.get("src")
+        # Video trailer background image
+        j = 1
         try:
-            if dvdThumbURL == None:
-                dvdThumbURL = dvdThumb.get("data-src")
-            metadata.art[dvdThumbURL] = Proxy.Preview(HTTP.Request(dvdThumbURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = bgNum)
-            bgNum += 1
+            twitterBG = detailsPageElements.xpath('//div[@class="trailerArea"]/a[1]')[0].get('href')
+            twitterBG = PAsearchSites.getSearchSearchURL(siteID) + twitterBG
+            metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(twitterBG, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+            j += 1
         except:
+            pass
+
+        # DVD Page
+        posterNum = 1
+        try:
+            dvdPageLink = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]/a')[0].get('href')
+            dvdPageElements = HTML.ElementFromURL(dvdPageLink)
+            dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
+            if dvdPosterURL == None:
+                dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
+            metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order=posterNum)
+            posterNum += 1
+        except:
+            Log("DVD Cover not found")
+            pass
+
+    else:
+        Log("DVDUpdate")
+        # Title
+        title = detailsPageElements.xpath('//div[@class="dvdSections clear"]/div[1]')[0].text_content().replace("DVDS /","").strip()
+        metadata.title = title
+
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//div[@class="dDetails"]/p')[0].text_content().strip()
+
+        # Tagline and Collection(s)
+        # DVD Name
+        dvdName = title
+        metadata.tagline = dvdName
+        metadata.collections.add(dvdName)
+        # Site Name
+        siteName = PAsearchSites.getSearchSiteName(siteID).strip()
+        metadata.collections.add(siteName)
+
+        # Genres
+        genres = detailsPageElements.xpath('//div[@class="dvdDetails clear"]/ul/li[2]/a')
+        if len(genres) > 0:
+            for genreLink in genres:
+                genreName = genreLink.text_content().strip().lower()
+                movieGenres.addGenre(genreName)
+
+        # Release Date
+        date = detailsPageElements.xpath('//div[@class="dvdDetails clear"]/ul/li[1]')[0].text_content().replace('Released:','').strip()
+        if len(date) > 0:
+            try:
+                date_object = datetime.strptime(date, '%Y-%m-%d')
+            except:
+                date_object = datetime.strptime(date, '%m/%d/%y')
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+
+        # Actors
+        try:
+            actors = detailsPageElements.xpath('//span[@class="tour_update_models"]/a')
+            if len(actors) > 0:
+                for actorLink in actors:
+                    actorName = str(actorLink.text_content().strip())
+                    try:
+                        actorPageURL = actorLink.get("href")
+                        actorPage = HTML.ElementFromURL(actorPageURL)
+                        actorPhotoURL = actorPage.xpath('//div[@class="modelPicture"]/div/img')[0].get("src0_3x")
+                    except:
+                        actorPhotoURL = ''
+                    movieActors.addActor(actorName, actorPhotoURL)
+        except:
+            actorsList = detailsPageElements.xpath('//div[@class="dvdDetails clear"]/div[2]/p')[0].text_content().split('Featuring:')[1]
+            actors = actorsList.split(",")
+            if len(actors) > 0:
+                for actorLink in actors:
+                    actorName = str(actorLink.strip())
+                    actorPhotoURL = ''
+                    movieActors.addActor(actorName, actorPhotoURL)
+
+        ### Posters and artwork ###
+
+        # DVD Cover
+        posterNum = 1
+        try:
+            dvdPosterURL = detailsPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
+            if dvdPosterURL == None:
+                dvdPosterURL = detailsPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
+            metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order=posterNum)
+            posterNum += 1
+        except:
+            Log("DVD Cover not found")
             pass
 
     return metadata
