@@ -369,7 +369,7 @@ searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com",
 searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
-searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
+searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
 searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/view/"]
 searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/view/"]
