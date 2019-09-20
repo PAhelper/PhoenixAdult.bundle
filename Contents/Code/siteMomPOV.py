@@ -36,7 +36,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'MomPOV'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//a[@class="title"]')[0].text_content().strip()
+    try:
+        metadata.title = detailsPageElements.xpath('//a[@class="title"]')[0].text_content().strip()
+    except:
+        metadata.title = detailsPageElements.xpath('//meta[@property="og:title"]')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="entry_content"]/p')[0].text_content().strip()

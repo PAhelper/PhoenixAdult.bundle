@@ -78,16 +78,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     actors = detailsPageElements.xpath('//h4[@class="more-scenes"]/a')
     if len(actors) > 0:
         for actorLink in actors:
-            role = metadata.roles.new()
             actorName = str(actorLink.text_content().strip())
-            actorName = actorName.replace("\xc2\xa0", " ")
-            role.name = actorName
-            actorsearch = HTML.ElementFromURL("https://www.adultdvdempire.com/performer/search?q=" + actorName.replace(' ','%20'))
-            actropageURL = actorsearch.xpath('//div[@class="col-xs-6 col-sm-3 grid-item grid-item-performer grid-item-performer-145"]/a')[0].get("href")
-            actropageURL = "https://www.adultdvdempire.com" + actropageURL
-            actropage = HTML.ElementFromURL(actropageURL)
-            actorPhotoURL = actropage.xpath('//a[@class="fancy headshot"]')[0].get("href")
-            role.photo = actorPhotoURL
+            actorPhotoURL = ''
+            movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
     try:
