@@ -11,14 +11,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(url)
         pageTitle = searchResults.xpath('//h1')[0].text_content().lower()
         if "found" in pageTitle:
-            resultsNum = len(searchResults.xpath('//li[@class="list-group-item"] | //div[contains(@class,"item")]'))
+            resultsNum = len(searchResults.xpath('//li[@class="list-group-item"]'))
+            resultsNumnew = len(searchResults.xpath('//div[contains(@class,"item")]'))
             Log("resultsNum: " + str(resultsNum))
+            Log("resultsNumNew: " + str(resultsNumnew))
             if resultsNum > 0:
-                for searchResult in searchResults.xpath('//li[@class="list-group-item"] | //div[contains(@class,"item")]'):
-                    curID = searchResult.xpath('.//a[contains(@class,"item-name")]')[0].get('href').replace('/','+').replace('?','!')
+                for searchResult in searchResults.xpath('//li[@class="list-group-item"]'):
+                    curID = searchResult.xpath('.//a[contains(@class,"item-name")][not(contains(@class,"item-name-model"))]')[0].get('href').replace('/','+').replace('?','!')
                     if "+movie+" in curID: # model page and photos in search results
                         Log(">>>VALID RESULT<<<")
-                        titleNoFormatting = searchResult.xpath('.//a[contains(@class,"item-name")]')[0].text_content()
+                        titleNoFormatting = searchResult.xpath('.//a[contains(@class,"item-name")][not(contains(@class,"item-name-model"))]')[0].text_content()
                         Log("Result title: " + titleNoFormatting)
                         Log("curID: " + curID)
                         releaseDate = searchResult.xpath('.//span[contains(@class,"item-date")]')[0].text_content().split("Rated")[0].strip()
@@ -28,7 +30,26 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                         else:
                             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
                         Log("Score: " + str(score))
+                        
                         results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
+            elif resultsNumnew > 0:
+                 for searchResult in searchResults.xpath('//div[contains(@class,"item")]'):
+                    curID = searchResult.xpath('.//a[contains(@class,"item-name")][not(contains(@class,"item-name-model"))]')[0].get('href').replace('/','+').replace('?','!')
+                    if "+movie+" in curID: # model page and photos in search results
+                        Log(">>>VALID RESULT<<<")
+                        titleNoFormatting = searchResult.xpath('.//a[contains(@class,"item-name")][not(contains(@class,"item-name-model"))]')[0].text_content()
+                        Log("Result title: " + titleNoFormatting)
+                        Log("curID: " + curID)
+                        releaseDate = searchResult.xpath('.//span[contains(@class,"item-date")]')[0].text_content().split("Rated")[0].strip()
+                        Log("releaseDate: " + releaseDate)
+                        if searchDate:
+                            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                        else:
+                            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                        Log("Score: " + str(score))
+                        
+                        results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
+
         else:
             Log("Redirected to actress page")
             movieResults = searchResults.xpath('//div[contains(@class,"row container")][1]//li[@class="list-group-item"]')
@@ -47,7 +68,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     else:
                         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
                     Log("Score: " + str(score))
-
+                    Log("Search: " + strcurID + "|" + str(searchSiteID), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate)
                     results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
 
             break
