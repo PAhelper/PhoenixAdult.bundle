@@ -6,7 +6,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     networkscene = True
     networkscenepages = True
     networkdvd = True
-    directmatch = False
     network_sep_scene_prev = ""
     network_sep_scene = ""
     network_sep_scene_pages_prev = ""
@@ -79,10 +78,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network_sep_scene_pages = "/scene/"
     elif siteNum == 277:
         network = 'Evil Angel'
-        networkscene = False
-        networkscenepages = False
-        networkdvd = False
-        directmatch = True
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
         network_sep_dvd = "/dvd"
@@ -214,54 +209,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 else:
                     i = 100
 
-    if directmatch:
-        # Result to check
-        resultfirst = []
-        searchString = encodedTitle.replace("%20", '-').lower()
-        #searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
-        for searchResult in searchResults.xpath('//div[@id="infoWrapper"]'):
-            titleNoFormatting = searchResult.xpath('.//h1[1]')[0].text_content().strip()
-            titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
-            titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
-
-            curID = (PAsearchSites.getSearchSearchURL(siteNum) + searchString).replace('/', '_').replace('?', '!')
-            resultfirst.append(curID)
-            Log (curID + titleNoFormatting + "FOUND")
-
-            # try:
-            #     actorLink = searchResult.xpath('.//div[@class="tlcActors"]/a')
-            #     actor = ' - '
-            #     if "BONUS" in titleNoFormatting or "BTS" in titleNoFormatting:
-            #         for actorText in actorLink:
-            #             actorName = str(actorText.text_content().strip())
-            #             if "Rocco Siffredi" not in actorName and "Peter North" not in actorName:
-            #                 actor = actor + actorName + ", "
-            #     else:
-            #         actor = actor + str(actorLink[0].text_content().strip())
-            #     actor = actor.strip()
-            #     actor = actor.strip(",")
-            #     actor = " " + actor
-            # except:
-            #     actor = ''
-
-            try:
-                releaseDate = (searchResult.xpath('//li[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-#            except:
-#                try:
-#                    detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]')[0].get('href'))
-#                    releaseDate = parse(detailsPageElements.xpath('//*[@class="updatedDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-            except:
-                releaseDate = ''
-            Log (releaseDate + "FOUND")
-            if searchDate and releaseDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+network+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
-
-
     if networkdvd:
         try:
             dvdResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_dvd_prev + encodedTitle + network_sep_dvd)
@@ -324,10 +271,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = '21Sextreme'
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     url = (PAsearchSites.getSearchBaseURL(siteID) + temp).replace("https:","http:")
-    if siteID == 277:
-        url = temp
     detailsPageElements = HTML.ElementFromURL(url)
-
     art = []
 
     # Summary
