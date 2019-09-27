@@ -178,29 +178,40 @@ def getRename(site, actor, title, date):
     # REALITY KINGS
     elif site.lower() in ["40inchplus", "8thstreetlatinas", "badtowtruck", "bignaturals", "bigtitsboss", "bikinicrashers", "captainstabbin", "cfnmsecret", "cumfiesta", "cumgirls", "dangerousdongs", "eurosexparties", "extremeasses", "extremenaturals", "firsttimeauditions", "flowertucci", "girlsofnaked", "happytugs", "hdlove", "hotbush", "inthevip", "mikeinbrazil", "mikesapartment", "milfhunter", "milfnextdoor", "momsbangteens", "momslickteens", "moneytalks", "monstercurves", "nofaces", "pure18", "realorgasms", "rkprime", "roundandbrown", "saturdaynightlatinas", "seemywife", "sneakysex", "streetblowjobs", "teamsquirt", "teenslovehugecocks", "topshelfpussy", "trannysurprise", "vipcrew", "welivetogether", "wivesinpantyhose"]:
         if site.lower() == "40inchplus":
-            site = "4"
+            sitenum = "4"
         elif site.lower() == "8thstreetlatinas":
-            site = "1"
+            sitenum = "1"
         elif site.lower() == "badtowtruck":
-            site = "44"
+            sitenum = "44"
+        elif site.lower() == "bignaturals":
+            sitenum = "5"
+        elif site.lower() == "bigtitsboss":
+            sitenum = "6"
         
         elif site.lower() == "momsbangteens":
-            site = "27"
+            sitenum = "27"
         
         else:
-            site = ""
+            sitenum = ""
         
         for pagenumber in range(1,10):
-            page = requests.get("https://www.realitykings.com/scenes?page=" + str(pagenumber) + "&site=" + site)        
+            page = requests.get("https://www.realitykings.com/scenes?page=" + str(pagenumber) + "&site=" + sitenum)        
             detailsPageElements = html.fromstring(page.content)
             i = 0
             for releaseDate in detailsPageElements.xpath('//div[@class="dtkdna-5 bUqDss"][1]/text()'):
                 sceneID = detailsPageElements.xpath('//span[contains(@class, "dtkdna-5")]/a')[i].get('href').split("/")[2]
                 title = sceneID + " - " + detailsPageElements.xpath('//span[contains(@class, "dtkdna-5")]/a/text()')[i]
-                #sexyhub date format is (Mon dd, yyyy) ... convert it to yyyy-mm-dd
+                #reality kings date format is (Mon dd, yyyy) ... convert it to yyyy-mm-dd
                 datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
                 releaseDate = datetime_object.strftime('%Y-%m-%d')
-                if releaseDate == date:
+                
+                #extra check due to possibility of multiple releases on one date
+                if sitenum == "":
+                    releaseSite = detailsPageElements.xpath('//a[@class="sc-11m21lp-0-n jRqcyg"]/div/div[position()=2]/text()')[i].strip()
+                else:
+                    releaseSite = site
+                    
+                if releaseDate == date and site.lower() == releaseSite.lower():
                     return title
                 i += 1
     # SEXYHUB NETWORK
