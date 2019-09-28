@@ -236,7 +236,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### EvilAngel | Matching type: *DirectURL*
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
@@ -657,7 +657,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RawAttack
   - TheStripperExperience
 + #### Step Secrets | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### Swallowed / TrueAnal / Nymphos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Badmilfs

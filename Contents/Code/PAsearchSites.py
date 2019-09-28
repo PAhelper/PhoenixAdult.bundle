@@ -88,7 +88,7 @@ import siteFuckingAwesome
 import siteToughLoveX
 import siteCumLouder
 
-searchSites = [None] * 767
+searchSites = [None] * 768
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -366,7 +366,7 @@ searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com",
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/search?q="]
 searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/search?q="]
 searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/search?q="]
-searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
+searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/video/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
 searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
@@ -856,6 +856,7 @@ searchSites[763] = ["FuckingAwesome","FuckingAwesome","https://fuckingawesome.co
 searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","https://tour.toughlovex.com/models?letter="]
 searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
+searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
 
 
 def getSearchBaseURL(siteID):
