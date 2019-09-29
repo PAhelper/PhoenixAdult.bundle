@@ -190,6 +190,9 @@ def getRename(site, actor, title, date):
         
         elif site.lower() == "momsbangteens":
             sitenum = "27"
+            
+        elif site.lower() == "rkprime":
+            sitenum = "45"
         
         else:
             sitenum = ""
@@ -248,7 +251,7 @@ def getRename(site, actor, title, date):
         detailsPageElements = html.fromstring(page.content)
         i = 0
         for releaseDate in detailsPageElements.xpath('//div[@class="thumb"]/div/a/div[@class="title_black pull-left"]/text()'):
-            sceneID = detailsPageElements.xpath('//div[@class="thumb"]/div/a')[i].get('href').split('/')[3]
+            sceneID = detailsPageElements.xpath('//div[@class="thumb"]/div/a[@class="seo-thumb"]')[i].get('href').split('/')[3]
             title = sceneID + ' - ' + detailsPageElements.xpath('//div[@class="thumb"]/div/a/div[@class="title red pull-left"]/text()')[i]
             #SisLovesMe date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%b %d, %Y ')
