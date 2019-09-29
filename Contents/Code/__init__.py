@@ -444,7 +444,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Twistys
             ###############
             if siteNum == 288:
-                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291):
+                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291) or searchSiteID == 768:
                     results = PAsearchSites.siteTwistys.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -1195,7 +1195,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Twistys		                                        ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 288 and siteID <= 291:
+        if siteID >= 288 and siteID <= 291 or siteID == 768:
             metadata = PAsearchSites.siteTwistys.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
