@@ -207,7 +207,7 @@ def getRename(site, actor, title, date):
                 
                 #extra check due to possibility of multiple releases on one date
                 if sitenum == "":
-                    releaseSite = detailsPageElements.xpath('//a[@class="sc-11m21lp-0-n jRqcyg"]/div/div[position()=2]/text()')[i].strip()
+                    releaseSite = detailsPageElements.xpath('//a[@class="sc-11m21lp-0-n jRqcyg"]/div[position()=2]/text()')[i].strip()
                 else:
                     releaseSite = site
                     
