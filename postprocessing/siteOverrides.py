@@ -100,7 +100,7 @@ def getRename(site, actor, title, date):
     # NUBILES NETWORK
     elif site.lower() in ["anilos", "badteenspunished", "brattysis", "bountyhunterporn", "daddyslilangel", "detentiongirls", "driverxxx", "hotcrazymess", "momsteachsex", "myfamilypies", "nfbusty", "nubilefilms", "nubilescasting", "nubileset", "nubilesnet", "nubilesporn", "nubilesunscripted", "petiteballerinasfucked", "petitehdporn", "princesscum", "stepsiblingscaught", "teacherfucksteens", "thatsitcomshow"]:
         #in theory you could add more pages "/30" "/45" etc to do a backdated match
-        for pagenumber in ["", "16", "32", "48", "64"]:
+        for pagenumber in ["", "12", "24", "36", "48", "60", "72"]:
             if site.lower() in ["nubilesnet", "nubilesporn"]:
                 site = "nubiles-porn"
             elif site.lower() == "nubilescasting":
