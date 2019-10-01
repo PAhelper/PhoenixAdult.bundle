@@ -6,10 +6,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="item-video hover"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="item-thumb"]/a')[0].get('title').strip()
-        curID = searchResult.xpath('.//div[@class="item-thumb"]/a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//div[@class="fake-h6"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+    for searchResult in searchResults.xpath('//div[@class="item-video-overlay"]'):
+        titleNoFormatting = searchResult.xpath('./a')[0].get('title').strip()
+        curID = searchResult.xpath('./a')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//p[@class="video-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -32,7 +32,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'Love Her Feet'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
+    metadata.title = detailsPageElements.xpath('//div[@class="main-info-left"]/h1')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
@@ -43,7 +43,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Genres
-    genres = detailsPageElements.xpath('//div[@class="item-info"]/p/a')
+    genres = detailsPageElements.xpath('//div[@class="video-tags"]/a')
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
@@ -51,14 +51,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre("Foot Sex")
 
     # Release Date
-    date = detailsPageElements.xpath('//ul[@class="item-meta"]/li[1]')[0].text_content().replace('Release:','').strip()
+    date = detailsPageElements.xpath('//div[@class="date"]')[0].text_content().strip()
     if len(date) > 0:
         date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('//div[@class="item-info"]/h5/a')
+    actors = detailsPageElements.xpath('//div[@class="featured"]/a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -68,16 +68,30 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
-            actorPhotoURL = ''
+            try:
+                actorPageURL = actorLink.get("href")
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                actorPhotoURL = actorPage.xpath('//div[@class="picture"]/img')[0].get("src0_3x")
+                if 'http' not in actorPhotoURL:
+            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            except:
+                actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
 
+    # Video trailer background image
+    try:
+        twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
+        art.append(twitterBG)
+    except:
+        pass
+
     # Photos
-    photos = detailsPageElements.xpath('//div[@class = "item-images"]/ul/li/a/img')
+    photos = detailsPageElements.xpath('//div[@class="photos"]/a/img')
     if len(photos) > 0:
         for photoLink in photos:
-            photo = photoLink.get('src0_3x')
+            photo = photoLink.get('src')
             art.append(photo)
 
     j = 1
