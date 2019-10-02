@@ -86,8 +86,9 @@ import siteVogoV
 import siteUltrafilms
 import siteFuckingAwesome
 import siteToughLoveX
+import siteCumLouder
 
-searchSites = [None] * 765
+searchSites = [None] * 769
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -365,10 +366,10 @@ searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com",
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/scene/"]
-searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
+searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/video/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
-searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
+searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
 searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/view/"]
 searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/view/"]
@@ -377,9 +378,9 @@ searchSites[285] = ["EroticaX","EroticaX","https://www.xempire.com","https://www
 searchSites[286] = ["DarkX","DarkX","https://www.xempire.com","https://www.xempire.com/en/search/darkx/"]
 searchSites[287] = ["LesbianX","LesbianX","http://www.xempire.com","http://www.xempire.com/en/search/lesbianx/"]
 searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[289] = ["WhenGirlsPlay","WhenGirlsPlay","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[290] = ["MomKnowsBest","MomKnowsBest","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[291] = ["TwistysHard","TwistysHard","https://www.twistys.com","https://www.twistys.com/scene/"]
 searchSites[292] = ["VirtualTaboo","VirtualTaboo","https://virtualtaboo.com","https://virtualtaboo.com/search?q="]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
@@ -853,6 +854,11 @@ searchSites[761] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/searc
 searchSites[762] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
 searchSites[763] = ["FuckingAwesome","FuckingAwesome","https://fuckingawesome.com","https://fuckingawesome.com/search/videos/"]
 searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","https://tour.toughlovex.com/models?letter="]
+searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
+searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
+searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
+searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1002,6 +1008,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mgbf ', 'MyGirlfriendsBustyFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mmgs ', 'MommysGirl ', mediaTitle, flags=re.IGNORECASE)

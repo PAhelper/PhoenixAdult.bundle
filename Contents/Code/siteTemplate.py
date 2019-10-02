@@ -49,7 +49,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
-    movieGenres.addGenre("Genre")
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content().strip()
@@ -69,11 +68,14 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb"]')[0].get("src")
-            if 'http' not in actorPhotoURL:
-            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            try:
+                actorPageURL = actorLink.get("href")
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb"]')[0].get("src")
+                if 'http' not in actorPhotoURL:
+            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            except:
+                actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Director

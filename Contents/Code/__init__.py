@@ -444,7 +444,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Twistys
             ###############
             if siteNum == 288:
-                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291):
+                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291) or searchSiteID == 768:
                     results = PAsearchSites.siteTwistys.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -612,7 +612,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Nubiles
             ###############
             if siteNum == 525:
-                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <= 545) or (searchSiteID >= 755 and searchSiteID <= 756) :
+                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <= 545) or (searchSiteID >= 755 and searchSiteID <= 756) or (searchSiteID == 766) :
                     results = PAsearchSites.networkNubiles.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -998,6 +998,20 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 764:
                 if searchSiteID == 9999 or searchSiteID == 764:
                     results = PAsearchSites.siteToughLoveX.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            
+            ###############
+            ## cumlouder.com
+            ###############
+            if siteNum == 765:
+                if searchSiteID == 9999 or searchSiteID == 765:
+                    results = PAsearchSites.siteCumLouder.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## AllAnal
+            ###############
+            if siteNum == 767:
+                if searchSiteID == 9999 or searchSiteID == 767:
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1173,7 +1187,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Stepped Up Media                                       ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 282 and siteID <= 284:
+        if siteID == 767 or (siteID >= 282 and siteID <= 284):
             metadata = PAsearchSites.networkSteppedUp.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1181,7 +1195,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Twistys		                                        ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 288 and siteID <= 291:
+        if siteID >= 288 and siteID <= 291 or siteID == 768:
             metadata = PAsearchSites.siteTwistys.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1340,7 +1354,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Nubiles                                                  ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 525 and siteID <= 545 or siteID >= 755 and siteID <= 756:
+        if (siteID >= 525 and siteID <= 545) or (siteID >= 755 and siteID <= 756) or (siteID == 766):
             metadata = PAsearchSites.networkNubiles.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1782,6 +1796,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 764:
             metadata = PAsearchSites.siteToughLoveX.update(metadata, siteID, movieGenres, movieActors)
+        
+        ##############################################################
+        ##                                                          ##
+        ##  cumlouder.com                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 765:
+            metadata = PAsearchSites.siteCumLouder.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

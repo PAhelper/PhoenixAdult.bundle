@@ -150,6 +150,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZZ Series
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
++ #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Czech Amateurs
   - Czech Bangbus
@@ -234,7 +235,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **DirectURL**
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
@@ -448,7 +449,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
-+ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL, Date Add**
 + #### Nubiles-porn.com Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
@@ -469,6 +470,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Other Nubiles Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Anilos
   - Bratty Sis
+  - Deep Lush
   - Hot Crazy Mess
   - NF Busty
   - Nubilesfilms
@@ -654,7 +656,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RawAttack
   - TheStripperExperience
 + #### Step Secrets | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### Swallowed / TrueAnal / Nymphos | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Badmilfs
@@ -729,10 +731,11 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TushyRaw | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Twistys | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-  - Mom Knows Best
+  - MomKnowsBest
+  - TurningTwistys
   - Twistys
-  - Twistys Hard
-  - When Girls Play
+  - TwistysHard
+  - WhenGirlsPlay
 + #### Ultrafilms | Matching type *[Limited](./manualsearch.md#limited-search)*
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
