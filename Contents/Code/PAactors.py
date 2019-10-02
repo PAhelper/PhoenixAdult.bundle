@@ -69,6 +69,8 @@ class PhoenixActors:
                 newActor = "Cyrstal Rae"
             if newActor == "Doris Ivy":
                 newActor = "Gina Gerson"
+            if newActor == "Eden Sin":
+                newActor = "Eden Sinclair"
             if newActor == "Elsa Dream":
                 newActor = "Elsa Jean"
             if newActor == "Eve Lawrence":
