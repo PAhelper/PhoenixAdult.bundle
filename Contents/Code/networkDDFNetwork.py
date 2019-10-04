@@ -120,7 +120,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(class,"pornstar-card")]//a')
+    actors = detailsPageElements.xpath('//div[contains(@class,"pornstar-card")]//a')
     Log('Actors found: ' + str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
