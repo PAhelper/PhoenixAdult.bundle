@@ -120,7 +120,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(class,"pornstar-card")]//a')
+    actors = detailsPageElements.xpath('//div[contains(@class,"pornstar-card")]//a')
     Log('Actors found: ' + str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
@@ -131,6 +131,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPageURL = actorLink.get("href")
                 actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID) + actorPageURL)
                 actorPhotoURL = 'http:' + actorPage.xpath('//div[@class="card nomargin"]/img')[0].get("data-src")
+            # Fix 2x Alice Problem (Mira Sunset)
+            if actorLink.get('href').strip().split('/')[-1] == '3270':
+                Log('Changing Actor to Mira Sunset')
+                actorName = 'Mira Sunset'
             movieActors.addActor(actorName,actorPhotoURL)
 
     #Posters
