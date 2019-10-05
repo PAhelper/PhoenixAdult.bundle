@@ -87,8 +87,9 @@ import siteUltrafilms
 import siteFuckingAwesome
 import siteToughLoveX
 import siteCumLouder
+import siteZTOD
 
-searchSites = [None] * 769
+searchSites = [None] * 770
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -858,6 +859,7 @@ searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https:/
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
 searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
 searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[769] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
 
 
 def getSearchBaseURL(siteID):
@@ -1082,6 +1084,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ztod ', 'ZeroTolerance ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
