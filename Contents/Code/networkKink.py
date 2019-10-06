@@ -6,7 +6,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     Log(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//div[@class="shoot search"]'):
+    for searchResult in searchResults.xpath('//div[@class="shoot-card scene"]'):
         titleNoFormatting = searchResult.xpath('.//img')[0].get('alt').strip()
         curID = searchResult.xpath('.//a[@class="shoot-link"]')[0].get('href').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')

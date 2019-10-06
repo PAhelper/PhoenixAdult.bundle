@@ -38,6 +38,7 @@ This script will automatically rename and move files after they are downloaded.
 
 - "-d" "--dryrun", help="Don't do it for real, just show what will happen"
 - "-b", "--batch", help="Changes how logging works when bulk matching to avoid an error with permissions"
+
 - "-c", "--cleanup", help="Delete leftover files and cleanup folders after rename"
 - "-m", "--mediainfo", help="Add media info to the folder. Resolution and framerate"
 - "-m2", "--mediainfo2", help="Add media info to the filename. Resolution and framerate"

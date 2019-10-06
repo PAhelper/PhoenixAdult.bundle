@@ -41,27 +41,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Title
     title = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]/h2')[0].text_content().strip()
     metadata.title = title
-    #episode = title.split(' - ')[-1].strip()
-    #Log("Sort Title: "+episode + " - " + title[:title.rfind('-')])
-    #metadata.sort_title = episode + " - " + title[:title.rfind('-')]
 
     # Studio
     metadata.studio = "Nubiles"
 
     # Summary
     try:
-        paragraphs = detailsPageElements.xpath('//div[contains(@class, "content-pane-container")]//p')
-        pNum = 0
-        summary = ""
-        for paragraph in paragraphs:
-            if pNum >= 0 and pNum < (len(paragraphs)):
-                summary = summary + '\n\n' + paragraph.text_content()
-            pNum += 1
+        summary = detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]/div')[0].text_content().strip()
     except:
-        pass
-    if summary == '':
         try:
-            summary = detailsPageElements.xpath('//div[@class="video-description"]/article')[0].text_content().strip()
+            paragraphs = detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]//p')
+            pNum = 0
+            summary = ""
+            for paragraph in paragraphs:
+                if pNum >= 0 and pNum < (len(paragraphs)):
+                    summary = summary + '\n\n' + paragraph.text_content()
+                    pNum += 1
         except:
             pass
     metadata.summary = summary.strip()
@@ -129,7 +124,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genreName)
 
     # Posters
-    background = "http:" + detailsPageElements.xpath('//video')[0].get('poster')
+    background = detailsPageElements.xpath('//video')[0].get('poster')
+    if "http" not in background:
+                    background = "http:" + background
     metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
     # Scene cover from related photosets
@@ -140,7 +137,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             posterName = poster.xpath('//div[@class="content-grid container-fluid "]//a[@class= "title"]')[i].text_content()
             if title == posterName:
                 Log('Cover image found')
-                posterLink = "http:" + poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
+                posterLink = poster.xpath('//div[@class="content-grid container-fluid "]//img')[i].get("data-original")
+                if "http" not in posterLink:
+                    posterLink = "http:" + posterLink
                 metadata.posters[posterLink] = Proxy.Preview(HTTP.Request(posterLink, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
                 break
             i+=1
@@ -155,7 +154,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("photoPageURL: " + str(photoPageURL))
         photoPageElements = HTML.ElementFromURL(photoPageURL)
         for posterUrl in photoPageElements.xpath('//div[@class= "content-grid masonry "]//img'):
-            art.append("http:" + posterUrl.get('src'))
+            if "http" not in posterUrl.get('src'):
+                art.append("http:" + posterUrl.get('src'))
+            else:
+                art.append(posterUrl.get('src'))
     except:
         pass
 

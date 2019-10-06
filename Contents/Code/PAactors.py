@@ -69,6 +69,8 @@ class PhoenixActors:
                 newActor = "Cyrstal Rae"
             if newActor == "Doris Ivy":
                 newActor = "Gina Gerson"
+            if newActor == "Eden Sin":
+                newActor = "Eden Sinclair"
             if newActor == "Elsa Dream":
                 newActor = "Elsa Jean"
             if newActor == "Eve Lawrence":
@@ -2116,6 +2118,9 @@ class PhoenixActors:
             if metadata.studio == "Reality Kings":
                 if newActor == "Morgan":
                     newActor = "Morgan Layne"
+            if metadata.studio == "WowGirls":
+                if newActor == "Clover":
+                    newActor = "Katya Clover"
 
             if not skip:
                 if newPhoto == '':

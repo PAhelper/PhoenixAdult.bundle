@@ -36,7 +36,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.xxx] ", score = score, lang = lang))
     
     else:
-        Log('no Tile found on wowgirls.xxx, trying wowgirls.tv')
+        Log('Title not found on wowgirls.xxx, trying wowgirls.tv')
 
         try:
             searchResultsWowTV = HTML.ElementFromURL(urlWowTV)
@@ -101,9 +101,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     releaseDate = ''
                 results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.tv] ", score = score, lang = lang))
 
-
-
-
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
@@ -112,7 +109,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     sitename = str(metadata.id).split("|")[0].split('_')[2]
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
 
-    art = []
     metadata.collections.clear()
     movieGenres.clearGenres()
     movieActors.clearActors()
@@ -176,13 +172,22 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPhotoURL = ''
                 movieActors.addActor(actorName,actorPhotoURL)
 
-
         ### Posters and artwork ###
 
         # Video trailer background image
         twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
         Log("TwitterBG: " + twitterBG)
-        art.append(twitterBG)
+
+        if len(twitterBG) > 0:
+            try:
+                metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+                metadata.posters[twitterBG] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+            except:
+                request = urllib.Request(twitterBG, headers=headers)
+                response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
+                content = response.read()
+                metadata.art[twitterBG] = Proxy.Media(content, sort_order=1)
+                metadata.posters[twitterBG] = Proxy.Media(content, sort_order=1)
 
 
     else:
@@ -241,13 +246,6 @@ def update(metadata,siteID,movieGenres,movieActors):
                     actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
                 movieActors.addActor(actorName,actorPhotoURL)
 
-
-
-
-
-                movieActors.addActor(actorName,actorPhotoURL)
-
-
         ### Posters and artwork ###
 
         for poster in detailsPageElements.xpath('//div[@id="gallery-1"]/dl/dt/img'):
@@ -255,21 +253,13 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("DownLoad Posters/Arts: " + posterUrl)
             if len(posterUrl) > 0:
                 try:
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
                 except:
                     request = urllib.Request(posterUrl, headers=headers)
                     response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
                     content = response.read()
-                    metadata.art[posterUrl] = Proxy.Media(content, sort_order = 1)
-                    metadata.posters[posterUrl] = Proxy.Media(content, sort_order = 1)
-
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-            j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(content, sort_order=1)
+                    metadata.posters[posterUrl] = Proxy.Media(content, sort_order=1)
 
     return metadata

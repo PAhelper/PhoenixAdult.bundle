@@ -60,6 +60,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         if metadata.title == "Huge Tits":
             collection = "Busty"
+        if metadata.title == "Pool Table":
+            collection = "Fetishouse"
+        if metadata.title == "Spanish Milf":
+            collection = "Milf"
     metadata.collections.add(collection)
 
     # Actors

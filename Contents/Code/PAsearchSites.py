@@ -81,8 +81,14 @@ import networkMetArt
 import siteFittingRoom
 import siteFamilyHookups
 import siteClips4Sale
+import siteFakeHub
+import siteVogoV
+import siteUltrafilms
+import siteFuckingAwesome
+import siteToughLoveX
+import siteCumLouder
 
-searchSites = [None] * 761
+searchSites = [None] * 769
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -220,52 +226,52 @@ searchSites[133] = ["Street Ranger","Street Ranger","https://bangbros.com","http
 searchSites[134] = ["Tugjobs","Tugjobs","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[135] = ["Working Latinas","Working Latinas","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[136] = ["Tushy","Tushy","https://www.tushy.com","https://www.tushy.com/search?q="]
-searchSites[137] = ["Reality Kings","Reality Kings", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[138] = ["40 Inch Plus", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[139] = ["8th Street Latinas","8th Street Latinas", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[140] = ["Bad Tow Truck","Bad Tow Truck", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[141] = ["Big Naturals","Big Naturals", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[142] = ["Big Tits Boss","Big Tits Boss", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[143] = ["Bikini Crashers","Bikini Crashers", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[144] = ["Captain Stabbin","Captain Stabbin", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[145] = ["CFNM Secret","CFNM Secret", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[146] = ["Cum Fiesta","Cum Fiesta", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[147] = ["Cum Girls","Cum Girls", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[148] = ["Dangerous Dongs","Dangerous Dongs", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[149] = ["Euro Sex Parties","Euro Sex Parties", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[150] = ["Extreme Asses","Extreme Asses", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[151] = ["Extreme Naturals","Extreme Naturals", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[152] = ["First Time Auditions","First Time Auditions", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[153] = ["Flower Tucci","Flower Tucci", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[154] = ["Girls of Naked","Girls of Naked", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[155] = ["Happy Tugs","Happy Tugs", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[156] = ["HD Love","HD Love", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[157] = ["Hot Bush","Hot Bush", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[158] = ["In the VIP","In the VIP", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[159] = ["Mike in Brazil","Mike in Brazil", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[160] = ["Mikes Apartment","Mike's Apartment", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[161] = ["Milf Hunter","Milf Hunter", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[162] = ["Milf Next Door","Milf Next Door", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[163] = ["Moms Bang Teens","Moms Bang Teens", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[164] = ["Moms Lick Teens","Moms Lick Teens", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[165] = ["Money Talks","Money Talks", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[166] = ["Monster Curves","Monster Curves", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[167] = ["No Faces","No Faces", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[168] = ["Pure 18","Pure 18", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[169] = ["Real Orgasms","Real Orgasms", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[170] = ["RK Prime","RK Prime", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[171] = ["Round and Brown","Round and Brown", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[172] = ["Saturday Night Latinas","Saturday Night Latinas", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[173] = ["See My Wife","See My Wife", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[174] = ["Sneaky Sex","Sneaky Sex", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[175] = ["Street BlowJobs","Street BlowJobs", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[176] = ["Team Squirt","Team Squirt", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[177] = ["Teens Love Huge Cocks","Teens Love Huge Cocks", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[178] = ["Top Shelf Pussy","Top Shelf Pussy", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[179] = ["Tranny Surprise","Tranny Surprise", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[180] = ["VIP Crew","VIP Crew", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[181] = ["We Live Together","We Live Together", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
-searchSites[182] = ["Wives in Pantyhose","Wives in Pantyhose", "https://www.realitykings.com/", "https://www.realitykings.com/tour/search/videos/"]
+searchSites[137] = ["Reality Kings","Reality Kings", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[138] = ["40 Inch Plus", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[139] = ["8th Street Latinas","8th Street Latinas", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[140] = ["Bad Tow Truck","Bad Tow Truck", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[141] = ["Big Naturals","Big Naturals", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[142] = ["Big Tits Boss","Big Tits Boss", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[143] = ["Bikini Crashers","Bikini Crashers", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[144] = ["Captain Stabbin","Captain Stabbin", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[145] = ["CFNM Secret","CFNM Secret", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[146] = ["Cum Fiesta","Cum Fiesta", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[147] = ["Cum Girls","Cum Girls", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[148] = ["Dangerous Dongs","Dangerous Dongs", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[149] = ["Euro Sex Parties","Euro Sex Parties", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[150] = ["Extreme Asses","Extreme Asses", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[151] = ["Extreme Naturals","Extreme Naturals", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[152] = ["First Time Auditions","First Time Auditions", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[153] = ["Flower Tucci","Flower Tucci", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[154] = ["Girls of Naked","Girls of Naked", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[155] = ["Happy Tugs","Happy Tugs", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[156] = ["HD Love","HD Love", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[157] = ["Hot Bush","Hot Bush", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[158] = ["In the VIP","In the VIP", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[159] = ["Mike in Brazil","Mike in Brazil", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[160] = ["Mikes Apartment","Mike's Apartment", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[161] = ["Milf Hunter","Milf Hunter", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[162] = ["Milf Next Door","Milf Next Door", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[163] = ["Moms Bang Teens","Moms Bang Teens", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[164] = ["Moms Lick Teens","Moms Lick Teens", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[165] = ["Money Talks","Money Talks", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[166] = ["Monster Curves","Monster Curves", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[167] = ["No Faces","No Faces", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[168] = ["Pure 18","Pure 18", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[169] = ["Real Orgasms","Real Orgasms", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[170] = ["RK Prime","RK Prime", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[171] = ["Round and Brown","Round and Brown", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[172] = ["Saturday Night Latinas","Saturday Night Latinas", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[173] = ["See My Wife","See My Wife", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[174] = ["Sneaky Sex","Sneaky Sex", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[175] = ["Street BlowJobs","Street BlowJobs", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[176] = ["Team Squirt","Team Squirt", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[177] = ["Teens Love Huge Cocks","Teens Love Huge Cocks", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[178] = ["Top Shelf Pussy","Top Shelf Pussy", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[179] = ["Tranny Surprise","Tranny Surprise", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[180] = ["VIP Crew","VIP Crew", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[181] = ["We Live Together","We Live Together", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
+searchSites[182] = ["Wives in Pantyhose","Wives in Pantyhose", "https://www.realitykings.com", "https://www.realitykings.com/scene/"]
 searchSites[183] = ["21Naturals","21Naturals","https://www.21naturals.com","http://www.21naturals.com/en/search/"]
 searchSites[184] = ["PornFidelity","PornFidelity","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=2&page=1&search="]
 searchSites[185] = ["TeenFidelity","TeenFidelity","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=3&page=1&search="]
@@ -360,10 +366,10 @@ searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com",
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/scene/"]
-searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/search/"]
+searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/video/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
-searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/search.php?query="]
+searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
 searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/view/"]
 searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/view/"]
@@ -372,9 +378,9 @@ searchSites[285] = ["EroticaX","EroticaX","https://www.xempire.com","https://www
 searchSites[286] = ["DarkX","DarkX","https://www.xempire.com","https://www.xempire.com/en/search/darkx/"]
 searchSites[287] = ["LesbianX","LesbianX","http://www.xempire.com","http://www.xempire.com/en/search/lesbianx/"]
 searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[289] = ["WhenGirlsPlay","WhenGirlsPlay","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[290] = ["MomKnowsBest","MomKnowsBest","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[291] = ["TwistysHard","TwistysHard","https://www.twistys.com","https://www.twistys.com/scene/"]
 searchSites[292] = ["VirtualTaboo","VirtualTaboo","https://virtualtaboo.com","https://virtualtaboo.com/search?q="]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
@@ -416,13 +422,13 @@ searchSites[329] = ["Throated","Throated","https://www.blowpass.com","https://ww
 searchSites[330] = ["Sweetheart Video","Sweetheart Video","https://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.fantasymassage.com","https://www.fantasymassage.com/en/search/"]
 searchSites[332] = ["SweetSinner","SweetSinner","https://www.milehighmedia.com","http://www.milehighmedia.com/en/search/"]
-searchSites[333] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[334] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[335] = ["Fitness Rooms","Fitness Rooms","https://www.fitnessrooms.com","https://www.fitnessrooms.com/search/videos/"]
-searchSites[336] = ["Girlfriends.xxx","Girlfriends.xxx","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
-searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/search/videos/"]
+searchSites[333] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[334] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[335] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[336] = ["Girlfriends.xxx","Girlfriends.xxx","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
+searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[342] = ["VirtualRealPorn","VirtualRealPorn","https://virtualrealporn.com/","https://virtualrealporn.com/vr-porn-video/"]
@@ -480,17 +486,17 @@ searchSites[393] = ["LA Sluts","LA Sluts","https://tour.naughtyamerica.com","htt
 searchSites[394] = ["Slut Stepsister","Slut Stepsister","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[395] = ["Teens Love Cream","Teens Love Cream","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[396] = ["Latina Stepmom","Latina Stepmom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[397] = ["Fake Taxi","Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[398] = ["Fakehub Originals","Fakehub Originals","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[399] = ["Public Agent","Public Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[400] = ["Fake Agent","Fake Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[401] = ["Female Agent","Female Agent","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[402] = ["Fake Hospital","Fake Hospital","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[403] = ["Fake Agent UK","Fake Agent UK","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[404] = ["Fake Cop","Fake Cop","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
-searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.femalefaketaxi.com","https://www.femalefaketaxi.com/search/videos/"]
-searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakedrivingschool.com","https://www.fakedrivingschool.com/search/videos/"]
-searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehostel.com","https://www.fakehostel.com/search/videos/"]
+searchSites[397] = ["Fake Taxi","Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[398] = ["Fakehub Originals","Fakehub Originals","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[399] = ["Public Agent","Public Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[400] = ["Fake Agent","Fake Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[401] = ["Female Agent","Female Agent","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[402] = ["Fake Hospital","Fake Hospital","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[403] = ["Fake Agent UK","Fake Agent UK","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[404] = ["Fake Cop","Fake Cop","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[405] = ["Female Fake Taxi","Female Fake Taxi","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[406] = ["Fake Driving School","Fake Driving School","https://www.fakehub.com","https://www.fakehub.com/scene/"]
+searchSites[407] = ["Fake Hostel","Fake Hostel","https://www.fakehub.com","https://www.fakehub.com/scene/"]
 searchSites[408] = ["Dogfart","Dogfart","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[409] = ["BlacksOnBlondes","BlacksOnBlondes","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[410] = ["CuckoldSessions","CuckoldSessions","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
@@ -769,7 +775,7 @@ searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf
 searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 searchSites[685] = ["First Anal Quest","First Anal Quest","http://www.firstanalquest.com","http://www.firstanalquest.com/search/?q="]
-searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pervmom.com"]
+searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pervmom.com/"]
 searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","http://www.kink.com/search?channelIds=chantasbitches&q="]
 searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 searchSites[689] = ["Femdom Empire","Femdom Empire","https://femdomempire.com","https://femdomempire.com/tour/search.php?query="]
@@ -844,6 +850,15 @@ searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.m
 searchSites[758] = ["Fitting-Room","Fitting-Room","https://www.fitting-room.com","https://www.fitting-room.com/videos/"]
 searchSites[759] = ["FamilyHookups","FamilyHookups","https://www.familyhookups.com","https://www.familyhookups.com/scene/"]
 searchSites[760] = ["Clips4Sale","Clips4Sale","https://www.clips4sale.com","https://www.clips4sale.com/studio/"]
+searchSites[761] = ["VogoV","VogoV","https://vogov.com","https://vogov.com/search/?q="]
+searchSites[762] = ["Ultrafilms","Ultrafilms","https://www.ultrafilms.xxx","https://www.ultrafilms.xxx/?s="]
+searchSites[763] = ["FuckingAwesome","FuckingAwesome","https://fuckingawesome.com","https://fuckingawesome.com/search/videos/"]
+searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","https://tour.toughlovex.com/models?letter="]
+searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
+searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
+searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
+searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -924,9 +939,12 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^clip ', 'LegalPorno ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^cws ', 'CzechWifeSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dbm ', 'DontBreakMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ddfb ', 'DDFBusty ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ddfvr ', 'DDFNetworkVR ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^Digital Playground ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
@@ -972,6 +990,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lhf ', 'LoveHerFeet ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^lsb ', 'Lesbea ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^maj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
@@ -989,10 +1008,12 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mgbf ', 'MyGirlfriendsBustyFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mmgs ', 'MommysGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mnm ', 'MyNaughtyMassage ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mom ', 'MomXXX ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mpov ', 'MrPOV ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mshf ', 'MySistersHotFriend ', mediaTitle, flags=re.IGNORECASE)
@@ -1052,12 +1073,14 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^tss ', 'ThatSitcomShow ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wfbg ', 'WeFuckBlackGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
@@ -1079,22 +1102,29 @@ def getSearchSettings(mediaTitle):
     if searchSiteID != 9999:
         Log("^^^^^^^ Shortening Title")
         Log(mediaTitle[:len(searchSites[searchSiteID][0])].lower() + " vs " + searchSites[searchSiteID][0].lower())
+        # searchSites [0] matches madiaTitle
         if mediaTitle[:len(searchSites[searchSiteID][0])].lower() == searchSites[searchSiteID][0].lower():
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0])+1:]
             Log("1")
+        # searchSites [0] contains an ' but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0]):]
+            Log("2")
+        # searchSites [0] contains an ' and spaces but mediaTitle does not
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ","").replace("'",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ","").replace("'",""))+1:]
+            Log("3")
+        # searchSites [0] and mediaTitle have the same punctuation but differnt spaces
+        elif mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
+            searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
+            Log("4")
         else:
             searchTitle = mediaTitle
-            Log("2")
-            if mediaTitle[:len(searchSites[searchSiteID][0].replace(" ",""))].lower() == searchSites[searchSiteID][0].lower().replace(" ",""):
-                searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
-                Log("3")
-            else:
-                searchTitle = mediaTitle
-                Log("4")
+            Log("5")
         if searchTitle[:4].lower() == "com ":
             searchTitle = searchTitle[4:]
-            Log("5")
-        Log("6")
+            Log("6")
+        Log("7")
     else:
         searchTitle = mediaTitle
 

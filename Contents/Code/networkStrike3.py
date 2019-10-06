@@ -10,12 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = searchResult.xpath('.//img')[0].get('alt')
             scenePage = searchResult.xpath('.//a')[0].get('href')
             curID = scenePage.replace('/','_').replace('?','!')
-            detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + scenePage)
-            bigScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
-            alpha = bigScript.find('"releaseDate":"')+15
-            omega = bigScript.find('"',alpha)
-            date = bigScript[alpha:omega]
-            releaseDate = parse(date).strftime('%Y-%m-%d')
+            releaseDate = parse(searchResult.xpath('.//div[@class="sc-10d9zl9-5 gfkBpA"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
@@ -40,6 +35,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
 
+    wholeScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
+    bigScript = wholeScript[:wholeScript.find("itsUpAds")] # This should truncate bigScript to just the parts relevant to the current scene
+
     # Studio
     metadata.studio = "Strike 3"
 
@@ -57,21 +55,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//h1[@data-test-component="VideoTitle"]')[0].text_content().strip()
 
     # Release Date
-    wholeScript = detailsPageElements.xpath('//footer/following::script[1]')[0].text_content()
-    bigScript = wholeScript[:wholeScript.find("itsUpAds")] # This should truncate bigScript to just the parts relevant to the current scene
-    alpha = bigScript.find('"releaseDate":"')+15
-    omega = bigScript.find('"',alpha)
-    date = bigScript[alpha:omega]
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year    
+    date = detailsPageElements.xpath('//button[contains(@title, "Release date")]/span')[0].text_content().strip()
+    if len(date) > 0:
+        date_object = datetime.strptime(date, '%B %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
     try:
-        alpha = bigScript.find('"tags":[')+8
-        omega = bigScript.find(']',alpha)
-        genres = bigScript[alpha:omega].strip('"').split(',')
+        tagScript = wholeScript.split('"tags":["')[1].split(']',1)[0]
+        genres = tagScript.strip('"').split(',')
         for genre in genres:
             movieGenres.addGenre(genre.replace('"','').lower())
     except:
@@ -99,8 +93,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID)+actorPageURL)
             actorBigScript = actorPage.xpath('//footer/following::script[1]')[0].text_content()
-            alpha = actorBigScript.find('"src":"')+7
-            omega = actorBigScript.find('"',alpha)
+            alpha = actorBigScript.find('listing_150x256')
+            alpha = actorBigScript.find('3x',alpha)
+            alpha = actorBigScript.find('http', alpha)
+            omega = actorBigScript.find('"', alpha)
             actorPhotoURL = actorBigScript[alpha:omega].decode('unicode_escape')
             if 'http' not in actorPhotoURL:
                 actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID)+actorPhotoURL
@@ -108,13 +104,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Director
     metadata.directors.clear()
-    director = metadata.directors.new()
-    alpha = bigScript.find('directorNames')+16
-    omega = bigScript.find('"',alpha)
-    dirName = bigScript[alpha:omega]
-    if dirName == "ull," or dirName == '':
-        dirName = "Greg Lansky"
-    director.name = dirName
+    try:
+        director = metadata.directors.new()
+        dirName = detailsPageElements.xpath('//div[@data-test-component="DirectorSection"]//span[2]')[0].text_content().strip()
+        director.name = dirName
+    except:
+        pass
 
     # Posters/Background
     valid_names = list()

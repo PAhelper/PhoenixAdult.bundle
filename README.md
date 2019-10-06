@@ -10,25 +10,26 @@ Currently the features of this metadata agent are:
   - Scene Title
   - Scene Summary
   - Studio
-  - Originating Site (saved as the Tagline, and also a Collection for easy searching)
+  - Originating Site / Subsite / Site Collection (saved as the Tagline, and also a Collection for easy searching)
   - Release Date
   - Genres / Categories / Tags
   - Porn Stars (stored as Actors, with photo)
-  - Scene Director
+  - Scene Director(s)
   - Movie Poster(s) / Background Art
 
-- Function to strip common "scene" tags from filenames to assist with matching
-- Function to help replace abbreviations in filenames with the full names to assist with matching
-- Function to help clean up extraneous Genres
-- Function to map actresses with aliases on different sites together (e.g. Doris Ivy is Gina Gerson)
-- Function to locate an image for actresses where the original site doesn't provide one
-- Workaround to manually set actors for unsupported sites
+- Function to strip common "scene" tags to assist with matching
+- Function to replace abbreviated site names with full site names to assist with matching
+- Function to clean up / merge genres
+- Function to clean up / merge actresses with aliases (e.g. Doris Ivy is Gina Gerson)
+- Function to locate an image for actors where the original site doesn't provide one
+- Function to manually add actors for sites the agent doesn't support
+- Function to automatically rename files (WIP)
 
 File Naming
 -----------
-The agent will try to match your file automatically, usually based on the filename. You can help it match by renaming your video appropriately (see below).
-If the video is not successfully matched, you can manually try to match it using the [Match...] function in Plex, and entering as much information as you have, see the [manual searching document](./docs/manualsearch.md) for more information.
-Which type of search each site accepts is listed in the [sitelist document](./docs/sitelist.md).
+The agent will try to match your file automatically, usually based on the filename. You can assist it by renaming your video appropriately.
+If the video is not successfully matched, you can try to manually match it using the [Match...] function in Plex. See the [manual searching document](./docs/manualsearch.md) for more information.
+Best practice for each site is listed in the [sitelist document](./docs/sitelist.md).
 **Plex Video Files Scanner needs to be set as the library scanner for best results.**
 
 #### Here are some naming structures we recommend:
@@ -43,10 +44,10 @@ Real world examples:
 - `Blacked - 2018-09-07 - Alecia Fox.mp4`
 - `Blacked - Alecia Fox Joss Lescaf.mp4`
 
-Some sites do not have a search function available, but are still supported through direct matching. This is where SceneID Search/Match and Direct URL Match come in to play.
-These usually don't make the most intuitive filenames, so it is often better to use the [Match...] function in Plex. This is further covered in the [manual searching document](./docs/manualsearch.md).
+Some sites do not have a search function available. This is where SceneID and Direct URL come in to play.
+These usually don't make the most intuitive filenames, so it is often better to use the [Match...] function in Plex. See the [manual searching document](./docs/manualsearch.md) for more information.
 
-#### If you would like to name your files with SceneIDs instead of just matching in Plex, here are some examples:
+#### If you would prefer to integrate SceneIDs into your filenames, instead of manually matching in Plex, here are some naming structures we recommend:
 
 - `SiteName` - `YYYY-MM-DD` - `SceneID` `.[ext]`
 - `SiteName` - `SceneID` `.[ext]`
@@ -59,44 +60,28 @@ Real world examples:
 
 Installation
 ------------
-Here is how to find the plug-in folder location:
+How to find the plug-in folder location:
 [https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-](https://linkthe.net/?https://support.plex.tv/hc/en-us/articles/201106098-How-do-I-find-the-Plug-Ins-folder-)
 
-Plex main folder location:
-
-+ **Most common locations:**
-  - **Linux**: `/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/`
-  - **Mac**: `~/Library/Application Support/Plex Media Server/`
-  - **Windows**: `%LOCALAPPDATA%\Plex Media Server/`
-  - More paths listed in the [Plex documentation](https://support.plex.tv/articles/202915258-where-is-the-plex-media-server-data-directory-located/)
-
-Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
+- Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
 - Rename folder to "PhoenixAdult.bundle" (remove -master)
 
-Notice
+Reporting a bug
 ------
-I try to maintain bug-free code, but sometimes bugs happen. If you are having difficulty matching a scene, [create an issue on Github](https://github.com/PAhelper/PhoenixAdult.bundle/issues) and I will do my best to address it.
-
-**Plex Video Files Scanner needs to be set as the library scanner for best results.**
+We try to maintain bug-free code, but bugs do happen. If you are having difficulty matching a scene, please refer to [Known Issues](https://github.com/PAhelper/PhoenixAdult.bundle/issues/218) before submitting an Issue.
 
 Known Limitations
 -----------------
-Some sites do not have a search function, we do our best to support those through direct matching.
 Some sites do not have many high quality images that can be used as poster or background art. I have found the forums at [ViperGirls.to](https://linkthe.net/?https://www.vipergirls.to) to be a great resource for artwork in these situations.
-Due to a bug in code, some sites are unavailable for matching on Linux installations of Plex. We're working on it.
-Some sites with lots of content may return matching results, but still not include the specific scene you're trying to match. In some cases a means of direct match might work better, or choosing more unique search terms might help.
+Some sites do not work on Linux installations of Plex. Workarounds have been found, but unfortunately this issue lies mostly with the differences in code between Plex Server for Windows and Plex Server for Linux.
 
 Change Log/Updates
 ------------------
-Aside from viewing normal commit logs to see changes, an official record of changes can be found in the [CHANGELOG.md](./CHANGELOG.md) file.
+To view the most detailed changes to code, check the [commit log](https://github.com/PAhelper/PhoenixAdult.bundle/commits/master). Additional infomation can be obtained from the list of [merged pull requests](https://github.com/PAhelper/PhoenixAdult.bundle/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged). 
 
 Supported Networks
 ------------------
 
-To see the full list of all supported sites, [check out the sitelist doc](./docs/sitelist.md).
-If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests
-
-If you like my work... I like beer :)
-
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=K5NFB6DYPCZQA&item_name=Plex+Agent+code+development&currency_code=USD&source=url)
+To view the full list of supported sites, [check out the sitelist doc](./docs/sitelist.md).
+If your favorite site isn't supported, head over to [Issue #1](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1) to add your request to the list, or vote on the current requests.
