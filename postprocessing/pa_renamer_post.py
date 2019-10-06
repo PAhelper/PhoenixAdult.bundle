@@ -19,8 +19,8 @@ def main():
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
-        parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
-        parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
+        parser.add_argument("-d", "--dryrun", help="Don't do it for real, just show what will happen", action="store_true")
+        parser.add_argument("-b", "--batch", help="Changes how logging works when bulk matching to avoid an error with permissions", action="store_true")
         parser.add_argument("-c", "--cleanup", help="Delete leftover files and cleanup folders after rename", action="store_true")
         parser.add_argument("-m", "--mediainfo", help="Add media info to the folder. Resolution and framerate", action="store_true")
         parser.add_argument("-m2", "--mediainfo2", help="Add media info to the filename. Resolution and framerate", action="store_true")
