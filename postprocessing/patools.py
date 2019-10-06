@@ -41,7 +41,7 @@ def pa_parse_dir(dir, use_filename):
     # Studio Match
     # TODO: determine based on collections.py
 
-    shoot['studio'] = match_object.group(1).replace('-','')
+    shoot['studio'] = match_object.group(1).replace('-','').replace('[', '').replace(']','')
 
     # Segment matches
     if match_object.group(9) is not None:
