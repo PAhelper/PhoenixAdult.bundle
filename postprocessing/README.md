@@ -53,3 +53,19 @@ For old collections where the media is structured with multiple video files in o
 **Warning!!**
 
 When procesing multiple files in this way I have had one instance of files being named incorrectly when moving them into the same directory. I attempted to code around this and I have not had it happen again but I cannot guarentee I have resolved it.
+
+## Supported Sites
+
+- FakeHub Network
+- Family Strokes
+- Little Caprice Dreams
+- Nubiles Network
+- Mofos Network (at this stage sharemyBF only)
+- Porn Pros Network (cum4k, lubed, nannyspy, passionhd, spyfam, tiny4k)
+- Reality Kings
+- SexyHub Network
+- Sis Loves Me
+- Vixen
+- X-Art
+
+Not every site is necessarily supported within the network site. I have supported sites I wanted to use. If you want something specific feel free to request things or submit working code yoursef.
