@@ -55,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
         # Tagline and Collection(s)
         # DVD Name
-        dvdName = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]')[0].text_content().strip()
+        dvdName = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]')[0].text_content().replace('DVD:','').strip()
         metadata.tagline = dvdName
         metadata.collections.add(dvdName)
         #Site Name
@@ -104,8 +104,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         # Video trailer background image
         j = 1
         try:
-            twitterBG = detailsPageElements.xpath('//div[@class="trailerArea"]/a[1]')[0].get('href')
-            twitterBG = PAsearchSites.getSearchSearchURL(siteID) + twitterBG
+            twitterBG = detailsPageElements.xpath('//span[@id="limit_thumb"]/a/span[1]/img')[0].get('src')
             metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(twitterBG, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
             j += 1
         except:
