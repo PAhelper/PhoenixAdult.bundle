@@ -88,7 +88,7 @@ import siteFuckingAwesome
 import siteToughLoveX
 import siteCumLouder
 
-searchSites = [None] * 768
+searchSites = [None] * 769
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -378,9 +378,9 @@ searchSites[285] = ["EroticaX","EroticaX","https://www.xempire.com","https://www
 searchSites[286] = ["DarkX","DarkX","https://www.xempire.com","https://www.xempire.com/en/search/darkx/"]
 searchSites[287] = ["LesbianX","LesbianX","http://www.xempire.com","http://www.xempire.com/en/search/lesbianx/"]
 searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[289] = ["When Girls Play","When Girls Play","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[290] = ["Mom Knows Best","Mom Knows Best","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[291] = ["Twistys Hard","Twistys Hard","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[289] = ["WhenGirlsPlay","WhenGirlsPlay","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[290] = ["MomKnowsBest","MomKnowsBest","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[291] = ["TwistysHard","TwistysHard","https://www.twistys.com","https://www.twistys.com/scene/"]
 searchSites[292] = ["VirtualTaboo","VirtualTaboo","https://virtualtaboo.com","https://virtualtaboo.com/search?q="]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
@@ -857,6 +857,7 @@ searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","htt
 searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
 searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
+searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
 
 
 def getSearchBaseURL(siteID):

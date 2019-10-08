@@ -152,7 +152,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if networkscenepages:
             # Other pages
             i = 2
-            while i < 90:
+            while i < 3:
                 pagenum = i
                 if siteNum == 380:
                     pagenum = i - 1

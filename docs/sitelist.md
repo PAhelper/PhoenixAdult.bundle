@@ -236,7 +236,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### EvilAngel | Matching type: *DirectURL*
++ #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **DirectURL**
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
@@ -732,10 +732,11 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TushyRaw | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Twistys | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-  - Mom Knows Best
+  - MomKnowsBest
+  - TurningTwistys
   - Twistys
-  - Twistys Hard
-  - When Girls Play
+  - TwistysHard
+  - WhenGirlsPlay
 + #### Ultrafilms | Matching type *[Limited](./manualsearch.md#limited-search)*
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
