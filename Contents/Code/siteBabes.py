@@ -15,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    url = "https://www.babes.com/scene/" + sceneID + "/1"
+    url = PAsearchSites.getSearchBaseURL(siteNum) + "/scene/" + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 btKUEO"]'):
         titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace("SML-","").replace("Trailer","").strip()
