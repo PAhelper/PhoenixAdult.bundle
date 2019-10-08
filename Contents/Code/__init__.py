@@ -444,7 +444,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Twistys
             ###############
             if siteNum == 288:
-                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291):
+                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291) or searchSiteID == 768:
                     results = PAsearchSites.siteTwistys.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
@@ -1006,6 +1006,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 765:
                     results = PAsearchSites.siteCumLouder.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## AllAnal
+            ###############
+            if siteNum == 767:
+                if searchSiteID == 9999 or searchSiteID == 767:
+                    results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1180,7 +1187,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Stepped Up Media                                       ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 282 and siteID <= 284:
+        if siteID == 767 or (siteID >= 282 and siteID <= 284):
             metadata = PAsearchSites.networkSteppedUp.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1188,7 +1195,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Twistys		                                        ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 288 and siteID <= 291:
+        if siteID >= 288 and siteID <= 291 or siteID == 768:
             metadata = PAsearchSites.siteTwistys.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

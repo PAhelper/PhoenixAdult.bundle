@@ -1,14 +1,6 @@
 #!/usr/local/sabnzbd/env/bin/python
 # !/usr/bin/env python
 
-# point sabnzbd to this file for automated postprocessing
-# configure and customise siteOverrides.py
-# install lxml if required -> pip install lxml
-
-#Media Info is a beta option and will require you to install two things.
-# install pymedia info -> pip install pymediainfo
-# https://mediaarea.net/en/MediaInfo the MediaInfo.DLL file for your system (NOTE: I did find this must have already been installed on my system and was not nedded)
-
 import sys
 import os, glob, shutil
 import logging
@@ -18,25 +10,21 @@ from patools import pa_parse_dir
 import siteOverrides
 
 def main():
-    dryrun=False
-    batch=False
-    cleanup=False
-    mediainfo=False
-    mediainfo2=False
+    from siteConfig import dryrun, batch, cleanup, sab_cleanup, mediainfo, sab_mediainfo, mediainfo2, sab_mediainfo2, debug, log_location, use_filename
     if "SAB_VERSION" in os.environ:
         (scriptname,dir,orgnzbname,jobname,reportnumber,category,group,postprocstatus,url) = sys.argv
-        # set to True/False to enable/Disable when using sabnzbd
-        cleanup=False
-        mediainfo=False
-        mediainfo2=False
+        cleanup = sab_cleanup
+        mediainfo = sab_mediainfo
+        mediainfo2 = sab_mediainfo2
     else:
         parser = argparse.ArgumentParser(description='Rename adult media downloads for import into Plex with the PhoenixAdult metadat agent')
         parser.add_argument("directory")
-        parser.add_argument("-d", "--dryrun", help="don't do work, just show what will happen", action="store_true")
-        parser.add_argument("-b", "--batch", help="Do not try to log as batch job will fail", action="store_true")
+        parser.add_argument("-d", "--dryrun", help="Don't do it for real, just show what will happen", action="store_true")
+        parser.add_argument("-b", "--batch", help="Changes how logging works when bulk matching to avoid an error with permissions", action="store_true")
         parser.add_argument("-c", "--cleanup", help="Delete leftover files and cleanup folders after rename", action="store_true")
         parser.add_argument("-m", "--mediainfo", help="Add media info to the folder. Resolution and framerate", action="store_true")
         parser.add_argument("-m2", "--mediainfo2", help="Add media info to the filename. Resolution and framerate", action="store_true")
+        parser.add_argument("-n", "--filerename", help="Use the filename instead of the folder name. Not recommended", action="store_true")
         args = parser.parse_args()
         if args.dryrun:
             print "Dry-run mode enabled."
@@ -53,9 +41,10 @@ def main():
         if args.mediainfo2:
             print "File MediaInfo enabled."
             mediainfo2=True
+        if args.filerename:
+            print "Using FileName."
+            use_filename=True
         dir = args.directory
-
-    debug=False
 
     if debug:
         logging.basicConfig(level=logging.DEBUG)
@@ -65,13 +54,34 @@ def main():
     logger = logging.getLogger('pa_renamer')
     formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s')
     if not dryrun and not batch:
-        hdlr = logging.FileHandler('C:\Program Files\SABnzbd\scripts\pa_post.log')
+        hdlr = logging.FileHandler(log_location)
         hdlr.setFormatter(formatter)
         logger.addHandler(hdlr)
 
-    logger.info("Starting to process: %s" % dir)
-
-    shoot = pa_parse_dir(dir)
+    logger.info(" Starting to process: %s" % dir)
+    logger.debug(" Variables:")
+    logger.debug(" dryrun: %s, batch: %s, cleanup: %s, mediainfo: %s, mediainfo2: %s, use_filename: %s" % (dryrun, batch, cleanup, mediainfo, mediainfo2, use_filename))
+    
+    if use_filename:
+        for item in os.listdir(dir):
+            fullfilepath = os.path.join(dir, item)
+            if os.path.getsize(fullfilepath) > 50000000:
+                shoot = pa_parse_dir(fullfilepath, use_filename)
+                success = renameShoot(shoot, dir, fullfilepath, dryrun, cleanup, mediainfo, mediainfo2, use_filename)
+    else:
+        shoot = pa_parse_dir(dir, use_filename)
+        success = renameShoot(shoot, dir, dir, dryrun, cleanup, mediainfo, mediainfo2, use_filename)
+    
+    try:
+        if success:
+            logger.info(" Successful")
+    except:
+        logger.info(" Unsuccessful")
+        
+        
+def renameShoot(shoot, dir, fullfilepath, dryrun, cleanup, mediainfo, mediainfo2, use_filename):
+    from siteConfig import debug, overwrite_duplicate, keep_duplicate, duplicate_location
+    logger = logging.getLogger('pa_renamer')
     logger.debug("Full shoot dict:")
     logger.debug(shoot)
     # shoot = {
@@ -93,7 +103,8 @@ def main():
         correctName = siteOverrides.getRename(shoot['studio'], "filleractor", shoot['filename_title'], shoot['date'])
 
         for item in os.listdir(dir):
-            fullfilepath = os.path.join(dir, item)
+            if not use_filename:
+                fullfilepath = os.path.join(dir, item)
             filetype = item.split('.')[-1]
             logger.debug(" The filetype is: %s" % filetype)
             #if the file is over 50MB rename it
@@ -115,21 +126,45 @@ def main():
                             dir_new = dir_new + " " + media_Info
                         if mediainfo2:
                             filename_new = filename_new.replace(" (", " (" + media_Info + ") (")
+                filename_new = filename_new.replace(".mp4", '.' + filetype)
                 logger.debug(" After:")
                 logger.debug("    New directory: %s" % dir_new)
                 logger.debug("    New file name: %s" % filename_new)
                 if filetype in ["mp4", "avi", "mkv"]:
-                    newpath = os.path.join(dir_new, filename_new.replace(".mp4", '.' + filetype))
+                    newpath = os.path.join(dir_new, filename_new)
                     if dryrun:
-                        logger.info("[DRYRUN] Renaming: %s -> %s" % (fullfilepath, newpath))
+                        logger.info(" [DRYRUN] Renaming: %s -> %s" % (fullfilepath, newpath))
                     else:
                         try:
                             os.makedirs(dir_new)
                         except:
                             pass
                         logger.info(" Renaming/Moving from: %s --> %s" % (fullfilepath, newpath))
-                        os.rename(fullfilepath, newpath)
-                        os.chmod(newpath, 0775)
+                        try:
+                            os.rename(fullfilepath, newpath)
+                            os.chmod(newpath, 0775)
+                        except:
+                            # duplicate file handling
+                            logger.info(" File already Exists")
+                            if duplicate_location == "":
+                                duplicate_location = dir
+                            duplicatepath = os.path.join(duplicate_location, filename_new)
+                            if overwrite_duplicate:
+                                logger.info(" Overwriting Original")
+                                os.remove(newpath)
+                                os.rename(fullfilepath, newpath)
+                                os.chmod(newpath, 0775)
+                            elif not keep_duplicate:
+                                logger.info(" Deleting Duplicate")
+                                os.remove(fullfilepath)
+                            else:
+                                try:
+                                    os.makedirs(duplicate_location)
+                                except:
+                                    pass
+                                logger.info(" Renaming/Moving to %s" % duplicatepath)
+                                os.rename(fullfilepath, duplicatepath)
+                                os.chmod(duplicatepath, 0775)
             if cleanup and not dryrun:
                 if filetype in ["txt", "jpg", "jpeg", "nfo", "sfv", "srr"]:
                     os.remove(fullfilepath)
@@ -139,7 +174,9 @@ def main():
                     logger.info(" Empty Directory Deleted")
                 except:
                     pass
-        logger.info(" Successful")
+            if use_filename:
+                return True
+        return True
                 
     else:
         logger.critical("No match found for dir: %s" % dir)

@@ -114,6 +114,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         pass
 
+    # Country
+    metadata.countries.add("French")
+
     # Video backgrounds
     backgrounds = detailsPageElements.xpath('//ul[@class="vid_rotator_img"]/li/img')
     for background in backgrounds:
