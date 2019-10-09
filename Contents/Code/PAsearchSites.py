@@ -88,7 +88,7 @@ import siteFuckingAwesome
 import siteToughLoveX
 import siteCumLouder
 
-searchSites = [None] * 769
+searchSites = [None] * 770
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -858,7 +858,7 @@ searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https:/
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
 searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
 searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
-
+searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
