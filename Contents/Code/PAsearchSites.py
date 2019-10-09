@@ -360,7 +360,7 @@ searchSites[267] = ["Stranded Teens","Stranded Teens","https://www.mofos.com","h
 searchSites[268] = ["Mofos B Sides","Mofos B Sides","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[269] = ["Shes a Freak","She's a Freak","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[270] = ["Public Pickups","Public Pickups","https://www.mofos.com","https://www.mofos.com/scene/"]
-searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/scene/"]
+searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/search?q="]
 searchSites[272] = ["Babes Unleashed","Babes Unleashed","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
