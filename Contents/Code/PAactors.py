@@ -27,8 +27,6 @@ class PhoenixActors:
                 skip = True
 
             ##### Replace by actor name; for actors that have different aliases in the industry
-            if newActor == "Aaliyah Love2":
-                newActor = "Aaliyah Love"
             if newActor == "Abby Rains":
                 newActor = "Abbey Rain"
             if newActor == "Ms Addie Juniper":
