@@ -72,19 +72,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = actorPage.xpath('//div[@class="pornstar-image"]/img')[0].get("src")
                 if 'http' not in actorPhotoURL:
-            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             except:
                 actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
-
-    # Director
-    director = metadata.directors.new()
-    try:
-        directors = detailsPageElements.xpath('//p[@class="director"]/a')
-        for dirname in directors:
-            director.name = dirname.text_content().strip()
-    except:
-        pass
 
     ### Posters and artwork ###
 

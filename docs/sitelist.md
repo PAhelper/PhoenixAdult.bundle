@@ -790,6 +790,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Eroticax
   - Hardx
   - Lesbianx
++ #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list
 When this plugin is inevitably updated to add or update a sites' types of searching, you can use the below markdown formatting in a PR to easily add the site in question here
