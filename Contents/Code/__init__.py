@@ -1013,6 +1013,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 767:
                     results = PAsearchSites.networkSteppedUp.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## ZeroTolerance
+            ###############
+            if siteNum == 769:
+                if searchSiteID == 9999 or searchSiteID == 769:
+                    results = PAsearchSites.siteZTOD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1804,6 +1811,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 765:
             metadata = PAsearchSites.siteCumLouder.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  ztod.com                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 769:
+            metadata = PAsearchSites.siteZTOD.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
