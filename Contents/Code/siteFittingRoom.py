@@ -64,6 +64,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             collection = "Fetishouse"
         if metadata.title == "Spanish Milf":
             collection = "Milf"
+        if metadata.title == "Cotton Panty":
+            collection = "Pantyhose"
     metadata.collections.add(collection)
 
     # Actors
