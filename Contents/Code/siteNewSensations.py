@@ -55,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
         # Tagline and Collection(s)
         # DVD Name
-        dvdName = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]')[0].text_content().strip()
+        dvdName = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]')[0].text_content().replace('DVD:','').strip()
         metadata.tagline = dvdName
         metadata.collections.add(dvdName)
         #Site Name
@@ -102,25 +102,23 @@ def update(metadata,siteID,movieGenres,movieActors):
         ### Posters and artwork ###
 
         # Video trailer background image
-        j = 1
+        bgnum = 1
         try:
-            twitterBG = detailsPageElements.xpath('//div[@class="trailerArea"]/a[1]')[0].get('href')
-            twitterBG = PAsearchSites.getSearchSearchURL(siteID) + twitterBG
-            metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(twitterBG, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-            j += 1
+            twitterBG = detailsPageElements.xpath('//span[@id="limit_thumb"]/a/span[1]/img')[0].get('src')
+            metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(twitterBG, headers={'Referer': 'http://www.google.com'}).content, sort_order=bgnum)
+            metadata.posters[twitterBG] = Proxy.Preview(HTTP.Request(twitterBG, headers={'Referer': 'http://www.google.com'}).content, sort_order=2)
+            bgnum += 1
         except:
             pass
 
         # DVD Page
-        posterNum = 1
         try:
             dvdPageLink = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[4]/a')[0].get('href')
             dvdPageElements = HTML.ElementFromURL(dvdPageLink)
             dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("src")
             if dvdPosterURL == None:
                 dvdPosterURL = dvdPageElements.xpath('//div[@class="dvdcover"]//img')[0].get("data-src")
-            metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order=posterNum)
-            posterNum += 1
+            metadata.posters[dvdPosterURL] = Proxy.Preview(HTTP.Request(dvdPosterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
         except:
             Log("DVD Cover not found")
             pass
