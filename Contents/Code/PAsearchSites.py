@@ -88,8 +88,9 @@ import siteFuckingAwesome
 import siteToughLoveX
 import siteCumLouder
 import siteZTOD
+import siteClubFilly
 
-searchSites = [None] * 771
+searchSites = [None] * 772
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -861,6 +862,7 @@ searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour
 searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
 searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 searchSites[770] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
+searchSites[771] = ["ClubFilly","ClubFilly","http://www.clubfilly.com","http://www.clubfilly.com/scenefocus.php?vnum=V"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

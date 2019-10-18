@@ -1020,6 +1020,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 770:
                     results = PAsearchSites.siteZTOD.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## ClubFilly
+            ###############
+            if siteNum == 771:
+                if searchSiteID == 9999 or searchSiteID == 771:
+                    results = PAsearchSites.siteClubFilly.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1819,6 +1826,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 770:
             metadata = PAsearchSites.siteZTOD.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  ClubFilly                                               ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 771:
+            metadata = PAsearchSites.siteClubFilly.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
