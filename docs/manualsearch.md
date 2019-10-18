@@ -16,33 +16,32 @@ There are 3 available search/matching methods, as listed below:
 
 ## Enhanced Search
 #### Multi-search available.
-+ **Available search methods**
++ **Available search methods:**
   - **Title**
   - **Actor(s)**
-+ **Available match methods**
++ **Available match methods:**
 *These can be used in conjunction with available search methods and will increase the possibility of locating the correct scene. However, they cannot be used as standalone search terms. At least one of these can be utilized, depending on the site.*
   - **Date**
   - **SceneID** 
 
-+ **SceneID Match:** SceneID can be entered as a search term alongside other search terms (Title, Actor) to increase the possibility for a match, but cannot be entered as a standalone search term.
-  - Example: Though Kink has a full-fledged title/actor search function, you cannot enter just a SceneID and find results. However, if a SceneID is entered alongside a title/actor, it will increase the possibility of locating the correct scene
-+ **Date Match:** Date can be entered alongside other search terms to improve search results
++ **SceneID Match:** SceneID can be entered, before other search terms, to increase the possibility for a match. However, it cannot be entered as a standalone search term.
++ **Date Match:** Date can be entered, before other search terms, to improve search results. However, it cannot be entered as a standalone search term.
 
 ## Limited Search
 #### Limited-search available.
-+ Available search methods:
++ **Available search methods:**
   - **Title**
   - **Actor**
 
 ## Exact Match
 #### No search available.
-*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In some cases, you may add additional terms to your search. However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
+*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In some cases, you may add additional terms after the SceneID or Direct URL. However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
 + **SceneID**
   - Can add the the Date (before the SceneID)
-  - Can typically add a Title/Actor (after the SceneID).
+  - Can typically add a Title/Actor (after the SceneID)
 + **Direct URL**
   - Can add the the Date (before the URL)
-  - Adding any terms, such as Title/Actors, after the URL will cause issues with matching.
+  - Adding any terms, such as Title/Actors, after the URL will cause issues with matching
 
 ## Notes
 + **Date Add** - Some sites don't make release dates available, so the agent will strip the date from your filename/search term instead
