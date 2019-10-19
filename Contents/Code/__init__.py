@@ -1028,11 +1028,11 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteClubFilly.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
-            ## Insex
+            ## Intersec
             ###############
             if siteNum == 772:
                 if searchSiteID == 9999 or (searchSiteID >= 772 and searchSiteID <= 781):
-                    results = PAsearchSites.siteInsex.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.networkIntersec.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1844,11 +1844,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Insex                                                   ##
+        ##  Intersec                                                ##
         ##                                                          ##
         ##############################################################
         if siteID >= 772 and siteID <= 781:
-            metadata = PAsearchSites.siteInsex.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkIntersec.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

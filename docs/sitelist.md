@@ -299,6 +299,15 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SexBabesVR
   - SinsVR
   - StasyQVR
++ #### Intersec Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
+  - Hardtied
+  - Infernal Restraints
+  - Insex
+  - Pain Toy
+  - Real Time Bondage
+  - Sensual Pain
+  - Sexually Broken
+  - Topgrl
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - JulesJordan

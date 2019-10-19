@@ -12,20 +12,24 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         subSite = searchResult.xpath('./span[3]')[0].text_content().split('.com')[0].strip().title()
         Log(subSite)
         releaseDate = parse(searchResult.xpath('./span[3]')[0].text_content().split('-', 1)[1].strip()).strftime('%Y-%m-%d')
-        actress = searchResult.xpath('./span[2]')[0].text_content().strip()
-        Log(actress)
+        actresses = searchResult.xpath('./span[2]')[0].text_content().strip()
+        Log(actresses)
         scenePoster = searchResult.xpath('./a/img')[0].get('src').replace('/','+').replace('?','!')
         if subSite == PAsearchSites.getSearchSiteName(siteNum):
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            elif searchTitle in actress:
-                score = 80
+            elif searchTitle in actresses:
+                score = 70
+            else:
+                score = 50
         else:
             if searchDate:
-                score = 60 - Util.LevenshteinDistance(searchDate, releaseDate)
-            elif searchTitle in actress:
-                score = 60 - Util.LevenshteinDistance(searchTitle.lower(), actress.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + scenePoster, name = titleNoFormatting + " [Insex/"+subSite+"] " + releaseDate, score = score, lang = lang))
+                score = 70 - Util.LevenshteinDistance(searchDate, releaseDate)
+            elif searchTitle in actresses:
+                score = 50
+            else:
+                score = 30
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + scenePoster, name = titleNoFormatting + " [Intersec/"+subSite+"] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -40,7 +44,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Insex'
+    metadata.studio = 'Intersec Interactive'
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[@style="width:934px;font-size:14px;background-color:#333333;"][1]/div[1]')[0].text_content().strip()
@@ -49,7 +53,27 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements.xpath('//div[@style="width:934px;font-size:14px;background-color:#333333;"][1]/div[5]')[0].text_content().strip()
 
     #Tagline and Collection(s)
-    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+    taglineText = detailsPageElements.xpath('//div[@class="content"]/div[6]/a/img')[0].get('src')
+    if "sexuallybroken" in taglineText:
+        tagline = "Sexually Broken"
+    elif "infernalrestraints" in taglineText:
+        tagline = "Infernal Restraints"
+    elif "realtimebondage" in taglineText:
+        tagline = "Real Time Bondage"
+    elif "hardtied" in taglineText:
+        tagline = "Hardtied"
+    elif "topgrl" in taglineText:
+        tagline = "Topgrl"
+    elif "sensualpain" in taglineText:
+        tagline = "Sensual Pain"
+    elif "paintoy" in taglineText:
+        tagline = "Pain Toy"
+    elif "renderfiend" in taglineText:
+        tagline = "Renderfiend"
+    elif "hotelhostages" in taglineText:
+        tagline = "Hotel Hostages"
+    else:
+        tagline = "Intersex"
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -79,14 +103,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
-
-    # Video trailer background image
-    try:
-        twitterBG = detailsPageElements.xpath('//div[@class="video-js vjs-paused my-video-dimensions vjs-controls-enabled vjs-workinghover vjs-v7 vjs-user-active"]')[0].get('poster')
-        Log(twitterBG)
-        art.append(twitterBG)
-    except:
-        pass
 
     # Scene Poster
     scenePoster = str(metadata.id).split("|")[2].replace('+', '/').replace('!', '?')
