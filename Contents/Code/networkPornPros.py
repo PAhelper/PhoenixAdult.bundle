@@ -16,7 +16,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         response = urllib.urlopen(url)
         htmlstring = response.read()
         searchResult = fromstring(htmlstring)
-        
+
     titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
     releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
@@ -44,7 +44,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
-    
+
     # Summary
     try:
         metadata.summary = detailsPageElements.xpath('//div[contains(@id, "description")]')[0].text_content().strip()
@@ -53,7 +53,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     try:
         if siteName.lower() == "Cum4K".lower():
-        
+
             summaryurl = "https://cum4k.tube/" + temp
             Log(summaryurl)
             summaryPageElements = HTML.ElementFromURL(summaryurl)
@@ -111,6 +111,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "Cum4K".lower():
         for genreName in ['Creampie']:
             movieGenres.addGenre(genreName)
+    elif siteName.lower() == "GirlCum".lower():
+        for genreName in ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms']:
+            movieGenres.addGenre(genreName)
     # Based on number of actors
     if len(actors) == 3:
         movieGenres.addGenre('Threesome')
@@ -137,12 +140,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-	
+
     #Extra Posters
     import random
     art = []
     match = 0
-    
+
     if siteName.lower() == "Holed".lower():
         fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, 0, siteName)
     elif siteName.lower() == "SpyFam".lower():
@@ -153,40 +156,40 @@ def update(metadata,siteID,movieGenres,movieActors):
         fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title, 0, siteName)
     elif siteName.lower() == "Tiny4K".lower():
         fanSite = PAextras.getFanArt("Tiny4KFan.com", art, actors, actorName, metadata.title, 0, siteName)
-        
+
     for site in ["HQSluts.com", "ImagePost.com", "PornGirlsErotica.com", "PinkWorld.com", "CoedCherry.com/pics"]:
         try:
             match = fanSite[2]
         except:
             pass
-        if match is 1:	
+        if match is 1:
             break
         fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match, siteName)
-        
+
     try:
         match = fanSite[2]
     except:
         pass
     summary = fanSite[1]
-    
+
     try:
         if len(summary) > 0:
-            metadata.summary = summary 
+            metadata.summary = summary
     except:
         metadata.summary = summary
-    
+
     if match is 1:
         # Return, first, last and randóm selection of images
-        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
-        sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)     
+        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.
+        sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)
         art = sample
         Log("Selecting first 5, last and random 4 images from set")
 
         j = 1
-											  
+
         for posterUrl in art:
             Log("Trying next Image")
-            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
+            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
             #Download image file for analysis
                 try:
                     hdr = {
