@@ -309,7 +309,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sexually Broken
   - Topgrl
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - GirlGirl
   - JulesJordan
   - ManuelFerrara
   - SpermSwallowers

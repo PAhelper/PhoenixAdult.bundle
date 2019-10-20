@@ -532,6 +532,13 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
+            ## GirlGirl
+            ###############
+            if siteNum == 782:
+                if searchSiteID == 9999 or searchSiteID == 782:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
             ## DDFNetwork
             ###############
             if siteNum == 433:
@@ -1280,7 +1287,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Jules Jordan                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID == 432 or (siteID >= 522 and siteID <= 524):
+        if siteID == 432 or (siteID >= 522 and siteID <= 524) or siteID == 782:
             metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################

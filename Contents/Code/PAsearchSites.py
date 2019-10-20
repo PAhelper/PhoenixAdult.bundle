@@ -91,7 +91,7 @@ import siteZTOD
 import siteClubFilly
 import networkIntersec
 
-searchSites = [None] * 782
+searchSites = [None] * 783
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -874,6 +874,7 @@ searchSites[778] = ["Sensual Pain","Sensualpain","https://www.insexondemand.com"
 searchSites[779] = ["Paintoy","Paintoy","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
 searchSites[780] = ["Renderfiend","Renderfiend","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
 searchSites[781] = ["Hotel Hostages","Hotelhostages","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[782] = ["GirlGirl","GirlGirl","https://www.girlgirl.com","https://www.girlgirl.com/trial/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
