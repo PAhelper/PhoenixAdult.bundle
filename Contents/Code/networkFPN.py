@@ -9,7 +9,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//a[@class="title"]')[0].text_content().strip()
         Log("Result Title: " + titleNoFormatting)
         curID = PAsearchSites.getSearchSearchURL(siteNum) + titleNoFormatting.lower().replace(' ','+')
-        curID = curID.replace('/','_').replace('?','!')
+        curID = curID.replace('!','').replace('/','_').replace('?','!')
         Log("ID: " + curID)
         releaseDate = parse(searchResult.xpath('.//div[@class="info-column video-data"]/span[last()]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
