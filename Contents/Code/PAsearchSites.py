@@ -89,8 +89,9 @@ import siteToughLoveX
 import siteCumLouder
 import siteZTOD
 import siteClubFilly
+import networkCherryPimps
 
-searchSites = [None] * 772
+searchSites = [None] * 782
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -824,7 +825,7 @@ searchSites[729] = ["ArchAngel","ArchAngel","https://www.archangelvideo.com","ht
 searchSites[730] = ["We Are Hairy","We Are Hairy","https://www.wearehairy.com","https://www.wearehairy.com/search/?query="]
 searchSites[731] = ["Love Her Feet","Love Her Feet","https://www.loveherfeet.com","https://www.loveherfeet.com/tour/search.php?query="]
 searchSites[732] = ["MomPOV","MomPOV","http://www.mompov.com","http://www.mompov.com/tour/?s="]
-searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/scene/"]
+searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/search?q="]
 searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?query="]
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
@@ -863,6 +864,16 @@ searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com",
 searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 searchSites[770] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
 searchSites[771] = ["ClubFilly","ClubFilly","http://www.clubfilly.com","http://www.clubfilly.com/scenefocus.php?vnum=V"]
+searchSites[772] = ["Cherry Pimps","Cherry Pimps","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[773] = ["Wild On Cam","Wild On Cam","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[774] = ["Cherry Spot","Cherry Spot","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[775] = ["Britney Amber","Britney Amber","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[776] = ["Confessions","Confessions.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[777] = ["Cucked","Cucked.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[778] = ["Drilled","Drilled.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[779] = ["BCM","BCM.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[780] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[781] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1082,6 +1093,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wfbg ', 'WeFuckBlackGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^woc ', 'WildOnCam ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
