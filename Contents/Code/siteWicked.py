@@ -1,0 +1,158 @@
+import PAsearchSites
+import PAgenres
+import PAactors
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
+        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
+        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        Log(titleNoFormatting+"/"+curID+"/"+releaseDate+"/"+score)
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Wicked/Scene] " + releaseDate, score = score, lang = lang))
+
+    # Full DVD match added to results as an option
+    dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+    curID = searchResults.xpath('//a[@class="frontCoverImg"]')[0].get('href').replace('/','_').replace('?','!')
+    releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+    if searchDate:
+        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+    else:
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), dvdTitle.lower())
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = dvdTitle + " [Wicked/Full Movie] " + releaseDate, score = score, lang = lang))
+
+    return results
+
+def update(metadata,siteID,movieGenres,movieActors):
+    Log('******UPDATE CALLED*******')
+
+    urlBase = PAsearchSites.getSearchBaseURL(siteID)
+    url = urlBase + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    Log("url: " + url)
+    detailsPageElements = HTML.ElementFromURL(url)
+    art = []
+    metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
+
+    # Studio
+    metadata.studio = 'Wicked Pictures'
+    Log("Studio: " + metadata.studio)
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1//span')[0].text_content().strip()
+    Log("Title: " + metadata.title)
+
+    # Release Date
+    date = detailsPageElements.xpath('//li[@class="updatedOn"] | //li[@class="updatedDate"]')[0].text_content().replace("Updated","").strip()
+    Log("date: " + date)
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date
+        metadata.year = metadata.originally_available_at.year
+    # Scene update
+    if "/video/" in url:
+
+        # Genres
+        genres = detailsPageElements.xpath('//div[contains(@class,"sceneColCategories")]/a')
+        if len(genres) > 0:
+            for genreLink in genres:
+                genreName = genreLink.text_content().strip().lower()
+                movieGenres.addGenre(genreName)
+
+        # Actors
+        actors = detailsPageElements.xpath('//div[contains(@class,"sceneColActors")]//a')
+        if len(actors) > 0:
+            for actorLink in actors:
+                actorName = actorLink.text_content().strip()
+                try:
+                    actorPageURL = urlBase + actorLink.get("href")
+                    actorPage = HTML.ElementFromURL(actorPageURL)
+                    actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"]')[0].get("src")
+                    movieActors.addActor(actorName,actorPhotoURL)
+                except:
+                    actorPhotoURL = ""
+                    movieActors.addActor(actorName,actorPhotoURL)
+                Log("actor: " + actorName + " PhotoURL" + actorPhotoURL)
+
+        # Background
+        script_text = detailsPageElements.xpath('//script')[7].text_content()
+
+        # background
+        alpha = script_text.find('picPreview":"')
+        omega = script_text.find('"', alpha + 13)
+        previewBG = script_text[alpha + 13:omega].replace("\/","/")
+        Log("preview BG: " + previewBG)
+        art.append(previewBG)
+
+        # Get dvd page for some info
+        dvdPageURL = urlBase + detailsPageElements.xpath('//div[@class="content"]//a[contains(@class,"dvdLink")]')[0]
+        Log("dvdPageURL: " dvdPageURL)
+        dvdPageElements = HTML.ElementFromURL(dvdPageURL)
+
+        # Tagline and Collection(s)
+        tagline = dvdPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+        Log("dvdtitle: " + tagline)
+
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
+        Log("Summary: " + metadata.summary)
+
+        # Director
+        director = metadata.directors.new()
+        try:
+            directors = detailsPageElements.xpath('//ul[@class="directedBy"]')
+            for dirname in directors:
+                director.name = dirname.text_content().strip()
+                Log("Director: " + director.name)
+        except:
+            pass
+
+        # DVD cover
+        dvdCover = dvdPageElements.xpath('//img[@class="dvdCover"]')[0].get('src')
+        art.append(dvdCover)
+        Log("dvdCover URL: " + dvdCover)
+
+        # Extra photos for the completist
+        photoPageURL = urlBase + detailsPageElements.xpath('//div[contains(@class,"buttonHolder")]//a').get('href')
+        photoPageElements = HTML.ElementFromURL(photoPageURL)
+        ## good 2:3 poster picture
+        poster = photoPageElements.xpath('//div[@class="previewImage"]//img').get('src')
+        Log("poss.poster: " + poster)
+        art.append(poster)
+        ## more Pictures
+        extraPix = photoPageElements.xpath('//li[@class="preview"]//a[@class="imgLink pgUnlocked"]')
+        for picture in extraPix:
+            art.append(picture)
+            Log("extraPicture: " + picture)
+
+    j = 1
+    Log("Artwork found: " + str(len(art)))
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+            #Download image file for analysis
+            try:
+                img_file = urllib.urlopen(posterUrl)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                #Add the image proxy items to the collection
+                if width > 1 or height > width:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                j = j + 1
+            except:
+                pass
+
+    return metadata

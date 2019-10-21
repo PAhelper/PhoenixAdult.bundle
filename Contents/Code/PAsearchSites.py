@@ -90,8 +90,9 @@ import siteCumLouder
 import siteZTOD
 import siteClubFilly
 import networkCherryPimps
+import siteWicked
 
-searchSites = [None] * 782
+searchSites = [None] * 783
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -874,6 +875,7 @@ searchSites[778] = ["Drilled","Drilled.XXX","https://www.pimp.xxx","https://pimp
 searchSites[779] = ["BCM","BCM.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
 searchSites[780] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
 searchSites[781] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[782] = ["Wicked","Wicked Pictures","https://www.wicked.com","https://wicked.com/en/movie/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1093,6 +1095,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wfbg ', 'WeFuckBlackGirls ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^wkp ', 'Wicked ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^woc ', 'WildOnCam ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
