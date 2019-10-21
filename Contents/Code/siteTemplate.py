@@ -15,14 +15,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/"+subSite+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -33,12 +33,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'Studio Name'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//div[@class="title"]')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="summary"]/p')[0].text_content().strip()
 
-    #Tagline and Collection(s)
+    # Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
@@ -100,12 +100,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     photos = detailsPageElements.xpath('//img[contains(@class, "update_thumbs")]')
     if len(photos) > 0:
         for photoLink in photos:
-            photo = PAsearchSites.getSearchBaseURL(siteID) + photoLink.get('poster')
+            photo = photoLink.get('poster')
             art.append(photo)
 
     # Scene photos page
     try:
-        photoPageUrl = PAsearchSites.getSearchBaseURL(siteID)+detailsPageElements.xpath('//a[@class="photo_page"]')[0].get('href')
+        photoPageUrl = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="photo_page"]')[0].get('href')
         photoPage = HTML.ElementFromURL(photoPageUrl)
         unlockedPhotos = photoPage.xpath('//a[@class="imgLink"]')
         for unlockedPhoto in unlockedPhotos:

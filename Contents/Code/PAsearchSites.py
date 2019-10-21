@@ -89,8 +89,9 @@ import siteToughLoveX
 import siteCumLouder
 import siteZTOD
 import siteClubFilly
+import networkIntersec
 
-searchSites = [None] * 772
+searchSites = [None] * 783
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -863,6 +864,17 @@ searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com",
 searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 searchSites[770] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
 searchSites[771] = ["ClubFilly","ClubFilly","http://www.clubfilly.com","http://www.clubfilly.com/scenefocus.php?vnum=V"]
+searchSites[772] = ["Insex","Insex","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[773] = ["Sexually Broken","Sexuallybroken","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[774] = ["Infernal Restraints","Infernalrestraints","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[775] = ["Real Time Bondage","Realtimebondage","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[776] = ["Hardtied","Hardtied","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[777] = ["Topgrl","Topgrl","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[778] = ["Sensual Pain","Sensualpain","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[779] = ["Paintoy","Paintoy","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[780] = ["Renderfiend","Renderfiend","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[781] = ["Hotel Hostages","Hotelhostages","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[782] = ["GirlGirl","GirlGirl","https://www.girlgirl.com","https://www.girlgirl.com/trial/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
