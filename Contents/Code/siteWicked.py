@@ -14,13 +14,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        Log(titleNoFormatting+"/"+curID+"/"+releaseDate+"/"+score)
+        Log(titleNoFormatting+"/"+curID+"/"+releaseDate+"/"+str(score))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Wicked/Scene] " + releaseDate, score = score, lang = lang))
 
     # Full DVD match added to results as an option
     dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
-    curID = searchResults.xpath('//a[@class="frontCoverImg"]')[0].get('href').replace('/','_').replace('?','!')
-    releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+    curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
+    releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().replace("Updated","").strip()).strftime('%Y-%m-%d')
     if searchDate:
         score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
     else:
@@ -33,7 +33,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     urlBase = PAsearchSites.getSearchBaseURL(siteID)
-    url = urlBase + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    if 'http' not in url:
+        url = urlBase + url
     Log("url: " + url)
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
@@ -50,11 +52,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log("Title: " + metadata.title)
 
     # Release Date
-    date = detailsPageElements.xpath('//li[@class="updatedOn"] | //li[@class="updatedDate"]')[0].text_content().replace("Updated","").strip()
+    date = detailsPageElements.xpath('//li[@class="updatedOn"] | //li[@class="updatedDate"]')[0].text_content().replace("Updated","").replace("|","").strip()
     Log("date: " + date)
     if len(date) > 0:
         date_object = parse(date)
-        metadata.originally_available_at = date
+        metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
     # Scene update
     if "/video/" in url:
@@ -79,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 except:
                     actorPhotoURL = ""
                     movieActors.addActor(actorName,actorPhotoURL)
-                Log("actor: " + actorName + " PhotoURL" + actorPhotoURL)
+                Log("actor: " + actorName + ", PhotoURL: " + actorPhotoURL)
 
         # Background
         script_text = detailsPageElements.xpath('//script')[7].text_content()
@@ -89,11 +91,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         omega = script_text.find('"', alpha + 13)
         previewBG = script_text[alpha + 13:omega].replace("\/","/")
         Log("preview BG: " + previewBG)
-        art.append(previewBG)
+        metadata.art[previewBG] = Proxy.Preview(HTTP.Request(previewBG, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        # art.append(previewBG)
 
         # Get dvd page for some info
-        dvdPageURL = urlBase + detailsPageElements.xpath('//div[@class="content"]//a[contains(@class,"dvdLink")]')[0]
-        Log("dvdPageURL: " dvdPageURL)
+        dvdPageURL = urlBase + detailsPageElements.xpath('//div[@class="content"]//a[contains(@class,"dvdLink")]')[0].get("href")
+        Log("dvdPageURL: " + dvdPageURL)
         dvdPageElements = HTML.ElementFromURL(dvdPageURL)
 
         # Tagline and Collection(s)
@@ -103,13 +106,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("dvdtitle: " + tagline)
 
         # Summary
-        metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
+        metadata.summary = dvdPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
         Log("Summary: " + metadata.summary)
 
         # Director
         director = metadata.directors.new()
         try:
-            directors = detailsPageElements.xpath('//ul[@class="directedBy"]')
+            directors = dvdPageElements.xpath('//ul[@class="directedBy"]')
             for dirname in directors:
                 director.name = dirname.text_content().strip()
                 Log("Director: " + director.name)
@@ -122,19 +125,21 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("dvdCover URL: " + dvdCover)
 
         # Extra photos for the completist
-        photoPageURL = urlBase + detailsPageElements.xpath('//div[contains(@class,"buttonHolder")]//a').get('href')
+        photoPageURL = urlBase + detailsPageElements.xpath('//div[contains(@class,"picturesItem")]//a')[0].get('href').split("?")[0]
         photoPageElements = HTML.ElementFromURL(photoPageURL)
         ## good 2:3 poster picture
-        poster = photoPageElements.xpath('//div[@class="previewImage"]//img').get('src')
+        poster = photoPageElements.xpath('//div[@class="previewImage"]//img')[0].get('src')
         Log("poss.poster: " + poster)
-        art.append(poster)
+        metadata.posters[poster] = Proxy.Preview(HTTP.Request(poster, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        # art.append(poster)
         ## more Pictures
         extraPix = photoPageElements.xpath('//li[@class="preview"]//a[@class="imgLink pgUnlocked"]')
         for picture in extraPix:
-            art.append(picture)
-            Log("extraPicture: " + picture)
+            pictureURL = picture.get("href")
+            Log("extraPicture: " + pictureURL)
+            art.append(pictureURL)
 
-    j = 1
+    j = 2
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
         if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):

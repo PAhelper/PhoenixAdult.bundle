@@ -1863,7 +1863,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 782:
-            metadata = PAsearchSites.networkCherryPimps.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.siteWicked.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
