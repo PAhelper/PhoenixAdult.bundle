@@ -7,7 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="update_details"]'):
-        titleNoFormatting = searchResult.xpath('.//a[2]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('./a[last()]')[0].text_content().strip()
         releaseDate = searchResult.xpath('.//div[@class="cell update_date"]')[0].text_content().strip()
         if releaseDate == '':
             try:
@@ -16,44 +16,53 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             except:
                 pass
         releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
-        Log("releaseDate: "+releaseDate)
-        curID = searchResult.xpath('.//a[2]')[0].get('href').replace('/','_').replace('?','!')
+        Log("releaseDate: " + releaseDate)
+        curID = searchResult.xpath('./a[last()]')[0].get('href').replace('/','_').replace('?','!')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate , score = score, lang = lang))
+
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Jules Jordan'
+
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('/vids.html','_vids.html')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
-    metadata.summary = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content().strip()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
+
+    # Studio
+    metadata.studio = 'Jules Jordan'
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content().strip()
+
+    # Summary
+    metadata.summary = detailsPageElements.xpath('//span[@class="update_description"]')[0].text_content().strip()
+
+    # Tagline and Collection(s)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     tagline = tagline.strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
     try:
         dvdName = detailsPageElements.xpath('//span[@class="update_dvds"]')[0].text_content().replace('Movie:','').strip()
         metadata.collections.add(dvdName)
     except:
         pass
-    metadata.title = detailsPageElements.xpath('//span[@class="title_bar_hilite"]')[0].text_content().strip()
 
     # Genres
-    movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//span[@class="update_tags"]/a')
-
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip('\n').lower()
             movieGenres.addGenre(genreName)
-
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="cell update_date"]')[0].text_content().strip()
@@ -69,20 +78,21 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
+    if PAsearchSites.getSearchSiteName(siteID) == "GirlGirl":
+        actors = detailsPageElements.xpath('//div[@class="item"]/span/div/a')
+    else:
+        actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0_1x")
-            if (str(actorPhotoURL) == 'None' ) :
-                actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0")
-            else:
+            try:
+                actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb stdimage thumbs target"]')[0].get("src0_3x")
+                if 'http' not in actorPhotoURL:
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            except:
                 actorPhotoURL = ''
-            if (str(actorPhotoURL) != 'None' and 'http' not in actorPhotoURL):
-            	actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters

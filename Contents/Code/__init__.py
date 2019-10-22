@@ -532,6 +532,13 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
+            ## GirlGirl
+            ###############
+            if siteNum == 782:
+                if searchSiteID == 9999 or searchSiteID == 782:
+                    results = PAsearchSites.siteJulesJordan.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
             ## DDFNetwork
             ###############
             if siteNum == 433:
@@ -1028,10 +1035,17 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteClubFilly.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
-            ## Cherry Pimps
+            ## Intersec
             ###############
             if siteNum == 772:
                 if searchSiteID == 9999 or (searchSiteID >= 772 and searchSiteID <= 781):
+                    results = PAsearchSites.networkIntersec.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
+            ###############
+            ## Cherry Pimps
+            ###############
+            if siteNum == 783:
+                if searchSiteID == 9999 or (searchSiteID >= 783 and searchSiteID <= 792):
                     results = PAsearchSites.networkCherryPimps.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             siteNum += 1
@@ -1280,7 +1294,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Jules Jordan                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID == 432 or (siteID >= 522 and siteID <= 524):
+        if siteID == 432 or (siteID >= 522 and siteID <= 524) or siteID == 782:
             metadata = PAsearchSites.siteJulesJordan.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1844,12 +1858,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
+        ##  Intersec                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 772 and siteID <= 781:
+            metadata = PAsearchSites.networkIntersec.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
         ##  Cherry Pimps                                            ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 772 and siteID <= 781):
+        if (siteID >= 783 and siteID <= 792):
             metadata = PAsearchSites.networkCherryPimps.update(metadata, siteID, movieGenres, movieActors)
-            
 
         ##############################################################
         ## Cleanup Genres and Add
