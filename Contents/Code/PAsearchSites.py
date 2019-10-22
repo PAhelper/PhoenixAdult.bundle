@@ -89,10 +89,11 @@ import siteToughLoveX
 import siteCumLouder
 import siteZTOD
 import siteClubFilly
+import networkIntersec
 import networkCherryPimps
 import siteWicked
 
-searchSites = [None] * 783
+searchSites = [None] * 794
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -865,17 +866,29 @@ searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com",
 searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 searchSites[770] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
 searchSites[771] = ["ClubFilly","ClubFilly","http://www.clubfilly.com","http://www.clubfilly.com/scenefocus.php?vnum=V"]
-searchSites[772] = ["Cherry Pimps","Cherry Pimps","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
-searchSites[773] = ["Wild On Cam","Wild On Cam","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
-searchSites[774] = ["Cherry Spot","Cherry Spot","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
-searchSites[775] = ["Britney Amber","Britney Amber","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
-searchSites[776] = ["Confessions","Confessions.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[777] = ["Cucked","Cucked.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[778] = ["Drilled","Drilled.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[779] = ["BCM","BCM.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[780] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[781] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
-searchSites[782] = ["Wicked","Wicked Pictures","https://www.wicked.com","https://wicked.com/en/movie/"]
+searchSites[772] = ["Insex","Insex","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[773] = ["Sexually Broken","Sexuallybroken","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[774] = ["Infernal Restraints","Infernalrestraints","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[775] = ["Real Time Bondage","Realtimebondage","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[776] = ["Hardtied","Hardtied","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[777] = ["Topgrl","Topgrl","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[778] = ["Sensual Pain","Sensualpain","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[779] = ["Paintoy","Paintoy","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[780] = ["Renderfiend","Renderfiend","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[781] = ["Hotel Hostages","Hotelhostages","https://www.insexondemand.com","https://www.insexondemand.com/iod/home.php?s="]
+searchSites[782] = ["GirlGirl","GirlGirl","https://www.girlgirl.com","https://www.girlgirl.com/trial/search.php?query="]
+searchSites[783] = ["Cherry Pimps","Cherry Pimps","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[784] = ["Wild On Cam","Wild On Cam","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[785] = ["Cherry Spot","Cherry Spot","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[786] = ["Britney Amber","Britney Amber","https://www.cherrypimps.com","https://cherrypimps.com/search.php?query="]
+searchSites[787] = ["Confessions","Confessions.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[788] = ["Cucked","Cucked.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[789] = ["Drilled","Drilled.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[790] = ["BCM","BCM.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[791] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[792] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
+searchSites[793] = ["Wicked","Wicked Pictures","https://www.wicked.com","https://wicked.com/en/movie/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

@@ -29,7 +29,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Title Search available for some scenes**
-  ##### Note: SceneID works better e.g. "Babes [4393845](https://www.babes.com/scene/4393845/strip-tease-studying)" vs "Babes strip tease studying"
   - Babes
   - Babes Unleashed
   - Black is Better
@@ -162,7 +161,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Family.XXX
   - Petite.XXX
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
-+ #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **DVDs not supported**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Czech Amateurs
@@ -221,7 +220,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sandy's Fantasies
   - Sex Video Casting
 + #### Deeper | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** (Only standalone scenes and full movies supported)
++ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **Scenes from Movies not supported**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
   - BlackMeatWhiteFeet
@@ -311,8 +310,18 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SexBabesVR
   - SinsVR
   - StasyQVR
++ #### Intersec Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
+  - Hardtied
+  - Infernal Restraints
+  - Insex
+  - Pain Toy
+  - Real Time Bondage
+  - Sensual Pain
+  - Sexually Broken
+  - Topgrl
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### JulesJordan network | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - GirlGirl
   - JulesJordan
   - ManuelFerrara
   - SpermSwallowers
