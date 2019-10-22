@@ -83,16 +83,14 @@ def update(metadata,siteID,movieGenres,movieActors):
                     movieActors.addActor(actorName,actorPhotoURL)
                 Log("actor: " + actorName + ", PhotoURL: " + actorPhotoURL)
 
-        # Background
         script_text = detailsPageElements.xpath('//script')[7].text_content()
 
-        # background
+        # Background
         alpha = script_text.find('picPreview":"')
         omega = script_text.find('"', alpha + 13)
         previewBG = script_text[alpha + 13:omega].replace("\/","/")
         Log("preview BG: " + previewBG)
         metadata.art[previewBG] = Proxy.Preview(HTTP.Request(previewBG, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-        # art.append(previewBG)
 
         # Get dvd page for some info
         dvdPageURL = urlBase + detailsPageElements.xpath('//div[@class="content"]//a[contains(@class,"dvdLink")]')[0].get("href")
@@ -127,11 +125,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         # Extra photos for the completist
         photoPageURL = urlBase + detailsPageElements.xpath('//div[contains(@class,"picturesItem")]//a')[0].get('href').split("?")[0]
         photoPageElements = HTML.ElementFromURL(photoPageURL)
+
         ## good 2:3 poster picture
         poster = photoPageElements.xpath('//div[@class="previewImage"]//img')[0].get('src')
         Log("poss.poster: " + poster)
         metadata.posters[poster] = Proxy.Preview(HTTP.Request(poster, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-        # art.append(poster)
+
         ## more Pictures
         extraPix = photoPageElements.xpath('//li[@class="preview"]//a[@class="imgLink pgUnlocked"]')
         for picture in extraPix:
@@ -139,6 +138,65 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("extraPicture: " + pictureURL)
             art.append(pictureURL)
 
+    ## Full DVD update
+    else:
+        Log("Fetching Full DVD metadata")
+
+        # Genres
+        genres = detailsPageElements.xpath('//p[@class="dvdCol"]/a')
+        if len(genres) > 0:
+            for genreLink in genres:
+                genreName = genreLink.text_content().strip().lower()
+                movieGenres.addGenre(genreName)
+
+        # Actors
+        actors = detailsPageElements.xpath('//div[@class="actorCarousel"]//a')
+        Log("Actors#: " + str(len(actors)))
+        if len(actors) > 0:
+            for actorLink in actors:
+                actorName = actorLink.xpath('.//span')[0].text_content().strip()
+                try:
+                    actorPhotoURL = actorLink.xpath('.//img')[0].get("src")
+                    movieActors.addActor(actorName,actorPhotoURL)
+                except:
+                    actorPhotoURL = ""
+                    movieActors.addActor(actorName,actorPhotoURL)
+                Log("actor: " + actorName + ", PhotoURL: " + actorPhotoURL)
+
+        # Tagline/collections
+        tagline = 'Wicked Pictures'
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+        Log("dvdtitle: " + tagline)
+
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
+        Log("Summary: " + metadata.summary)
+
+        # Director
+        director = metadata.directors.new()
+        try:
+            directors = detailsPageElements.xpath('//ul[@class="directedBy"]')
+            for dirname in directors:
+                director.name = dirname.text_content().strip()
+                Log("Director: " + director.name)
+        except:
+            pass
+
+        # Backgrounds
+        scenePreviews = detailsPageElements.xpath('//div[@class="sceneContainer"]//img[contains(@id,"clip")]')
+        for scenePreview in scenePreviews:
+            previewIMG = scenePreview.get('data-original').split('?')[0]
+            Log("scene preview IMG: " + previewIMG)
+            art.append(previewIMG)
+
+        # DVD cover
+        dvdCover = detailsPageElements.xpath('//img[@class="dvdCover"]')[0].get('src')
+        metadata.posters[dvdCover] = Proxy.Preview(HTTP.Request(dvdCover, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        Log("dvdCover URL: " + dvdCover)
+
+
+    # Extra Picture processing
     j = 2
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
