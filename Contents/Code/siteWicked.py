@@ -5,9 +5,15 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchString = searchTitle.replace(" ","-")
+    Log("searchString: " + searchString)
+    if "/" not in searchString:
+        i = searchString.rfind("-")
+        searchString = searchString[:i] + "/" + searchString[i+1:]
+        Log("searchString formatted: " + searchString)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
-        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip().title().replace("Xxx","XXX")
         curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
@@ -18,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Wicked/Scene] " + releaseDate, score = score, lang = lang))
 
     # Full DVD match added to results as an option
-    dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+    dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip().title().replace("Xxx","XXX")
     curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
     releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().replace("Updated","").strip()).strftime('%Y-%m-%d')
     if searchDate:
@@ -48,7 +54,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log("Studio: " + metadata.studio)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1//span')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1//span')[0].text_content().strip().title().replace("Xxx","XXX")
     Log("Title: " + metadata.title)
 
     # Release Date
@@ -98,14 +104,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         dvdPageElements = HTML.ElementFromURL(dvdPageURL)
 
         # Tagline and Collection(s)
-        tagline = dvdPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+        tagline = dvdPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip().title().replace("Xxx","XXX")
         metadata.tagline = tagline
         metadata.collections.add(tagline)
         Log("dvdtitle: " + tagline)
 
         # Summary
-        metadata.summary = dvdPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
-        Log("Summary: " + metadata.summary)
+        try:
+            metadata.summary = dvdPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
+            Log("Summary: " + metadata.summary)
+        except:
+            Log("Summary fetch failed")
 
         # Director
         director = metadata.directors.new()
@@ -170,8 +179,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("dvdtitle: " + tagline)
 
         # Summary
-        metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
-        Log("Summary: " + metadata.summary)
+        try:
+            metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
+            Log("Summary: " + metadata.summary)
+        except:
+            Log("Summary fetch failed")
 
         # Director
         director = metadata.directors.new()
