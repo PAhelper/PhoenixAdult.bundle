@@ -364,10 +364,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MetArtX
   - SexArt
   - Viv Thomas
-+ #### MileHighNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
-  - CherryPop
++ #### MileHighNetwork | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **Movies Not Supported**
   - DoghouseDigital
-  - LesbianOlderYounger
   - RealityJunkies
   - SweetheartVideo
   - SweetSinner
