@@ -131,6 +131,8 @@ class PhoenixActors:
                 newActor = "Riley Jensen"
             if newActor == "Sara Luv":
                 newActor = "Sara Luvv"
+            if newActor == "Dylann Vox" or newActor == "Dylan Vox":
+                newActor = "Skylar Vox"
             if newActor == "Sedona" or newActor == "Stefanie Renee":
                 newActor = "Stephanie Renee"
             if newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
@@ -141,7 +143,8 @@ class PhoenixActors:
                 newActor = "Sybil A"
             if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
                 newActor = "Eva Elfie"
-
+            if newActor == "Veronica Vega":
+                newActor = "Veronica Valentine"
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury":
                 if newActor == "Abbie":

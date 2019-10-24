@@ -3,22 +3,22 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchString = searchTitle.replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
-    for searchResult in searchResults.xpath('//div[contains(@class,"compact")]//article'):
-        titleNoFormatting = searchResult.xpath('.//a//h3')[0].text_content()
+    for searchResult in searchResults.xpath('//div[@class="vrVideo"]'):
+        titleNoFormatting = searchResult.xpath('.//h3//a')[0].text_content()
         Log("Result Title: " + titleNoFormatting)
         curID = searchResult.xpath('.//a')[0].get('href')
         curID = curID.replace('/','_').replace('?','!')
         Log("curID: " + curID)
-        releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        Log("releaseDate: " + releaseDate.strip())
+        # releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        # Log("releaseDate: " + releaseDate.strip())
 
-        searchString = searchString.replace("+"," ")
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        # if searchDate:
+        #     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        # else:
+        #     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] ", score = score, lang = lang))
 
     return results
 def update(metadata,siteID,movieGenres,movieActors):
@@ -26,7 +26,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[contains(@class,"title")]//h2')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//div[@class="videoDetails"]//h4')[0].text_content().strip()
 
     # Studio/Tagline/Collection
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
@@ -35,17 +35,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.studio)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="desc"]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[@class="videoDetails"]//p')[0].text_content().strip()
 
     # Date
-    date = detailsPageElements.xpath('//p[@class="meta"]//span')[0].text_content().strip()
+    date = detailsPageElements.xpath('//ul[@class="videoInfo"]//li[3]')[0].text_content().replace("Uploaded:","").strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Actors / possible posters
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//p[@class="meta"]//span[3]//a')
+    actors = detailsPageElements.xpath('//ul[@class="videoInfo"]//li[1]//a')
     if len(actors) > 0:
         posterNum = 2
         for actorLink in actors:
@@ -53,7 +53,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
             Log(actorName + ": " + actorPageURL)
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="actor"]//img')[0].get("src")
+            actorPhotoURL = actorPage.xpath('//div[@class="profilePic"]//img')[0].get("src")
             Log('actorPhotoURL: ' + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
             # Actor profile pic as possible poster
@@ -62,7 +62,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('.//p[@class="meta"]//span[@class="clear"]//a')
+    genres = detailsPageElements.xpath('//ul[@class="videoInfo"]//li[4]//a')
     if len(genres) > 0:
         for genre in genres:
             movieGenres.addGenre(genre.text_content())
