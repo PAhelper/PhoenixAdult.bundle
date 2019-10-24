@@ -1048,6 +1048,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 783 and searchSiteID <= 792):
                     results = PAsearchSites.networkCherryPimps.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Wicked
+            ###############
+            if siteNum == 793:
+                if searchSiteID == 9999 or searchSiteID == 793:
+                    results = PAsearchSites.siteWicked.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1871,6 +1878,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 783 and siteID <= 792):
             metadata = PAsearchSites.networkCherryPimps.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Wicked                                                  ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 793:
+            metadata = PAsearchSites.siteWicked.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
