@@ -284,7 +284,7 @@ def getRename(site, actor, title, date):
         page = requests.get("https://www.x-art.com/videos/recent/all/")
         detailsPageElements = html.fromstring(page.content)
         i = 0
-        for releaseDate in detailsPageElements.xpath('//div[@class="item-header"]//h2[not(contains(text(),"HD Video"))]/text()'):
+        for releaseDate in detailsPageElements.xpath('//div[@class="item-header"]//h2[not(contains(text(),"Video"))]/text()'):
             title = detailsPageElements.xpath('//div[@class="item-header"]/h1/text()')[i]
             #Xart date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
