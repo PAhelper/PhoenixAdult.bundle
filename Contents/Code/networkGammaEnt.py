@@ -104,6 +104,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         resultsecond = []
 
         #searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
+        encodedTitle = encodedTitle.replace("%27", "").replace("%3F", "").replace("%2C", "") #Remove troublesome punctuation (, . ?)
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_prev + encodedTitle + network_sep_scene)
         for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
             titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
