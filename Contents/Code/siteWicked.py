@@ -11,27 +11,45 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         i = searchString.rfind("-")
         searchString = searchString[:i] + "/" + searchString[i+1:]
         Log("searchString formatted: " + searchString)
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
-    for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
-        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip().title().replace("Xxx","XXX")
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+
+        # Direct URL (DVD Page) search - preferred
+    if "scene" not in searchString.lower():
+        Log("Direct URL (DVD page)")
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
+        for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
+            titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip().title().replace("Xxx","XXX")
+            curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
+            releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            Log(titleNoFormatting+"/"+curID+"/"+releaseDate+"/"+str(score))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Wicked/Scene] " + releaseDate, score = score, lang = lang))
+
+        # Full DVD match added to results as an option
+        dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip().title().replace("Xxx","XXX")
+        curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResults.xpath('//li[@class="updatedOn"]')[0].text_content().replace("Updated","").strip()).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), dvdTitle.lower())
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = dvdTitle + " [Wicked/Full Movie] " + releaseDate, score = score, lang = lang))
+
+        # Direct URL (scene page search)
+    else:
+        Log("Direct URL (Scene page)")
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + "/en/video/" + searchString)
+        titleNoFormatting = searchResults.xpath('//h1//span')[0].text_content().strip().title().replace("Xxx","XXX")
+        curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
+        releaseDate = parse(searchResults.xpath('//li[@class="updatedDate"]')[0].text_content().replace("Updated","").replace("|","").strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        Log(titleNoFormatting+"/"+curID+"/"+releaseDate+"/"+str(score))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Wicked/Scene] " + releaseDate, score = score, lang = lang))
 
-    # Full DVD match added to results as an option
-    dvdTitle = searchResults.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip().title().replace("Xxx","XXX")
-    curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-    releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().replace("Updated","").strip()).strftime('%Y-%m-%d')
-    if searchDate:
-        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-    else:
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), dvdTitle.lower())
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = dvdTitle + " [Wicked/Full Movie] " + releaseDate, score = score, lang = lang))
 
     return results
 

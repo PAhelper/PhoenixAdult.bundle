@@ -22,7 +22,7 @@ There are 3 available search/matching methods, as listed below:
 + **Available match methods:**
 *These can be used in conjunction with available search methods and will increase the possibility of locating the correct scene. However, they cannot be used as standalone search terms. At least one of these can be utilized, depending on the site.*
   - **Date**
-  - **SceneID** 
+  - **SceneID**
 
 + **SceneID Match:** SceneID can be entered, before other search terms, to increase the possibility for a match. However, it cannot be entered as a standalone search term.
 + **Date Match:** Date can be entered, before other search terms, to improve search results. However, it cannot be entered as a standalone search term.
@@ -59,7 +59,7 @@ Here are some examples for each type of search:
     - `SiteName` `Jane Doe` `An Interesting Plot`
   - Another minimal search, using the site shorthand:
     - `SN` `An Interesting Plot`
-  
+
 + **Limited Search** examples:
   - A search using both actor and scene title:
     - `SiteName` `Jane Doe` `An Interesting Plot`
@@ -67,7 +67,7 @@ Here are some examples for each type of search:
     - `SiteName` `Jane Doe`
   - A search using site shorthand with the scene title:
     - `SN` `An Interesting Plot`
-    
+
 + **Exact Match** examples:
   - An exact search using site name and ID:
     - `SiteName` `SceneID`
@@ -75,6 +75,8 @@ Here are some examples for each type of search:
     - `SN` `SceneID`
   - A direct url match, using only a suffix:
     - `SiteName` `Direct URL`
-      - `PornPros` `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://pornpros.com/video/eager-hands))
+      - `PornPros` `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://dereferer.me/?https%3A//pornpros.com/video/eager-hands))
     - `SiteName` `YY-MM-DD` `Direct URL`
-      - `Mylf` `2019.01.01` `1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://www.mylf.com/movies/1809/manicured-milf-masturbation))
+      - `Mylf` `2019.01.01` `1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://dereferer.me/?https%3A//www.mylf.com/movies/1809/manicured-milf-masturbation))
+      - `Wicked` `2019.10.10` `Stranger-Than-Fiction 77675` (taken from the URL [https://www.wicked.com/en/movie/**Stranger-Than-Fiction/77675**](https://dereferer.me/?https%3A//www.wicked.com/en/movie/Stranger-Than-Fiction/77675))
+      - `Wicked` `2019.10.10` `Stranger Than Fiction Scene 1 167063` (taken from the URL [https://www.wicked.com/en/video/**Stranger-Than-Fiction-Scene-1/167063**](https://dereferer.me/?https%3A//www.wicked.com/en/video/Stranger-Than-Fiction-Scene-1/167063))
