@@ -149,6 +149,17 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Teens Like It Black
   - ZZ Series
 + #### BurningAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### CherryPimps Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Britney Amber
+  - Cherry Pimps
+  - Cherry Spot
+  - Wild on Cam
+  - BCM.XXX
+  - Confessions.XXX
+  - Cucked.XXX
+  - Drilled.XXX
+  - Family.XXX
+  - Petite.XXX
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
 + #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **DVDs not supported**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
@@ -600,7 +611,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Russian Teen Ass
   - Sex on the beach
   - Tight and Teen
-+ #### PropertySex | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### PropertySex | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* / *[Exact](./manualsearch.md#excact-match)* - **SceneID**
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Reality Kings Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - 40 Inch Plus

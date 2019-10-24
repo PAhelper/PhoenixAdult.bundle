@@ -26,7 +26,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h2')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
     # Studio/Tagline/Collection
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)

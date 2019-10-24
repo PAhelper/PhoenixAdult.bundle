@@ -1041,6 +1041,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or (searchSiteID >= 772 and searchSiteID <= 781):
                     results = PAsearchSites.networkIntersec.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
+            ###############
+            ## Cherry Pimps
+            ###############
+            if siteNum == 783:
+                if searchSiteID == 9999 or (searchSiteID >= 783 and searchSiteID <= 792):
+                    results = PAsearchSites.networkCherryPimps.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1864,6 +1871,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 772 and siteID <= 781:
             metadata = PAsearchSites.networkIntersec.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Cherry Pimps                                            ##
+        ##                                                          ##
+        ##############################################################
+        if (siteID >= 783 and siteID <= 792):
+            metadata = PAsearchSites.networkCherryPimps.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
