@@ -31,11 +31,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         networkdvd = False
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
-    elif siteNum == 330 or siteNum == 332 or (siteNum >= 361 and siteNum <= 364):
-        network = 'Mile High Network'
-        network_sep_scene = "/scene"
-        network_sep_scene_pages = "/scene/"
-        network_sep_dvd = "/dvd"
     elif (siteNum >= 365 and siteNum <= 372) or siteNum == 466 or siteNum == 692:
         network = '21Sextury'
         networkdvd = False
@@ -109,6 +104,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         resultsecond = []
 
         #searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "?query=" + encodedTitle)
+        encodedTitle = encodedTitle.replace("%27", "").replace("%3F", "").replace("%2C", "") #Remove troublesome punctuation (, . ?)
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_prev + encodedTitle + network_sep_scene)
         for searchResult in searchResults.xpath('//div[@class="tlcDetails"]'):
             titleNoFormatting = searchResult.xpath('.//a[1]')[0].text_content().strip()
@@ -297,8 +293,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Blowpass'
     elif siteID == 331 or (siteID >= 355 and siteID <= 360) or siteID == 750:
         metadata.studio = 'Fantasy Massage'
-    elif siteID == 330 or siteID == 332 or (siteID >= 361 and siteID <= 364):
-        metadata.studio = 'Mile High Network'
     elif (siteID >= 365 and siteID <= 372) or siteID == 466 or siteID == 690:
         metadata.studio = '21Sextury'
     elif siteID == 183 or (siteID >= 373 and siteID <= 374):

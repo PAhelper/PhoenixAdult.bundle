@@ -205,9 +205,9 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Mile High Media
             ###############
-            if siteNum == 330:
-                if searchSiteID == 9999 or searchSiteID == 330 or searchSiteID == 332 or (searchSiteID >= 361 and searchSiteID <= 364):
-                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+            if siteNum == 361:
+                if searchSiteID == 9999 or (searchSiteID >= 361 and searchSiteID <= 364):
+                    results = PAsearchSites.networkMileHighMedia.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## Fantasy Massage
@@ -1285,8 +1285,16 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
+        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 360) or (siteID >= 365 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
             metadata = PAsearchSites.networkGammaEnt.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  MileHighMedia                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >= 361 and siteID <= 364:
+            metadata = PAsearchSites.networkMileHighMedia.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
