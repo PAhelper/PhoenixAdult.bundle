@@ -6,8 +6,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article'):
         titleNoFormatting = searchResult.xpath('.//a[@rel="bookmark"]')[0].text_content().strip()
-        detailsPageElements = HTML.ElementFromURL(searchResult.xpath('.//a[@rel="bookmark"]')[0].get('href'))
-        releaseDate = parse(detailsPageElements.xpath('//p[@class="pull-right dates invisible"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        detailsPageElements = HTML.ElementFromURL(searchResult.xpath('.//a[@rel="bookmark"]')[0].get('href'))    
         curID = searchResult.xpath('.//a[@rel="bookmark"]')[0].get('href').replace('/','_').replace('?','!')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -16,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if len(titleNoFormatting) > 29:
             titleNoFormatting = titleNoFormatting[:32] + "..."
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] ", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
