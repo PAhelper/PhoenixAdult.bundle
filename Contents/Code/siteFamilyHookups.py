@@ -15,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-2 fCFhuf"]'):
-        titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
