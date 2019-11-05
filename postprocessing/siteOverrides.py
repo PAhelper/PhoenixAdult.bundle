@@ -111,8 +111,8 @@ def getRename(site, actor, title, date):
             detailsPageElements = html.fromstring(page.content)
             i = 0
             for releaseDate in detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "date"]/text()'):
-                sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]')[i].get("href").split('/')[3]
-                title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//a[@class= "title"]/text()')[i].split('-')[0]
+                sceneID = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "title"]/a')[i].get("href").split('/')[3]
+                title = detailsPageElements.xpath('//div[contains(@class, "content-grid-item")]//span[@class= "title"]/a/text()')[i].split('-')[0]
                 title = sceneID + " - " + title
                 #NubilesPorn date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
                 datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
@@ -284,7 +284,7 @@ def getRename(site, actor, title, date):
         page = requests.get("https://www.x-art.com/videos/recent/all/")
         detailsPageElements = html.fromstring(page.content)
         i = 0
-        for releaseDate in detailsPageElements.xpath('//div[@class="item-header"]//h2[not(contains(text(),"Video"))]/text()'):
+        for releaseDate in detailsPageElements.xpath('//div[@class="item-header"]//h2[not(contains(text(),"HD Video"))][not(contains(text(),"4K Video"))]/text()'):
             title = detailsPageElements.xpath('//div[@class="item-header"]/h1/text()')[i]
             #Xart date format is (Mon d, yyyy) ... convert it to yyyy-mm-dd
             datetime_object = datetime.strptime(releaseDate, '%b %d, %Y')
