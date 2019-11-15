@@ -165,6 +165,8 @@ class PhoenixActors:
             if metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
+                if newActor == "Olivia":
+                    newActor = "Sophia Traxler"
             if metadata.studio == "Joymii":
                 if newActor == "Abigail":
                     newActor = "Abigaile Johnson"
