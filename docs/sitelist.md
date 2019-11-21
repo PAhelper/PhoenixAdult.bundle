@@ -6,6 +6,8 @@
 The above is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
 # All supported networks and sites
 
++ #### 18OnlyGirls | Matching type: *[Limited](./manualsearch.md#limited-search)*
+
 + #### 21Naturals | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 21Naturals
   - 21FootArt
