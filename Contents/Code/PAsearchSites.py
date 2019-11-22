@@ -828,7 +828,7 @@ searchSites[729] = ["ArchAngel","ArchAngel","https://www.archangelvideo.com","ht
 searchSites[730] = ["We Are Hairy","We Are Hairy","https://www.wearehairy.com","https://www.wearehairy.com/search/?query="]
 searchSites[731] = ["Love Her Feet","Love Her Feet","https://www.loveherfeet.com","https://www.loveherfeet.com/tour/search.php?query="]
 searchSites[732] = ["MomPOV","MomPOV","http://www.mompov.com","http://www.mompov.com/tour/?s="]
-searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/search?q="]
+searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/scene/"]
 searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?query="]
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
