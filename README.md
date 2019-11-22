@@ -65,7 +65,7 @@ How to find the plug-in folder location:
 
 - Get the PAhelper source zip in GitHub release at https://github.com/PAhelper/PhoenixAdult.bundle > "Clone or download > Download Zip
 - Open PhoenixAdult.bundle-master.zip and copy the folder inside (PhoenixAdult.bundle-master) to the plug-ins folders
-- Rename folder to "PhoenixAdult.bundle" (remove -master)
+- Rename folder to "PhoenixAdult.bundle" (remove "-master")
 
 Reporting a bug
 ------
@@ -78,7 +78,7 @@ Some sites do not work on Linux installations of Plex. Workarounds have been fou
 
 Change Log/Updates
 ------------------
-To view the most detailed changes to code, check the [commit log](https://github.com/PAhelper/PhoenixAdult.bundle/commits/master). Additional infomation can be obtained from the list of [merged pull requests](https://github.com/PAhelper/PhoenixAdult.bundle/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged). 
+To view the most detailed changes to code, check the [commit log](https://github.com/PAhelper/PhoenixAdult.bundle/commits/master). Additional information can be obtained from the list of [merged pull requests](https://github.com/PAhelper/PhoenixAdult.bundle/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged).
 
 Supported Networks
 ------------------

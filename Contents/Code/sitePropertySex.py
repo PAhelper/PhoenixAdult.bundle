@@ -5,20 +5,6 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    try:
-        Log("Enhanced search")
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-        for searchResult in searchResults.xpath('//div[@class="sc-bxivhb dWSjsT"]//div[@class="sc-bxivhb sc-ifAKCX kjDpeh"]//div[@class="sc-EHOje izPSQd"]'):
-            titleNoFormatting = searchResult.xpath('.//a')[0].get('title')
-            curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-            releaseDate = parse(searchResult.xpath('.//div[@class="dtkdna-5 bUqDss"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [PropertySex] " + releaseDate, score = score, lang = lang))
-    except:
-        Log("Exact search (scene ID)")
         sceneID = encodedTitle.split('%20', 1)[0]
         Log("SceneID: " + sceneID)
         try:
@@ -26,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         except:
             sceneTitle = ''
         Log("Scene Title: " + sceneTitle)
-        url = PAsearchSites.getSearchBaseURL(siteNum) + "/scene/" + sceneID + "/1"
+        url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
         searchResults = HTML.ElementFromURL(url)
         for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
             titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
@@ -42,8 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    urlBase = PAsearchSites.getSearchBaseURL(siteID)
-    url = urlBase + str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -94,9 +79,12 @@ def update(metadata,siteID,movieGenres,movieActors):
                 movieGenres.addGenre("Orgy")
             for actorLink in actors:
                 actorName = str(actorLink.text_content().strip())
-                actorPage = urlBase + actorLink.get("href")
-                actorPageElements = HTML.ElementFromURL(actorPage)
-                actorPhotoURL = actorPageElements.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get("src")
+                try:
+                    actorPage = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    actorPageElements = HTML.ElementFromURL(actorPage)
+                    actorPhotoURL = actorPageElements.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get("src")
+                except:
+                    actorPhotoURL = ''
                 movieActors.addActor(actorName, actorPhotoURL)
     except:
         pass
