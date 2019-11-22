@@ -8,10 +8,7 @@ from lxml.html.soupparser import fromstring
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    Log('****SEARCH*****')
-
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    
     for searchResult in searchResults.xpath('//div[@class="entry clearfix latest"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]/a')[0].text_content().strip()
         curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
@@ -20,13 +17,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
         else:
             releaseDate = ''
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [18OnlyGirls] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [18OnlyGirls] ", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
-    sitename = str(metadata.id).split("|")[0].split('_')[2]
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
 
     metadata.collections.clear()
@@ -64,7 +60,11 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Release Date
     date = str(metadata.id).split("|")[2]
-    Log("Date from file")
+    if len(date) > 0:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+        Log("Date from file")
 
     if len(date) > 0:
         date_object = parse(date)
@@ -83,7 +83,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
-
             try:
                 actorPage = HTML.ElementFromURL(actorPageURL)
             except:
