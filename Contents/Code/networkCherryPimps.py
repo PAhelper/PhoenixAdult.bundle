@@ -7,16 +7,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
     searchPageNum = 1
     while searchPageNum <= 2:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "&page=" + str(searchPageNum))
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + "%22" + encodedTitle + "%22" + "&page=" + str(searchPageNum))
         for searchResult in searchResults.xpath('//div[@class="video-thumb "]'):
             titleNoFormatting = searchResult.xpath('.//p[@class="text-thumb"]//a')[0].text_content().strip()
-            Log("Title: " + titleNoFormatting)
             curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-            Log("curID: " + curID)
             subSite = searchResult.xpath('.//p[@class="text-thumb"]//a[@class="badge"]')[0].text_content().strip()
-            Log("subSite: " + subSite)
             releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().split("|")[1].strip()).strftime('%Y-%m-%d')
-            Log("releaseDate: " + releaseDate)
             actorNames = ""
             actors = searchResult.xpath('.//span[@class="category"]//a')
             for actor in actors:
