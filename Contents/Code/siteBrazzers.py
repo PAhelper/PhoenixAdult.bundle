@@ -17,6 +17,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
+    
+     if searchTitle == "How To Handle Your Students: 101 - Angelica Heart":
+        Log("Manual Search Match")
+        curID = ("https://www.brazzers.com/scenes/view/id/7007/how-to-handle-your-students-101/")
+        curID = curID.replace('/','_')
+        Log(str(curID))
+        subSite = "Brazzers Vault"
+        releaseDate = "2012-12-03"
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Angelica Heart" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+    
+    
+    
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
