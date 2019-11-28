@@ -21,7 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().replace("SML-","").replace("Trailer","").strip()
         curID = url.replace('/','_').replace('?','!')
         subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//div[@class="tjb798-2 flgKJM"]/span[3]')[0].text_content().strip().replace('Release Date:','')).strftime('%Y-%m-%d')
+        releaseDate = parse(searchResult.xpath('.//div[@class="tjb798-2 flgKJM"]/span[position()=last()]')[0].text_content().strip().replace('Release Date:','')).strftime('%Y-%m-%d')
         score = 100
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Babes/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
