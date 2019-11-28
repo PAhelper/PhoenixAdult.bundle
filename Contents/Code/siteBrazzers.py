@@ -17,18 +17,96 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
-    
-     if searchTitle == "How To Handle Your Students 101 - Angelica Heart":
-        Log("Manual Search Match")
-        curID = ("https://www.brazzers.com/scenes/view/id/7007/how-to-handle-your-students-101/")
-        curID = curID.replace('/','_')
-        Log(str(curID))
-        subSite = "Brazzers Vault"
-        releaseDate = "2012-12-03"
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Angelica Heart" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
-    
-    
-    
+
+    if "how to handle your students 101" in searchTitle.lower():
+        if "angelica heart" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7007/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Angelica Heart" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "jessica bangkok" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7008/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Jessica Bangkok" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "morgan ray" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7009/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Morgan Ray" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "kerry louise" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7011/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Kerry Louise" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "tanya tate" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7012/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Tanya Tate" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "veronica avluv" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7013/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Veronica Avluv" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "katie kox" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7014/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Katie Kox" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "britney amber" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7015/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Britney Amber" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "sophie dee" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7016/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Sophie Dee" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "julia ann" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7017/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Julia Ann" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
+        elif "rachel roxx" in searchTitle.lower() or "sienna west" in searchTitle.lower():
+            Log("Manual Search Match")
+            curID = ("https://www.brazzers.com/scenes/view/id/7018/how-to-handle-your-students-101/")
+            curID = curID.replace('/','_')
+            Log(str(curID))
+            subSite = "Brazzers Vault"
+            releaseDate = "2012-12-03"
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "How To Handle Your Students: 101 - Rachel Roxx & Sienna West" + " [Brazzers/" + subSite + "] " + releaseDate, score = 101, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
