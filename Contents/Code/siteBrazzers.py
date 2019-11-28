@@ -18,7 +18,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
     
-     if searchTitle == "How To Handle Your Students: 101 - Angelica Heart":
+     if searchTitle == "How To Handle Your Students 101 - Angelica Heart":
         Log("Manual Search Match")
         curID = ("https://www.brazzers.com/scenes/view/id/7007/how-to-handle-your-students-101/")
         curID = curID.replace('/','_')
