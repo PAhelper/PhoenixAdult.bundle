@@ -1,4 +1,7 @@
 # Changelog
+- 2019-12-04
+    - Fix postprocessing script for pornpros
+    - Add sceneID matching to Brazzers
 - 2019-08-14
     - Bugfixes for DDFNetwork
 - 2019-07-16
