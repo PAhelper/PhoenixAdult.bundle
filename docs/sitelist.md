@@ -248,7 +248,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **DirectURL**
++ #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **SceneID**
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
@@ -299,12 +299,15 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### GirlfriendsFilms | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Girls Rimming | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
-+ #### Girlsway | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Girlsway | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - GirlCore
   - GirlsTryAnal
   - GirlswayOriginals
   - MommysGirl
+  - MomsOnMoms
   - SextapeLesbians
   - WebYoung
+  - WeLikeGirls
 + #### Gloryhole Secrets | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only** (Title includes actress first name)
 + #### Hegre | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### HighTechVR Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
