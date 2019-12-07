@@ -5,9 +5,8 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    Log("siteNum: " + str(siteNum))
 
-    # Use encodedTitle as sceneId, if provided
+    # Use encodedTitle as sceneID, if provided
     sceneID = encodedTitle.split('%20', 1)[0]
     Log("SceneID: " + sceneID)
     try:
