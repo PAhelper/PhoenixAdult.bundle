@@ -371,6 +371,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Karups Older Women
   - Karups Private Collection
 + #### LegalPorno | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### Lil Humpers | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -384,6 +385,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RealityJunkies
   - SweetheartVideo
   - SweetSinner
++ #### Other MileHighNetwork sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - BellesaFilms
 + #### MissaX | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Mofos Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Don't Break Me
