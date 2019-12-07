@@ -8,7 +8,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         # URL Scene Search
         searchString = searchTitle.replace(" ","-")
         url = PAsearchSites.getSearchSearchURL(siteNum) + "updates/" + searchString + ".html"
-        searchResult = HTML.ElementFromURL(url)
+        try:
+            searchResult = HTML.ElementFromURL(url)
+        except:
+            Log("Normal url failed, trying with trailing hyphen")
+            searchResult = HTML.ElementFromURL(url.replace(".html", "-.html"))
         titleNoFormatting = searchResult.xpath('//div[contains(concat(" ",normalize-space(@class)," "),"title")]//h3')[0].text_content().strip()
         curID = url.replace('/','+').replace('?','!')
         if searchDate:

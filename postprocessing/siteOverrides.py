@@ -168,7 +168,7 @@ def getRename(site, actor, title, date):
             detailsPageElements = html.fromstring(page.content)
             i = 0
             for releaseDate in detailsPageElements.xpath('//p[@class= "date"]/text()'):
-                title = detailsPageElements.xpath('//div[@class= "information"]/a')[i].get("href").split("/")[-1].replace('-', ' ')
+                title = detailsPageElements.xpath('//div[contains(@class,"video-releases")][position()=last()]//div[@class= "information"]/a')[i].get("href").split("/")[-1].replace('-', ' ')
                 #PornPros date format is (Month d, yyyy) ... convert it to yyyy-mm-dd
                 datetime_object = datetime.strptime(releaseDate, '%B %d, %Y')
                 releaseDate = datetime_object.strftime('%Y-%m-%d')
