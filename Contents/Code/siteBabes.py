@@ -61,7 +61,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     try:
         metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[position()=last()-1]/div[2]')[0].text_content().strip()
-
     except:
         pass
 
