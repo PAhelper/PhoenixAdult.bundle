@@ -94,8 +94,10 @@ import networkMileHighMedia
 import networkCherryPimps
 import siteWicked
 import site18OnlyGirls
+import siteGirlsWay
+import siteEvilAngel
 
-searchSites = [None] * 795
+searchSites = [None] * 797
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -149,7 +151,7 @@ searchSites[49] = ["Live Naughty Teacher","Live Naughty Teacher","https://tour.n
 searchSites[50] = ["Live Naughty Milf","Live Naughty Milf","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[51] = ["Live Naughty Nurse","Live Naughty Nurse","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[52] = ["Vixen","Vixen","http://www.vixen.com","http://www.vixen.com/search?q="]
-searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","http://www.girlsway.com/en/search/"]
+searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[54] = ["Moms in Control","Moms in Control","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[55] = ["Pornstars Like It Big","Pornstars Like It Big","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[56] = ["Big Tits at Work","Big Tits at Work","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -373,7 +375,7 @@ searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com",
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://www.babes.com/scene/"]
-searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/video/"]
+searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
 searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
@@ -471,12 +473,12 @@ searchSites[371] = ["Lez Cuties","Lez Cuties","http://www.21sextury.com","http:/
 searchSites[372] = ["Pix and Video","Pix and Video","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
 searchSites[373] = ["21FootArt","21FootArt","http://www.21naturals.com","http://www.21naturals.com/en/search/"]
 searchSites[374] = ["21EroticAnal","21EroticAnal","http://www.21naturals.com","http://www.21naturals.com/en/search/"]
-searchSites[375] = ["Mommys Girl","Mommy's Girl","http://www.girlsway.com","http://www.girlsway.com/en/search/"]
-searchSites[376] = ["Web Young","Web Young","http://www.girlsway.com","http://www.girlsway.com/en/search/"]
-searchSites[377] = ["Girls Try Anal","Girls Try Anal","http://www.girlsway.com","http://www.girlsway.com/en/search/"]
-searchSites[378] = ["Sextape Lesbians","Sextape Lesbians","http://www.girlsway.com","http://www.girlsway.com/en/search/"]
-searchSites[379] = ["Girlsway Originals","Girlsway Originals","http://www.girlsway.com","http://www.girlsway.com/en/search/"]
-searchSites[380] = ["Girlfriends Films","Girlfriends Films","http://www.girlfriendsfilms.com","http://www.girlfriendsfilms.com/en/search/"]
+searchSites[375] = ["Mommys Girl","Mommy's Girl","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[376] = ["Web Young","Web Young","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[377] = ["Girls Try Anal","Girls Try Anal","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[378] = ["Sextape Lesbians","Sextape Lesbians","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[379] = ["Girlsway Originals","Girlsway Originals","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[380] = ["Girlfriends Films","Girlfriends Films","http://www.girlfriendsfilms.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[381] = ["Burning Angel","Burning Angel","http://www.burningangel.com","http://www.burningangel.com/en/search/"]
 searchSites[382] = ["Pretty Dirty","Pretty Dirty","http://www.prettydirty.com","http://www.prettydirty.com/en/search/"]
 searchSites[383] = ["Devils Film","Devil's Film","http://www.devilsfilm.com","http://www.devilsfilm.com/en/search/"]
@@ -891,6 +893,9 @@ searchSites[791] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.x
 searchSites[792] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
 searchSites[793] = ["Wicked","Wicked Pictures","https://www.wicked.com","https://wicked.com/en/movie/"]
 searchSites[794] = ["18OnlyGirls","18 Only Girls","http://www.18onlygirls.tv","http://18onlygirls.tv/?s="]
+searchSites[794] = ["GirlCore","GirlCore","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[795] = ["Moms On Moms","Moms On Moms","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[796] = ["We Like Girls","We Like Girls","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

@@ -13,8 +13,6 @@ import PAactors
 import PAgenres
 import PAsearchSites
 
-VERSION_NO = '2.2018.12.08.1'
-
 def any(s):
     for v in s:
         if v:
@@ -112,11 +110,11 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.networkStrike3.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
-            ## Girlsway
+            ## GirlsWay
             ###############
             if siteNum == 53:
-                if searchSiteID == 9999 or searchSiteID == 53 or (searchSiteID >= 375 and searchSiteID <= 379):
-                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                if searchSiteID == 9999 or searchSiteID == 53 or (searchSiteID >= 375 and searchSiteID <= 379) or (searchSiteID >= 794 and searchSiteID <= 796):
+                    results = PAsearchSites.siteGirlsWay.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## 21Naturals
@@ -130,7 +128,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 277:
                 if searchSiteID == 9999 or searchSiteID == 277:
-                    results = PAsearchSites.networkGammaEnt.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
+                    results = PAsearchSites.siteEvilAngel.search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID)
 
             ###############
             ## XEmpire/Hardx
@@ -1292,7 +1290,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or (siteID >= 277 and siteID <= 278) or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 360) or (siteID >= 365 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
+        if siteID == 183 or siteID == 278 or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 360) or (siteID >= 365 and siteID <= 374) or (siteID >= 380 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
             metadata = PAsearchSites.networkGammaEnt.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
@@ -1883,7 +1881,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Intersec                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 772 and siteID <= 781:
+        if (siteID >= 772 and siteID <= 781):
             metadata = PAsearchSites.networkIntersec.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1909,6 +1907,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 794:
             metadata = PAsearchSites.site18OnlyGirls.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  GirlsWay                                                ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 53 or (siteID >=  375 and siteID <= 379) or (siteID >=  794 and siteID <= 796):
+            metadata = PAsearchSites.siteGirlsWay.update(metadata,siteID,movieGenres,movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Evil Angel                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 277:
+            metadata = PAsearchSites.siteEvilAngel.update(metadata,siteID,movieGenres,movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

@@ -39,9 +39,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         networkdvd = False
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
-    elif siteNum == 53 or (siteNum >= 375 and siteNum <= 379):
-        network = 'Girlsway'
-        networkdvd = False
     elif siteNum >= 383 and siteNum <= 386:
         network = 'Fame Digital'
         if siteNum == 383:
@@ -72,15 +69,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         networkdvd = False
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
-    elif siteNum == 277:
-        network = 'Evil Angel'
-        networkscene = False
-        networkscenepages = False
-        networkdvd = False
-        directmatch = True
-        network_sep_scene = "/scene"
-        network_sep_scene_pages = "/scene/"
-        network_sep_dvd = "/dvd"
     elif siteNum == 382:
         network = 'Pretty Dirty'
         networkdvd = False
@@ -297,9 +285,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = '21Sextury'
     elif siteID == 183 or (siteID >= 373 and siteID <= 374):
         metadata.studio = '21Naturals'
-    elif siteID == 53 or (siteID >= 375 and siteID <= 379):
-        metadata.studio = 'Girlsway'
-        director.name = 'Stills by Alan'
     elif siteID >= 383 and siteID <= 386:
         metadata.studio = 'Fame Digital'
     elif siteID >= 387 and siteID <= 392:
@@ -310,8 +295,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Girlfriends Films'
     elif siteID == 381:
         metadata.studio = 'Burning Angel'
-    elif siteID == 277:
-        metadata.studio = 'Evil Angel'
     elif siteID == 382:
         metadata.studio = 'Pretty Dirty'
     elif siteID >= 460 and siteID <= 466:
