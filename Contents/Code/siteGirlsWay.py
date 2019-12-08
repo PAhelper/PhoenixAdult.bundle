@@ -63,7 +63,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('//span[@class="sceneCol sceneColActors"]/a')
+    actors = detailsPageElements.xpath('//div[@class="sceneCol sceneColActors"]/a')
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -75,10 +75,12 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = str(actorLink.text_content().strip())
             try:
                 actorPageURL = actorLink.get("href")
+                if 'http' not in actorPageURL:
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"]')[0].get("src")
                 if 'http' not in actorPhotoURL:
-            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             except:
                 actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
