@@ -5,6 +5,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
     Log("siteNum: " + str(siteNum))
+    
+    if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/scenes/view/id/" + searchTitle.split(" ")[0]
+        Log(url)
+        searchResult = HTML.ElementFromURL(url)
+        titleNoFormatting = searchResult.xpath('//h1')[0].text_content().strip()
+        curID = (PAsearchSites.getSearchBaseURL(int(siteNum)) + searchResult.xpath('//meta[@name= "dti.url"]')[0].get('content')).replace('/','_').replace('?','!')
+        Log(curID)
+        subSite = searchResult.xpath('//span[@class="label-text"]')[0].text_content().strip()
+        Log(subSite)
+        releaseDate = parse(searchResult.xpath('//aside[@class= "scene-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        Log(releaseDate)
+
+        score = 100
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
+        return results
+
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
         titleNoFormatting = searchResult.xpath('.//a[1]')[0].get('title')
