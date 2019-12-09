@@ -770,7 +770,7 @@ searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","http://teenmegaworld.net","
 searchSites[667] = ["TrenchcoatX","TrenchcoatX","https://trenchcoatx.com","https://trenchcoatx.com/search.php?query="]
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
-searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/videos"]
+searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/search?q="]
 searchSites[671] = ["Deeper","Deeper","https://www.deeper.com","https://www.deeper.com/search?q="]
 searchSites[672] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
 searchSites[673] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]

@@ -111,8 +111,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - KatieBanks
   - MonroeLee
   - TaliaShepard
-+ #### Blacked | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### BlackedRaw | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Black Valley Girls | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Blowpass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 1000 Facials
@@ -220,7 +218,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Only Blowjob
   - Sandy's Fantasies
   - Sex Video Casting
-+ #### Deeper | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **Scenes from Movies not supported**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
@@ -684,6 +681,13 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RawAttack
   - TheStripperExperience
 + #### Step Secrets | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Strike3 Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+ - Blacked
+ - BlackedRaw
+ - Deeper
+ - Tushy
+ - TushyRaw
+ - Vixen
 + #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -756,8 +760,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
 + #### TransAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Tushy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### TushyRaw | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### Twistys | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - MomKnowsBest
   - TurningTwistys
@@ -768,7 +770,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### Vixen | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
