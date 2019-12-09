@@ -101,7 +101,7 @@ import siteBellesaFilms
 import siteClubSeventeen
 import siteElegantAngel
 
-searchSites = [None] * 801
+searchSites = [None] * 802
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -897,13 +897,13 @@ searchSites[791] = ["Petite","Petite.XXX","https://www.pimp.xxx","https://pimp.x
 searchSites[792] = ["Family","Family.XXX","https://www.pimp.xxx","https://pimp.xxx/search.php?query="]
 searchSites[793] = ["Wicked","Wicked Pictures","https://www.wicked.com","https://wicked.com/en/movie/"]
 searchSites[794] = ["18OnlyGirls","18 Only Girls","http://www.18onlygirls.tv","http://18onlygirls.tv/?s="]
-searchSites[794] = ["GirlCore","GirlCore","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[795] = ["Moms On Moms","Moms On Moms","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[796] = ["We Like Girls","We Like Girls","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[797] = ["Lil Humpers","Lil Humpers","https://www.lilhumpers.com","https://www.lilhumpers.com/scene/"]
-searchSites[798] = ["Bellesa Films","Bellesa Films","https://www.bellesafilms.com/","https://www.bellesafilms.com/scene/"]
-searchSites[799] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.com","https://www.clubseventeen.com/video.php?slug="]
-searchSites[800] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/streaming-elegant-angel-dvds-on-video.html?fq="]
+searchSites[795] = ["GirlCore","GirlCore","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[796] = ["Moms On Moms","Moms On Moms","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[797] = ["We Like Girls","We Like Girls","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[798] = ["Lil Humpers","Lil Humpers","https://www.lilhumpers.com","https://www.lilhumpers.com/scene/"]
+searchSites[799] = ["Bellesa Films","Bellesa Films","https://www.bellesafilms.com/","https://www.bellesafilms.com/scene/"]
+searchSites[800] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.com","https://www.clubseventeen.com/video.php?slug="]
+searchSites[801] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/streaming-elegant-angel-dvds-on-video.html?fq="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
