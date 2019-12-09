@@ -673,7 +673,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Massage Rooms
   - MomXXX
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### SisLovesMe | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add****
++ #### SisLovesMe | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - FirstClassPOV
   - IntimateLesbians
