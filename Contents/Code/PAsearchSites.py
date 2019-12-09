@@ -98,8 +98,9 @@ import siteGirlsWay
 import siteEvilAngel
 import siteLilHumpers
 import siteBellesaFilms
+import siteClubSeventeen
 
-searchSites = [None] * 799
+searchSites = [None] * 800
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -900,6 +901,7 @@ searchSites[795] = ["Moms On Moms","Moms On Moms","https://www.girlsway.com","ht
 searchSites[796] = ["We Like Girls","We Like Girls","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[797] = ["Lil Humpers","Lil Humpers","https://www.lilhumpers.com","https://www.lilhumpers.com/scene/"]
 searchSites[798] = ["Bellesa Films","Bellesa Films","https://www.bellesafilms.com/","https://www.bellesafilms.com/scene/"]
+searchSites[799] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.com","https://www.clubseventeen.com/video.php?slug="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
