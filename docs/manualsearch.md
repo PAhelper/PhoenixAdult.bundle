@@ -1,6 +1,6 @@
 # Manual Search Usage
 
-Each search query will be comprised of *up to* 5 parts, depending on the supported [*search type*](./manualsearch.md#search-types-and-their-capabilities):
+Each search query can be comprised of *up to* 5 parts, depending on the supported [*search type*](./manualsearch.md#search-types-and-their-capabilities):
 - `Site` - Either the shorthand abbreviation, or full site name.
 - `Date` - Follows immediately after site name, in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `Actor(s)`
@@ -24,18 +24,18 @@ There are 3 available search/matching methods, as listed below:
   - **Date**
   - **SceneID**
 
-+ **SceneID Match:** SceneID can be entered, before other search terms, to increase the possibility for a match. However, it cannot be entered as a standalone search term.
-+ **Date Match:** Date can be entered, before other search terms, to improve search results. However, it cannot be entered as a standalone search term.
++ **Date Match:** Date can be entered directly after the site name, but before any other search terms. This will increase the possibility for a match. However, it cannot be entered as a standalone search term.
++ **SceneID Match:** SceneID can be entered directly after the site name (and date), but before other search terms. This will increase the possibility for a match. However, it cannot be entered as a standalone search term.
 
 ## Limited Search
 #### Limited-search available.
 + **Available search methods:**
   - **Title**
-  - **Actor**
+  - **Actor(s)**
 
 ## Exact Match
 #### No search available.
-*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In some cases, you may add additional terms after the SceneID or Direct URL. However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
+*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In the case of SceneID, you may be able to add additional terms after the SceneID (such as Title, Actor(s), etc). However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
 + **SceneID**
   - Can add the the Date (before the SceneID)
   - Can typically add a Title/Actor (after the SceneID)
@@ -44,7 +44,7 @@ There are 3 available search/matching methods, as listed below:
   - Adding any terms, such as Title/Actors, after the URL will cause issues with matching
 
 ## Notes
-+ **Date Add** - Some sites don't make release dates available, so the agent will strip the date from your filename/search term instead
++ **Date Add** - Some sites don't make release dates available. The agent will strip the date from your filename/search term, instead.
 
 # Search Examples
 Depending on the capability of any one network/site, you can try a few combiations of the above.
@@ -52,31 +52,31 @@ Depending on the capability of any one network/site, you can try a few combiatio
 Here are some examples for each type of search:
 + **Enhanced Search** examples:
   - A full search, with all available details:
-    - `SiteName` `YY-MM-DD` `SceneID` `Jane Doe` `An Interesting Plot`
+    - `SiteName` - `YY-MM-DD` - `SceneID` - `Jane Doe` - `An Interesting Plot`
   - A minimal search, with fewer details, but includes SceneID:
-    - `SiteName` `SceneID` `Jane Doe`
+    - `SiteName` - `SceneID` - `Jane Doe`
   - A basic search with the most common details:
-    - `SiteName` `Jane Doe` `An Interesting Plot`
-  - Another minimal search, using the site shorthand:
-    - `SN` `An Interesting Plot`
+    - `SiteName` - `YY-MM-DD` - `An Interesting Plot`
+  - Another minimal search, using site shorthand:
+    - `SN` - `An Interesting Plot`
 
 + **Limited Search** examples:
   - A search using both actor and scene title:
-    - `SiteName` `Jane Doe` `An Interesting Plot`
+    - `SiteName` - `Jane Doe` - `An Interesting Plot`
   - A search using site name and an actor from the scene:
-    - `SiteName` `Jane Doe`
+    - `SiteName` - `Jane Doe`
   - A search using site shorthand with the scene title:
-    - `SN` `An Interesting Plot`
+    - `SN` - `An Interesting Plot`
 
 + **Exact Match** examples:
   - An exact search using site name and ID:
-    - `SiteName` `SceneID`
+    - `SiteName` - `SceneID`
   - An exact search using site shorthand and ID:
-    - `SN` `SceneID`
+    - `SN` - `SceneID`
   - A direct url match, using only a suffix:
-    - `SiteName` `Direct URL`
-      - `PornPros` `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://dereferer.me/?https%3A//pornpros.com/video/eager-hands))
-    - `SiteName` `YY-MM-DD` `Direct URL`
-      - `Mylf` `2019.01.01` `1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://dereferer.me/?https%3A//www.mylf.com/movies/1809/manicured-milf-masturbation))
-      - `Wicked` `2019.10.10` `Stranger-Than-Fiction 77675` (taken from the URL [https://www.wicked.com/en/movie/**Stranger-Than-Fiction/77675**](https://dereferer.me/?https%3A//www.wicked.com/en/movie/Stranger-Than-Fiction/77675))
-      - `Wicked` `2019.10.10` `Stranger Than Fiction Scene 1 167063` (taken from the URL [https://www.wicked.com/en/video/**Stranger-Than-Fiction-Scene-1/167063**](https://dereferer.me/?https%3A//www.wicked.com/en/video/Stranger-Than-Fiction-Scene-1/167063))
+    - `SiteName` - `Direct URL`
+      - `PornPros` - `eager-hands` (taken from the URL [https://pornpros.com/video/**eager-hands**](https://dereferer.me/?https%3A//pornpros.com/video/eager-hands))
+    - `SiteName` - `YY-MM-DD` - `Direct URL`
+      - `Mylf` - `2019.01.01` - `1809 manicured-milf-masturbation` (taken from the URL [https://www.mylf.com/movies/**1809/manicured-milf-masturbation**](https://dereferer.me/?https%3A//www.mylf.com/movies/1809/manicured-milf-masturbation))
+      - `Wicked` - `2019.10.10` - `Stranger-Than-Fiction 77675` (taken from the URL [https://www.wicked.com/en/movie/**Stranger-Than-Fiction/77675**](https://dereferer.me/?https%3A//www.wicked.com/en/movie/Stranger-Than-Fiction/77675))
+      - `Wicked` - `2019.10.10` - `Stranger Than Fiction Scene 1 167063` (taken from the URL [https://www.wicked.com/en/video/**Stranger-Than-Fiction-Scene-1/167063**](https://dereferer.me/?https%3A//www.wicked.com/en/video/Stranger-Than-Fiction-Scene-1/167063))
