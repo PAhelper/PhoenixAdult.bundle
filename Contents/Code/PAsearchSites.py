@@ -99,8 +99,9 @@ import siteEvilAngel
 import siteLilHumpers
 import siteBellesaFilms
 import siteClubSeventeen
+import siteElegantAngel
 
-searchSites = [None] * 800
+searchSites = [None] * 801
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -902,6 +903,7 @@ searchSites[796] = ["We Like Girls","We Like Girls","https://www.girlsway.com","
 searchSites[797] = ["Lil Humpers","Lil Humpers","https://www.lilhumpers.com","https://www.lilhumpers.com/scene/"]
 searchSites[798] = ["Bellesa Films","Bellesa Films","https://www.bellesafilms.com/","https://www.bellesafilms.com/scene/"]
 searchSites[799] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.com","https://www.clubseventeen.com/video.php?slug="]
+searchSites[800] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/streaming-elegant-angel-dvds-on-video.html?fq="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

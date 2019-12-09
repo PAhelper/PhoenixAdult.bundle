@@ -1081,6 +1081,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 799:
                     results = PAsearchSites.siteClubSeventeen.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Elegant Angel
+            ###############
+            if siteNum == 800:
+                if searchSiteID == 9999 or searchSiteID == 800:
+                    results = PAsearchSites.siteElegantAngel.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1968,6 +1975,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 799:
             metadata = PAsearchSites.siteClubSeventeen.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Elegant Angel                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 800:
+            metadata = PAsearchSites.siteElegantAngel.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

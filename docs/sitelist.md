@@ -246,6 +246,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ZebraGirls
 + #### Dorcel Club | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### Elegant Angel | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Only DVDs supported**
 + #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **SceneID**
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
