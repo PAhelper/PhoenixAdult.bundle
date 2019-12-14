@@ -903,7 +903,7 @@ searchSites[797] = ["We Like Girls","We Like Girls","https://www.girlsway.com","
 searchSites[798] = ["Lil Humpers","Lil Humpers","https://www.lilhumpers.com","https://www.lilhumpers.com/scene/"]
 searchSites[799] = ["Bellesa Films","Bellesa Films","https://www.bellesafilms.com/","https://www.bellesafilms.com/scene/"]
 searchSites[800] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.com","https://www.clubseventeen.com/video.php?slug="]
-searchSites[801] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/streaming-elegant-angel-dvds-on-video.html?fq="]
+searchSites[801] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/Search?fq="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1223,6 +1223,8 @@ def posterAlreadyExists(posterUrl,metadata):
         if p.lower() == posterUrl.lower():
             Log("Found " + posterUrl + " in posters collection")
             return True
+        else:
+            pass
 
     for p in metadata.art.keys():
         if p.lower() == posterUrl.lower():
