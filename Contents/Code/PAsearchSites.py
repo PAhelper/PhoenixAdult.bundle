@@ -102,8 +102,9 @@ import siteClubSeventeen
 import siteElegantAngel
 import siteFamilySinners
 import siteReidMyLips
+import sitePlayboyPlus
 
-searchSites = [None] * 804
+searchSites = [None] * 805
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -434,9 +435,9 @@ searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https:
 searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com"]
 searchSites[329] = ["Throated","Throated","https://www.blowpass.com","https://www.blowpass.com/en/search/throated/scene/"]
-searchSites[330] = ["","","",""]
+
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.fantasymassage.com","https://www.fantasymassage.com/en/search/"]
-searchSites[332] = ["","","",""]
+
 searchSites[333] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[334] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[335] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
@@ -908,6 +909,7 @@ searchSites[800] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.c
 searchSites[801] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/Search?fq="]
 searchSites[802] = ["Family Sinners","Family Sinners","https://www.familysinners.com","https://www.familysinners.com/scene/"]
 searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","https://www.reidmylips.com/"]
+searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

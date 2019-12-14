@@ -1102,6 +1102,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 803:
                     results = PAsearchSites.siteReidMyLips.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Playboy Plus
+            ###############
+            if siteNum == 804:
+                if searchSiteID == 9999 or searchSiteID == 804:
+                    results = PAsearchSites.sitePlayboyPlus.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -2013,6 +2020,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 803:
             metadata = PAsearchSites.siteReidMyLips.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Playboy Plus                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 804:
+            metadata = PAsearchSites.sitePlayboyPlus.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
