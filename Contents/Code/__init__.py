@@ -92,14 +92,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Brazzers
             ###############
             if siteNum == 2:
-                if searchSiteID == 9999 or searchSiteID == 2 or (searchSiteID >= 54 and searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
+                if searchSiteID == 9999 or searchSiteID == 2 or (54 <= searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
                     results = PAsearchSites.siteBrazzers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Naughty America
             ###############
             if siteNum == 5:
-                if searchSiteID == 9999 or (searchSiteID >= 5 and searchSiteID <= 51) or searchSiteID == 341 or (searchSiteID >= 393 and searchSiteID <= 396) or searchSiteID == 467 or searchSiteID == 468 or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
+                if searchSiteID == 9999 or (5 <= searchSiteID <= 51) or searchSiteID == 341 or (393 <= searchSiteID <= 396) or (467 <= searchSiteID <= 468) or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
                     results = PAsearchSites.siteNaughtyAmerica.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -113,14 +113,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## GirlsWay
             ###############
             if siteNum == 53:
-                if searchSiteID == 9999 or searchSiteID == 53 or (searchSiteID >= 375 and searchSiteID <= 379) or (searchSiteID >= 794 and searchSiteID <= 797):
+                if searchSiteID == 9999 or searchSiteID == 53 or (375 <= searchSiteID <= 379) or (794 <= searchSiteID <= 797):
                     results = PAsearchSites.siteGirlsWay.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## 21Naturals
             ###############
             if siteNum == 183:
-                if searchSiteID == 9999 or searchSiteID == 183 or searchSiteID == 373 or searchSiteID == 374:
+                if searchSiteID == 9999 or searchSiteID == 183 or (373 <= searchSiteID <= 374):
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -204,21 +204,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mile High Media
             ###############
             if siteNum == 361:
-                if searchSiteID == 9999 or (searchSiteID >= 361 and searchSiteID <= 364):
+                if searchSiteID == 9999 or (361 <= searchSiteID <= 364):
                     results = PAsearchSites.networkMileHighMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Fantasy Massage
             ###############
             if siteNum == 331:
-                if searchSiteID == 9999 or searchSiteID == 331 or (searchSiteID >= 355 and searchSiteID <= 360) or searchSiteID == 750:
+                if searchSiteID == 9999 or searchSiteID == 331 or (355 <= searchSiteID <= 360) or searchSiteID == 750:
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## 21Sextury
             ###############
             if siteNum == 365:
-                if searchSiteID == 9999 or (searchSiteID >= 365 and searchSiteID <= 372) or searchSiteID == 466 or searchSiteID == 692:
+                if searchSiteID == 9999 or (365 <= searchSiteID <= 372) or searchSiteID == 466 or searchSiteID == 692:
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -316,7 +316,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## 21Sextreme
             ###############
             if siteNum == 460:
-                if searchSiteID == 9999 or (searchSiteID >= 460 and searchSiteID <= 465):
+                if searchSiteID == 9999 or (460 <= searchSiteID <= 465):
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -330,7 +330,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Bang Bros
             ###############
             if siteNum == 83:
-                if searchSiteID == 9999 or (searchSiteID >= 83 and searchSiteID <= 135):
+                if searchSiteID == 9999 or (83 <= searchSiteID <= 135):
                     results = PAsearchSites.siteBangBros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -344,7 +344,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Reality Kings
             ###############
             if siteNum == 137:
-                if searchSiteID == 9999 or (searchSiteID >= 137 and searchSiteID <= 182):
+                if searchSiteID == 9999 or (137 <= searchSiteID <= 182):
                     results = PAsearchSites.siteRealityKings.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -372,14 +372,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Team Skeet
             ###############
             if siteNum == 187:
-                if searchSiteID == 9999 or (searchSiteID >= 187 and searchSiteID <= 215):
+                if searchSiteID == 9999 or (187 <= searchSiteID <= 215):
                     results = PAsearchSites.siteTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Porndoe Premium
             ###############
             if siteNum == 216:
-                if searchSiteID == 9999 or (searchSiteID >= 216 and searchSiteID <= 259):
+                if searchSiteID == 9999 or (216 <= searchSiteID <= 259):
                     results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -393,14 +393,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mofos
             ###############
             if siteNum == 261:
-                if searchSiteID == 9999 or (searchSiteID >= 261 and searchSiteID <= 270) or searchSiteID == 583 or (searchSiteID >= 738 and searchSiteID <= 740):
+                if searchSiteID == 9999 or (261 <= searchSiteID <= 270) or searchSiteID == 583 or (738 <= searchSiteID <= 740):
                     results = PAsearchSites.siteMofos.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Babes
             ###############
             if siteNum == 271:
-                if searchSiteID == 9999 or (searchSiteID >= 271 and searchSiteID <= 276):
+                if searchSiteID == 9999 or (271 <= searchSiteID <= 276):
                     results = PAsearchSites.siteBabes.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -442,28 +442,28 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Twistys
             ###############
             if siteNum == 288:
-                if searchSiteID == 9999 or (searchSiteID >= 288 and searchSiteID <= 291) or searchSiteID == 768:
+                if searchSiteID == 9999 or (288 <= searchSiteID <= 291) or searchSiteID == 768:
                     results = PAsearchSites.siteTwistys.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Spizoo
             ###############
             if siteNum == 293:
-                if searchSiteID == 9999 or searchSiteID == 293 or (searchSiteID >= 571 and searchSiteID <= 577):
+                if searchSiteID == 9999 or searchSiteID == 293 or (571 <= searchSiteID <= 577):
                     results = PAsearchSites.siteSpizoo.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Private
             ###############
             if siteNum == 294:
-                if searchSiteID == 9999 or (searchSiteID >= 294 and searchSiteID <= 305):
+                if searchSiteID == 9999 or (294 <= searchSiteID <= 305):
                     results = PAsearchSites.sitePrivate.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## PornPros Network
             ###############
-            if (siteNum >= 306 and siteNum <= 308) or (siteNum >= 479 and siteNum <= 489) or (siteNum == 624) or (siteNum == 769):
-                if searchSiteID == 9999 or (searchSiteID >= 306 and searchSiteID <= 327) or (searchSiteID >= 479 and searchSiteID <= 489) or searchSiteID == 624 or (searchSiteID == 769):
+            if (306 <= siteNum <= 308) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769:
+                if searchSiteID == 9999 or (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769:
                     results = PAsearchSites.networkPornPros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -477,28 +477,28 @@ class PhoenixAdultAgent(Agent.Movies):
             ## SexyHub
             ###############
             if siteNum == 333 or siteNum == 335 or siteNum == 406 or siteNum == 407:
-                if searchSiteID == 9999 or (searchSiteID >= 333 and searchSiteID <= 339):
+                if searchSiteID == 9999 or (333 <= searchSiteID <= 339):
                     results = PAsearchSites.networkSexyHub.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## FullPornNetwork
             ###############
-            if siteNum >= 343 and siteNum <=350:
-                if searchSiteID == 9999 or (searchSiteID >= 343 and searchSiteID <= 350):
+            if (343 <= siteNum <= 350):
+                if searchSiteID == 9999 or (343 <= searchSiteID <= 350):
                     results = PAsearchSites.networkFPN.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## DogfartNetwork
             ###############
             if siteNum == 408:
-                if searchSiteID == 9999 or (searchSiteID >= 408 and searchSiteID <= 431):
+                if searchSiteID == 9999 or (408 <= searchSiteID <= 431):
                     results = PAsearchSites.networkDogfart.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## FakeHub
             ###############
             if siteNum == 340:
-                if searchSiteID == 9999 or searchSiteID == 340 or (searchSiteID >= 397 and searchSiteID <= 407):
+                if searchSiteID == 9999 or searchSiteID == 340 or (397 <= searchSiteID <= 407):
                     results = PAsearchSites.siteFakeHub.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -540,21 +540,21 @@ class PhoenixAdultAgent(Agent.Movies):
             ## DDFNetwork
             ###############
             if siteNum == 433:
-                if searchSiteID == 9999 or (searchSiteID >= 433 and searchSiteID <= 447) or (searchSiteID >= 546 and searchSiteID <= 547):
+                if searchSiteID == 9999 or (433 <= searchSiteID <= 447) or (546 <= searchSiteID <= 547):
                     results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## PerfectGonzo
             ###############
             if siteNum == 448:
-                if searchSiteID == 9999 or (searchSiteID >= 448 and searchSiteID <= 459):
+                if searchSiteID == 9999 or (448 <= searchSiteID <= 459):
                     results = PAsearchSites.networkPerfectGonzo.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## BadoinkVR Network
             ###############
             if siteNum == 469:
-                if searchSiteID == 9999 or (searchSiteID >= 469 and searchSiteID <= 473):
+                if searchSiteID == 9999 or (469 <= searchSiteID <= 473):
                     results = PAsearchSites.networkBadoinkVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -610,28 +610,28 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Kink
             ###############
             if siteNum == 490:
-                if searchSiteID == 9999 or (searchSiteID >= 490 and searchSiteID <= 521) or searchSiteID == 687 or searchSiteID == 735 or searchSiteID == 736:
+                if searchSiteID == 9999 or (490 <= searchSiteID <= 521) or searchSiteID == 687 or (735 <= searchSiteID <= 736):
                     results = PAsearchSites.networkKink.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Nubiles
             ###############
             if siteNum == 525:
-                if searchSiteID == 9999 or (searchSiteID >= 525 and searchSiteID <= 545) or (searchSiteID >= 755 and searchSiteID <= 756) or (searchSiteID == 766) :
+                if searchSiteID == 9999 or (525 <= searchSiteID <= 545) or (755 <= searchSiteID <= 756) or searchSiteID == 766:
                     results = PAsearchSites.networkNubiles.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## BellaPass
             ###############
             if siteNum == 548:
-                if searchSiteID == 9999 or (searchSiteID >= 548 and searchSiteID <= 563):
+                if searchSiteID == 9999 or (548 <= searchSiteID <= 563):
                     results = PAsearchSites.networkBellaPass.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## AllureMedia
             ###############
             if siteNum == 564 or siteNum == 565:
-                if searchSiteID == 9999 or searchSiteID == 564 or searchSiteID == 565:
+                if searchSiteID == 9999 or (564 <= searchSiteID <= 565):
                     results = PAsearchSites.siteAllureMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -673,28 +673,28 @@ class PhoenixAdultAgent(Agent.Movies):
             ## CzechVR Network
             ###############
             if siteNum == 578:
-                if searchSiteID == 9999 or (searchSiteID >= 578 and searchSiteID <= 580):
+                if searchSiteID == 9999 or (578 <= searchSiteID <= 580):
                     results = PAsearchSites.networkCzechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## FinishesTheJob
             ###############
             if siteNum == 584:
-                if searchSiteID == 9999 or (searchSiteID >= 584 and searchSiteID <= 586):
+                if searchSiteID == 9999 or (584 <= searchSiteID <= 586):
                     results = PAsearchSites.siteFinishesTheJob.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Wankz Network
             ###############
             if siteNum == 587:
-                if searchSiteID == 9999 or (searchSiteID >= 587 and searchSiteID <= 619):
+                if searchSiteID == 9999 or (587 <= searchSiteID <= 619):
                     results = PAsearchSites.networkWankz.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## SexArt / TheLifeErotic / VivThomas
             ###############
             if siteNum == 621:
-                if searchSiteID == 9999 or (searchSiteID >= 621 and searchSiteID <= 623):
+                if searchSiteID == 9999 or (621 <= searchSiteID <= 623):
                     results = PAsearchSites.networkMetArt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
             ###############
             ## Family Strokes
@@ -714,14 +714,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Karups
             ###############
             if siteNum == 628:
-                if searchSiteID == 9999 or (searchSiteID >= 628 and searchSiteID <= 630):
+                if searchSiteID == 9999 or (628 <= searchSiteID <= 630):
                     results = PAsearchSites.siteKarups.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## TeenMegaWorld
             ###############
             if siteNum == 631:
-                if searchSiteID == 9999 or (searchSiteID >= 631 and searchSiteID <= 666):
+                if searchSiteID == 9999 or (631 <= searchSiteID <= 666):
                     results = PAsearchSites.networkTMW.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -770,7 +770,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mylf
             ###############
             if siteNum == 674:
-                if searchSiteID == 9999 or (searchSiteID >= 674 and searchSiteID <= 683) or searchSiteID == 757:
+                if searchSiteID == 9999 or (674 <= searchSiteID <= 683) or searchSiteID == 757:
                     results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -826,7 +826,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## CzechAV
             ###############
             if siteNum == 696:
-                if searchSiteID == 9999 or (searchSiteID >= 696 and searchSiteID <= 728):
+                if searchSiteID == 9999 or (696 <= searchSiteID <= 728):
                     results = PAsearchSites.networkCzechAV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1036,14 +1036,14 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Intersec
             ###############
             if siteNum == 772:
-                if searchSiteID == 9999 or (searchSiteID >= 772 and searchSiteID <= 781):
+                if searchSiteID == 9999 or (772 <= searchSiteID <= 781):
                     results = PAsearchSites.networkIntersec.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Cherry Pimps
             ###############
             if siteNum == 783:
-                if searchSiteID == 9999 or (searchSiteID >= 783 and searchSiteID <= 792):
+                if searchSiteID == 9999 or (783 <= searchSiteID <= 792):
                     results = PAsearchSites.networkCherryPimps.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1087,6 +1087,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 801:
                 if searchSiteID == 9999 or searchSiteID == 801:
                     results = PAsearchSites.siteElegantAngel.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## Family Sinners
+            ###############
+            if siteNum == 802:
+                if searchSiteID == 9999 or searchSiteID == 802:
+                    results = PAsearchSites.siteFamilySinners.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1983,6 +1990,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 801:
             metadata = PAsearchSites.siteElegantAngel.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Family Sinners                                          ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 802:
+            metadata = PAsearchSites.siteFamilySinners.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
