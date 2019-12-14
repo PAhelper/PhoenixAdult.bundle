@@ -1109,6 +1109,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 804:
                     results = PAsearchSites.sitePlayboyPlus.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Meana Wolf
+            ###############
+            if siteNum == 805:
+                if searchSiteID == 9999 or searchSiteID == 805:
+                    results = PAsearchSites.siteMeanaWolf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -2028,6 +2035,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 804:
             metadata = PAsearchSites.sitePlayboyPlus.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Meana Wolf                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 805:
+            metadata = PAsearchSites.siteMeanaWolf.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
