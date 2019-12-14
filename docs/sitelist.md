@@ -266,7 +266,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RoccoSiffredi
   - TeraPatrick
 + #### FamilyHookups | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-+ #### FamilyStrokes | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **DirectURL, Title Search available for some scenes**
++ #### FamilyStrokes | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **Direct URL, Title Search available for some scenes**
 + #### FantasyMassage  | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllGirlMassage
   - FantasyMassage
@@ -296,8 +296,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Twisted Visual
 + #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlfriendsFilms | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
-+ #### Girls Rimming | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Girls Rimming | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### Girlsway | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - GirlCore
   - GirlsTryAnal
@@ -404,7 +404,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - She's A Freak
   - Stranded Teens
 + #### MomPOV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only**
-+ #### Mylf Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL, Date Add**
++ #### Mylf Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - Mylf
   - MylfBoss
   - MylfBlows
@@ -476,7 +476,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
-+ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL, Date Add**
++ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
 + #### Nubiles-porn.com Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
@@ -520,7 +520,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PurePOV
   - SpermSwap
   - TamedTeens
-+ #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL, SceneID**
++ #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, SceneID**
 + #### Porndoe Premium Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - A Girl Knows
   - Badtime Stories
@@ -567,7 +567,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - XXX Omas
   - XXXShades
 + #### PornFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
   - 18YearsOld
   - 40ozBounce
   - CockCompetition
@@ -589,7 +589,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-+ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
   - Baeb
   - CastingCouch-X
   - Cum4K
@@ -666,6 +666,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - VIP Crew
   - We Live Together
   - Wives in Pantyhose
++ #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### SexyHub | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Dane Jones
   - Fitness Rooms
@@ -771,10 +772,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WhenGirlsPlay
 + #### Ultrafilms | Matching type *[Limited](./manualsearch.md#limited-search)*
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
-+ #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **DirectURL**
++ #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
