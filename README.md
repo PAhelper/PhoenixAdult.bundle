@@ -74,7 +74,6 @@ We try to maintain bug-free code, but bugs do happen. If you are having difficul
 Known Limitations
 -----------------
 Some sites do not have many high quality images that can be used as poster or background art. I have found the forums at [ViperGirls.to](https://linkthe.net/?https://www.vipergirls.to) to be a great resource for artwork in these situations.
-Some sites do not work on Linux installations of Plex. Workarounds have been found, but unfortunately this issue lies mostly with the differences in code between Plex Server for Windows and Plex Server for Linux.
 
 Change Log/Updates
 ------------------
