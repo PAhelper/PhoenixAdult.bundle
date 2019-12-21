@@ -567,7 +567,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Xchimera
   - XXX Omas
   - XXXShades
-+ #### PornFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### PornFidelity Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - PornFidelity
+  - TeenFidelity
 + #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - 18YearsOld
   - 40ozBounce
@@ -700,7 +702,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - BraceFaced
   - CFNM Teens
   - Dyked
-  - Exxxtra small
+  - Exxxtra Small
   - Gingerpatch
   - Her Freshman Year
   - Innocent High
@@ -726,7 +728,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Titty Attack
 + #### Other TeamSkeet Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - DadCrush
-+ #### TeenFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs
