@@ -201,7 +201,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
-+ #### DadCrush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 1By-Day
   - Cherry Jul
@@ -385,7 +384,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RealityJunkies
   - SweetheartVideo
   - SweetSinner
-+ #### Other MileHighNetwork sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Other MileHighNetwork Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - BellesaFilms
   - FamilySinners
 + #### MissaX | Matching type: *[Limited](./manualsearch.md#limited-search)*
@@ -591,7 +590,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-+ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### Other PornPros Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - Baeb
   - CastingCouch-X
   - Cum4K
@@ -725,6 +724,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - The Real Workout
   - This Girl Sucks
   - Titty Attack
++ #### Other TeamSkeet Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
+  - DadCrush
 + #### TeenFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
