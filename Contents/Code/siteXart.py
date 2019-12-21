@@ -385,7 +385,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.clearGenres()
     # No Source for Genres, add manual
     movieGenres.addGenre("Artistic")
-    movieGenres.addGenre("Glamcore")
+    movieGenres.addGenre("Glamorous")
 
     # Actors 
     movieActors.clearActors()

@@ -113,10 +113,9 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = ["Glamcore", "Glam"] # site has no genres listed, but some should be put in manually describing the overall genre of the site?
+    genres = ["Glamorous"]
     for genre in genres:
         movieGenres.addGenre(genre)
-        # Log("Genre: " + genre)
 
     # Posters/Background
     valid_names = list()
