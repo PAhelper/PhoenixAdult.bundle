@@ -463,13 +463,13 @@ class PhoenixGenres:
                 newGenre = "pornstar"
 
             ##### Position
-            if "doggystyle" or "doggy style" in newGenre.lower():
+            if "doggystyle" in newGenre.lower() or "doggy style" in newGenre.lower():
                 newGenre = "doggystyle (Position)"
             if "cow girl" == newGenre.lower() or "cowgirl" == newGenre.lower() or "cowgirl (pov)" == newGenre.lower():
                 newGenre = "cowgirl (Position)"
             if "reverse cow girl" == newGenre.lower() or "reverse cowgirl" == newGenre.lower() or "reverse cowgirl (pov)" == newGenre.lower() or "cowgirl - pov" == newGenre.lower():
                 newGenre = "reverse cowgirl (Position)"
-            if "missionary" in newGenre.lower():
+            if "missionary" == newGenre.lower() or "missionary (pov)" == newGenre.lower() or "missionary - pov" == newGenre.lower():
                 newGenre = "missionary (Position)"
             if "sixty-nine" == newGenre.lower() or "69" == newGenre.lower() or "69 position" == newGenre.lower():
                 newGenre = "69 (Position)"
