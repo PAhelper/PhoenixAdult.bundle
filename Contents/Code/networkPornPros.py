@@ -2,26 +2,25 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAextras
-from lxml.html.soupparser import fromstring
+
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
-    try:
-        Log('This is repeating')
-        searchResult = HTML.ElementFromURL(url)
-    except:
-        Log('That is repeating')
-        response = urllib.urlopen(url)
-        htmlstring = response.read()
-        searchResult = fromstring(htmlstring)
+    searchResult = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
     curID = searchTitle.lower().replace(" ","-").replace("'","-")
-    releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+    try:
+        releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+    except:
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -30,12 +29,8 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     url = PAsearchSites.getSearchSearchURL(siteID) + temp
     Log('scene url: ' + url)
-    try:
-        detailsPageElements = HTML.ElementFromURL(url)
-    except:
-        response = urllib.urlopen(url)
-        htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring)
+    detailsPageElements = HTML.ElementFromURL(url)
+
 
     metadata.studio = "Porn Pros"
 
@@ -73,7 +68,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             titleActors = titleActors + actorName + " & "
             Log("actorPhoto: " + actorPhotoURL)
             movieActors.addActor(actorName,actorPhotoURL)
-        titleActors = titleActors[:-3]
 
     # Manually Add Actors
     # Add Actor Based on Title
@@ -84,8 +78,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorName = "Dillion Harper"
         actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
-
-
 
     # Genres
     movieGenres.clearGenres()
@@ -114,6 +106,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "GirlCum".lower():
         for genreName in ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms']:
             movieGenres.addGenre(genreName)
+    elif siteName.lower() == "PassionHD".lower():
+        for genreName in ['Hardcore']:
+            movieGenres.addGenre(genreName)
     # Based on number of actors
     if len(actors) == 3:
         movieGenres.addGenre('Threesome')
@@ -132,11 +127,19 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Date
-    date = detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()
-    Log('Date: ' + date)
-    date_object = datetime.strptime(date, '%B %d, %Y')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    try:
+        date = detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()
+        if len(date) > 0:
+            date_object = datetime.strptime(date, '%B %d, %Y')
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+    except:
+        date = str(metadata.id).split("|")[2]
+        if len(date) > 0:
+            date_object = parse(date)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
+            Log("Date from file")
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
