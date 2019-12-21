@@ -5,17 +5,25 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    for searchResult in searchResults.xpath('//article[@class="release-card scene"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="card-title"]/a')[0].text_content().strip()
-        curID = searchResult.xpath('.//div[@class="card-title"]/a')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[@class="site-domain"]')[0].text_content().strip()
-        releaseDate = parse(searchResult.xpath('.//div[@class="release-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/" + subSite + "] " + releaseDate, score = score, lang = lang))
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
+    searchResult = HTML.ElementFromURL(url)
+
+    titleNoFormatting = searchResult.xpath('//div[@class="card-title"]/a')[0].text_content().strip()
+    curID = url.replace('/','_').replace('?','!')
+    subSite = searchResult.xpath('//div[@class="site-domain"]')[0].text_content().strip()
+    releaseDate = parse(searchResult.xpath('//div[@class="releasedate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+    if sceneTitle:
+        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 90
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Studio Name/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -73,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = actorPage.xpath('//img[@class="model_bio_thumb"]')[0].get("src")
                 if 'http' not in actorPhotoURL:
-            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             except:
                 actorPhotoURL = ""
             movieActors.addActor(actorName,actorPhotoURL)
