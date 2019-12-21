@@ -569,7 +569,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - XXX Omas
   - XXXShades
 + #### PornFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - 18YearsOld
   - 40ozBounce
   - CockCompetition
@@ -591,7 +591,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-+ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - Baeb
   - CastingCouch-X
   - Cum4K
