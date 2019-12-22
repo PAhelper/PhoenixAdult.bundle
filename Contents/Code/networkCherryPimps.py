@@ -8,9 +8,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchPageNum = 1
     while searchPageNum <= 2:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + "%22" + encodedTitle + "%22" + "&page=" + str(searchPageNum))
-        for searchResult in searchResults.xpath('//div[@class="video-thumb "]'):
-            titleNoFormatting = searchResult.xpath('.//p[@class="text-thumb"]//a')[0].text_content().strip()
-            curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
+        for searchResult in searchResults.xpath('//div[@class="video-thumb  "]'):
+            titleNoFormatting = searchResult.xpath('.//p[@class="text-thumb"]/a[1]')[0].text_content().strip()
+            curID = searchResult.xpath('.//p[@class="text-thumb"]/a[1]')[0].get('href').replace('/','_').replace('?','!')
             subSite = searchResult.xpath('.//p[@class="text-thumb"]//a[@class="badge"]')[0].text_content().strip()
             releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().split("|")[1].strip()).strftime('%Y-%m-%d')
             actorNames = ""
@@ -24,7 +24,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            Log("Score: " + str(score))
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = actorNames + " in " + titleNoFormatting + " [CherryPimps/"+subSite+"] " + releaseDate, score = score, lang = lang))
         searchPageNum += 1
 
