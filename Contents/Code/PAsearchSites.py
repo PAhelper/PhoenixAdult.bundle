@@ -104,8 +104,9 @@ import siteFamilySinners
 import siteReidMyLips
 import sitePlayboyPlus
 import siteMeanaWolf
+import siteTranssensual
 
-searchSites = [None] * 806
+searchSites = [None] * 807
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -434,7 +435,7 @@ searchSites[324] = ["CumDisgrace","CumDisgrace","https://www.pornpros.com","http
 searchSites[325] = ["CockCompetition","CockCompetition","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
-searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com"]
+searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com/scene/"]
 searchSites[329] = ["Throated","Throated","https://www.blowpass.com","https://www.blowpass.com/en/search/throated/scene/"]
 
 searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.fantasymassage.com","https://www.fantasymassage.com/en/search/"]
@@ -912,6 +913,7 @@ searchSites[802] = ["Family Sinners","Family Sinners","https://www.familysinners
 searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","https://www.reidmylips.com/"]
 searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search?query="]
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
+searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://www.transsensual.com/scene/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1001,7 +1003,6 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ddfb ', 'DDFBusty ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ddfvr ', 'DDFNetworkVR ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^Digital Playground ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
