@@ -63,6 +63,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 releaseDate = ''
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Cheater, Cheater MILF Dick Teaser" + " [Mylf]", score = 101, lang = lang))
+        if searchTitle == "2059/rich milf, wet pussy":
+            Log("Manual Search Match")
+            curID = ("https://www.mylf.com/movies/2059/rich-milf,-wet-pussy")
+            curID = curID.replace('/','_').replace('?','!').replace(',','+')
+            Log(str(curID))
+            if searchDate:
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+            else:
+                releaseDate = ''
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Rich MILF, Wet Pussy" + " [Mylf]", score = 101, lang = lang))
 
     return results
 
