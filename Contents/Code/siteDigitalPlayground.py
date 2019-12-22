@@ -13,7 +13,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
 
-    url = "https://www.digitalplayground.com/scene/" + sceneID + "/1"
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResult = HTML.ElementFromURL(url)
     titleNoFormatting = searchResult.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer for','').replace('Trailer','').strip()
     curID = url.replace('/','_').replace('?','!')
@@ -71,11 +71,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = PAsearchSites.getSearchSiteName(siteID).strip()
         metadata.tagline = tagline
         metadata.collections.add(tagline)
-
-    # Movie Collection
-    if sceneType == "Movie":
-        movieCollection = metadata.title
-        metadata.collections.add(movieCollection)
 
     # Genres
     genres = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[1]/a')
