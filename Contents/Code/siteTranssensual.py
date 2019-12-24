@@ -12,19 +12,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
-    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
-    searchResults = HTML.ElementFromURL(url)
-    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
-        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().replace('Trailer','').strip()
-        curID = url.replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
-        if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-        else:
-            score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Mofos/" + subSite + "] ", score = score, lang = lang))
 
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    searchResult = HTML.ElementFromURL(url)
+    titleNoFormatting = searchResult.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    curID = url.replace('/','_').replace('?','!')
+    if sceneTitle:
+        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+    else:
+        score = 90
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Transsensual] ", score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -37,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'Mofos'
+    metadata.studio = 'Mile High Media'
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
@@ -49,7 +48,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -72,19 +71,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     try:
         actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
         if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
             for actorLink in actors:
                 actorName = str(actorLink.text_content().strip())
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                Log("actorPageURL: " + actorPageURL)
-                actorPage = HTML.ElementFromURL(actorPageURL)
                 try:
-                    actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    detailsActorPage = HTML.ElementFromURL(actorPageURL)
+                    actorPhotoURL = detailsActorPage.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get('src')
                 except:
                     actorPhotoURL = ''
                 movieActors.addActor(actorName, actorPhotoURL)
@@ -93,7 +85,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     ### Posters and artwork ###
 
-    # Video trailer background image
+    # Video trailer background image (Scene)
     try:
         twitterBG = detailsPageElements.xpath('//div[@class="tg5e7m-2 evtSOm"]/img')[0].get('src')
         art.append(twitterBG)

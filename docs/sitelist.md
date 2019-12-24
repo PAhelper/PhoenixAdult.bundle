@@ -29,7 +29,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Title Search available for some scenes**
++ #### Babes Network
+  ##### Matching type (main): *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  ##### Matching type (alternate): *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - Babes
   - Babes Unleashed
   - Black is Better
@@ -118,10 +120,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MommyBlowsBest
   - OnlyTeenBlowjobs
   - Throated
-+ #### Brazzers Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only** **SceneID**
++ #### Brazzers Network
+  ##### Matching type (main): *[Limited](./manualsearch.md#limited-search)* - **Title only.**
+  ##### Matching type (alternate): *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Asses In Public
   - Baby Got Boobs
-  - Big Butts like it big
+  - Big Butts Like It Big
   - Big Tits at School
   - Big Tits at Work
   - Big Tits in Sports
@@ -160,7 +164,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Family.XXX
   - Petite.XXX
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
-+ #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **DVDs not supported**
++ #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, DVDs not supported**
 + #### ClubSeventeen | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
@@ -201,7 +205,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
-+ #### DadCrush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 1By-Day
   - Cherry Jul
@@ -219,7 +222,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Only Blowjob
   - Sandy's Fantasies
   - Sex Video Casting
-+ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **Scenes from Movies not supported**
++ #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
   - BlackMeatWhiteFeet
@@ -266,7 +269,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RoccoSiffredi
   - TeraPatrick
 + #### FamilyHookups | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-+ #### FamilyStrokes | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **Direct URL, Title Search available for some scenes**
++ #### FamilyStrokes
+  ##### Matching type (main): *[Exact](./manualsearch.md#exact-match)*  - **Direct URL**
+  ##### Matching type (alternate): *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### FantasyMassage  | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllGirlMassage
   - FantasyMassage
@@ -323,7 +328,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sexually Broken
   - Topgrl
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**
   - GirlGirl
   - JulesJordan
   - ManuelFerrara
@@ -380,14 +385,15 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MetArtX
   - SexArt
   - Viv Thomas
-+ #### MileHighNetwork | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID** **Movies Not Supported**
++ #### MileHighNetwork | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Movies Not Supported**
   - DoghouseDigital
   - RealityJunkies
   - SweetheartVideo
   - SweetSinner
-+ #### Other MileHighNetwork sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Other MileHighNetwork Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Movies Not Supported**
   - BellesaFilms
   - FamilySinners
+  - Transsensual
 + #### MissaX | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Mofos Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Don't Break Me
@@ -568,7 +574,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Xchimera
   - XXX Omas
   - XXXShades
-+ #### PornFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### PornFidelity Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - PornFidelity
+  - TeenFidelity
 + #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - 18YearsOld
   - 40ozBounce
@@ -591,7 +599,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-+ #### Other PornPros sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### Other PornPros Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - Baeb
   - CastingCouch-X
   - Cum4K
@@ -701,7 +709,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - BraceFaced
   - CFNM Teens
   - Dyked
-  - Exxxtra small
+  - Exxxtra Small
   - Gingerpatch
   - Her Freshman Year
   - Innocent High
@@ -725,7 +733,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - The Real Workout
   - This Girl Sucks
   - Titty Attack
-+ #### TeenFidelity | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Other TeamSkeet Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
+  - DadCrush
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs

@@ -1116,6 +1116,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 805:
                     results = PAsearchSites.siteMeanaWolf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Transsensual
+            ###############
+            if siteNum == 806:
+                if searchSiteID == 9999 or searchSiteID == 806:
+                    results = PAsearchSites.siteTranssensual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -2043,6 +2050,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 805:
             metadata = PAsearchSites.siteMeanaWolf.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Transsensual                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 806:
+            metadata = PAsearchSites.siteTranssensual.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

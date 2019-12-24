@@ -176,10 +176,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    try:
-        actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
-    except:
-        pass
+    actors = detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a')
     if len(actors) > 0:
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
@@ -188,7 +185,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL(actorPageURL)
                 actorPhotoURL = actorPage.xpath('//div[@class="cell_top cell_thumb"]/img').get('src')
                 if 'http' not in actorPhotoURL:
-            	    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             except:
                 actorPhotoURL = ''
             movieActors.addActor(actorName,actorPhotoURL)
@@ -367,6 +364,38 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
     if "Emma Wilson" in metadata.title or "Emma Wilson" in metadata.summary:
         actorName = "Emma Wilson"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Kenzie Reeves" in metadata.title or "Kenzie Reeves" in metadata.summary:
+        actorName = "Kenzie Reeves"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Devon Green" in metadata.title or "Devon Green" in metadata.summary:
+        actorName = "Devon Green"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Jane Wilde" in metadata.title or "Jane Wilde" in metadata.summary:
+        actorName = "Jane Wilde"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Lena Anderson" in metadata.title or "Lena Anderson" in metadata.summary:
+        actorName = "Lena Anderson"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Lilly Banks" in metadata.title or "Lilly Banks" in metadata.summary:
+        actorName = "Lilly Banks"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Linda Lay" in metadata.title or "Linda Lay" in metadata.summary:
+        actorName = "Linda Lay"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Belle Knox" in metadata.title or "Belle Knox" in metadata.summary:
+        actorName = "Belle Knox"
+        actorPhotoURL = ''
+        movieActors.addActor(actorName, actorPhotoURL)
+    if "Miley May" in metadata.title or "Miley May" in metadata.summary:
+        actorName = "Miley May"
         actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
 
