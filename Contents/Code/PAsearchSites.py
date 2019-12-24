@@ -539,7 +539,7 @@ searchSites[428] = ["BarbCummings","BarbCummings","https://www.dogfartnetwork.co
 searchSites[429] = ["TheMinion","TheMinion","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[430] = ["BlacksOnBoys","BlacksOnBoys","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[431] = ["GloryholesAndHandjobs","GloryholesAndHandjobs","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
-searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com","https://www.julesjordan.com/trial/search.php?query="]
+searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com","http://www.julesjordan.com/trial/search.php?st=advanced&qall="]
 searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
