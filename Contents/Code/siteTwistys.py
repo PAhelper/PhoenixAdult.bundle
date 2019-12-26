@@ -15,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
-        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().replace('Trailer','').strip()
+        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
         subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
         if sceneTitle:
