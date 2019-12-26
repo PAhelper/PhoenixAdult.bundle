@@ -106,8 +106,10 @@ import sitePlayboyPlus
 import siteMeanaWolf
 import siteTranssensual
 import siteDaughterSwap
+import siteErito
+import siteTrueAmateurs
 
-searchSites = [None] * 808
+searchSites = [None] * 810
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -916,6 +918,8 @@ searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com",
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
 searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://www.transsensual.com/scene/"]
 searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://www.daughterswap.com/movies/"]
+searchSites[808] = ["Erito","Erito","https://www.erito.com","https://www.erito.com/scene/"]
+searchSites[809] = ["True Amateurs","True Amateurs","https://www.trueamateurs.com","https://www.trueamateurs.com/scene/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
