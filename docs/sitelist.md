@@ -251,6 +251,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Dorcel Vision | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Elegant Angel | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Only DVDs supported**
 + #### EvilAngel | Matching type: *[Exact](./manualsearch.md#exact-match)*  - **SceneID**
++ #### Erito | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
 + #### FakeHub | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
   - Fake Agent
   - Fake Agent UK
@@ -735,6 +736,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Titty Attack
 + #### Other TeamSkeet Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
   - DadCrush
+  - DaughterSwap
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs
@@ -775,6 +777,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
 + #### TransAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### TrenchcoatX | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### True Amateurs | Matching type: *[Exact](./manualsearch.md#excact-match)* - **SceneID**
 + #### Twistys | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - MomKnowsBest
   - TurningTwistys
