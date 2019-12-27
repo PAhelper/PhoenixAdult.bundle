@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("SceneID: " + sceneID)
     try:
         sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
-except:
+    except:
         sceneTitle = ''
     Log("Scene Title: " + sceneTitle)
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
