@@ -141,7 +141,7 @@ class PhoenixActors:
                 newActor = "Steven St. Croix"
             if newActor == "Sybil Kailena" or newActor == "Sybil":
                 newActor = "Sybil A"
-            if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay":
+            if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay" or newActor == "Tiny Teen / Eva Elfie":
                 newActor = "Eva Elfie"
             if newActor == "Veronica Vega":
                 newActor = "Veronica Valentine"
