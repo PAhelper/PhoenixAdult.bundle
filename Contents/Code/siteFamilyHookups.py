@@ -17,12 +17,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
         titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        else:
+            releaseDate = ''
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [FamilyHookups] ", score = score, lang = lang))
-
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [FamilyHookups] ", score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
