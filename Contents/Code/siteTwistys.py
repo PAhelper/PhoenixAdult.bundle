@@ -14,10 +14,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Scene Title: " + sceneTitle)
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
-    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
-        titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
+        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//div[2]/a/div[2]')[0].text_content().strip()
+        subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
@@ -52,12 +52,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[2]/div[2]')[0].text_content().strip()
+        metadata.summary = detailsPageElements.xpath('//div[@class="tjb798-2 flgKJM"]/span[position()=last()-1]/div[2]')[0].text_content().strip()
     except:
         pass
 
     # Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bKVlBB"]')[0].text_content().strip()
+    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 

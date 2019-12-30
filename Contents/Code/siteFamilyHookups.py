@@ -14,8 +14,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     Log("Scene Title: " + sceneTitle)
     url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
     searchResults = HTML.ElementFromURL(url)
-    for searchResult in searchResults.xpath('//div[@class="wxt7nk-2 fCFhuf"]'):
-        titleNoFormatting = searchResult.xpath('.//h1')[0].text_content().strip()
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
+        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
@@ -26,7 +26,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 90
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [FamilyHookups] ", score = score, lang = lang))
-
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):

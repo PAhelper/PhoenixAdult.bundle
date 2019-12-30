@@ -16,12 +16,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
         titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().replace('Trailer','').strip()
         curID = url.replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]')[0].text_content().strip()
         if sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
             score = 90
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [SexyHub/" + subSite + "] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Erito] ", score = score, lang = lang))
 
     return results
 
@@ -36,10 +35,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'SexyHub'
+    metadata.studio = 'Erito'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().replace('Trailer','').strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="wxt7nk-4 fSsARZ"]')[0].text_content().strip()
 
     # Summary
     try:
@@ -48,9 +47,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     #Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//div[@class="sc-11m21lp-2 bYxGJu"]/text()')[0].strip()
-    if "Mom XXX" in tagline:
-        tagline = "MomXXX"
+    tagline = 'Erito'
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -69,43 +66,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    try:
-        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
-        if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
-            for actorLink in actors:
-                actorName = str(actorLink.text_content().strip())
-                try:
-                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                    Log("actorPageURL: " + actorPageURL)
-                    actorPage = HTML.ElementFromURL(actorPageURL)
-                    actorPhotoURL = actorPage.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]/div/img')[0].get("src")
-                except:
-                    actorPhotoURL = ''
-                movieActors.addActor(actorName, actorPhotoURL)
-    except:
-        pass
-
     ### Posters and artwork ###
 
     # Video trailer background image
     try:
-        site = detailsPageElements.xpath('//div[@class="wxt7nk-3 gsvQoQ"]/a')[0].get('href').split('=')[-1]
-        BGPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//a[@class= "sc-1ji9c7-0 kAyxis"]')[0].get('href').replace("&sortby=date", "&site=") + site
-        BGPage = HTML.ElementFromURL(BGPageURL)
-        for scene in BGPage.xpath('//div[@class="sc-EHOje bBeIha"]'):
-            if metadata.title in scene.xpath('.//a[contains(@class, "hupvSc")]')[0].get('title'):
-                Log(metadata.title)
-                BGPhotoURL = scene.xpath('.//img')[0].get("src")
-                art.append(BGPhotoURL.replace("webp", ".jpg"))
+        twitterBG = detailsPageElements.xpath('//div[@class="tg5e7m-2 evtSOm"]/img')[0].get('src')
+        art.append(twitterBG)
     except:
-        Log("Error with BG Image")
         pass
 
     j = 1

@@ -5,23 +5,23 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-        sceneID = encodedTitle.split('%20', 1)[0]
-        Log("SceneID: " + sceneID)
-        try:
-            sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
-        except:
-            sceneTitle = ''
-        Log("Scene Title: " + sceneTitle)
-        url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
-        searchResults = HTML.ElementFromURL(url)
-        for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 bsAFqW"]'):
-            titleNoFormatting = searchResult.xpath('.//div[1]/h1')[0].text_content().strip()
-            curID = url.replace('/','_').replace('?','!')
-            if sceneTitle:
-                score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-            else:
-                score = 90
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Property Sex] ", score = score, lang = lang))
+    sceneID = encodedTitle.split('%20', 1)[0]
+    Log("SceneID: " + sceneID)
+    try:
+        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
+    except:
+        sceneTitle = ''
+    Log("Scene Title: " + sceneTitle)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + "/1"
+    searchResults = HTML.ElementFromURL(url)
+    for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h1'):
+        titleNoFormatting = searchResult.xpath('//div[1]/h1')[0].text_content().strip()
+        curID = url.replace('/','_').replace('?','!')
+        if sceneTitle:
+            score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+        else:
+            score = 90
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [PropertySex] ", score = score, lang = lang))
 
     return results
 

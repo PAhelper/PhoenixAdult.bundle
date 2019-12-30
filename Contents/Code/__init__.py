@@ -113,7 +113,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## GirlsWay
             ###############
             if siteNum == 53:
-                if searchSiteID == 9999 or searchSiteID == 53 or (375 <= searchSiteID <= 379) or (794 <= searchSiteID <= 797):
+                if searchSiteID == 9999 or searchSiteID == 53 or (375 <= searchSiteID <= 379) or (795 <= searchSiteID <= 797):
                     results = PAsearchSites.siteGirlsWay.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1123,6 +1123,27 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 806:
                     results = PAsearchSites.siteTranssensual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## DaughterSwap
+            ###############
+            if siteNum == 807:
+                if searchSiteID == 9999 or searchSiteID == 807:
+                    results = PAsearchSites.siteDaughterSwap.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+ 
+            ###############
+            ## Erito
+            ###############
+            if siteNum == 808:
+                if searchSiteID == 9999 or searchSiteID == 808:
+                    results = PAsearchSites.siteErito.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## TrueAmateurs
+            ###############
+            if siteNum == 809:
+                if searchSiteID == 9999 or searchSiteID == 809:
+                    results = PAsearchSites.siteTrueAmateurs.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                  
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -1976,7 +1997,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  GirlsWay                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or (siteID >=  375 and siteID <= 379) or (siteID >=  794 and siteID <= 797):
+        if siteID == 53 or (siteID >=  375 and siteID <= 379) or (siteID >=  795 and siteID <= 797):
             metadata = PAsearchSites.siteGirlsWay.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -2058,6 +2079,30 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 806:
             metadata = PAsearchSites.siteTranssensual.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  DaughterSwap                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 807:
+            metadata = PAsearchSites.siteDaughterSwap.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Erito                                                   ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 808:
+            metadata = PAsearchSites.siteErito.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  TrueAmateurs                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 809:
+            metadata = PAsearchSites.siteTrueAmateurs.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

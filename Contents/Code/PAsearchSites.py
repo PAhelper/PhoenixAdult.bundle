@@ -105,8 +105,11 @@ import siteReidMyLips
 import sitePlayboyPlus
 import siteMeanaWolf
 import siteTranssensual
+import siteDaughterSwap
+import siteErito
+import siteTrueAmateurs
 
-searchSites = [None] * 807
+searchSites = [None] * 810
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -378,7 +381,7 @@ searchSites[267] = ["Stranded Teens","Stranded Teens","https://www.mofos.com","h
 searchSites[268] = ["Mofos B Sides","Mofos B Sides","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[269] = ["Shes a Freak","She's a Freak","https://www.mofos.com","https://www.mofos.com/scene/"]
 searchSites[270] = ["Public Pickups","Public Pickups","https://www.mofos.com","https://www.mofos.com/scene/"]
-searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/search?q="]
+searchSites[271] = ["Babes","Babes","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[272] = ["Babes Unleashed","Babes Unleashed","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com","https://www.babes.com/scene/"]
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://www.babes.com/scene/"]
@@ -447,7 +450,7 @@ searchSites[336] = ["Girlfriends.xxx","Girlfriends.xxx","https://www.sexyhub.com
 searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
-searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/scene/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[342] = ["VirtualRealPorn","VirtualRealPorn","https://virtualrealporn.com/","https://virtualrealporn.com/vr-porn-video/"]
 searchSites[343] = ["Analized","Analized","https://www.analized.com","https://analized.com/search.php?query="]
@@ -914,6 +917,9 @@ searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","http
 searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search?query="]
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
 searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://www.transsensual.com/scene/"]
+searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://www.daughterswap.com/movies/"]
+searchSites[808] = ["Erito","Erito","https://www.erito.com","https://www.erito.com/scene/"]
+searchSites[809] = ["True Amateurs","True Amateurs","https://www.trueamateurs.com","https://www.trueamateurs.com/scene/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
