@@ -947,11 +947,11 @@ def getSearchSiteIDByFilter(searchFilter):
         searchID += 1
     return 9999
 def getSearchSettings(mediaTitle):
+    mediaTitle = mediaTitle.lower()
     mediaTitle = mediaTitle.replace(".", " ")
     mediaTitle = mediaTitle.replace(" - ", " ")
     mediaTitle = mediaTitle.replace("-", " ")
     mediaTitle = mediaTitle.strip()
-    mediaTitle = mediaTitle.lower()
 
     # Search Site abbreviations
     # Using Regex instead of .replace or .startswith so it can be case insensitive
