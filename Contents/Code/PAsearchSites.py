@@ -954,7 +954,8 @@ def getSearchSettings(mediaTitle):
 
     # Search Site abbreviations
     # Using Regex instead of .replace or .startswith so it can be case insensitive
-    Log("mediaTitle w/ possible abbrieviation: " + mediaTitle)
+    Log("mediaTitle w/ possible abbreviation: " + mediaTitle)
+    mediaTitle = re.sub('^18og ', '18OnlyGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^1kf ', '1000Facials ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^21ea ', '21EroticAnal ', mediaTitle, flags=re.IGNORECASE)
