@@ -947,7 +947,6 @@ def getSearchSiteIDByFilter(searchFilter):
         searchID += 1
     return 9999
 def getSearchSettings(mediaTitle):
-    mediaTitle = mediaTitle.lower()
     mediaTitle = mediaTitle.replace(".", " ")
     mediaTitle = mediaTitle.replace(" - ", " ")
     mediaTitle = mediaTitle.replace("-", " ")
