@@ -450,7 +450,7 @@ searchSites[336] = ["Girlfriends.xxx","Girlfriends.xxx","https://www.sexyhub.com
 searchSites[337] = ["Lesbea","Lesbea","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[338] = ["Massage Rooms","Massage Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[339] = ["MomXXX","MomXXX","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
-searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/search/videos/"]
+searchSites[340] = ["FakeHub","FakeHub","https://www.fakehub.com","https://www.fakehub.com/scene/"]
 searchSites[341] = ["Big Cock Bully","Big Cock Bully","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[342] = ["VirtualRealPorn","VirtualRealPorn","https://virtualrealporn.com/","https://virtualrealporn.com/vr-porn-video/"]
 searchSites[343] = ["Analized","Analized","https://www.analized.com","https://analized.com/search.php?query="]
