@@ -82,7 +82,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 releaseDate = parse(searchDate).strftime('%Y-%m-%d')
             else:
                 releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Rich MILF, Wet Pussy" + " [Mylf]", score = 101, lang = lang))
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Trick Or Treat, Stroke And Repeat" + " [Mylf]", score = 101, lang = lang))
 
     return results
 
