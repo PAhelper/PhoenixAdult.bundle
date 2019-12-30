@@ -29,9 +29,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Babes Network
-  ##### Matching type (main): *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-  ##### Matching type (alternate): *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Babes
   - Babes Unleashed
   - Black is Better
