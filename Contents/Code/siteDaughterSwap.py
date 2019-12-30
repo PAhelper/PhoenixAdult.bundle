@@ -11,7 +11,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResult = HTML.ElementFromURL(url)
     titleNoFormatting = searchResult.xpath('//p[@class="video-title hidden-xs"]')[0].text_content().strip()
     curID = url.replace('/','_').replace('?','!')
-    subSite = "DadCrush"
+    subSite = "DaughterSwap"
     if searchDate:
         releaseDate = parse(searchDate).strftime('%Y-%m-%d')
     else:
