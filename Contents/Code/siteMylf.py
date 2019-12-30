@@ -5,7 +5,7 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","")
+    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").lower()
     Log("searchString: " + searchString)
     if "/" not in searchString:
         searchString = searchString.replace("-","/",1)
