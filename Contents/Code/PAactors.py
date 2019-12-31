@@ -49,6 +49,8 @@ class PhoenixActors:
                 newActor = "Anastasia Morna"
             if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
                 newActor = "April O'Neil"
+            if newActor == "Ashley Graham":
+                newActor = "Ashlee Graham"
             if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
                 newActor = "Britney Beth"
             if newActor == "Bridgette B.":
@@ -156,6 +158,12 @@ class PhoenixActors:
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
+               if newActor == "Ariel":
+                   newActor = "Ariel Piper Fawn"
+               if newActor == "Aiko May":
+                   newActor = "Aika May"
+               if newActor == "Clover":
+                   newActor = "Katya Clover"
             if metadata.studio == "Bang Bros":
                if newActor == "Amy":
                     newActor = "Abella Anderson"
