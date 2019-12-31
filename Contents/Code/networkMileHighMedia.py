@@ -77,7 +77,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     try:
-        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
+        actors = detailsPageElements.xpath('//div[@class="wxt7nk-5 cWGMuL"]/span/a')
         if len(actors) > 0:
             if len(actors) == 3:
                 movieGenres.addGenre("Threesome")
@@ -89,6 +89,8 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorName = str(actorLink.text_content().strip())
                 try:
                     actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                    if "60800" in actorPageURL:
+                        actorName = "Lovita Fate"
                     detailsActorPage = HTML.ElementFromURL(actorPageURL)
                     actorPhotoURL = detailsActorPage.xpath('//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get('src')
                 except:
