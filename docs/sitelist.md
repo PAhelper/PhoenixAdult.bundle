@@ -783,7 +783,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Twistys
   - TwistysHard
   - WhenGirlsPlay
-+ #### Ultrafilms | Matching type *[Limited](./manualsearch.md#limited-search)*
++ #### Ultrafilms | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
