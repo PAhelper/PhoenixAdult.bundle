@@ -5,6 +5,7 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
+    # Advanced Search
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="item-info clear"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].text_content().strip()
@@ -17,6 +18,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Femdom Empire] " + releaseDate, score = score, lang = lang))
 
+    # Difficult Scenes
     if searchTitle == "Extreme Strap on Training":
         Log("Manual Search Match")
         curID = ("https://femdomempire.com/tour/trailers/EXTREMEStrap-OnTraining.html").replace('/','_')
@@ -37,6 +39,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = ("https://femdomempire.com/tour/trailers/OralServitude.html").replace('/','_')
         Log(str(curID))
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "Oral Servitude" + " [Femdom Empire] " + "2012.04.08", score = 101, lang = lang))
+
+    if len(results) > 0:
+        return results
+
+    # Standard Search
+    else:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + "/tour/search.php?query=" + encodedTitle)
+        for searchResult in searchResults.xpath('//div[@class="item-info clear"]'):
+            titleNoFormatting = searchResult.xpath('.//a')[0].text_content().strip()
+            scenePage = searchResult.xpath('.//a')[0].get('href')
+            curID = scenePage.replace('/', '_').replace('?', '!')
+            releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Femdom Empire] " + releaseDate, score = score, lang = lang))
 
     return results
 
