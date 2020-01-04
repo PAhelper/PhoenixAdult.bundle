@@ -28,6 +28,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PixandVideo
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### AmourAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Babes Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Babes
