@@ -7,8 +7,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    url = "%s%s/" % (PAsearchSites.getSearchSearchURL(siteNum), searchTitle.replace(' ', '%2B'))
-    searchResults = HTML.ElementFromURL(url)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//li[contains(@class, "item-list")]'):
         sceneTitle = searchResult.xpath('.//dt')[0].text_content().strip()
         sceneID = searchResult.xpath('.//img/@alt')[0]
@@ -16,7 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = sceneURL.replace('/', '$').replace('?', '!')
         score = 100 - Util.LevenshteinDistance(searchTitle.replace(' ', '-').lower(), sceneID.lower())
 
-        results.Append(MetadataSearchResult(id="%s|%s" % (curID, str(siteNum)), name=sceneTitle, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%s' % (curID, str(siteNum)), name='[%s] %s' % (sceneID, sceneTitle), score=score, lang=lang))
 
     return results
 
@@ -24,9 +23,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('$', '/').replace('?', '!')
+    url = str(metadata.id).split('|')[0].replace('$', '/').replace('?', '!')
     detailsPageElements = HTML.ElementFromURL(url)
-    art = []
 
     # Title
     metadata.title = detailsPageElements.xpath('//cite[@itemprop="name"]')[0].text_content().strip()
@@ -58,18 +56,18 @@ def update(metadata,siteID,movieGenres,movieActors):
     actors = detailsPageElements.xpath('//div[@itemprop="actors"]//span[@itemprop="name"]')
     if len(actors) > 0:
         for actor in actors:
-            actorName = actor.text_content().strip()
-            if actorName != '----':
-                splitActorName = actorName.split("(")
+            fullActorName = actor.text_content().strip()
+            if fullActorName != '----':
+                splitActorName = fullActorName.split('(')
                 mainName = splitActorName[0].strip()
                 actorPhotoURL = detailsPageElements.xpath('//img[@alt="' + mainName + '"]/@src')[0]
                 if actorPhotoURL.rsplit('/', 1)[1] == 'nowprinting.gif':
-                    actorPhotoURL = ""
+                    actorPhotoURL = ''
                 if len(splitActorName) > 1 and mainName == splitActorName[1][:-1]:
-                    fullActorName = mainName
+                    actorName = mainName
                 else:
-                    fullActorName = actorName
-                movieActors.addActor(fullActorName, actorPhotoURL)
+                    actorName = fullActorName
+                movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
@@ -79,14 +77,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().lower().strip()
             movieGenres.addGenre(genreName)
-    metadata.collections.add("Japanese")
+    metadata.collections.add('Japanese')
 
     # Posters
-    try:
-        img = detailsPageElements.xpath('//img[contains(@alt, "cover")]/@src')[0]
-        art.append(img)
-    except:
-        pass
+    art = []
+
+    img = detailsPageElements.xpath('//img[contains(@alt, "cover")]/@src')[0]
+    art.append(img)
 
     for poster in detailsPageElements.xpath('//section[@id="product-gallery"]//img/@data-src'):
         art.append(poster)
