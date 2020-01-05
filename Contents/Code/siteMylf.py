@@ -5,26 +5,22 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","")
+    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").lower()
     Log("searchString: " + searchString)
     if "/" not in searchString:
         searchString = searchString.replace("-","/",1)
-        Log("searchString formatted")
     try:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
         titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-8"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
         Log("titleNoFormatting: " + titleNoFormatting)
         curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-        Log("curID: " + curID)
         actors = searchResults.xpath('//div[@class="col-12 col-md-8"]//a//span')
         Log("# actors: " + str(len(actors)))
         firstActor = actors[0].text_content()
-        Log("firstActor: " + firstActor)
         if "mylfdom" in curID:
             subSite = "MylfDom"
         else:
             subSite = searchResults.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').title()
-        Log("subSite: " + subSite)
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
         else:
@@ -73,6 +69,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 releaseDate = ''
             results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Rich MILF, Wet Pussy" + " [Mylf]", score = 101, lang = lang))
+        if searchTitle == "1339/Trick or Treat, Stroke and Repeat":
+            Log("Manual Search Match")
+            curID = ("https://www.mylf.com/movies/1339/trick-or-treat,-stroke-and-repeat")
+            curID = curID.replace('/','_').replace('?','!').replace(',','+')
+            Log(str(curID))
+            if searchDate:
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+            else:
+                releaseDate = ''
+            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Trick Or Treat, Stroke And Repeat" + " [Mylf]", score = 101, lang = lang))
 
     return results
 
@@ -90,7 +96,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Title
     metadata.title = detailsPageElements.xpath('//span[contains(@class,"m_scenetitle")]')[0].text_content().strip()
-    Log("title: " + metadata.title)
 
     # Summary
     summary = detailsPageElements.xpath('//div[contains(@class,"text-light")]')[0].text_content().strip()
@@ -100,7 +105,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     subSite = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = subSite
     metadata.collections.add(subSite)
-    Log("subSite: " + subSite)
 
     # Release Date
     date = str(metadata.id).split("|")[2]
@@ -121,7 +125,6 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//img[contains(@class,"girlthumb")]')[0].get("data-original")
             movieActors.addActor(actorName,actorPhotoURL)
-            Log('actor: ' + actorName + ", " + actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
@@ -136,9 +139,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif subSite.lower() == "Milfty".lower():
         for genreName in ['Cheating']:
             movieGenres.addGenre(genreName)
-    # elif subSite.lower() == "Got Mylf".lower():
-    #     for genreName in []:
-    #         movieGenres.addGenre(genreName)
     elif subSite.lower() == "Mom Drips".lower():
         for genreName in ['Creampie']:
             movieGenres.addGenre(genreName)
