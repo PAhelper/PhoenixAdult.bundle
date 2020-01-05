@@ -325,7 +325,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                     paragraph = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
                 except:
                     paragraph = ''
-    metadata.summary = paragraph.replace('</br>','\n').replace('<br>','\n').strip()
+    metadata.summary = paragraph.replace('</br>','\n').replace('<br>','\n').replace('<br/>','\n').strip()
     metadata.collections.clear()
 
     # Tagline
