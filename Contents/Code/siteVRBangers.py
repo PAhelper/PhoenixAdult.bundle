@@ -31,7 +31,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="less-text"]/p[2]')[0].text_content().strip()
+    try:
+        metadata.summary = detailsPageElements.xpath('//div[@class="less-text d-block"]/p[2]')[0].text_content().strip()
+    except:
+        pass
 
     # Tagline and Collection
     tagline = "VR Bangers"
