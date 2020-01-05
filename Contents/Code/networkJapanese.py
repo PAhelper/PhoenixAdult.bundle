@@ -11,7 +11,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//li[contains(@class, "item-list")]'):
         sceneTitle = searchResult.xpath('.//dt')[0].text_content().strip()
         sceneID = searchResult.xpath('.//img/@alt')[0]
-        sceneURL = "%s/" % searchResult.xpath('.//a/@href')[0].rsplit('/', 1)[0]
+        sceneURL = searchResult.xpath('.//a/@href')[0].rsplit('/', 1)[0]
         curID = sceneURL.replace('/', '$').replace('?', '!')
         score = 100 - Util.LevenshteinDistance(searchTitle.replace(' ', '-').lower(), sceneID.lower())
 
@@ -81,7 +81,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Posters
     art = []
-
+    # img = detailsPageElements.xpath('//img[@itemprop="image"]/@src')[0]
     img = detailsPageElements.xpath('//img[contains(@alt, "cover")]/@src')[0]
     art.append(img)
 
