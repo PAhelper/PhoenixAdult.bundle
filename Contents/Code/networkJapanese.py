@@ -13,7 +13,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneID = searchResult.xpath('.//img/@alt')[0]
         sceneURL = searchResult.xpath('.//a/@href')[0].rsplit('/', 1)[0]
         curID = sceneURL.replace('/', '$').replace('?', '!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.replace(' ', '-').lower(), sceneID.lower())
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), sceneID.lower())
 
         results.Append(MetadataSearchResult(id='%s|%s' % (curID, str(siteNum)), name='[%s] %s' % (sceneID, sceneTitle), score=score, lang=lang))
 
