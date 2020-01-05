@@ -63,6 +63,8 @@ def update(metadata,siteID,movieGenres,movieActors):
                 splitActorName = actorName.split("(")
                 mainName = splitActorName[0].strip()
                 actorPhotoURL = detailsPageElements.xpath('//img[@alt="' + mainName + '"]/@src')[0]
+                if actorPhotoURL.rsplit('/', 1)[1] == 'nowprinting.gif':
+                    actorPhotoURL = ""
                 if len(splitActorName) > 1 and mainName == splitActorName[1][:-1]:
                     fullActorName = mainName
                 else:
