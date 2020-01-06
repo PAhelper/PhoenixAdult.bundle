@@ -1159,11 +1159,11 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteAmourAngels.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## Japanese
+            ## JAV
             ###############
             if siteNum == 812:
                 if searchSiteID == 9999 or searchSiteID == 812:
-                    results = PAsearchSites.networkJapanese.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkR18.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
 
@@ -2143,11 +2143,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Japanese                                                ##
+        ##  JAV                                                     ##
         ##                                                          ##
         ##############################################################
         if siteID == 812:
-            metadata = PAsearchSites.networkJapanese.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkR18.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

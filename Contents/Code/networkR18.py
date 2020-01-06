@@ -7,15 +7,27 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
+    searchJAVID = None
+    splitSearchTitle = searchTitle.split(' ')
+    if(unicode(splitSearchTitle[1], 'utf-8').isnumeric()):
+        searchJAVID = '%s-%s' % (splitSearchTitle[0], splitSearchTitle[1])
+
+    if searchJAVID:
+        encodedTitle = searchJAVID
+
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//li[contains(@class, "item-list")]'):
-        sceneTitle = searchResult.xpath('.//dt')[0].text_content().strip()
-        sceneID = searchResult.xpath('.//img/@alt')[0]
+        titleNoFormatting = searchResult.xpath('.//dt')[0].text_content().strip()
+        JAVID = searchResult.xpath('.//img/@alt')[0]
         sceneURL = searchResult.xpath('.//a/@href')[0].rsplit('/', 1)[0]
         curID = sceneURL.replace('/', '$').replace('?', '!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), sceneID.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%s' % (curID, str(siteNum)), name='[%s] %s' % (sceneID, sceneTitle), score=score, lang=lang))
+        if searchJAVID:
+            score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%s' % (curID, str(siteNum)), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
 
     return results
 
@@ -60,7 +72,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             if fullActorName != '----':
                 splitActorName = fullActorName.split('(')
                 mainName = splitActorName[0].strip()
-                actorPhotoURL = detailsPageElements.xpath('//img[@alt="%s"]/@src' % mainName)[0]
+                actorPhotoURL = detailsPageElements.xpath('//div[@id="%s"]//img[contains(@alt, "%s")]/@src' % (mainName.replace(' ', ''), mainName))[0]
                 if actorPhotoURL.rsplit('/', 1)[1] == 'nowprinting.gif':
                     actorPhotoURL = ''
                 if len(splitActorName) > 1 and mainName == splitActorName[1][:-1]:
@@ -77,7 +89,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genreName = genreLink.text_content().lower().strip()
             movieGenres.addGenre(genreName)
-    metadata.collections.add('Japanese')
+    metadata.collections.add('Japan Adult Video')
 
     # Posters
     art = []

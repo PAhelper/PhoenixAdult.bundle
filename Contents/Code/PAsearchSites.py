@@ -110,7 +110,7 @@ import siteErito
 import siteTrueAmateurs
 import siteHustler
 import siteAmourAngels
-import networkJapanese
+import networkR18
 
 searchSites = [None] * 813
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
@@ -925,7 +925,7 @@ searchSites[808] = ["Erito","Erito","https://www.erito.com","https://www.erito.c
 searchSites[809] = ["True Amateurs","True Amateurs","https://www.trueamateurs.com","https://www.trueamateurs.com/scene/"]
 searchSites[810] = ["Hustler","Hustler","https://hustler.com","https://hustler.com/search.php?query="]
 searchSites[811] = ["AmourAngels","AmourAngels","http://www.amourangels.com","http://www.amourangels.com/z_cover_"]
-searchSites[812] = ["Japanese","Japanese","https://www.r18.com","https://www.r18.com/common/search/searchword="]
+searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/common/search/searchword="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
