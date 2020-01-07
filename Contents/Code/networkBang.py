@@ -17,15 +17,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     data = urllib.urlopen(req).read()
     searchResults = json.loads(data)
     for searchResult in searchResults['hits']['hits']:
-        titleNoFormatting = searchResult['_source']['name']
-        seriesScene = searchResult['_source']['series']['name']
-        curID = searchResult['_source']['identifier']
+        searchResult = searchResult['_source']
+        titleNoFormatting = searchResult['name']
+        studioScene = searchResult['studio']['name'].title()
+        seriesScene = searchResult['series']['name'].title()
+        curID = searchResult['identifier']
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        if seriesScene:
-            name = '[%s] %s' % (seriesScene, titleNoFormatting)
-        else:
-            name = titleNoFormatting
+        name = '[%s] %s' % (seriesScene if seriesScene else studioScene, titleNoFormatting)
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=name, score=score, lang=lang))
 
     return results
@@ -54,7 +53,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements['description']
 
     # Studio
-    metadata.studio = detailsPageElements['studio']['name']
+    metadata.studio = detailsPageElements['studio']['name'].title()
 
     # Release Date
     date = detailsPageElements['releaseDate']
@@ -77,7 +76,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genre['name'])
 
     metadata.collections.add(metadata.studio)
-    seriesScene = detailsPageElements['series']['name']
+    seriesScene = detailsPageElements['series']['name'].title()
     if seriesScene:
         metadata.collections.add(seriesScene)
 
