@@ -414,10 +414,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 #Add the image proxy items to the collection
                 if width > 1 or height > width:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': photoPageURL}).content, sort_order = j)
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': photoPageURL}).content, sort_order = j)
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
                 j = j + 1
             except Exception as e:
                 Log("posterUrl: "+ posterUrl)
