@@ -117,6 +117,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Photos page
+    photoPageURL = None
     try:
         photoPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]')[0].get('href')
         photoPageElements = HTML.ElementFromURL(photoPageURL)
@@ -405,17 +406,20 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             #Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
+                referer = photoPageURL if photoPageURL else url
+                req = urllib.Request(posterUrl)
+                req.add_header('Referer', referer)
+                img_file = urllib.urlopen(req)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 #Add the image proxy items to the collection
                 if width > 1 or height > width:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': referer}).content, sort_order = j)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': url}).content, sort_order = j)
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': referer}).content, sort_order = j)
                 j = j + 1
             except Exception as e:
                 Log("posterUrl: "+ posterUrl)
