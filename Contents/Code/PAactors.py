@@ -59,6 +59,8 @@ class PhoenixActors:
                 newActor = "Capri Cavanni"
             if newActor == "Ce Ce Capella":
                 newActor = "CeCe Capella"
+            if newActor == "Charli Red":
+                newActor = "Charlie Red"
             if newActor == "Charlotte Lee":
                 newActor = "Jaye Summers"
             if newActor == "Criss Strokes":
