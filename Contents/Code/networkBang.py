@@ -20,11 +20,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResult = searchResult['_source']
         titleNoFormatting = searchResult['name']
         studioScene = searchResult['studio']['name'].title()
-        seriesScene = searchResult['series']['name'].title()
+        seriesScene = searchResult['series']['name']
         curID = searchResult['identifier']
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        name = '[%s] %s' % (seriesScene if seriesScene else studioScene, titleNoFormatting)
+        name = '[%s] %s' % (seriesScene.title() if seriesScene else studioScene, titleNoFormatting)
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=name, score=score, lang=lang))
 
     return results
@@ -76,9 +76,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             movieGenres.addGenre(genre['name'])
 
     metadata.collections.add(metadata.studio)
-    seriesScene = detailsPageElements['series']['name'].title()
+    seriesScene = detailsPageElements['series']['name']
     if seriesScene:
-        metadata.collections.add(seriesScene)
+        metadata.collections.add(seriesScene.title())
 
     # Posters
     art = []
