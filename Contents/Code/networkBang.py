@@ -26,7 +26,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             name = '[%s] %s' % (seriesScene, titleNoFormatting)
         else:
             name = titleNoFormatting
-        results.Append(MetadataSearchResult(id='%s|%s' % (curID, str(siteNum)), name=name, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=name, score=score, lang=lang))
 
     return results
 
@@ -34,61 +34,65 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    identifier = str(metadata.id).split('|')[0]
+    id = str(metadata.id).split('|')
+    identifier = id[0]
+    siteNum = int(id[1])
+
     headers = {
         'Authorization': 'Basic YmFuZy1yZWFkOktqVDN0RzJacmQ1TFNRazI=',
         'Content-Type': 'application/json'
     }
     params = json.dumps({"query":{"bool":{"must":[{"match":{"identifier": identifier}},{"match":{"type":"movie"}}],"must_not":[{"match":{"type":"trailer"}}]}}})
-    req = urllib.Request(PAsearchSites.getSearchSearchURL(siteID), data=params, headers=headers)
+    req = urllib.Request(PAsearchSites.getSearchSearchURL(siteNum), data=params, headers=headers)
     data = urllib.urlopen(req).read()
-    searchResults = json.loads(data)
-    detailsPageElements = json.loads(data)
+    detailsPageElements = json.loads(data)['hits']['hits'][0]['_source']
 
     # Title
-    metadata.title = detailsPageElements['hits']['hits'][0]['_source']['name']
+    metadata.title = detailsPageElements['name']
 
     # Summary
-    metadata.summary = detailsPageElements['hits']['hits'][0]['_source']['description']
+    metadata.summary = detailsPageElements['description']
 
     # Studio
-    metadata.studio = detailsPageElements['hits']['hits'][0]['_source']['studio']['name']
+    metadata.studio = detailsPageElements['studio']['name']
 
     # Release Date
-    date = detailsPageElements['hits']['hits'][0]['_source']['releaseDate']
+    date = detailsPageElements['releaseDate']
     date_object = datetime.strptime(date, '%Y-%m-%d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    actors = searchResults['hits']['hits'][0]['_source']['actors']
+    actors = detailsPageElements['actors']
     if len(actors) > 0:
         for actor in actors:
             movieActors.addActor(actor['name'], 'https://i.bang.com/pornstars/%d.jpg?p=big' % actor['id'])
 
     # Genres
     movieGenres.clearGenres()
-    genres = searchResults['hits']['hits'][0]['_source']['genres']
+    genres = detailsPageElements['genres']
     if len(genres) > 0:
         for genre in genres:
             movieGenres.addGenre(genre['name'])
 
-    genres = searchResults['hits']['hits'][0]['_source']['genres']
+    genres = detailsPageElements['genres']
     if len(genres) > 0:
         for genre in genres:
             movieGenres.addGenre(genre['name'])
-    metadata.collections.add(metadata.studio)    
-    metadata.collections.add(detailsPageElements['hits']['hits'][0]['_source']['series']['name'])
+    metadata.collections.add(metadata.studio)
+    seriesScene = detailsPageElements['series']['name']
+    if seriesScene:
+        metadata.collections.add(seriesScene)
 
     # Posters
     art = []
-    dvdID = detailsPageElements['hits']['hits'][0]['_source']['dvd']['id']
-    photos = detailsPageElements['hits']['hits'][0]['_source']['photos']
+    dvdID = detailsPageElements['dvd']['id']
+    photos = detailsPageElements['photos']
 
     art.append('https://i.bang.com/covers/%d/front.jpg' % dvdID)
 
-    imgs = searchResults['hits']['hits'][0]['_source']['screenshots']
+    imgs = detailsPageElements['screenshots']
     if len(imgs) > 0 and photos > 0:
         for img in imgs:
             art.append('https://i.bang.com/screenshots/%d/movie/1/%d.jpg' % (dvdID, img['screenId']))
