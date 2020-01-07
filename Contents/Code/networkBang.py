@@ -89,7 +89,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     art.append('https://i.bang.com/covers/%d/front.jpg' % dvdID)
 
     imgs = searchResults['hits']['hits'][0]['_source']['screenshots']
-    Log(str(len(imgs)) + " - " + str(photos))
     if len(imgs) > 0 and photos > 0:
         for img in imgs:
             art.append('https://i.bang.com/screenshots/%d/movie/1/%d.jpg' % (dvdID, img['screenId']))
