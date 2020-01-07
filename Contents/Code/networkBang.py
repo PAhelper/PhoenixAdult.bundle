@@ -67,7 +67,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     actors = detailsPageElements['actors']
     if len(actors) > 0:
         for actor in actors:
-            movieActors.addActor(actor['name'], 'https://i.bang.com/pornstars/%d.jpg?p=big' % actor['id'])
+            movieActors.addActor(actor['name'], 'https://i.bang.com/pornstars/%d.jpg' % actor['id'])
 
     # Genres
     movieGenres.clearGenres()
@@ -76,10 +76,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genre in genres:
             movieGenres.addGenre(genre['name'])
 
-    genres = detailsPageElements['genres']
-    if len(genres) > 0:
-        for genre in genres:
-            movieGenres.addGenre(genre['name'])
     metadata.collections.add(metadata.studio)
     seriesScene = detailsPageElements['series']['name']
     if seriesScene:
