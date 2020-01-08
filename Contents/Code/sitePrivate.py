@@ -65,7 +65,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     movieActors.clearActors()
     titleActors = ""
-    actors = detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[@class=" col-md-4 col-sm-6 col-xs-6 featuring"]')
+    actors = detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[contains(@class, "featuring")]')
     if len(actors) > 0:
         for actorPage in actors:
             actorName = actorPage.xpath('.//div[@class="model"]//a')[0].get("title")
