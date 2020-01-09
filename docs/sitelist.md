@@ -531,7 +531,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SpermSwap
   - TamedTeens
 + #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, SceneID**
-+ #### Playboy Plus | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### Playboy Plus | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Porndoe Premium Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - A Girl Knows
   - Badtime Stories
