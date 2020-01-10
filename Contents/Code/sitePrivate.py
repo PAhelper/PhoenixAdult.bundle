@@ -3,7 +3,7 @@ import PAgenres
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     searchResults = HTML.ElementFromURL('https://www.private.com/search.php?query=' + encodedTitle)
-    for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[@class="col-lg-3 col-md-4 col-sm-6 col-xs-6"]'):
+    for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[contains(@class, "col-sm-6")]'):
         #Log(searchResult.get('class'))
         titleNoFormatting = searchResult.xpath('.//div[@class="scene"]//div//h3//a')[0].text_content()
         Log("Result Title: " + titleNoFormatting)
@@ -65,7 +65,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     movieActors.clearActors()
     titleActors = ""
-    actors = detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[@class=" col-md-4 col-sm-6 col-xs-6 featuring"]')
+    actors = detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[contains(@class, "featuring")]')
     if len(actors) > 0:
         for actorPage in actors:
             actorName = actorPage.xpath('.//div[@class="model"]//a')[0].get("title")
