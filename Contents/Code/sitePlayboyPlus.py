@@ -3,30 +3,31 @@ import PAgenres
 import PAactors
 import json
 
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    baseurl = PAsearchSites.getSearchSearchURL(siteNum)
-    data = urllib.urlopen(baseurl + '?gallery=1&terms=' + encodedTitle).read()
+    data = urllib.urlopen(PAsearchSites.getSearchSearchURL(siteNum) + '?gallery=1&terms=' + encodedTitle).read()
     data = json.loads(data)
 
     searchResults = HTML.ElementFromString(data['results'][0]['html'])
 
     for searchResult in searchResults.xpath('//li[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]')[0].text_content().strip()
-        url = baseurl.rsplit('/', 1)[0] + searchResult.xpath('.//a/@href')[0]
-        curID = url.replace('/','_').replace('?','!')
+        url = PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a/@href')[0]
+        curID = url.replace('/', '_').replace('?', '!')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name="%s [Playboy Plus]" % titleNoFormatting, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Playboy Plus]' % titleNoFormatting, score=score, lang=lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
+    url = str(metadata.id).split('|')[0].replace('_', '/').replace('!', '?')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -73,13 +74,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log("Artwork found: " + str(len(art)))
     for posterUrl in art:
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            #Download image file for analysis
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
+                # Add the image proxy items to the collection
                 if (width > 1 or height > width) and width < height:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
