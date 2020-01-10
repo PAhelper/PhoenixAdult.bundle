@@ -105,6 +105,8 @@ class PhoenixGenres:
                 skip = True
             if "twistys hard" == newGenre.lower():
                 skip = True
+            if "extra update" == newGenre.lower():
+                skip = True
 
             #Search and Skip
             if "5k" in newGenre.lower():
@@ -317,7 +319,7 @@ class PhoenixGenres:
                 newGenre = "coeds"
             if "oiled" == newGenre.lower() or "babyoil" == newGenre.lower():
                 newGenre = "oil"
-            if "thick" == newGenre.lower() or "voluptuous" == newGenre.lower():
+            if "thick" == newGenre.lower() or "voluptuous" == newGenre.lower() or "curvy woman" == newGenre.lower():
                 newGenre = "curvy"
             if "reality" == newGenre.lower():
                 newGenre = "reality porn"

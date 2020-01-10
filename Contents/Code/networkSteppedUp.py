@@ -5,7 +5,7 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle.replace(" ", "-").replace(",", "").replace("’","").replace("'","").lower()
+    searchString = searchTitle.replace(" ", "-").replace(",", "").replace("’","").replace("'","").replace("--","-").lower()
     Log("searchString: " + searchString)
     if "/" not in searchString:
         searchString = searchString.replace("-", "/", 1)
@@ -25,23 +25,29 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    metadata.studio = 'Stepped Up Media'
+
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
+    metadata.collections.clear()
+    movieGenres.clearGenres()
+    movieActors.clearActors()
+
+    # Studio
+    metadata.studio = 'Stepped Up Media'
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[contains(@class,"desc")]')[0].text_content().strip()
+
+    # Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID)
-    metadata.collections.clear()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
 
     # Genres
-    movieGenres.clearGenres()
-    movieGenres.addGenre('hardcore')
-    movieGenres.addGenre('heterosexual')
     if tagline == "Swallowed":
         movieGenres.addGenre('blowjob')
         movieGenres.addGenre('cum swallow')
@@ -50,24 +56,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieGenres.addGenre('gaping')
     elif tagline == "Nympho":
         movieGenres.addGenre('nympho')
-
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('(//h4[@class="models"])[1]//a')
-    if len(actors) > 0:
-        if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
-        if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
-        if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
-    movieActors.addActor('Mike Adriano','https://imgs1cdn.adultempire.com/actors/470003.jpg')
+    movieGenres.addGenre('hardcore')
+    movieGenres.addGenre('heterosexual')
 
     # Release Date
     date = detailsPageElements.xpath('//span[contains(@class,"date")]')
@@ -77,12 +67,26 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
-    #Posters
+    # Actors
+    actors = detailsPageElements.xpath('(//h4[@class="models"])[1]//a')
+    if len(actors) > 0:
+        for actorLink in actors:
+            actorName = str(actorLink.text_content().strip())
+            actorPageURL = actorLink.get("href")
+            actorPage = HTML.ElementFromURL(actorPageURL)
+            actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img')[0].get("src")
+            movieActors.addActor(actorName,actorPhotoURL)
+    movieActors.addActor('Mike Adriano','https://imgs1cdn.adultempire.com/actors/470003.jpg')
+
+    ### Posters and artwork ###
+
+    # Video trailer background image
     try:
         art.append(detailsPageElements.xpath('//div[@id="trailer-player"]')[0].get('data-screencap'))
     except:
         art.append(detailsPageElements.xpath('//video[@id="ypp-player"]')[0].get('poster'))
 
+    # Photos
     for poster in actorPage.xpath('//a[@href="' + url + '"]//img'):
         art.append(poster.get('src'))
     for poster in actorPage.xpath('//div[@class="thumb-mouseover"] | //div[@class="thumb-bottom"] | //div[@class="thumb-top"]'):

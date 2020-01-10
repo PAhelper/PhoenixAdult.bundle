@@ -11,14 +11,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = searchResult.xpath('.//a[@class="shoot-link"]')[0].get('href').replace('/','_').replace('?','!')
         releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         shootID = searchResult.xpath('.//span[@class="favorite-button"]')[0].get('data-id')
-        if searchDate:
+        if shootID in title:
+            Log("ShootID in title")
+            score = 100
+        elif searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        if shootID in title:
-            score = 100
-        
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] " + releaseDate, score = score, lang = lang))
+
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = " [" + shootID + "] " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
