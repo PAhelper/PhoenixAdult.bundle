@@ -15,11 +15,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     for searchResult in searchResults.xpath('//li[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]')[0].text_content().strip()
+        releaseDate = parse(searchResult.xpath('.//p[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        img = searchResults.xpath('.//img[contains(@class, "image")]/@data-src')[0].split('?', 1)[0].replace('/', '_').replace('?', '!')
         url = PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a/@href')[0]
         curID = url.replace('/', '_').replace('?', '!')
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Playboy Plus]' % titleNoFormatting, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, img), name='%s [Playboy Plus] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -27,12 +32,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split('|')[0].replace('_', '/').replace('!', '?')
+    id = str(metadata.id).split('|')
+    url = id[0].replace('_', '/').replace('!', '?')
+    searchImg = id[2].replace('_', '/').replace('!', '?')
+
     detailsPageElements = HTML.ElementFromURL(url)
-    art = []
-    metadata.collections.clear()
-    movieGenres.clearGenres()
-    movieActors.clearActors()
 
     # Studio
     metadata.studio = 'Playboy Plus'
@@ -44,11 +48,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements.xpath('//p[@class="description-truncated"]')[0].text_content().strip().replace('...', '', 1)
 
     # Tagline and Collection(s)
+    metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Genres
+    movieGenres.clearGenres()
     movieGenres.addGenre("Glamour")
 
     # Release Date
@@ -58,6 +64,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Actors
+    movieActors.clearActors()
     actorName = detailsPageElements.xpath('//p[@class="contributorName"]')[0].text_content().strip()
     movieActors.addActor(actorName, '')
 
@@ -67,7 +74,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     director.name = directorName
 
     # Photos
-    for img in detailsPageElements.xpath('//img[contains(@class, "image")]/@data-src'):
+    art = [searchImg]
+    img = detailsPageElements.xpath('//img[contains(@class, "image")]/@data-src')[0]
+    art.append(img.split('?', 1)[0])
+    for img in detailsPageElements.xpath('//section[@class="gallery"]//img[contains(@class, "image")]/@data-src'):
         art.append(img.split('?', 1)[0])
 
     j = 1
