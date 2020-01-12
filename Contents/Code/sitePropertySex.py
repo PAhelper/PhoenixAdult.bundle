@@ -68,26 +68,21 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    try:
-        actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
-        if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
-            for actorLink in actors:
-                actorName = str(actorLink.text_content().strip())
-                try:
-                    actorPage = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                    actorPageElements = HTML.ElementFromURL(actorPage)
-                    actorPhotoURL = actorPageElements.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get("src")
-                except:
-                    actorPhotoURL = ''
-                movieActors.addActor(actorName, actorPhotoURL)
-    except:
-        pass
+    actors = detailsPageElements.xpath('//a[@class="wxt7nk-6 czvZQW"]')
+    if len(actors) > 0:
+        for actorLink in actors:
+            actorName = str(actorLink.text_content().strip())
+            try:
+                actorPage = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
+                actorPageElements = HTML.ElementFromURL(actorPage)
+                actorPhotoURL = actorPageElements.xpath('//div[@class="sc-1p8qg4p-0 kYYnJ"]//img[@class="sc-1p8qg4p-2 ibyLSN"]')[0].get("src")
+            except:
+                actorPhotoURL = ''
+            movieActors.addActor(actorName, actorPhotoURL)
+    # Manually Add Missing Actors
+    if metadata.title == "Hollywood Homemade Hills":
+        movieActors.addActor("Adrian Maya", "")
+
 
     ### Posters and artwork ###
 
