@@ -918,7 +918,7 @@ searchSites[800] = ["ClubSeventeen","ClubSeventeen","https://www.clubseventeen.c
 searchSites[801] = ["Elegant Angel","Elegant Angel","https://www.elegantangel.com","https://www.elegantangel.com/Search?fq="]
 searchSites[802] = ["Family Sinners","Family Sinners","https://www.familysinners.com","https://www.familysinners.com/scene/"]
 searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","https://www.reidmylips.com/"]
-searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search?query="]
+searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search"]
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
 searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://www.transsensual.com/scene/"]
 searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://www.daughterswap.com/movies/"]
