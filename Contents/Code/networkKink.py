@@ -12,8 +12,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             break
 
     if shootID:
-        url = PAsearchSites.getSearchBaseURL(siteNum) + '/shoot/' + shootID
-        detailsPageElements = HTML.ElementFromURL(url, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
+        url = '/shoot/' + shootID
+        detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + url, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
 
         titleNoFormatting = detailsPageElements.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()[:-1]
         releaseDate = parse(detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[0].text_content().strip()[6:]).strftime('%Y-%m-%d')
