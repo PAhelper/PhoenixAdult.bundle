@@ -1669,6 +1669,8 @@ class PhoenixActors:
                     newActor = "Nelly A"
                 if newActor == "Charity":
                     newActor = "Charity Crawford"
+                if newActor == "Charlie":
+                    newActor = "Charlie Red"
                 if newActor == "Charlotte":
                     newActor = "Charlotte Stokely"
                 if newActor == "Chelsea":
