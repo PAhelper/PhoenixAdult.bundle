@@ -12,11 +12,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = json.loads(data)
     for searchResult in searchResults['response']['collection']:
         titleNoFormatting = searchResult['title']
-        curID = searchResult['id']
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        curID = str(searchResult['id'])
+        releaseDate = parse(searchResult['sites']['collection'][curID]['publishDate']).strftime('%Y-%m-%d')
 
-        if score > 90:
-            results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name=titleNoFormatting, score=score, lang=lang))
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        if (not searchDate and score > 90) or score == 100:
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=score, lang=lang))
+
         if score == 100:
             break
 
