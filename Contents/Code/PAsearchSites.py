@@ -940,45 +940,53 @@ def getSearchFilter(siteID):
 def getSearchSiteName(siteID):
     return searchSites[siteID][1]
 def getSearchSiteIDByFilter(searchFilter):
-    searchID = 0
-    for sites in searchSites:
-        try:
-            searchStr = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
-            siteName = sites[0].lower().replace(" ", "").replace("'", "")
+    searchSitesEnum = enumerate(searchSites)
 
-            if searchStr.startswith(siteName):
+    # Method #3
+    searchFilterF = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
+    for searchID, sites in searchSitesEnum:
+        try:
+            siteNameF = sites[0].lower().replace(" ", "").replace("'", "")
+
+            if searchFilterF.startswith(siteNameF):
                 Log('Site found with method #3')
                 return searchID
         except:
             pass
-        searchID += 1
 
-    searchID = 0
-    for sites in searchSites:
-        #First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
+    # Method #2
+    # First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
+    searchFilterF = searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0]
+    for searchID, sites in searchSitesEnum:
         try:
-            if searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0] == sites[0].lower().replace(" ","").replace("'",""):
+            siteNameF = sites[0].lower().replace(" ","").replace("'","")
+
+            if searchFilterF == siteNameF:
                 Log('Site found with method #2')
                 return searchID
         except:
             pass
-        searchID += 1
 
-    searchID = 0
-    for sites in searchSites:
-        # Might try converting this code to use startswith() to avoid problems with overlapping site names:
-        # https://www.tutorialspoint.com/python/string_startswith.htm
-        # Examples:
-        #  Blacked -> BlackedRaw
-        #  Babes -> FootsieBabes
-        #  PassionHD Love Ties -> HD Love
+    # Method #1
+    # Might try converting this code to use startswith() to avoid problems with overlapping site names:
+    # https://www.tutorialspoint.com/python/string_startswith.htm
+    # Examples:
+    #  Blacked -> BlackedRaw
+    #  Babes -> FootsieBabes
+    #  PassionHD Love Ties -> HD Love
+    searchFilterF = (
+        searchFilter.lower().replace(".com","").replace("'",""),
+        searchFilter.lower().replace(".com","").replace("'","").replace(" ","")
+    )
+    for searchID, sites in searchSitesEnum:
         try:
-            if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
+            siteNameF = sites[0].lower().replace(" ","").replace("'","")
+
+            if siteNameF in searchFilterF[0] or siteNameF in searchFilterF[1]:
                 Log('Site found with method #1')
                 return searchID
         except:
             pass
-        searchID += 1
 
     return 9999
 def getSearchSettings(mediaTitle):
