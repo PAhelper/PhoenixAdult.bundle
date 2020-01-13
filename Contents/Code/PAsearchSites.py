@@ -942,9 +942,23 @@ def getSearchSiteName(siteID):
 def getSearchSiteIDByFilter(searchFilter):
     searchID = 0
     for sites in searchSites:
+        try:
+            searchStr = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
+            siteName = sites[0].lower().replace(" ", "").replace("'", "")
+
+            if searchStr.startswith(siteName):
+                Log('Site found with method #3')
+                return searchID
+        except:
+            pass
+        searchID += 1
+
+    searchID = 0
+    for sites in searchSites:
         #First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
         try:
             if searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0] == sites[0].lower().replace(" ","").replace("'",""):
+                Log('Site found with method #2')
                 return searchID
         except:
             pass
@@ -960,6 +974,7 @@ def getSearchSiteIDByFilter(searchFilter):
         #  PassionHD Love Ties -> HD Love
         try:
             if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
+                Log('Site found with method #1')
                 return searchID
         except:
             pass
