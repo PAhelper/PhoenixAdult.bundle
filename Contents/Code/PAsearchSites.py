@@ -956,9 +956,13 @@ def getSearchSiteIDByFilter(searchFilter):
         #  Blacked -> BlackedRaw
         #  Babes -> FootsieBabes
         #  PassionHD Love Ties -> HD Love
-        if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
-            return searchID
+        try:
+            if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
+                return searchID
+        except:
+            pass
         searchID += 1
+
     return 9999
 def getSearchSettings(mediaTitle):
     mediaTitle = mediaTitle.replace(".", " ")
