@@ -47,7 +47,7 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
 
 
     # Title
-    sceneTitle = detailsPageElements.xpath('//h3[contains(@class, "headline")]')[0].text_content().split("(")[0].strip()
+    sceneTitle = detailsPageElements.xpath('//div[@class="info-container"]//h3[contains(@class, "headline")]')[0].text_content().split("(")[0].strip()
     metadata.title = sceneTitle
 
     # Studio/Tagline/Collection
@@ -58,7 +58,6 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(subSite)
 
     # Summary
-
     try:
         summary = detailsPageElements.xpath('//p[@class="description-text"]')[0].text_content().replace('Read More','').strip()
         metadata.summary = summary
@@ -89,9 +88,10 @@ def updateSexArt(metadata,siteID,movieGenres,movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = ["Glamorous"]
+    genres = detailsPageElements.xpath('//div[@class="tag-list"]//a')
     for genre in genres:
-        movieGenres.addGenre(genre)
+        genreName = genre.text_content().strip()
+        movieGenres.addGenre(genreName)
 
     # Posters/Background
     valid_names = list()
