@@ -193,15 +193,6 @@ def update(metadata,siteID,movieGenres,movieActors):
                     actorPhotoURL = ""
                 movieActors.addActor(actorName,actorPhotoURL)
 
-        # Director
-        director = metadata.directors.new()
-        try:
-            directors = detailsPageElements.xpath('//ul[@class="directedBy"]/li/a')
-            for dirname in directors:
-                director.name = dirname.text_content().strip()
-        except:
-            pass
-
         # DVD Cover
         try:
             dvdFrontCover = detailsPageElements.xpath('//a[@class="frontCoverImg"]')[0].get('href')
