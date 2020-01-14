@@ -113,6 +113,7 @@ import siteAmourAngels
 import networkR18
 import networkBang
 import siteVivid
+import siteJaysPOV
 
 searchSites = [None] * 815
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
@@ -930,6 +931,7 @@ searchSites[811] = ["AmourAngels","AmourAngels","http://www.amourangels.com","ht
 searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/common/search/searchword="]
 searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search"]
 searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/videos/"]
+searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
