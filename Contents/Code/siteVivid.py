@@ -31,7 +31,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + videoBG, name = titleNoFormatting + " [Vivid/" + subSite + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + subSite + "|" + videoBG, name = titleNoFormatting + " [Vivid/" + subSite + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -55,7 +55,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements.xpath('//p[@class="indie-model-p"]')[0].text_content().strip()
 
     # Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//h5[contains(text(),"Site:")]/a')[0].text_content().replace(".com","").strip()
+    tagline = str(metadata.id).split("|")[2]
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -85,7 +85,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Video trailer background image
     try:
-        twitterBG = str(metadata.id).split("|")[2]
+        twitterBG = str(metadata.id).split("|")[3]
         twitterBG = twitterBG.replace('_', '/').replace('!', '?')
         art.append(twitterBG)
     except:
