@@ -117,6 +117,7 @@ import siteAmateurCFNM
 import sitePureCFNM
 
 searchSites = [None] * 817
+
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -934,6 +935,7 @@ searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b65945
 searchSites[814] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
 searchSites[815] = ["AmateurCFNM","AmateurCFNM","https://www.amateurcfnm.com/","https://www.amateurcfnm.com/models/"]
 searchSites[816] = ["PureCFNM","PureCFNM","https://www.purecfnm.com/","https://www.purecfnm.com/models/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

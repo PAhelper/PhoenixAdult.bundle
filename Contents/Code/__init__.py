@@ -1632,7 +1632,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 621 and siteID <= 623):
             metadata = PAsearchSites.networkMetArt.updateSexArt(metadata, siteID, movieGenres, movieActors)
-
+            
         ##############################################################
         ##                                                          ##
         ##  Family Strokes                                          ##
@@ -2208,6 +2208,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 816:
             metadata = PAsearchSites.sitePureCFNM.update(metadata, siteID, movieGenres, movieActors)
+
 
         ##############################################################
         ## Cleanup Genres and Add
