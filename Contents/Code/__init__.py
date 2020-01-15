@@ -691,11 +691,12 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.networkWankz.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## SexArt / TheLifeErotic / VivThomas
+            ## MetArt Network
             ###############
             if siteNum == 621:
-                if searchSiteID == 9999 or (621 <= searchSiteID <= 623):
+                if searchSiteID == 9999 or (621 <= searchSiteID <= 623) or (753 <= searchSiteID <= 754) or (816 <= searchSiteID <= 821):
                     results = PAsearchSites.networkMetArt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             ###############
             ## Family Strokes
             ###############
@@ -947,13 +948,6 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 752:
                 if searchSiteID == 9999 or searchSiteID == 752:
                     results = PAsearchSites.siteVRHush.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
-
-            ###############
-            ## MetArt
-            ###############
-            if siteNum == 753:
-                if searchSiteID == 9999 or searchSiteID == 753 or searchSiteID == 754:
-                    results = PAsearchSites.networkMetArt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Fitting-Room
@@ -1620,14 +1614,6 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  SexArt / TheLifeErotic / VivThomas                      ##
-        ##                                                          ##
-        ##############################################################
-        if (siteID >= 621 and siteID <= 623):
-            metadata = PAsearchSites.networkMetArt.updateSexArt(metadata, siteID, movieGenres, movieActors)
-
-        ##############################################################
-        ##                                                          ##
         ##  Family Strokes                                          ##
         ##                                                          ##
         ##############################################################
@@ -1916,11 +1902,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  MetArt / MetArtX                                        ##
+        ##  MetArt Network                                          ##
         ##                                                          ##
         ##############################################################
-        if siteID == 753 or siteID == 754:
-            metadata = PAsearchSites.networkMetArt.updateMetArt(metadata, siteID, movieGenres, movieActors)
+        if (621 <= siteID <= 623) or (753 <= siteID <= 754) or (816 <= siteID <= 821):
+            metadata = PAsearchSites.networkMetArt.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##

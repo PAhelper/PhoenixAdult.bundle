@@ -116,7 +116,7 @@ import siteVivid
 import siteJaysPOV
 import siteGirlfriendsFilms
 
-searchSites = [None] * 816
+searchSites = [None] * 822
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -738,9 +738,9 @@ searchSites[617] = ["Young Sluts Hardcore","Young Sluts Hardcore","https://www.w
 searchSites[618] = ["Matrix Models","Matrix Models","https://www.wankz.com","https://www.wankz.com/search?q="]
 searchSites[619] = ["Blow Patrol","Blow Patrol","https://www.wankz.com","https://www.wankz.com/search?q="]
 searchSites[620] = ["Sleazy Stepdad","Sleazy Stepdad","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[621] = ["SexArt","SexArt","https://www.sexart.com","https://www.sexart.com/search/"]
-searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.com","https://www.thelifeerotic.com/search/"]
-searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/search/"]
+searchSites[621] = ["SexArt","SexArt","https://www.sexart.com","https://www.sexart.com/api/search-results?searchPhrase="]
+searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.com","https://www.thelifeerotic.com/api/search-results?searchPhrase="]
+searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/api/search-results?searchPhrase="]
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://www.familystrokes.com/scenes/"]
@@ -870,8 +870,8 @@ searchSites[749] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com",
 searchSites[750] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
 searchSites[751] = ["Step Secrets","Step Secrets","http://www.stepsecrets.com","https://stepsecrets.com/?query="]
 searchSites[752] = ["VRHush","VRHush","https://www.vrhush.com","https://vrhush.com/scenes/"]
-searchSites[753] = ["MetArt","MetArt","https://www.metart.com","https://www.metart.com/search/"]
-searchSites[754] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.metartx.com/search/"]
+searchSites[753] = ["MetArt","MetArt","https://www.metart.com","https://www.metart.com/api/search-results?searchPhrase="]
+searchSites[754] = ["MetArtX","MetArtX","https://www.metartx.com","https://www.metartx.com/api/search-results?searchPhrase="]
 searchSites[755] = ["Nubiles ET","Nubiles ET","https://nubileset.com","https://nubileset.com/video/"]
 searchSites[756] = ["Detention Girls","Detention Girls","https://detentiongirls.com","https://detentiongirls.com/video/"]
 searchSites[757] = ["Mylfdom","Mylfdom","https://www.mylfdom.com","https://www.mylfdom.com/movies/"]
@@ -933,6 +933,12 @@ searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/commo
 searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search"]
 searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/videos/"]
 searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
+searchSites[816] = ["Errotica Archives","Errotica Archives","https://www.errotica-archives.com","https://www.errotica-archives.com/api/search-results?searchPhrase="]
+searchSites[817] = ["ALS Scan","ALS Scan","https://www.alsscan.com","https://www.alsscan.com/api/search-results?searchPhrase="]
+searchSites[818] = ["Rylsky Art","Rylsky Art","https://www.rylskyart.com","https://www.rylskyart.com/api/search-results?searchPhrase="]
+searchSites[819] = ["Eternal Desire","Eternal Desire","https://www.eternaldesire.com","https://www.eternaldesire.com/api/search-results?searchPhrase="]
+searchSites[820] = ["Stunning18","Stunning18","https://www.stunning18.com","https://www.stunning18.com/api/search-results?searchPhrase="]
+searchSites[821] = ["Love Hairy","Love Hairy","https://www.lovehairy.com","https://www.lovehairy.com/api/search-results?searchPhrase="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
