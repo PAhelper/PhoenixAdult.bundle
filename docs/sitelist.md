@@ -791,7 +791,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
++ #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
