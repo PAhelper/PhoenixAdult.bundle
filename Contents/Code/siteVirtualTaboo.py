@@ -49,7 +49,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="description"]//span[contains(@class, "full")]')[0].text_content().strip()
+    description = detailsPageElements.xpath('//div[@class="description"]//span[contains(@class, "full")]')
+
+    if description:
+        metadata.summary = description[0].text_content().strip()
+    else:
+        metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[0].text_content().strip()
 
     # Actors
     movieActors.clearActors()
