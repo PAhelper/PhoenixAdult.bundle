@@ -116,7 +116,7 @@ import siteVivid
 import siteJaysPOV
 import siteGirlfriendsFilms
 
-searchSites = [None] * 822
+searchSites = [None] * 829
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -939,6 +939,13 @@ searchSites[818] = ["Rylsky Art","Rylsky Art","https://www.rylskyart.com","https
 searchSites[819] = ["Eternal Desire","Eternal Desire","https://www.eternaldesire.com","https://www.eternaldesire.com/api/search-results?searchPhrase="]
 searchSites[820] = ["Stunning18","Stunning18","https://www.stunning18.com","https://www.stunning18.com/api/search-results?searchPhrase="]
 searchSites[821] = ["Love Hairy","Love Hairy","https://www.lovehairy.com","https://www.lovehairy.com/api/search-results?searchPhrase="]
+searchSites[822] = ["GF Revenge","GF Revenge","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[823] = ["Black GFs","Black GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[824] = ["Dare Dorm","Dare Dorm","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://www.realitykings.com/scene/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

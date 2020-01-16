@@ -344,7 +344,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Reality Kings
             ###############
             if siteNum == 137:
-                if searchSiteID == 9999 or (137 <= searchSiteID <= 182):
+                if searchSiteID == 9999 or (137 <= searchSiteID <= 182) or (822 <= searchSiteID <= 828):
                     results = PAsearchSites.siteRealityKings.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1282,7 +1282,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Reality Kings                                          ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 137 and siteID <= 182:
+        if (siteID >= 137 and siteID <= 182) or (siteID >= 822 and siteID <= 828):
             metadata = PAsearchSites.siteRealityKings.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
