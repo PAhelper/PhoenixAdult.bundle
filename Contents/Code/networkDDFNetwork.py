@@ -58,10 +58,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Release Date
     date = detailsPageElements.xpath('//meta[@itemprop="uploadDate"]/@content')[0].strip()
-    if date:
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
