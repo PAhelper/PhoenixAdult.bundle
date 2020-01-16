@@ -112,9 +112,11 @@ import siteHustler
 import siteAmourAngels
 import networkR18
 import networkBang
+import siteVivid
 import siteJaysPOV
+import siteGirlfriendsFilms
 
-searchSites = [None] * 815
+searchSites = [None] * 816
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -495,7 +497,7 @@ searchSites[376] = ["Web Young","Web Young","http://www.girlsway.com","https://w
 searchSites[377] = ["Girls Try Anal","Girls Try Anal","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[378] = ["Sextape Lesbians","Sextape Lesbians","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[379] = ["Girlsway Originals","Girlsway Originals","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[380] = ["Girlfriends Films","Girlfriends Films","http://www.girlfriendsfilms.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[380] = ["Girlfriends Films","Girlfriends Films","http://www.girlfriendsfilms.com","https://www.girlfriendsfilms.com/en/"]
 searchSites[381] = ["Burning Angel","Burning Angel","http://www.burningangel.com","http://www.burningangel.com/en/search/"]
 searchSites[382] = ["Pretty Dirty","Pretty Dirty","http://www.prettydirty.com","http://www.prettydirty.com/en/search/"]
 searchSites[383] = ["Devils Film","Devil's Film","http://www.devilsfilm.com","http://www.devilsfilm.com/en/search/"]
@@ -929,7 +931,8 @@ searchSites[810] = ["Hustler","Hustler","https://hustler.com","https://hustler.c
 searchSites[811] = ["AmourAngels","AmourAngels","http://www.amourangels.com","http://www.amourangels.com/z_cover_"]
 searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/common/search/searchword="]
 searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search"]
-searchSites[814] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
+searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/videos/"]
+searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1012,6 +1015,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^analb ', 'AnalBeauty ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ap ', 'AssParade ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcasting ', 'BangCasting ', mediaTitle, flags=re.IGNORECASE)
@@ -1154,6 +1158,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sas ', 'SexandSubmission ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub("^Shes New ", "She's New ", mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)

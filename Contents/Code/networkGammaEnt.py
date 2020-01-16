@@ -58,12 +58,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         networkdvd = False
         network_sep_scene = "/scene"
         network_sep_scene_pages = "/scene/"
-    elif siteNum == 380:
-        network = 'Girlfriends Films'
-        network_sep_scene = "?query=&pscenes=0&tab=scenes"
-        network_sep_scene_pages = "?query=&pscenes="
-        network_sep_scene_pages_next = "&tab=scenes"
-        network_sep_dvd = "&tab=movies"
     elif siteNum == 381:
         network = 'Burning Angel'
         networkdvd = False
@@ -138,8 +132,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             i = 2
             while i < 3:
                 pagenum = i
-                if siteNum == 380:
-                    pagenum = i - 1
                 searchResultsSec = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + network_sep_scene_pages_prev + encodedTitle + network_sep_scene_pages + str(pagenum) + network_sep_scene_pages_next)
                 i += 1
                 searchResultSec = searchResultsSec.xpath('//div[@class="tlcDetails"]')
@@ -291,8 +283,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.studio = 'Open Life Network'
     elif siteID == 281:
         metadata.studio = 'Pure Taboo'
-    elif siteID == 380:
-        metadata.studio = 'Girlfriends Films'
     elif siteID == 381:
         metadata.studio = 'Burning Angel'
     elif siteID == 382:
