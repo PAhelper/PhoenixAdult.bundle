@@ -946,16 +946,21 @@ def getSearchSiteIDByFilter(searchFilter):
     searchSitesEnum = enumerate(searchSites)
 
     # Method #3
+    searchResults = []
     searchFilterF = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
     for searchID, sites in searchSitesEnum:
         try:
-            siteNameF = sites[0].lower().replace(" ", "").replace("'", "")
+            siteNameF = sites[0].lower().replace(" ", "").replace("'", "").replace("-", "")
 
             if searchFilterF.startswith(siteNameF):
-                Log('Site found with method #3')
-                return searchID
+                searchResults.append((searchID, siteNameF))
         except:
             pass
+
+    if searchResults:
+        from operator import itemgetter
+
+        return max(searchResults, key=itemgetter(1))[0]
 
     # Method #2
     # First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
