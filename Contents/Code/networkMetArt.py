@@ -30,49 +30,27 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 def update (metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('+','/').replace('!','?')
-    urlBase = PAsearchSites.getSearchBaseURL(siteID)
     if "http" not in url:
-        url = urlBase + url
+        url = PAsearchSites.getSearchBaseURL(siteID) + url
     detailsPageElements = HTML.ElementFromURL(url)
 
-    # Title
-    sceneTitle = detailsPageElements.xpath('//div[@class="info-container"]//h3[contains(@class, "headline")]')[0].text_content().split("(")[0].strip()
-    metadata.title = sceneTitle
+    # Studio
+    metadata.studio = 'MetArt'
 
-    # Studio/Tagline/Collection
-    metadata.studio = "MetArt"
-    subSite = PAsearchSites.getSearchSiteName(siteID)
-    metadata.tagline = subSite
-    metadata.collections.clear()
-    metadata.collections.add(subSite)
+    # Title
+    metadata.title = detailsPageElements.xpath('//div[@class="info-container"]//h3[contains(@class, "headline")]')[0].text_content().split("(")[0].strip()
 
     # Summary
     try:
-        summary = detailsPageElements.xpath('//p[@class="description-text"]')[0].text_content().replace('Read More','').strip()
-        metadata.summary = summary
+        metadata.summary = detailsPageElements.xpath('//p[@class="description-text"]')[0].text_content().replace('Read More','').strip()
     except:
         pass
 
-    # Date
-    date = detailsPageElements.xpath('//div[@class="movie-data"]//span[@class="attr-value"]')[2].text_content().strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
-
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="movie-data"]//span[@class="attr-value"]')[0].xpath('.//a')
-    for actorObject in actors:
-        actorName = actorObject.text_content()
-        actorPageURL = actorObject.get("href")
-        if "http" not in actorPageURL:
-            actorPageURL = urlBase + actorPageURL
-
-        actorPageElements = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPageElements.xpath('//img[contains(@src,"/headshots/")]')[0].get("src").split("?")[0]
-        if "http" not in actorPhotoURL:
-            actorPhotoURL = urlBase + actorPhotoURL
-        movieActors.addActor(actorName,actorPhotoURL)
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Genres
     movieGenres.clearGenres()
@@ -80,8 +58,44 @@ def update (metadata,siteID,movieGenres,movieActors):
     for genre in genres:
         genreName = genre.text_content().strip()
         movieGenres.addGenre(genreName)
+    movieGenres.addGenre("Glamorous")
 
-    # Posters/Background
+    # Release Date
+    date = detailsPageElements.xpath('//div[@class="movie-data"]//span[@class="attr-value"]')[2].text_content().strip()
+    if len(date) > 0:
+        date_object = datetime.strptime(date, '%b %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
+    # Actors
+    movieActors.clearActors()
+    actors = detailsPageElements.xpath('//div[@class="movie-data"]//span[@class="attr-value"]')[0].xpath('.//a')
+    if len(actors) > 0:
+        for actorLink in actors:
+            actorName = str(actorLink.text_content().strip())
+            try:
+                actorPageURL = actorLink.get("href")
+                if "http" not in actorPageURL:
+                    actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL
+                actorPage = HTML.ElementFromURL(actorPageURL)
+                actorPhotoURL = actorPage.xpath('//div[@class="img-container"]/img')[0].get("src").split("?")[0]
+                if "http" not in actorPhotoURL:
+                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            except:
+                actorPhotoURL = ""
+            movieActors.addActor(actorName,actorPhotoURL)
+
+    # Director
+    director = metadata.directors.new()
+    try:
+        directors = detailsPageElements.xpath('//a[contains(@href,"/photographer/")]')
+        for dirname in directors:
+            director.name = dirname.text_content().strip()
+    except:
+        pass
+
+    ### Posters and artwork ###
+
     valid_names = list()
     metadata.posters.validate_keys(valid_names)
     metadata.art.validate_keys(valid_names)

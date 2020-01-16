@@ -384,10 +384,17 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Meana Wolf | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### MetArt Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### MetArt Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - ALS Scan
+  - Errotica Archives
+  - Eternal Desire
+  - Love Hairy
   - MetArt
   - MetArtX
+  - Rylsky Art
   - SexArt
+  - Stunning18
+  - TheLifeErotic
   - Viv Thomas
 + #### MileHighNetwork | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Movies Not Supported**
   - DoghouseDigital
