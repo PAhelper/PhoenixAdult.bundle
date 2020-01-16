@@ -64,14 +64,10 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@id="pornstars"]//img')
+    actors = detailsPageElements.xpath('//div[contains(@class, "pornstar-card")]//img')
     for actor in actors:
-        actorName = actor.xpath('.//../@title')
+        actorName = actor.xpath('.//../@title')[0]
         actorPhotoURL = 'http:' + actor.get('data-src')
-
-        if actorLink.xpath('.//../@href').strip().split('/')[-1] == '3270':
-            Log('Changing Actor to Mira Sunset')
-            actorName = 'Mira Sunset'
 
         movieActors.addActor(actorName, actorPhotoURL)
 
