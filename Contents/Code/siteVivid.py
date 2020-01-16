@@ -7,31 +7,28 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    url = PAsearchSites.getSearchSearchURL(siteNum) + 'api/?limit=24&sort=datedesc&search=' + encodedTitle + '&flagType=video'
-    Log(url)
-
     headers = {
-        'Host': 'www.vivid.com',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0',
-        'Accept': 'application/json, text/plain, */*',
-        'Cookie': '__cfduid=d7cb89b5d7dd10d49a3b5deca061f0d9f1576295085; PHPSESSID=4umsf5l5hnev6jeku50gh5bjr4',
-        'Referer': 'https://www.vivid.com/videos/Vivid_Videos.html?nats=VividTypeIn.1.1.1.0.0.0.0.0'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'
     }
-
-    req = urllib.Request(url, headers=headers)
-    data = urllib.urlopen(req).read()
-    searchResults = json.loads(data)
-    for searchResult in searchResults['responseData']:
-        titleNoFormatting = searchResult['name']
-        curID = searchResult['url'].replace('/','_').replace('?','!')
-        subSite = searchResult['site']['name']
-        releaseDate = parse(searchResult['release_date']).strftime('%Y-%m-%d')
-        videoBG = searchResult['placard_800'].replace('/','_').replace('?','!')
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + subSite + "|" + videoBG, name = titleNoFormatting + " [Vivid/" + subSite + "] " + releaseDate, score = score, lang = lang))
+    for sceneType in ['videos', 'dvds']:
+        url = PAsearchSites.getSearchSearchURL(siteNum) + sceneType + '/api/?flagType=video&search=' + encodedTitle
+        req = urllib.Request(url, headers=headers)
+        data = urllib.urlopen(req).read()
+        searchResults = json.loads(data)
+        for searchResult in searchResults['responseData']:
+            titleNoFormatting = searchResult['name']
+            curID = searchResult['url'].replace('/','_').replace('?','!')
+            if 'site' in searchResult:
+                subSite = searchResult['site']['name']
+            else:
+                subSite = 'DVD'
+            releaseDate = parse(searchResult['release_date']).strftime('%Y-%m-%d')
+            videoBG = searchResult['placard_800'].replace('/','_').replace('?','!')
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, subSite, videoBG), name='%s [Vivid/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
