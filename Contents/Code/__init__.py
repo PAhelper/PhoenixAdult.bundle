@@ -726,13 +726,6 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.networkTMW.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## TrenchcoatX
-            ###############
-            if siteNum == 667:
-                if searchSiteID == 9999 or searchSiteID == 667:
-                    results = PAsearchSites.siteTrenchcoatX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
-
-            ###############
             ## Screwbox
             ###############
             if siteNum == 668:
@@ -1643,14 +1636,6 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if (siteID >= 631 and siteID <= 666):
             metadata = PAsearchSites.networkTMW.update(metadata, siteID, movieGenres, movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##  TrenchcoatX                                             ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 667:
-            metadata = PAsearchSites.siteTrenchcoatX.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
