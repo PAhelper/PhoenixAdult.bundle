@@ -931,7 +931,7 @@ searchSites[810] = ["Hustler","Hustler","https://hustler.com","https://hustler.c
 searchSites[811] = ["AmourAngels","AmourAngels","http://www.amourangels.com","http://www.amourangels.com/z_cover_"]
 searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/common/search/searchword="]
 searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search"]
-searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/videos/"]
+searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/"]
 searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
 searchSites[816] = ["Errotica Archives","Errotica Archives","https://www.errotica-archives.com","https://www.errotica-archives.com/api/search-results?searchPhrase="]
 searchSites[817] = ["ALS Scan","ALS Scan","https://www.alsscan.com","https://www.alsscan.com/api/search-results?searchPhrase="]
@@ -1002,6 +1002,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^analb ', 'AnalBeauty ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^ap ', 'AssParade ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcasting ', 'BangCasting ', mediaTitle, flags=re.IGNORECASE)
@@ -1144,6 +1145,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sas ', 'SexandSubmission ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub("^Shes New ", "She's New ", mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)
