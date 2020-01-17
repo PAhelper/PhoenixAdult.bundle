@@ -114,8 +114,9 @@ import networkBang
 import siteVivid
 import siteJaysPOV
 import siteGirlfriendsFilms
+import siteBAMVisions
 
-searchSites = [None] * 829
+searchSites = [None] * 830
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -945,6 +946,7 @@ searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realityking
 searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
 searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://www.realitykings.com/scene/"]
 searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[829] = ["BAMVisions","BAMVisions","https://tour.bamvisions.com","https://tour.bamvisions.com/search.php?st=advanced&qall="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

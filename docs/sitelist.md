@@ -43,6 +43,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - BabeVR
   - KinkVR
   - VRCosplayX
++ #### BAMVisions | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Bang Bros Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Ass Parade
   - AvaSpice
