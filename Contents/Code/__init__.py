@@ -1172,6 +1172,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 815:
                 if searchSiteID == 9999 or searchSiteID == 815:
                     results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## PureCFNM Network
+            ###############
+            if siteNum == 829:
+                if searchSiteID == 9999 or (829 <= searchSiteID <= 834):
+                    results = PAsearchSites.networkPureCFNM.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
 
@@ -2172,6 +2179,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 380:
             metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  PureCFNM Network                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >=  829 and siteID <= 834:
+            metadata = PAsearchSites.networkPureCFNM.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
