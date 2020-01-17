@@ -379,15 +379,21 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Karups Older Women
   - Karups Private Collection
 + #### LegalPorno | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### Lil Humpers | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Meana Wolf | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### MetArt Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### MetArt Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - ALS Scan
+  - Errotica Archives
+  - Eternal Desire
+  - Love Hairy
   - MetArt
   - MetArtX
+  - Rylsky Art
   - SexArt
+  - Stunning18
+  - TheLifeErotic
   - Viv Thomas
 + #### MileHighNetwork | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Movies Not Supported**
   - DoghouseDigital
@@ -641,19 +647,25 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Big Naturals
   - Big Tits Boss
   - Bikini Crashers
-  - Captain Stabbin
+  - Black GFs
   - CFNM Secret
+  - Captain Stabbin
+  - Crazy Asian GFs
+  - Crazy College GFs
   - Cum Fiesta
   - Cum Girls
   - Dangerous Dongs
+  - Dare Dorm
   - Euro Sex Parties
   - Extreme Asses
   - Extreme Naturals
   - First Time Auditions
   - Flower Tucci
+  - GF Revenge
   - Girls of Naked
-  - Happy Tugs
   - HD Love
+  - Happy Tugs
+  - Horny Birds
   - Hot Bush
   - In the VIP
   - Mike in Brazil
@@ -666,8 +678,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Monster Curves
   - No Faces
   - Pure 18
-  - Real Orgasms
   - RK Prime
+  - Real Orgasms
+  - Reckless in Miami
   - Round and Brown
   - Saturday Night Latinas
   - See My Wife
@@ -680,6 +693,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - VIP Crew
   - We Live Together
   - Wives in Pantyhose
++ #### Other Reality Kings Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - Lil Humpers
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### SexyHub | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Dane Jones
