@@ -1172,6 +1172,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 815:
                 if searchSiteID == 9999 or searchSiteID == 815:
                     results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## ATKGirlfriends
+            ###############
+            if siteNum == 829:
+                if searchSiteID == 9999 or searchSiteID == 829:
+                    results = PAsearchSites.siteATKGirlfriends.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
 
@@ -2172,6 +2179,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 380:
             metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  ATK Girlfriends                                         ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 829:
+            metadata = PAsearchSites.siteATKGirlfriends.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
