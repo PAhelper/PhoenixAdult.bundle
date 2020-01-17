@@ -1174,6 +1174,13 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
+            ## PJGirls
+            ###############
+            if siteNum == 667:
+                if searchSiteID == 9999 or searchSiteID == 667:
+                    results = PAsearchSites.sitePJGirls.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    
+            ###############
             ## PureCFNM Network
             ###############
             if siteNum == 829:
@@ -2179,6 +2186,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 380:
             metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  PJGirls                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 667:
+            metadata = PAsearchSites.sitePJGirls.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
