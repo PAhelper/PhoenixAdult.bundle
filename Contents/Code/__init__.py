@@ -1190,9 +1190,16 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## BAMVisions
             ###############
-            if siteNum == 829:
+            if siteNum == 835:
                 if searchSiteID == 9999 or searchSiteID == 835:
                     results = PAsearchSites.siteBAMVisions.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    
+            ###############
+            ## ATKGirlfriends
+            ###############
+            if siteNum == 836:
+                if searchSiteID == 9999 or searchSiteID == 836:
+                    results = PAsearchSites.siteATKGirlfriends.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
 
@@ -1538,6 +1545,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID >= 490 and siteID <= 521 or siteID == 687 or siteID == 735 or siteID == 736:
             metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
+            
         ##############################################################
         ##                                                          ##
         ##  Nubiles                                                  ##
@@ -2193,7 +2201,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 380:
             metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
-
+         
         ##############################################################
         ##                                                          ##
         ##  PJGirls                                                 ##
@@ -2217,7 +2225,15 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 835:
             metadata = PAsearchSites.siteBAMVisions.update(metadata, siteID, movieGenres, movieActors)
-
+            
+        ##############################################################
+        ##                                                          ##
+        ##  ATK Girlfriends                                         ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 836:
+            metadata = PAsearchSites.siteATKGirlfriends.update(metadata, siteID, movieGenres, movieActors)
+            
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")
