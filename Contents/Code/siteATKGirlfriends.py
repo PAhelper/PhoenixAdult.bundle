@@ -5,7 +5,7 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    modelID = encodedTitle.split('%20', 1)[0]
+    modelID = encodedTitle.split('%20', 1)[0].lower()
     Log("modelID: " + modelID)
     try:
         sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
