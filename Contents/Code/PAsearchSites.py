@@ -114,10 +114,11 @@ import networkBang
 import siteVivid
 import siteJaysPOV
 import siteGirlfriendsFilms
+import siteBAMVisions
 import sitePJGirls
 import networkPureCFNM
 
-searchSites = [None] * 835
+searchSites = [None] * 836
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -953,6 +954,7 @@ searchSites[831] = ["CFNMGames","CFNMGames","https://www.cfnmgames.com/","https:
 searchSites[832] = ["GirlsAbuseGuys","GirlsAbuseGuys","https://www.girlsabuseguys.com/","https://www.girlsabuseguys.com/models/"]
 searchSites[833] = ["HeyLittleDick","HeyLittleDick","https://www.heylittledick.com/","https://www.heylittledick.com/models/"]
 searchSites[834] = ["LadyVoyeurs","LadyVoyeurs","https://www.ladyvoyeurs.com/","https://www.ladyvoyeurs.com/models/"]
+searchSites[835] = ["BAMVisions","BAMVisions","https://tour.bamvisions.com","https://tour.bamvisions.com/search.php?st=advanced&qall="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
