@@ -5,6 +5,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
+    sceneID = None
+    for search in searchTitle.split(' '):
+        if unicode(search, 'UTF-8').isdigit():
+            sceneID = search
+            break
+
+    if sceneID:
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/get/' + sceneID
+        detailsPageElements = HTML.ElementFromURL(url)
+
+        searchTitle = detailsPageElements.xpath('//h1')[0].text_content().strip()
+
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
     for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
@@ -16,8 +28,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = ''
 
         sceneCover = searchResult.xpath('.//..//img/@data-src')[0].replace('/','_').replace('?','!')
+        url = searchResult.xpath('.//..//img/@data-src')[0]
+        if not url.startswith('http'):
+            url = PAsearchSites.getSearchBaseURL(siteNum) + url
         curID = searchResult.xpath('.//a/@href')[0].replace('/','_').replace('?','!')
-
         if searchDate and releaseDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -57,10 +71,18 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieGenres.addGenre(genreName)
 
     # Release Date
-    date = detailsPageElements.xpath('//meta[@itemprop="uploadDate"]/@content')[0].strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    date_object = None
+    for item in detailsPageElements.xpath('//div[@id="video-specs"]//div//p'):
+        try:
+            item = item.text_content().strip()
+            if item:
+                date_object = parse(item)
+                break
+        except:
+            pass
+    if date_object:
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
@@ -73,12 +95,19 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     #Posters
     art = [
-        str(metadata.id).split('|')[2].replace('_','/').replace('!','?'),
-        detailsPageElements.xpath('//meta[@itemprop="thumbnailUrl"]/@content')[0]
+        str(metadata.id).split('|')[2].replace('_','/').replace('!','?')
     ]
-
-    for img in detailsPageElements.xpath('//div[@id="photoSliderGuest"]//a/@href'):
-        art.append(img)
+    xpaths = [
+        '//meta[@itemprop="thumbnailUrl"]/@content',
+        '//div[@id="innerVideoBlock"]//img/@src',
+        '//div[@id="photoSliderGuest"]//a/@href'
+    ]
+    for xpath in xpaths:
+        try:
+            for img in detailsPageElements.xpath(xpath):
+                art.append(img)
+        except:
+            pass
 
     j = 1
     Log('Artwork found: %d' % len(art))
