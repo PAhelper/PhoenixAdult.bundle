@@ -115,8 +115,10 @@ import siteVivid
 import siteJaysPOV
 import siteGirlfriendsFilms
 import siteBAMVisions
+import sitePJGirls
+import networkPureCFNM
 
-searchSites = [None] * 830
+searchSites = [None] * 836
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -784,7 +786,7 @@ searchSites[663] = ["WOW Orgasms","WOW Orgasms","http://teenmegaworld.net","http
 searchSites[664] = ["Watch Me Fucked","Watch Me Fucked","http://teenmegaworld.net","http://teenmegaworld.net/search.php?query="]
 searchSites[665] = ["X Angels","X Angels","http://teenmegaworld.net","http://teenmegaworld.net/search.php?query="]
 searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","http://teenmegaworld.net","http://teenmegaworld.net/search.php?query="]
-
+searchSites[667] = ["PJGirls","PJGirls","http://www.pjgirls.com","http://www.pjgirls.com/en/videos/?fulltext="]
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
 searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/search?q="]
@@ -946,7 +948,13 @@ searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realityking
 searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
 searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://www.realitykings.com/scene/"]
 searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[829] = ["BAMVisions","BAMVisions","https://tour.bamvisions.com","https://tour.bamvisions.com/search.php?st=advanced&qall="]
+searchSites[829] = ["AmateurCFNM","AmateurCFNM","https://www.amateurcfnm.com/","https://www.amateurcfnm.com/models/"]
+searchSites[830] = ["PureCFNM","PureCFNM","https://www.purecfnm.com/","https://www.purecfnm.com/models/"]
+searchSites[831] = ["CFNMGames","CFNMGames","https://www.cfnmgames.com/","https://www.cfnmgames.com/models/"]
+searchSites[832] = ["GirlsAbuseGuys","GirlsAbuseGuys","https://www.girlsabuseguys.com/","https://www.girlsabuseguys.com/models/"]
+searchSites[833] = ["HeyLittleDick","HeyLittleDick","https://www.heylittledick.com/","https://www.heylittledick.com/models/"]
+searchSites[834] = ["LadyVoyeurs","LadyVoyeurs","https://www.ladyvoyeurs.com/","https://www.ladyvoyeurs.com/models/"]
+searchSites[835] = ["BAMVisions","BAMVisions","https://tour.bamvisions.com","https://tour.bamvisions.com/search.php?st=advanced&qall="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

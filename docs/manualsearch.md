@@ -5,14 +5,16 @@ Each search query can be comprised of *up to* 5 parts, depending on the supporte
 - `Date` - Follows immediately after site name, in the format of either `YYYY-MM-DD` or `YY-MM-DD` ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
 - `Actor(s)`
 - `Title` - The title/name of the scene.
-- `SceneID` - A numeric value found in the URL of a scene. ([more on how this can be used](./manualsearch.md#search-types-and-their-capabilities))
-- `Direct URL` - A string of characters at the end of a URL. Typically includes some combination of a SceneID, Scene Title, or Actor.
+- `StudioID` - A numeric value found in the URL of a studio page.
+- `ActressID` - An alphanumeric value found in the URL of an actress page. Typically similar to the name of the actress.
+- `SceneID` - A numeric value found in the URL of a scene page.
+- `Direct URL` - A string of characters at the end of a URL of a scene page. Typically includes some combination of a SceneID, Scene Title, or Actor.
 
 # Search types and their capabilities
 There are 3 available search/matching methods, as listed below:
 + **Enhanced Search:** `Title` `Actor` `Date` `SceneID`
 + **Limited Search:** `Title` `Actor`
-+ **Exact Match:** `SceneID` `Direct URL`
++ **Exact Match:** `StudioID` `ActressID` `SceneID` `Direct URL`
 
 ## Enhanced Search
 #### Multi-search available.
@@ -20,12 +22,12 @@ There are 3 available search/matching methods, as listed below:
   - **Title**
   - **Actor(s)**
 + **Available match methods:**
-*These can be used in conjunction with available search methods and will increase the possibility of locating the correct scene. However, they cannot be used as standalone search terms. At least one of these can be utilized, depending on the site.*
+*These can be used in conjunction with available search methods and will increase the possibility of locating the correct scene. However, it is not recommended they be used as standalone search terms. Usually, at least one of these can be utilized (depending on the site)*
   - **Date**
   - **SceneID**
 
-+ **Date Match:** Date can be entered directly after the site name, but before any other search terms. This will increase the possibility for a match. However, it cannot be entered as a standalone search term.
-+ **SceneID Match:** SceneID can be entered directly after the site name (and date), but before other search terms. This will increase the possibility for a match. However, it cannot be entered as a standalone search term.
++ **Date Match:** Date can be entered directly after the site name, but before any other search terms. This will increase the possibility for a match.
++ **SceneID Match:** SceneID can be entered directly after the site name (and date), but before all other search terms. This will increase the possibility for a match.
 
 ## Limited Search
 #### Limited-search available.
@@ -35,16 +37,22 @@ There are 3 available search/matching methods, as listed below:
 
 ## Exact Match
 #### No search available.
-*Locating the correct scene is entirely dependent on entering the correct SceneID or Direct URL. In the case of SceneID, you may be able to add additional terms after the SceneID (such as Title, Actor(s), etc). However, these will not increase the possibility of locating the correct scene and are only implemented for convenience.*
+*Locating the correct scene is entirely dependent on entering the correct StudioID, ActressID, SceneID, or Direct URL. However, entering additional search terms may help with matching.*
++ **StudioID:** Typically used when sites host many small, independent studios (ie. Clips4Sale).
+  - Can add the Date (before the StudioID).
+  - Can add a Title/Actor (after the StudioID). This acts as a search term.
++ **ActressID:** Typically used when actresses have their own page, but scenes do not. 
+  - Can add the Date (before the ActressID).
+  - Can add a Title/Actor (after the ActressID). This acts as a search term.
 + **SceneID**
-  - Can add the the Date (before the SceneID)
-  - Can typically add a Title/Actor (after the SceneID)
+  - Can add the Date (before the SceneID).
+  - Can add a Title/Actor (after the SceneID).
 + **Direct URL**
-  - Can add the the Date (before the URL)
-  - Adding any terms, such as Title/Actors, after the URL will cause issues with matching
+  - Can add the Date (before the URL).
+  - Adding any additional terms (ie. Title/Actors) will cause issues with matching.
 
 ## Notes
-+ **Date Add** - Some sites don't make release dates available. The agent will strip the date from your filename/search term, instead.
++ **Date Add** - Some sites don't make release dates available. The agent will scrape the date from your filename/search term, instead.
 
 # Search Examples
 Depending on the capability of any one network/site, you can try a few combiations of the above.

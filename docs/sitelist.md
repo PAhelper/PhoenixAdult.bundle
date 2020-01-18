@@ -539,6 +539,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SpermSwap
   - TamedTeens
 + #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, SceneID**
++ #### PJGirls | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Playboy Plus | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Porndoe Premium Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - A Girl Knows
@@ -640,6 +641,13 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sex on the beach
   - Tight and Teen
 + #### PropertySex | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### PureCFNM Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **ActressID with Title Search**
+  - AmateurCFNM
+  - CFNMGames
+  - GirlsAbuseGuys
+  - HeyLittleDick
+  - LadyVoyeurs
+  - PureCFNM
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Reality Kings Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - 40 Inch Plus

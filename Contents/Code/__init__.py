@@ -1174,10 +1174,24 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
+            ## PJGirls
+            ###############
+            if siteNum == 667:
+                if searchSiteID == 9999 or searchSiteID == 667:
+                    results = PAsearchSites.sitePJGirls.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    
+            ###############
+            ## PureCFNM Network
+            ###############
+            if siteNum == 829:
+                if searchSiteID == 9999 or (829 <= searchSiteID <= 834):
+                    results = PAsearchSites.networkPureCFNM.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    
+            ###############
             ## BAMVisions
             ###############
             if siteNum == 829:
-                if searchSiteID == 9999 or searchSiteID == 829:
+                if searchSiteID == 9999 or searchSiteID == 835:
                     results = PAsearchSites.siteBAMVisions.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
@@ -2182,10 +2196,26 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
+        ##  PJGirls                                                 ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 667:
+            metadata = PAsearchSites.sitePJGirls.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  PureCFNM Network                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID >=  829 and siteID <= 834:
+            metadata = PAsearchSites.networkPureCFNM.update(metadata, siteID, movieGenres, movieActors)
+        
+        ##############################################################
+        ##                                                          ##
         ##  BAMVisions                                              ##
         ##                                                          ##
         ##############################################################
-        if siteID == 829:
+        if siteID == 835:
             metadata = PAsearchSites.siteBAMVisions.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
