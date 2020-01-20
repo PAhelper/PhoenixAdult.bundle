@@ -31,7 +31,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = ''
 
         sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
-        if not sceneCoverURL.startwith('http'):
+        if not sceneCoverURL.startswith('http'):
             sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
         sceneCover = sceneCoverURL.replace('/','_').replace('?','!')
         curID = url.replace('/','_').replace('?','!')
