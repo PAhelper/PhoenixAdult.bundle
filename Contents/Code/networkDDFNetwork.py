@@ -1,18 +1,19 @@
 import PAsearchSites
 import PAgenres
 
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    sceneID = None
+    searchSceneID = None
     for search in searchTitle.split(' '):
         if unicode(search, 'UTF-8').isdigit():
-            sceneID = search
+            searchSceneID = search
             break
 
-    if sceneID:
-        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/get/' + sceneID
+    if searchSceneID:
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/get/' + searchSceneID
         detailsPageElements = HTML.ElementFromURL(url)
 
         searchTitle = detailsPageElements.xpath('//h1')[0].text_content().strip()
@@ -20,6 +21,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
     for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
+        url = searchResult.xpath('.//a/@href')[0]
+        sceneID = url.rsplit('/', 1)[1]
 
         releaseDate = searchResult.xpath('.//small[@class="text-muted"]/@datetime')
         if releaseDate:
@@ -27,12 +30,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             releaseDate = ''
 
-        sceneCover = searchResult.xpath('.//..//img/@data-src')[0].replace('/','_').replace('?','!')
-        url = searchResult.xpath('.//..//img/@data-src')[0]
-        if not url.startswith('http'):
-            url = PAsearchSites.getSearchBaseURL(siteNum) + url
-        curID = searchResult.xpath('.//a/@href')[0].replace('/','_').replace('?','!')
-        if searchDate and releaseDate:
+        sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
+        if not sceneCoverURL.startwith('http'):
+            sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
+        sceneCover = sceneCoverURL.replace('/','_').replace('?','!')
+        curID = url.replace('/','_').replace('?','!')
+
+        if searchSceneID == sceneID:
+            score = 100
+        elif searchDate and releaseDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -41,13 +47,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     return results
 
+
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split('|')[0].replace('_','/').replace('!','?')
+    metadata_id = str(metadata.id).split('|')
+    url = PAsearchSites.getSearchBaseURL(siteID) + metadata_id[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Studio
-    metadata.studio = "DDFProd"
+    metadata.studio = 'DDFProd'
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
@@ -95,7 +103,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     #Posters
     art = [
-        str(metadata.id).split('|')[2].replace('_','/').replace('!','?')
+        metadata_id[2].replace('_','/').replace('!','?')
     ]
     xpaths = [
         '//meta[@itemprop="thumbnailUrl"]/@content',
@@ -103,17 +111,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         '//div[@id="photoSliderGuest"]//a/@href'
     ]
     for xpath in xpaths:
-        try:
-            for img in detailsPageElements.xpath(xpath):
-                art.append(img)
-        except:
-            pass
+        for img in detailsPageElements.xpath(xpath):
+            art.append(img)
 
-    j = 1
     Log('Artwork found: %d' % len(art))
-    for posterUrl in art:
+    for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            #Download image file for analysis
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
@@ -122,11 +126,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 #Add the image proxy items to the collection
                 if (width > 1 or height > width) and width < height:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
                 pass
 
