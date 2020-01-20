@@ -38,7 +38,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    detailsPageElements = HTML.ElementFromURL(url,headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
+    detailsPageElements = HTML.ElementFromURL(url, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
     art = []
 
     # Summary
@@ -132,16 +132,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//p[@class="tag-list category-tag-list"]//a')
-
-    if len(genres) > 0:
-        for genreLink in genres:
-            genreName = genreLink.text_content().strip().lower()
-            movieGenres.addGenre(genreName)
+    for genreLink in genres:
+        genreName = genreLink.text_content().strip().title()
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"With:")]//a')
-    if len(actors) > 0:
+    if actors:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
         if len(actors) == 4:
@@ -149,7 +147,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         if len(actors) > 4:
             movieGenres.addGenre("Orgy")
         for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
+            actorName = actorLink.text_content().strip()
             actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = actorPage.xpath('//div[@class="model-image"]/img')[0].get("src")
@@ -182,7 +180,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             art.append(poster)
 
     Log('Artwork found: %d' % len(art))
-    for idx, posterUrl in enumerate(art):
+    for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             #Download image file for analysis
             try:
