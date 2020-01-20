@@ -2,15 +2,12 @@ import siteBrazzers
 import siteNaughtyAmerica
 import siteXart
 import siteBangBros
-import siteRealityKings
 import siteTeamSkeet
 import sitePorndoePremium
 import siteLegalPorno
-import siteMofos
 import siteBabes
 import siteGloryHoleSecrets
 import siteNewSensations
-import siteTwistys
 import siteSpizoo
 import sitePrivate
 import siteDigitalPlayground
@@ -118,6 +115,7 @@ import siteBAMVisions
 import sitePJGirls
 import networkPureCFNM
 import siteATKGirlfriends
+import network1service
 
 searchSites = [None] * 837
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
@@ -408,10 +406,10 @@ searchSites[284] = ["Nympho","Nympho","https://tour.nympho.com","https://tour.ny
 searchSites[285] = ["EroticaX","EroticaX","https://www.xempire.com","https://www.xempire.com/en/search/eroticax/"]
 searchSites[286] = ["DarkX","DarkX","https://www.xempire.com","https://www.xempire.com/en/search/darkx/"]
 searchSites[287] = ["LesbianX","LesbianX","http://www.xempire.com","http://www.xempire.com/en/search/lesbianx/"]
-searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[289] = ["WhenGirlsPlay","WhenGirlsPlay","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[290] = ["MomKnowsBest","MomKnowsBest","https://www.twistys.com","https://www.twistys.com/scene/"]
-searchSites[291] = ["TwistysHard","TwistysHard","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[288] = ["Twistys","Twistys","https://www.twistys.com","https://site-api.project1service.com"]
+searchSites[289] = ["WhenGirlsPlay","WhenGirlsPlay","https://www.twistys.com","https://site-api.project1service.com"]
+searchSites[290] = ["MomKnowsBest","MomKnowsBest","https://www.twistys.com","https://site-api.project1service.com"]
+searchSites[291] = ["TwistysHard","TwistysHard","https://www.twistys.com","https://site-api.project1service.com"]
 searchSites[292] = ["VirtualTaboo","VirtualTaboo","https://virtualtaboo.com","https://virtualtaboo.com/search?q="]
 searchSites[293] = ["Spizoo","Spizoo","https://www.spizoo.com","https://www.spizoo.com/search.php?query="]
 searchSites[294] = ["Private","Private","https://www.private.com","https://www.private.com/search.php?query="]
@@ -888,7 +886,7 @@ searchSites[764] = ["ToughLoveX","ToughLoveX","https://tour.toughlovex.com","htt
 searchSites[765] = ["CumLouder","CumLouder","https://www.cumlouder.com","https://www.cumlouder.com/search?q="]
 searchSites[766] = ["Deep Lush", "Deep Lush", "https://deeplush.com","https://deeplush.com/video/" ]
 searchSites[767] = ["AllAnal","AllAnal","https://tour.allanal.com","https://tour.allanal.com/view/"]
-searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://www.twistys.com/scene/"]
+searchSites[768] = ["TurningTwistys","TurningTwistys","https://www.twistys.com","https://site-api.project1service.com"]
 searchSites[769] = ["GirlCum","GirlCum","https://www.girlcum.com","https://www.girlcum.com/video/"]
 searchSites[770] = ["ZeroTolerance","ZeroTolerance","http://www.ztod.com","http://www.ztod.com/videos?query="]
 searchSites[771] = ["ClubFilly","ClubFilly","http://www.clubfilly.com","http://www.clubfilly.com/scenefocus.php?vnum=V"]
@@ -942,13 +940,13 @@ searchSites[818] = ["Rylsky Art","Rylsky Art","https://www.rylskyart.com","https
 searchSites[819] = ["Eternal Desire","Eternal Desire","https://www.eternaldesire.com","https://www.eternaldesire.com/api/search-results?searchPhrase="]
 searchSites[820] = ["Stunning18","Stunning18","https://www.stunning18.com","https://www.stunning18.com/api/search-results?searchPhrase="]
 searchSites[821] = ["Love Hairy","Love Hairy","https://www.lovehairy.com","https://www.lovehairy.com/api/search-results?searchPhrase="]
-searchSites[822] = ["GF Revenge","GF Revenge","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[823] = ["Black GFs","Black GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[824] = ["Dare Dorm","Dare Dorm","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://www.realitykings.com/scene/"]
-searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://www.realitykings.com/scene/"]
+searchSites[822] = ["GF Revenge","GF Revenge","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[823] = ["Black GFs","Black GFs","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[824] = ["Dare Dorm","Dare Dorm","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://site-api.project1service.com"]
 searchSites[829] = ["AmateurCFNM","AmateurCFNM","https://www.amateurcfnm.com/","https://www.amateurcfnm.com/models/"]
 searchSites[830] = ["PureCFNM","PureCFNM","https://www.purecfnm.com/","https://www.purecfnm.com/models/"]
 searchSites[831] = ["CFNMGames","CFNMGames","https://www.cfnmgames.com/","https://www.cfnmgames.com/models/"]
