@@ -62,14 +62,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    metadata_id = str(metadata.id).split('|')
-    sceneID = metadata_id[0]
-    siteNum = int(metadata_id[1])
-    cookies = get_Cookies(siteNum)
+    sceneID = str(metadata.id).split('|')[0]
+    cookies = get_Cookies(siteID)
     headers = {
         'Instance': cookies['instance_token'],
     }
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&id=' + sceneID
+    url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=scene&id=' + sceneID
     req = urllib.Request(url, headers=headers)
     data = urllib.urlopen(req).read()
     detailsPageElements = json.loads(data)['result'][0]
@@ -107,7 +105,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['actors']
     for actorLink in actors:
-        actorPageURL = PAsearchSites.getSearchSearchURL(siteNum) + '/v1/actors?id=%d' % actorLink['id']
+        actorPageURL = PAsearchSites.getSearchSearchURL(siteID) + '/v1/actors?id=%d' % actorLink['id']
 
         req = urllib.Request(actorPageURL, headers=headers)
         data = urllib.urlopen(req).read()
@@ -127,13 +125,13 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            #Download image file for analysis
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
+                # Add the image proxy items to the collection
                 if width > 1 or height > width:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
