@@ -2,12 +2,15 @@ import siteBrazzers
 import siteNaughtyAmerica
 import siteXart
 import siteBangBros
+import siteRealityKings
 import siteTeamSkeet
 import sitePorndoePremium
 import siteLegalPorno
+import siteMofos
 import siteBabes
 import siteGloryHoleSecrets
 import siteNewSensations
+import siteTwistys
 import siteSpizoo
 import sitePrivate
 import siteDigitalPlayground
@@ -115,7 +118,6 @@ import siteBAMVisions
 import sitePJGirls
 import networkPureCFNM
 import siteATKGirlfriends
-import network1service
 
 searchSites = [None] * 837
 searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
