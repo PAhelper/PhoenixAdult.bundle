@@ -34,9 +34,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             break
 
     if sceneID:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '?type=scene&id=' + sceneID
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&id=' + sceneID
     else:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '?type=scene&search=' + encodedTitle
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&search=' + encodedTitle
     req = urllib.Request(url, headers=headers)
     data = urllib.urlopen(req).read()
 
@@ -69,7 +69,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     headers = {
         'Instance': cookies['instance_token'],
     }
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '?type=scene&id=' + sceneID
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&id=' + sceneID
     req = urllib.Request(url, headers=headers)
     data = urllib.urlopen(req).read()
     detailsPageElements = json.loads(data)['result'][0]
@@ -107,15 +107,22 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['actors']
     for actorLink in actors:
-        actorName = actorLink['name']
-        actorPhotoURL = ''
+        actorPageURL = PAsearchSites.getSearchSearchURL(siteNum) + '/v1/actors?id=%d' % actorLink['id']
+
+        req = urllib.Request(actorPageURL, headers=headers)
+        data = urllib.urlopen(req).read()
+        actorData = json.loads(data)['result'][0]
+
+        actorName = actorData['name']
+        if actorData['images']['profile']:
+            actorPhotoURL = actorData['images']['profile'][0]['xs']['url']
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []
     for image in detailsPageElements['images']['poster']:
         art.append(image['xx']['url'])
-
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
