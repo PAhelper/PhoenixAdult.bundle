@@ -20,7 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
         searchResults = HTML.ElementFromURL(sitemapURL)
         for searchResult in searchResults.xpath('//url'):
-            searchURL = searchResult.xpath('.//loc')[0].text_content().strip()
+            searchURL = searchResult.xpath('.//loc')[0].text_content().strip().rsplit('?', 1)[0]
             if ('movies' in searchURL) and (shootID in searchURL):
                 searchResultsURLs.append(searchURL)
                 break
@@ -33,19 +33,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             if ('movies' in searchURL):
                 searchResultsURLs.append(sceneURL)
 
-    if searchResultsURLs:
-        for sceneURL in searchResultsURLs:
-            detailsPageElements = HTML.ElementFromURL(sceneURL)
+    for sceneURL in searchResultsURLs:
+        detailsPageElements = HTML.ElementFromURL(sceneURL)
 
-            titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
-            curID = sceneURL.replace('/', '_').replace('?', '!')
-            subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
-            releaseDate = ''
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            score = 100
+        titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
+        curID = sceneURL.replace('/', '_').replace('?', '!')
+        subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
+        releaseDate = ''
+        if searchDate:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        score = 100
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
     return results
 
