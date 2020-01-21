@@ -20,17 +20,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
         searchResults = HTML.ElementFromURL(sitemapURL)
         for searchResult in searchResults.xpath('//url'):
-            searchURL = searchResult.xpath('.//loc')[0].text_content().strip().rsplit('?', 1)[0]
-            if ('movies' in searchURL) and (shootID in searchURL):
-                searchResultsURLs.append(searchURL)
+            sceneURL = searchResult.xpath('.//loc')[0].text_content().strip()
+            if ('movies' in sceneURL) and (shootID in sceneURL):
+                searchResultsURLs.append(sceneURL)
                 break
 
     if not searchResultsURLs:
         domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
 
         for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
-            searchURL = sceneURL.rsplit('?', 1)[0]
-            if ('movies' in searchURL):
+            sceneURL = sceneURL.rsplit('?', 1)[0]
+            if ('movies' in sceneURL):
                 searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
