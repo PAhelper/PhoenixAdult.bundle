@@ -859,11 +859,11 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.sitePropertySex.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## FuckedHard18
+            ## FuelVirtual
             ###############
-            if siteNum == 734:
-                if searchSiteID == 9999 or searchSiteID == 734:
-                    results = PAsearchSites.siteFuckedHard18.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+            if siteNum == 546:
+                if searchSiteID == 9999 or (546 <= searchSiteID <= 547):
+                    results = PAsearchSites.networkFuelVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## TransAngels
@@ -1820,11 +1820,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  FuckedHard18                                            ##
+        ##  FuelVirtual                                             ##
         ##                                                          ##
         ##############################################################
-        if siteID == 734:
-            metadata = PAsearchSites.siteFuckedHard18.update(metadata, siteID, movieGenres, movieActors)
+        if 546 <= siteID <= 547:
+            metadata = PAsearchSites.networkFuelVirtual.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##

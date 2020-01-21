@@ -64,7 +64,7 @@ import siteWeAreHairy
 import siteLoveHerFeet
 import siteMomPOV
 import sitePropertySex
-import siteFuckedHard18
+import networkFuelVirtual
 import siteTransAngels
 import siteStraplezz
 import siteLittleCaprice
@@ -664,6 +664,8 @@ searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com
 searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/"]
 searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/"]
 searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomshow.com","https://thatsitcomshow.com/video/"]
+searchSites[546] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?st=advanced&site[]=5&qall="]
+searchSites[547] = ["MassageGirls18","MassageGirls18","http://massagegirls18.com","http://massagegirls18.com/membersarea/search.php?st=advanced&site[]=4&qall="]
 
 searchSites[548] = ["BellaPass", "BellaPass", "https://www.bellapass.com","https://bellapass.com/search.php?query="]
 searchSites[549] = ["Bryci", "Bryci", "https://www.bryci.com","https://bryci.com/search.php?query="]
@@ -851,7 +853,7 @@ searchSites[730] = ["We Are Hairy","We Are Hairy","https://www.wearehairy.com","
 searchSites[731] = ["Love Her Feet","Love Her Feet","https://www.loveherfeet.com","https://www.loveherfeet.com/tour/search.php?query="]
 searchSites[732] = ["MomPOV","MomPOV","http://www.mompov.com","http://www.mompov.com/tour/?s="]
 searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/scene/"]
-searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?query="]
+
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
 searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","https://www.transangels.com/scene/"]
