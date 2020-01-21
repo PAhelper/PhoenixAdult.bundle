@@ -554,20 +554,18 @@ searchSites[430] = ["BlacksOnBoys","BlacksOnBoys","https://www.dogfartnetwork.co
 searchSites[431] = ["GloryholesAndHandjobs","GloryholesAndHandjobs","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com","http://www.julesjordan.com/trial/search.php?st=advanced&qall="]
 searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[436] = ["House of Taboo","House of Taboo", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[437] = ["Euro Girls on Girls","Euro Girls on Girls", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[438] = ["1By-Day","1By-Day", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[439] = ["DDF Network VR","DDF Network VR", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[440] = ["Euro Teen Erotica","Euro Teen Erotica", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[441] = ["Hot Legs and Feet","Hot Legs & Feet", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[442] = ["Only Blowjob","Only Blowjob", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[443] = ["Sandys Fantasies","Sandy's Fantasies", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[444] = ["Cherry Jul","Cherry Jul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[445] = ["Eve Angel Official","Eve Angel Official", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[446] = ["Sex Video Casting","Sex Video Casting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[447] = ["Hairy Twatter","Hairy Twatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://handsonhardcore.com","https://handsonhardcore.com/videos/freeword/"]
+searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfbusty.com","https://ddfbusty.com/videos/freeword/"]
+searchSites[436] = ["House of Taboo","House of Taboo", "https://houseoftaboo.com","https://houseoftaboo.com/videos/freeword/"]
+searchSites[437] = ["Euro Girls on Girls","Euro Girls on Girls", "https://eurogirlsongirls.com","https://eurogirlsongirls.com/videos/freeword/"]
+searchSites[438] = ["1ByDay","1ByDay", "https://1by-day.com","https://1by-day.com/videos/freeword/"]
+searchSites[440] = ["Euro Teen Erotica","Euro Teen Erotica", "https://euroteenerotica.com","https://euroteenerotica.com/videos/freeword/"]
+searchSites[441] = ["Hot Legs and Feet","Hot Legs & Feet", "https://hotlegsandfeet.com","https://hotlegsandfeet.com/videos/freeword/"]
+searchSites[442] = ["Only Blowjob","Only Blowjob", "https://onlyblowjob.com","https://onlyblowjob.com/videos/freeword/"]
+searchSites[443] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[444] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[445] = ["DDF Babes", "DDF Babes", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+
 searchSites[448] = ["PerfectGonzo","PerfectGonzo", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?q="]
 searchSites[449] = ["AllInternal","AllInternal", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=allinternal&q="]
 searchSites[450] = ["AssTraffic","AssTraffic", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=asstraffic&q="]
@@ -666,8 +664,7 @@ searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com
 searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/"]
 searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/"]
 searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomshow.com","https://thatsitcomshow.com/video/"]
-searchSites[546] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[547] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+
 searchSites[548] = ["BellaPass", "BellaPass", "https://www.bellapass.com","https://bellapass.com/search.php?query="]
 searchSites[549] = ["Bryci", "Bryci", "https://www.bryci.com","https://bryci.com/search.php?query="]
 searchSites[550] = ["Katie Banks", "Katie Banks", "https://www.katiebanks.com","https://katiebanks.com/search.php?query="]
@@ -1049,7 +1046,6 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^dbm ', 'DontBreakMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ddfb ', 'DDFBusty ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ddfvr ', 'DDFNetworkVR ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
