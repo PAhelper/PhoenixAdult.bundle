@@ -37,7 +37,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if sceneID:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=' % (sceneType, sceneID)
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
         req = urllib.Request(url, headers=headers)
         data = urllib.urlopen(req).read()
 
