@@ -29,7 +29,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
 
         for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
-            searchResultsURLs.append(sceneURL.rsplit('?', 1)[0])
+            searchURL = sceneURL.rsplit('?', 1)[0]
+            if ('movies' in searchURL):
+                searchResultsURLs.append(sceneURL)
 
     if searchResultsURLs:
         for sceneURL in searchResultsURLs:
@@ -49,7 +51,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('+',',')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
