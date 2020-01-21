@@ -33,31 +33,32 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             sceneID = splited
             break
 
-    if sceneID:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&id=' + sceneID
-    else:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=scene&search=' + encodedTitle
-    req = urllib.Request(url, headers=headers)
-    data = urllib.urlopen(req).read()
-
-    searchResults = json.loads(data)
-    for searchResult in searchResults['result']:
-        titleNoFormatting = searchResult['title']
-        releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
-        curID = searchResult['id']
-        siteName = searchResult['brand'].title()
-        subSite = ''
-        if 'collections' in searchResult:
-            subSite = searchResult['collections'][0]['name']
-
+    for sceneType in ['scene', 'movie']:
         if sceneID:
-            score = 100
-        elif searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=' % (sceneType, sceneID)
+        req = urllib.Request(url, headers=headers)
+        data = urllib.urlopen(req).read()
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate), score=score, lang=lang))
+        searchResults = json.loads(data)
+        for searchResult in searchResults['result']:
+            titleNoFormatting = searchResult['title']
+            releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
+            curID = searchResult['id']
+            siteName = searchResult['brand'].title()
+            subSite = ''
+            if 'collections' in searchResult:
+                subSite = searchResult['collections'][0]['name']
+
+            if sceneID:
+                score = 100
+            elif searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
