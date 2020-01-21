@@ -58,7 +58,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -66,12 +66,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    sceneID = str(metadata.id).split('|')[0]
+    metadata_id = str(metadata.id).split('|')
+    sceneID = metadata_id[0]
+    sceneType = metadata_id[2]
     cookies = get_Cookies(siteID)
     headers = {
         'Instance': cookies['instance_token'],
     }
-    url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=scene&id=' + sceneID
+    url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
     req = urllib.Request(url, headers=headers)
     data = urllib.urlopen(req).read()
     detailsPageElements = json.loads(data)['result'][0]
