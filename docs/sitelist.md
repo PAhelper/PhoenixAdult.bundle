@@ -208,21 +208,22 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
-+ #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 1By-Day
-  - Cherry Jul
   - DDF Busty
   - DDF Hardcore
-  - DDF Network VR
   - DDF Xtreme
   - Euro Girls on Girls
   - Euro Teen Erotica
-  - Eve Angel Official
-  - Hairy Twatter
   - Hands on Hardcore
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
++ #### Other DDFNetwork Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - DDF Network VR
+  - Cherry Jul
+  - Eve Angel Official
+  - Hairy Twatter
   - Sandy's Fantasies
   - Sex Video Casting
 + #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**

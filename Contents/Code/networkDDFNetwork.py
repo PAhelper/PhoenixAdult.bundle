@@ -8,42 +8,42 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     searchSceneID = None
     for search in searchTitle.split(' '):
-        if unicode(search, 'UTF-8').isdigit():
+        if unicode(search, 'UTF-8').isdigit() and len(search) >= 4:
             searchSceneID = search
             break
 
     if searchSceneID:
         url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/get/' + searchSceneID
         detailsPageElements = HTML.ElementFromURL(url)
-
-        searchTitle = detailsPageElements.xpath('//h1')[0].text_content().strip()
-
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
-    for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
-        titleNoFormatting = searchResult.xpath('.//a/@title')[0]
-        url = searchResult.xpath('.//a/@href')[0]
-        sceneID = url.rsplit('/', 1)[1]
-
-        releaseDate = searchResult.xpath('.//small[@class="text-muted"]/@datetime')
-        if releaseDate:
-            releaseDate = parse(releaseDate[0]).strftime('%Y-%m-%d')
-        else:
-            releaseDate = ''
-
-        sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
-        if not sceneCoverURL.startswith('http'):
-            sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
-        sceneCover = sceneCoverURL.replace('/','_').replace('?','!')
+        titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
         curID = url.replace('/','_').replace('?','!')
+        score = 100
 
-        if searchSceneID == sceneID:
-            score = 100
-        elif searchDate and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneCover), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+    else:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
+        for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
+            titleNoFormatting = searchResult.xpath('.//a/@title')[0]
+            url = searchResult.xpath('.//a/@href')[0]
+            releaseDate = searchResult.xpath('.//small[@class="text-muted"]/@datetime')
+            if releaseDate:
+                releaseDate = parse(releaseDate[0]).strftime('%Y-%m-%d')
+            else:
+                releaseDate = ''
+
+            sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
+            if not sceneCoverURL.startswith('http'):
+                sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
+            sceneCover = sceneCoverURL.replace('/','_').replace('?','!')
+            curID = url.replace('/','_').replace('?','!')
+
+            if searchDate and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneCover), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
@@ -51,7 +51,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata_id = str(metadata.id).split('|')
-    url = PAsearchSites.getSearchBaseURL(siteID) + metadata_id[0].replace('_','/').replace('!','?')
+    url = metadata_id[0].replace('_','/').replace('!','?')
+    if 'http' not in url:
+        url = PAsearchSites.getSearchBaseURL(siteID) + url
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Studio
@@ -102,9 +104,14 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
 
     #Posters
-    art = [
-        metadata_id[2].replace('_','/').replace('!','?')
-    ]
+    art = []
+
+    try:
+        poster = metadata_id[2].replace('_','/').replace('!','?')
+        art.append(poster)
+    except:
+        pass
+
     xpaths = [
         '//meta[@itemprop="thumbnailUrl"]/@content',
         '//div[@id="innerVideoBlock"]//img/@src',
