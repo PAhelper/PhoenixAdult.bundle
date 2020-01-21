@@ -45,6 +45,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = searchResult['title']
         releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
         curID = searchResult['id']
+        siteName = searchResult['brand'].title()
         subSite = searchResult['collections'][0]['name']
 
         if sceneID:
@@ -54,7 +55,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Mofos/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
