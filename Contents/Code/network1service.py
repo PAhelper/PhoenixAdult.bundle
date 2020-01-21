@@ -48,7 +48,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             curID = searchResult['id']
             siteName = searchResult['brand'].title()
             subSite = ''
-            if 'collections' in searchResult:
+            if 'collections' in searchResult and searchResult['collections']:
                 subSite = searchResult['collections'][0]['name']
 
             if sceneID:
