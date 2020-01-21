@@ -46,7 +46,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
         curID = searchResult['id']
         siteName = searchResult['brand'].title()
-        subSite = searchResult['collections'][0]['name']
+        subSite = ''
+        if 'collections' in searchResult:
+            subSite = searchResult['collections'][0]['name']
 
         if sceneID:
             score = 100
@@ -80,8 +82,15 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements['title']
 
     # Summary
+    description = None
     if 'description' in detailsPageElements:
-        metadata.summary = detailsPageElements['description']
+        description = detailsPageElements['description']
+    elif 'parent' in detailsPageElements:
+        if 'description' in detailsPageElements['parent']:
+            description = detailsPageElements['parent']['description']
+
+    if description:
+        metadata.summary = description
 
     # Release Date
     date_object = parse(detailsPageElements['dateReleased'])
@@ -90,9 +99,12 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = detailsPageElements['collections'][0]['name']
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
+    if 'collections' in detailsPageElements:
+        tagline = detailsPageElements['collections'][0]['name']
+        metadata.tagline = tagline
+        metadata.collections.add(tagline)
+    if 'parent' in detailsPageElements:
+        metadata.collections.add(detailsPageElements['parent']['title'])
 
     # Genres
     movieGenres.clearGenres()
