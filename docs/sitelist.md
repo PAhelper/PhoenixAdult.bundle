@@ -210,6 +210,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR Fetish
 + #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 1By-Day
+  - DDF Babes
   - DDF Busty
   - DDF Hardcore
   - DDF Xtreme
@@ -219,13 +220,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
-+ #### Other DDFNetwork Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
-  - DDF Network VR
-  - Cherry Jul
-  - Eve Angel Official
-  - Hairy Twatter
-  - Sandy's Fantasies
-  - Sex Video Casting
 + #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
