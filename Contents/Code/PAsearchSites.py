@@ -960,6 +960,7 @@ def getSearchSiteIDByFilter(searchFilter):
     if searchResults:
         from operator import itemgetter
 
+        Log('Site found with method #3')
         return max(searchResults, key=itemgetter(1))[0]
 
     # Method #2
@@ -1236,12 +1237,19 @@ def getSearchSettings(mediaTitle):
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
             Log("4")
         else:
-            searchTitle = mediaTitle
-            Log("5")
+            title = mediaTitle.title().replace(" ", "").replace(".com", "").replace("'", "")
+            site = searchSites[searchSiteID][0].lower().replace(" ", "").replace("'", "").replace("-", "")
+            if title.lower().startswith(site):
+                title = re.sub(site, '', title, flags=re.IGNORECASE).strip()
+                searchTitle = re.sub(r"(\w)([A-Z])", r"\1 \2", title)
+                Log("5")
+            else:
+                searchTitle = mediaTitle
+                Log("6")
         if searchTitle[:4].lower() == "com ":
             searchTitle = searchTitle[4:]
-            Log("6")
-        Log("7")
+            Log("7")
+        Log("8")
     else:
         searchTitle = mediaTitle
 
