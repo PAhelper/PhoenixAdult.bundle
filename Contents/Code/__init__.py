@@ -210,8 +210,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Fantasy Massage
             ###############
-            if siteNum == 331:
-                if searchSiteID == 9999 or searchSiteID == 331 or (355 <= searchSiteID <= 360) or searchSiteID == 750:
+            if siteNum == 330:
+                if searchSiteID == 9999 or searchSiteID == 330 or (355 <= searchSiteID <= 360) or searchSiteID == 750:
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -540,7 +540,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## DDFNetwork
             ###############
             if siteNum == 433:
-                if searchSiteID == 9999 or (433 <= searchSiteID <= 445):
+                if searchSiteID == 9999 or (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 445):
                     results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1431,7 +1431,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment                                    ##
         ##                                                          ##
         ##############################################################
-        if siteID == 183 or siteID == 278 or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 332) or (siteID >= 351 and siteID <= 360) or (siteID >= 365 and siteID <= 374) or (siteID >= 381 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
+        if siteID == 183 or siteID == 278 or siteID == 281 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 330) or (siteID >= 351 and siteID <= 360) or (siteID >= 365 and siteID <= 374) or (siteID >= 381 and siteID <= 392) or (siteID >= 460 and siteID <= 466) or siteID == 750:
             metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1463,7 +1463,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   DDF Network                                            ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 433 and siteID <= 445):
+        if (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 445):
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################

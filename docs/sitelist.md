@@ -209,11 +209,18 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR Casting
   - CzechVR Fetish
 + #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-  - 1By-Day
+  - Cherry Jul
   - DDF Babes
-  - DDF Busty
   - DDF Hardcore
+  - DDF Network VR
   - DDF Xtreme
+  - Eve Angel Official
+  - Hairy Twatter
+  - Sandy's Fantasies
+  - Sex Video Casting
++ #### Other DDFNetwork Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - 1By-Day
+  - DDF Busty
   - Euro Girls on Girls
   - Euro Teen Erotica
   - Hands on Hardcore
