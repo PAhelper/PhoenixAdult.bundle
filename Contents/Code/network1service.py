@@ -66,6 +66,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
+
     cookies = get_Cookies(siteID)
     headers = {
         'Instance': cookies['instance_token'],
@@ -114,10 +115,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements['tags']
-    if genres:
-        for genreLink in genres:
-            genreName = genreLink['name']
-            movieGenres.addGenre(genreName)
+    for genreLink in genres:
+        genreName = genreLink['name']
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
