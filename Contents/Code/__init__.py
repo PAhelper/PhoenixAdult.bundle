@@ -540,7 +540,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## DDFNetwork
             ###############
             if siteNum == 433:
-                if searchSiteID == 9999 or (433 <= searchSiteID <= 447) or (546 <= searchSiteID <= 547):
+                if searchSiteID == 9999 or (433 <= searchSiteID <= 445):
                     results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1470,7 +1470,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   DDF Network                                            ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 433 and siteID <= 447) or (siteID >= 546 and siteID <= 547):
+        if (siteID >= 433 and siteID <= 445):
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################

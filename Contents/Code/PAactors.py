@@ -35,6 +35,8 @@ class PhoenixActors:
                 newActor = "Adriana Chechik"
             if newActor == "Alex D":
                 newActor = "Alex D."
+            if newActor == "Alura Tnt Jenson" or newActor == "Alura 'Tnt' Jenson":
+                newActor = "Alura Jenson"
             if newActor == "Amia Moretti":
                 newActor = "Amia Miley"
             if newActor == "Amy Reid":
