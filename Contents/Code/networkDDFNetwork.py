@@ -84,7 +84,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     for actor in actors:
         actorName = actor.xpath('.//../@title')[0]
         actorPhotoURL = 'http:' + actor.get('data-src')
-
         movieActors.addActor(actorName, actorPhotoURL)
 
     #Posters

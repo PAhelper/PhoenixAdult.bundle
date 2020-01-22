@@ -64,7 +64,7 @@ import siteWeAreHairy
 import siteLoveHerFeet
 import siteMomPOV
 import sitePropertySex
-import siteFuckedHard18
+import networkFuelVirtual
 import siteTransAngels
 import siteStraplezz
 import siteLittleCaprice
@@ -120,11 +120,10 @@ import networkPureCFNM
 import siteATKGirlfriends
 
 searchSites = [None] * 837
-searchSites[0] = ["Blackedraw com","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
-searchSites[1] = ["Blacked com","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
+searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
+searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
-searchSites[4] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
-searchSites[3] = ["Blackedraw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
+
 searchSites[5] = ["My Friends Hot Mom","My Friends Hot Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[6] = ["My First Sex Teacher","My First Sex Teacher","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[7] = ["Seduced By A Cougar","Seduced By A Cougar","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
@@ -450,9 +449,9 @@ searchSites[326] = ["PimpParade","PimpParade","https://www.pornpros.com","https:
 searchSites[327] = ["SquirtDisgrace","SquirtDisgrace","https://www.pornpros.com","https://pornpros.com/video/"]
 searchSites[328] = ["DigitalPlayground","DigitalPlayground","https://www.digitalplayground.com","https://www.digitalplayground.com/scene/"]
 searchSites[329] = ["Throated","Throated","https://www.blowpass.com","https://www.blowpass.com/en/search/throated/scene/"]
-
-searchSites[331] = ["Nuru Massage","Nuru Massage","https://www.fantasymassage.com","https://www.fantasymassage.com/en/search/"]
-
+searchSites[330] = ["Nuru Massage","Nuru Massage","https://www.fantasymassage.com","https://www.fantasymassage.com/en/search/"]
+searchSites[331] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[332] = ["DDF Babes", "DDF Babes", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
 searchSites[333] = ["SexyHub","SexyHub","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[334] = ["Dane Jones","Dane Jones","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
 searchSites[335] = ["Fitness Rooms","Fitness Rooms","https://www.sexyhub.com","https://www.sexyhub.com/scene/"]
@@ -554,18 +553,20 @@ searchSites[430] = ["BlacksOnBoys","BlacksOnBoys","https://www.dogfartnetwork.co
 searchSites[431] = ["GloryholesAndHandjobs","GloryholesAndHandjobs","https://www.dogfartnetwork.com","https://www.dogfartnetwork.com/tour/search.php?search="]
 searchSites[432] = ["Jules Jordan","Jules Jordan", "https://www.julesjordan.com","http://www.julesjordan.com/trial/search.php?st=advanced&qall="]
 searchSites[433] = ["DDFNetwork","DDFNetwork", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[434] = ["Hands on Hardcore","Hands on Hardcore", "https://handsonhardcore.com","https://handsonhardcore.com/videos/freeword/"]
-searchSites[435] = ["DDF Busty","DDF Busty", "https://ddfbusty.com","https://ddfbusty.com/videos/freeword/"]
-searchSites[436] = ["House of Taboo","House of Taboo", "https://houseoftaboo.com","https://houseoftaboo.com/videos/freeword/"]
-searchSites[437] = ["Euro Girls on Girls","Euro Girls on Girls", "https://eurogirlsongirls.com","https://eurogirlsongirls.com/videos/freeword/"]
-searchSites[438] = ["1ByDay","1ByDay", "https://1by-day.com","https://1by-day.com/videos/freeword/"]
-searchSites[440] = ["Euro Teen Erotica","Euro Teen Erotica", "https://euroteenerotica.com","https://euroteenerotica.com/videos/freeword/"]
-searchSites[441] = ["Hot Legs and Feet","Hot Legs & Feet", "https://hotlegsandfeet.com","https://hotlegsandfeet.com/videos/freeword/"]
-searchSites[442] = ["Only Blowjob","Only Blowjob", "https://onlyblowjob.com","https://onlyblowjob.com/videos/freeword/"]
-searchSites[443] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[444] = ["DDF Hardcore", "DDF Hardcore", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-searchSites[445] = ["DDF Babes", "DDF Babes", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
-
+searchSites[434] = ["Sandys Fantasies","Sandy's Fantasies", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[435] = ["Cherry Jul","Cherry Jul", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[436] = ["Eve Angel Official","Eve Angel Official", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[437] = ["Sex Video Casting","Sex Video Casting", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[438] = ["Hairy Twatter","Hairy Twatter", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[439] = ["DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com","https://ddfnetwork.com/videos/freeword/"]
+searchSites[440] = ["DDF Busty","DDF Busty", "https://ddfbusty.com","https://ddfbusty.com/videos/freeword/"]
+searchSites[441] = ["House of Taboo","House of Taboo", "https://houseoftaboo.com","https://houseoftaboo.com/videos/freeword/"]
+searchSites[442] = ["Euro Girls on Girls","Euro Girls on Girls", "https://eurogirlsongirls.com","https://eurogirlsongirls.com/videos/freeword/"]
+searchSites[443] = ["1ByDay","1ByDay", "https://1by-day.com","https://1by-day.com/videos/freeword/"]
+searchSites[444] = ["Euro Teen Erotica","Euro Teen Erotica", "https://euroteenerotica.com","https://euroteenerotica.com/videos/freeword/"]
+searchSites[445] = ["Hot Legs and Feet","Hot Legs & Feet", "https://hotlegsandfeet.com","https://hotlegsandfeet.com/videos/freeword/"]
+searchSites[446] = ["Only Blowjob","Only Blowjob", "https://onlyblowjob.com","https://onlyblowjob.com/videos/freeword/"]
+searchSites[447] = ["Hands on Hardcore","Hands on Hardcore", "https://handsonhardcore.com","https://handsonhardcore.com/videos/freeword/"]
 searchSites[448] = ["PerfectGonzo","PerfectGonzo", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?q="]
 searchSites[449] = ["AllInternal","AllInternal", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=allinternal&q="]
 searchSites[450] = ["AssTraffic","AssTraffic", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=asstraffic&q="]
@@ -664,7 +665,8 @@ searchSites[542] = ["Anilos", "Anilos", "https://anilos.com","https://anilos.com
 searchSites[543] = ["Hot Crazy Mess", "Hot Crazy Mess", "https://hotcrazymess.com","https://hotcrazymess.com/video/"]
 searchSites[544] = ["NF Busty", "NF Busty", "https://nfbusty.com","https://nfbusty.com/video/"]
 searchSites[545] = ["That Sitcom Show", "That Sitcom Show", "https://thatsitcomshow.com","https://thatsitcomshow.com/video/"]
-
+searchSites[546] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?st=advanced&site[]=5&qall="]
+searchSites[547] = ["MassageGirls18","MassageGirls18","http://massagegirls18.com","http://massagegirls18.com/membersarea/search.php?st=advanced&site[]=4&qall="]
 searchSites[548] = ["BellaPass", "BellaPass", "https://www.bellapass.com","https://bellapass.com/search.php?query="]
 searchSites[549] = ["Bryci", "Bryci", "https://www.bryci.com","https://bryci.com/search.php?query="]
 searchSites[550] = ["Katie Banks", "Katie Banks", "https://www.katiebanks.com","https://katiebanks.com/search.php?query="]
@@ -851,7 +853,7 @@ searchSites[730] = ["We Are Hairy","We Are Hairy","https://www.wearehairy.com","
 searchSites[731] = ["Love Her Feet","Love Her Feet","https://www.loveherfeet.com","https://www.loveherfeet.com/tour/search.php?query="]
 searchSites[732] = ["MomPOV","MomPOV","http://www.mompov.com","http://www.mompov.com/tour/?s="]
 searchSites[733] = ["Property Sex","Property Sex","https://www.propertysex.com","https://www.propertysex.com/scene/"]
-searchSites[734] = ["FuckedHard18","FuckedHard18","http://fuckedhard18.com","http://fuckedhard18.com/membersarea/search.php?query="]
+
 searchSites[735] = ["Fucked and Bound","Fucked and Bound","http://www.kink.com","http://www.kink.com/search?channelIds=fuckedandbound&q="]
 searchSites[736] = ["Captive Male","Captive Male","http://www.kink.com","http://www.kink.com/search?channelIds=captivemale&q="]
 searchSites[737] = ["TransAngels","TransAngels","https://www.transangels.com","https://www.transangels.com/scene/"]

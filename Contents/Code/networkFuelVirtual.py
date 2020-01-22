@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [FuckedHard18] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [FuelVirtual/" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
@@ -22,6 +22,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     url = PAsearchSites.getSearchBaseURL(siteID) + "/membersarea/" + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
+    Log(url)
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -29,10 +30,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'FuckedHard18'
+    metadata.studio = 'FuelVirtual'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().replace('- Movies','').strip()
+    metadata.title = detailsPageElements.xpath('//title')[0].text_content().split('-')[0].strip()
 
     # Summary
 
@@ -50,9 +51,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre("18-Year-Old")
 
     # Release Date
-    date = detailsPageElements.xpath('//td[@class="date"]')[0].text_content().replace('Added','').strip()
+    date = str(metadata.id).split("|")[2]
     if len(date) > 0:
-        date_object = datetime.strptime(date, '%M/%d/%Y')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
