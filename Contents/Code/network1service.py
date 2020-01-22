@@ -34,10 +34,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             break
 
     for sceneType in ['scene', 'movie']:
-        if sceneID:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
-        else:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
         req = urllib.Request(url, headers=headers)
         data = urllib.urlopen(req).read()
 
@@ -52,7 +49,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 subSite = searchResult['collections'][0]['name']
 
             if sceneID:
-                score = 100
+                score = 100 - Util.LevenshteinDistance(sceneID, curID)
             elif searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
