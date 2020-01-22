@@ -45,7 +45,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Studio: ' + metadata.studio)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="g-cols onlydesktop"]/p')[0].text_content()
+    description = detailsPageElements.xpath('//div[@class="g-cols onlydesktop"]')
+    if description:
+        metadata.summary = description[0].text_content()
 
     # Tagline and Collection
     metadata.collections.clear()
