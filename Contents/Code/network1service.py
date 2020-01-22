@@ -128,15 +128,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorData = json.loads(data)['result'][0]
 
         actorName = actorData['name']
-        if actorData['images']['profile']:
+        if actorData['images'] and actorData['images']['profile']:
             actorPhotoURL = actorData['images']['profile'][0]['xs']['url']
 
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []
-    for image in detailsPageElements['images']['poster']:
-        art.append(image['xx']['url'])
+    for imageType in ['poster', 'cover']:
+        if imageType in detailsPageElements['images']:
+            for image in detailsPageElements['images'][imageType]:
+                art.append(image['xx']['url'])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
