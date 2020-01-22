@@ -1081,6 +1081,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^hotab ', 'HouseofTaboo ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^hustl3r ', 'Hustler ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ihaw ', 'IHaveAWife ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^iktg ', 'IKnowThatGirl ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^il ', 'ImmoralLive ', mediaTitle, flags=re.IGNORECASE)
