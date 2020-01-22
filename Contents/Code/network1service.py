@@ -99,7 +99,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    if 'collections' in detailsPageElements:
+    if 'collections' in detailsPageElements and detailsPageElements['collections']:
         tagline = detailsPageElements['collections'][0]['name']
         metadata.tagline = tagline
         metadata.collections.add(tagline)
