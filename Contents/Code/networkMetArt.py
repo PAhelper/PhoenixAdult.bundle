@@ -75,9 +75,11 @@ def update (metadata,siteID,movieGenres,movieActors):
         director.name = dirname['name']
 
     # Posters
+    siteUUID = detailsPageElements['siteUUID']
+    CDNurl = 'https://cdn.metartnetwork.com/' + siteUUID
     art = [
-        PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements['coverImagePath'],
-        PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements['splashImagePath']
+        CDNurl + detailsPageElements['coverImagePath'],
+        CDNurl + detailsPageElements['splashImagePath']
     ]
 
     Log('Artwork found: %d' % len(art))
