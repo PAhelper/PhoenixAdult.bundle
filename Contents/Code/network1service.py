@@ -103,7 +103,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     if 'collections' in detailsPageElements and detailsPageElements['collections']:
         for collection in detailsPageElements['collections']:
             seriesNames.append(collection['name'])
-    if 'parent' in detailsPageElements:
+    if 'parent' in detailsPageElements and detailsPageElements['parent']:
         seriesNames.append(detailsPageElements['parent']['title'])
 
     metadata.tagline = seriesNames[0]
