@@ -99,12 +99,17 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
+    seriesNames = [PAsearchSites.getSearchSiteName(siteID)]
     if 'collections' in detailsPageElements and detailsPageElements['collections']:
-        tagline = detailsPageElements['collections'][0]['name']
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
+        for collection in detailsPageElements['collections']:
+            seriesNames.append(collection['name'])
     if 'parent' in detailsPageElements:
-        metadata.collections.add(detailsPageElements['parent']['title'])
+        seriesNames.append(detailsPageElements['parent']['title'])
+
+    metadata.tagline = seriesNames[0]
+    for seriesName in seriesNames:
+        metadata.collections.add(seriesName)
+
 
     # Genres
     movieGenres.clearGenres()
