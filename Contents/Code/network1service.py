@@ -1,11 +1,12 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import cookielib
 import json
 
 
 def get_Cookies(url):
+    import cookielib
+
     cookies = {}
     cookie_jar = cookielib.CookieJar()
     opener = urllib.build_opener(urllib.HTTPCookieProcessor(cookie_jar))
