@@ -48,6 +48,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             subSite = ''
             if 'collections' in searchResult and searchResult['collections']:
                 subSite = searchResult['collections'][0]['name']
+            siteDisplay = '%s/%s' % (siteName, subSite) if subSite else '%s' siteName
 
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
@@ -56,12 +57,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            if subSite:
-                resultName = '%s [%s/%s] %s' % (titleNoFormatting, siteName, subSite, releaseDate)
-            else:
-                resultName = '%s [%s] %s' % (titleNoFormatting, siteName, releaseDate)
-
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name=resultName, score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
 
     return results
 
