@@ -132,6 +132,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorData = json.loads(data)['result'][0]
 
         actorName = actorData['name']
+        actorPhotoURL = ''
         if actorData['images'] and actorData['images']['profile']:
             actorPhotoURL = actorData['images']['profile'][0]['xs']['url']
 
