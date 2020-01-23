@@ -327,6 +327,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SinsVR
   - StasyQVR
 + #### Hustler | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
++ #### Interracial Pass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Intersec Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
   - Hardtied
   - Infernal Restraints

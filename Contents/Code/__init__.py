@@ -1207,6 +1207,13 @@ class PhoenixAdultAgent(Agent.Movies):
             if siteNum == 837:
                 if searchSiteID == 9999 or (837 <= searchSiteID <= 839):
                     results = PAsearchSites.networkTwoWebMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## Interracial Pass
+            ###############
+            if siteNum == 840:
+                if searchSiteID == 9999 or searchSiteID == 840:
+                    results = PAsearchSites.siteInterracialPass.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
                   
             siteNum += 1
 
@@ -2248,6 +2255,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if 837 <= siteID <= 839:
             metadata = PAsearchSites.networkTwoWebMedia.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Interracial Pass                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 840:
+            metadata = PAsearchSites.siteInterracialPass.update(metadata, siteID, movieGenres, movieActors)
             
         ##############################################################
         ## Cleanup Genres and Add

@@ -119,8 +119,9 @@ import sitePJGirls
 import networkPureCFNM
 import siteATKGirlfriends
 import networkTwoWebMedia
+import siteInterracialPass
 
-searchSites = [None] * 840
+searchSites = [None] * 841
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -960,6 +961,7 @@ searchSites[836] = ["ATKGirlfriends","ATKGirlfriends","https://www.atkgirlfriend
 searchSites[837] = ["Wank It Now","Wank It Now","https://www.wankitnow.com","https://www.wankitnow.com/?s="]
 searchSites[838] = ["Bopping Babes","Bopping Babes","https://www.boppingbabes.com","https://www.boppingbabes.com/v2/?s="]
 searchSites[839] = ["Upskirt Jerk","Upskirt Jerk","https://www.upskirtjerk.com","https://www.upskirtjerk.com/?s="]
+searchSites[840] = ["Interracial Pass","Interracial Pass","hhttps://www.interracialpass.com","https://www.interracialpass.com/newtour/search.php?query="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
