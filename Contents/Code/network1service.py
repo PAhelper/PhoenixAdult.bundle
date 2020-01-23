@@ -5,13 +5,13 @@ import cookielib
 import json
 
 
-def get_Cookies(siteNum):
+def get_Cookies(url):
     cookies = {}
     cookie_jar = cookielib.CookieJar()
     opener = urllib.build_opener(urllib.HTTPCookieProcessor(cookie_jar))
     urllib.install_opener(opener)
 
-    urllib.urlopen(PAsearchSites.getSearchBaseURL(siteNum))
+    urllib.urlopen(url)
     for cookie in cookie_jar:
         cookies[cookie.name] = cookie.value
 
@@ -22,7 +22,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    cookies = get_Cookies(siteNum)
+    cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteNum))
     headers = {
         'Instance': cookies['instance_token'],
     }
@@ -67,7 +67,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
 
-    cookies = get_Cookies(siteID)
+    cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteID))
     headers = {
         'Instance': cookies['instance_token'],
     }
