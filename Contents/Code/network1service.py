@@ -114,6 +114,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for seriesName in seriesNames:
         if seriesName.lower().replace(' ', '').replace('\'', '') == siteName:
             isInCollection = True
+            break
 
     if not isInCollection:
         seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteID))
