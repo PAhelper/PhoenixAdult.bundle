@@ -537,10 +537,10 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## DDFNetwork
+            ## DDF Network
             ###############
             if siteNum == 433:
-                if searchSiteID == 9999 or (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 445):
+                if searchSiteID == 9999 or (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 447):
                     results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1463,7 +1463,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   DDF Network                                            ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 445):
+        if (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 447):
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
