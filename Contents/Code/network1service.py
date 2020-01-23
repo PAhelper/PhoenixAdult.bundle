@@ -48,7 +48,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             subSite = ''
             if 'collections' in searchResult and searchResult['collections']:
                 subSite = searchResult['collections'][0]['name']
-            siteDisplay = '%s/%s' % (siteName, subSite) if subSite else '%s' siteName
+            siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
