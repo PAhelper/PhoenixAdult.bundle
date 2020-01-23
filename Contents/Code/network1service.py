@@ -105,15 +105,19 @@ def update(metadata,siteID,movieGenres,movieActors):
     if 'collections' in detailsPageElements and detailsPageElements['collections']:
         for collection in detailsPageElements['collections']:
             seriesNames.append(collection['name'])
-
-    if not seriesNames:
-        seriesNames.append(PAsearchSites.getSearchSiteName(siteID))
-
     if 'parent' in detailsPageElements:
         if 'title' in detailsPageElements['parent']:
             seriesNames.append(detailsPageElements['parent']['title'])
 
-    metadata.tagline = seriesNames[0]
+    isInCollection = False
+    siteName = PAsearchSites.getSearchSiteName(siteID).replace(' ', '').lower()
+    for seriesName in seriesNames:
+        if seriesName.replace(' ', '').lower() == siteName:
+            isInCollection = True
+
+    if not isInCollection:
+        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteID))
+
     for seriesName in seriesNames:
         metadata.collections.add(seriesName)
 
