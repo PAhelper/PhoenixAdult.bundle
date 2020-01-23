@@ -33,7 +33,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             sceneID = splited
             break
 
-    for sceneType in ['scene', 'movie']:
+    for sceneType in ['scene', 'movie', 'serie']:
         url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
         req = urllib.Request(url, headers=headers)
         data = urllib.urlopen(req).read()
