@@ -118,8 +118,9 @@ import siteBAMVisions
 import sitePJGirls
 import networkPureCFNM
 import siteATKGirlfriends
+import networkTwoWebMedia
 
-searchSites = [None] * 837
+searchSites = [None] * 840
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -956,6 +957,9 @@ searchSites[833] = ["HeyLittleDick","HeyLittleDick","https://www.heylittledick.c
 searchSites[834] = ["LadyVoyeurs","LadyVoyeurs","https://www.ladyvoyeurs.com/","https://www.ladyvoyeurs.com/models/"]
 searchSites[835] = ["BAMVisions","BAMVisions","https://tour.bamvisions.com","https://tour.bamvisions.com/search.php?st=advanced&qall="]
 searchSites[836] = ["ATKGirlfriends","ATKGirlfriends","https://www.atkgirlfriends.com","https://www.atkgirlfriends.com/tour/model/"]
+searchSites[837] = ["Wank It Now","Wank It Now","https://www.wankitnow.com","https://www.wankitnow.com/?s="]
+searchSites[838] = ["Bopping Babes","Bopping Babes","https://www.boppingbabes.com","https://www.boppingbabes.com/v2/?s="]
+searchSites[839] = ["Upskirt Jerk","Upskirt Jerk","https://www.upskirtjerk.com","https://www.upskirtjerk.com/?s="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
