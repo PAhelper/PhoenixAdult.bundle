@@ -2,6 +2,7 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import json
+import re
 
 
 def bypassCloudflare(url, headers=''):
@@ -47,8 +48,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneId = metadata_id[0]
 
+    data = bypassCloudflare(PAsearchSites.getSearchBaseURL(siteID))
+    token = re.search(r'nK\.access_token=\"(.*?)\"', data).group(1)
+
     url = PAsearchSites.getSearchBaseURL(siteID) + '/api/movies/' + sceneId
-    headers = 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImFkY2Y2NmNjZmZkZTU5MGFmNjQyMzc0ZmJjODU5MDhhMDdiMjg3MDQyZjYzMjkyNzk1NmNlZWM0NjEzYjMzODk2MzI3N2E0ODJkNTEyMThmIn0.eyJhdWQiOiI1IiwianRpIjoiYWRjZjY2Y2NmZmRlNTkwYWY2NDIzNzRmYmM4NTkwOGEwN2IyODcwNDJmNjMyOTI3OTU2Y2VlYzQ2MTNiMzM4OTYzMjc3YTQ4MmQ1MTIxOGYiLCJpYXQiOjE1Nzk1OTkzMzksIm5iZiI6MTU3OTU5OTMzOSwiZXhwIjoxNTg0NzgzMzM5LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.QKRRblT7dvYbPOSdja6G1Yw7ZxDcs971qYPeQInYQXvrZpHxbKfkysPrqs0JiKfY2l4DUmx6Un-grBSDr7tTYv8OWKiPvgRkpahEf9fAqlosqtyaV-hQp0VmqEPFNMImZBLMB4NYk1JhHzhlhtEzgcILBgkHVvVoaryfuKZklMMksxHpnX9EAz4PYYgo0wOFndX5ubwegkUWx5Bmeu9FSzbDIDrMetWdH5Kl3Ot-EAL8QeEhgVQftaot52Vh-aEd7HPWyaswcfnhY-eoAbQiEYJbQ0AWTP4ePgHKBZx6vqHBqCchN9a0Ix8lyYjyOShSjFLQblxqsQ_kSLvW2GO9dW_zXgEFObTlA6Y3DHI0PmefIltXvofoDdIYEFO-fXDkavefteRE6fnOtxEthXBkF4uCO3rHeWuOrQ_N05CaxRBruBETgJeBJQ1M788jnXVWwxvfEhTxHdsVadfgQ4TzF2uP9Ss1BimqXRMTuWNm9TUZ5PKZizp1RFTxgkTNbGB9wgGASnRQTnF0XxDeR0uWQ8sVt34Rfkwdf-WfW_BKuAMra1JCIiH4z120upY6-ZfnCqDpvvNpBXSYX-rUBD0bGFTBxNEr-t1mu2aZxjIJFyqoKHqlWwREH6aye8Nr77IznmV9NL8Jran_1HffQJ3UR2UdaYUa28ZSqRNPNYGukXk'
+    headers = 'Authorization: Bearer ' + token
     data = bypassCloudflare(url, headers)
     detailsPageElements = json.loads(data)['data']
 
@@ -62,7 +66,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements['synopsis_clean']
 
-    #Tagline and Collection(s)
+    # Tagline and Collection(s)
     metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
@@ -100,7 +104,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         img = photoLink.split('?', 1)[0]
         art.append(img)
 
-    Log('Artwork found: %s' % len(art))
+    Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
             # Download image file for analysis
