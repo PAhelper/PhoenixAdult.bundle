@@ -28,15 +28,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     searchResults = json.loads(data)['results'][0]['hits']
     for idx, searchResult in enumerate(searchResults):
-        if idx % 2:
-            curID = searchResult['id']
-            titleNoFormatting = searchResult['title']['def']
-            releaseDate = parse(searchResult['release_date']['def']).strftime('%Y-%m-%d')
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            
+        curID = searchResult['id']
+        titleNoFormatting = searchResult['title']['def']
+        releaseDate = parse(searchResult['release_date']['def']).strftime('%Y-%m-%d')
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        if searchResult['cover_title_picture'] or searchResult['info_title_picture'] or searchResult['mobile_detail_picture']:
             results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
@@ -101,7 +101,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     ]
 
     for photoLink in detailsPageElements['album']:
-        img = photoLink.split('?', 1)[0]
+        img = photoLink['path'].split('?', 1)[0]
         art.append(img)
 
     Log('Artwork found: %d' % len(art))
