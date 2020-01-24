@@ -39,10 +39,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
         sceneID = sceneURL.rsplit('/', 2)[1]
         curID = sceneURL.replace('/', '_').replace('?', '!')
-        subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
-        releaseDate = ''
-        if searchDate:
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+        if "mylfdom" in curID:
+            subSite = "MylfDom"
+        else:
+            subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
         if shootID:
             score = 100 - Util.LevenshteinDistance(shootID, sceneID)
         else:
