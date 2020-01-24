@@ -21,7 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(sitemapURL)
         for searchResult in searchResults.xpath('//url'):
             sceneURL = searchResult.xpath('.//loc')[0].text_content().strip()
-            if ('movies' in sceneURL) and (shootID in sceneURL):
+            if ('/movies/' in sceneURL) and (shootID in sceneURL):
                 searchResultsURLs.append(sceneURL)
                 break
 
@@ -30,19 +30,23 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
         for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
             sceneURL = sceneURL.rsplit('?', 1)[0]
-            if ('movies' in sceneURL):
+            if ('/movies/' in sceneURL):
                 searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
         detailsPageElements = HTML.ElementFromURL(sceneURL)
 
         titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
+        sceneID = sceneURL.rsplit('/', 2)[1]
         curID = sceneURL.replace('/', '_').replace('?', '!')
         subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
         releaseDate = ''
         if searchDate:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-        score = 100
+        if shootID:
+            score = 100 - Util.LevenshteinDistance(shootID, sceneID)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
