@@ -5,46 +5,48 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    sceneID = encodedTitle.split('%20', 1)[0]
-    Log("SceneID: " + sceneID)
-    try:
-        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20',' ')
-    except:
-        sceneTitle = ''
-    Log("Scene Title: " + sceneTitle)
 
-    # DVDs
-    try:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + "dvd/1/" + sceneID
-        searchResult = HTML.ElementFromURL(url)
-        titleNoFormatting = searchResult.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
-        curID = url.replace('/', '_').replace('?', '!')
-        Log(curID)
-        releaseDate = parse(searchResult.xpath('//li[@class="updatedOn"]')[0].text_content().replace('Updated','').strip()).strftime('%Y-%m-%d')
-        if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        else:
-            # Won't auto-match unless you add a scene title, as movie/scene IDs aren't unique
-            score = 70
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Girlfriends Films] " + releaseDate, score = score, lang = lang))
-    except:
-        pass
+    sceneID = searchTitle.split(' ', 1)[0]
+    if unicode(sceneID, 'utf8').isdigit():
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+    else:
+        sceneID = None
 
-    # Scenes
-    try:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + "video/1/" + sceneID
-        searchResult = HTML.ElementFromURL(url)
-        titleNoFormatting = searchResult.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
-        curID = url.replace('/', '_').replace('?', '!')
-        releaseDate = parse(searchResult.xpath('//li[@class="updatedDate"]')[0].text_content().replace('|','').strip()).strftime('%Y-%m-%d')
-        if sceneTitle:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        else:
-            # Won't auto-match unless you add a scene title, as movie/scene IDs aren't unique
-            score = 70
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Girlfriends Films] " + releaseDate, score = score, lang = lang))
-    except:
-        pass
+    for sceneType in ['scenes', 'movies']:
+        url = PAsearchSites.getSearchSearchURL(siteNum).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=YTQ3N2E4NmI4ZjExYTNhMTU5NWJjM2Q5ZjIwOTMwNTA5ZDJiZjRkZWZjMTg3MDA4MzY5YzA4NGNiNDUxMGFmY3ZhbGlkVW50aWw9MTU3OTk5Njc3OSZyZXN0cmljdEluZGljZXM9Z2lybGZyaWVuZHNmaWxtcyUyQSZmaWx0ZXJzPXNlZ21lbnQlM0FnaXJsZnJpZW5kc2ZpbG1z'
+        params = json.dumps({'params':'query=' + searchTitle})
+        req = urllib.Request(url)
+        req.add_header('Content-Type', 'application/json')
+        req.add_header('Referer', PAsearchSites.getSearchBaseURL(siteNum))
+        data = urllib.urlopen(req, params).read()
+
+        searchResults = json.loads(data)['hits']
+        for searchResult in searchResults:
+            if sceneType == 'scenes':
+                foundID = str(searchResult['clip_id'])
+                url = '/en/video/1/' + foundID
+                releaseDate = parse(searchResult['release_date']).strftime('%Y-%m-%d')
+
+                actors = []
+                for actorLink in searchResult['female_actors']:
+                    actors.append(actorLink['name'])
+                sceneInfo = ', '.join(actors)
+            else:
+                foundID = str(searchResult['movie_id'])
+                url = '/en/dvd/1/' + foundID
+                releaseDate = parse(searchResult['last_modified']).strftime('%Y-%m-%d')
+                sceneInfo = 'Movie'
+
+            curID = (PAsearchSites.getSearchBaseURL(siteNum) + url).replace('/','_').replace('?','!')
+            titleNoFormatting = searchResult['title']
+            if sceneID:
+                score = 100 - Util.LevenshteinDistance(sceneID, foundID)
+            elif searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (sceneInfo, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
