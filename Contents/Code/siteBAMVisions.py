@@ -32,7 +32,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="item-info"]/h4/a')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+
+    description = detailsPageElements.xpath('//p[@class="description"]')
+    if description:
+        metadata.summary = description[0].text_content().strip()
 
     # Tagline and Collection(s)
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
