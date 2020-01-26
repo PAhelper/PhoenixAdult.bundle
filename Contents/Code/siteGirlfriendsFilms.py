@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import re
+
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
@@ -12,8 +14,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     else:
         sceneID = None
 
+
+    req = urllib.Request(PAsearchSites.getSearchBaseURL(siteNum))
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+    data = urllib.urlopen(req).read()
+    apiKEY = re.search(r'\"apiKey\":\"(.*?)\"', data).group(1)
+
     for sceneType in ['scenes', 'movies']:
-        url = PAsearchSites.getSearchSearchURL(siteNum).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=YTQ3N2E4NmI4ZjExYTNhMTU5NWJjM2Q5ZjIwOTMwNTA5ZDJiZjRkZWZjMTg3MDA4MzY5YzA4NGNiNDUxMGFmY3ZhbGlkVW50aWw9MTU3OTk5Njc3OSZyZXN0cmljdEluZGljZXM9Z2lybGZyaWVuZHNmaWxtcyUyQSZmaWx0ZXJzPXNlZ21lbnQlM0FnaXJsZnJpZW5kc2ZpbG1z'
+        url = PAsearchSites.getSearchSearchURL(siteNum).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
         params = json.dumps({'params':'query=' + searchTitle})
         req = urllib.Request(url)
         req.add_header('Content-Type', 'application/json')
@@ -42,9 +50,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, foundID)
             elif searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                score = 80 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 80 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (sceneInfo, titleNoFormatting, releaseDate), score=score, lang=lang))
 
