@@ -4,6 +4,24 @@ import PAactors
 import re
 
 
+def getAPIKey(url):
+    req = urllib.Request(url)
+    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+    data = urllib.urlopen(req).read()
+
+    return re.search(r'\"apiKey\":\"(.*?)\"', data).group(1)
+
+
+def getAlgolia(url, params, referer):
+    params = json.dumps({'params':params})
+    req = urllib.Request(url)
+    req.add_header('Content-Type', 'application/json')
+    req.add_header('Referer', referer)
+    data = urllib.urlopen(req, params).read()
+
+    return json.loads(data)
+
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
@@ -14,220 +32,124 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     else:
         sceneID = None
 
-
-    req = urllib.Request(PAsearchSites.getSearchBaseURL(siteNum))
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
-    data = urllib.urlopen(req).read()
-    apiKEY = re.search(r'\"apiKey\":\"(.*?)\"', data).group(1)
-
+    apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteNum))
     for sceneType in ['scenes', 'movies']:
         url = PAsearchSites.getSearchSearchURL(siteNum).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        params = json.dumps({'params':'query=' + searchTitle})
-        req = urllib.Request(url)
-        req.add_header('Content-Type', 'application/json')
-        req.add_header('Referer', PAsearchSites.getSearchBaseURL(siteNum))
-        data = urllib.urlopen(req, params).read()
+        data = getAlgolia(url, 'query=' + searchTitle, PAsearchSites.getSearchBaseURL(siteNum))
 
-        searchResults = json.loads(data)['hits']
+        searchResults = data['hits']
         for searchResult in searchResults:
             if sceneType == 'scenes':
-                foundID = str(searchResult['clip_id'])
-                url = '/en/video/1/' + foundID
                 releaseDate = parse(searchResult['release_date']).strftime('%Y-%m-%d')
 
                 actors = []
                 for actorLink in searchResult['female_actors']:
                     actors.append(actorLink['name'])
-                sceneInfo = ', '.join(actors)
+                sceneData = ', '.join(actors)
+                curID = searchResult['clip_id']
             else:
-                foundID = str(searchResult['movie_id'])
-                url = '/en/dvd/1/' + foundID
                 releaseDate = parse(searchResult['last_modified']).strftime('%Y-%m-%d')
-                sceneInfo = 'Movie'
+                sceneData = 'Movie'
+                curID = searchResult['movie_id']
 
-            curID = (PAsearchSites.getSearchBaseURL(siteNum) + url).replace('/','_').replace('?','!')
             titleNoFormatting = searchResult['title']
             if sceneID:
-                score = 100 - Util.LevenshteinDistance(sceneID, foundID)
+                score = 100 - Util.LevenshteinDistance(sceneID, curID)
             elif searchDate:
                 score = 80 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 80 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (sceneInfo, titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
-    detailsPageElements = HTML.ElementFromURL(url)
-    art = []
-    metadata.collections.clear()
-    movieGenres.clearGenres()
-    movieActors.clearActors()
+    metadata_id = str(metadata.id).split('|')
+    sceneID = metadata_id[0]
+    sceneType = metadata_id[2]
+    sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
+    apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
+
+    url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+    data = getAlgolia(url, 'filters=%s=%s' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
+    detailsPageElements = data['hits'][0]
 
     # Studio
-    metadata.studio = 'Girlfriends Films'
+    metadata.studio = detailsPageElements['studio_name']
 
-    if "video" in url:
-        sceneType = 'Scene'
-        Log('SceneType: ' + sceneType)
+    # Title
+    metadata.title = detailsPageElements['title']
 
-        # Title
-        metadata.title = detailsPageElements.xpath('//h1[@class="sceneTitle"]')[0].text_content().strip()
+    # Summary
+    metadata.summary = detailsPageElements['description']
 
-        # Summary
-        try:
-            metadata.summary = detailsPageElements.xpath('//div[@class="descriptionText"]')[0].text_content().strip()
-        except:
-            pass
-
-        #Tagline and Collection(s)
-        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-        # DVD Release
-        try:
-            dvdRel = detailsPageElements.xpath('//img[@class="sceneImage"]')[0].get('title').strip()
-            metadata.collections.add(dvdRel)
-        except:
-            pass
-
-        # Genres
-        genres = detailsPageElements.xpath('//div[@class="sceneCol categories"]/a')
-        if len(genres) > 0:
-            for genreLink in genres:
-                genreName = genreLink.get('title').strip().lower()
-                movieGenres.addGenre(genreName)
-
-        # Release Date
-        date = detailsPageElements.xpath('//li[@class="updatedDate"]')[0].text_content().replace('|','').strip()
-        if len(date) > 0:
-            date_object = datetime.strptime(date, '%m-%d-%Y')
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-
-        # Actors
-        actors = detailsPageElements.xpath('//div[@class="sceneCol actors"]/a')
-        if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
-            for actorLink in actors:
-                actorName = str(actorLink.text_content().strip())
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-                actorPage = HTML.ElementFromURL(actorPageURL)
-                actorPhotoURL = actorPage.xpath('//img[@class="actorPicture"]')[0].get("src")
-                if 'http' not in actorPhotoURL:
-                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
-                movieActors.addActor(actorName,actorPhotoURL)
-
-        ### Posters and artwork ###
-
-        # Video trailer background image
-        try:
-            picScript = detailsPageElements.xpath('//script[contains(text(),"picPreview")]')[0].text_content()
-            alpha = picScript.find('"picPreview":"') + 14
-            omega = picScript.find('"', alpha)
-            Log('BG in <script>: ' + picScript[alpha:omega].replace('\\', ''))
-            art.append(picScript[alpha:omega].replace('\\', '').replace("https:", "http:"))
-        except:
-            pass
-
-        # Photos
-        try:
-            photoPageUrl = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//a[@class="controlButton GA_Track GA_Track_Action_Pictures GA_Track_Category_Player GA GA_Click GA_Id_ScenePlayer_Pictures"]')[0].get('href')
-            photoPage = HTML.ElementFromURL(photoPageUrl)
-            unlockedPhotoImg = photoPage.xpath('//div[@class="previewImage"]/img')[0].get('src')
-            art.append(unlockedPhotoImg)
-            unlockedPhotos = photoPage.xpath('//a[@class="imgLink"] | //a[@class="imgLink pgUnlocked"]')
-            for unlockedPhoto in unlockedPhotos:
-                art.append(unlockedPhoto.get('href'))
-        except:
-            pass
-
-        # DVD Cover
-        dvdCover = detailsPageElements.xpath('//img[@class="sceneImage"]')[0].get('src')
-        art.append(dvdCover)
-
+    # Release Date
+    if 'release_date' in detailsPageElements:
+        date = detailsPageElements['release_date']
     else:
-        sceneType = 'Movie'
-        Log('SceneType: ' + sceneType)
+        date = detailsPageElements['last_modified']
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
-        # Title
-        metadata.title = detailsPageElements.xpath('//h3[@class="dvdTitle"]')[0].text_content().strip()
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    metadata.collections.add(detailsPageElements['network_name'])
 
-        # Summary
-        try:
-            metadata.summary = detailsPageElements.xpath('//p[@class="descriptionText"]')[0].text_content().strip()
-        except:
-            pass
+    # Genres
+    movieGenres.clearGenres()
+    genres = detailsPageElements['categories']
+    for genreLink in genres:
+        genreName = genreLink['name']
+        movieGenres.addGenre(genreName)
 
-        #Tagline and Collection(s)
-        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-        # DVD Release
-        metadata.collections.add(metadata.title)
+    # Actors
+    movieActors.clearActors()
+    actors = detailsPageElements['actors']
+    for actorLink in actors:
+        actorName = actorLink['name']
 
-        # Genres
-        genres = detailsPageElements.xpath('//p[@class="dvdCol"]/a')
-        if len(genres) > 0:
-            for genreLink in genres:
-                genreName = genreLink.get('title').strip().lower()
-                movieGenres.addGenre(genreName)
+        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+        data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
+        actorData = data['hits'][0]
+        actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures']['500x750']
 
-        # Release Date
-        try:
-            date = detailsPageElements.xpath('//ul[@class="dvdSpecs"]/li[@class="updatedOn"]')[0].text_content().replace('Updated','').strip()
-            if len(date) > 0:
-                date_object = datetime.strptime(date, '%Y-%m-%d')
-                metadata.originally_available_at = date_object
-                metadata.year = metadata.originally_available_at.year
-        except:
-            pass
+        movieActors.addActor(actorName, actorPhotoURL)
 
-        # Actors
-        actors = detailsPageElements.xpath('//div[@class="Gamma_Carousel Gamma_Component Gamma_Carousel_ActorsCarousel"]//img')
-        if len(actors) > 0:
-            for actorLink in actors:
-                actorName = str(actorLink.get("alt").strip())
-                try:
-                    actorPhotoURL = actorLink.get("src")
-                except:
-                    actorPhotoURL = ""
-                movieActors.addActor(actorName,actorPhotoURL)
+    # Posters
+    art = [
+        'https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_'))
+    ]
 
-        # DVD Cover
-        try:
-            dvdFrontCover = detailsPageElements.xpath('//a[@class="frontCoverImg"]')[0].get('href')
-            art.append(dvdFrontCover)
-        except:
-            pass
+    if 'pictures' in detailsPageElements:
+        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures']['1920x1080'])
+    else:
+        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+        data = getAlgolia(url, 'filters=movie_id=' + str(detailsPageElements['movie_id']), PAsearchSites.getSearchBaseURL(siteID))
+        for scene in data['hits']:
+            art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures']['1920x1080'])
 
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
-            #Download image file for analysis
+
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
+                # Add the image proxy items to the collection
                 if width > 1 or height > width:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
                 pass
 
