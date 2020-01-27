@@ -62,6 +62,25 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
             results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
 
+    url = 'https://www.girlfriendsfilms.net/search/SearchAutoComplete?rows=50&name_startsWith=' + encodedTitle
+    data = urllib.urlopen(url).read()
+
+    searchResults = json.loads(data)['Results']
+    for searchResult in searchResults:
+        searchResult = searchResult['BasicResponseGroup']
+        if searchResult['media_type'] == 'DVD':
+            titleNoFormatting = searchResult['description']
+            releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
+            sceneURL = 'https://www.girlfriendsfilms.net' + searchResult['id']
+            curID = sceneURL.replace('/','_').replace('?','!')
+
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[DVD] %s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+
     return results
 
 
@@ -69,70 +88,123 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneID = metadata_id[0]
-    sceneType = metadata_id[2]
-    sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
-    apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
+    sceneType = metadata_id[2] if len(metadata_id) > 2 else None
 
-    url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-    data = getAlgolia(url, 'filters=%s=%s' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
-    detailsPageElements = data['hits'][0]
+    if sceneType:
+        sceneID = metadata_id[0]
+        sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
+        apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
 
-    # Studio
-    metadata.studio = detailsPageElements['studio_name']
+        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+        data = getAlgolia(url, 'filters=%s=%s' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
+        detailsPageElements = data['hits'][0]
 
-    # Title
-    metadata.title = detailsPageElements['title']
+        # Studio
+        metadata.studio = detailsPageElements['studio_name']
 
-    # Summary
-    metadata.summary = detailsPageElements['description']
+        # Title
+        metadata.title = detailsPageElements['title']
 
-    # Release Date
-    if 'release_date' in detailsPageElements:
-        date = detailsPageElements['release_date']
+        # Summary
+        metadata.summary = detailsPageElements['description']
+
+        # Release Date
+        if 'release_date' in detailsPageElements:
+            date = detailsPageElements['release_date']
+        else:
+            date = detailsPageElements['last_modified']
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
+        # Tagline and Collection(s)
+        metadata.collections.clear()
+        metadata.collections.add(detailsPageElements['network_name'])
+
+        # Genres
+        movieGenres.clearGenres()
+        genres = detailsPageElements['categories']
+        for genreLink in genres:
+            genreName = genreLink['name']
+            movieGenres.addGenre(genreName)
+
+        # Actors
+        movieActors.clearActors()
+        actors = detailsPageElements['actors']
+        for actorLink in actors:
+            actorName = actorLink['name']
+
+            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+            data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
+            actorData = data['hits'][0]
+            actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures']['500x750']
+
+            movieActors.addActor(actorName, actorPhotoURL)
+
+        # Posters
+        art = [
+            'https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_'))
+        ]
+
+        if 'pictures' in detailsPageElements:
+            art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures']['1920x1080'])
+        else:
+            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+            data = getAlgolia(url, 'filters=movie_id=' + str(detailsPageElements['movie_id']), PAsearchSites.getSearchBaseURL(siteID))
+            for scene in data['hits']:
+                art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures']['1920x1080'])
     else:
-        date = detailsPageElements['last_modified']
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+        sceneURL = metadata_id[0].replace('_','/').replace('!','?')
+        data = urllib.urlopen(sceneURL).read()
+        detailsPageElements = HTML.ElementFromString(data)
 
-    # Tagline and Collection(s)
-    metadata.collections.clear()
-    metadata.collections.add(detailsPageElements['network_name'])
+        # Studio
+        metadata.studio = detailsPageElements.xpath('//div[@class="studio"]//a/text()')[0]
 
-    # Genres
-    movieGenres.clearGenres()
-    genres = detailsPageElements['categories']
-    for genreLink in genres:
-        genreName = genreLink['name']
-        movieGenres.addGenre(genreName)
+        # Title
+        metadata.title = detailsPageElements.xpath('//h1[@class="description"]/text()')[0]
 
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements['actors']
-    for actorLink in actors:
-        actorName = actorLink['name']
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//div[@class="synopsis"]//text()')[0].strip()
 
-        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
-        actorData = data['hits'][0]
-        actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures']['500x750']
+        # Release Date
+        date = detailsPageElements.xpath('//div[@class="release-date"]/text()')[0].strip()
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        # Tagline and Collection(s)
+        metadata.collections.clear()
+        metadata.collections.add(metadata.studio)
 
-    # Posters
-    art = [
-        'https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_'))
-    ]
+        # Genres
+        movieGenres.clearGenres()
+        genres = detailsPageElements.xpath('//div[@class="categories"]//a')
+        for genreLink in genres:
+            genreName = genreLink.xpath('./text()')[0]
+            movieGenres.addGenre(genreName)
 
-    if 'pictures' in detailsPageElements:
-        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures']['1920x1080'])
-    else:
-        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        data = getAlgolia(url, 'filters=movie_id=' + str(detailsPageElements['movie_id']), PAsearchSites.getSearchBaseURL(siteID))
-        for scene in data['hits']:
-            art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures']['1920x1080'])
+        # Actors
+        movieActors.clearActors()
+        actors = detailsPageElements.xpath('//div[@class="video-performer"]//img')
+        for actorLink in actors:
+            actorName = actorLink.xpath('./@title')[0]
+            actorPhotoURL = actorLink.xpath('./@data-bgsrc')[0]
+            if 'image-not-available-performer-female' in actorPhotoURL:
+                actorPhotoURL = ''
 
+            movieActors.addActor(actorName, actorPhotoURL)
+
+        # Posters
+        art = [
+            detailsPageElements.xpath('//picture//img/@src')[-1]
+        ]
+
+        images = re.findall(r'img = \"(.*?)\";', data)
+        for image in images:
+            if image not in art:
+                Log(image)
+                art.append(image)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
