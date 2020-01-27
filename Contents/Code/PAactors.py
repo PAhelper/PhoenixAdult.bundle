@@ -2341,6 +2341,8 @@ def actorDBfinder(actorName):
                     actorPageURL = "http://www.iafd.com" + actorPageURL
                     actorPage = HTML.ElementFromURL(actorPageURL)
                     actorPhotoURL = actorPage.xpath('//div[@id="headshot"]//img')[0].get("src")
+                    if 'nophoto' in actorPhotoURL:
+                        raise Exception
                     Log(actorName + " found in " + databaseName)
                     Log("PhotoURL: " + actorPhotoURL)
                 except:
