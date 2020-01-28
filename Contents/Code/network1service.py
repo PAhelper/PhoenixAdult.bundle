@@ -29,13 +29,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     }
 
     sceneID = None
-    for splited in searchTitle.split(' '):
-        if unicode(splited, 'utf8').isdigit():
-            sceneID = splited
-            break
+    splited = searchTitle.split(' ')
+    if unicode(splited[0], 'utf8').isdigit():
+        sceneID = splited[0]
 
     for sceneType in ['scene', 'movie', 'serie']:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
+        if sceneID:
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
+        else:
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
         req = urllib.Request(url, headers=headers)
         data = urllib.urlopen(req).read()
 
