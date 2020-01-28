@@ -166,7 +166,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Drilled.XXX
   - Family.XXX
   - Petite.XXX
-+ #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search (ie. Clips4Sale - [47321](https://www.clips4sale.com/studio/47321/marks-head-bobbers-and-hand-jobbers) - Roadhead with Alexa Rydell)**
++ #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search**
 + #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, DVDs not supported**
 + #### ClubSeventeen | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
@@ -208,23 +208,25 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
-+ #### DDFNetwork | Matching type: *[Limited](./manualsearch.md#limited-search)*
-  - 1By-Day
++ #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Cherry Jul
-  - DDF Busty
+  - DDF Babes
   - DDF Hardcore
   - DDF Network VR
   - DDF Xtreme
-  - Euro Girls on Girls
-  - Euro Teen Erotica
   - Eve Angel Official
   - Hairy Twatter
+  - Sandy's Fantasies
+  - Sex Video Casting
++ #### Other DDFNetwork Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - 1By-Day
+  - DDF Busty
+  - Euro Girls on Girls
+  - Euro Teen Erotica
   - Hands on Hardcore
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
-  - Sandy's Fantasies
-  - Sex Video Casting
 + #### DigitalPlayground | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
@@ -292,8 +294,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - TheDickSuckers
 + #### First Anal Quest | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Fitting-Room | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
-+ #### FuckedHard18 | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### FuckingAwesome | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### FuelVirtual Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - FuckedHard18
+  - MassageGirls18
 + #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Analized
   - Bad Daddy POV
@@ -659,8 +663,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Big Tits Boss
   - Bikini Crashers
   - Black GFs
-  - CFNM Secret
   - Captain Stabbin
+  - CFNM Secret
   - Crazy Asian GFs
   - Crazy College GFs
   - Cum Fiesta
@@ -674,8 +678,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Flower Tucci
   - GF Revenge
   - Girls of Naked
-  - HD Love
   - Happy Tugs
+  - HD Love
   - Horny Birds
   - Hot Bush
   - In the VIP
@@ -689,9 +693,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Monster Curves
   - No Faces
   - Pure 18
-  - RK Prime
   - Real Orgasms
   - Reckless in Miami
+  - RK Prime
   - Round and Brown
   - Saturday Night Latinas
   - See My Wife
