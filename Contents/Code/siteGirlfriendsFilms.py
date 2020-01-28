@@ -99,8 +99,9 @@ def update(metadata,siteID,movieGenres,movieActors):
         data = getAlgolia(url, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
         detailsPageElements = data['hits'][0]
 
-        data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))
-        scenesPagesElements = enumerate(data['hits'], 1)
+        data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))['hits']
+        data = sorted(data, key=lambda i: i['clip_id'])
+        scenesPagesElements = enumerate(data, 1)
 
         # Studio
         metadata.studio = detailsPageElements['studio_name']
@@ -136,7 +137,8 @@ def update(metadata,siteID,movieGenres,movieActors):
 
         # Tagline and Collection(s)
         metadata.collections.clear()
-        metadata.collections.add(detailsPageElements['network_name'])
+        for collectionName in ['network_name', 'serie_name', 'movie_title']:
+            metadata.collections.add(detailsPageElements[collectionName])
 
         # Genres
         movieGenres.clearGenres()
