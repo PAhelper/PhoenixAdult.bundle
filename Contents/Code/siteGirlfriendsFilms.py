@@ -91,31 +91,48 @@ def update(metadata,siteID,movieGenres,movieActors):
     sceneType = metadata_id[2] if len(metadata_id) > 2 else None
 
     if sceneType:
-        sceneID = metadata_id[0]
+        sceneID = int(metadata_id[0])
         sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
         apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
 
         url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        data = getAlgolia(url, 'filters=%s=%s' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
+        data = getAlgolia(url, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
         detailsPageElements = data['hits'][0]
+
+        data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))
+        scenesPagesElements = enumerate(data['hits'], 1)
 
         # Studio
         metadata.studio = detailsPageElements['studio_name']
 
         # Title
-        metadata.title = detailsPageElements['title']
+        if sceneType == 'scenes':
+            for idx, scene in scenesPagesElements:
+                if scene['clip_id'] == sceneID:
+                    metadata.title = '%s, Scene #%d' % (detailsPageElements['title'], idx)
+        else:
+            metadata.title = detailsPageElements['title']
 
         # Summary
-        metadata.summary = detailsPageElements['description']
+        description = detailsPageElements['description']
+        if not description.startswith('Previously released on'):
+            metadata.summary = description
 
         # Release Date
-        if 'release_date' in detailsPageElements:
-            date = detailsPageElements['release_date']
-        else:
-            date = detailsPageElements['last_modified']
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+        date_object = None
+        try:
+            date = description.replace('Previously released on', '', 1).replace('th', '', 1).strip()
+            date_object = parse(date)
+        except:
+            if 'release_date' in detailsPageElements:
+                date = detailsPageElements['release_date']
+            else:
+                date = detailsPageElements['last_modified']
+            date_object = parse(date)
+
+        if date_object:
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
 
         # Tagline and Collection(s)
         metadata.collections.clear()
@@ -147,12 +164,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         ]
 
         if 'pictures' in detailsPageElements:
-            art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures']['1920x1080'])
+            max_quality = sorted(detailsPageElements['pictures'].keys())[-3]
+            art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
         else:
-            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-            data = getAlgolia(url, 'filters=movie_id=' + str(detailsPageElements['movie_id']), PAsearchSites.getSearchBaseURL(siteID))
-            for scene in data['hits']:
-                art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures']['1920x1080'])
+            for idx, scene in scenesPagesElements:
+                max_quality = sorted(scene['pictures'].keys())[-3]
+                art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures'][max_quality])
     else:
         sceneURL = metadata_id[0].replace('_','/').replace('!','?')
         data = urllib.urlopen(sceneURL).read()
