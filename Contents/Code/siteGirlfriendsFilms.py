@@ -110,7 +110,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         if sceneType == 'scenes':
             for idx, scene in scenesPagesElements:
                 if scene['clip_id'] == sceneID:
-                    metadata.title = '%s, Scene #%d' % (detailsPageElements['title'], idx)
+                    metadata.title = '%s, Scene %d' % (detailsPageElements['title'], idx)
         else:
             metadata.title = detailsPageElements['title']
 
