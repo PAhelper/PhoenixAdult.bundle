@@ -107,8 +107,8 @@ import network1service
 
 searchSites = [None] * 842
 
-searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/search?q="]
-searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/search?q="]
+searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
+searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
 searchSites[2] = ["Brazzers.com","Brazzers","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 
 searchSites[5] = ["My Friends Hot Mom","My Friends Hot Mom","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
@@ -158,7 +158,7 @@ searchSites[48] = ["Live Gym Cam","Live Gym Cam","https://tour.naughtyamerica.co
 searchSites[49] = ["Live Naughty Teacher","Live Naughty Teacher","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[50] = ["Live Naughty Milf","Live Naughty Milf","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[51] = ["Live Naughty Nurse","Live Naughty Nurse","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[52] = ["Vixen","Vixen","http://www.vixen.com","http://www.vixen.com/search?q="]
+searchSites[52] = ["Vixen","Vixen","http://www.vixen.com","http://www.vixen.com/api"]
 searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
 searchSites[54] = ["Moms in Control","Moms in Control","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[55] = ["Pornstars Like It Big","Pornstars Like It Big","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -242,7 +242,7 @@ searchSites[132] = ["Stepmom Videos","Stepmom Videos","https://bangbros.com","ht
 searchSites[133] = ["Street Ranger","Street Ranger","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[134] = ["Tugjobs","Tugjobs","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[135] = ["Working Latinas","Working Latinas","https://bangbros.com","https://bangbros.com/search/"]
-searchSites[136] = ["Tushy","Tushy","https://www.tushy.com","https://www.tushy.com/search?q="]
+searchSites[136] = ["Tushy","Tushy","https://www.tushy.com","https://www.tushy.com/api"]
 searchSites[137] = ["Reality Kings","Reality Kings", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[138] = ["40 Inch Plus", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[139] = ["8th Street Latinas","8th Street Latinas", "https://www.realitykings.com", "https://site-api.project1service.com"]
@@ -776,8 +776,8 @@ searchSites[666] = ["Teen Sex Movs","Teen Sex Movs","http://teenmegaworld.net","
 searchSites[667] = ["PJGirls","PJGirls","http://www.pjgirls.com","http://www.pjgirls.com/en/videos/?fulltext="]
 searchSites[668] = ["Screwbox","Screwbox","https://screwbox.com","https://screwbox.com/search.php?query="]
 searchSites[669] = ["Dorcel Club","Dorcel Club","https://www.dorcelclub.com","https://www.dorcelclub.com/en/search?search="]
-searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/search?q="]
-searchSites[671] = ["Deeper","Deeper","https://www.deeper.com","https://www.deeper.com/search?q="]
+searchSites[670] = ["TushyRaw","TushyRaw","https://www.tushyraw.com","https://www.tushyraw.com/api"]
+searchSites[671] = ["Deeper","Deeper","https://www.deeper.com","https://www.deeper.com/api"]
 searchSites[672] = ["MissaX","MissaX","https://missax.com","https://missax.com/tour/search.php?query="]
 searchSites[673] = ["AllHerLuv","AllHerLuv","https://allherluv.com","https://allherluv.com/tour/search.php?query="]
 searchSites[674] = ["Mylf","Mylf","https://mylf.com","https://www.mylf.com/movies/"]
