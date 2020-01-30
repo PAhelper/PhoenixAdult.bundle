@@ -6,7 +6,7 @@ import re
 
 
 def bypassCloudflare(url, headers=''):
-    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers}),'idnUrl':url,'deviceId':'','sessionId':''})
+    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'idnUrl':url}),'deviceId':'','sessionId':''})
     req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
         'Content-Type': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
@@ -14,6 +14,16 @@ def bypassCloudflare(url, headers=''):
     data = urllib.urlopen(req).read()
 
     return json.loads(data)['Content']
+
+
+def getDatafromAPI(baseURL, sceneId):
+    data = bypassCloudflare(baseURL)
+    token = re.search(r'\.access_token=\"(.*?)\"', data).group(1)
+
+    url = baseURL + '/api/movies/' + str(sceneId)
+    headers = 'Authorization: Bearer ' + token
+
+    return bypassCloudflare(url, headers)
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
@@ -36,7 +46,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        if searchResult['cover_title_picture'] or searchResult['info_title_picture'] or searchResult['mobile_detail_picture']:
+        data = getDatafromAPI(PAsearchSites.getSearchBaseURL(siteNum), curID)
+        if 'error' not in data:
             results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
@@ -48,12 +59,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneId = metadata_id[0]
 
-    data = bypassCloudflare(PAsearchSites.getSearchBaseURL(siteID))
-    token = re.search(r'nK\.access_token=\"(.*?)\"', data).group(1)
-
-    url = PAsearchSites.getSearchBaseURL(siteID) + '/api/movies/' + sceneId
-    headers = 'Authorization: Bearer ' + token
-    data = bypassCloudflare(url, headers)
+    data = getDatafromAPI(PAsearchSites.getSearchBaseURL(siteID), sceneId)
     detailsPageElements = json.loads(data)['data']
 
     # Studio
