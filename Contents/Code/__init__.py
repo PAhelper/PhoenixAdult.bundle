@@ -1202,10 +1202,24 @@ class PhoenixAdultAgent(Agent.Movies):
                     results = PAsearchSites.siteATKGirlfriends.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
-            ## LookAtHerNow
+            ## TwoWebMedia
             ###############
             if siteNum == 837:
-                if searchSiteID == 9999 or searchSiteID == 837:
+                if searchSiteID == 9999 or (837 <= searchSiteID <= 839):
+                    results = PAsearchSites.networkTwoWebMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## Interracial Pass
+            ###############
+            if siteNum == 840:
+                if searchSiteID == 9999 or searchSiteID == 840:
+                    results = PAsearchSites.siteInterracialPass.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## LookAtHerNow
+            ###############
+            if siteNum == 841:
+                if searchSiteID == 9999 or searchSiteID == 841:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             siteNum += 1
@@ -2243,10 +2257,26 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
+        ##  TwoWebMedia                                             ##
+        ##                                                          ##
+        ##############################################################
+        if 837 <= siteID <= 839:
+            metadata = PAsearchSites.networkTwoWebMedia.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Interracial Pass                                        ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 840:
+            metadata = PAsearchSites.siteInterracialPass.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
         ##  LookAtHerNow                                            ##
         ##                                                          ##
         ##############################################################
-        if siteID == 837:
+        if siteID == 841:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
             
         ##############################################################
