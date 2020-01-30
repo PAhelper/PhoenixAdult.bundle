@@ -184,7 +184,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.title = detailsPageElements.xpath('//h1[@class="description"]/text()')[0]
 
         # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="synopsis"]//text()')[0].strip()
+        metadata.summary = detailsPageElements.xpath('//div[@class="synopsis"]')[0].text_content().strip()
 
         # Release Date
         date = detailsPageElements.xpath('//div[@class="release-date"]/text()')[0].strip()
