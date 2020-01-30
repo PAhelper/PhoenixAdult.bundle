@@ -23,10 +23,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('https','http')
     detailsPageElements = HTML.ElementFromURL(url)
     urlBase = PAsearchSites.getSearchBaseURL(siteID)
+    art = []
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[@class="title-line"]/h1')[0].text_content().strip()
-    Log("Scene Title: " + metadata.title)
 
     # Studio/Tagline/Collection
     metadata.studio = "Teen Mega World"
@@ -36,14 +36,10 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(metadata.tagline)
 
     # Summary
-    try:
-        metadata.summary = detailsPageElements.xpath('//div[@class="text"]//p')[0].text_content().strip()
-    except:
-        Log('No summary found')
+    metadata.summary = detailsPageElements.xpath('//div[@class="text"]//p')[0].text_content().strip()
 
     # Date
     date = detailsPageElements.xpath('//div[@class="date"]//time')[0].text_content().strip()
-    Log("date: " + date)
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
@@ -51,15 +47,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="video"]//div[@class="site"]//a[position()>1]')
-    Log("actors #: " + str(len(actors)))
     if len(actors) > 0:
         for actorLink in actors:
             actorName = actorLink.text_content().strip()
-            Log("Actor: " + actorName)
-            actorPageURL = actorLink.get('href').replace('https','http')
+            actorPageURL = actorLink.get('href')
             actorPageElements = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = urlBase + actorPageElements.xpath('//div[@class="photo"]//img')[0].get("data-src").replace('https','http')
-            Log("ActorPhotoURL: " + actorPhotoURL)
+            actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageElements.xpath('//div[@class="photo"]//img')[0].get("data-src").replace('https','http')
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Genres
@@ -69,5 +62,21 @@ def update(metadata,siteID,movieGenres,movieActors):
         for genreLink in genres:
             genre = genreLink.text_content()
             movieGenres.addGenre(genre)
+
+    ### Posters and artwork ###
+
+    # Video trailer background image
+    try:
+        twitterBG = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//video')[0].get('poster')
+        art.append(twitterBG)
+    except:
+        pass
+
+    j = 1
+    for posterUrl in art:
+        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
+            metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+            metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
+            j = j + 1
 
     return metadata
