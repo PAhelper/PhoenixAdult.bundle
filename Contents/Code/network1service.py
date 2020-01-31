@@ -175,10 +175,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if height > width:
+                if width > 1:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if width > height:
+                if width > 100 and width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
