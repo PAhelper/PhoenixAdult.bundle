@@ -32,34 +32,42 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     splited = searchTitle.split(' ')
     if unicode(splited[0], 'utf8').isdigit():
         sceneID = splited[0]
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
 
     for sceneType in ['scene', 'movie', 'serie']:
-        if sceneID:
+        if sceneID and not searchTitle:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
+
+        data = None
         req = urllib.Request(url, headers=headers)
-        data = urllib.urlopen(req).read()
+        try:
+            data = urllib.urlopen(req).read()
+        except Exception as e:
+            Log(e)
+            pass
 
-        searchResults = json.loads(data)
-        for searchResult in searchResults['result']:
-            titleNoFormatting = searchResult['title']
-            releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
-            curID = searchResult['id']
-            siteName = searchResult['brand'].title()
-            subSite = ''
-            if 'collections' in searchResult and searchResult['collections']:
-                subSite = searchResult['collections'][0]['name']
-            siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
+        if data:
+            searchResults = json.loads(data)
+            for searchResult in searchResults['result']:
+                titleNoFormatting = searchResult['title']
+                releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
+                curID = searchResult['id']
+                siteName = searchResult['brand'].title()
+                subSite = ''
+                if 'collections' in searchResult and searchResult['collections']:
+                    subSite = searchResult['collections'][0]['name']
+                siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
-            if sceneID:
-                score = 100 - Util.LevenshteinDistance(sceneID, curID)
-            elif searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                if sceneID:
+                    score = 100 - Util.LevenshteinDistance(sceneID, curID)
+                elif searchDate:
+                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                else:
+                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
+                results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -167,10 +175,10 @@ def update(metadata,siteID,movieGenres,movieActors):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1 or height > width:
+                if height > width:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if width > 100 and width > height and idx > 1:
+                if width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
