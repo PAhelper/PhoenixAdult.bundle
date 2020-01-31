@@ -65,24 +65,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
             results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
 
-    url = 'https://www.girlfriendsfilms.net/search/SearchAutoComplete?rows=50&name_startsWith=' + encodedTitle
-    data = urllib.urlopen(url).read()
+    searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
+    pages = int(searchResults.xpath('//li[contains(@class, "page-item")]//text()')[-1])
+    for page in range(1, pages + 1):
+        for searchResult in searchResults.xpath('//div[@class="grid-item"]'):
+            titleNoFormatting = searchResult.xpath('.//span[@class="overlay-inner"]//text()')[0]
+            sceneURL = searchResult.xpath('.//a/@href')[0]
+            curID = sceneURL.replace('/', '_').replace('?', '!')
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-    searchResults = json.loads(data)['Results']
-    for searchResult in searchResults:
-        searchResult = searchResult['BasicResponseGroup']
-        if searchResult['media_type'] == 'DVD':
-            titleNoFormatting = searchResult['description']
-            releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
-            sceneURL = 'https://www.girlfriendsfilms.net' + searchResult['id']
-            curID = sceneURL.replace('/','_').replace('?','!')
-
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[DVD] %s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[DVD] %s' % (titleNoFormatting), score=score, lang=lang))
+        searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&page=%d&q=%s' % (page, encodedTitle))
 
     return results
 
@@ -179,7 +172,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 max_quality = sorted(scene['pictures'].keys())[-3]
                 art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures'][max_quality])
     else:
-        sceneURL = metadata_id[0].replace('_','/').replace('!','?')
+        sceneURL = metadata_id[0].replace('_', '/').replace('!', '?')
         data = urllib.urlopen(sceneURL).read()
         detailsPageElements = HTML.ElementFromString(data)
 
