@@ -102,6 +102,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         data = getAlgolia(url, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
         detailsPageElements = data['hits'][0]
 
+        if sceneType == 'movies':
+            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
         data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))['hits']
         data = sorted(data, key=lambda i: i['clip_id'])
         scenesPagesElements = enumerate(data, 1)
@@ -141,7 +143,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         # Tagline and Collection(s)
         metadata.collections.clear()
         for collectionName in ['network_name', 'serie_name', 'movie_title']:
-            metadata.collections.add(detailsPageElements[collectionName])
+            if collectionName in detailsPageElements:
+                metadata.collections.add(detailsPageElements[collectionName])
 
         # Genres
         movieGenres.clearGenres()
@@ -225,7 +228,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         images = re.findall(r'img = \"(.*?)\";', data)
         for image in images:
             if image not in art:
-                Log(image)
                 art.append(image)
 
     Log('Artwork found: %d' % len(art))
@@ -238,7 +240,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1 or height > width:
+                if width > 1:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
                 if width > 100 and width > height:
