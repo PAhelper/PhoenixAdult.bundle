@@ -55,10 +55,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = searchResult['title']
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
+            elif sceneType == 'scenes':
+                titleFormatted = '%s %s' % (titleNoFormatting, sceneData)
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleFormatted.lower())
             elif searchDate:
-                score = 80 - Util.LevenshteinDistance(searchDate, releaseDate)
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
-                score = 80 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
 
