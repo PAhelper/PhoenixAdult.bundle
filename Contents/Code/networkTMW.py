@@ -20,9 +20,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchPageNum += 1
     return results
 def update(metadata,siteID,movieGenres,movieActors):
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?').replace('https','http')
+    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
-    urlBase = PAsearchSites.getSearchBaseURL(siteID)
     art = []
 
     # Title
@@ -52,7 +51,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = actorLink.text_content().strip()
             actorPageURL = actorLink.get('href')
             actorPageElements = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageElements.xpath('//div[@class="photo"]//img')[0].get("data-src").replace('https','http')
+            actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageElements.xpath('//div[@class="photo"]//img')[0].get("data-src")
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Genres
@@ -70,7 +69,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         twitterBG = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//video')[0].get('poster')
         art.append(twitterBG)
     except:
-        pass
+        twitterBG = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//deo-video')[0].get('cover-image')
+        art.append(twitterBG)
 
     j = 1
     for posterUrl in art:
