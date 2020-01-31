@@ -17,6 +17,8 @@ class PhoenixGenres:
 
             ##### Skips
             #Match and Skip
+            if "photos" == newGenre.lower():
+                skip = True
             if "4k" == newGenre.lower():
                 skip = True
             if "18+teens" == newGenre.lower():
