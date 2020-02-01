@@ -66,11 +66,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
-    pages = int(searchResults.xpath('//li[contains(@class, "page-item")]//text()')[-1])
+    pages = searchResults.xpath('//li[contains(@class, "page-item")]//text()')
+    pages = int(pages[-1]) if pages else 1
     for page in range(1, pages + 1):
         for searchResult in searchResults.xpath('//div[@class="grid-item"]'):
             titleNoFormatting = searchResult.xpath('.//span[@class="overlay-inner"]//text()')[0]
-            sceneURL = searchResult.xpath('.//a/@href')[0]
+            sceneURL = 'https://www.girlfriendsfilms.net' + searchResult.xpath('.//a/@href')[0]
             curID = sceneURL.replace('/', '_').replace('?', '!')
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
