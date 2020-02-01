@@ -47,23 +47,21 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     actors.append(actorLink['name'])
                 sceneData = ', '.join(actors)
                 curID = searchResult['clip_id']
+                titleNoFormatting = '%s %s' % (searchResult['title'], sceneData)
             else:
-                releaseDate = parse(searchResult['last_modified']).strftime('%Y-%m-%d')
-                sceneData = 'Movie'
+                date = 'last_modified' if searchResult['last_modified'] else 'date_created'
+                releaseDate = parse(searchResult[date]).strftime('%Y-%m-%d')
                 curID = searchResult['movie_id']
+                titleNoFormatting = searchResult['title']
 
-            titleNoFormatting = searchResult['title']
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
-            elif sceneType == 'scenes':
-                titleFormatted = '%s %s' % (titleNoFormatting, sceneData)
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleFormatted.lower())
             elif searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneData, titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
     pages = searchResults.xpath('//li[contains(@class, "page-item")]//text()')
