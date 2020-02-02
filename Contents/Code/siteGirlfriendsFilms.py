@@ -61,7 +61,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
 
     searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
     pages = searchResults.xpath('//li[contains(@class, "page-item")]//text()')
@@ -124,8 +124,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         except:
             if 'release_date' in detailsPageElements:
                 date = detailsPageElements['release_date']
-            else:
+            elif 'last_modified' in detailsPageElements and detailsPageElements['last_modified']:
                 date = detailsPageElements['last_modified']
+            else:
+                date = detailsPageElements['date_created']
             date_object = parse(date)
 
         if date_object:
@@ -154,7 +156,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
             data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
             actorData = data['hits'][0]
-            actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures']['500x750']
+            max_quality = sorted(actorData['pictures'].keys())[-1]
+            actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
 
             movieActors.addActor(actorName, actorPhotoURL)
 
