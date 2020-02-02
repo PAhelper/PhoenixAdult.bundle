@@ -40,7 +40,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = data['hits']
         for searchResult in searchResults:
             if sceneType == 'scenes':
-                releaseDate = parse(searchResult['release_date']).strftime('%Y-%m-%d')
+                releaseDate = parse(searchResult['release_date'])
 
                 actors = []
                 for actorLink in searchResult['female_actors']:
@@ -50,18 +50,28 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 titleNoFormatting = '%s %s' % (searchResult['title'], sceneData)
             else:
                 date = 'last_modified' if searchResult['last_modified'] else 'date_created'
-                releaseDate = parse(searchResult[date]).strftime('%Y-%m-%d')
+                releaseDate = parse(searchResult[date])
                 curID = searchResult['movie_id']
                 titleNoFormatting = searchResult['title']
 
+            description = searchResult['description']
+            if description.startswith('Previously released on'):
+                date = description.replace('Previously released on', '', 1).replace('th', '', 1).strip()
+                releaseDate = parse(date)
+
+            if searchDate:
+                date = parse(searchDate)
+                if date.year < releaseDate.year:
+                    releaseDate = date
+
+            releaseDate = releaseDate.strftime('%Y-%m-%d')
+
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
-            elif searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%d|%d|%s' % (curID, siteNum, sceneType), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
 
     searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
     pages = searchResults.xpath('//li[contains(@class, "page-item")]//text()')
@@ -88,6 +98,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     if sceneType:
         sceneID = int(metadata_id[0])
         sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
+        sceneDate = metadata_id[3]
         apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
 
         url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
@@ -117,22 +128,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             metadata.summary = description
 
         # Release Date
-        date_object = None
-        try:
-            date = description.replace('Previously released on', '', 1).replace('th', '', 1).strip()
-            date_object = parse(date)
-        except:
-            if 'release_date' in detailsPageElements:
-                date = detailsPageElements['release_date']
-            elif 'last_modified' in detailsPageElements and detailsPageElements['last_modified']:
-                date = detailsPageElements['last_modified']
-            else:
-                date = detailsPageElements['date_created']
-            date_object = parse(date)
-
-        if date_object:
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
         # Tagline and Collection(s)
         metadata.collections.clear()
