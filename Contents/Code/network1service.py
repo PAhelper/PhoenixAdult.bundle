@@ -34,7 +34,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneID = splited[0]
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
 
-    for sceneType in ['scene', 'movie', 'serie']:
+    for sceneType in ['scene', 'movie', 'serie', 'trailer']:
         if sceneID and not searchTitle:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
