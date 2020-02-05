@@ -2,264 +2,118 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAextras
-import ssl
-from lxml.html.soupparser import fromstring
+
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    
-    urlWowXXX = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + encodedTitle +'%22'
-    urlWowTV = 'https://www.wowgirls.tv/?s=%22' + encodedTitle +'%22'
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
 
-    try:
-        searchResultsWowXXX = HTML.ElementFromURL(urlWowXXX)
-    except:
-        request = urllib.Request(urlWowXXX, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        searchResultsWowXXX = fromstring(htmlstring)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    for searchResult in searchResults.xpath('//article//a'):
+        siteName = PAsearchSites.getSearchSiteName(siteNum) + '.xxx'
+        titleNoFormatting = searchResult.xpath('./@title')[0]
+        sceneURL = searchResult.xpath('./@href')[0]
+        curID = sceneURL.replace('/', '_').replace('?', '!')
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-    Log('Search-Video-Number: ' + searchResultsWowXXX.xpath('//span[@class="search-video-number"]')[0].text_content().split(' ',1)[0])
-    if int(searchResultsWowXXX.xpath('//span[@class="search-video-number"]')[0].text_content().split(' ',1)[0]) > 0:
-        Log('Title Found on wowgirls.xxx')
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
-        for searchResult in searchResultsWowXXX.xpath('//div[@class="videos-list"]/article'):
-            titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
-            curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.xxx] ", score = score, lang = lang))
-    
-    else:
-        Log('Title not found on wowgirls.xxx, trying wowgirls.tv')
+    url = PAsearchSites.getSearchSearchURL(siteNum).replace('.xxx', '.tv', 1)
+    searchResults = HTML.ElementFromURL(url + encodedTitle)
+    for searchResult in searchResults.xpath('//div[contains(@class, "entry")]//h3//a'):
+        siteName = PAsearchSites.getSearchSiteName(siteNum) + '.tv'
+        titleNoFormatting = searchResult.xpath('./text()')[0].strip()
+        sceneURL = searchResult.xpath('./@href')[0]
+        curID = sceneURL.replace('/', '_').replace('?', '!')
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        try:
-            searchResultsWowTV = HTML.ElementFromURL(urlWowTV)
-        except:
-            request = urllib.Request(urlWowTV, headers=headers)
-            response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-            htmlstring = response.read()
-            searchResultsWowTV = fromstring(htmlstring)
-
-        if len(searchResultsWowTV.xpath('//h1')) == 0:
-            Log('Title found on wowgirls.tv')
-
-            for searchResult in searchResultsWowTV.xpath('//div[@class="entry clearfix latest"]'):
-                titleNoFormatting = searchResult.xpath('.//h3/a')[0].text_content().strip()
-                curID = searchResult.xpath('.//h3/a')[0].get('href').replace('/','_').replace('?','!')
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                if searchDate:
-                    releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-                else:
-                    releaseDate = ''
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.tv] ", score = score, lang = lang))
-
-        else:
-            Log('No exact Title found, trying normal Search on wowgirls.xxx and .tv')
-            
-            urlWowXXX = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
-            urlWowTV = 'https://www.wowgirls.tv/?s=' + encodedTitle
-            
-            try:
-                searchResultsWowXXX = HTML.ElementFromURL(urlWowXXX)
-            except:
-                request = urllib.Request(urlWowXXX, headers=headers)
-                response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                htmlstring = response.read()
-                searchResultsWowXXX = fromstring(htmlstring)
-            
-            for searchResult in searchResultsWowXXX.xpath('//div[@class="videos-list"]/article'):
-                titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
-                curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                if searchDate:
-                    releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-                else:
-                    releaseDate = ''
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.xxx] ", score = score, lang = lang))
-
-            try:
-                searchResultsWowTV = HTML.ElementFromURL(urlWowTV)
-            except:
-                request = urllib.Request(urlWowTV, headers=headers)
-                response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                htmlstring = response.read()
-                searchResultsWowTV = fromstring(htmlstring)
-            
-            for searchResult in searchResultsWowTV.xpath('//div[@class="entry clearfix latest"]'):
-                titleNoFormatting = searchResult.xpath('.//h3/a')[0].text_content().strip()
-                curID = searchResult.xpath('.//h3/a')[0].get('href').replace('/','_').replace('?','!')
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-                if searchDate:
-                    releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-                else:
-                    releaseDate = ''
-                results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [WowGirls.tv] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     return results
 
+
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
-    sitename = str(metadata.id).split("|")[0].split('_')[2]
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
 
-    metadata.collections.clear()
-    movieGenres.clearGenres()
-    movieActors.clearActors()
+    metadata_id = str(metadata.id).split('|')
+    url = metadata_id[0].replace('_', '/').replace('!', '?')
+    detailsPageElements = HTML.ElementFromURL(url)
+
+    if '.xxx' in url:
+        # Title
+        metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]/text()')[0].strip()
+
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//div[@class="video-description"]')[0].text_content().strip()
+
+        # Genres & Actors
+        movieGenres.clearGenres()
+        movieActors.clearActors()
+        tags = detailsPageElements.xpath('//div[@class="tags"]//a')
+        for tagLink in tags:
+            tagName = tagLink.xpath('./@title')[0]
+            tagURL = tagLink.xpath('./@href')[0]
+            if '/teen/' not in tagURL:
+                movieGenres.addGenre(tagName)
+            else:
+                movieActors.addActor(tagName, '')
+    else:
+         # Title
+        metadata.title = detailsPageElements.xpath('//h1[@class="title"]/text()')[0].strip()
+
+        # Summary
+        metadata.summary = detailsPageElements.xpath('//div[contains(@class, "entry")]//p')[2].text_content().strip()
+
+        # Genres & Actors
+        movieGenres.clearGenres()
+        movieActors.clearActors()
+        tags = detailsPageElements.xpath('//div[@class="post-meta"]//a')
+        for tagLink in tags:
+            tagName = tagLink.xpath('./text()')[0].strip()
+            tagURL = tagLink.xpath('./@href')[0]
+            if '/models/' not in tagURL:
+                movieGenres.addGenre(tagName)
+            else:
+                movieActors.addActor(tagName, '')
 
     # Studio
-    metadata.studio = 'WowGirls'
+    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
 
-    try:
-        detailsPageElements = HTML.ElementFromURL(url)
-    except:
-        request = urllib.Request(url, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring)
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    metadata.collections.add(metadata.studio)
 
-    Log('Sitename '+ sitename)
-    if "xxx" in sitename:
-        Log('wowporn.xxx')
+    # Posters
+    art = []
+    xpaths = [
+        '//video/@poster',
+        '//dl[@class="gallery-item"]//img/@src'
+    ]
+    for xpath in xpaths:
+        for poster in detailsPageElements.xpath(xpath):
+            art.append(poster)
 
-        # Title
-        metadata.title = detailsPageElements.xpath('//div[@class="title-views"]/h1')[0].text_content().strip().rsplit(" ",3)[0]
-
-        # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="desc "]/p')[0].text_content().strip()
-
-        #Tagline and Collection(s)
-        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-
-        # Genres
-        genres = detailsPageElements.xpath('//div[@class="tags-list"]/a[i[@class="fa fa-folder"]]')
-        if len(genres) > 0:
-            for genreLink in genres:
-                genreName = genreLink.text_content().strip().lower()
-                movieGenres.addGenre(genreName)
-
-        # Release Date
-        try:
-            date = detailsPageElements.xpath('//meta[@property="article:published_time"]')[0].get('content')
-        except:
-            date = str(metadata.id).split("|")[2]
-            Log("Date from file")
-
-        if len(date) > 0:
-            date_object = parse(date)
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-        
-        # Actors
-        actors = detailsPageElements.xpath('//div[@class="tags-list"]/a[i[@class="fa fa-tag"]]')
-        if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
-            for actorLink in actors:
-                actorName = str(actorLink.text_content().strip())
-                actorPhotoURL = ''
-                movieActors.addActor(actorName,actorPhotoURL)
-
-        ### Posters and artwork ###
-
-        # Video trailer background image
-        twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
-        Log("TwitterBG: " + twitterBG)
-
-        if len(twitterBG) > 0:
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
-                metadata.art[twitterBG] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-                metadata.posters[twitterBG] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+                headers = {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'
+                }
+                req = urllib.Request(posterUrl, headers=headers)
+                img_file = urllib.urlopen(req)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
             except:
-                request = urllib.Request(twitterBG, headers=headers)
-                response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                content = response.read()
-                metadata.art[twitterBG] = Proxy.Media(content, sort_order=1)
-                metadata.posters[twitterBG] = Proxy.Media(content, sort_order=1)
-
-
-    else:
-        Log('wowporn.tv')
-
-        # Title
-        metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-
-        # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="entry post clearfix"]/p')[1].text_content().strip()
-
-        #Tagline and Collection(s)
-        tagline = PAsearchSites.getSearchSiteName(siteID).strip()
-        metadata.tagline = tagline
-        metadata.collections.add(tagline)
-
-        # Genres
-        genres = detailsPageElements.xpath('//p[@class="meta-info"]/a[@rel="tag"]')
-        if len(genres) > 0:
-            for genreLink in genres:
-                genreName = genreLink.text_content().strip().lower()
-                movieGenres.addGenre(genreName)
-
-        # Release Date
-        date = str(metadata.id).split("|")[2]
-        Log("Date from file")
-
-        if len(date) > 0:
-            date_object = parse(date)
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-        
-        # Actors
-        actors = detailsPageElements.xpath('//p[@class="meta-info"]/a[@rel="category tag"]')
-        if len(actors) > 0:
-            if len(actors) == 3:
-                movieGenres.addGenre("Threesome")
-            if len(actors) == 4:
-                movieGenres.addGenre("Foursome")
-            if len(actors) > 4:
-                movieGenres.addGenre("Orgy")
-            for actorLink in actors:
-                actorName = str(actorLink.text_content().strip())
-                actorPageURL = actorLink.get("href")
-
-                try:
-                    actorPage = HTML.ElementFromURL(actorPageURL)
-                except:
-                    request = urllib.Request(actorPageURL, headers=headers)
-                    response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                    htmlstring = response.read()
-                    actorPage = fromstring(htmlstring)
-
-                actorPhotoURL = actorPage.xpath('//div[@id="mod_info"]/img')[0].get("src")
-                if 'http' not in actorPhotoURL:
-                    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
-                movieActors.addActor(actorName,actorPhotoURL)
-
-        ### Posters and artwork ###
-
-        for poster in detailsPageElements.xpath('//div[@id="gallery-1"]/dl/dt/img'):
-            posterUrl = poster.get('src')
-            Log("DownLoad Posters/Arts: " + posterUrl)
-            if len(posterUrl) > 0:
-                try:
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-                except:
-                    request = urllib.Request(posterUrl, headers=headers)
-                    response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                    content = response.read()
-                    metadata.art[posterUrl] = Proxy.Media(content, sort_order=1)
-                    metadata.posters[posterUrl] = Proxy.Media(content, sort_order=1)
+                pass
 
     return metadata
