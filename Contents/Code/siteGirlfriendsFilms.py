@@ -100,14 +100,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
         sceneDate = metadata_id[3]
         apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
+        urlParams = '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
 
-        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_' + sceneType, 1) + urlParams
         data = getAlgolia(url, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
         detailsPageElements = data['hits'][0]
 
+        url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + urlParams
         if sceneType == 'movies':
-            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))['hits']
+            data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))['hits']
+        else:
+            data = getAlgolia(url, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))['hits']
         data = sorted(data, key=lambda i: i['clip_id'])
         scenesPagesElements = enumerate(data, 1)
 
@@ -151,7 +154,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         for actorLink in actors:
             actorName = actorLink['name']
 
-            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+            url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + urlParams
             data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
             actorData = data['hits'][0]
             if actorData['pictures']:
