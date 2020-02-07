@@ -154,8 +154,11 @@ def update(metadata,siteID,movieGenres,movieActors):
             url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_actors', 1) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
             data = getAlgolia(url, 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
             actorData = data['hits'][0]
-            max_quality = sorted(actorData['pictures'].keys())[-1]
-            actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
+            if actorData['pictures']:
+                max_quality = sorted(actorData['pictures'].keys())[-1]
+                actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
+            else:
+                actorPhotoURL = ''
 
             movieActors.addActor(actorName, actorPhotoURL)
 
