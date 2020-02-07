@@ -107,10 +107,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         detailsPageElements = data['hits'][0]
 
         url = PAsearchSites.getSearchSearchURL(siteID).replace('*', 'girlfriendsfilms_scenes', 1) + urlParams
-        if sceneType == 'movies':
-            data = getAlgolia(url, 'filters=movie_id=%d' % detailsPageElements['movie_id'], PAsearchSites.getSearchBaseURL(siteID))['hits']
-        else:
-            data = getAlgolia(url, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))['hits']
+        data = getAlgolia(url, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))['hits']
         data = sorted(data, key=lambda i: i['clip_id'])
         scenesPagesElements = enumerate(data, 1)
 
