@@ -958,27 +958,60 @@ def getSearchFilter(siteID):
 def getSearchSiteName(siteID):
     return searchSites[siteID][1]
 def getSearchSiteIDByFilter(searchFilter):
-    searchID = 0
-    for sites in searchSites:
-        #First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
+    searchSitesEnum = enumerate(searchSites)
+
+    # Method #3
+    searchResults = []
+    searchFilterF = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
+    for searchID, sites in searchSitesEnum:
         try:
-            if searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0] == sites[0].lower().replace(" ","").replace("'",""):
+            siteNameF = sites[0].lower().replace(" ", "").replace("'", "").replace("-", "")
+
+            if searchFilterF.startswith(siteNameF):
+                searchResults.append((searchID, siteNameF))
+        except:
+            pass
+
+    if searchResults:
+        from operator import itemgetter
+
+        Log('Site found with method #3')
+        return max(searchResults, key=itemgetter(1))[0]
+
+    # Method #2
+    # First attempt to fix the commented issue below. Startswith was not working for me but this method does have good results for my tests.
+    searchFilterF = searchFilter.lower().replace(".com","").replace("'","").split(' ', 1)[0]
+    for searchID, sites in searchSitesEnum:
+        try:
+            siteNameF = sites[0].lower().replace(" ","").replace("'","")
+
+            if searchFilterF == siteNameF:
+                Log('Site found with method #2')
                 return searchID
         except:
             pass
-        searchID += 1
 
-    searchID = 0
-    for sites in searchSites:
-        # Might try converting this code to use startswith() to avoid problems with overlapping site names:
-        # https://www.tutorialspoint.com/python/string_startswith.htm
-        # Examples:
-        #  Blacked -> BlackedRaw
-        #  Babes -> FootsieBabes
-        #  PassionHD Love Ties -> HD Love
-        if sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace("'","") or sites[0].lower().replace(" ","").replace("'","") in searchFilter.lower().replace(".com","").replace(" ","").replace("'",""):
-            return searchID
-        searchID += 1
+    # Method #1
+    # Might try converting this code to use startswith() to avoid problems with overlapping site names:
+    # https://www.tutorialspoint.com/python/string_startswith.htm
+    # Examples:
+    #  Blacked -> BlackedRaw
+    #  Babes -> FootsieBabes
+    #  PassionHD Love Ties -> HD Love
+    searchFilterF = (
+        searchFilter.lower().replace(".com","").replace("'",""),
+        searchFilter.lower().replace(".com","").replace("'","").replace(" ","")
+    )
+    for searchID, sites in searchSitesEnum:
+        try:
+            siteNameF = sites[0].lower().replace(" ","").replace("'","")
+
+            if siteNameF in searchFilterF[0] or siteNameF in searchFilterF[1]:
+                Log('Site found with method #1')
+                return searchID
+        except:
+            pass
+
     return 9999
 def getSearchSettings(mediaTitle):
     mediaTitle = mediaTitle.replace(".", " ")
@@ -1224,12 +1257,21 @@ def getSearchSettings(mediaTitle):
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
             Log("4")
         else:
-            searchTitle = mediaTitle
-            Log("5")
+            title = re.sub(r"(\d+) (\d+)", r"\1:\2", mediaTitle.title()).replace(" ", "").replace(".com", "").replace("'", "")
+            site = re.sub(r"(\d+) (\d+)", r"\1:\2", searchSites[searchSiteID][0]).lower().replace(" ", "").replace("'", "").replace("-", "")
+            if title.lower().startswith(site):
+                searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE).strip()
+                searchTitle = re.sub(r"(\w)([A-Z])", r"\1 \2", searchTitle)
+                searchTitle = re.sub(r"(\d+)", r" \1", searchTitle)
+                searchTitle = searchTitle.replace(':', '')
+                Log("5")
+            else:
+                searchTitle = mediaTitle
+                Log("6")
         if searchTitle[:4].lower() == "com ":
             searchTitle = searchTitle[4:]
-            Log("6")
-        Log("7")
+            Log("7")
+        Log("8")
     else:
         searchTitle = mediaTitle
 
