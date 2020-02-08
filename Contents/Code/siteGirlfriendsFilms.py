@@ -74,17 +74,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
 
     searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&q=' + encodedTitle)
-    pages = searchResults.xpath('//li[contains(@class, "page-item")]//text()')
-    pages = int(pages[-1]) if pages else 1
-    for page in range(1, pages + 1):
-        for searchResult in searchResults.xpath('//div[@class="grid-item"]'):
-            titleNoFormatting = searchResult.xpath('.//span[@class="overlay-inner"]//text()')[0]
-            sceneURL = 'https://www.girlfriendsfilms.net' + searchResult.xpath('.//a/@href')[0]
-            curID = sceneURL.replace('/', '_').replace('?', '!')
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+    for searchResult in searchResults.xpath('//div[@class="grid-item"]'):
+        titleNoFormatting = searchResult.xpath('.//span[@class="overlay-inner"]//text()')[0]
+        sceneURL = 'https://www.girlfriendsfilms.net' + searchResult.xpath('.//a/@href')[0]
+        curID = sceneURL.replace('/', '_').replace('?', '!')
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[DVD] %s' % (titleNoFormatting), score=score, lang=lang))
-        searchResults = HTML.ElementFromURL('https://www.girlfriendsfilms.net/Search?media=2&page=%d&q=%s' % (page, encodedTitle))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[DVD] %s' % (titleNoFormatting), score=score, lang=lang))
 
     return results
 
