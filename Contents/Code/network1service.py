@@ -34,7 +34,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneID = splited[0]
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
 
-    for sceneType in ['scene', 'movie', 'serie']:
+    for sceneType in ['scene', 'movie', 'serie', 'trailer']:
         if sceneID and not searchTitle:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
@@ -66,6 +66,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                 else:
                     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+                if sceneType == 'trailer':
+                    titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
+                    score = score - 10
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
 
