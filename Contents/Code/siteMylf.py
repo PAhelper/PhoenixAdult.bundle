@@ -1,89 +1,60 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import googlesearch
+
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").lower()
-    Log("searchString: " + searchString)
-    if "/" not in searchString:
-        searchString = searchString.replace("-","/",1)
-    try:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
-        titleNoFormatting = searchResults.xpath('//div[@class="col-12 col-md-8"]//span[contains(@class,"text-lightgray")]')[0].text_content().strip()
-        Log("titleNoFormatting: " + titleNoFormatting)
-        curID = searchResults.xpath('//link[@rel="canonical"]')[0].get('href').replace('/','_').replace('?','!')
-        actors = searchResults.xpath('//div[@class="col-12 col-md-8"]//a//span')
-        Log("# actors: " + str(len(actors)))
-        firstActor = actors[0].text_content()
+
+    searchResultsURLs = []
+    shootID = None
+    for search in searchTitle.split(' '):
+        if unicode(search, 'utf8').isdigit():
+            shootID = search
+            break
+
+    if shootID:
+        sitemapURL = PAsearchSites.getSearchBaseURL(siteNum) + '/sitemap.xml'
+
+        searchResults = HTML.ElementFromURL(sitemapURL)
+        for searchResult in searchResults.xpath('//url'):
+            sceneURL = searchResult.xpath('.//loc')[0].text_content().strip()
+            if ('/movies/' in sceneURL) and (shootID in sceneURL):
+                searchResultsURLs.append(sceneURL)
+                break
+
+    if not searchResultsURLs:
+        domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
+
+        for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+            sceneURL = sceneURL.rsplit('?', 1)[0]
+            if ('/movies/' in sceneURL):
+                searchResultsURLs.append(sceneURL)
+
+    for sceneURL in searchResultsURLs:
+        detailsPageElements = HTML.ElementFromURL(sceneURL)
+
+        titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
+        sceneID = sceneURL.rsplit('/', 2)[1]
+        curID = sceneURL.replace('/', '_').replace('?', '!')
         if "mylfdom" in curID:
             subSite = "MylfDom"
         else:
-            subSite = searchResults.xpath('//img[@class="lazy img-fluid"]')[0].get("data-original").split('/')[-1].replace('_logo.png','').title()
-        if searchDate:
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+            subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+        if shootID:
+            score = 100 - Util.LevenshteinDistance(shootID, sceneID)
         else:
-            releaseDate = ''
-        score = 100
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
-    except:
-        # Manual Matching for Problematic Scenes
-        if searchTitle == "1693/when it rains, she whores":
-            Log("Manual Search Match")
-            curID = ("https://www.mylf.com/movies/1693/when-it-rains,-she-whores!")
-            curID = curID.replace('/','_').replace('?','!').replace(',','+')
-            Log(str(curID))
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "When It Rains, She Whores!" + " [Mylf]", score = 101, lang = lang))
-        if searchTitle == "1713/when her man is away, this milf will play":
-            Log("Manual Search Match")
-            curID = ("https://www.mylf.com/movies/1713/when-her-man-is-away,-this-milf-will-play")
-            curID = curID.replace('/','_').replace('?','!').replace(',','+')
-            Log(str(curID))
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "When Her Man Is Away, This MILF Will Play" + " [Mylf]", score = 101, lang = lang))
-        if searchTitle == "2049/cheater, cheater milf dick teaser":
-            Log("Manual Search Match")
-            curID = ("https://www.mylf.com/movies/2049/cheater,-cheater-milf-dick-teaser")
-            curID = curID.replace('/','_').replace('?','!').replace(',','+')
-            Log(str(curID))
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Cheater, Cheater MILF Dick Teaser" + " [Mylf]", score = 101, lang = lang))
-        if searchTitle == "2059/rich milf, wet pussy":
-            Log("Manual Search Match")
-            curID = ("https://www.mylf.com/movies/2059/rich-milf,-wet-pussy")
-            curID = curID.replace('/','_').replace('?','!').replace(',','+')
-            Log(str(curID))
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Rich MILF, Wet Pussy" + " [Mylf]", score = 101, lang = lang))
-        if searchTitle == "1339/Trick or Treat, Stroke and Repeat":
-            Log("Manual Search Match")
-            curID = ("https://www.mylf.com/movies/1339/trick-or-treat,-stroke-and-repeat")
-            curID = curID.replace('/','_').replace('?','!').replace(',','+')
-            Log(str(curID))
-            if searchDate:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-            else:
-                releaseDate = ''
-            results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = "Trick Or Treat, Stroke And Repeat" + " [Mylf]", score = 101, lang = lang))
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
     return results
 
-def update(metadata,siteID,movieGenres,movieActors):
 
+def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!').replace('+',',')
     detailsPageElements = HTML.ElementFromURL(url)
     art = []

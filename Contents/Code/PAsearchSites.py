@@ -105,7 +105,7 @@ import networkTwoWebMedia
 import siteInterracialPass
 import network1service
 
-searchSites = [None] * 842
+searchSites = [None] * 843
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -948,6 +948,7 @@ searchSites[838] = ["Bopping Babes","Bopping Babes","https://www.boppingbabes.co
 searchSites[839] = ["Upskirt Jerk","Upskirt Jerk","https://www.upskirtjerk.com","https://www.upskirtjerk.com/?s="]
 searchSites[840] = ["Interracial Pass","Interracial Pass","hhttps://www.interracialpass.com","https://www.interracialpass.com/newtour/search.php?query="]
 searchSites[841] = ["LookAtHerNow","LookAtHerNow","https://www.lookathernow.com","https://site-api.project1service.com"]
+searchSites[842] = ["Mylfwood","Mylfwood","https://www.mylf.com","https://www.mylf.com/movies/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
