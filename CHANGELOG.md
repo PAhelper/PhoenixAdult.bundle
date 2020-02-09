@@ -1,4 +1,6 @@
 # Changelog
+- 2020-02-09
+    - Added new XEmpire site: AllBlackX
 - 2019-12-04
     - Fix postprocessing script for pornpros
     - Add sceneID matching to Brazzers

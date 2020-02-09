@@ -877,6 +877,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Eroticax
   - Hardx
   - Lesbianx
+  - AllBlackX
 + #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list
