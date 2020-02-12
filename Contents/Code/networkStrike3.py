@@ -82,9 +82,16 @@ def update(metadata,siteID,movieGenres,movieActors):
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
-    art = [
-        video['images']['movie'][-1]['highdpi']['3x']
-    ]
+    art = []
+
+    for name in ['movie', 'poster']:
+        if name in video['images'] and video['images'][name]:
+            image = video['images'][name][-1]
+            if 'highdpi' in image:
+                art.append(image['highdpi']['3x'])
+            else:
+                art.append(image['src'])
+            break
 
     for image in pictureset:
         img = image['main'][0]['src']
