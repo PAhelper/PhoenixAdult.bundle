@@ -6,7 +6,7 @@ import re
 
 
 def bypassCloudflare(url, headers=''):
-    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'idnUrl':url}),'deviceId':'','sessionId':''})
+    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'apiNode':'US','idnUrl':url}),'deviceId':'','sessionId':''})
     req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
         'Content-Type': 'application/json',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
