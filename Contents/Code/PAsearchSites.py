@@ -960,11 +960,11 @@ def getSearchFilter(siteID):
 def getSearchSiteName(siteID):
     return searchSites[siteID][1]
 def getSearchSiteIDByFilter(searchFilter):
-    searchSitesEnum = enumerate(searchSites)
+    searchSitesEnum = list(enumerate(searchSites))
 
     # Method #3
     searchResults = []
-    searchFilterF = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "")
+    searchFilterF = searchFilter.lower().replace(" ", "").replace(".com", "").replace("'", "").replace("-", "")
     for searchID, sites in searchSitesEnum:
         try:
             siteNameF = sites[0].lower().replace(" ", "").replace("'", "").replace("-", "")
