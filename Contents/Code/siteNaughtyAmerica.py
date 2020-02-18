@@ -23,7 +23,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneID = None
 
     url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
-    searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + searchTitle)
+    if sceneID and not searchTitle:
+        searchResults = getAlgolia(url, 'nacms_scenes_production', 'filters=id=' + sceneID)
+    else:
+        searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + searchTitle)
+
     for searchResult in searchResults:
         titleNoFormatting = searchResult['title']
         curID = searchResult['id']
