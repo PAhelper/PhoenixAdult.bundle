@@ -99,7 +99,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
-        Log(posterUrl)
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
