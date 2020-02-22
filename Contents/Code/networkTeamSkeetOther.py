@@ -24,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneName = None
         if ('/movies/' in sceneURL):
             sceneName = sceneURL.split('/')[-1]
-        elif sceneID and sceneID in sceneURL and '/girls/' not in sceneURL:
+        elif ((sceneID and sceneID in sceneURL) or (unicode(sceneURL.split('/')[-3]).isdigit())) and '/girls/' not in sceneURL:
             sceneName = sceneURL.split('/')[-2]
 
         if sceneName:
