@@ -702,7 +702,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 626:
                 if searchSiteID == 9999 or searchSiteID == 626:
-                    results = PAsearchSites.siteFamilyStrokes.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Tonights Girlfriend
@@ -786,7 +786,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 686:
                 if searchSiteID == 9999 or searchSiteID == 686:
-                    results = PAsearchSites.sitePervMom.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Hegre
@@ -1229,6 +1229,19 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 843:
                     results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Foster Tapes
+            ###############
+            if siteNum == 844:
+                if searchSiteID == 9999 or searchSiteID == 844:
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## BFFs
+            ###############
+            if siteNum == 845:
+                if searchSiteID == 9999 or searchSiteID == 845:
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -1669,7 +1682,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 626:
-            metadata = PAsearchSites.siteFamilyStrokes.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1765,7 +1778,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 686:
-            metadata = PAsearchSites.sitePervMom.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -2286,6 +2299,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 841:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Foster Tapes                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 844:
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  BFFs                                                    ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 845:
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
             
         ##############################################################
         ## Cleanup Genres and Add

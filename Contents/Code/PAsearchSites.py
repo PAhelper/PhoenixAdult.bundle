@@ -103,7 +103,7 @@ import siteInterracialPass
 import network1service
 import networkTeamSkeetOther
 
-searchSites = [None] * 844
+searchSites = [None] * 846
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -730,7 +730,7 @@ searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.c
 searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/api"]
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
-searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://www.familystrokes.com/scenes/"]
+searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://tms-fuel-1.firebaseio.com/FS-organic-1rstmyhj44"]
 searchSites[627] = ["Tonights Girlfriend","Tonights Girlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
 searchSites[628] = ["KarupsPC","Karups Private Collection","https://www.karups.com","https://www.karups.com/models/search/"]
 searchSites[629] = ["KarupsHA","Karups Hometown Amateurs","https://www.karups.com","https://www.karups.com/models/search/"]
@@ -790,7 +790,7 @@ searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf
 searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 searchSites[685] = ["First Anal Quest","First Anal Quest","http://www.firstanalquest.com","http://www.firstanalquest.com/search/?q="]
-searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://www.pervmom.com/"]
+searchSites[686] = ["PervMom","PervMom","http://www.pervmom.com","https://tms-fuel-1.firebaseio.com/PVM-organic-rg7wwuc7uh"]
 searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","http://www.kink.com/search?channelIds=chantasbitches&q="]
 searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 searchSites[689] = ["Femdom Empire","Femdom Empire","https://femdomempire.com","https://femdomempire.com/tour/search.php?st=advanced&qany="]
@@ -948,6 +948,8 @@ searchSites[840] = ["Interracial Pass","Interracial Pass","hhttps://www.interrac
 searchSites[841] = ["LookAtHerNow","LookAtHerNow","https://www.lookathernow.com","https://site-api.project1service.com"]
 searchSites[842] = ["Mylfwood","Mylfwood","https://www.mylf.com","https://www.mylf.com/movies/"]
 searchSites[843] = ["AllBlackX","AllBlackX","https://www.xempire.com","https://www.xempire.com/en/search/allblackx/"]
+searchSites[844] = ["Foster Tapes","Foster Tapes","https://www.fostertapes.com","https://tms-fuel-1.firebaseio.com/FOS-organic-n5oaginage"]
+searchSites[845] = ["BFFs","BFFs","https://www.bffs.com","https://tms-fuel-1.firebaseio.com/BFFS-organic-7o68xoev0j"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

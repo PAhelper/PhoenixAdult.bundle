@@ -80,8 +80,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     if siteName == 'Sis Loves Me':
         movieGenres.addGenre('Step Sister')
     elif siteName == 'DadCrush' or siteName == 'DaughterSwap':
-        movieGenres.addGenre("Step Dad")
-        movieGenres.addGenre("Step Daughter")
+        movieGenres.addGenre('Step Dad')
+        movieGenres.addGenre('Step Daughter')
+    elif siteName == 'PervMom':
+        movieGenres.addGenre('Step Mom')
+    elif siteName == 'Family Strokes':
+        movieGenres.addGenre('Taboo Family')
+    elif siteName == 'Foster Tapes':
+        movieGenres.addGenre('Taboo Sex')
+    elif siteName == 'BFFs':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Group Sex')
 
     # Actors
     movieActors.clearActors()
