@@ -1,55 +1,67 @@
 import PAsearchSites
 import PAgenres
 import PAextras
+import googlesearch
+
+
+def getDataFromAPI(url):
+    data = urllib.urlopen(url).read()
+
+    return json.loads(data)
+
+
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    sceneID = encodedTitle.split('%20', 1)[0]
-    Log("SceneID: " + sceneID)
-    try:
-        sceneTitle = encodedTitle.split('%20', 1)[1].replace('%20', ' ')
-    except:
-        sceneTitle = ''
-    Log("Scene Title: " + sceneTitle)
-    Log("Try Default URL")
-    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
-    searchResult = HTML.ElementFromURL(url)
-    if len(searchResult.xpath('//div[@class="red_big"]/text()')) == 0:
-        Log("Try Alternate URL")
-        url = PAsearchSites.getSearchBaseURL(siteNum) + "/" + sceneID + '/banner/1'
-        searchResult = HTML.ElementFromURL(url)
-    titleNoFormatting = searchResult.xpath('//div[@class="red_big"]/text()')[0].strip()
-    curID = url.replace('/','_').replace('?','!')
-    if searchDate:
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-    else:
-        releaseDate = ''
-    if sceneTitle:
-        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
-    else:
-        score = 90
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
+
+    sceneID = searchTitle.split(' ', 1)[0]
+    if not unicode(sceneID, 'utf8').isdigit():
+        sceneID = None
+
+    searchResults = []
+    domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
+    for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+        sceneName = None
+        if ('/movies/' in sceneURL):
+            sceneName = sceneURL.split('/')[-1]
+        elif sceneID and sceneID in sceneURL and '/girls/' not in sceneURL:
+            sceneName = sceneURL.split('/')[-2]
+
+        if sceneName:
+            searchResults.append(sceneName)
+
+    for sceneName in searchResults:
+        detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteNum), sceneName))
+
+        if detailsPageElements:
+            curID = detailsPageElements['id']
+            titleNoFormatting = detailsPageElements['title']
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+
+            score = 100 - Util.LevenshteinDistance(sceneName, curID)
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s' % titleNoFormatting, score=score, lang=lang))
+
     return results
 
+
 def update(metadata,siteID,movieGenres,movieActors):
-    art =[]
     Log('******UPDATE CALLED*******')
-    detailsPageElements = HTML.ElementFromURL(str(metadata.id).split("|")[0].replace('_', '/').replace('!','?'))
-    try:
-        Log("urlName: " + detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster").split('/')[5])
-        urlName = detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster").split('/')[5]
-    except:
-        Log("urlName: " + detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5])
-        urlName = detailsPageElements.xpath('//video[@id="preview"]')[0].get("poster").split('/')[5]
+
+    metadata_id = str(metadata.id).split('|')
+    sceneName = metadata_id[0]
+    sceneDate = metadata_id[2]
+
+    detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneName))
 
     # Studio
-    metadata.studio = "TeamSkeet"
+    metadata.studio = 'TeamSkeet'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="red_big"]/text()')[0].strip()
+    metadata.title = detailsPageElements['title']
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('(//div[@class="vid-desc-mobile"]/span)[not(position()=1)][not(position()=last())]')[0].text_content()
+    metadata.summary = detailsPageElements['description']
 
     # Collections / Tagline
     siteName = PAsearchSites.getSearchSiteName(siteID)
@@ -58,122 +70,48 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(siteName)
 
     # Date
-    try:
-        date = str(metadata.id).split("|")[2]
-        if len(date) > 0:
-            date_object = parse(date)
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-            Log("Date from file")
-    except:
-        pass
+    if sceneDate:
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
-    movieGenres.addGenre("Step Sister")
+    movieGenres.addGenre('Step Sister')
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@class="red_big"]/span/text()')[0].split(" and ")
-    if len(actors) > 0:
-        for actor in actors:
-            actorName = actor
-            actorPhotoURL = "http://cdn.teamskeetimages.com/design/tour/slm/tour/pics/"+urlName+"/"+urlName+".jpg"
-            Log("actorPhoto: " + actorPhotoURL)
-            movieActors.addActor(actorName,actorPhotoURL)
+    actors = detailsPageElements['models']
+    for actorLink in actors:
+        actorData = getDataFromAPI('%s/modelsContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), actorLink['modelId']))
+        actorName = actorData['name']
+        actorPhotoURL = actorData['img']
 
-    #Posters
-    import random
-    match = 0
-    for site in ["TeamSkeetFans.com", "CoedCherry.com/pics"]:
-        try:
-            match = fanSite[2]
-        except:
-            pass
-        if match is 1:	
-            break
-        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match, siteName)
-        
-    try:
-        match = fanSite[2]
-    except:
-        pass
-    summary = fanSite[1]
+        movieActors.addActor(actorName, actorPhotoURL)
 
-    if len(metadata.summary) < len(summary):
-        metadata.summary = summary.strip()   
-                    
-    if match is 1 and len(art) >= 10 or match is 2 and len(art) >= 10:
-        # Return, first, last and randóm selection of 4 more images
-        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.	
-        sample = [art[0], art[-1]] + random.sample(art, 6)     
-        art = sample
-        Log("Selecting first, last and random 6 images from set")
-        
-        j = 1
-                                              
-        for posterUrl in art:
-            Log("Trying next Image")
-            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
-                try:
-                    hdr = {
-                            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
-                    }
-                    req = urllib.Request(posterUrl, headers=hdr)
-                    img_file = urllib.urlopen(req)
-                    im = StringIO(img_file.read())
-                    resized_image = Image.open(im)
-                    width, height = resized_image.size
-                    #Add the image proxy items to the collection
-                    if width > 1 or height > width:
-                        # Item is a poster
-                        metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
-                    if width > 100 and width > height:
-                        # Item is an art item
-                        metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
-                    j = j + 1
-                except:
-                    Log("there was an issue")
-    else:
-        art = []
-        
-        try:
-            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/" +urlName+"/"+urlName+".jpg")
-        except:
-            pass
-        try:
-            art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/hi.jpg")
-        except:
+    # Posters
+    art = [
+        detailsPageElements['img']
+    ]
+
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
-                art.append(detailsPageElements.xpath('//video[@id="main-movie-player"]')[0].get("poster"))
+                headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
+                req = urllib.Request(posterUrl, headers=headers)
+                img_file = urllib.urlopen(req)
+                im = StringIO(img_file.read())
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                if width > 100 and width > height:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
             except:
-                try:
-                    art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_big.jpg")
-                except:
-                    try:
-                        art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/med.jpg")
-                    except:
-                        try:
-                            art.append("https://images.psmcdn.net/teamskeet/slm/"+urlName+"/shared/low.jpg")
-                        except:
-                            try:  
-                                art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/v2.jpg")
-                            except:
-                                pass
-        try:
-            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_small.jpg")
-        except:
-            pass
-        try:
-            art.append("https://images.psmcdn.net/design/tour/slm/tour/pics/"+urlName+"/bio_small2.jpg")
-        except:
-            pass
-        
-        posterNum = 1
-        for posterURL in art:
-            if not PAsearchSites.posterAlreadyExists(posterURL,metadata):
-                metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-                metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL).content, sort_order = posterNum)
-                posterNum += 1
+                pass
 
     return metadata
