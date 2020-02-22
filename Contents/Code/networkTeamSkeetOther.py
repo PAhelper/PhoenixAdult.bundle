@@ -18,7 +18,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if not unicode(sceneID, 'utf8').isdigit():
         sceneID = None
 
-    searchResults = []
+    directURL = searchTitle.replace(' ', '-').lower()
+
+    searchResults = [directURL]
     domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
     for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
         sceneName = None
@@ -27,7 +29,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         elif ((sceneID and sceneID in sceneURL) or (unicode(sceneURL.split('/')[-3]).isdigit())) and '/girls/' not in sceneURL:
             sceneName = sceneURL.split('/')[-2]
 
-        if sceneName:
+        if sceneName and sceneName not in searchResults:
             searchResults.append(sceneName)
 
     for sceneName in searchResults:
