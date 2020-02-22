@@ -646,7 +646,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 567:
                 if searchSiteID == 9999 or searchSiteID == 567:
-                    results = PAsearchSites.siteSisLovesMe.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Manyvids
@@ -926,7 +926,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 748:
                 if searchSiteID == 9999 or searchSiteID == 748:
-                    results = PAsearchSites.siteDadCrush.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## StepSecrets
@@ -1115,7 +1115,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 807:
                 if searchSiteID == 9999 or searchSiteID == 807:
-                    results = PAsearchSites.siteDaughterSwap.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
  
             ###############
             ## Erito
@@ -1613,7 +1613,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 567:
-            metadata = PAsearchSites.siteSisLovesMe.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1925,7 +1925,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 748:
-            metadata = PAsearchSites.siteDadCrush.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -2157,7 +2157,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 807:
-            metadata = PAsearchSites.siteDaughterSwap.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##

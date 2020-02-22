@@ -36,11 +36,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if detailsPageElements:
             curID = detailsPageElements['id']
             titleNoFormatting = detailsPageElements['title']
+            siteName = PAsearchSites.getSearchSiteName(siteNum)
             releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-            score = 100 - Util.LevenshteinDistance(sceneName, curID)
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s' % titleNoFormatting, score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     return results
 
@@ -76,7 +77,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    movieGenres.addGenre('Step Sister')
+    if siteName == 'Sis Loves Me':
+        movieGenres.addGenre('Step Sister')
+    elif siteName == 'DadCrush' or siteName == 'DaughterSwap':
+        movieGenres.addGenre("Step Dad")
+        movieGenres.addGenre("Step Daughter")
 
     # Actors
     movieActors.clearActors()

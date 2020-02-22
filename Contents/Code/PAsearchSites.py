@@ -30,7 +30,6 @@ import networkNubiles
 import networkBellaPass
 import siteAllureMedia
 import siteBlackValleyGirls
-import siteSisLovesMe
 import siteManyvids
 import siteVirtualReal
 import siteVirtualTaboo
@@ -65,7 +64,6 @@ import siteVIPissy
 import siteGirlsOutWest
 import siteGirlsRimming
 import siteGangbangCreampie
-import siteDadCrush
 import siteStepSecrets
 import siteVRHush
 import networkMetArt
@@ -89,7 +87,6 @@ import siteElegantAngel
 import siteReidMyLips
 import sitePlayboyPlus
 import siteMeanaWolf
-import siteDaughterSwap
 import siteHustler
 import siteAmourAngels
 import networkR18
@@ -104,6 +101,7 @@ import siteATKGirlfriends
 import networkTwoWebMedia
 import siteInterracialPass
 import network1service
+import networkTeamSkeetOther
 
 searchSites = [None] * 844
 
@@ -854,7 +852,7 @@ searchSites[744] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.v
 searchSites[745] = ["GirlsOutWest","GirlsOutWest","https://tour.girlsoutwest.com","https://tour.girlsoutwest.com/trailers/"]
 searchSites[746] = ["Girls Rimming","Girls Rimming","https://www.girlsrimming.com","https://www.girlsrimming.com/tour/trailers/"]
 searchSites[747] = ["Gangbang Creampie","Gangbang Creampie","https://gangbangcreampie.com","https://gangbangcreampie.com/tour/search.php?query="]
-searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://www.dadcrush.com/movies/"]
+searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://tms-fuel-1.firebaseio.com/DC-organic-w8xs8e0dv3"]
 searchSites[749] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com","https://tour.naughtyamerica.com/search?term="]
 searchSites[750] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
 searchSites[751] = ["Step Secrets","Step Secrets","http://www.stepsecrets.com","https://stepsecrets.com/?query="]
@@ -913,7 +911,7 @@ searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","http
 searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search"]
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
 searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://site-api.project1service.com"]
-searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://www.daughterswap.com/movies/"]
+searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://tms-fuel-1.firebaseio.com/DSW-organic-dfangeym88"]
 searchSites[808] = ["Erito","Erito","https://www.erito.com","https://site-api.project1service.com"]
 searchSites[809] = ["True Amateurs","True Amateurs","https://www.trueamateurs.com","https://site-api.project1service.com"]
 searchSites[810] = ["Hustler","Hustler","https://hustler.com","https://hustler.com/search.php?query="]
