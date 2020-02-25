@@ -14,10 +14,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    sceneID = searchTitle.split(' ', 1)[0]
-    if not unicode(sceneID, 'utf8').isdigit():
-        sceneID = None
-
     directURL = searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]
@@ -26,7 +22,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneName = None
         if ('/movies/' in sceneURL):
             sceneName = sceneURL.split('/')[-1]
-        elif ((sceneID and sceneID in sceneURL) or (unicode(sceneURL.split('/')[-3]).isdigit())) and '/girls/' not in sceneURL:
+        elif unicode(sceneURL.split('/')[-3]).isdigit():
             sceneName = sceneURL.split('/')[-2]
 
         if sceneName and sceneName not in searchResults:
@@ -110,11 +106,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     ]
 
     Log('Artwork found: %d' % len(art))
+    headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
                 req = urllib.Request(posterUrl, headers=headers)
                 img_file = urllib.urlopen(req)
                 im = StringIO(img_file.read())
