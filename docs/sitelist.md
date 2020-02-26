@@ -275,9 +275,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RoccoSiffredi
   - TeraPatrick
 + #### FamilyHookups | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### FamilyStrokes
-  ##### Matching type (main): *[Exact](./manualsearch.md#exact-match)*  - **Direct URL**
-  ##### Matching type (alternate): *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### FantasyMassage  | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllGirlMassage
   - FantasyMassage
@@ -546,7 +543,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PurePOV
   - SpermSwap
   - TamedTeens
-+ #### PervMom | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, SceneID**
 + #### PJGirls | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Playboy Plus | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Porndoe Premium Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -721,7 +717,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Massage Rooms
   - MomXXX
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### SisLovesMe | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - FirstClassPOV
   - IntimateLesbians
@@ -769,9 +764,14 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - The Real Workout
   - This Girl Sucks
   - Titty Attack
-+ #### Other TeamSkeet Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### Other TeamSkeet Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - DadCrush
   - DaughterSwap
+  - SisLovesMe
+  - BFFs
+  - FosterTapes
+  - FamilyStrokes
+  - PervMom
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs
