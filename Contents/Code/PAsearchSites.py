@@ -1297,7 +1297,7 @@ def getSearchSettings(mediaTitle):
         date = re.search(r, searchTitle)
         if date:
             searchDate = datetime.strptime(date.group(), dateFormat).strftime('%Y-%m-%d')
-            searchTitle = re.sub(r, '', searchTitle, 1)
+            searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
             break
 
     searchType = 1 if searchDate else 0
