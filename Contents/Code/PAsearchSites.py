@@ -1290,8 +1290,8 @@ def getSearchSettings(mediaTitle):
     # Search Type
     searchTitle = searchTitle.replace('#', '')
     regex = [
-        (r'\d{4} \d{2} \d{2}', '%Y %m %d'),
-        (r'\d{2} \d{2} \d{2}', '%y %m %d')
+        (r'\b\d{4} \d{2} \d{2}\b', '%Y %m %d'),
+        (r'\b\d{2} \d{2} \d{2}\b', '%y %m %d')
     ]
     date_obj = None
     for r, dateFormat in regex:
