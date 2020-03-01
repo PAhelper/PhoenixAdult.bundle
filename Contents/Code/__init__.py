@@ -38,7 +38,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
     def search(self, results, media, lang):
         filepath = urllib.unquote(media.filename)
-        title = str(os.path.splitext(os.path.basename(filepath))[0])
+        title = str(os.path.splitext(os.path.basename(filepath))[0]).title()
         siteName = str(os.path.split(os.path.dirname(filepath))[1])
 
         title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180 180x180','').replace('180x180','').replace('Hevc','').replace('H265','').replace('Avc','').replace('5k','').replace(' 4k','').replace('.4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2300p','').replace('2160p','').replace('1900p','').replace('1600p','').replace('1080p','').replace('720p','').replace('480p','').replace('540p','').replace('3840x1920','').replace('5400x2700','').replace(' XXX',' ').replace('Ktr ','').replace('MP4-KTR','').replace('Oro ','').replace('Sexors','').replace('3dh','').replace('Oculus','').replace('Oculus5k','').replace('Lr','').replace('-180_','').replace('TOWN.AG_','').strip()
