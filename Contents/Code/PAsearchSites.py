@@ -1293,12 +1293,19 @@ def getSearchSettings(mediaTitle):
         (r'\d{4} \d{2} \d{2}', '%Y %m %d'),
         (r'\d{2} \d{2} \d{2}', '%y %m %d')
     ]
+    date_obj = None
     for r, dateFormat in regex:
         date = re.search(r, searchTitle)
         if date:
-            searchDate = datetime.strptime(date.group(), dateFormat).strftime('%Y-%m-%d')
-            searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
-            break
+            try:
+                date_obj = datetime.strptime(date.group(), dateFormat)
+            except:
+                pass
+
+            if date_obj:
+                searchDate = date_obj.strftime('%Y-%m-%d')
+                searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
+                break
 
     searchType = 1 if searchDate else 0
 
