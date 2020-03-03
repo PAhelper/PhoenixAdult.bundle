@@ -33,7 +33,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteNum))
     url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-    data = getAlgolia(url, 'all_scenes', 'query=' + searchTitle, PAsearchSites.getSearchBaseURL(siteNum))
+    params = 'filters=clip_id=' + sceneID if sceneID and not searchTitle else 'query=' + searchTitle
+    data = getAlgolia(url, 'all_scenes', params, PAsearchSites.getSearchBaseURL(siteNum))
 
     searchResults = data['results'][0]['hits']
     for searchResult in searchResults:
