@@ -29,7 +29,6 @@ import networkKink
 import networkNubiles
 import networkBellaPass
 import siteAllureMedia
-import siteBlackValleyGirls
 import siteManyvids
 import siteVirtualReal
 import siteVirtualTaboo
@@ -101,7 +100,7 @@ import siteInterracialPass
 import network1service
 import networkTeamSkeetOther
 
-searchSites = [None] * 846
+searchSites = [None] * 851
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -290,7 +289,7 @@ searchSites[184] = ["PornFidelity","PornFidelity","https://www.pornfidelity.com"
 searchSites[185] = ["TeenFidelity","TeenFidelity","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=3&page=1&search="]
 searchSites[186] = ["Kelly Madison","Kelly Madison","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=1&page=1&search="]
 searchSites[187] = ["TeamSkeet", "TeamSkeet", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
-searchSites[188] = ["Exxxtra small","Exxxtra small", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[188] = ["Exxxtra small","Exxxtra small", "https://www.exxxtrasmall.com","https://tms-fuel-1.firebaseio.com/EXS-organic-ooJ4duo8"]
 searchSites[189] = ["Teen Pies","Teen Pies", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[190] = ["Innocent High","Innocent High", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[191] = ["Teen Curves","Teen Curves", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
@@ -312,11 +311,11 @@ searchSites[206] = ["Her Freshman Year","Her Freshman Year", "https://www.teamsk
 searchSites[207] = ["Self Desire","Self Desire", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[208] = ["Solo Interviews","Solo Interviews", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[209] = ["Team Skeet Extras","Team Skeet Extras", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
-searchSites[210] = ["Dyked","Dyked", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[210] = ["Dyked","Dyked", "https://www.dyked.com","https://tms-fuel-1.firebaseio.com/DYK-organic-kiedei7O"]
 searchSites[211] = ["Badmilfs","Badmilfs", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[212] = ["Gingerpatch","Gingerpatch", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[213] = ["BraceFaced","BraceFaced", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
-searchSites[214] = ["TeenJoi","TeenJoi", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
+searchSites[214] = ["TeenJoi","TeenJoi", "https://www.teenjoi.com","https://tms-fuel-1.firebaseio.com/JOI-organic-q8uvjxl29p"]
 searchSites[215] = ["StepSiblings","StepSiblings", "https://www.teamskeet.com","https://www.teamskeet.com/t1/search/results/?query="]
 searchSites[216] = ["Lets Doe It","Let's Doe It", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[217] = ["The White Boxxx","The White Boxxx", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
@@ -668,7 +667,7 @@ searchSites[562] = ["HD 19", "HD 19", "https://www.hd19.com","https://hd19.com/s
 searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://bellahd.com/search.php?query="]
 searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallure.com","https://www.amateurallure.com/tour/search.php?st=advanced&cat%5B%5D=5&qany="]
 searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qany="]
-searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://www.blackvalleygirls.com/scenes"]
+searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://tms-fuel-1.firebaseio.com/BCG-organic-dhed18vuav"]
 searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://tms-fuel-1.firebaseio.com/SLM-organic-b75inmn9fu"]
 searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/"]
 searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"]
@@ -948,6 +947,11 @@ searchSites[842] = ["Mylfwood","Mylfwood","https://www.mylf.com","https://www.my
 searchSites[843] = ["AllBlackX","AllBlackX","https://www.xempire.com","https://www.xempire.com/en/search/allblackx/"]
 searchSites[844] = ["Foster Tapes","Foster Tapes","https://www.fostertapes.com","https://tms-fuel-1.firebaseio.com/FOS-organic-n5oaginage"]
 searchSites[845] = ["BFFs","BFFs","https://www.bffs.com","https://tms-fuel-1.firebaseio.com/BFFS-organic-7o68xoev0j"]
+searchSites[846] = ["Shoplyfter","Shoplyfter","https://www.shoplyfter.com","https://tms-fuel-1.firebaseio.com/SHL-organic-driobt7t0f"]
+searchSites[847] = ["ShoplyfterMylf","ShoplyfterMylf","https://www.shoplyftermylf.com","https://tms-fuel-1.firebaseio.com/MSL-organic-ws9h564all"]
+searchSites[848] = ["Little Asians","Little Asians","https://www.littleasians.com","https://tms-fuel-1.firebaseio.com/LAS-organic-whlghevsfs"]
+searchSites[849] = ["Thickumz","Thickumz","https://www.thickumz.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
+searchSites[850] = ["Teens Love Black Cocks","Teens Love Black Cocks","https://www.teensloveblackcocks.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

@@ -739,8 +739,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Badmilfs
   - BraceFaced
   - CFNM Teens
-  - Dyked
-  - Exxxtra Small
   - Gingerpatch
   - Her Freshman Year
   - Innocent High
@@ -755,7 +753,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - StepSiblings
   - Team Skeet Extras
   - Teen Curves
-  - TeenJoi
   - Teen Pies
   - Teens Do Porn
   - Teens Love Anal
@@ -765,13 +762,22 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - This Girl Sucks
   - Titty Attack
 + #### Other TeamSkeet Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - BFFs
+  - Black Valley Girls
   - DadCrush
   - DaughterSwap
-  - SisLovesMe
-  - BFFs
-  - FosterTapes
+  - Dyked
+  - ExxxtraSmall
   - FamilyStrokes
+  - FosterTapes
+  - Little Asians
   - PervMom
+  - Shoplyfter
+  - ShoplyfterMylf
+  - Sis Loves Me
+  - Teen JOI
+  - Teens Love Black Cocks
+  - Thickumz
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs

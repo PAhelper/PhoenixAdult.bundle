@@ -89,6 +89,32 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName == 'BFFs':
         movieGenres.addGenre('Teen')
         movieGenres.addGenre('Group Sex')
+    elif siteName == 'Shoplyfter':
+        movieGenres.addGenre('Strip')
+    elif siteName == 'ShoplyfterMylf':
+        movieGenres.addGenre('Strip')
+        movieGenres.addGenre('MILF')
+    elif siteName == 'Exxxtra small':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Small Tits')
+    elif siteName == 'Little Asians':
+        movieGenres.addGenre('Asian')
+        movieGenres.addGenre('Teen')
+    elif siteName == 'TeenJoi':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('JOI')
+    elif siteName == 'Black Valley Girls':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Ebony')
+    elif siteName == 'Thickumz':
+        movieGenres.addGenre('Thick')
+    elif siteName == 'Dyked':
+        movieGenres.addGenre('Hardcore')
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Lesbian')
+    elif siteName == 'Teens Love Black Cocks':
+        movieGenres.addGenre('Teens')
+        movieGenres.addGenre('BBC')
 
     # Actors
     movieActors.clearActors()
