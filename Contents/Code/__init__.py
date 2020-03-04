@@ -114,7 +114,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 53:
                 if searchSiteID == 9999 or searchSiteID == 53 or (375 <= searchSiteID <= 379) or (795 <= searchSiteID <= 797):
-                    results = PAsearchSites.siteGirlsWay.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## 21Naturals
@@ -226,7 +226,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             if siteNum == 380:
                 if searchSiteID == 9999 or searchSiteID == 380:
-                    results = PAsearchSites.siteGirlfriendsFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                    results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Burning Angel
@@ -2069,7 +2069,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 53 or (siteID >=  375 and siteID <= 379) or (siteID >=  795 and siteID <= 797):
-            metadata = PAsearchSites.siteGirlsWay.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -2229,7 +2229,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         if siteID == 380:
-            metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
          
         ##############################################################
         ##                                                          ##
