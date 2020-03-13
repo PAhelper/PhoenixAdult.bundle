@@ -5,9 +5,15 @@ import googlesearch
 
 
 def getDataFromAPI(url):
-    data = urllib.urlopen(url).read()
+    data = None
+    try:
+        data = urllib.urlopen(url).read()
+    except:
+        pass
 
-    return json.loads(data)
+    if data:
+        return json.loads(data)
+    return data
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
@@ -23,7 +29,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if ('/movies/' in sceneURL):
             sceneName = sceneURL.split('/')[-1]
         elif unicode(sceneURL.split('/')[-3]).isdigit():
-            sceneName = sceneURL.split('/')[-2]
+            sceneName = sceneURL.split('/')[-1]
 
         if sceneName and sceneName not in searchResults:
             searchResults.append(sceneName)
