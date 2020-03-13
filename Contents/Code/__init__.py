@@ -379,7 +379,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeamSkeet Other
             ###############
             if siteNum == 188:
-                if searchSiteID == 9999 or searchSiteID == 188 or searchSiteID == 210 or searchSiteID == 214 or searchSiteID == 566 or searchSiteID == 567 or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 784 or searchSiteID == 807 or (844 <= searchSiteID <= 850):
+                if searchSiteID == 9999 or searchSiteID == 188 or searchSiteID == 210 or searchSiteID == 214 or searchSiteID == 566 or searchSiteID == 567 or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 784 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
                     results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -469,8 +469,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## PornPros Network
             ###############
-            if (306 <= siteNum <= 308) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769:
-                if searchSiteID == 9999 or (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769:
+            if (306 <= siteNum <= 308) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844:
+                if searchSiteID == 9999 or (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769 or searchSiteID == 844:
                     results = PAsearchSites.networkPornPros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1320,7 +1320,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  TeamSkeet Other                                         ##
         ##                                                          ##
         ##############################################################
-        if siteID == 188 or siteID == 210 or siteID == 214 or siteID == 566 or siteID == 567 or siteID == 626 or siteID == 686 or siteID == 784 or siteID == 807 or (844 <= siteID <= 850):
+        if siteID == 188 or siteID == 210 or siteID == 214 or siteID == 566 or siteID == 567 or siteID == 626 or siteID == 686 or siteID == 784 or siteID == 807 or (845 <= siteID <= 851):
             metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1408,7 +1408,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   PornPros Network                                       ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or (siteID == 624) or (siteID == 769):
+        if (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or (siteID == 624) or (siteID == 769) or (siteID == 844):
             metadata = PAsearchSites.networkPornPros.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################

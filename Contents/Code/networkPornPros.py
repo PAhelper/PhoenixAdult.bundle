@@ -109,6 +109,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "PassionHD".lower():
         for genreName in ['Hardcore']:
             movieGenres.addGenre(genreName)
+    elif siteName.lower() == "BBCPie".lower():
+        for genreName in ['Interracial', 'BBC', 'Creampie']:
+            movieGenres.addGenre(genreName)
     # Based on number of actors
     if len(actors) == 3:
         movieGenres.addGenre('Threesome')

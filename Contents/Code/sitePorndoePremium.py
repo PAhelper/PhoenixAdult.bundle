@@ -53,6 +53,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Release Date
     date = detailsPageElements.xpath('//div[@class="h5 h5-published nowrap color-rgba255-06"]')[0].text_content().strip()
     if len(date) > 0:
+        date = date.split('•')[-1].strip()
         date_object = datetime.strptime(date, '%d %B %Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
