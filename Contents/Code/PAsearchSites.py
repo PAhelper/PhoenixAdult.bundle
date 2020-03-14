@@ -1290,31 +1290,27 @@ def getSearchSettings(mediaTitle):
 
     Log("searchTitle (before date processing): " + searchTitle)
 
-    #Search Type
-    searchTitle = searchTitle.replace("#",'')
-    if unicode(searchTitle[:4], 'utf-8').isnumeric():
-        if unicode(searchTitle[5:7], 'utf-8').isnumeric():
-            if unicode(searchTitle[8:10], 'utf-8').isnumeric():
-                searchType = 1
-                searchDate = searchTitle[0:10].replace(" ","-")
-                searchTitle = searchTitle[11:]
-            else:
-                searchType = 0
-        else:
-            searchType = 0
-    else:
-        if unicode(searchTitle[:2], 'utf-8').isnumeric():
-            if unicode(searchTitle[3:5], 'utf-8').isnumeric():
-                if unicode(searchTitle[6:8], 'utf-8').isnumeric():
-                    searchType = 1
-                    searchDate = "20" + searchTitle[0:8].replace(" ","-")
-                    searchTitle = searchTitle[9:]
-                else:
-                    searchType = 0
-            else:
-                searchType = 0
-        else:
-            searchType = 0
+    # Search Type
+    searchTitle = searchTitle.replace('#', '')
+    regex = [
+        (r'\b\d{4} \d{2} \d{2}\b', '%Y %m %d'),
+        (r'\b\d{2} \d{2} \d{2}\b', '%y %m %d')
+    ]
+    date_obj = None
+    for r, dateFormat in regex:
+        date = re.search(r, searchTitle)
+        if date:
+            try:
+                date_obj = datetime.strptime(date.group(), dateFormat)
+            except:
+                pass
+
+            if date_obj:
+                searchDate = date_obj.strftime('%Y-%m-%d')
+                searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
+                break
+
+    searchType = 1 if searchDate else 0
 
     return [searchSiteID,searchType,searchTitle,searchDate]
 
