@@ -490,7 +490,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## FullPornNetwork
             ###############
-            if (343 <= siteNum <= 350):
+            if siteNum == 343:
                 if searchSiteID == 9999 or (343 <= searchSiteID <= 350):
                     results = PAsearchSites.networkFPN.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
