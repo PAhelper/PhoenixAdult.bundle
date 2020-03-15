@@ -379,7 +379,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeamSkeet Other
             ###############
             if siteNum == 188:
-                if searchSiteID == 9999 or searchSiteID == 188 or searchSiteID == 210 or searchSiteID == 214 or searchSiteID == 566 or searchSiteID == 567 or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 784 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
+                if searchSiteID == 9999 or searchSiteID == 188 or searchSiteID == 210 or searchSiteID == 214 or searchSiteID == 566 or searchSiteID == 567 or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
                     results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1320,7 +1320,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  TeamSkeet Other                                         ##
         ##                                                          ##
         ##############################################################
-        if siteID == 188 or siteID == 210 or siteID == 214 or siteID == 566 or siteID == 567 or siteID == 626 or siteID == 686 or siteID == 784 or siteID == 807 or (845 <= siteID <= 851):
+        if siteID == 188 or siteID == 210 or siteID == 214 or siteID == 566 or siteID == 567 or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851):
             metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
