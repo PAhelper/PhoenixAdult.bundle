@@ -25,6 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = [directURL]
     domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
     for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+        sceneURL = sceneURL.split('?', 1)[0]
         sceneName = None
         if ('/movies/' in sceneURL):
             sceneName = sceneURL.split('/')[-1]
