@@ -40,12 +40,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if detailsPageElements:
             curID = detailsPageElements['id']
             titleNoFormatting = detailsPageElements['title']
-            siteName = PAsearchSites.getSearchSiteName(siteNum)
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+            siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
+            if 'publishedDate' in detailsPageElements:
+                releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
+            else: 
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if searchDate and 'publishedDate' in detailsPageElements:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, siteName, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -69,7 +75,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements['description']
 
     # Collections / Tagline
-    siteName = PAsearchSites.getSearchSiteName(siteID)
+    siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
@@ -100,7 +106,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName == 'ShoplyfterMylf':
         movieGenres.addGenre('Strip')
         movieGenres.addGenre('MILF')
-    elif siteName == 'Exxxtra small':
+    elif siteName == 'Exxxtra Small':
         movieGenres.addGenre('Teen')
         movieGenres.addGenre('Small Tits')
     elif siteName == 'Little Asians':
