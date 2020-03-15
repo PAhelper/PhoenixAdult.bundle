@@ -75,7 +75,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements['description']
 
     # Collections / Tagline
-    siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
+    siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
