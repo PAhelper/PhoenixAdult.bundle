@@ -56,7 +56,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
             description = searchResult['description']
             if description.startswith('Previously released on'):
-                date = description.split('.', 1)[0].replace('Previously released on', '', 1).replace('th', '', 1).replace('st', '', 1).strip()
+                date = description.split('.', 1)[0].replace('Previously released on', '', 1).strip()
                 releaseDate = parse(date)
 
             if searchDate:
