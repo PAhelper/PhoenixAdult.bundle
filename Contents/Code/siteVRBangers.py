@@ -28,7 +28,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = "VR Bangers"
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
     try:
