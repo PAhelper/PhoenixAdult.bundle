@@ -87,9 +87,12 @@ def update(metadata,siteID,movieGenres,movieActors):
     for actorLink in detailsPageElements['performers']:
         if actorLink and 'name' in actorLink:
             actorName = actorLink['name']
+            actorPhotoURL = ''
 
             actorsPageElements = HTML.ElementFromURL('https://www.naughtyamerica.com/pornstar/' + actorLink['slug'])
-            actorPhotoURL = 'https:' + actorsPageElements.xpath('//img[@class="performer-pic"]/@src')[0]
+            img = actorsPageElements.xpath('//img[@class="performer-pic"]/@src')
+            if img:
+                actorPhotoURL = 'https:' + img[0]
 
             movieActors.addActor(actorName, actorPhotoURL)
 
