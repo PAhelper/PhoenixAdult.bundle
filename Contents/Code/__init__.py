@@ -204,7 +204,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mile High Media
             ###############
             if siteNum == 361:
-                if searchSiteID == 9999 or (361 <= searchSiteID <= 364):
+                if searchSiteID == 9999 or (361 <= searchSiteID <= 364) or searchSiteID == 852:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1440,7 +1440,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  MileHighMedia                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 361 and siteID <= 364:
+        if siteID == 852 or (siteID >= 361 and siteID <= 364):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
