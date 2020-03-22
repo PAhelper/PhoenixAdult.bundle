@@ -1,4 +1,6 @@
 # Changelog
+- 2020-03-22
+    - Added new Mile High site: Bi Empire
 - 2020-02-09
     - Added new XEmpire site: AllBlackX
 - 2019-12-04
