@@ -8,12 +8,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    searchResultsURLs = []
-    shootID = None
-    for search in searchTitle.split(' '):
-        if unicode(search, 'utf8').isdigit():
-            shootID = search
-            break
+    directURL = searchTitle
+    if '/' not in searchTitle:
+        directURL = searchTitle.replace(' ', '/', 1)
+    directURL = '%s/movies/%s' % (PAsearchSites.getSearchBaseURL(siteNum), directURL.replace(' ', '-').lower())
+
+    searchResultsURLs = [directURL]
+    shootID = directURL.rsplit('/', 2)[1]
+    if not unicode(shootID, 'utf8').isdigit():
+        shootID = None
 
     if shootID:
         sitemapURL = PAsearchSites.getSearchBaseURL(siteNum) + '/sitemap.xml'
@@ -25,31 +28,44 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 searchResultsURLs.append(sceneURL)
                 break
 
+    googleResults = []
     if not searchResultsURLs:
         domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
 
-        for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+        try:
+            googleResults = list(googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10))
+        except:
+            Log('Google Search Error')
+            pass
+
+        for sceneURL in googleResults:
             sceneURL = sceneURL.rsplit('?', 1)[0]
-            if ('/movies/' in sceneURL):
-                searchResultsURLs.append(sceneURL)
+            if sceneURL not in searchResultsURLs:
+                if ('/movies/' in sceneURL):
+                    searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
-        detailsPageElements = HTML.ElementFromURL(sceneURL)
+        detailsPageElements = None
+        try:
+            detailsPageElements = HTML.ElementFromURL(sceneURL)
+        except:
+            pass
 
-        titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
-        sceneID = sceneURL.rsplit('/', 2)[1]
-        curID = sceneURL.replace('/', '_').replace('?', '!')
-        if "mylfdom" in curID:
-            subSite = "MylfDom"
-        else:
-            subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
-        if shootID:
-            score = 100 - Util.LevenshteinDistance(shootID, sceneID)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if detailsPageElements:
+            titleNoFormatting = detailsPageElements.xpath('//span[contains(@class, "m_scenetitle")]')[0].text_content().strip()
+            sceneID = sceneURL.rsplit('/', 2)[1]
+            curID = sceneURL.replace('/', '_').replace('?', '!')
+            if "mylfdom" in curID:
+                subSite = "MylfDom"
+            else:
+                subSite = detailsPageElements.xpath('//img[@class="lazy img-fluid"]/@data-original')[0].split('/')[-1].replace('_logo.png', '').title()
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+            if shootID:
+                score = 100 - Util.LevenshteinDistance(shootID, sceneID)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Mylf/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
     return results
 
