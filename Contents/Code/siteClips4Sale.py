@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     encodedSceneTitle = encodedTitle.split('%20', 1)[1]
     sceneTitle = encodedSceneTitle.replace('%20', ' ')
     Log("Scene Title: " + sceneTitle)
-    url = PAsearchSites.getSearchSearchURL(siteNum) + userID + "/1/Cat0-AllCategories/Page1/SortBy-bestmatch/Limit50/search/" + encodedSceneTitle
+    url = PAsearchSites.getSearchSearchURL(siteNum) + userID + "/*/Cat0-AllCategories/Page1/SortBy-bestmatch/Limit50/search/" + encodedSceneTitle
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[@class="clipWrapper"]'):
         titleNoFormatting = searchResult.xpath('.//a[@class="clipTitleLink"]')[0].text_content().replace('(HD MP4)','').replace('(WMV)','').strip()
