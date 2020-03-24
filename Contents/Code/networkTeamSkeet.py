@@ -36,7 +36,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             searchResults.append(sceneName)
 
     for sceneName in searchResults:
-        detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteNum), sceneName))
+        for sceneType in ['moviesContent', 'videosContent']:
+            detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (PAsearchSites.getSearchSearchURL(siteNum), sceneType, sceneName))
+            if detailsPageElements:
+                break
 
         if detailsPageElements:
             curID = detailsPageElements['id']
@@ -52,7 +55,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, siteName, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteName, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -63,8 +66,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0]
     sceneDate = metadata_id[2]
+    sceneType = metadata_id[3]
 
-    detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneName))
+    detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneType, sceneName))
 
     # Studio
     metadata.studio = 'TeamSkeet'
