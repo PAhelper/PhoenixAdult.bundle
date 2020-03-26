@@ -11,9 +11,9 @@ def getJSONfromPage(url):
     data = urllib.urlopen(req).read()
 
     if data:
-        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data).group(1)
+        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data)
         if jsonData:
-            return json.loads(jsonData)['content']
+            return json.loads(jsonData.group(1))['content']
     return None
 
 
