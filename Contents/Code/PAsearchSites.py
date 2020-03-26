@@ -100,7 +100,7 @@ import siteInterracialPass
 import network1service
 import networkTeamSkeetOther
 
-searchSites = [None] * 852
+searchSites = [None] * 857
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -953,6 +953,11 @@ searchSites[848] = ["ShoplyfterMylf","ShoplyfterMylf","https://www.shoplyftermyl
 searchSites[849] = ["Little Asians","Little Asians","https://www.littleasians.com","https://tms-fuel-1.firebaseio.com/LAS-organic-whlghevsfs"]
 searchSites[850] = ["Thickumz","Thickumz","https://www.thickumz.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
 searchSites[851] = ["Teens Love Black Cocks","Teens Love Black Cocks","https://www.teensloveblackcocks.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
+searchSites[852] = ["Mylf x Joybear","Mylf x Joybear","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[853] = ["Mylf x Teamskeet","Mylf x Teamskeet","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[854] = ["Mylf x Hussie Pass","Mylf x Hussie Pass","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[855] = ["Mylf Of The Month","Mylf Of The Month","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[856] = ["Mylfselects","Mylfselects","https://mylf.com","https://www.mylf.com/movies/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

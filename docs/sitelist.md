@@ -427,18 +427,24 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - She's A Freak
   - Stranded Teens
 + #### MomPOV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only**
-+ #### Mylf Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
-  - Mylf
-  - MylfBoss
-  - MylfBlows
-  - MylfDom
-  - Milfty
-  - Got Mylf
-  - Mom Drips
-  - Mylfed
-  - Milf Body
-  - Lone Milf
++ #### Mylf Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Full Of JOI
+  - Got Mylf
+  - Lone Milf
+  - Milf Body
+  - Milfty
+  - Mom Drips
+  - Mylf
+  - Mylf Of The Month
+  - Mylf x Hussie Pass
+  - Mylf x Joybear
+  - Mylf x Teamskeet
+  - MylfBlows
+  - MylfBoss
+  - MylfDom
+  - Mylfed
+  - Mylfselects
+  - Mylfwood
 + #### Naughty America Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 2 Chicks Same Time
   - American Daydreams

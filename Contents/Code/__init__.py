@@ -750,7 +750,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mylf
             ###############
             if siteNum == 674:
-                if searchSiteID == 9999 or (674 <= searchSiteID <= 683) or searchSiteID == 757 or searchSiteID == 842:
+                if searchSiteID == 9999 or (674 <= searchSiteID <= 683) or searchSiteID == 757 or searchSiteID == 842 or (searchSiteID >= 852 and searchSiteID <= 856):
                     results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1688,7 +1688,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  Mylf                                                    ##
         ##                                                          ##
         ##############################################################
-        if (siteID >= 674 and siteID <= 683) or siteID == 757 or siteID == 842:
+        if (siteID >= 674 and siteID <= 683) or siteID == 757 or siteID == 842 or (siteID >= 852 and siteID <= 856):
             metadata = PAsearchSites.siteMylf.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
