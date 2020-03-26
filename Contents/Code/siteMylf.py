@@ -55,33 +55,34 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         detailsPageElements = getJSONfromPage(sceneURL)
 
         if detailsPageElements:
-            if 'moviesContent' in detailsPageElements:
-                contentName = 'moviesContent'
-            else:
-                contentName = 'videosContent'
+            contentName = None
+            for name in ['moviesContent', 'videosContent']:
+                if name in detailsPageElements:
+                    contentName = name
+                    break
 
-            detailsPageElements = detailsPageElements[contentName]
-            curID = detailsPageElements.keys()[0]
-            detailsPageElements = detailsPageElements[curID]
-            titleNoFormatting = detailsPageElements['title']
-            if 'mylfdom' in sceneURL:
-                subSite = 'MylfDom'
-            else:
-                subSite = detailsPageElements['site']['name']
+            if contentName:
+                detailsPageElements = detailsPageElements[contentName]
+                curID = detailsPageElements.keys()[0]
+                detailsPageElements = detailsPageElements[curID]
+                titleNoFormatting = detailsPageElements['title']
+                if 'mylfdom' in sceneURL:
+                    subSite = 'MylfDom'
+                else:
+                    subSite = detailsPageElements['site']['name']
 
-            if 'publishedDate' in detailsPageElements:
-                releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
-            else:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+                if 'publishedDate' in detailsPageElements:
+                    releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
+                else:
+                    releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+                displayDate = releaseDate if 'publishedDate' in detailsPageElements else ''
 
-            displayDate = releaseDate if 'publishedDate' in detailsPageElements else ''
+                if searchDate and displayDate:
+                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                else:
+                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            if searchDate and displayDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, contentName), name='%s [Mylf/%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
+                results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, contentName), name='%s [Mylf/%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
     return results
 
