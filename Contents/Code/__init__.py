@@ -204,7 +204,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Mile High Media
             ###############
             if siteNum == 361:
-                if searchSiteID == 9999 or (361 <= searchSiteID <= 364):
+                if searchSiteID == 9999 or (361 <= searchSiteID <= 364) or searchSiteID == 852:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -372,15 +372,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeamSkeet
             ###############
             if siteNum == 187:
-                if searchSiteID == 9999 or searchSiteID == 187 or (188 < searchSiteID < 210) or (210 < searchSiteID < 214) or searchSiteID == 215:
-                    results = PAsearchSites.siteTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
-
-            ###############
-            ## TeamSkeet Other
-            ###############
-            if siteNum == 188:
-                if searchSiteID == 9999 or searchSiteID == 188 or searchSiteID == 210 or searchSiteID == 214 or searchSiteID == 566 or searchSiteID == 567 or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 784 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
-                    results = PAsearchSites.networkTeamSkeetOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                if (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
+                    results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Porndoe Premium
@@ -1312,16 +1305,8 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   TeamSkeet                                              ##
         ##                                                          ##
         ##############################################################
-        if siteID == 187 or siteID > 188 and siteID < 210 or siteID > 210 and siteID < 214 or siteID == 215:
-            metadata = PAsearchSites.siteTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
-
-        ##############################################################
-        ##                                                          ##
-        ##  TeamSkeet Other                                         ##
-        ##                                                          ##
-        ##############################################################
-        if siteID == 188 or siteID == 210 or siteID == 214 or siteID == 566 or siteID == 567 or siteID == 626 or siteID == 686 or siteID == 784 or siteID == 807 or (845 <= siteID <= 851):
-            metadata = PAsearchSites.networkTeamSkeetOther.update(metadata, siteID, movieGenres, movieActors)
+        if (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851):
+            metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##
@@ -1440,7 +1425,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  MileHighMedia                                           ##
         ##                                                          ##
         ##############################################################
-        if siteID >= 361 and siteID <= 364:
+        if siteID == 852 or (siteID >= 361 and siteID <= 364):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
