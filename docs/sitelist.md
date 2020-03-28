@@ -438,6 +438,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Mylf Of The Month
   - Mylf x Hussie Pass
   - Mylf x Joybear
+  - Mylf x Lady Fyre
   - Mylf x Teamskeet
   - MylfBlows
   - MylfBoss

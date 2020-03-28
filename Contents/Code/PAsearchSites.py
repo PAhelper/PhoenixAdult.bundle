@@ -100,7 +100,7 @@ import siteInterracialPass
 import network1service
 import networkTeamSkeetOther
 
-searchSites = [None] * 857
+searchSites = [None] * 858
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -958,6 +958,7 @@ searchSites[853] = ["Mylf x Teamskeet","Mylf x Teamskeet","https://mylf.com","ht
 searchSites[854] = ["Mylf x Hussie Pass","Mylf x Hussie Pass","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[855] = ["Mylf Of The Month","Mylf Of The Month","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[856] = ["Mylfselects","Mylfselects","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[857] = ["Mylf x Lady Fyre","Mylf x Lady Fyre","https://mylf.com","https://www.mylf.com/movies/"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
