@@ -25,6 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = [directURL]
     domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
     for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+        sceneURL = sceneURL.split('?', 1)[0]
         sceneName = None
         if ('/movies/' in sceneURL):
             sceneName = sceneURL.split('/')[-1]
@@ -35,17 +36,28 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             searchResults.append(sceneName)
 
     for sceneName in searchResults:
-        detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteNum), sceneName))
+        for sceneType in ['moviesContent', 'videosContent']:
+            detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (PAsearchSites.getSearchSearchURL(siteNum), sceneType, sceneName))
+            if detailsPageElements:
+                break
 
         if detailsPageElements:
             curID = detailsPageElements['id']
             titleNoFormatting = detailsPageElements['title']
-            siteName = PAsearchSites.getSearchSiteName(siteNum)
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+            siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
+            if 'publishedDate' in detailsPageElements:
+                releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
+            else: 
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            displayDate = releaseDate if 'publishedDate' in detailsPageElements else ''
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
+            if searchDate and displayDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteName, displayDate), score=score, lang=lang))
 
     return results
 
@@ -56,8 +68,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0]
     sceneDate = metadata_id[2]
+    sceneType = metadata_id[3]
 
-    detailsPageElements = getDataFromAPI('%s/moviesContent/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneName))
+    detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneType, sceneName))
 
     # Studio
     metadata.studio = 'TeamSkeet'
@@ -69,7 +82,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.summary = detailsPageElements['description']
 
     # Collections / Tagline
-    siteName = PAsearchSites.getSearchSiteName(siteID)
+    siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
@@ -100,7 +113,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName == 'ShoplyfterMylf':
         movieGenres.addGenre('Strip')
         movieGenres.addGenre('MILF')
-    elif siteName == 'Exxxtra small':
+    elif siteName == 'Exxxtra Small':
         movieGenres.addGenre('Teen')
         movieGenres.addGenre('Small Tits')
     elif siteName == 'Little Asians':
