@@ -1078,6 +1078,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^clip ', 'LegalPorno ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cps ', 'CherryPimps ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cuf ', 'CumFiesta ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^css ', 'CzechStreets ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cws ', 'CzechWifeSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^Daughter ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
