@@ -406,6 +406,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - RealityJunkies
   - SweetheartVideo
   - SweetSinner
+  - Bi Empire
 + #### Other MileHighNetwork Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - BellesaFilms
   - FamilySinners
