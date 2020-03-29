@@ -123,6 +123,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - MommyBlowsBest
   - OnlyTeenBlowjobs
   - Throated
+  - My XXX Pass
 + #### Brazzers Network
   ##### Matching type (main): *[Limited](./manualsearch.md#limited-search)* - **Title only.**
   ##### Matching type (alternate): *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -227,6 +228,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
++ #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### DigitalPlayground | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
@@ -653,6 +655,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sex on the beach
   - Tight and Teen
 + #### PropertySex | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Puffy Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
+  - Euro Babe Facials
+  - Simply Anal
+  - We Like to Suck
+  - Wet and Pissy
+  - Wet and Puffy
 + #### PureCFNM Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **ActressID with Title Search**
   - AmateurCFNM
   - CFNMGames
@@ -725,6 +733,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Massage Rooms
   - MomXXX
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### She Will Cheat | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### SinsLife | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### SinX | Matching type: *[Limited](./manualsearch.md#limited-search)*
+  - Fully Clothed Pissing
+  - Golden Shower Power
+  - Pissing in Action
 + #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - FirstClassPOV
   - IntimateLesbians
@@ -836,7 +850,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Upskirt Jerk
   - Wank It Now
 + #### Ultrafilms | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
++ #### VIPissy | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### VirtualRealPorn | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
