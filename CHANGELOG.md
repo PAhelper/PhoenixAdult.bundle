@@ -1,5 +1,4 @@
 # Changelog
-To-Do: Code cleanup, merge with latest Version
 - 2020-03-28
     - added support for new Network: Puffy Network
         - Includes: - Wet and Pissy
