@@ -2,7 +2,7 @@ class PhoenixGenres:
     genresTable = None
     genresNum = 0
     def __init__(self):
-        self.genresTable = [None] * 100
+        self.genresTable = [None] * 150
         self.genresNum = 0
     def addGenre(self,newGenre):
         self.genresTable[self.genresNum] = newGenre

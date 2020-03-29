@@ -8,10 +8,21 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@style="position:relative; background:black;"]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get('title')
+        SubSite = searchResult.xpath('.//img')[0].get('src')
+        if 'wetandpissy' in SubSite:
+            SubSite = 'Wet and Pissy'
+        if 'weliketosuck' in SubSite:
+            SubSite = 'We Like To Suck'
+        if 'wetandpuffy' in SubSite:
+            SubSite = 'Wet and Puffy'
+        if 'simplyanal' in SubSite:
+            SubSite = 'Simply Anal'
+        if 'eurobabefacials' in SubSite:
+            SubSite = 'Euro Babe Facials'
         curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        #releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [VIPissy] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Puffy Network/" + SubSite + "] ", score = score, lang = lang))
 
     return results
 
@@ -19,7 +30,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     temp = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
-    url = 'https://www.vipissy.com' + temp
+    url = 'https://www.puffynetwork.com/' + temp
     detailsPageElements = HTML.ElementFromURL(url)
     art = []
     metadata.collections.clear()
@@ -27,33 +38,33 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
 
     # Studio
-    metadata.studio = 'VIPissy'
+    metadata.studio = 'Puffy Network'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//section[@class="downloads"]/strong')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//div/section[1]/div[2]/h2/span')[0].text_content().strip()
 
     # Summary
-    all_summary = detailsPageElements.xpath('//div/section[4]/div')[0].text_content().strip()
-    tags_summary = detailsPageElements.xpath('//div/section[4]/div/p')[0].text_content().strip()
+    all_summary = detailsPageElements.xpath('//div/section[3]/div[2]')[0].text_content().strip()
+    tags_summary = detailsPageElements.xpath('//div/section[3]/div[2]/p')[0].text_content().strip()
     summary = all_summary.replace(tags_summary, '')
     summary = summary.split("Show more...")[0].strip()
     metadata.summary = summary
     # Log("Summary:" + metadata.summary)
     
     #Tagline and Collection(s)
-    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Genres
-    genres = detailsPageElements.xpath('//div/section[4]/div/p/a')
+    genres = detailsPageElements.xpath('//div/section[3]/div[2]/p/a')
     if len(genres) > 0:
         for genreLink in genres:
             genreName = genreLink.text_content().strip().lower()
             movieGenres.addGenre(genreName)
 
     # Release Date
-    date = detailsPageElements.xpath('//div/section[2]/dl/dd[2]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div/section[2]/dl/dt[2]')[0].text_content().strip("Released on:")
     Log("Date:" + date)
     if len(date) > 0:
         date_object = datetime.strptime(date, '%b %d, %Y')
@@ -88,16 +99,38 @@ def update(metadata,siteID,movieGenres,movieActors):
     ### Posters and artwork ###
 
     # Video trailer background image
+
     try:
-        temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
-        temp2 = temp2.split("/updates")[1]
-        twitterBG = 'https://media.vipissy.com/videos' + temp2 + 'cover/l.jpg'
-        art.append(twitterBG)
+        if 'Wet and Pissy' in tagline:
+           temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+           temp2 = temp2.split("-video-")[1]
+           twitterBG = 'https://media.wetandpissy.com/videos/video-' + temp2 + 'cover/hd.jpg'
+           art.append(twitterBG)
+        if 'We Like To Suck' in tagline:
+           temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+           temp2 = temp2.split("-video-")[1]
+           twitterBG = 'https://media.weliketosuck.com/videos/video-' + temp2 + 'cover/hd.jpg'
+           art.append(twitterBG)
+        if 'Wet and Puffy' in tagline:
+           temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+           temp2 = temp2.split("-video-")[1]
+           twitterBG = 'https://media.wetandpuffy.com/videos/video-' + temp2 + 'cover/hd.jpg'
+           art.append(twitterBG)
+        if 'Simply Anal' in tagline:
+           temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+           temp2 = temp2.split("-video-")[1]
+           twitterBG = 'https://media.simplyanal.com/videos/video-' + temp2 + 'cover/hd.jpg'
+           art.append(twitterBG)
+        if 'Euro Babe Facials' in tagline:
+           temp2 = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
+           temp2 = temp2.split("-video-")[1]
+           twitterBG = 'https://media.eurobabefacials.com/videos/video-' + temp2 + 'cover/hd.jpg'
+           art.append(twitterBG)
     except:
         pass
 
     # Posters
-    posters = detailsPageElements.xpath('//div[contains(@id, "pics2")]//div//ul//li//div//div//img')
+    posters = detailsPageElements.xpath('//div[contains(@id, "pics")]//div//ul//li//div//div//img')
     posterNum = 1
     Log(str(len(posters)))
     for poster in posters:
