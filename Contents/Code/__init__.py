@@ -1,4 +1,3 @@
-import os
 import re
 import random
 import urllib
@@ -49,17 +48,15 @@ class PhoenixAdultAgent(Agent.Movies):
         if media.primary_metadata is not None:
             year = media.primary_metadata.year
 
-        searchSettings = None
-        searchSiteID = 9999
+        Log("Getting Search Settings for: " + title)
         searchDate = None
-
-        for searchTitle in [title, '%s - %s' % (siteName, title)]:
-            Log("Getting Search Settings for: " + searchTitle)
-            searchSettings = PAsearchSites.getSearchSettings(searchTitle)
-            if searchSettings[0] != 9999:
-                searchSiteID = searchSettings[0]
-                break
-
+        searchSiteID = None
+        searchSettings = PAsearchSites.getSearchSettings(title)
+        searchSiteID = searchSettings[0]
+        if searchSiteID == 3:
+            searchSiteID = 0
+        if searchSiteID == 4:
+            searchSiteID = 1
         searchTitle = searchSettings[2]
         Log("Search Title: " + searchSettings[2])
         if searchSettings[1]:
