@@ -37,7 +37,7 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
-        filepath = urllib.unquote(media.filename)
+        filepath = urllib.unquote(media.filename) if media.filename else media.items[0].parts[0].file
         title = str(os.path.splitext(os.path.basename(filepath))[0]).title()
         siteName = str(os.path.split(os.path.dirname(filepath))[1])
 
