@@ -1226,9 +1226,15 @@ class PhoenixAdultAgent(Agent.Movies):
             ## SinX
             ###############
             if siteNum == 864:
-                if searchSiteID == 9999 or (864 <= searchSiteID <= 866):
+                if searchSiteID == 9999 or (864 <= searchSiteID <= 866) or searchSiteID == 871:
                     results = PAsearchSites.networkSinX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
-
+                    
+            ###############
+            ## Kinky Spa
+            ###############
+            if siteNum == 872:
+                if searchSiteID == 9999 or searchSiteID == 872:
+                    results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             siteNum += 1
 
@@ -2276,9 +2282,16 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   SinX                                                   ##
         ##                                                          ##
         ##############################################################
-        if siteID >=  864 and siteID <= 866:
+        if siteID == 871 or (siteID >=  864 and siteID <= 866):
             metadata = PAsearchSites.networkSinX.update(metadata, siteID, movieGenres, movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##   Kinky Spa                                              ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 872:
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
