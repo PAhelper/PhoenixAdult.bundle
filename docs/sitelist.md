@@ -381,6 +381,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WaterBondage
   - WhippedAss
   - WiredPussy
++ #### Kinky Spa | Matching type: *[Limited](./manualsearch.md#limited-search)*  
 + #### Karups | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
   - Karups Hometown Amateurs
   - Karups Older Women
@@ -739,6 +740,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Fully Clothed Pissing
   - Golden Shower Power
   - Pissing in Action
+  - Slime Wave
 + #### Spizoo | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - FirstClassPOV
   - IntimateLesbians
