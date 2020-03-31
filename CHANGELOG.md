@@ -1,4 +1,6 @@
 # Changelog
+- 2020-03-31
+    - added SinX/Slime Wave + Kinky Spa
 - 2020-03-28
     - added support for new Network: Puffy Network
         - Includes: - Wet and Pissy
