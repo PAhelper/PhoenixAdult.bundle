@@ -103,7 +103,7 @@ import network1service
 import networkTeamSkeet
 
 
-searchSites = [None] * 871
+searchSites = [None] * 873
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -975,6 +975,8 @@ searchSites[867] = ["Simply Anal","Simply Anal","https://www.puffynetwork.com/",
 searchSites[868] = ["Wet and Puffy","Wet and Puffy","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
 searchSites[869] = ["We Like To Suck","We Like To Suck","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
 searchSites[870] = ["Euro Babe Facials","Euro Babe Facials","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[871] = ["Slime Wave","Slime Wave","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
+searchSites[872] = ["Kinky Spa","Kinky Spa","https://www.kinkyspa.com/","https://site-api.project1service.com"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
