@@ -1,4 +1,28 @@
 # Changelog
+- 2020-03-31
+    - added SinX/Slime Wave + Kinky Spa
+- 2020-03-28
+    - added support for new Network: Puffy Network
+        - Includes: - Wet and Pissy
+                    - Wet and Puffy
+                    - Simply Anal
+                    - Euro Babe Facials
+                    - We Like to Suck
+    - Changed Genre Limit to 150 in PAgenres
+- 2020-03-26
+    - Added support for new Network: SinX
+        - Includes: - Pissing in Action
+                    - Golden Shower Power
+                    - Fully Clothed Pissing
+        - Other Sites could be added as well
+        - Search may need to be improved
+    - Added SinsLife support
+        - Actor Pictures only work for one Actor
+    - Fixed site: VIPissy (Site Changed)
+- 2020-03-23
+    - Added new site: Blowpass / My XXX Pass
+- 2020-03-23
+    - Added new sites: Deviant Hardcore, She Will Cheat
 - 2020-03-22
     - Added new Mile High site: Bi Empire
     - Fix PornDoe sites

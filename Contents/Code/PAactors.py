@@ -67,6 +67,8 @@ class PhoenixActors:
                 newActor = "Jaye Summers"
             if newActor == "Criss Strokes":
                 newActor = "Chris Strokes"
+            if newActor == "Christy Charming":
+                newActor = "Paula Shy"
             if newActor == "CléA Gaultier":
                 newActor = "Clea Gaultier"
             if newActor == "Crissy Kay" or newActor == "Emma Hicks" or newActor == "Emma Hixx":

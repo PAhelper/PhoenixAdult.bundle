@@ -92,6 +92,9 @@ import siteJaysPOV
 import siteGirlfriendsFilms
 import siteBAMVisions
 import sitePJGirls
+import siteSinsLife
+import networkPuffy
+import networkSinX
 import networkPureCFNM
 import siteATKGirlfriends
 import networkTwoWebMedia
@@ -100,7 +103,7 @@ import network1service
 import networkTeamSkeet
 
 
-searchSites = [None] * 859
+searchSites = [None] * 873
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -845,7 +848,7 @@ searchSites[740] = ["Mofos Lab","Mofos Lab","https://www.mofos.com","https://sit
 searchSites[741] = ["Straplezz","Straplezz","https://straplezz.com","https://straplezz.com/updates/"]
 searchSites[742] = ["LittleCaprice","LittleCaprice","https://www.littlecaprice-dreams.com","https://www.littlecaprice-dreams.com/?s="]
 searchSites[743] = ["WowGirls","WowGirls","https://www.wowgirls.xxx","https://www.wowgirls.xxx/?s="]
-searchSites[744] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.vipissy.com/advanced-search/?search=search&query[]="]
+searchSites[744] = ["VIPissy","VIPissy","https://www.vipissy.com","https://www.vipissy.com/updates?search="]
 searchSites[745] = ["GirlsOutWest","GirlsOutWest","https://tour.girlsoutwest.com","https://tour.girlsoutwest.com/trailers/"]
 searchSites[746] = ["Girls Rimming","Girls Rimming","https://www.girlsrimming.com","https://www.girlsrimming.com/tour/trailers/"]
 searchSites[747] = ["Gangbang Creampie","Gangbang Creampie","https://gangbangcreampie.com","https://gangbangcreampie.com/tour/search.php?query="]
@@ -960,6 +963,20 @@ searchSites[855] = ["Mylf x Hussie Pass","Mylf x Hussie Pass","https://mylf.com"
 searchSites[856] = ["Mylf Of The Month","Mylf Of The Month","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[857] = ["Mylfselects","Mylfselects","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[858] = ["Mylf x Lady Fyre","Mylf x Lady Fyre","https://mylf.com","https://www.mylf.com/movies/"]
+searchSites[859] = ["Deviant Hardcore","Deviant Hardcore","https://www.devianthardcore.com","https://site-api.project1service.com"]
+searchSites[860] = ["She Will Cheat","She Will Cheat","https://www.shewillcheat.com","https://site-api.project1service.com"]
+searchSites[861] = ["My XXX Pass","My XXX Pass","http://www.blowpass.com","http://www.blowpass.com/en/search/blowpass/scene/"]
+searchSites[862] = ["SinsLife","SinsLife","https://sinslife.com/","https://sinslife.com/tour/search.php?query="]
+searchSites[863] = ["Wet and Pissy","Wet and Pissy","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[864] = ["Pissing In Action","Pissing In Action","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
+searchSites[865] = ["Golden Shower Power","Golden Shower Power","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
+searchSites[866] = ["Fully Clothed Pissing","Fully Clothed Pissing","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
+searchSites[867] = ["Simply Anal","Simply Anal","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[868] = ["Wet and Puffy","Wet and Puffy","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[869] = ["We Like To Suck","We Like To Suck","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[870] = ["Euro Babe Facials","Euro Babe Facials","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
+searchSites[871] = ["Slime Wave","Slime Wave","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
+searchSites[872] = ["Kinky Spa","Kinky Spa","https://www.kinkyspa.com/","https://site-api.project1service.com"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1200,6 +1217,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^sas ', 'SexandSubmission ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub("^Shes New ", "She's New ", mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^sins ', 'SinsLife ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^smb ', 'ShareMyBF ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)

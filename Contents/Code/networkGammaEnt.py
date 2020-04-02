@@ -23,7 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         network_sep_scene_pages_prev = "scene/"
         network_sep_dvd_prev = "dvd/"
         network_sep_dvd = "/1"
-    elif siteNum == 329 or (siteNum >= 351 and siteNum <= 354):
+    elif siteNum == 329 or (siteNum >= 351 and siteNum <= 354) or siteNum == 861:
         network = 'Blowpass'
         networkdvd = False
     elif siteNum == 330 or (siteNum >= 355 and siteNum <= 360) or siteNum == 750:
@@ -269,7 +269,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     if siteID == 278 or (siteID >= 285 and siteID <= 287) or siteID == 843:
         metadata.studio = 'XEmpire'
         director.name = 'Mason'
-    elif siteID == 329 or (siteID >= 351 and siteID <= 354):
+    elif siteID == 329 or (siteID >= 351 and siteID <= 354) or siteID == 861:
         metadata.studio = 'Blowpass'
     elif siteID == 331 or (siteID >= 355 and siteID <= 360) or siteID == 750:
         metadata.studio = 'Fantasy Massage'
