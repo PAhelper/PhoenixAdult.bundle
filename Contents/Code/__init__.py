@@ -1474,7 +1474,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment Other                              ##
         ##                                                          ##
         ##############################################################
-        if siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or siteID == 283 (siteID >= 365 and siteID <= 379) or siteID == 381 or siteID == 385 or (siteID >= 460 and siteID <= 466) or siteID == 692 or (795 <= siteID <= 797):
+        if siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or siteID == 283 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797):
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
