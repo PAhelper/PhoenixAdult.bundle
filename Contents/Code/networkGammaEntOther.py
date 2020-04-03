@@ -94,7 +94,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements['title']
 
     # Summary
-    description = detailsPageElements['description']
+    metadata.summary = detailsPageElements['description']
 
     # Release Date
     date_object = parse(sceneDate)
