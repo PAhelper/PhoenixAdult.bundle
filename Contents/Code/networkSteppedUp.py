@@ -60,7 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre('heterosexual')
 
     # Release Date
-    date = detailsPageElements.xpath('//span[contains(@class,"date")]')
+    date = detailsPageElements.xpath('//span[contains(@class,"date")] | //span[contains(@class,"hide")]')
     if len(date) > 0:
         date = date[0].text_content().strip()
         date_object = parse(date)
