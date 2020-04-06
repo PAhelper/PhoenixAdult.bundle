@@ -2,12 +2,30 @@ import PAsearchSites
 import PAgenres
 
 
-def getDatafromAPI(url):
-    req = urllib.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+def bypassCloudflare(url, headers=''):
+    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'apiNode':'US','idnUrl':url}),'deviceId':'','sessionId':''})
+    req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
+        'Content-Type': 'application/json',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+    })
     data = urllib.urlopen(req).read()
 
-    return json.loads(data)['data']
+    return json.loads(data)['Content']
+
+
+def getDatafromAPI(url):
+    data = None
+    try:
+        req = urllib.Request(url)
+        req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+        data = urllib.urlopen(req).read()
+    except Exception as e:
+        Log('%s: trying to bypass' % e)
+        data = bypassCloudflare(url)
+
+    if data:
+        return json.loads(data)['data']
+    return data
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
