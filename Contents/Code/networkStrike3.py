@@ -11,7 +11,7 @@ def bypassCloudflare(url, headers=''):
     data = urllib.urlopen(req).read()
     data = json.loads(data)
     if data['Success']:
-        return json.loads(data)['Content']
+        return data['Content']
     else:
         Log('Bypass error: %s' % data['Content'])
         return None
