@@ -9,8 +9,12 @@ def bypassCloudflare(url, headers=''):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
     })
     data = urllib.urlopen(req).read()
-
-    return json.loads(data)['Content']
+    data = json.loads(data)
+    if data['Success']:
+        return json.loads(data)['Content']
+    else:
+        Log('Bypass error: %s' % data['Content'])
+        return None
 
 
 def getDatafromAPI(url):
@@ -35,17 +39,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + encodedTitle
 
     searchResults = getDatafromAPI(url)
-    for searchResult in searchResults['videos']:
-        titleNoFormatting = searchResult['title']
-        releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
-        curID = searchResult['targetUrl'].replace('/', '$').replace('?', '!')
+    if searchResults:
+        for searchResult in searchResults['videos']:
+            titleNoFormatting = searchResult['title']
+            releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
+            curID = searchResult['targetUrl'].replace('/', '$').replace('?', '!')
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
