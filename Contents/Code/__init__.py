@@ -32,7 +32,7 @@ def capitalize(line):
 class PhoenixAdultAgent(Agent.Movies):
     name = 'PhoenixAdult'
     languages = [Locale.Language.English]
-    accepts_from = ['com.plexapp.agents.localmedia']
+    accepts_from = ['com.plexapp.agents.localmedia', 'com.plexapp.agents.lambda']
     primary_provider = True
 
     def search(self, results, media, lang):
