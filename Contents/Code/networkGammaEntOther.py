@@ -94,7 +94,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements['title']
 
     # Summary
-    metadata.summary = detailsPageElements['description']
+    metadata.summary = detailsPageElements['description'].replace('</br>', '\n')
 
     # Release Date
     date_object = parse(sceneDate)
@@ -135,7 +135,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Posters
     art = []
 
-    if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com')):
+    if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
 
     if 'pictures' in detailsPageElements:
