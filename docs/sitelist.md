@@ -360,6 +360,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Electrosluts
   - EverythingButt
   - FamiliesTied
+  - Filthy Femdom
   - FootWorship
   - FuckedandBound (Twisted Factory Channel)
   - FuckingMachines
@@ -373,10 +374,11 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PublicDisgrace
   - SadisticRope
   - SexAndSubmission
-  - TheTrainingOfO
-  - TheUpperFloor
+  - SubmissiveX
   - TSPussyHunters
   - TSSeduction
+  - TheTrainingOfO
+  - TheUpperFloor
   - UltimateSurrender
   - WaterBondage
   - WhippedAss
