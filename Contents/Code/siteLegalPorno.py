@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             curID = searchResult.xpath('.//a')[0].get("href").replace('/','+').replace('?','!')
 
             Log("ID: " + curID)
-            releaseDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-7"]')[0].text_content().replace("\n","")[14:-1]
+            releaseDate = searchResult.xpath('.//div[@class="thumbnail-description gradient"]//div[@class="col-xs-12"]')[0].text_content().replace("\n","").replace("RELEASE:","").strip()
             releaseDate = datetime.strptime(releaseDate, '%b %d, %Y').strftime('%Y-%m-%d')
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
