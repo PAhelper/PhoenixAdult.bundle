@@ -137,6 +137,8 @@ class PhoenixActors:
                 newActor = "Noemilk"
             if newActor == "Rebel Lynn (Contract Star)":
                 newActor = "Rebel Lynn"
+            if newActor == "Remy La Croix":
+                newActor = "Remy Lacroix"
             if newActor == "Riley Jenson" or newActor == "Riley Anne" or newActor == "Rilee Jensen":
                 newActor = "Riley Jensen"
             if newActor == "Sara Luv":
