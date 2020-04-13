@@ -1345,7 +1345,7 @@ def getSearchSettings(mediaTitle):
 
 def posterAlreadyExists(posterUrl,metadata):
     for p in metadata.posters.keys():
-        Log(p.lower())
+        # Log(p.lower())
         if p.lower() == posterUrl.lower():
             Log("Found " + posterUrl + " in posters collection")
             return True
