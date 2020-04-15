@@ -1,39 +1,10 @@
 import PAsearchSites
 import PAgenres
-
-
-def getUserAgent():
-    from fake_useragent import UserAgent
-    ua = UserAgent(fallback='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
-
-    return ua.random
-
-
-def bypassCloudflare(url, headers=''):
-    for node in ['US', 'DE']:
-        params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'apiNode':node,'idnUrl':url}),'deviceId':'','sessionId':''})
-        req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
-            'Content-Type': 'application/json',
-            'User-Agent': getUserAgent()
-        })
-        data = urllib.urlopen(req).read()
-        data = json.loads(data)
-        if data['Success']:
-            return data['Content']
-
-    Log('Bypass error: %s' % data['Content'])
-    return None
+import PAutils
 
 
 def getDatafromAPI(url):
-    data = None
-    try:
-        req = urllib.Request(url)
-        req.add_header('User-Agent', getUserAgent())
-        data = urllib.urlopen(req).read()
-    except Exception as e:
-        Log('%s: trying to bypass' % e)
-        data = bypassCloudflare(url)
+    data = PAutils.HTTPRequest(url)
 
     if data:
         return json.loads(data)['data']

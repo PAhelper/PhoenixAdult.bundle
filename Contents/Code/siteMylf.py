@@ -1,14 +1,12 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import googlesearch
+import PAutils
 import re
 
 
 def getJSONfromPage(url):
-    req = urllib.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
-    data = urllib.urlopen(req).read()
+    data = PAutils.HTTPRequest(url)
 
     if data:
         jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data)
@@ -35,15 +33,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
     searchResultsURLs = [directURL]
 
-    googleResults = []
     if not searchResultsURLs:
-        domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
-
-        try:
-            googleResults = list(googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10))
-        except:
-            Log('Google Search Error')
-            pass
+        googleResults = PAutils.getFromGoogleSearch(siteNum, searchTitle)
 
         for sceneURL in googleResults:
             sceneURL = sceneURL.rsplit('?', 1)[0]

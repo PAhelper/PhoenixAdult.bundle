@@ -12,21 +12,14 @@ from dateutil.parser import parse
 import PAactors
 import PAgenres
 import PAsearchSites
+import PAutils
 
-def any(s):
-    for v in s:
-        if v:
-            return True
-    return False
 
 def Start():
     HTTP.ClearCache()
     HTTP.CacheTime = CACHE_1MINUTE*20
-    HTTP.Headers['User-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
+    HTTP.Headers['User-Agent'] = PAutils.getUserAgent()
     HTTP.Headers['Accept-Encoding'] = 'gzip'
-
-def capitalize(line):
-    return ' '.join([s[0].upper() + s[1:] for s in line.split(' ')])
 
 
 class PhoenixAdultAgent(Agent.Movies):
