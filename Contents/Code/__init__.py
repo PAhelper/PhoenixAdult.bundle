@@ -469,7 +469,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## PornPros Network
             ###############
-            if (306 <= siteNum <= 308) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844:
+            if siteNum == 306:
                 if searchSiteID == 9999 or (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769 or searchSiteID == 844:
                     results = PAsearchSites.networkPornPros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
@@ -480,11 +480,11 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 328:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
-             ###############
+            ###############
             ## SexyHub
             ###############
-            if siteNum == 333 or siteNum == 335 or siteNum == 406 or siteNum == 407:
-                if searchSiteID == 9999 or (333 <= searchSiteID <= 339):
+            if siteNum == 333:
+                if searchSiteID == 9999 or (333 <= searchSiteID <= 339) or (406 <= searchSiteID <= 407):
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -637,7 +637,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## AllureMedia
             ###############
-            if siteNum == 564 or siteNum == 565:
+            if siteNum == 564:
                 if searchSiteID == 9999 or (564 <= searchSiteID <= 565):
                     results = PAsearchSites.siteAllureMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
