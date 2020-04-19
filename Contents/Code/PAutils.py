@@ -51,13 +51,17 @@ def HTTPRequest(url, **kwargs):
     return data
 
 
-def getFromGoogleSearch(siteID, searchText, **kwargs):
+def getFromGoogleSearch(searchText, **kwargs):
     stop = kwargs['stop'] if 'stop' in kwargs else 10
-    googleResults = None
+    site = kwargs['site'] if 'site' in kwargs else ''
+    if unicode(site, 'UTF-8').isdigit():
+        site = PAsearchSites.getSearchBaseURL(site).split('://')[1]
 
-    domain = PAsearchSites.getSearchBaseURL(siteID).split('://')[1]
+    searchTerm = 'site:%s %s' % (site, searchText) if site else searchText
+
+    googleResults = None
     try:
-        googleResults = list(googlesearch.search('site:%s %s' % (domain, searchText), stop=stop))
+        googleResults = list(googlesearch.search(searchTerm, stop=stop))
     except:
         Log('Google Search Error')
         pass

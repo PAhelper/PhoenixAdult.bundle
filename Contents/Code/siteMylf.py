@@ -34,7 +34,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchResultsURLs = [directURL]
 
     if not searchResultsURLs:
-        googleResults = PAutils.getFromGoogleSearch(siteNum, searchTitle)
+        googleResults = PAutils.getFromGoogleSearch(searchTitle, site=siteNum)
 
         for sceneURL in googleResults:
             sceneURL = sceneURL.rsplit('?', 1)[0]
