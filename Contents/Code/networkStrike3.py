@@ -1,31 +1,10 @@
 import PAsearchSites
 import PAgenres
-
-
-def bypassCloudflare(url, headers=''):
-    params = json.dumps({'id':0,'json':json.dumps({'method':'GET','url':url,'headers':headers,'apiNode':'US','idnUrl':url}),'deviceId':'','sessionId':''})
-    req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
-        'Content-Type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
-    })
-    data = urllib.urlopen(req).read()
-    data = json.loads(data)
-    if data['Success']:
-        return data['Content']
-    else:
-        Log('Bypass error: %s' % data['Content'])
-        return None
+import PAutils
 
 
 def getDatafromAPI(url):
-    data = None
-    try:
-        req = urllib.Request(url)
-        req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
-        data = urllib.urlopen(req).read()
-    except Exception as e:
-        Log('%s: trying to bypass' % e)
-        data = bypassCloudflare(url)
+    data = PAutils.HTTPRequest(url)
 
     if data:
         return json.loads(data)['data']
@@ -59,7 +38,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0].replace('$', '/').replace('?', '!')
     url = PAsearchSites.getSearchSearchURL(siteID) + sceneName
-    
+
     detailsPageElements = getDatafromAPI(url)
     video = detailsPageElements['video']
     pictureset = detailsPageElements['pictureset']
@@ -82,7 +61,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     director = metadata.directors.new()
     director.name = video['directorNames']
 
-     # Tagline and Collection(s)
+    # Tagline and Collection(s)
     metadata.collections.clear()
     metadata.collections.add(metadata.studio)
 

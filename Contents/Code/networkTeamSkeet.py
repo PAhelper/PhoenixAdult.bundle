@@ -1,15 +1,11 @@
 import PAsearchSites
 import PAgenres
 import PAextras
-import googlesearch
+import PAutils
 
 
 def getDataFromAPI(url):
-    data = None
-    try:
-        data = urllib.urlopen(url).read()
-    except:
-        pass
+    data = PAutils.HTTPRequest(url)
 
     if data:
         return json.loads(data)
@@ -23,8 +19,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     directURL = searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]
-    domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
-    for sceneURL in googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10):
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    for sceneURL in googleResults:
         sceneURL = sceneURL.split('?', 1)[0]
         sceneName = None
         if ('/movies/' in sceneURL):

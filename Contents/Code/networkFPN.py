@@ -1,21 +1,14 @@
 import PAsearchSites
 import PAgenres
-import googlesearch
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
 
-    googleResults = []
     searchResultsURLs = []
-    domain = PAsearchSites.getSearchBaseURL(siteNum).split('://')[1]
-
-    try:
-        googleResults = list(googlesearch.search('site:%s %s' % (domain, searchTitle), stop=10))
-    except:
-        Log('Google Search Error')
-        pass
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
 
     for sceneURL in googleResults:
         if sceneURL not in searchResultsURLs:
