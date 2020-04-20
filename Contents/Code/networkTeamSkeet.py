@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     directURL = searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]
-    googleResults = PAutils.getFromGoogleSearch(searchTitle, site=siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.split('?', 1)[0]
         sceneName = None

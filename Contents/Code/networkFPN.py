@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         siteNum = searchSiteID
 
     searchResultsURLs = []
-    googleResults = PAutils.getFromGoogleSearch(searchTitle, site=siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
 
     for sceneURL in googleResults:
         if sceneURL not in searchResultsURLs:
