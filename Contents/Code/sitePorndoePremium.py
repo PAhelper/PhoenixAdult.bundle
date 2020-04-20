@@ -36,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.title = detailsPageElements.xpath('//h1[@class="no-space transform-none"]')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content')
+    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').replace('&#039;', '\'')
 
     # Tagline and Collection(s)
     tagline = detailsPageElements.xpath('//div[@class="actors"]/h4/a')[0].text_content()
