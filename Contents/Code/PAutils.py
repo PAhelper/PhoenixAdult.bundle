@@ -35,12 +35,17 @@ def bypassCloudflare(url, **kwargs):
 
 def HTTPRequest(url, **kwargs):
     headers = kwargs['headers'] if 'headers' in kwargs else {}
+    cookies = kwargs['cookies'] if 'cookies' in kwargs else {}
     data = None
 
     if 'User-Agent' not in headers:
         headers['User-Agent'] = getUserAgent()
+    if cookies and 'Cookie' not in headers:
+        data = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
+        headers['Cookie'] = data
 
     try:
+        Log('Requesting "%s"' % url)
         req = urllib.Request(url, headers=headers)
         data = urllib.urlopen(req).read()
     except Exception as e:
