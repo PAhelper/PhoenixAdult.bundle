@@ -41,8 +41,8 @@ def HTTPRequest(url, **kwargs):
     if 'User-Agent' not in headers:
         headers['User-Agent'] = getUserAgent()
     if cookies and 'Cookie' not in headers:
-        data = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
-        headers['Cookie'] = data
+        cookie = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
+        headers['Cookie'] = cookie
 
     try:
         Log('Requesting "%s"' % url)
@@ -63,7 +63,7 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
 
     searchTerm = 'site:%s %s' % (site, searchText) if site else searchText
 
-    googleResults = None
+    googleResults = []
     try:
         googleResults = list(googlesearch.search(searchTerm, stop=stop))
     except:
