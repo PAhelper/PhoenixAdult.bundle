@@ -67,7 +67,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorName = actorLink.xpath('.//span/text()')[0]
         actorPhotoURL = actorLink.xpath('.//img//@src0_3x')[0]
         if not actorPhotoURL.startswith('http'):
-            actorPhotoURL = 'https://www.interracialpass.com' + actorPhotoURL
+            actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
 
         movieActors.addActor(actorName, actorPhotoURL)
 
@@ -80,7 +80,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for xpath in xpaths:
         for img in detailsPageElements.xpath(xpath):
             if not img.startswith('http'):
-                img = 'https://www.interracialpass.com' + img
+                img = PAsearchSites.getSearchBaseURL(siteID) + img
             art.append(img)
 
     Log('Artwork found: %d' % len(art))
