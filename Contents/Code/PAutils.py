@@ -12,11 +12,7 @@ def getUserAgent():
 
 def bypassCloudflare(url, **kwargs):
     headers = kwargs['headers'] if 'headers' in kwargs else {}
-
-    req_headers = ''
-    for key, value in headers.iteritems():
-        req_headers += '%s: %s \n' % (key, value)
-    req_headers = req_headers.strip()
+    req_headers = '\n'.join(['%s: %s' % (key, headers[key]) for key in headers])
 
     for node in ['US', 'DE']:
         params = json.dumps({'id': 0, 'json': json.dumps({'method': 'GET', 'url': url, 'headers': req_headers, 'apiNode': node, 'idnUrl': url}), 'deviceId': '', 'sessionId': ''})
