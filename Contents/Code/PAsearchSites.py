@@ -1202,6 +1202,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^pav ', 'PixAndVideo ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pc ', 'PrincessCum ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^pdmcl ', 'ChicasLoca ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pf ', 'PornFidelity ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^phd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^phdp ', 'PetiteHDPorn ', mediaTitle, flags=re.IGNORECASE)
