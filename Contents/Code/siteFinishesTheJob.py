@@ -8,7 +8,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="scene"]'):
         titleNoFormatting = searchResult.xpath('.//h4[@itemprop="name"]//a')[0].text_content()
         curID = searchResult.xpath('.//a/@href')[0].replace('/','_').replace('?','!')
-        releaseDate  = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
         subSite = searchResult.xpath('.//small[@class="shadow"]//a')[0].text_content().strip()
         if subSite.lower().replace(".com","").replace(" ","") == PAsearchSites.getSearchSiteName(siteNum).lower().replace(" ",""):
