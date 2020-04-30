@@ -5,7 +5,7 @@ import PAgenres
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.lower().split('and ')[0].strip().replace(' ', '-')
     for page in range(1, 5):
-        url = '%s%s/?p=%d' % (PAsearchSites.getSearchSearchURL(searchSiteID), searchString, page)
+        url = '%s%s/?p=%d' % (PAsearchSites.getSearchSearchURL(siteNum), searchString, page)
         searchResults = HTML.ElementFromURL(url).xpath('//div[@class="panel-body"]')
         for searchResult in searchResults:
             actorList = []

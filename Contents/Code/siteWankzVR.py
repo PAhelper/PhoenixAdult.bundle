@@ -5,7 +5,7 @@ import PAutils
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     encodedTitle = encodedTitle.replace('%20', '+')
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle
+    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
     data = PAutils.HTTPRequest(url, cookies={
         'sst': 'ulang-en'
     })

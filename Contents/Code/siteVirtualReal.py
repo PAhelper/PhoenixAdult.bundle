@@ -3,7 +3,7 @@ import PAgenres
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-")
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-")
     searchPage = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchPage.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     script_date = script_text[alpha+16:omega]
     releaseDate = parse(script_date).strftime('%Y-%m-%d')
     Log("releaseDate:" + releaseDate)
-    resultTitle = firstActor + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate
+    resultTitle = firstActor + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
     if searchDate:
         score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
     else:

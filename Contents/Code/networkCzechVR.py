@@ -7,9 +7,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","-")
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
     try:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
     except:
-        request = urllib.Request(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString, headers=headers)
+        request = urllib.Request(PAsearchSites.getSearchSearchURL(siteNum) + searchString, headers=headers)
         htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
         searchResults = HTML.ElementFromString(htmlstring)
 

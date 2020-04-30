@@ -3,7 +3,7 @@ import PAgenres
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
         titleNoFormatting = searchResult.xpath('.//span[@itemprop="name"]')[0].text_content().strip()
@@ -24,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         Log("Score: " + str(score))
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
 
