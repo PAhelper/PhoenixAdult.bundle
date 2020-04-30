@@ -3,10 +3,7 @@ import PAgenres
 import PAactors
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     try:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
         for searchResult in searchResults.xpath('//div[@class="video-item"]'):

@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     encodedTitle = encodedTitle.replace('%20a%20','%20')
 
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
@@ -27,6 +26,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 60 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [Dogfart/" + subSite + "] ", score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

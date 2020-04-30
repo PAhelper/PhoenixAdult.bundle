@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//tr[@style="width:px;height:190px;"]/td'):
         titleNoFormatting = searchResult.xpath('./span[1]/a')[0].text_content().strip()
@@ -32,6 +31,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + scenePoster, name = titleNoFormatting + " [Intersec/"+subSite+"] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

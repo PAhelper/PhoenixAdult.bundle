@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-", 1).replace(" ","_")
     searchResults = HTML.ElementFromURL(url)
 
@@ -11,6 +13,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     score = 100
     results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +"] " + releaseDate, score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]

@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     networkscene = True
     networkscenepages = True
     networkdvd = True
@@ -15,8 +15,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     network_sep_dvd_prev = ""
     network_sep_dvd = "/1/dvd"
 
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
     if siteNum == 278 or (siteNum >= 285 and siteNum <= 287) or siteNum == 843:
         network = 'XEmpire'
         network_sep_scene_prev = "scene/"
@@ -260,6 +259,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             pass
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

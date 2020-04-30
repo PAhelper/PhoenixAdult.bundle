@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-")
     searchPage = HTML.ElementFromURL(url)
 
@@ -34,7 +34,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log('url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
-
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()

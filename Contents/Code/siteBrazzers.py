@@ -1,9 +1,8 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     Log("siteNum: " + str(siteNum))
     
     if unicode(searchTitle.split(" ")[0], 'utf-8').isnumeric():
@@ -35,6 +34,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Brazzers/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

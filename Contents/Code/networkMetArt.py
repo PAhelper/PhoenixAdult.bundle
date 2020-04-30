@@ -2,10 +2,8 @@ import PAsearchSites
 import PAgenres
 import json
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + '/search-results?query[contentType]=movies&searchPhrase=' + encodedTitle
     data = urllib.urlopen(url).read()
     searchResults = json.loads(data)
@@ -27,6 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [MetArt/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
+
 
 def update (metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('+','/').replace('!','?')

@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//article'):
         titleNoFormatting = searchResult.xpath('.//a[@rel="bookmark"]')[0].text_content().strip()
@@ -18,6 +18,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             titleNoFormatting = titleNoFormatting[:32] + "..."
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+PAsearchSites.getSearchSiteName(siteNum)+"] ", score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
@@ -81,7 +82,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     # preview = detailsPageElements.xpath('//div[@class="video-content__watch"]//img')[0].get("src")
     # Log("preview img:" + preview)
     # metadata.art[preview] = Proxy.Preview(HTTP.Request(preview, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-
 
     j = 2
     Log("Artwork found: " + str(len(art)))

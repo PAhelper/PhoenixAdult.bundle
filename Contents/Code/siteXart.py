@@ -1,11 +1,13 @@
 import PAsearchSites
 import PAgenres
 import PAextras
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     xartpost = {
         "input_search_sm" : encodedTitle
     }
-    searchResults = HTML.ElementFromURL('https://www.x-art.com/search/', values = xartpost)
+    searchResults = HTML.ElementFromURL('https://www.x-art.com/search/', values=xartpost)
 
     for searchResult in searchResults.xpath('//a[contains(@href,"videos")]'):
         link = searchResult.xpath('.//img[contains(@src,"videos")]')
@@ -355,6 +357,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = "The Rich Girl - Part Two" + " [X-Art]", score = 101, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

@@ -4,10 +4,7 @@ import PAactors
 import json
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     data = urllib.urlopen(PAsearchSites.getSearchSearchURL(siteNum) + '?_method=content.load&limit=0&offset=0&transitParameters[preset]=videos').read()
     searchResults = json.loads(data)
     for searchResult in searchResults['response']['collection']:

@@ -19,10 +19,7 @@ def get_Cookies(url):
     return cookies
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteNum))
     headers = {
         'Instance': cookies['instance_token'],

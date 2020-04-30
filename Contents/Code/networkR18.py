@@ -3,13 +3,10 @@ import PAgenres
 import PAactors
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
-    if(unicode(splitSearchTitle[1], 'utf-8').isnumeric()):
+    if(unicode(splitSearchTitle[1], 'utf-8').isdigit()):
         searchJAVID = '%s-%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:

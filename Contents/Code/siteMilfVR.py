@@ -1,6 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","+")
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + searchString)
     for searchResult in searchResults.xpath('//div[@class="vrVideo"]'):
@@ -21,6 +23,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] ", score = score, lang = lang))
 
     return results
+
+
 def update(metadata,siteID,movieGenres,movieActors):
     url = PAsearchSites.getSearchBaseURL(siteID) + str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)

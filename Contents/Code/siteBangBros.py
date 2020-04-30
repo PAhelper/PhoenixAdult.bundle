@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchPageNum = 1
     while searchPageNum <= 2:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/" + str(searchPageNum))

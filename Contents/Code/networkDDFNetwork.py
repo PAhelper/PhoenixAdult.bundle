@@ -2,10 +2,7 @@ import PAsearchSites
 import PAgenres
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
     for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]

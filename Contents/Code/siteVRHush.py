@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","_").replace(",","").replace("'","").replace("?","")
     Log("searchString: " + searchString)
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
@@ -23,8 +22,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     return results
 
-def update(metadata,siteID,movieGenres,movieActors):
 
+def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('+','/').replace('?','!')
     detailsPageElements = HTML.ElementFromURL(url)
     metadata.collections.clear()

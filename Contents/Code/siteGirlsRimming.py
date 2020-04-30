@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     title = searchTitle.lower().replace(' ','-')
     url = PAsearchSites.getSearchSearchURL(siteNum) + title + '.html'
     Log("URL: " + url)
@@ -19,6 +18,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Girls Rimming] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

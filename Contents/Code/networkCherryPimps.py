@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchPageNum = 1
     while searchPageNum <= 2:
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + "%22" + encodedTitle + "%22" + "&page=" + str(searchPageNum))
@@ -28,6 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchPageNum += 1
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

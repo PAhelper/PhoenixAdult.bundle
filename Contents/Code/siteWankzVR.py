@@ -3,7 +3,7 @@ import PAgenres
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     encodedTitle = encodedTitle.replace('%20', '+')
     url = PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle
     data = PAutils.HTTPRequest(url, cookies={

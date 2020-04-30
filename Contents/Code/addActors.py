@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     Log("searchTitle:" + searchTitle)
     searchTitle = searchTitle.replace(' And ',',').replace(' and ',',').replace(' In ', ' in ').replace(' At ', ' at ')
     parse_siteName = searchTitle.split(' at ')
@@ -37,6 +36,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = metadataID, name = displayName + "[" + siteName + "] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log("*******Manual actor input*******")

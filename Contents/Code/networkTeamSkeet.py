@@ -12,10 +12,7 @@ def getDataFromAPI(url):
     return data
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     directURL = searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]

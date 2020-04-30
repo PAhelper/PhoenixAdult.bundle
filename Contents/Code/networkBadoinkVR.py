@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
     Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
@@ -27,6 +27,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0].replace("+","/")

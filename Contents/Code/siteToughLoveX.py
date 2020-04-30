@@ -2,10 +2,7 @@ import PAsearchSites
 import PAactors
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").lower().strip()
 
     modelsPageSortByLetter = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle[:1] #here we get first letter of searchTitle

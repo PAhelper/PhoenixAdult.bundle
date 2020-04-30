@@ -4,9 +4,7 @@ import PAactors
 import PAextras
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     searchResult = HTML.ElementFromURL(url)
 
@@ -23,6 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
