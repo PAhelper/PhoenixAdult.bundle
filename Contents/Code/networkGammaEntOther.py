@@ -106,7 +106,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for collectionName in ['studio_name', 'serie_name']:
         if collectionName in detailsPageElements:
             metadata.collections.add(detailsPageElements[collectionName])
-    if ':' in detailsPageElements['title']:
+    if ':' in detailsPageElements['title'] or '#' in detailsPageElements['title']:
         if 'movie_title' in detailsPageElements:
             metadata.collections.add(detailsPageElements['movie_title'])
 
