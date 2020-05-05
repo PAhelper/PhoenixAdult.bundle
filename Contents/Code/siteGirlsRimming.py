@@ -1,109 +1,116 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAUtils
+
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
     if searchSiteID != 9999:
         siteNum = searchSiteID
-    title = searchTitle.lower().replace(' ','-')
-    url = PAsearchSites.getSearchSearchURL(siteNum) + title + '.html'
-    Log("URL: " + url)
-    searchResult = HTML.ElementFromURL(url)
-    titleNoFormatting = searchResult.xpath('//body/div[@class="content"]//div[@class="item-info"]/h4/a')[0].text_content().strip()
-    curID = url.replace('/','_').replace('?','!')
-    releaseDate = parse(searchResult.xpath('//ul[@class="item-meta"]/li[1]')[0].text_content().replace('Release:','').strip()).strftime('%Y-%m-%d')
-    if searchDate:
-        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-    else:
-        score = 90
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Girls Rimming] " + releaseDate, score = score, lang = lang))
+
+    directURL = '%s%s.html' % (PAsearchSites.getSearchSearchURL(siteNum), searchTitle.lower().replace(' ', '-'))
+    searchResults = [directURL]
+
+    googleResults = PAUtils.getFromGoogleSearch(searchTitle, siteNum)
+    for sceneURL in googleResults:
+        sceneURL = sceneURL.lower()
+        if ('/trailers/' in sceneURL) and sceneURL not in searchResults:
+            searchResults.append(sceneURL)
+
+    for sceneURL in searchResults:
+        data = PAUtils.HTTPRequest(sceneURL)
+        if data:
+            searchResult = HTML.ElementFromString(data)
+
+            titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
+            curID = String.Encode(sceneURL)
+            releaseDate = parse(searchDate) if searchDate else ''
+
+            score = 100 - Util.LevenshteinDistance(searchTitle, titleNoFormatting)
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Girls Rimming]' % titleNoFormatting, score=score, lang=lang))
 
     return results
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('?','!')
-    detailsPageElements = HTML.ElementFromURL(url)
-    art = []
-    metadata.collections.clear()
-    movieGenres.clearGenres()
-    movieActors.clearActors()
+    metadata_id = str(metadata.id).split('|')
+    sceneURL = String.Decode(metadata_id[0])
+    sceneDate = metadata_id[2]
+    detailsPageElements = HTML.ElementFromURL(sceneURL)
 
     # Studio
     metadata.studio = 'Girls Rimming'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//body/div[@class="content"]//div[@class="item-info"]/h4/a')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h2[@class="title"]/text()')[0]
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//body/div[@class="content"]//div[@class="item-info"]/p')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]/@content')[0]
 
     #Tagline and Collection(s)
+    metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Genres
-    movieGenres.addGenre("Rim Job")
+    movieGenres.clearGenres()
+    actors = []
+
+    genres = detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].split(',')
+    for genreLink in genres:
+        genreName = genreLink.strip()
+        if ' Id ' in genreName:
+            actors.append(genreName)
+        else:
+            movieGenres.addGenre(genreName.title())
+
+    movieGenres.addGenre('Rim Job')
 
     # Release Date
-    date = detailsPageElements.xpath('//ul[@class="item-meta"]/li[1]')[0].text_content().replace('Release:','').strip()
-    if len(date) > 0:
-        date_object = datetime.strptime(date, '%B %d, %Y')
+    if sceneDate:
+        date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Actors
-    actors = detailsPageElements.xpath('//body/div[@class="content"]//div[@class="item-info"]/h5/a')
-    if len(actors) > 0:
-        if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
-        if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
-        if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="profile-pic"]/img')[0].get("src0_3x")
-            movieActors.addActor(actorName,actorPhotoURL)
+    movieActors.clearActors()
+    for actorLink in actors:
+        actorLink = actorLink.split(' Id ')
+        actorName = actorLink[0].strip()
+        actorPhotoURL = ''
 
-    ### Posters and artwork ###
+        actorPageURL = '%s/tour/models/%s.html' % (PAsearchSites.getSearchBaseURL(siteID), actorName.lower().replace(' ', '-'))
+        data = PAUtils.HTTPRequest(actorPageURL)
+        if data:
+            actorPage = HTML.ElementFromString(data)
+            actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
 
-    # Video trailer background image
-    try:
-        twitterBG = detailsPageElements.xpath('//div[@class="player-thumb"]/img')[0].get('src0_3x')
-        art.append(twitterBG)
-    except:
-        pass
+        movieActors.addActor(actorName, actorPhotoURL)
 
-    # Photos
-    photos = detailsPageElements.xpath('//div[@class="item-images"]/ul/li/a/img')
-    if len(photos) > 0:
-        for photoLink in photos:
-            photo = photoLink.get('src0_3x')
-            art.append(photo)
+    #Posters
+    art = [
+        detailsPageElements.xpath('//div[@id="fakeplayer"]//img/@src0_3x')[0]
+    ]
 
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
-                if width > 1 or height > width:
+                # Add the image proxy items to the collection
+                if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                if width > 100 and width > height:
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                if width > 100:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
                 pass
 

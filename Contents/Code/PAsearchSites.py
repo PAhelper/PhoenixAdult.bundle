@@ -76,8 +76,6 @@ import networkIntersec
 import networkCherryPimps
 import siteWicked
 import site18OnlyGirls
-import siteGirlsWay
-import siteEvilAngel
 import siteClubSeventeen
 import siteElegantAngel
 import siteReidMyLips
@@ -101,9 +99,10 @@ import networkTwoWebMedia
 import siteInterracialPass
 import network1service
 import networkTeamSkeet
+import networkGammaEntOther
 
 
-searchSites = [None] * 873
+searchSites = [None] * 875
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -157,7 +156,7 @@ searchSites[49] = ["Live Naughty Teacher","Live Naughty Teacher","https://tour.n
 searchSites[50] = ["Live Naughty Milf","Live Naughty Milf","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
 searchSites[51] = ["Live Naughty Nurse","Live Naughty Nurse","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
 searchSites[52] = ["Vixen","Vixen","http://www.vixen.com","http://www.vixen.com/api"]
-searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[53] = ["Girlsway","Girlsway","https://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[54] = ["Moms in Control","Moms in Control","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[55] = ["Pornstars Like It Big","Pornstars Like It Big","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[56] = ["Big Tits at Work","Big Tits at Work","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
@@ -242,7 +241,7 @@ searchSites[134] = ["Tugjobs","Tugjobs","https://bangbros.com","https://bangbros
 searchSites[135] = ["Working Latinas","Working Latinas","https://bangbros.com","https://bangbros.com/search/"]
 searchSites[136] = ["Tushy","Tushy","https://www.tushy.com","https://www.tushy.com/api"]
 searchSites[137] = ["Reality Kings","Reality Kings", "https://www.realitykings.com", "https://site-api.project1service.com"]
-searchSites[138] = ["40 Inch Plus", "https://www.realitykings.com", "https://site-api.project1service.com"]
+searchSites[138] = ["40 Inch Plus", "40 Inch Plus", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[139] = ["8th Street Latinas","8th Street Latinas", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[140] = ["Bad Tow Truck","Bad Tow Truck", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[141] = ["Big Naturals","Big Naturals", "https://www.realitykings.com", "https://site-api.project1service.com"]
@@ -287,39 +286,39 @@ searchSites[179] = ["Tranny Surprise","Tranny Surprise", "https://www.realitykin
 searchSites[180] = ["VIP Crew","VIP Crew", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[181] = ["We Live Together","We Live Together", "https://www.realitykings.com", "https://site-api.project1service.com"]
 searchSites[182] = ["Wives in Pantyhose","Wives in Pantyhose", "https://www.realitykings.com", "https://site-api.project1service.com"]
-searchSites[183] = ["21Naturals","21Naturals","https://www.21naturals.com","http://www.21naturals.com/en/search/"]
+searchSites[183] = ["21Naturals","21Naturals","https://www.21naturals.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[184] = ["PornFidelity","PornFidelity","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=2&page=1&search="]
 searchSites[185] = ["TeenFidelity","TeenFidelity","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=3&page=1&search="]
 searchSites[186] = ["Kelly Madison","Kelly Madison","https://www.pornfidelity.com","https://www.pornfidelity.com/episodes/search/?site=1&page=1&search="]
-searchSites[187] = ["TeamSkeet", "TeamSkeet", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[188] = ["Exxxtra Small","Exxxtra Small", "https://www.exxxtrasmall.com","https://tms-fuel-1.firebaseio.com/EXS-organic-ooJ4duo8"]
-searchSites[189] = ["Teen Pies","Teen Pies", "https://www.teenpies.com","https://tms-fuel-1.firebaseio.com/organic-tp-ka0WooXi"]
-searchSites[190] = ["Innocent High","Innocent High", "https://www.innocenthigh.com","https://tms-fuel-1.firebaseio.com/organic-ih-pouT0rah"]
-searchSites[191] = ["Teen Curves","Teen Curves", "https://www.teencurves.com/","https://tms-fuel-1.firebaseio.com/tc-organic-4dwlgywovp"]
-searchSites[192] = ["CFNM Teens","CFNM Teens", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[193] = ["Teens Love Anal","Teens Love Anal", "https://www.teensloveanal.com","https://tms-fuel-1.firebaseio.com/organic-tla-lee9eZee"]
-searchSites[194] = ["My Babysitters Club","My Babysitters Club", "https://www.mybabysittersclub.com","https://tms-fuel-1.firebaseio.com/organic-bsc-Ac5eich1"]
-searchSites[195] = ["She's New","She's New", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[196] = ["Teens Do Porn","Teens Do Porn", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[197] = ["POV Life","POV Life", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[198] = ["The Real Workout","The Real Workout", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[199] = ["This Girl Sucks","This Girl Sucks", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[200] = ["Teens Love Money","Teens Love Money", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[201] = ["Oye Loca","Oye Loca", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[202] = ["Titty Attack","Titty Attack", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[203] = ["Teeny Black","Teeny Black", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[204] = ["Lust HD","Lust HD", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[205] = ["Rub A Teen","Rub A Teen", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[206] = ["Her Freshman Year","Her Freshman Year", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[207] = ["Self Desire","Self Desire", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[208] = ["Solo Interviews","Solo Interviews", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[209] = ["Team Skeet Extras","Team Skeet Extras", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[210] = ["Dyked","Dyked", "https://www.dyked.com","https://tms-fuel-1.firebaseio.com/DYK-organic-kiedei7O"]
-searchSites[211] = ["Badmilfs","Badmilfs", "https://www.badmilfs.com","https://tms-fuel-1.firebaseio.com/Organic-bad-aiGhaiL5"]
-searchSites[212] = ["Gingerpatch","Gingerpatch", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[213] = ["BraceFaced","BraceFaced", "https://www.teamskeet.com","https://tms-fuel-1.firebaseio.com/ts-organic-UNieTh9i"]
-searchSites[214] = ["TeenJoi","TeenJoi", "https://www.teenjoi.com","ttps://tms-fuel-1.firebaseio.com/JOI-organic-q8uvjxl29p"]
-searchSites[215] = ["StepSiblings","StepSiblings", "https://www.stepsiblings.com","https://tms-fuel-1.firebaseio.com/organic-sss-no7OhCoo"]
+searchSites[187] = ["TeamSkeet", "TeamSkeet", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[188] = ["Exxxtra Small","Exxxtra Small", "https://www.exxxtrasmall.com","https://store.psmcdn.net/EXS-organic-ooJ4duo8"]
+searchSites[189] = ["Teen Pies","Teen Pies", "https://www.teenpies.com","https://store.psmcdn.net/organic-tp-ka0WooXi"]
+searchSites[190] = ["Innocent High","Innocent High", "https://www.innocenthigh.com","https://store.psmcdn.net/organic-ih-pouT0rah"]
+searchSites[191] = ["Teen Curves","Teen Curves", "https://www.teencurves.com/","https://store.psmcdn.net/tc-organic-4dwlgywovp"]
+searchSites[192] = ["CFNM Teens","CFNM Teens", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[193] = ["Teens Love Anal","Teens Love Anal", "https://www.teensloveanal.com","https://store.psmcdn.net/organic-tla-lee9eZee"]
+searchSites[194] = ["My Babysitters Club","My Babysitters Club", "https://www.mybabysittersclub.com","https://store.psmcdn.net/organic-bsc-Ac5eich1"]
+searchSites[195] = ["She's New","She's New", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[196] = ["Teens Do Porn","Teens Do Porn", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[197] = ["POV Life","POV Life", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[198] = ["The Real Workout","The Real Workout", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[199] = ["This Girl Sucks","This Girl Sucks", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[200] = ["Teens Love Money","Teens Love Money", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[201] = ["Oye Loca","Oye Loca", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[202] = ["Titty Attack","Titty Attack", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[203] = ["Teeny Black","Teeny Black", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[204] = ["Lust HD","Lust HD", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[205] = ["Rub A Teen","Rub A Teen", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[206] = ["Her Freshman Year","Her Freshman Year", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[207] = ["Self Desire","Self Desire", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[208] = ["Solo Interviews","Solo Interviews", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[209] = ["Team Skeet Extras","Team Skeet Extras", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[210] = ["Dyked","Dyked", "https://www.dyked.com","https://store.psmcdn.net/DYK-organic-kiedei7O"]
+searchSites[211] = ["Badmilfs","Badmilfs", "https://www.badmilfs.com","https://store.psmcdn.net/Organic-bad-aiGhaiL5"]
+searchSites[212] = ["Gingerpatch","Gingerpatch", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[213] = ["BraceFaced","BraceFaced", "https://www.teamskeet.com","https://store.psmcdn.net/ts-organic-UNieTh9i"]
+searchSites[214] = ["TeenJoi","TeenJoi", "https://www.teenjoi.com","https://store.psmcdn.net/JOI-organic-q8uvjxl29p"]
+searchSites[215] = ["StepSiblings","StepSiblings", "https://www.stepsiblings.com","https://store.psmcdn.net/organic-sss-no7OhCoo"]
 searchSites[216] = ["Lets Doe It","Let's Doe It", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[217] = ["The White Boxxx","The White Boxxx", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[218] = ["Scam Angels","Scam Angels", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
@@ -340,7 +339,7 @@ searchSites[232] = ["Tu Venganza","Tu Venganza", "https://letsdoeit.com","https:
 searchSites[233] = ["Bums Buero","Bums Buero", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[234] = ["Los Consoladores","Los Consoladores", "https://vipsexvault.com","https://vipsexvault.com/search.en.html?q="]
 searchSites[235] = ["Quest for Orgasm","Quest for Orgasm", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
-searchSites[236] = ["Trans Bella","Trans Bella", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
+searchSites[236] = ["Trans Bella","Trans Bella", "https://transbella.com","https://transbella.com/search.en.html?q="]
 searchSites[237] = ["Her Big Ass","Her Big Ass", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[238] = ["Horny Hostel","Horny Hostel", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[239] = ["Fucked In Traffic","Fucked In Traffic", "https://vipsexvault.com","https://vipsexvault.com/search.en.html?q="]
@@ -353,7 +352,7 @@ searchSites[245] = ["Porndoepedia","Porndoepedia", "https://vipsexvault.com","ht
 searchSites[246] = ["Casting Francais","Casting Francais", "https://amateureuro.com","https://amateureuro.com/search.en.html?q="]
 searchSites[247] = ["Bums Besuch","Bums Besuch", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[248] = ["Special Feet Force","Special Feet Force", "https://forbondage.com","https://forbondage.com/search.en.html?q"]
-searchSites[249] = ["Trans Taboo","Trans Taboo", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
+searchSites[249] = ["Trans Taboo","Trans Taboo", "https://transbella.com","https://transbella.com/search.en.html?q="]
 searchSites[250] = ["Operacion Limpieza","Operacion Limpieza", "https://letsdoeit.com","https://letsdoeit.com/search.en.html?q="]
 searchSites[251] = ["La Novice","La Novice", "https://amateureuro.com","https://amateureuro.com/search.en.html?q="]
 searchSites[252] = ["Casting Alla Italiana","Casting Alla Italiana", "https://amateureuro.com","https://amateureuro.com/search.en.html?q="]
@@ -381,11 +380,11 @@ searchSites[273] = ["Black is Better","Black is Better","https://www.babes.com",
 searchSites[274] = ["Elegant Anal","Elegant Anal","https://www.babes.com","https://site-api.project1service.com"]
 searchSites[275] = ["Office Obsession","Office Obsession","https://www.babes.com","https://site-api.project1service.com"]
 searchSites[276] = ["Stepmom Lessons","Stepmom Lessons","https://www.babes.com","https://site-api.project1service.com"]
-searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://www.evilangel.com/en/"]
+searchSites[277] = ["Evil Angel","Evil Angel","https://www.evilangel.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[278] = ["HardX","HardX","https://www.xempire.com","https://www.xempire.com/en/search/hardx/"]
 searchSites[279] = ["GloryHoleSecrets","GloryHoleSecrets","http://www.gloryholesecrets.com","http://www.gloryholesecrets.com/tour/search.php?query="]
 searchSites[280] = ["New Sensations","New Sensations","http://www.newsensations.com","https://www.newsensations.com/tour_ns/"]
-searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://www.puretaboo.com/en/search/"]
+searchSites[281] = ["Pure Taboo","Pure Taboo","https://www.puretaboo.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[282] = ["Swallowed","Swallowed","https://tour.swallowed.com","https://tour.swallowed.com/view/"]
 searchSites[283] = ["TrueAnal","TrueAnal","https://tour.trueanal.com","https://tour.trueanal.com/view/"]
 searchSites[284] = ["Nympho","Nympho","https://tour.nympho.com","https://tour.nympho.com/view/"]
@@ -469,27 +468,27 @@ searchSites[361] = ["Sweetheart Video","Sweetheart Video","https://www.milehighm
 searchSites[362] = ["Reality Junkies","Reality Junkies","http://www.milehighmedia.com","https://site-api.project1service.com"]
 searchSites[363] = ["SweetSinner","SweetSinner","https://www.milehighmedia.com","https://site-api.project1service.com"]
 searchSites[364] = ["Doghouse Digital","Doghouse Digital","http://www.milehighmedia.com","https://site-api.project1service.com"]
-searchSites[365] = ["21Sextury","21Sextury","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[366] = ["Anal Teen Angels","Anal Teen Angels","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[367] = ["Deepthroat Frenzy","Deepthroat Frenzy","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[368] = ["DP Fanatics","DP Fanatics","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[369] = ["Footsie Babes","Footsie Babes","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[370] = ["Gapeland","Gapeland","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[371] = ["Lez Cuties","Lez Cuties","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[372] = ["Pix and Video","Pix and Video","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
-searchSites[373] = ["21FootArt","21FootArt","http://www.21naturals.com","http://www.21naturals.com/en/search/"]
-searchSites[374] = ["21EroticAnal","21EroticAnal","http://www.21naturals.com","http://www.21naturals.com/en/search/"]
-searchSites[375] = ["Mommys Girl","Mommy's Girl","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[376] = ["Web Young","Web Young","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[377] = ["Girls Try Anal","Girls Try Anal","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[378] = ["Sextape Lesbians","Sextape Lesbians","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
-searchSites[379] = ["Girlsway Originals","Girlsway Originals","http://www.girlsway.com","https://www.girlsway.com/en/video/1/1/"]
+searchSites[365] = ["21Sextury","21Sextury","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[366] = ["Anal Teen Angels","Anal Teen Angels","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[367] = ["Deepthroat Frenzy","Deepthroat Frenzy","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[368] = ["DP Fanatics","DP Fanatics","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[369] = ["Footsie Babes","Footsie Babes","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[370] = ["Gapeland","Gapeland","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[371] = ["Lez Cuties","Lez Cuties","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[372] = ["Pix and Video","Pix and Video","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[373] = ["21FootArt","21FootArt","http://www.21naturals.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[374] = ["21EroticAnal","21EroticAnal","http://www.21naturals.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[375] = ["Mommys Girl","Mommy's Girl","http://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[376] = ["Web Young","Web Young","http://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[377] = ["Girls Try Anal","Girls Try Anal","http://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[378] = ["Sextape Lesbians","Sextape Lesbians","http://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[379] = ["Girlsway Originals","Girlsway Originals","http://www.girlsway.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[380] = ["Girlfriends Films","Girlfriends Films","http://www.girlfriendsfilms.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/query"]
-searchSites[381] = ["Burning Angel","Burning Angel","http://www.burningangel.com","http://www.burningangel.com/en/search/"]
+searchSites[381] = ["Burning Angel","Burning Angel","http://www.burningangel.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[382] = ["Pretty Dirty","Pretty Dirty","http://www.prettydirty.com","http://www.prettydirty.com/en/search/"]
-searchSites[383] = ["Devils Film","Devil's Film","http://www.devilsfilm.com","http://www.devilsfilm.com/en/search/"]
+searchSites[383] = ["Devils Film","Devil's Film","http://www.devilsfilm.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[384] = ["Peter North","Peter North","http://www.peternorth.com","http://www.peternorth.com/en/search/"]
-searchSites[385] = ["Rocco Siffredi","Rocco Siffredi","http://www.roccosiffredi.com","http://www.roccosiffredi.com/en/search/"]
+searchSites[385] = ["Rocco Siffredi","Rocco Siffredi","http://www.roccosiffredi.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[386] = ["Tera Patrick","Tera Patrick","http://www.terapatrick.com","http://www.terapatrick.com/en/search/"]
 searchSites[387] = ["Sunny Leone","Sunny Leone","http://www.sunnyleone.com","http://www.sunnyleone.com/en/search/scene/"]
 searchSites[388] = ["Lane Sisters","Lane Sisters","http://www.lanesisters.com","http://www.lanesisters.com/en/search/scene/"]
@@ -564,13 +563,13 @@ searchSites[456] = ["GiveMePink","GiveMePink", "https://www.perfectgonzo.com","h
 searchSites[457] = ["FistFlush","FistFlush", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=fistflush&q="]
 searchSites[458] = ["MilfThing","MilfThing", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=milfthing&q="]
 searchSites[459] = ["PerfectGonzoInterview","PerfectGonzoInterview", "https://www.perfectgonzo.com","https://www.perfectgonzo.com/movies?tag=interview&q="]
-searchSites[460] = ["21Sextreme","21Sextreme","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[461] = ["LustyGrandmas","LustyGrandmas","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[462] = ["GrandpasFuckTeens","GrandpasFuckTeens","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[463] = ["TeachMeFisting","TeachMeFisting","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[464] = ["Zoliboy","Zoliboy","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com","http://www.21sextreme.com/en/search/"]
-searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[460] = ["21Sextreme","21Sextreme","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[461] = ["LustyGrandmas","LustyGrandmas","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[462] = ["GrandpasFuckTeens","GrandpasFuckTeens","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[463] = ["TeachMeFisting","TeachMeFisting","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[464] = ["Zoliboy","Zoliboy","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[465] = ["DominatedGirls","DominatedGirls","http://www.21sextreme.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
+searchSites[466] = ["Asshole Fever","Asshole Fever","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[467] = ["Anal College","Anal College","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
 searchSites[468] = ["Watch Your Wife","Watch Your Wife","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
 searchSites[469] = ["BadoinkVR","BadoinkVR","https://www.badoinkvr.com","https://badoinkvr.com/vrpornvideos/search/"]
@@ -670,8 +669,8 @@ searchSites[562] = ["HD 19", "HD 19", "https://www.hd19.com","https://hd19.com/s
 searchSites[563] = ["Bella HD", "Bella HD", "https://www.bellahd.com","https://bellahd.com/search.php?query="]
 searchSites[564] = ["Amateur Allure", "Amateur Allure", "https://www.amateurallure.com","https://www.amateurallure.com/tour/search.php?st=advanced&cat%5B%5D=5&qany="]
 searchSites[565] = ["Swallow Salon", "Swallow Salon", "https://www.swallowsalon.com","https://www.swallowsalon.com/search.php?st=advanced&cat%5B%5D=5&format=h&qany="]
-searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://tms-fuel-1.firebaseio.com/BCG-organic-dhed18vuav"]
-searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://tms-fuel-1.firebaseio.com/SLM-organic-b75inmn9fu"]
+searchSites[566] = ["Black Valley Girls", "Black Valley Girls", "https://www.blackvalleygirls.com","https://store.psmcdn.net/BCG-organic-dhed18vuav"]
+searchSites[567] = ["Sis Loves Me", "Sis Loves Me", "https://www.sislovesme.com", "https://store.psmcdn.net/SLM-organic-b75inmn9fu"]
 searchSites[568] = ["Manyvids", "Manyvids", "https://www.manyvids.com", "https://www.manyvids.com/video/"]
 searchSites[569] = ["SinsVR","SinsVR","https://www.sinsvr.com","https://sinsvr.com/virtualreality/scene/id/"]
 searchSites[570] = ["StasyQ VR","StasyQ VR","https://www.stasyqvr.com","https://stasyqvr.com/virtualreality/scene/id/"]
@@ -730,7 +729,7 @@ searchSites[622] = ["TheLifeErotic","TheLifeErotic","https://www.thelifeerotic.c
 searchSites[623] = ["VivThomas","VivThomas","https://www.vivthomas.com","https://www.vivthomas.com/api"]
 searchSites[624] = ["Baeb","Baeb","http://www.baeb.com","http://baeb.com/video/"]
 searchSites[625] = ["Open Family","Open Family","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
-searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://tms-fuel-1.firebaseio.com/FS-organic-1rstmyhj44"]
+searchSites[626] = ["Family Strokes","Family Strokes","https://www.familystrokes.com","https://store.psmcdn.net/FS-organic-1rstmyhj44"]
 searchSites[627] = ["Tonights Girlfriend","Tonights Girlfriend","https://www.tonightsgirlfriend.com","https://www.tonightsgirlfriend.com/pornstar/"]
 searchSites[628] = ["KarupsPC","Karups Private Collection","https://www.karups.com","https://www.karups.com/models/search/"]
 searchSites[629] = ["KarupsHA","Karups Hometown Amateurs","https://www.karups.com","https://www.karups.com/models/search/"]
@@ -790,13 +789,13 @@ searchSites[682] = ["Lone Milf","Lone Milf","https://mylf.com","https://www.mylf
 searchSites[683] = ["Full Of JOI","Full Of JOI","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[684] = ["ManualAddActors","ManualAddActors","",""]
 searchSites[685] = ["First Anal Quest","First Anal Quest","http://www.firstanalquest.com","http://www.firstanalquest.com/search/?q="]
-searchSites[686] = ["PervMom","PervMom","https://www.pervmom.com","https://tms-fuel-1.firebaseio.com/PVM-organic-rg7wwuc7uh"]
+searchSites[686] = ["PervMom","PervMom","https://www.pervmom.com","https://store.psmcdn.net/PVM-organic-rg7wwuc7uh"]
 searchSites[687] = ["Chantas Bitches","Chantas Bitches","http://www.kink.com","http://www.kink.com/search?channelIds=chantasbitches&q="]
 searchSites[688] = ["Hegre","Hegre","http://www.hegre.com","http://www.hegre.com/search?q="]
 searchSites[689] = ["Femdom Empire","Femdom Empire","https://femdomempire.com","https://femdomempire.com/tour/search.php?st=advanced&qany="]
 searchSites[690] = ["Day With A Porn Star","Day With A Porn Star","http://www.brazzers.com","http://www.brazzers.com/search/all/?q="]
 searchSites[691] = ["Watch Your Mom","Watch Your Mom","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
-searchSites[692] = ["Butt Plays","Butt Plays","http://www.21sextury.com","http://www.21sextury.com/en/search/"]
+searchSites[692] = ["Butt Plays","Butt Plays","http://www.21sextury.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[693] = ["Dorcel Vision","Dorcel Vision","https://www.dorcelvision.com","https://www.dorcelvision.com/en/search?type=4&keyword="]
 searchSites[694] = ["Feminized","Feminized","http://feminized.com","http://feminized.com/tour/search.php?st=advanced&qany="]
 searchSites[695] = ["XConfessions","XConfessions","https://xconfessions.com","https://2rzi1cnto2-dsn.algolia.net/1/indexes/*/queries"]
@@ -853,7 +852,7 @@ searchSites[745] = ["GirlsOutWest","GirlsOutWest","https://tour.girlsoutwest.com
 searchSites[746] = ["Girls Rimming","Girls Rimming","https://www.girlsrimming.com","https://www.girlsrimming.com/tour/trailers/"]
 searchSites[747] = ["Gangbang Creampie","Gangbang Creampie","https://gangbangcreampie.com","https://gangbangcreampie.com/tour/search.php?query="]
 searchSites[749] = ["Show My BF","Show My BF","https://tour.naughtyamerica.com","https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries"]
-searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://tms-fuel-1.firebaseio.com/DC-organic-w8xs8e0dv3"]
+searchSites[748] = ["DadCrush","DadCrush","https://www.dadcrush.com","https://store.psmcdn.net/DC-organic-w8xs8e0dv3"]
 searchSites[750] = ["POV Massage","POV Massage","http://www.fantasymassage.com","http://www.fantasymassage.com/en/search/"]
 searchSites[751] = ["Step Secrets","Step Secrets","http://www.stepsecrets.com","https://stepsecrets.com/?query="]
 searchSites[752] = ["VRHush","VRHush","https://www.vrhush.com","https://vrhush.com/scenes/"]
@@ -911,7 +910,7 @@ searchSites[803] = ["ReidMyLips","ReidMyLips","https://www.reidmylips.com","http
 searchSites[804] = ["Playboy Plus","Playboy Plus","https://www.playboyplus.com","https://www.playboyplus.com/search"]
 searchSites[805] = ["Meana Wolf","Meana Wolf","https://meanawolf.elxcomplete.com","https://meanawolf.elxcomplete.com/search.php?query="]
 searchSites[806] = ["Transsensual","Transsensual","https://www.transsensual.com/","https://site-api.project1service.com"]
-searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://tms-fuel-1.firebaseio.com/DSW-organic-dfangeym88"]
+searchSites[807] = ["DaughterSwap","DaughterSwap","https://www.daughterswap.com","https://store.psmcdn.net/DSW-organic-dfangeym88"]
 searchSites[808] = ["Erito","Erito","https://www.erito.com","https://site-api.project1service.com"]
 searchSites[809] = ["True Amateurs","True Amateurs","https://www.trueamateurs.com","https://site-api.project1service.com"]
 searchSites[810] = ["Hustler","Hustler","https://hustler.com","https://hustler.com/search.php?query="]
@@ -929,10 +928,10 @@ searchSites[821] = ["Love Hairy","Love Hairy","https://www.lovehairy.com","https
 searchSites[822] = ["GF Revenge","GF Revenge","https://www.realitykings.com","https://site-api.project1service.com"]
 searchSites[823] = ["Black GFs","Black GFs","https://www.realitykings.com","https://site-api.project1service.com"]
 searchSites[824] = ["Dare Dorm","Dare Dorm","https://www.realitykings.com","https://site-api.project1service.com"]
-searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realitykings.com","site-api.project1service.com"]
-searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","site-api.project1service.com"]
-searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","site-api.project1service.com"]
-searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","site-api.project1service.com"]
+searchSites[825] = ["Crazy Asian GFs","Crazy Asian GFs","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[826] = ["Crazy College GFs","Crazy College GFs","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[827] = ["Horny Birds","Horny Birds","https://www.realitykings.com","https://site-api.project1service.com"]
+searchSites[828] = ["Reckless in Miami","Reckless in Miami","https://www.realitykings.com","https://site-api.project1service.com"]
 searchSites[829] = ["AmateurCFNM","AmateurCFNM","https://www.amateurcfnm.com/","https://www.amateurcfnm.com/models/"]
 searchSites[830] = ["PureCFNM","PureCFNM","https://www.purecfnm.com/","https://www.purecfnm.com/models/"]
 searchSites[831] = ["CFNMGames","CFNMGames","https://www.cfnmgames.com/","https://www.cfnmgames.com/models/"]
@@ -944,18 +943,18 @@ searchSites[836] = ["ATKGirlfriends","ATKGirlfriends","https://www.atkgirlfriend
 searchSites[837] = ["Wank It Now","Wank It Now","https://www.wankitnow.com","https://www.wankitnow.com/?s="]
 searchSites[838] = ["Bopping Babes","Bopping Babes","https://www.boppingbabes.com","https://www.boppingbabes.com/v2/?s="]
 searchSites[839] = ["Upskirt Jerk","Upskirt Jerk","https://www.upskirtjerk.com","https://www.upskirtjerk.com/?s="]
-searchSites[840] = ["Interracial Pass","Interracial Pass","hhttps://www.interracialpass.com","https://www.interracialpass.com/newtour/search.php?query="]
+searchSites[840] = ["Interracial Pass","Interracial Pass","https://www.interracialpass.com","https://www.interracialpass.com/t1/search.php?query="]
 searchSites[841] = ["LookAtHerNow","LookAtHerNow","https://www.lookathernow.com","https://site-api.project1service.com"]
 searchSites[842] = ["Mylfwood","Mylfwood","https://www.mylf.com","https://www.mylf.com/movies/"]
 searchSites[843] = ["AllBlackX","AllBlackX","https://www.xempire.com","https://www.xempire.com/en/search/allblackx/"]
 searchSites[844] = ["BBCPie","BBCPie","https://bbcpie.com","https://bbcpie.com/video/"]
-searchSites[845] = ["Foster Tapes","Foster Tapes","https://www.fostertapes.com","https://tms-fuel-1.firebaseio.com/FOS-organic-n5oaginage"]
-searchSites[846] = ["BFFs","BFFs","https://www.bffs.com","https://tms-fuel-1.firebaseio.com/BFFS-organic-7o68xoev0j"]
-searchSites[847] = ["Shoplyfter","Shoplyfter","https://www.shoplyfter.com","https://tms-fuel-1.firebaseio.com/SHL-organic-driobt7t0f"]
-searchSites[848] = ["ShoplyfterMylf","ShoplyfterMylf","https://www.shoplyftermylf.com","https://tms-fuel-1.firebaseio.com/MSL-organic-ws9h564all"]
-searchSites[849] = ["Little Asians","Little Asians","https://www.littleasians.com","https://tms-fuel-1.firebaseio.com/LAS-organic-whlghevsfs"]
-searchSites[850] = ["Thickumz","Thickumz","https://www.thickumz.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
-searchSites[851] = ["Teens Love Black Cocks","Teens Love Black Cocks","https://www.teensloveblackcocks.com","https://tms-fuel-1.firebaseio.com/TMZ-organic-958spxinbs"]
+searchSites[845] = ["Foster Tapes","Foster Tapes","https://www.fostertapes.com","https://store.psmcdn.net/FOS-organic-n5oaginage"]
+searchSites[846] = ["BFFs","BFFs","https://www.bffs.com","https://store.psmcdn.net/BFFS-organic-7o68xoev0j"]
+searchSites[847] = ["Shoplyfter","Shoplyfter","https://www.shoplyfter.com","https://store.psmcdn.net/SHL-organic-driobt7t0f"]
+searchSites[848] = ["ShoplyfterMylf","ShoplyfterMylf","https://www.shoplyftermylf.com","https://store.psmcdn.net/MSL-organic-ws9h564all"]
+searchSites[849] = ["Little Asians","Little Asians","https://www.littleasians.com","https://store.psmcdn.net/LAS-organic-whlghevsfs"]
+searchSites[850] = ["Thickumz","Thickumz","https://www.thickumz.com","https://store.psmcdn.net/TMZ-organic-958spxinbs"]
+searchSites[851] = ["Teens Love Black Cocks","Teens Love Black Cocks","https://www.teensloveblackcocks.com","https://store.psmcdn.net/TLBC-organic-w8bw4yp9io"]
 searchSites[852] = ["Bi Empire","Bi Empire","http://www.biempire.com","https://site-api.project1service.com"]
 searchSites[853] = ["Mylf x Joybear","Mylf x Joybear","https://mylf.com","https://www.mylf.com/movies/"]
 searchSites[854] = ["Mylf x Teamskeet","Mylf x Teamskeet","https://mylf.com","https://www.mylf.com/movies/"]
@@ -977,6 +976,8 @@ searchSites[869] = ["We Like To Suck","We Like To Suck","https://www.puffynetwor
 searchSites[870] = ["Euro Babe Facials","Euro Babe Facials","https://www.puffynetwork.com/","https://www.puffynetwork.com/videos?search="]
 searchSites[871] = ["Slime Wave","Slime Wave","https://sinx.com","https://www.sinx.com/videos/all?sexualOrientation=0&searchWord="]
 searchSites[872] = ["Kinky Spa","Kinky Spa","https://www.kinkyspa.com/","https://site-api.project1service.com"]
+searchSites[873] = ["SubmissiveX","SubmissiveX","http://www.kink.com","http://www.kink.com/search?channelIds=submissivex&q="]
+searchSites[874] = ["Filthy Femdom","Filthy Femdom","http://www.kink.com","http://www.kink.com/search?channelIds=filthyfemdom&q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1069,19 +1070,19 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcasting ', 'BangCasting ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bconfessions ', 'BangConfessions ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bglamkore ', 'BangGlamkore ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bgonzo ', 'BangGonzo ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^brealteens ', 'BangRealTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bcb ', 'BigCockBully ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bch ', 'BigCockHero ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^bconfessions ', 'BangConfessions ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bdpov ', 'BadDaddyPOV ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bex ', 'BrazzersExxtra ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bgb ', 'BabyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bgbs ', 'BoundGangbangs ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^bglamkore ', 'BangGlamkore ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^bgonzo ', 'BangGonzo ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bin ', 'BigNaturals ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bjf ', 'BlowjobFridays ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^bp ', 'ButtPlays ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^brealteens ', 'BangRealTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btas ', 'BigTitsatSchool ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btaw ', 'BigTitsatWork ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^btc', 'BigTitCreampie ', mediaTitle, flags=re.IGNORECASE)
@@ -1094,8 +1095,8 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^clip ', 'LegalPorno ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cps ', 'CherryPimps ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^cuf ', 'CumFiesta ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^css ', 'CzechStreets ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^cuf ', 'CumFiesta ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^cws ', 'CzechWifeSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^Daughter ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
@@ -1106,9 +1107,9 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^dsw ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dwc ', 'DirtyWivesClub ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^dwp ', 'DayWithAPornstar ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dsw ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^esp ', 'EuroSexParties ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ete ', 'EuroTeenErotica ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ext ', 'ExxxtraSmall ', mediaTitle, flags=re.IGNORECASE)
@@ -1119,15 +1120,15 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^fhd ', 'FantasyHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fhl ', 'FakeHostel ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fho ', 'FakehubOriginals ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^fittingroom ', 'Fitting-Room ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fka ', 'FakeAgent ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fm ', 'FuckingMachines ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^fms ', 'FantasyMassage ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^frs ', 'FitnessRooms ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ft ', 'FastTimes ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ftx ', 'FakeTaxi ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fittingroom ', 'Fitting-Room ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^gft ', 'GrandpasFuckTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gbcp ', 'GangbangCreampie ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^gft ', 'GrandpasFuckTeens ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gta ', 'GirlsTryAnal ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^gw ', 'GirlsWay ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^h1o1 ', 'Housewife1on1 ', mediaTitle, flags=re.IGNORECASE)
@@ -1146,6 +1147,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^kow ', 'KarupsOW ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^kpc ', 'KarupsPC ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^la ', 'LatinAdultery ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^latn ', 'LookAtHerNow ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^lhf ', 'LoveHerFeet ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
@@ -1167,6 +1169,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^mgbf ', 'MyGirlfriendsBustyFriend ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^mih ', 'MilfHunter ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
@@ -1199,6 +1202,7 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^pav ', 'PixAndVideo ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pc ', 'PrincessCum ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^pdmcl ', 'ChicasLoca ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^pf ', 'PornFidelity ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^phd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^phdp ', 'PetiteHDPorn ', mediaTitle, flags=re.IGNORECASE)
@@ -1249,8 +1253,8 @@ def getSearchSettings(mediaTitle):
     mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
     mediaTitle = re.sub('^ztod ', 'ZeroTolerance ', mediaTitle, flags=re.IGNORECASE)
+    mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
@@ -1288,13 +1292,14 @@ def getSearchSettings(mediaTitle):
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
             Log("4")
         else:
-            title = re.sub(r"(\d+) (\d+)", r"\1:\2", mediaTitle.title()).replace(" ", "").replace(".com", "").replace("'", "")
-            site = re.sub(r"(\d+) (\d+)", r"\1:\2", searchSites[searchSiteID][0]).lower().replace(" ", "").replace("'", "").replace("-", "")
+            title = re.sub(r"(\d+)", r":\1", mediaTitle.title()).replace(" ", "").replace(".com", "").replace("'", "")
+            site = re.sub(r"(\d+)", r":\1", searchSites[searchSiteID][0]).lower().replace(" ", "").replace("'", "").replace("-", "")
             if title.lower().startswith(site):
                 searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE).strip()
                 searchTitle = re.sub(r"(\w)([A-Z])", r"\1 \2", searchTitle)
                 searchTitle = re.sub(r"(\d+)", r" \1", searchTitle)
                 searchTitle = searchTitle.replace(':', '')
+                searchTitle = ' '.join(searchTitle.split())
                 Log("5")
             else:
                 searchTitle = mediaTitle
@@ -1342,7 +1347,7 @@ def getSearchSettings(mediaTitle):
 
 def posterAlreadyExists(posterUrl,metadata):
     for p in metadata.posters.keys():
-        Log(p.lower())
+        # Log(p.lower())
         if p.lower() == posterUrl.lower():
             Log("Found " + posterUrl + " in posters collection")
             return True

@@ -1,13 +1,14 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
 def getDatafromAPI(url):
-    req = urllib.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
-    data = urllib.urlopen(req).read()
+    data = PAutils.HTTPRequest(url)
 
-    return json.loads(data)['data']
+    if data:
+        return json.loads(data)['data']
+    return data
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
@@ -17,17 +18,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + encodedTitle
 
     searchResults = getDatafromAPI(url)
-    for searchResult in searchResults['videos']:
-        titleNoFormatting = searchResult['title']
-        releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
-        curID = searchResult['targetUrl'].replace('/', '$').replace('?', '!')
+    if searchResults:
+        for searchResult in searchResults['videos']:
+            titleNoFormatting = searchResult['title']
+            releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
+            curID = searchResult['targetUrl'].replace('/', '$').replace('?', '!')
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -36,7 +38,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0].replace('$', '/').replace('?', '!')
     url = PAsearchSites.getSearchSearchURL(siteID) + sceneName
-    
+
     detailsPageElements = getDatafromAPI(url)
     video = detailsPageElements['video']
     pictureset = detailsPageElements['pictureset']
@@ -59,7 +61,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     director = metadata.directors.new()
     director.name = video['directorNames']
 
-     # Tagline and Collection(s)
+    # Tagline and Collection(s)
     metadata.collections.clear()
     metadata.collections.add(metadata.studio)
 

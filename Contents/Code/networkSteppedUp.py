@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     for searchResult in searchResults.xpath('//div[@class="content-meta"]'):
         titleNoFormatting = searchResult.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
         curID = (PAsearchSites.getSearchSearchURL(siteNum) + searchString).replace('/','_').replace('?','!')
-        releaseDate = parse(searchResult.xpath('//span[contains(@class,"date")]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        releaseDate = parse(searchResult.xpath('//span[contains(@class,"date")] | //span[contains(@class,"hide")]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -60,7 +60,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.addGenre('heterosexual')
 
     # Release Date
-    date = detailsPageElements.xpath('//span[contains(@class,"date")]')
+    date = detailsPageElements.xpath('//span[contains(@class,"date")] | //span[contains(@class,"hide")]')
     if len(date) > 0:
         date = date[0].text_content().strip()
         date_object = parse(date)

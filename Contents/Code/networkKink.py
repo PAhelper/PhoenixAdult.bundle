@@ -114,6 +114,10 @@ def update(metadata,siteID,movieGenres,movieActors):
         tagline = "Fucked and Bound"
     elif "captivemale" in channel:
         tagline = "Captive Male"
+    elif "submissivex" in channel:
+        tagline = "SubmissiveX"
+    elif "filthyfemdom" in channel:
+        tagline = "Filthy Femdom"
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
