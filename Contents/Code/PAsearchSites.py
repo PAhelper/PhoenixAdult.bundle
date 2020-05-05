@@ -943,7 +943,7 @@ searchSites[836] = ["ATKGirlfriends","ATKGirlfriends","https://www.atkgirlfriend
 searchSites[837] = ["Wank It Now","Wank It Now","https://www.wankitnow.com","https://www.wankitnow.com/?s="]
 searchSites[838] = ["Bopping Babes","Bopping Babes","https://www.boppingbabes.com","https://www.boppingbabes.com/v2/?s="]
 searchSites[839] = ["Upskirt Jerk","Upskirt Jerk","https://www.upskirtjerk.com","https://www.upskirtjerk.com/?s="]
-searchSites[840] = ["Interracial Pass","Interracial Pass","https://www.interracialpass.com","https://www.interracialpass.com/newtour/search.php?query="]
+searchSites[840] = ["Interracial Pass","Interracial Pass","https://www.interracialpass.com","https://www.interracialpass.com/t1/search.php?query="]
 searchSites[841] = ["LookAtHerNow","LookAtHerNow","https://www.lookathernow.com","https://site-api.project1service.com"]
 searchSites[842] = ["Mylfwood","Mylfwood","https://www.mylf.com","https://www.mylf.com/movies/"]
 searchSites[843] = ["AllBlackX","AllBlackX","https://www.xempire.com","https://www.xempire.com/en/search/allblackx/"]
