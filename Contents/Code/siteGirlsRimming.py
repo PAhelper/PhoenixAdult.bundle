@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import PAUtils
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
