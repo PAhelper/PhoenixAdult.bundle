@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     for sceneURL in searchResults:
         data = PAutils.HTTPRequest(sceneURL)
-         if data and data != 'Page not found':
+        if data and data != 'Page not found':
             searchResult = HTML.ElementFromString(data)
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
@@ -84,9 +84,16 @@ def update(metadata,siteID,movieGenres,movieActors):
 
         actorPageURL = '%s/tour/models/%s.html' % (PAsearchSites.getSearchBaseURL(siteID), actorName.lower().replace(' ', '-'))
         data = PAutils.HTTPRequest(actorPageURL)
-        if data:
-            actorPage = HTML.ElementFromString(data)
-            actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
+        if not data or data == 'Page not found':
+            googleResults = PAutils.getFromGoogleSearch(actorName, siteID)
+            for actorURL in googleResults:
+                actorURL = actorURL.lower()
+                if ('/models/' in actorURL):
+                    data = PAutils.HTTPRequest(actorURL)
+                    break
+
+        actorPage = HTML.ElementFromString(data)
+        actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 
