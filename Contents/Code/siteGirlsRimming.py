@@ -11,14 +11,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     directURL = '%s%s.html' % (PAsearchSites.getSearchSearchURL(siteNum), searchTitle.lower().replace(' ', '-'))
     searchResults = [directURL]
 
-    googleResults = PAUtils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.lower()
         if ('/trailers/' in sceneURL) and sceneURL not in searchResults:
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
-        data = PAUtils.HTTPRequest(sceneURL)
+        data = PAutils.HTTPRequest(sceneURL)
         if data:
             searchResult = HTML.ElementFromString(data)
 
@@ -83,7 +83,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorPhotoURL = ''
 
         actorPageURL = '%s/tour/models/%s.html' % (PAsearchSites.getSearchBaseURL(siteID), actorName.lower().replace(' ', '-'))
-        data = PAUtils.HTTPRequest(actorPageURL)
+        data = PAutils.HTTPRequest(actorPageURL)
         if data:
             actorPage = HTML.ElementFromString(data)
             actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
