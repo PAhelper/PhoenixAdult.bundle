@@ -31,7 +31,15 @@ class PhoenixAdultAgent(Agent.Movies):
         title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
-        title = title.replace('"', '').replace(":", "").replace("!", "").replace("[", "").replace("]", "").replace("(", "").replace(")", "").replace("&", "").replace('RARBG.COM', '').replace('RARBG', '').replace('180 180x180', '').replace('180x180', '').replace('Hevc', '').replace('H265', '').replace('Avc', '').replace('5k', '').replace(' 4k', '').replace('.4k', '').replace('2300p60', '').replace('2160p60', '').replace('1920p60', '').replace('1600p60', '').replace('2300p', '').replace('2160p', '').replace('1900p', '').replace('1600p', '').replace('1080p', '').replace('720p', '').replace('480p', '').replace('540p', '').replace('3840x1920', '').replace('5400x2700', '').replace(' XXX', ' ').replace('Ktr ', '').replace('MP4-KTR', '').replace('Oro ', '').replace('Sexors', '').replace('3dh', '').replace('Oculus', '').replace('Oculus5k', '').replace('Lr', '').replace('-180_', '').replace('TOWN.AG_', '').strip()
+
+        trashTitle = (
+            'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD'
+        )
+
+        title = re.sub(r'\W', ' ', title)
+        for trash in trashTitle:
+            title = re.sub(r'\b%s\b' % trash, '', title, flags=re.IGNORECASE)
+        title = ' '.join(title.split())
 
         Log('*******MEDIA TITLE****** ' + str(title))
 

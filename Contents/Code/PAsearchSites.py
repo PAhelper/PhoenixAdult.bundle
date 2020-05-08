@@ -1057,209 +1057,216 @@ def getSearchSettings(mediaTitle):
     # Search Site abbreviations
     # Using Regex instead of .replace or .startswith so it can be case insensitive
     Log("mediaTitle w/ possible abbreviation: " + mediaTitle)
-    mediaTitle = re.sub('^18og ', '18OnlyGirls ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^18yo ', '18YearsOld ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^1kf ', '1000Facials ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^21ea ', '21EroticAnal ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^21fa ', '21FootArt ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^21n ', '21Naturals ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^2cst ', '2ChicksSameTime ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^a1o1 ', 'Asian1on1 ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^aa ', 'AmateurAllure ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ad ', 'AmericanDaydreams ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^add ', 'ManualAddActors ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^agm ', 'AllGirlMassage ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^am ', 'AssMasterpiece ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^analb ', 'AnalBeauty ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ap ', 'AssParade ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^baebz ', 'Baeb ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bblib ', 'BigButtsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bcasting ', 'BangCasting ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bcb ', 'BigCockBully ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bch ', 'BigCockHero ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bconfessions ', 'BangConfessions ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bdpov ', 'BadDaddyPOV ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bex ', 'BrazzersExxtra ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bgb ', 'BabyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bgbs ', 'BoundGangbangs ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bglamkore ', 'BangGlamkore ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bgonzo ', 'BangGonzo ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bin ', 'BigNaturals ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bjf ', 'BlowjobFridays ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bp ', 'ButtPlays ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^brealteens ', 'BangRealTeens ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btas ', 'BigTitsatSchool ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btaw ', 'BigTitsatWork ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btc', 'BigTitCreampie ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btis ', 'BigTitsinSports ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btiu ', 'BigTitsinUniform ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btlbd ', 'BigTitsLikeBigDicks ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^btra ', 'BigTitsRoundAsses ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^burna ', 'BurningAngel ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^bwb ', 'BigWetButts ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^cfnm ', 'ClothedFemaleNudeMale ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^clip ', 'LegalPorno ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^cps ', 'CherryPimps ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^css ', 'CzechStreets ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^cuf ', 'CumFiesta ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^cws ', 'CzechWifeSwap ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^da ', 'DoctorAdventures ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^Daughter ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^Daughters ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dbm ', 'DontBreakMe ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dc ', 'DorcelVision ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ddfb ', 'DDFBusty ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dm ', 'DirtyMasseur ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dnj ', 'DaneJones ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dpg ', 'DigitalPlayground ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dsw ', 'DaughterSwap ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dwc ', 'DirtyWivesClub ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^dwp ', 'DayWithAPornstar ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^esp ', 'EuroSexParties ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ete ', 'EuroTeenErotica ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ext ', 'ExxxtraSmall ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fams ', 'FamilyStrokes ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^faq ', 'FirstAnalQuest ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fds ', 'FakeDrivingSchool ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fft ', 'FemaleFakeTaxi ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fhd ', 'FantasyHD ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fhl ', 'FakeHostel ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fho ', 'FakehubOriginals ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fittingroom ', 'Fitting-Room ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fka ', 'FakeAgent ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fm ', 'FuckingMachines ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^fms ', 'FantasyMassage ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^frs ', 'FitnessRooms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ft ', 'FastTimes ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ftx ', 'FakeTaxi ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^gbcp ', 'GangbangCreampie ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^gft ', 'GrandpasFuckTeens ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^gta ', 'GirlsTryAnal ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^gw ', 'GirlsWay ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^h1o1 ', 'Housewife1on1 ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ham ', 'HotAndMean ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hart ', 'Hegre ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hcm ', 'HotCrazyMess ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hegre-art ', 'Hegre ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hoh ', 'HandsOnHardcore ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hotab ', 'HouseofTaboo ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ht ', 'Hogtied ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^hustl3r ', 'Hustler ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ihaw ', 'IHaveAWife ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^iktg ', 'IKnowThatGirl ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^il ', 'ImmoralLive ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^kha ', 'KarupsHA ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^kow ', 'KarupsOW ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^kpc ', 'KarupsPC ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^la ', 'LatinAdultery ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^latn ', 'LookAtHerNow ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^lcd ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^lhf ', 'LoveHerFeet ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^littlecapricedreams ', 'LittleCaprice ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^lsb ', 'Lesbea ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^lst ', 'LatinaSexTapes ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^lta ', 'LetsTryAnal ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^maj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mbb ', 'MommyBlowsBest ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mbt ', 'MomsBangTeens ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mc ', 'MassageCreep ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mcu ', 'MonsterCurves ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mdhf ', 'MyDaughtersHotFriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mdhg ', 'MyDadsHotGirlfriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mfa ', 'ManuelFerrara ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mfhg ', 'MyFriendsHotGirl ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mfhm ', 'MyFriendsHotMom ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mfl ', 'Mofos ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mfst ', 'MyFirstSexTeacher ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mgbf ', 'MyGirlfriendsBustyFriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mgb ', 'MommyGotBoobs ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mic ', 'MomsInControl ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mih ', 'MilfHunter ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mj ', 'ManoJob ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mlib ', 'MilfsLikeItBig ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mlt ', 'MomsLickTeens ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mmgs ', 'MommysGirl ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mmts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mnm ', 'MyNaughtyMassage ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mom ', 'MomXXX ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mpov ', 'MrPOV ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mr ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mrs ', 'MassageRooms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mshf ', 'MySistersHotFriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mts ', 'MomsTeachSex ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mvft ', 'MyVeryFirstTime ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^mwhf ', 'MyWifesHotFriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^naf ', 'NeighborAffair ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nam ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^na ', 'NaughtyAthletics ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^naughtyamericavr ', 'NaughtyAmerica ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nb ', 'NaughtyBookworms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^news ', 'NewSensations ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nf ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^no ', 'NaughtyOffice ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nrg ', 'NaughtyRichGirls ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nubilef ', 'NubileFilms ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^num ', 'NuruMassage ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^nw ', 'NaughtyWeddings ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^obj ', 'OnlyBlowjob ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^otb ', 'OnlyTeenBlowjobs ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^passion-hd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pav ', 'PixAndVideo ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pba ', 'PublicAgent ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pc ', 'PrincessCum ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pdmcl ', 'ChicasLoca ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pf ', 'PornFidelity ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^phd ', 'PassionHD ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^phdp ', 'PetiteHDPorn ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^plib ', 'PornstarsLikeitBig ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pop ', 'PervsOnPatrol ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ppu ', 'PublicPickups ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^prdi ', 'PrettyDirty ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ps ', 'PropertySex ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ptt ', 'Petite ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^pud ', 'PublicDisgrace ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^reg ', 'RealExGirlfriends ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^rkp ', 'RKPrime ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^rws ', 'RealWifeStories ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^saf ', 'ShesAFreak ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sart ', 'SexArt ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sas ', 'SexandSubmission ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sbj ', 'StreetBlowjobs ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub("^Shes New ", "She's New ", mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sins ', 'SinsLife ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sislove ', 'SisLovesMe ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^smb ', 'ShareMyBF ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ssc ', 'StepSiblingsCaught ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ssn ', 'ShesNew ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^sts ', 'StrandedTeens ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^swsn ', 'SwallowSalon ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tdp ', 'TeensDoPorn ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tds ', 'TheDickSuckers ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ted ', 'Throated ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tf ', 'TeenFidelity ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tgs ', 'ThisGirlSucks ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^these ', 'TheStripperExperience ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tla ', 'TeensLoveAnal ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tlc ', 'TeensLoveCream ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tle ', 'TheLifeErotic ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tlhc ', 'TeensLoveHugeCocks ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tlib ', 'TeensLikeItBig ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tlm ', 'TeensLoveMoney ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^togc ', 'TonightsGirlfriendClassic ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tog ', 'TonightsGirlfriend ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tspa ', 'TrickySpa ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tss ', 'ThatSitcomShow ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^tuf ', 'TheUpperFloor ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wa ', 'WhippedAss ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wfbg ', 'WeFuckBlackGirls ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wkp ', 'Wicked ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wlt ', 'WeLiveTogether ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^woc ', 'WildOnCam ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wov ', 'WivesOnVacation ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wowg ', 'WowGirls ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^wy ', 'WebYoung ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^ztod ', 'ZeroTolerance ', mediaTitle, flags=re.IGNORECASE)
-    mediaTitle = re.sub('^zzs ', 'ZZseries ', mediaTitle, flags=re.IGNORECASE)
+    abbreviations = (
+        ('^18og ', '18OnlyGirls '),
+        ('^18yo ', '18YearsOld '),
+        ('^1kf ', '1000Facials '),
+        ('^21ea ', '21EroticAnal '),
+        ('^21fa ', '21FootArt '),
+        ('^21n ', '21Naturals '),
+        ('^2cst ', '2ChicksSameTime '),
+        ('^a1o1 ', 'Asian1on1 '),
+        ('^aa ', 'AmateurAllure '),
+        ('^ad ', 'AmericanDaydreams '),
+        ('^add ', 'ManualAddActors '),
+        ('^agm ', 'AllGirlMassage '),
+        ('^am ', 'AssMasterpiece '),
+        ('^analb ', 'AnalBeauty '),
+        ('^ap ', 'AssParade '),
+        ('^baebz ', 'Baeb '),
+        ('^bblib ', 'BigButtsLikeItBig '),
+        ('^bcasting ', 'BangCasting '),
+        ('^bcb ', 'BigCockBully '),
+        ('^bch ', 'BigCockHero '),
+        ('^bconfessions ', 'BangConfessions '),
+        ('^bdpov ', 'BadDaddyPOV '),
+        ('^bex ', 'BrazzersExxtra '),
+        ('^bgb ', 'BabyGotBoobs '),
+        ('^bgbs ', 'BoundGangbangs '),
+        ('^bglamkore ', 'BangGlamkore '),
+        ('^bgonzo ', 'BangGonzo '),
+        ('^bin ', 'BigNaturals '),
+        ('^bjf ', 'BlowjobFridays '),
+        ('^bp ', 'ButtPlays '),
+        ('^brealteens ', 'BangRealTeens '),
+        ('^btas ', 'BigTitsatSchool '),
+        ('^btaw ', 'BigTitsatWork '),
+        ('^btc', 'BigTitCreampie '),
+        ('^btis ', 'BigTitsinSports '),
+        ('^btiu ', 'BigTitsinUniform '),
+        ('^btlbd ', 'BigTitsLikeBigDicks '),
+        ('^btra ', 'BigTitsRoundAsses '),
+        ('^burna ', 'BurningAngel '),
+        ('^bwb ', 'BigWetButts '),
+        ('^cfnm ', 'ClothedFemaleNudeMale '),
+        ('^clip ', 'LegalPorno '),
+        ('^cps ', 'CherryPimps '),
+        ('^css ', 'CzechStreets '),
+        ('^cuf ', 'CumFiesta '),
+        ('^cws ', 'CzechWifeSwap '),
+        ('^da ', 'DoctorAdventures '),
+        ('^Daughter ', 'DaughterSwap '),
+        ('^Daughters ', 'DaughterSwap '),
+        ('^dbm ', 'DontBreakMe '),
+        ('^dc ', 'DorcelVision '),
+        ('^ddfb ', 'DDFBusty '),
+        ('^dm ', 'DirtyMasseur '),
+        ('^dnj ', 'DaneJones '),
+        ('^dpg ', 'DigitalPlayground '),
+        ('^dsw ', 'DaughterSwap '),
+        ('^dwc ', 'DirtyWivesClub '),
+        ('^dwp ', 'DayWithAPornstar '),
+        ('^esp ', 'EuroSexParties '),
+        ('^ete ', 'EuroTeenErotica '),
+        ('^ext ', 'ExxxtraSmall '),
+        ('^fams ', 'FamilyStrokes '),
+        ('^faq ', 'FirstAnalQuest '),
+        ('^fds ', 'FakeDrivingSchool '),
+        ('^fft ', 'FemaleFakeTaxi '),
+        ('^fhd ', 'FantasyHD '),
+        ('^fhl ', 'FakeHostel '),
+        ('^fho ', 'FakehubOriginals '),
+        ('^fittingroom ', 'Fitting-Room '),
+        ('^fka ', 'FakeAgent '),
+        ('^fm ', 'FuckingMachines '),
+        ('^fms ', 'FantasyMassage '),
+        ('^frs ', 'FitnessRooms '),
+        ('^ft ', 'FastTimes '),
+        ('^ftx ', 'FakeTaxi '),
+        ('^gbcp ', 'GangbangCreampie '),
+        ('^gft ', 'GrandpasFuckTeens '),
+        ('^gta ', 'GirlsTryAnal '),
+        ('^gw ', 'GirlsWay '),
+        ('^h1o1 ', 'Housewife1on1 '),
+        ('^ham ', 'HotAndMean '),
+        ('^hart ', 'Hegre '),
+        ('^hcm ', 'HotCrazyMess '),
+        ('^hegre-art ', 'Hegre '),
+        ('^hoh ', 'HandsOnHardcore '),
+        ('^hotab ', 'HouseofTaboo '),
+        ('^ht ', 'Hogtied '),
+        ('^hustl3r ', 'Hustler '),
+        ('^ihaw ', 'IHaveAWife '),
+        ('^iktg ', 'IKnowThatGirl '),
+        ('^il ', 'ImmoralLive '),
+        ('^kha ', 'KarupsHA '),
+        ('^kow ', 'KarupsOW '),
+        ('^kpc ', 'KarupsPC '),
+        ('^la ', 'LatinAdultery '),
+        ('^latn ', 'LookAtHerNow '),
+        ('^lcd ', 'LittleCaprice '),
+        ('^lhf ', 'LoveHerFeet '),
+        ('^littlecapricedreams ', 'LittleCaprice '),
+        ('^lsb ', 'Lesbea '),
+        ('^lst ', 'LatinaSexTapes '),
+        ('^lta ', 'LetsTryAnal '),
+        ('^maj ', 'ManoJob '),
+        ('^mbb ', 'MommyBlowsBest '),
+        ('^mbt ', 'MomsBangTeens '),
+        ('^mc ', 'MassageCreep '),
+        ('^mcu ', 'MonsterCurves '),
+        ('^mdhf ', 'MyDaughtersHotFriend '),
+        ('^mdhg ', 'MyDadsHotGirlfriend '),
+        ('^mfa ', 'ManuelFerrara '),
+        ('^mfhg ', 'MyFriendsHotGirl '),
+        ('^mfhm ', 'MyFriendsHotMom '),
+        ('^mfl ', 'Mofos '),
+        ('^mfst ', 'MyFirstSexTeacher '),
+        ('^mgbf ', 'MyGirlfriendsBustyFriend '),
+        ('^mgb ', 'MommyGotBoobs '),
+        ('^mic ', 'MomsInControl '),
+        ('^mih ', 'MilfHunter '),
+        ('^mj ', 'ManoJob '),
+        ('^mlib ', 'MilfsLikeItBig '),
+        ('^mlt ', 'MomsLickTeens '),
+        ('^mmgs ', 'MommysGirl '),
+        ('^mmts ', 'MomsTeachSex '),
+        ('^mnm ', 'MyNaughtyMassage '),
+        ('^mom ', 'MomXXX '),
+        ('^mpov ', 'MrPOV '),
+        ('^mr ', 'MassageRooms '),
+        ('^mrs ', 'MassageRooms '),
+        ('^mshf ', 'MySistersHotFriend '),
+        ('^mts ', 'MomsTeachSex '),
+        ('^mvft ', 'MyVeryFirstTime '),
+        ('^mwhf ', 'MyWifesHotFriend '),
+        ('^naf ', 'NeighborAffair '),
+        ('^nam ', 'NaughtyAmerica '),
+        ('^na ', 'NaughtyAthletics '),
+        ('^naughtyamericavr ', 'NaughtyAmerica '),
+        ('^nb ', 'NaughtyBookworms '),
+        ('^news ', 'NewSensations '),
+        ('^nf ', 'NubileFilms '),
+        ('^no ', 'NaughtyOffice '),
+        ('^nrg ', 'NaughtyRichGirls '),
+        ('^nubilef ', 'NubileFilms '),
+        ('^num ', 'NuruMassage '),
+        ('^nw ', 'NaughtyWeddings '),
+        ('^obj ', 'OnlyBlowjob '),
+        ('^otb ', 'OnlyTeenBlowjobs '),
+        ('^passion-hd ', 'PassionHD '),
+        ('^pav ', 'PixAndVideo '),
+        ('^pba ', 'PublicAgent '),
+        ('^pc ', 'PrincessCum '),
+        ('^pdmcl ', 'ChicasLoca '),
+        ('^pf ', 'PornFidelity '),
+        ('^phd ', 'PassionHD '),
+        ('^phdp ', 'PetiteHDPorn '),
+        ('^plib ', 'PornstarsLikeitBig '),
+        ('^pop ', 'PervsOnPatrol '),
+        ('^ppu ', 'PublicPickups '),
+        ('^prdi ', 'PrettyDirty '),
+        ('^ps ', 'PropertySex '),
+        ('^ptt ', 'Petite '),
+        ('^pud ', 'PublicDisgrace '),
+        ('^reg ', 'RealExGirlfriends '),
+        ('^rkp ', 'RKPrime '),
+        ('^rws ', 'RealWifeStories '),
+        ('^saf ', 'ShesAFreak '),
+        ('^sart ', 'SexArt '),
+        ('^sas ', 'SexandSubmission '),
+        ('^sbj ', 'StreetBlowjobs '),
+        ("^Shes New ", "She's New "),
+        ('^sins ', 'SinsLife '),
+        ('^sislove ', 'SisLovesMe '),
+        ('^smb ', 'ShareMyBF '),
+        ('^ssc ', 'StepSiblingsCaught '),
+        ('^ssn ', 'ShesNew '),
+        ('^sts ', 'StrandedTeens '),
+        ('^swsn ', 'SwallowSalon '),
+        ('^tdp ', 'TeensDoPorn '),
+        ('^tds ', 'TheDickSuckers '),
+        ('^ted ', 'Throated '),
+        ('^tf ', 'TeenFidelity '),
+        ('^tgs ', 'ThisGirlSucks '),
+        ('^these ', 'TheStripperExperience '),
+        ('^tla ', 'TeensLoveAnal '),
+        ('^tlc ', 'TeensLoveCream '),
+        ('^tle ', 'TheLifeErotic '),
+        ('^tlhc ', 'TeensLoveHugeCocks '),
+        ('^tlib ', 'TeensLikeItBig '),
+        ('^tlm ', 'TeensLoveMoney '),
+        ('^togc ', 'TonightsGirlfriendClassic '),
+        ('^tog ', 'TonightsGirlfriend '),
+        ('^tspa ', 'TrickySpa '),
+        ('^tss ', 'ThatSitcomShow '),
+        ('^tuf ', 'TheUpperFloor '),
+        ('^wa ', 'WhippedAss '),
+        ('^wfbg ', 'WeFuckBlackGirls '),
+        ('^wkp ', 'Wicked '),
+        ('^wlt ', 'WeLiveTogether '),
+        ('^woc ', 'WildOnCam '),
+        ('^wov ', 'WivesOnVacation '),
+        ('^wowg ', 'WowGirls '),
+        ('^wy ', 'WebYoung '),
+        ('^ztod ', 'ZeroTolerance '),
+        ('^zzs ', 'ZZseries '),
+    )
+    for abbreviation, full in abbreviations:
+        r = re.compile(abbreviation, flags=re.IGNORECASE)
+        if r.match(mediaTitle):
+            mediaTitle = r.sub(full, mediaTitle, 1)
+            break
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
 
@@ -1347,7 +1354,7 @@ def getSearchSettings(mediaTitle):
                 searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
                 break
 
-    return [searchSiteID, searchTitle, searchDate]
+    return (searchSiteID, searchTitle, searchDate)
 
 
 def posterAlreadyExists(posterUrl, metadata):
