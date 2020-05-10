@@ -176,6 +176,9 @@ class PhoenixActors:
             if metadata.studio == "Bang Bros":
                if newActor == "Amy":
                     newActor = "Abella Anderson"
+            if metadata.studio == "Deeper" or metadata.studio == "Tushyraw" or metadata.studio == "Tushy" or metadata.studio == "Blacked" or metadata.studio == "Blackedraw" or metadata.studio == "Vixen":
+                if newActor == "Vina Skyy":
+                    newActor = "Vina Sky"
             if metadata.studio == "FuelVirtual":
                 if newActor == "Nicole":
                     newActor = "Nicole Ray"
