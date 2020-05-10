@@ -1,7 +1,7 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import PAUtils
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
@@ -11,15 +11,15 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     directURL = '%s%s.html' % (PAsearchSites.getSearchSearchURL(siteNum), searchTitle.lower().replace(' ', '-'))
     searchResults = [directURL]
 
-    googleResults = PAUtils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.lower()
         if ('/trailers/' in sceneURL) and sceneURL not in searchResults:
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
-        data = PAUtils.HTTPRequest(sceneURL)
-        if data:
+        data = PAutils.HTTPRequest(sceneURL)
+        if data and data != 'Page not found':
             searchResult = HTML.ElementFromString(data)
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
@@ -83,10 +83,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorPhotoURL = ''
 
         actorPageURL = '%s/tour/models/%s.html' % (PAsearchSites.getSearchBaseURL(siteID), actorName.lower().replace(' ', '-'))
-        data = PAUtils.HTTPRequest(actorPageURL)
-        if data:
-            actorPage = HTML.ElementFromString(data)
-            actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
+        data = PAutils.HTTPRequest(actorPageURL)
+        if not data or data == 'Page not found':
+            googleResults = PAutils.getFromGoogleSearch(actorName, siteID)
+            for actorURL in googleResults:
+                actorURL = actorURL.lower()
+                if ('/models/' in actorURL):
+                    data = PAutils.HTTPRequest(actorURL)
+                    break
+
+        actorPage = HTML.ElementFromString(data)
+        actorPhotoURL = actorPage.xpath('//div[contains(@class, "model_picture")]//img/@src0_3x')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 
