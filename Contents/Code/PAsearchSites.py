@@ -918,7 +918,7 @@ searchSites[811] = ["AmourAngels","AmourAngels","http://www.amourangels.com","ht
 searchSites[812] = ["JAV","JAV","https://www.r18.com","https://www.r18.com/common/search/searchword="]
 searchSites[813] = ["Bang","Bang","https://www.bang.com","https://617fb597b659459bafe6472470d9073a.us-east-1.aws.found.io/videos/video/_search"]
 searchSites[814] = ["Vivid","Vivid","https://www.vivid.com","https://www.vivid.com/"]
-searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/api/api"]
+searchSites[815] = ["JAY's POV","JAY's POV","https://jayspov.net","https://jayspov.net/MemberSceneSearch?q="]
 searchSites[816] = ["Errotica Archives","Errotica Archives","https://www.errotica-archives.com","https://www.errotica-archives.com/api"]
 searchSites[817] = ["ALS Scan","ALS Scan","https://www.alsscan.com","https://www.alsscan.com/api"]
 searchSites[818] = ["Rylsky Art","Rylsky Art","https://www.rylskyart.com","https://www.rylskyart.com/api"]
