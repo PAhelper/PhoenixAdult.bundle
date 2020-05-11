@@ -9,8 +9,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
 
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="grid-item"]'):
-        titleNoFormatting = searchResult.xpath('//a[@class="grid-item-title"]/text()')[0]
-        curID = String.Encode(searchResult.xpath('//a[@class="grid-item-title"]/@href')[0])
+        titleNoFormatting = searchResult.xpath('.//a[@class="grid-item-title"]/text()')[0]
+        curID = String.Encode(searchResult.xpath('.//a[@class="grid-item-title"]/@href')[0])
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=score, lang=lang))
@@ -64,7 +64,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Posters
     art = []
 
-    for poster in detailsPageElements.xpath('//div[@id="dv_frames"]//@src'):
+    for poster in detailsPageElements.xpath('//div[@id="dv_frames"]//img/@src'):
         img = poster.replace('320', '1280')
         art.append(img)
 
