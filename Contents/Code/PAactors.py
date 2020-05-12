@@ -27,11 +27,13 @@ class PhoenixActors:
                 skip = True
 
             ##### Replace by actor name; for actors that have different aliases in the industry
+            if newActor == "Abby Lee":
+                newActor = "Abby Lee Brazil"
             if newActor == "Abby Rains":
                 newActor = "Abbey Rain"
             if newActor == "Ms Addie Juniper":
                 newActor = "Addie Juniper"
-            if newActor == "Adrianna Chechik":
+            if newActor == "Adrianna Chechik" or newActor == "Adriana Chechick":
                 newActor = "Adriana Chechik"
             if newActor == "Alex D":
                 newActor = "Alex D."
@@ -41,6 +43,14 @@ class PhoenixActors:
                 newActor = "Amia Miley"
             if newActor == "Amy Reid":
                 newActor = "Amy Ried"
+            if newActor == "Ana Fox" or newActor == "Ana Foxx":
+                newActor = "Ana Foxxx"
+            if newActor == "Andreina De Lux" or newActor == "Andreina De Luxe" or newActor == "Andreina Dlux":
+                newActor = "Andreina Deluxe"
+            if newActor == "Angela Piaf" or newActor == "Angel Piaf":
+                newActor = "Angel Piaff"
+            if newActor == "Ani Black Fox" or newActor == "Ani Black":
+                newActor = "Ani Blackfox"
             if newActor == "Anikka Albrite":
                 newActor = "Annika Albrite"
             if newActor == "Anita Bellini":
@@ -53,6 +63,8 @@ class PhoenixActors:
                 newActor = "April O'Neil"
             if newActor == "Ashley Graham":
                 newActor = "Ashlee Graham"
+            if newActor == "Bella Danger":
+                newActor = "Abella Danger"
             if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
                 newActor = "Britney Beth"
             if newActor == "Bridgette B.":
@@ -83,10 +95,16 @@ class PhoenixActors:
                 newActor = "Elsa Jean"
             if newActor == "Eve Lawrence":
                 newActor = "Eve Laurence"
+            if newActor == "Francesca Di Caprio" or newActor == "Francesca Dicaprio":
+                newActor = "Francesca DiCaprio"
+            if newActor == "Guiliana Alexis":
+                newActor = "Gulliana Alexis"
             if newActor == "Grace Hartley":
                 newActor = "Pinky June"
             if newActor == "Hailey Reed":
                 newActor = "Haley Reed"
+            if newActor == "Josephina Jackson":
+                newActor = "Josephine Jackson"
             if newActor == "Jane Doux":
                 newActor = "Pristine Edge"
             if newActor == "Jade Indica":
@@ -159,11 +177,13 @@ class PhoenixActors:
                 newActor = "Veronica Valentine"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
-            if metadata.studio == "21Sextury":
+            if metadata.studio == "21Sextury" or metadata.studio == "Footsie Babes":
                 if newActor == "Abbie":
                     newActor = "Krystal Boyd"
                 if newActor == "Ariel Temple":
                     newActor = "Katarina Muti"
+                if newActor == "Henna Ssy":
+                    newActor = "Henessy"
             if metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
@@ -176,6 +196,13 @@ class PhoenixActors:
             if metadata.studio == "Bang Bros":
                if newActor == "Amy":
                     newActor = "Abella Anderson"
+               if newActor == "Noemi Bilas":
+                    newActor = "Noemie Bilas"
+            if metadata.studio == "Deeper" or metadata.studio == "Tushyraw" or metadata.studio == "Tushy" or metadata.studio == "Blacked" or metadata.studio == "Blackedraw" or metadata.studio == "Vixen":
+                if newActor == "Vikalita":
+                    newActor = "Vika Lita"
+                if newActor == "Vina Skyy":
+                    newActor = "Vina Sky"
             if metadata.studio == "FuelVirtual":
                 if newActor == "Nicole":
                     newActor = "Nicole Ray"
@@ -688,6 +715,8 @@ class PhoenixActors:
                     newActor = "Kristine Andrews"
                 if newActor == "Leah":
                     newActor = "Leah Parker"
+                if newActor == "Lolita Taylor":
+                    newActor = "Lola Taylor"
                 if newActor == "Melanie":
                     newActor = "Melanie Jagger"
                 if newActor == "Meriesa":
@@ -2280,6 +2309,21 @@ class PhoenixActors:
             if metadata.studio == "WowGirls":
                 if newActor == "Clover":
                     newActor = "Katya Clover"
+            if metadata.studio == "Private":
+                if newActor == "Lolita Taylor":
+                    newActor = "Lola Taylor"
+            if metadata.studio == "VIPissy":
+                if newActor == "Susan Ayne":
+                    newActor = "Susan Ayn"
+            if metadata.studio == "Erika Lust Films":
+                if newActor == "Luna Corazón":
+                    newActor = "Luna Corazon"
+            if metadata.studio == "Bang Com":
+                if newActor == "London Keys":
+                    newActor = "London Keyes"
+            if metadata.studio == "Milehigh" or metadata.studio == "Doghouse Digital":
+                if newActor == "Gabrielle Lati":
+                    newActor = "Gabriella Lati"
 
             if not skip:
                 if newPhoto == '':

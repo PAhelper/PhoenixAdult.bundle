@@ -138,6 +138,11 @@ def update(metadata,siteID,movieGenres,movieActors):
             genreName = genreLink['name']
             movieGenres.addGenre(genreName)
 
+        if sceneType == 'movies':
+            for idx, scene in scenesPagesElements:
+                for genreLink in scene['categories']:
+                    movieGenres.addGenre(genreLink['name'])
+
         # Actors
         movieActors.clearActors()
         actors = detailsPageElements['actors']
