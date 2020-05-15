@@ -372,7 +372,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeamSkeet
             ###############
             if siteNum == 187:
-                if (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
+                if (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
                     results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1023,7 +1023,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Bellesa Films
             ###############
             if siteNum == 799:
-                if searchSiteID == 9999 or searchSiteID == 799:
+                if searchSiteID == 9999 or searchSiteID == 799 or searchSiteID == 876:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1347,7 +1347,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   TeamSkeet                                              ##
         ##                                                          ##
         ##############################################################
-        if (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851):
+        if (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875:
             metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -2043,7 +2043,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  BellesaFilms                                            ##
         ##                                                          ##
         ##############################################################
-        if siteID == 799:
+        if siteID == 799 or siteID == 876:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
