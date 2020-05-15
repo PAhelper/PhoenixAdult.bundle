@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
     if(unicode(splitSearchTitle[1], 'utf-8').isnumeric()):
-        searchJAVID = '%s-%s' % (splitSearchTitle[0], splitSearchTitle[1])
+        searchJAVID = '%s %s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
         encodedTitle = searchJAVID
