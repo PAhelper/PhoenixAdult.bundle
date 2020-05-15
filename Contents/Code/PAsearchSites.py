@@ -102,7 +102,7 @@ import networkTeamSkeet
 import networkGammaEntOther
 
 
-searchSites = [None] * 875
+searchSites = [None] * 877
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -978,6 +978,8 @@ searchSites[871] = ["Slime Wave","Slime Wave","https://sinx.com","https://www.si
 searchSites[872] = ["Kinky Spa","Kinky Spa","https://www.kinkyspa.com/","https://site-api.project1service.com"]
 searchSites[873] = ["SubmissiveX","SubmissiveX","http://www.kink.com","http://www.kink.com/search?channelIds=submissivex&q="]
 searchSites[874] = ["Filthy Femdom","Filthy Femdom","http://www.kink.com","http://www.kink.com/search?channelIds=filthyfemdom&q="]
+searchSites[875] = ["Anal Mom","Anal Mom","https://analmom.com","https://store.psmcdn.net/organic-alm-Od3Iqu9I"]
+searchSites[876] = ["Bellesa House","Bellesa House","https://www.bellesafilms.com/","https://site-api.project1service.com"]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
