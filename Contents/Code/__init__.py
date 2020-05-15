@@ -7,6 +7,7 @@ import json
 from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
+from SSLEXTRA import sslOptions
 from dateutil.parser import parse
 import PAactors
 import PAgenres
