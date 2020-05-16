@@ -1229,6 +1229,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 872:
                     results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## Reality Lovers
+            ###############
+            if siteNum == 877:
+                if searchSiteID == 9999 or searchSiteID == 877:
+                    results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -2277,6 +2284,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 872:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  RealityLovers                                           ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 877:
+            metadata = PAsearchSites.siteRealityLovers.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
