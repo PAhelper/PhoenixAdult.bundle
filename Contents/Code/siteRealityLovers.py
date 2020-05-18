@@ -19,13 +19,14 @@ def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDat
     for searchResult in searchResults['contents']:
         releaseDate = parse(searchResult['released']).strftime('%Y-%m-%d')
         curID = String.Encode(searchResult['videoUri'])
+        posterID = String.Encode(searchResult['mainImageSrcset'].split(',')[1][:-3].replace("https", "http"))
         siteName = PAsearchSites.getSearchSiteName(siteNum)
         titleNoFormatting = '%s [%s] %s' % (searchResult['title'], siteName, releaseDate)
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, posterID), name=titleNoFormatting, score=score, lang=lang))
 
     return results
 
@@ -35,6 +36,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     id = str(metadata.id).split('|')
     videoUri = String.Decode(id[0])
+    posterUri = String.Decode(id[2])
     url = PAsearchSites.getSearchBaseURL(siteID) + videoUri
     detailsPageElements = HTML.ElementFromURL(url)
 
@@ -103,12 +105,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Poster
     try:
-        baseURL = "http://static.rlcontent.com/shared/VR/"
-        titlePathVar = videoUri.split('/')[2].replace('-', '_')
-        posterPathVar = "/00-Main-photo-Large.jpg"
-        posterURL = baseURL + titlePathVar + posterPathVar
-        metadata.posters[posterURL] = Proxy.Preview(
-            HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
+        metadata.posters[posterUri] = Proxy.Preview(
+            HTTP.Request(posterUri, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
     except:
         pass
 
