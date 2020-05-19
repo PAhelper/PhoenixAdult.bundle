@@ -1239,8 +1239,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## DoeGirls
             ###############
-            if siteNum == 878:
-                if searchSiteID == 9999 or searchSiteID == 878:
+            if siteNum == 879:
+                if searchSiteID == 9999 or searchSiteID == 879:
                     results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             siteNum += 1
@@ -2305,7 +2305,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  DoeGirls                                                ##
         ##                                                          ##
         ##############################################################
-        if siteID == 878:
+        if siteID == 879:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)			
 
         ##############################################################
