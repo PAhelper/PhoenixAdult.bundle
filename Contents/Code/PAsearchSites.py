@@ -982,6 +982,7 @@ searchSites[874] = ["Filthy Femdom","Filthy Femdom","http://www.kink.com","http:
 searchSites[875] = ["Anal Mom","Anal Mom","https://analmom.com","https://store.psmcdn.net/organic-alm-Od3Iqu9I"]
 searchSites[876] = ["Bellesa House","Bellesa House","https://www.bellesafilms.com/","https://site-api.project1service.com"]
 searchSites[877] = ["RealityLovers","Reality Lovers","https://realitylovers.com/","https://realitylovers.com/videos/search"]
+searchSites[878] = ["Adult Time","Adult Time","https://freetour.adulttime.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[879] = ["Doe Girls","Doe Girls", "https://doegirls.com/","https://doegirls.com/search.en.html?q="]
 
 def getSearchBaseURL(siteID):
