@@ -103,7 +103,7 @@ import networkGammaEntOther
 import siteRealityLovers
 
 
-searchSites = [None] * 879
+searchSites = [None] * 880
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -982,7 +982,7 @@ searchSites[874] = ["Filthy Femdom","Filthy Femdom","http://www.kink.com","http:
 searchSites[875] = ["Anal Mom","Anal Mom","https://analmom.com","https://store.psmcdn.net/organic-alm-Od3Iqu9I"]
 searchSites[876] = ["Bellesa House","Bellesa House","https://www.bellesafilms.com/","https://site-api.project1service.com"]
 searchSites[877] = ["RealityLovers","Reality Lovers","https://realitylovers.com/","https://realitylovers.com/videos/search"]
-searchSites[878] = ["Doe Girls","Doe Girls", "https://doegirls.com/","https://doegirls.com/search.en.html?q="]
+searchSites[879] = ["Doe Girls","Doe Girls", "https://doegirls.com/","https://doegirls.com/search.en.html?q="]
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
