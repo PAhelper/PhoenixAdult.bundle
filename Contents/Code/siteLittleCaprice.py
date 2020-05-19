@@ -43,9 +43,9 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[contains(@class,"et_pb_text_align_left")]/ul/li[contains(.,"Date")]')[0].text_content().strip().split(": ")[1]
+    date = detailsPageElements.xpath('//meta[11]')[0].get("content").split("T")[0]
     if len(date) > 0:
-        date_object = datetime.strptime(date, '%B %d, %Y')
+        date_object = datetime.strptime(date, '%Y-%m-%d')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -62,16 +62,17 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@class="model-page"]')[0].get("src")
-            if 'http' not in actorPhotoURL:
-                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            actorPhotoURL = ""
+            #actorPhotoURL = actorPage.xpath('//img[@class="model-page"]')[0].get("src")
+            #if 'http' not in actorPhotoURL:
+            #    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
 
     # Video trailer background image
     try:
-        twitterBG = detailsPageElements.xpath('//span[@class="et_pb_image_wrap "]/img')[0].get('src')
+        twitterBG = detailsPageElements.xpath('//meta[13]')[0].get('content')
         art.append(twitterBG)
     except:
         pass
