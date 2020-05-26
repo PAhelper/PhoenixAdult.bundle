@@ -13,7 +13,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         sceneID = None
 
     if sceneID:
-        url = PAsearchSites.getSearchBaseURL(siteID) + '/videos/1/' + sceneID
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/1/' + sceneID
         detailsPageElements = HTML.ElementFromURL(url)
 
         curID = String.Encode(url)
