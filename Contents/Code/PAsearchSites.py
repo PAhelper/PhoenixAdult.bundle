@@ -594,7 +594,7 @@ searchSites[486] = ["Holed","Holed","https://www.holed.com","https://holed.com/v
 searchSites[487] = ["CastingCouchX","CastingCouch-X","https://www.castingcouch-x.com","https://castingcouch-x.com/video/"]
 searchSites[488] = ["SpyFam","SpyFam","https://www.spyfam.com","https://spyfam.com/video/"]
 searchSites[489] = ["MyVeryFirstTime","MyVeryFirstTime","https://www.myveryfirsttime.com","https://myveryfirsttime.com/video/"]
-searchSites[490] = ["Kink.com","Kink.com","http://www.kink.com","http://www.kink.com/search?q="]
+searchSites[490] = ["Kink","Kink","http://www.kink.com","http://www.kink.com/search?q="]
 searchSites[491] = ["Brutal Sessions","Brutal Sessions","http://www.kink.com","http://www.kink.com/search?channelIds=brutalsessions&q="]
 searchSites[492] = ["Device Bondage","Device Bondage","http://www.kink.com","http://www.kink.com/search?channelIds=devicebondage&q="]
 searchSites[493] = ["Families Tied","Families Tied","http://www.kink.com","http://www.kink.com/search?channelIds=familiestied&q="]
