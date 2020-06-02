@@ -88,7 +88,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = data['results'][0]['hits'][0]
 
     # Studio
-    metadata.studio = detailsPageElements['studio_name']
+    metadata.studio = detailsPageElements['network_name']
 
     # Title
     metadata.title = detailsPageElements['title']
