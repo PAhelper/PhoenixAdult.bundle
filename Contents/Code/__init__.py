@@ -1250,6 +1250,13 @@ class PhoenixAdultAgent(Agent.Movies):
                 if searchSiteID == 9999 or searchSiteID == 879:
                     results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
+            ###############
+            ## BBC Paradise
+            ###############
+            if siteNum == 880:
+                if searchSiteID == 9999 or searchSiteID == 880:
+                    results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
             siteNum += 1
 
         results.Sort('score', descending=True)
@@ -2314,6 +2321,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         if siteID == 879:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  BBC Paradise                                            ##
+        ##                                                          ##
+        ##############################################################
+        if siteID == 880:
+            metadata = PAsearchSites.siteMylf.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
