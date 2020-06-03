@@ -103,7 +103,7 @@ import networkGammaEntOther
 import siteRealityLovers
 
 
-searchSites = [None] * 880
+searchSites = [None] * 881
 
 searchSites[0] = ["BlackedRaw","BlackedRaw","https://www.blackedraw.com","https://www.blackedraw.com/api"]
 searchSites[1] = ["Blacked","Blacked","https://www.blacked.com","https://www.blacked.com/api"]
@@ -984,6 +984,8 @@ searchSites[876] = ["Bellesa House","Bellesa House","https://www.bellesafilms.co
 searchSites[877] = ["RealityLovers","Reality Lovers","https://realitylovers.com/","https://realitylovers.com/videos/search"]
 searchSites[878] = ["Adult Time","Adult Time","https://freetour.adulttime.com","https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries"]
 searchSites[879] = ["RealJamVR","RealJamVR","https://www.realjamvr.com","https://realjamvr.com/virtualreality/scene/id/"]
+searchSites[880] = ["BBC Paradise","BBC Paradise","https://www.bbcparadise.com/","https://www.bbcparadise.com/movies/"]
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
