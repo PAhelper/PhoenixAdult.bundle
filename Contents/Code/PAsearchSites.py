@@ -1303,8 +1303,8 @@ def getSearchSettings(mediaTitle):
             title = mediaTitle.replace('.com', '').title()
             site = searchSites[searchSiteID][0].lower()
 
-            title = re.sub(r'([^a-zA-Z0-9 ])', '', title)
-            site = re.sub(r'(\W)','', site).lower()
+            title = re.sub(r'[^a-zA-Z0-9 ]', '', title)
+            site = re.sub(r'\W', '', site)
 
             matched = False
             while(' ' in title):
