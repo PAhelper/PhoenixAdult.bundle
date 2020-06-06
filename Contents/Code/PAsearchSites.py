@@ -1300,13 +1300,21 @@ def getSearchSettings(mediaTitle):
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ",""))+1:]
             Log("4")
         else:
-            title = re.sub(r"(\d+)", r":\1", mediaTitle.title()).replace(" ", "").replace(".com", "").replace("'", "")
-            site = re.sub(r"(\d+)", r":\1", searchSites[searchSiteID][0]).lower().replace(" ", "").replace("'", "").replace("-", "")
-            if title.lower().startswith(site):
-                searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE).strip()
-                searchTitle = re.sub(r"(\w)([A-Z])", r"\1 \2", searchTitle)
-                searchTitle = re.sub(r"(\d+)", r" \1", searchTitle)
-                searchTitle = searchTitle.replace(':', '')
+            title = mediaTitle.replace('.com', '').title()
+            site = searchSites[searchSiteID][0].lower()
+
+            title = re.sub(r'[^a-zA-Z0-9 ]', '', title)
+            site = re.sub(r'\W', '', site)
+
+            matched = False
+            while(' ' in title):
+                title = title.replace(' ', '', 1)
+                if title.lower().startswith(site):
+                    matched = True
+                    break;
+
+            if matched:
+                searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE)
                 searchTitle = ' '.join(searchTitle.split())
                 Log("5")
             else:
