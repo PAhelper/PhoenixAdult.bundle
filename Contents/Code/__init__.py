@@ -1,4 +1,5 @@
 import re
+import os, string, hashlib, base64, re, plistlib, unicodedata, traceback
 import random
 import requests
 import urllib
@@ -13,13 +14,17 @@ import PAgenres
 import PAsearchSites
 import PAutils
 
+def has_any(s):
+    for v in s:
+        if v:
+            return True
+    return False
 
 def Start():
     HTTP.ClearCache()
     HTTP.CacheTime = CACHE_1MINUTE*20
     HTTP.Headers['User-Agent'] = PAutils.getUserAgent()
     HTTP.Headers['Accept-Encoding'] = 'gzip'
-
 
 class PhoenixAdultAgent(Agent.Movies):
     name = 'PhoenixAdult'
@@ -28,10 +33,53 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
-        title = media.name
-        if media.primary_metadata is not None:
-            title = media.primary_metadata.studio + " " + media.primary_metadata.title
+        Log('*******SEARCH media.name (preferred) ****** ' + str(media.name))
+        Log('*******SEARCH media.title****** ' + str(media.title))
+        
+        def removeDuplicates(results):
+            seen_ids = set()
+            for r in results:
+                if r.id in seen_ids:
+                    results.Remove(r)
+                seen_ids.add(r.id)
+        
+        try:
+            self.my_search(results, media, lang, media.name)
+        except:
+            Log("Error in my_search, trying with media.name, error was: " + traceback.format_exc())
+        
+        if has_any(x.score == 100 for x in results):
+            Log("Found perfect match, stopping search")
+            return
+    
+        Log("No perfect match found yet, trying title as well")
+        try:
+            title = media.title
+            if media.primary_metadata is not None:
+                title = media.primary_metadata.studio + " " + media.primary_metadata.title
+                Log('*******SEARCH using primary_metadata.title****** ' + str(title))
 
+            self.my_search(results, media, lang, title)
+        except:
+            Log("Error in my_search, trying with filename, error was: " + traceback.format_exc())
+          
+        if has_any(x.score == 100 for x in results):
+            removeDuplicates(results)
+            return
+
+        part = media.items[0].parts[0]
+        filename = os.path.basename(part.file)
+        self.my_search(results, media, lang, filename)
+        
+        removeDuplicates(results)
+        
+        
+    
+    def my_search(self, results, media, lang, title):
+        part = media.items[0].parts[0]
+        filepath = str(os.path.abspath(part.file))
+        
+        Log('*******MEDIA TITLE (unclean) ****** ' + str(title))
         trashTitle = (
             'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD'
         )
@@ -41,7 +89,11 @@ class PhoenixAdultAgent(Agent.Movies):
             title = re.sub(r'\b%s\b' % trash, '', title, flags=re.IGNORECASE)
         title = ' '.join(title.split())
 
-        Log('*******MEDIA TITLE****** ' + str(title))
+        title = title.replace('"','').replace(":","").replace("!","").replace("[","").replace("]","").replace("(","").replace(")","").replace("&","").replace('RARBG.COM','').replace('RARBG','').replace('180 180x180','').replace('180x180','').replace('Hevc','').replace('H265','').replace('Avc','').replace('5k','').replace(' 4k','').replace('.4k','').replace('2300p60','').replace('2160p60','').replace('1920p60','').replace('1600p60','').replace('2300p','').replace('2160p','').replace('1900p','').replace('1600p','').replace('1080p','').replace('720p','').replace('480p','').replace('540p','').replace('3840x1920','').replace('5400x2700','').replace(' XXX',' ').replace('Ktr ','').replace('MP4-KTR','').replace('Oro ','').replace('Sexors','').replace('3dh','').replace('Oculus','').replace('Oculus5k','').replace('Lr','').replace('-180_','').replace('TOWN.AG_','').strip()
+        
+        
+        Log('*******MEDIA TITLE (clean) ****** ' + str(title))
+        Log('*******MEDIA Filepath****** ' + str(filepath))
 
         # Search for year
         year = media.year
@@ -49,7 +101,7 @@ class PhoenixAdultAgent(Agent.Movies):
             year = media.primary_metadata.year
 
         Log("Getting Search Settings for: " + title)
-        searchSettings = PAsearchSites.getSearchSettings(title)
+        searchSettings = PAsearchSites.getSearchSettings(filepath, title)
         searchSiteID = searchSettings[0]
         searchTitle = searchSettings[1]
         searchDate = searchSettings[2]
@@ -59,6 +111,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         encodedTitle = urllib.quote(searchTitle)
         Log(encodedTitle)
+        custom_start = PAsearchSites.getCustomStart()
 
         if searchSiteID is not None:
             siteNum = searchSiteID
@@ -73,7 +126,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Brazzers
             elif searchSiteID == 2 or (54 <= searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
-                results = PAsearchSites.siteBrazzers.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Naughty America
             elif (5 <= searchSiteID <= 51) or searchSiteID == 341 or (393 <= searchSiteID <= 396) or (467 <= searchSiteID <= 468) or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
@@ -141,9 +194,9 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 861:
                 results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            # Mile High Media
-            elif (361 <= searchSiteID <= 364) or searchSiteID == 852:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            ## Mile High Media
+            elif (361 <= searchSiteID <= 364) or searchSiteID == 852 or ((custom_start + 13) <= searchSiteID <= (custom_start + 14)):
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Fantasy Massage
             elif searchSiteID == 330 or (355 <= searchSiteID <= 360) or searchSiteID == 750:
@@ -223,7 +276,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Reality Kings
             elif (137 <= searchSiteID <= 182) or (822 <= searchSiteID <= 828):
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # PornFidelity
             elif searchSiteID == 184:
@@ -251,11 +304,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Mofos
             elif (261 <= searchSiteID <= 270) or searchSiteID == 583 or (738 <= searchSiteID <= 740):
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Babes
             elif (271 <= searchSiteID <= 276):
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # GloryHoleSecrets
             elif searchSiteID == 279:
@@ -279,7 +332,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Twistys
             elif (288 <= searchSiteID <= 291) or searchSiteID == 768:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Spizoo
             elif searchSiteID == 293 or (571 <= searchSiteID <= 577):
@@ -295,11 +348,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # DigitalPlayground
             elif searchSiteID == 328:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # SexyHub
             elif (333 <= searchSiteID <= 339) or (406 <= searchSiteID <= 407):
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # FullPornNetwork
             elif (343 <= searchSiteID <= 350):
@@ -311,7 +364,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # FakeHub
             elif searchSiteID == 340 or (397 <= searchSiteID <= 407):
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # JulesJordan
             elif searchSiteID == 432:
@@ -395,7 +448,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # VirtualTaboo
             elif searchSiteID == 292:
-                results = PAsearchSites.siteVirtualTaboo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVirtualTaboo.search(results, title, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # VirtualRealPorn
             elif searchSiteID == 342:
@@ -499,7 +552,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Property Sex
             elif searchSiteID == 733:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # FuelVirtual
             elif (546 <= searchSiteID <= 547):
@@ -507,7 +560,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # TransAngels
             elif searchSiteID == 737:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Straplezz
             elif searchSiteID == 741:
@@ -551,7 +604,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # FamilyHookups
             elif searchSiteID == 759:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Clips4Sale
             elif searchSiteID == 760:
@@ -607,11 +660,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # LilHumpers
             elif searchSiteID == 798:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Bellesa Films
             elif searchSiteID == 799 or searchSiteID == 876:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # ClubSeventeen
             elif searchSiteID == 800:
@@ -623,11 +676,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Family Sinners
             elif searchSiteID == 802:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # ReidMyLips
             elif searchSiteID == 803:
-                results = PAsearchSites.siteReidMyLips.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteReidMyLips.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Playboy Plus
             elif searchSiteID == 804:
@@ -639,15 +692,15 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Transsensual
             elif searchSiteID == 806:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Erito
             elif searchSiteID == 808:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # TrueAmateurs
             elif searchSiteID == 809:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Hustler
             elif searchSiteID == 810:
@@ -699,19 +752,27 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # LookAtHerNow
             elif searchSiteID == 841:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # XEmpire / AllBlackX
             elif searchSiteID == 843:
                 results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            # Deviant Hardcore
+            ## Pornportal Channels / Hentaipros
+            elif custom_start <= searchSiteID <= (custom_start + 12):
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            ## Why Not Bi
+            elif (custom_start + 15) <= searchSiteID <= (custom_start + 15):
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            ## Deviant Hardcore
             elif searchSiteID == 859:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # She Will Cheat
             elif searchSiteID == 860:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # SinsLife
             elif searchSiteID == 862:
@@ -727,7 +788,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Kinky Spa
             elif searchSiteID == 872:
-                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, media, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Reality Lovers
             elif searchSiteID == 877:
@@ -815,8 +876,9 @@ class PhoenixAdultAgent(Agent.Movies):
         metadata.genres.clear()
         metadata.roles.clear()
 
-        Log('******UPDATE CALLED*******')
+        Log('****** CALLED update *******')
 
+        custom_start = PAsearchSites.getCustomStart()
         siteID = int(str(metadata.id).split('|')[1])
         Log(str(siteID))
 
@@ -830,15 +892,15 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Brazzers
         elif siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
-            metadata = PAsearchSites.siteBrazzers.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # SexyHub
         elif (siteID >= 333 and siteID <= 339):
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # FakeHub
         elif siteID == 340 or (siteID >= 397 and siteID <= 407):
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Naughty America
         elif (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 749:
@@ -862,7 +924,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Reality Kings
         elif (siteID >= 137 and siteID <= 182) or (siteID >= 822 and siteID <= 828):
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # PornFidelity
         elif siteID >= 184 and siteID <= 186:
@@ -882,11 +944,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Mofos
         elif siteID >= 261 and siteID <= 270 or siteID == 583 or siteID >= 738 and siteID <= 740:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Babes
         elif siteID >= 271 and siteID <= 276:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # GloryHoleSecrets
         elif siteID == 279:
@@ -902,7 +964,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Twistys
         elif siteID >= 288 and siteID <= 291 or siteID == 768:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Spizoo
         elif siteID == 293 or (siteID >= 571 and siteID <= 577):
@@ -918,7 +980,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # DigitalPlayground
         elif siteID == 328:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # FullPornNetwork
         elif siteID >= 343 and siteID <= 350:
@@ -933,8 +995,8 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         # MileHighMedia
-        elif siteID == 852 or (siteID >= 361 and siteID <= 364):
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+        elif siteID == 852 or (siteID >= 361 and siteID <= 364) or (siteID >= (custom_start + 13) and siteID <= (custom_start + 14)):
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Dogfart Network
         elif siteID >= 408 and siteID <= 431:
@@ -1106,7 +1168,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Property Sex
         elif siteID == 733:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # FuelVirtual
         elif (546 <= siteID <= 547):
@@ -1114,7 +1176,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # TransAngels
         elif siteID == 737:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Straplezz
         elif siteID == 741:
@@ -1162,7 +1224,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # FamilyHookups
         elif siteID == 759:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Clips4Sale
         elif siteID == 760:
@@ -1210,11 +1272,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Lil Humpers
         elif siteID == 798:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # BellesaFilms
         elif siteID == 799 or siteID == 876:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # ClubSeventeen
         elif siteID == 800:
@@ -1226,7 +1288,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Family Sinners
         elif siteID == 802:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # ReidMyLips
         elif siteID == 803:
@@ -1242,15 +1304,15 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Transsensual
         elif siteID == 806:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Erito
         elif siteID == 808:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # TrueAmateurs
         elif siteID == 809:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Hustler
         elif siteID == 810:
@@ -1306,15 +1368,15 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # LookAtHerNow
         elif siteID == 841:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Deviant Hardcore
         elif siteID == 859:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # She Will Cheat
         elif siteID == 860:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # SinsLife
         elif siteID == 862:
@@ -1330,7 +1392,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Kinky Spa
         elif siteID == 872:
-            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # RealityLovers
         elif siteID == 877:
@@ -1399,6 +1461,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Evolved Fights Network
         elif siteID == 906 or siteID == 907:
             metadata = PAsearchSites.networkEvolvedFights.update(metadata, siteID, movieGenres, movieActors)
+
+        # PornPortal Channels & Hentaipros
+        elif custom_start <= siteID <= (custom_start + 12):
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
+
+        # Why Not Bi
+        elif (custom_start + 15) <= siteID <= (custom_start + 15):
+            metadata = PAsearchSites.network1service.update(metadata, media, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")

@@ -5,7 +5,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split()[0]
-    if unicode(sceneID, 'UTF-8').isdigit():
+    if PAsearchSites.safeUnicode(sceneID).isnumeric():
         sceneURL = '%s/scenes/view/id/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
         req = PAutils.HTTPRequest(sceneURL)
         detailsPageElements = HTML.ElementFromString(req.text)
@@ -40,6 +40,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
 def update(metadata, siteID, movieGenres, movieActors):
+    Log('****** CALLED update *******')
+
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):

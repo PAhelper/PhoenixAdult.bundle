@@ -15,7 +15,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         if len(titleNoFormatting) > 29:
             titleNoFormatting = titleNoFormatting[:32] + '...'
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 

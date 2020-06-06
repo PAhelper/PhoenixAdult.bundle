@@ -4,7 +4,27 @@ import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+def search(results, title, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    try:
+        fixedTitle = title.lower().replace(" ", "-")
+        postFix = fixedTitle.find("-files-")
+        if postFix != -1:
+            fixedTitle = fixedTitle[0:postFix]
+
+        url = PAsearchSites.getSearchBaseURL(siteNum) + "/videos/" + fixedTitle
+        req = PAutils.HTTPRequest(url)
+        if req:
+            searchResults = HTML.ElementFromString(req.text)
+            
+            releaseDate = parse(searchResults.xpath('.//div[@class="info"]')[0].text_content()[-30:].strip()).strftime('%Y-%m-%d')
+            # No 404 error -> perfect match
+            score = 100
+            curID = PAutils.Encode(url)
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s, %s]' % (fixedTitle, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+    except Exception as e:
+        Log(e)
+        pass
+    
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="video-item"]'):
@@ -33,7 +53,11 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
-    sceneDate = metadata_id[2]
+    
+    if len(metadata_id) > 2:
+        sceneDate = metadata_id[2]
+    else:
+        sceneDate = None
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -52,6 +76,13 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Release Date
     if sceneDate:
         date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    else:
+        # Date
+        date = parse(detailsPageElements.xpath('.//div[@class="info"]')[0].text_content()[-30:].strip()).strftime('%Y-%m-%d')
+        #date = str(metadata.id).split('|')[2]
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 

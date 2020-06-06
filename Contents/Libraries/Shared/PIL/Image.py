@@ -75,7 +75,7 @@ import os, string, sys
 from types import IntType, StringType, TupleType
 
 try:
-    UnicodeStringType = type(unicode(""))
+    UnicodeStringType = type(PAsearchSites.safeUnicode(""))
     ##
     # (Internal) Checks if an object is a string.  If the current
     # Python version supports Unicode, this checks for both 8-bit

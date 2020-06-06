@@ -1,4 +1,5 @@
 import PAutils
+import os, string, hashlib, base64, re, plistlib, unicodedata, traceback
 import siteBrazzers
 import siteNaughtyAmerica
 import siteXart
@@ -111,11 +112,23 @@ import siteVRLatina
 import siteVRConk
 import networkEvolvedFights
 
-searchSites = [None] * 908
+def safeUnicode(text):
+    if text is None:
+        return ""
+    else:
+        try:
+            return unicode(text, 'utf-8')
+        except TypeError as e:
+            Log("Unicode error on '" + repr(text) + "': " + repr(e))
+            return unicode(str(text), 'utf-8')
+
+def getCustomStart(): return 908 # This is the previous searchSites size
+custom_start = getCustomStart()
+searchSites = [None] * (custom_start + 16)
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
-searchSites[2] = ("Brazzers", "Brazzers", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
+searchSites[2] = ("Brazzers", "Brazzers", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
 
 searchSites[5] = ("My Friends Hot Mom", "My Friends Hot Mom", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
 searchSites[6] = ("My First Sex Teacher", "My First Sex Teacher", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
@@ -166,33 +179,33 @@ searchSites[50] = ("Live Naughty Milf", "Live Naughty Milf", "https://tour.naugh
 searchSites[51] = ("Live Naughty Nurse", "Live Naughty Nurse", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
 searchSites[52] = ("Vixen", "Vixen", "http://www.vixen.com", "http://www.vixen.com/api")
 searchSites[53] = ("Girlsway", "Girlsway", "https://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
-searchSites[54] = ("Moms in Control", "Moms in Control", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[55] = ("Pornstars Like It Big", "Pornstars Like It Big", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[56] = ("Big Tits at Work", "Big Tits at Work", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[57] = ("Big Tits at School", "Big Tits at School", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[58] = ("Baby Got Boobs", "Baby Got Boobs", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[59] = ("Real Wife Stories", "Real Wife Stories", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[60] = ("Teens Like It Big", "Teens Like It Big", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[61] = ("ZZ Series", "ZZ Series", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[62] = ("Mommy Got Boobs", "Mommy Got Boobs", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[63] = ("Milfs Like It Big", "Milfs Like It Big", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[64] = ("Big Tits in Uniform", "Big Tits in Uniform", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[65] = ("Doctor Adventures", "Doctor Adventures", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[66] = ("BrazzersExxtra", "Exxtra", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[67] = ("Big Tits in Sports", "Big Tits in Sports", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[68] = ("Big Butts like it big", "Big Butts like it big", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[69] = ("Big Wet Butts", "Big Wet Butts", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[70] = ("Dirty Masseur", "Dirty Masseur", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[71] = ("Hot and Mean", "Hot and Mean", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[72] = ("Shes Gonna Squirt", "Shes Gonna Squirt", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[73] = ("Asses In Public", "Asses In Public", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[74] = ("Busty Z", "Busty Z", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[75] = ("Busty and Real", "Busty and Real", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[76] = ("Hot Chicks Big Asses", "Hot Chicks Big Asses", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[77] = ("CFNM Clothed Female Male Nude", "CFNM Clothed Female Male Nude", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[78] = ("Teens Like It Black", "Teens Like It Black", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[79] = ("Racks and Blacks", "Racks and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
-searchSites[80] = ("Butts and Blacks", "Butts and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
+searchSites[54] = ("Moms in Control", "Moms in Control", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[55] = ("Pornstars Like It Big", "Pornstars Like It Big", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[56] = ("Big Tits at Work", "Big Tits at Work", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[57] = ("Big Tits at School", "Big Tits at School", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[58] = ("Baby Got Boobs", "Baby Got Boobs", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[59] = ("Real Wife Stories", "Real Wife Stories", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[60] = ("Teens Like It Big", "Teens Like It Big", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[61] = ("ZZ Series", "ZZ Series", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[62] = ("Mommy Got Boobs", "Mommy Got Boobs", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[63] = ("Milfs Like It Big", "Milfs Like It Big", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[64] = ("Big Tits in Uniform", "Big Tits in Uniform", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[65] = ("Doctor Adventures", "Doctor Adventures", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[66] = ("BrazzersExxtra", "Exxtra", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[67] = ("Big Tits in Sports", "Big Tits in Sports", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[68] = ("Big Butts like it big", "Big Butts like it big", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[69] = ("Big Wet Butts", "Big Wet Butts", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[70] = ("Dirty Masseur", "Dirty Masseur", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[71] = ("Hot and Mean", "Hot and Mean", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[72] = ("Shes Gonna Squirt", "Shes Gonna Squirt", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[73] = ("Asses In Public", "Asses In Public", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[74] = ("Busty Z", "Busty Z", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[75] = ("Busty and Real", "Busty and Real", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[76] = ("Hot Chicks Big Asses", "Hot Chicks Big Asses", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[77] = ("CFNM Clothed Female Male Nude", "CFNM Clothed Female Male Nude", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[78] = ("Teens Like It Black", "Teens Like It Black", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[79] = ("Racks and Blacks", "Racks and Blacks", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
+searchSites[80] = ("Butts and Blacks", "Butts and Blacks", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
 
 searchSites[82] = ("X Art", "X-Art", "https://www.x-art.com", "https://www.x-art.com/search/")
 searchSites[83] = ("Bang Bros", "Bang Bros", "https://bangbros.com", "https://bangbros.com/search/")
@@ -694,7 +707,7 @@ searchSites[578] = ("CzechVR", "CzechVR", "https://www.czechvr.com", "https://ww
 searchSites[579] = ("CzechVR Fetish", "CzechVR Fetish", "https://www.czechvrfetish.com", "https://www.czechvrfetish.com/model-")
 searchSites[580] = ("CzechVR Casting", "CzechVR Casting", "https://www.czechvrcasting.com", "https://www.czechvrcasting.com/model-")
 searchSites[581] = ("Slut Stepmom", "Slut Stepmom", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
-searchSites[582] = ("ZZ Series", "ZZ Series", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
+searchSites[582] = ("ZZ Series", "ZZ Series", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
 searchSites[583] = ("Latina Sex Tapes", "Latina Sex Tapes", "https://www.mofos.com", "https://site-api.project1service.com")
 searchSites[584] = ("Mano Job", "Mano Job", "https://www.finishesthejob.com", "https://www.finishesthejob.com/search?search=")
 searchSites[585] = ("The Dick Suckers", "The Dick Suckers", "https://www.finishesthejob.com", "https://www.finishesthejob.com/search?search=")
@@ -802,7 +815,7 @@ searchSites[686] = ("PervMom", "PervMom", "https://www.pervmom.com", "hhttps://w
 searchSites[687] = ("Chantas Bitches", "Chantas Bitches", "http://www.kink.com", "http://www.kink.com/search?channelIds=chantasbitches&q=")
 searchSites[688] = ("Hegre", "Hegre", "http://www.hegre.com", "http://www.hegre.com/search?q=")
 searchSites[689] = ("Femdom Empire", "Femdom Empire", "https://femdomempire.com", "https://femdomempire.com/tour/search.php?st=advanced&qany=")
-searchSites[690] = ("Day With A Porn Star", "Day With A Porn Star", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
+searchSites[690] = ("Day With A Porn Star", "Day With A Porn Star", "https://site-ma.brazzers.com", "https://site-api.project1service.com")
 searchSites[691] = ("Watch Your Mom", "Watch Your Mom", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
 searchSites[692] = ("Butt Plays", "Butt Plays", "http://www.21sextury.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[693] = ("Dorcel Vision", "Dorcel Vision", "https://www.dorcelvision.com", "https://www.dorcelvision.com/en/search?type=4&keyword=")
@@ -1020,6 +1033,22 @@ searchSites[904] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrcon
 searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com", "https://realjamvr.com/virtualreality/scene/id/")
 searchSites[906] = ("Evolved Fights", "Evolved Fights", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
 searchSites[907] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
+searchSites[custom_start] = ["3dxstar Channel PornPortal","3dxstar Channel PornPortal","https://3dxstar-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 1] = ["Cosplay Channel PornPortal","Cosplay Channel PornPortal","https://cosplay-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 2] = ["Ebony Channel PornPortal","Ebony Channel PornPortal","https://ebony-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 3] = ["Latina Channel PornPortal","Latina Channel PornPortal","https://latina-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 4] = ["Teen Channel PornPortal","Teen Channel PornPortal","https://teen-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 5] = ["Milf Channel PornPortal","Milf Channel PornPortal","https://milf-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 6] = ["Stepfamily Channel PornPortal","Stepfamily Channel PornPortal","https://stepfamily-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 7] = ["Lesbian Channel PornPortal","Lesbian Channel PornPortal","https://lesbian-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 8] = ["RealityGang Channel PornPortal","RealityGang Channel PornPortal","https://realitygang-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 9] = ["Anal Channel PornPortal","Anal Channel PornPortal","https://anal-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 10] = ["BBW Channel PornPortal","BBW Channel PornPortal","https://bbw-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 11] = ["VR Channel PornPortal","VR Channel PornPortal","https://vr-channel.pornportal.com","https://site-api.project1service.com"]
+searchSites[custom_start + 12] = ["Hentaipros","Hentaipros","https://hentaipros.com","https://site-api.project1service.com"]
+searchSites[custom_start + 13] = ["Mile High Media","Mile High Media","https://milehighmedia.com","https://site-api.project1service.com"]
+searchSites[custom_start + 14] = ["Mile High","Mile High","https://milehighmedia.com","https://site-api.project1service.com"]
+searchSites[custom_start + 15] = ["Why Not Bi","Why Not Bi","https://whynotbi.com","https://site-api.project1service.com"]
 
 
 def getSearchBaseURL(siteID):
@@ -1039,6 +1068,7 @@ def getSearchSiteName(siteID):
 
 
 def getSearchSiteIDByFilter(searchFilter):
+    Log("^^^^^^^ try reading siteId from: " + str(searchFilter))
     searchSitesEnum = list(enumerate(searchSites))
 
     # Method #3
@@ -1094,9 +1124,9 @@ def getSearchSiteIDByFilter(searchFilter):
             pass
 
     return None
-
-
-def getSearchSettings(mediaTitle):
+    
+def normalizeSiteName(mediaTitle):
+    
     mediaTitle = mediaTitle.replace(".", " ")
     mediaTitle = mediaTitle.replace(" - ", " ")
     mediaTitle = mediaTitle.replace("-", " ")
@@ -1317,7 +1347,13 @@ def getSearchSettings(mediaTitle):
             break
 
     Log("mediaTitle w/ possible abbrieviation fixed: " + mediaTitle)
+    
+    return mediaTitle
 
+def getSearchSettings(filepath, mediaTitle):
+
+    mediaTitle = normalizeSiteName(mediaTitle)
+    
     # Search Site ID
     searchSiteID = None
     # What to search for
@@ -1325,12 +1361,34 @@ def getSearchSettings(mediaTitle):
     # Date search
     searchDate = None
 
+    # Find site
+    def recover():
+        searchSiteID = getSearchSiteIDByFilter(mediaTitle)
+        return searchSiteID
+
+    errorRecover = False
+    try:
+        dirname=os.path.dirname(filepath)
+        dirnamesearch = normalizeSiteName(dirname)
+        dirNames=dirnamesearch.replace("\\", "/").split('/')
+        for name in reversed(dirNames[1:]):
+            searchSiteID = getSearchSiteIDByFilter(name)
+            if searchSiteID is not None:
+                break
+    except:
+        errorRecover = True
+        Log("Error while trying to find site, trying to detect from mediatitle, error was: " + traceback.format_exc())
+        searchSiteID = recover()
+
+    if not errorRecover and searchSiteID is None:
+        Log("Could not detect site from dir, trying from title...")
+        searchSiteID = recover()
+
+    Log("^^^^^^^ siteID: " + str(searchSiteID))
     # Remove Site from Title
-    searchSiteID = getSearchSiteIDByFilter(mediaTitle)
     if searchSiteID is not None:
-        Log("^^^^^^^ siteID: %d" % searchSiteID)
         Log("^^^^^^^ Shortening Title")
-        Log(mediaTitle[:len(searchSites[searchSiteID][0])].lower() + " vs " + searchSites[searchSiteID][0].lower())
+        Log(safeUnicode(mediaTitle[:len(searchSites[searchSiteID][0])]).lower() + " vs " + safeUnicode(searchSites[searchSiteID][0]).lower())
         # searchSites [0] matches madiaTitle
         if mediaTitle[:len(searchSites[searchSiteID][0])].lower() == searchSites[searchSiteID][0].lower():
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0]) + 1:]
@@ -1374,7 +1432,7 @@ def getSearchSettings(mediaTitle):
         Log("8")
     else:
         searchTitle = mediaTitle
-
+    
     # Gamma Ent remove Scene number from BONUS and BTS
     if searchSiteID == 53 or searchSiteID == 183 or (searchSiteID >= 277 and searchSiteID <= 278) or searchSiteID == 281 or (searchSiteID >= 285 and searchSiteID <= 287) or (searchSiteID >= 329 and searchSiteID <= 332) or (searchSiteID >= 351 and searchSiteID <= 392) or (searchSiteID >= 460 and searchSiteID <= 466) or searchSiteID == 692:
         if "Bonus" in searchTitle or "Bts" in searchTitle:
@@ -1406,8 +1464,9 @@ def getSearchSettings(mediaTitle):
                 searchTitle = ' '.join(re.sub(r, '', searchTitle, 1).split())
                 break
 
-    return (searchSiteID, searchTitle, searchDate)
-
+    result = (searchSiteID, searchTitle, searchDate)
+    Log("return: " + repr(result))
+    return result
 
 def posterAlreadyExists(posterUrl, metadata):
     posterUrl = PAutils.getClearURL(posterUrl)
@@ -1423,3 +1482,13 @@ def posterAlreadyExists(posterUrl, metadata):
         if p.lower() == posterUrl.lower():
             return True
     return False
+
+def findMetadataDirs(media):
+    part = media.items[0].parts[0]
+    filepath = str(os.path.abspath(part.file))
+    dirpath = str(os.path.dirname(filepath))
+    dirname = str(os.path.basename(dirpath))
+    rawMetadataDirs = [ os.path.realpath(x) for x in [ dirpath, dirpath + '/../metadata', dirpath + '/../../metadata', dirpath + '/../metadata/' + dirname, dirpath + '/../../metadata/' + dirname ] ]
+    metadataSearchDirs = [ x for x in rawMetadataDirs if os.path.exists(x) ]
+
+    return metadataSearchDirs

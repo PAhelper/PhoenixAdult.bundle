@@ -15,7 +15,7 @@ def getAlgolia(url, indexName, params):
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    if unicode(sceneID, 'utf8').isdigit():
+    if PAsearchSites.safeUnicode(sceneID).isnumeric():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
@@ -45,6 +45,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
 def update(metadata, siteID, movieGenres, movieActors):
+    Log('****** CALLED update [NA] *******')
+
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
 

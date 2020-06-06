@@ -149,6 +149,11 @@ def Encode(text):
 
 
 def Decode(text):
+    if "_" in text or ":" in text or "-" in text or "$" in text or "?" in text:
+        # Old style decoding
+        return text.replace('$', '/').replace('_', '/').replace('?', '!')
+
+
     text = text.encode('UTF-8')
 
     return base58.b58decode(text)
