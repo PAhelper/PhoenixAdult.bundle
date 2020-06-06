@@ -100,6 +100,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Tugjobs
   - Working Latinas
 + #### Bang! | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### BBC Paradise | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### BellaPass | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - AleahJasmine
   - AlexisMonroe
