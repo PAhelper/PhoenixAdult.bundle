@@ -883,7 +883,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Bellesa Films
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 799 or searchSiteID == 876:
+            elif searchSiteID == 799 or searchSiteID == 876:
                 results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
@@ -1057,31 +1057,31 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Kinky Spa
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 872:
+            elif searchSiteID == 872:
                 results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Reality Lovers
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 877:
+            elif searchSiteID == 877:
                 results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Adult Time
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 878:
+            elif searchSiteID == 878:
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## RealJamVR
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 879:
+            elif searchSiteID == 879:
                 results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## BBC Paradise
             ###############
-            elif searchSiteID == 9999 or searchSiteID == 880:
+            elif searchSiteID == 880:
                 results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
         results.Sort('score', descending=True)
