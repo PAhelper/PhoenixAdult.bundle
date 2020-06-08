@@ -118,28 +118,34 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.countries.add("French")
 
     # Video backgrounds
-    backgrounds = detailsPageElements.xpath('//ul[@class="vid_rotator_img"]/li/img')
-    for background in backgrounds:
-        art.append(background.get('data-lazy'))
+    xpaths = [
+        '//ul[@class="vid_rotator_img"]//img/@data-lazy',
+        '//div[contains(@class, "pictures_container")]//img[@class="item"]/@src'
+    ]
 
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
+    for xpath in xpaths:
+        for img in detailsPageElements.xpath(xpath):
+            trash = '_' + img.split('_', 3)[-1].rsplit('.', 1)[0]
+            img = img.replace(trash, '', 1)
+
+            art.append(img)
+
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
-                if(width > 1):
+                # Add the image proxy items to the collection
+                if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                if(width > 100):
+                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                if width > 100:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
                 pass
 

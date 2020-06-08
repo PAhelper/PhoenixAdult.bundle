@@ -6,8 +6,8 @@ import PAactors
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
-    if(unicode(splitSearchTitle[1], 'utf-8').isdigit()):
-        searchJAVID = '%s-%s' % (splitSearchTitle[0], splitSearchTitle[1])
+    if(unicode(splitSearchTitle[1], 'UTF-8').isnumeric()):
+        searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
         encodedTitle = searchJAVID

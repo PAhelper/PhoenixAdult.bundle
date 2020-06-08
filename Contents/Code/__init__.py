@@ -325,8 +325,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## TeamSkeet
             ###############
-            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851):
-                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
+                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## Porndoe Premium
@@ -883,8 +883,8 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Bellesa Films
             ###############
-            elif searchSiteID == 799:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+            elif searchSiteID == 9999 or searchSiteID == 799 or searchSiteID == 876:
+                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
             ###############
             ## ClubSeventeen
@@ -1057,8 +1057,32 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## Kinky Spa
             ###############
-            elif searchSiteID == 872:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+            elif searchSiteID == 9999 or searchSiteID == 872:
+                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## Reality Lovers
+            ###############
+            elif searchSiteID == 9999 or searchSiteID == 877:
+                results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## Adult Time
+            ###############
+            elif searchSiteID == 9999 or searchSiteID == 878:
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## RealJamVR
+            ###############
+            elif searchSiteID == 9999 or searchSiteID == 879:
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+
+            ###############
+            ## BBC Paradise
+            ###############
+            elif searchSiteID == 9999 or searchSiteID == 880:
+                results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
 
         results.Sort('score', descending=True)
 
@@ -1176,7 +1200,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   TeamSkeet                                              ##
         ##                                                          ##
         ##############################################################
-        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851):
+        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875:
             metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1296,7 +1320,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment Other                              ##
         ##                                                          ##
         ##############################################################
-        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or siteID == 283 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797):
+        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797) or siteID == 878:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1872,7 +1896,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##  BellesaFilms                                            ##
         ##                                                          ##
         ##############################################################
-        elif siteID == 799:
+        elif siteID == 799 or siteID == 876:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -2106,6 +2130,30 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 872:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  RealityLovers                                           ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 877:
+            metadata = PAsearchSites.siteRealityLovers.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  RealJamVR                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 879:
+            metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  BBC Paradise                                            ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 880:
+            metadata = PAsearchSites.siteMylf.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

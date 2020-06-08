@@ -3,28 +3,46 @@ import PAgenres
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
-    for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
-        titleNoFormatting = searchResult.xpath('.//a/@title')[0]
-        url = searchResult.xpath('.//a/@href')[0]
-        releaseDate = searchResult.xpath('.//small[@class="text-muted"]/@datetime')
-        if releaseDate:
-            releaseDate = parse(releaseDate[0]).strftime('%Y-%m-%d')
-        else:
-            releaseDate = ''
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
 
-        sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
-        if not sceneCoverURL.startswith('http'):
-            sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
-        sceneCover = sceneCoverURL.replace('/','_').replace('?','!')
-        curID = url.replace('/','_').replace('?','!')
+    sceneID = searchTitle.split(' ', 1)[0]
+    if unicode(sceneID, 'utf8').isdigit():
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+    else:
+        sceneID = None
 
-        if searchDate and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+    if sceneID:
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/1/' + sceneID
+        detailsPageElements = HTML.ElementFromURL(url)
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneCover), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        curID = String.Encode(url)
+        titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
+
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=100, lang=lang))
+    else:
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
+        for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
+            titleNoFormatting = searchResult.xpath('.//a/@title')[0]
+            url = searchResult.xpath('.//a/@href')[0]
+            releaseDate = searchResult.xpath('.//small[@class="text-muted"]/@datetime')
+            if releaseDate:
+                releaseDate = parse(releaseDate[0]).strftime('%Y-%m-%d')
+            else:
+                releaseDate = ''
+
+            sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
+            if not sceneCoverURL.startswith('http'):
+                sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
+            sceneCover = String.Encode(sceneCoverURL)
+            curID = String.Encode(url)
+
+            if searchDate and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneCover), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
@@ -32,7 +50,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata_id = str(metadata.id).split('|')
-    url = metadata_id[0].replace('_','/').replace('!','?')
+    url = String.Decode(metadata_id[0])
     if 'http' not in url:
         url = PAsearchSites.getSearchBaseURL(siteID) + url
     detailsPageElements = HTML.ElementFromURL(url)
@@ -85,8 +103,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     #Posters
     art = []
-    poster = metadata_id[2].replace('_','/').replace('!','?')
-    art.append(poster)
+    if len(metadata_id) > 2:
+        poster = String.Decode(metadata_id[2])
+        art.append(poster)
 
 
     xpaths = [

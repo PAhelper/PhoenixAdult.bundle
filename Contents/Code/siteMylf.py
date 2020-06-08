@@ -54,10 +54,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
                 curID = detailsPageElements.keys()[0]
                 detailsPageElements = detailsPageElements[curID]
                 titleNoFormatting = detailsPageElements['title']
-                if 'mylfdom' in sceneURL:
-                    subSite = 'MylfDom'
-                else:
+                if 'site' in detailsPageElements:
                     subSite = detailsPageElements['site']['name']
+                else:
+                    subSite =PAsearchSites.getSearchSiteName(siteNum)
 
                 if 'publishedDate' in detailsPageElements:
                     releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')

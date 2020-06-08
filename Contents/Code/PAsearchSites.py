@@ -100,9 +100,10 @@ import siteInterracialPass
 import network1service
 import networkTeamSkeet
 import networkGammaEntOther
+import siteRealityLovers
 
 
-searchSites = [None] * 875
+searchSites = [None] * 881
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -593,7 +594,7 @@ searchSites[486] = ("Holed", "Holed", "https://www.holed.com", "https://holed.co
 searchSites[487] = ("CastingCouchX", "CastingCouch-X", "https://www.castingcouch-x.com", "https://castingcouch-x.com/video/")
 searchSites[488] = ("SpyFam", "SpyFam", "https://www.spyfam.com", "https://spyfam.com/video/")
 searchSites[489] = ("MyVeryFirstTime", "MyVeryFirstTime", "https://www.myveryfirsttime.com", "https://myveryfirsttime.com/video/")
-searchSites[490] = ("Kink.com", "Kink.com", "http://www.kink.com", "http://www.kink.com/search?q=")
+searchSites[490] = ("Kink", "Kink", "http://www.kink.com", "http://www.kink.com/search?q=")
 searchSites[491] = ("Brutal Sessions", "Brutal Sessions", "http://www.kink.com", "http://www.kink.com/search?channelIds=brutalsessions&q=")
 searchSites[492] = ("Device Bondage", "Device Bondage", "http://www.kink.com", "http://www.kink.com/search?channelIds=devicebondage&q=")
 searchSites[493] = ("Families Tied", "Families Tied", "http://www.kink.com", "http://www.kink.com/search?channelIds=familiestied&q=")
@@ -978,6 +979,13 @@ searchSites[871] = ("Slime Wave", "Slime Wave", "https://sinx.com", "https://www
 searchSites[872] = ("Kinky Spa", "Kinky Spa", "https://www.kinkyspa.com/", "https://site-api.project1service.com")
 searchSites[873] = ("SubmissiveX", "SubmissiveX", "http://www.kink.com", "http://www.kink.com/search?channelIds=submissivex&q=")
 searchSites[874] = ("Filthy Femdom", "Filthy Femdom", "http://www.kink.com", "http://www.kink.com/search?channelIds=filthyfemdom&q=")
+searchSites[875] = ("Anal Mom", "Anal Mom", "https://analmom.com", "https://store.psmcdn.net/organic-alm-Od3Iqu9I")
+searchSites[876] = ("Bellesa House", "Bellesa House", "https://www.bellesafilms.com/", "https://site-api.project1service.com")
+searchSites[877] = ("RealityLovers", "Reality Lovers", "https://realitylovers.com/", "https://realitylovers.com/videos/search")
+searchSites[878] = ("Adult Time", "Adult Time", "https://freetour.adulttime.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
+searchSites[879] = ("RealJamVR", "RealJamVR", "https://www.realjamvr.com", "https://realjamvr.com/virtualreality/scene/id/")
+searchSites[880] = ("BBC Paradise", "BBC Paradise", "https://www.bbcparadise.com/", "https://www.bbcparadise.com/movies/")
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1303,13 +1311,21 @@ def getSearchSettings(mediaTitle):
             searchTitle = mediaTitle[len(searchSites[searchSiteID][0].replace(" ", "")) + 1:]
             Log("4")
         else:
-            title = re.sub(r"(\d+)", r":\1", mediaTitle.title()).replace(" ", "").replace(".com", "").replace("'", "")
-            site = re.sub(r"(\d+)", r":\1", searchSites[searchSiteID][0]).lower().replace(" ", "").replace("'", "").replace("-", "")
-            if title.lower().startswith(site):
-                searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE).strip()
-                searchTitle = re.sub(r"(\w)([A-Z])", r"\1 \2", searchTitle)
-                searchTitle = re.sub(r"(\d+)", r" \1", searchTitle)
-                searchTitle = searchTitle.replace(':', '')
+            title = mediaTitle.replace('.com', '').title()
+            site = searchSites[searchSiteID][0].lower()
+
+            title = re.sub(r'[^a-zA-Z0-9 ]', '', title)
+            site = re.sub(r'\W', '', site)
+
+            matched = False
+            while(' ' in title):
+                title = title.replace(' ', '', 1)
+                if title.lower().startswith(site):
+                    matched = True
+                    break;
+
+            if matched:
+                searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE)
                 searchTitle = ' '.join(searchTitle.split())
                 Log("5")
             else:

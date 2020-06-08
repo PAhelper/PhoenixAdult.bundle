@@ -6,17 +6,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
-        titleNoFormatting = searchResult.xpath('.//span[@itemprop="name"]')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('title')
         Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get('href').replace("/","+")
+        curID = String.Encode(searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('href'))
         Log("curID: " + curID)
         try:
-            releaseDate = parse(searchResult.xpath('.//span[@itemprop="datePublished"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            releaseDate = parse(searchResult.xpath('.//span[@class="video-card-upload-date"]')[0].get('content')).strftime('%Y-%m-%d')
             Log("releaseDate: " + releaseDate)
         except:
             releaseDate = ""
-            Log("No date found (BabeVR)")
-        girlName = searchResult.xpath('.//a[@itemprop="actor"]')[0].text_content().strip()
+            Log("No date found (BadoinkVR)")
+        girlName = searchResult.xpath('.//a[@class="video-card-link"]')[0].text_content()
         Log("firstGirlname: " + girlName)
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -24,14 +24,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         Log("Score: " + str(score))
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name="%s in [%s] % " % (girlName, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0].replace("+","/")
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
+    path = String.Decode(str(metadata.id).split("|")[0])
+    url = PAsearchSites.getSearchBaseURL(siteID) + path
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Title
