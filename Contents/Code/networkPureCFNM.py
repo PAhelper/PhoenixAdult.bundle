@@ -2,10 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     try:
         modelID = '-'.join(encodedTitle.split("%20", 2)[:2])
         Log("modelID: " + modelID)
@@ -57,6 +55,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 60
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + titleNoFormatting + "|" + summary + "|" + releaseDate + "|" + actors + "|" + videoBG, name = titleNoFormatting + " [PureCFNM/" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE METADATA CALLED*******')

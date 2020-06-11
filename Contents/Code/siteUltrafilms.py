@@ -3,12 +3,11 @@ import PAgenres
 import PAactors
 import PAextras
 import ssl
-from lxml.html.soupparser import fromstring
+
 
 # maybe helpful for linux users, who has "sslv3 alert handshake failure (_ssl.c:590)>" @kamuk90
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+
     url = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + encodedTitle + '%22'
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
     maxscore = 0
@@ -17,9 +16,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         searchResults = HTML.ElementFromURL(url)
     except:
         request = urllib.Request(url, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        searchResults = fromstring(htmlstring)
+        htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+        searchResults = HTML.ElementFromString(htmlstring)
 
     for searchResult in searchResults.xpath('//ul[@class="listing-videos listing-tube"]/*[div[@class="format-infos"]/div[@class="time-infos"]]'):
         titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
@@ -45,9 +43,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             searchResults = HTML.ElementFromURL(url)
         except:
             request = urllib.Request(url, headers=headers)
-            response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-            htmlstring = response.read()
-            searchResults = fromstring(htmlstring)
+            htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+            searchResults = HTML.ElementFromString(htmlstring)
 
         for searchResult in searchResults.xpath('//ul[@class="listing-videos listing-tube"]/*[div[@class="format-infos"]/div[@class="time-infos"]]'):
             titleNoFormatting = searchResult.xpath('.//a')[0].get('title').strip()
@@ -72,9 +69,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         detailsPageElements = HTML.ElementFromURL(pageURL)
     except:
         request = urllib.Request(pageURL, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring)
+        htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+        detailsPageElements = HTML.ElementFromString(htmlstring)
 
     # Studio
     siteName = PAsearchSites.getSearchSiteName(siteID)

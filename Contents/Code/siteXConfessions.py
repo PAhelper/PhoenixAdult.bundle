@@ -32,10 +32,7 @@ def getDatafromAPI(baseURL, sceneId, token):
     return None
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     token = getToken(PAsearchSites.getSearchBaseURL(siteNum))
     url = PAsearchSites.getSearchSearchURL(siteNum) + '?&x-algolia-application-id=2RZI1CNTO2&x-algolia-api-key=797e0814d00bb34f8bcb08e575e26625'
     searchResults = getAlgolia(url, 'production_movies', 'query=' + searchTitle)

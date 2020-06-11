@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(' ','-').replace("'","-")
     actressSearchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString + "/")
     actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a')[0].get('href')
@@ -29,6 +29,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchSubSite.lower(), subSite.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + subSite + "] " + releaseDate, score = score, lang = lang))
     return results
+
+
 def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)

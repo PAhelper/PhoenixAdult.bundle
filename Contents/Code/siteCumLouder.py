@@ -3,12 +3,9 @@ import PAgenres
 import PAactors
 import ssl
 from dateutil.relativedelta import relativedelta
-from lxml.html.soupparser import fromstring
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + "%22" + encodedTitle + "%22"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'}
 
@@ -17,9 +14,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     except:
         # its helpful for linux users, who has "sslv3 alert handshake failure (_ssl.c:590)>" @kamuk90
         req = urllib.Request(url, headers=headers)
-        resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = resp.read()
-        searchResults = fromstring(htmlstring)
+        htmlstring = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+        searchResults = HTML.ElementFromString(htmlstring)
 
 
     for searchResult in searchResults.xpath('//div[@class="listado-escenas listado-busqueda"]//div[@class="medida"]/a'):
@@ -29,6 +25,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [CumLouder] ", score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -41,9 +38,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         detailsPageElements = HTML.ElementFromURL(pageURL)
     except:
         req = urllib.Request(pageURL, headers=headers)
-        resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = resp.read()
-        detailsPageElements = fromstring(htmlstring)
+        resp = urllib.urlopen(req, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+        detailsPageElements = HTML.ElementFromString(htmlstring)
 
     art = []
     metadata.collections.clear()

@@ -3,12 +3,9 @@ import PAgenres
 import PAactors
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     try:
-        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+        searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
         for searchResult in searchResults.xpath('//div[@class="video-item"]'):
             titleNoFormatting = searchResult.xpath('.//div[@class="video-title"]//a')[0].text_content()
             sceneUrl = searchResult.xpath('.//a[contains(@class, "play")]/@href')[0]
@@ -25,7 +22,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s in %s [%s, %s]' % (actors, titleNoFormatting, PAsearchSites.getSearchSiteName(searchSiteID), releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s in %s [%s, %s]' % (actors, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
     except Exception as e:
         Log(e)
         pass

@@ -1,12 +1,9 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import json
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'
     }
@@ -31,6 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, subSite, videoBG), name='%s [Vivid/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

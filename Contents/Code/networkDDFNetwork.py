@@ -2,7 +2,7 @@ import PAsearchSites
 import PAgenres
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     if searchSiteID != 9999:
         siteNum = searchSiteID
 

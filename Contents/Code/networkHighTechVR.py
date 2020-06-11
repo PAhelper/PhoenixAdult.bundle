@@ -1,7 +1,9 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-", 1).replace(" ","_")
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-", 1).replace(" ","_")
     searchResults = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchResults.xpath('//h1')[0].text_content().strip()
@@ -9,8 +11,9 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     releaseDate = parse(searchResults.xpath('//span[@class="date-display-single"] | //span[@class="u-inline-block u-mr--nine"] | //div[@class="video-meta-date"] | //div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
     score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(searchSiteID), name = titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(searchSiteID) +"] " + releaseDate, score = score, lang = lang))
+    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " ["+ PAsearchSites.getSearchSiteName(siteNum) +"] " + releaseDate, score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]

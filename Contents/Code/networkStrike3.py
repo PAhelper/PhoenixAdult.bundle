@@ -11,10 +11,7 @@ def getDatafromAPI(url):
     return data
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + encodedTitle
 
     searchResults = getDatafromAPI(url)

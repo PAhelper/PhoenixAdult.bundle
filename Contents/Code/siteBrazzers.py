@@ -3,10 +3,7 @@ import PAgenres
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     sceneID = searchTitle.split()[0]
     if unicode(sceneID, 'UTF-8').isdigit():
         sceneURL = '%s/scenes/view/id/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)

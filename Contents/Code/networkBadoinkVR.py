@@ -1,9 +1,9 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(searchSiteID) + encodedTitle)
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
         titleNoFormatting = searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('title')
@@ -24,9 +24,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         Log("Score: " + str(score))
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name = girlName + " in " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate, score = score, lang = lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name="%s in [%s] % " % (girlName, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     path = String.Decode(str(metadata.id).split("|")[0])

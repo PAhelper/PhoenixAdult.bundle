@@ -2,9 +2,8 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = encodedTitle.replace('%20',"_")
     Log("searchString: " + searchString)
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchString
@@ -21,6 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [ClubSeventeen] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

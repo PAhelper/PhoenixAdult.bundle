@@ -4,9 +4,7 @@ import PAactors
 import PAextras
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
     searchResult = HTML.ElementFromURL(url)
 
@@ -23,6 +21,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     temp = str(metadata.id).split("|")[0]
@@ -122,7 +121,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Posters
     try:
-        background = "http:" + detailsPageElements.xpath('//video[@id="player"]')[0].get('poster')
+        background = detailsPageElements.xpath('//video[@id="player"]/@poster')[0]
+        if not background.startswith('http'):
+            background = "http:" + background
         Log("BG DL: " + background)
         metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
         metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
@@ -184,7 +185,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         metadata.summary = summary
 
-    if match is 1:
+    if match is 1 and art:
         # Return, first, last and randóm selection of images
         # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.
         sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)
@@ -220,11 +221,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         #Smaller background images
         Log("Match is not 1")
         try:
-            for image in detailsPageElements.xpath('(//img[contains(@src, "handtouched")])[position() <5]'):
-                background = "http:" + image.get('src')
+            for idx, background in enumerate(detailsPageElements.xpath('(//img[contains(@src, "handtouched")])[position() <5]/@src'), 2):
+                if not background.startswith('http'):
+                    background = "http:" + background
                 Log("BG DL: " + background)
-                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
-                metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
         except:
             pass
 

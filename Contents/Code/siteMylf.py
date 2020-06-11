@@ -15,10 +15,7 @@ def getJSONfromPage(url):
     return None
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     directURL = searchTitle.replace(' ', '-').lower()
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)

@@ -3,11 +3,10 @@ import PAgenres
 import PAactors
 import PAextras
 import ssl
-from lxml.html.soupparser import fromstring
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="entry clearfix latest"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]/a')[0].text_content().strip()
@@ -19,6 +18,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
             releaseDate = ''
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [18OnlyGirls] ", score = score, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -36,9 +36,9 @@ def update(metadata,siteID,movieGenres,movieActors):
         detailsPageElements = HTML.ElementFromURL(url)
     except:
         request = urllib.Request(url, headers=headers)
-        response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-        htmlstring = response.read()
-        detailsPageElements = fromstring(htmlstring)
+        htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+
+        detailsPageElements = HTML.ElementFromString(htmlstring)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
@@ -87,9 +87,8 @@ def update(metadata,siteID,movieGenres,movieActors):
                 actorPage = HTML.ElementFromURL(actorPageURL)
             except:
                 request = urllib.Request(actorPageURL, headers=headers)
-                response = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1))
-                htmlstring = response.read()
-                actorPage = fromstring(htmlstring)
+                htmlstring = urllib.urlopen(request, context=ssl.SSLContext(ssl.PROTOCOL_TLSv1)).read()
+                actorPage = HTML.ElementFromString(htmlstring)
 
             actorPhotoURL = actorPage.xpath('//div[@id="mod_info"]/img')[0].get("src")
             if 'http' not in actorPhotoURL:
