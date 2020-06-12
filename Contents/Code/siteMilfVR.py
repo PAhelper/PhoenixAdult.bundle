@@ -3,8 +3,12 @@ import PAgenres
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchString = searchTitle.replace(" ","+")
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
+    encodedTitle = searchTitle.replace('%20', '+')
+    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
+    data = PAutils.HTTPRequest(url, cookies={
+        'sst': 'ulang-en'
+    })
+    searchResults = HTML.ElementFromString(data)
     for searchResult in searchResults.xpath('//div[@class="vrVideo"]'):
         titleNoFormatting = searchResult.xpath('.//h3//a')[0].text_content()
         Log("Result Title: " + titleNoFormatting)
