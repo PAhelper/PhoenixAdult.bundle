@@ -326,7 +326,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## TeamSkeet
             ###############
             elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
-                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## Porndoe Premium
@@ -884,7 +884,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Bellesa Films
             ###############
             elif searchSiteID == 799 or searchSiteID == 876:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## ClubSeventeen
@@ -1058,31 +1058,31 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Kinky Spa
             ###############
             elif searchSiteID == 872:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## Reality Lovers
             ###############
             elif searchSiteID == 877:
-                results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## Adult Time
             ###############
             elif searchSiteID == 878:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## RealJamVR
             ###############
             elif searchSiteID == 879:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## BBC Paradise
             ###############
             elif searchSiteID == 880:
-                results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+                results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
