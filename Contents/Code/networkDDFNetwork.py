@@ -3,9 +3,6 @@ import PAgenres
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
     sceneID = searchTitle.split(' ', 1)[0]
     if unicode(sceneID, 'utf8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
