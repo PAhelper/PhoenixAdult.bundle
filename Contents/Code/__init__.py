@@ -61,7 +61,7 @@ class PhoenixAdultAgent(Agent.Movies):
         encodedTitle = urllib.quote(searchTitle)
         Log(encodedTitle)
 
-        if searchSiteID:
+        if searchSiteID is not None:
             siteNum = searchSiteID
 
             ###############

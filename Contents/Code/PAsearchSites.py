@@ -1290,7 +1290,7 @@ def getSearchSettings(mediaTitle):
 
     # Remove Site from Title
     searchSiteID = getSearchSiteIDByFilter(mediaTitle)
-    if searchSiteID:
+    if searchSiteID is not None:
         Log("^^^^^^^ siteID: %d" % searchSiteID)
         Log("^^^^^^^ Shortening Title")
         Log(mediaTitle[:len(searchSites[searchSiteID][0])].lower() + " vs " + searchSites[searchSiteID][0].lower())
