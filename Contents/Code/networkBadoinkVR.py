@@ -24,7 +24,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         Log("Score: " + str(score))
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name="%s in [%s] % " % (girlName, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        name = "[%s] %s in %s %s" % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate)
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=name, score=score, lang=lang))
 
     return results
 
