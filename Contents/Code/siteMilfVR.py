@@ -1,30 +1,25 @@
 import PAsearchSites
 import PAgenres
-
+import PAutils
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    encodedTitle = searchTitle.replace('%20', '+')
+    encodedTitle = encodedTitle.replace('%20', '+')
     url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
     data = PAutils.HTTPRequest(url, cookies={
         'sst': 'ulang-en'
     })
     searchResults = HTML.ElementFromString(data)
-    for searchResult in searchResults.xpath('//div[@class="vrVideo"]'):
-        titleNoFormatting = searchResult.xpath('.//h3//a')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get('href')
-        curID = curID.replace('/','_').replace('?','!')
-        Log("curID: " + curID)
-        # releaseDate = parse(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        # Log("releaseDate: " + releaseDate.strip())
+    for searchResult in searchResults.xpath('//ul[@class="cards-list"]//li'):
+        titleNoFormatting = searchResult.xpath('.//div[@class="card__footer"]//div[@class="card__h"]/text()')[0]
+        curID = searchResult.xpath('.//a/@href')[0].replace('/', '_').replace('?', '!')
+        releaseDate = parse(searchResult.xpath('.//div[@class="card__date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
-        # if searchDate:
-        #     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        # else:
-        #     score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] ", score = score, lang = lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
