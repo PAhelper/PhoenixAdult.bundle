@@ -45,7 +45,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         if detailsPageElements:
             contentName = None
             for name in ['moviesContent', 'videosContent']:
-                if name in detailsPageElements:
+                if name in detailsPageElements and detailsPageElements[name]:
                     contentName = name
                     break
 
