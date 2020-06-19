@@ -103,7 +103,7 @@ import networkGammaEntOther
 import siteRealityLovers
 
 
-searchSites = [None] * 881
+searchSites = [None] * 888
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -985,6 +985,13 @@ searchSites[877] = ("RealityLovers", "Reality Lovers", "https://realitylovers.co
 searchSites[878] = ("Adult Time", "Adult Time", "https://freetour.adulttime.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[879] = ("RealJamVR", "RealJamVR", "https://www.realjamvr.com", "https://realjamvr.com/virtualreality/scene/id/")
 searchSites[880] = ("BBC Paradise", "BBC Paradise", "https://www.bbcparadise.com/", "https://www.bbcparadise.com/movies/")
+searchSites[881] = ("Mylf X CamSoda", "Mylf X CamSoda", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[882] = ("Mylf X Fucking Awesome", "Mylf X Fucking Awesome", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[883] = ("Mylf X James Deen", "Mylf X James Deen", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[884] = ("Mylf X Mindi Mink", "Mylf X Mindi Mink", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[885] = ("Mylf X Owen Gray", "Mylf X Owen Gray", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[886] = ("Mylf X SpankMonster", "Mylf X SpankMonster", "https://mylf.com", "https://www.mylf.com/movies/")
+searchSites[887] = ("StayHomeMilf", "StayHomeMilf", "https://mylf.com", "https://www.mylf.com/movies/")
 
 
 def getSearchBaseURL(siteID):
