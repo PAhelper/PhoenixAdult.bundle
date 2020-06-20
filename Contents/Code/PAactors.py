@@ -57,6 +57,8 @@ class PhoenixActors:
                 newActor = "Anita Bellini Berlusconi"
             if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
                 newActor = "Krystal Boyd"
+            if newActor == "Anna Deville" or newActor == "Anna DeVille":
+                newActor = "Anna De Ville"
             if newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
             if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
