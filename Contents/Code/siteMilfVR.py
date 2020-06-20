@@ -12,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromString(data)
     for searchResult in searchResults.xpath('//ul[@class="cards-list"]//li'):
         titleNoFormatting = searchResult.xpath('.//div[@class="card__footer"]//div[@class="card__h"]/text()')[0]
-        curID = searchResult.xpath('.//a/@href')[0].replace('/', '_').replace('?', '!')
+        curID = String.Encode(searchResult.xpath('.//a/@href')[0])
         releaseDate = parse(searchResult.xpath('.//div[@class="card__date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -27,7 +27,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneURL = metadata_id[0].replace('_', '/').replace('!', '?')
+    sceneURL = String.Decode(metadata_id[0])
     art = []
 
     url = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
@@ -57,12 +57,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     for genre in genres:
         movieGenres.addGenre(genre.text_content().strip())
 
-    # Posters and artwork
-    try:
-        art.insert(0, detailsPageElements.xpath('//meta[@property="og:image"]/@content')[0].replace('cover', 'hero').replace('medium.jpg', 'large.jpg'))
-    except:
-        pass
-
     # Actors / possible posters
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="detail__models"]//a')
@@ -73,6 +67,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorPhotoURL = actorPage.xpath('//div[@class="person__avatar"]//source/@srcset')[1].replace('.webp', '.jpg')
         art.append(actorPhotoURL)
         movieActors.addActor(actorName, actorPhotoURL)
+
+    # Posters and artwork
+    try:
+        art.insert(0, detailsPageElements.xpath('//meta[@property="og:image"]/@content')[0].replace('cover', 'hero').replace('medium.jpg', 'large.jpg'))
+    except:
+        pass
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
