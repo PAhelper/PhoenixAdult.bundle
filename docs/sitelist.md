@@ -100,7 +100,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Tugjobs
   - Working Latinas
 + #### Bang! | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
-+ #### BBC Paradise | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### BellaPass | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
   - AleahJasmine
   - AlexisMonroe
@@ -360,6 +359,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - DivineBitches
   - Electrosluts
   - EverythingButt
+  - EvolvedFights
+  - EvolvedFightsLesbianEdition
   - FamiliesTied
   - Filthy Femdom
   - FootWorship
@@ -445,12 +446,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Mom Drips
   - Mylf
   - Mylf Of The Month
-  - Mylf X CamSoda
-  - Mylf X Fucking Awesome
-  - Mylf X James Deen
-  - Mylf X Mindi Mink
-  - Mylf X Owen Gray
-  - Mylf X SpankMonster
   - Mylf x Hussie Pass
   - Mylf x Joybear
   - Mylf x Lady Fyre
@@ -461,7 +456,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Mylfed
   - Mylfselects
   - Mylfwood
-  - StayHomeMilf
 + #### Naughty America Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 2 Chicks Same Time
   - American Daydreams
@@ -769,7 +763,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
  - Tushy
  - TushyRaw
  - Vixen
-+ #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
   - BFFs
