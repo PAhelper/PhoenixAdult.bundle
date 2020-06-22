@@ -360,6 +360,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - DivineBitches
   - Electrosluts
   - EverythingButt
+  - EvolvedFights
+  - EvolvedFightsLesbianEdition
   - FamiliesTied
   - Filthy Femdom
   - FootWorship
