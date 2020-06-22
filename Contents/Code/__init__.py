@@ -403,7 +403,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             ## PornPros Network
             ###############
-            elif (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769 or searchSiteID == 844:
+            elif (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769 or searchSiteID == 844 or searchSiteID == 890:
                 results = PAsearchSites.networkPornPros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
@@ -1288,7 +1288,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   PornPros Network                                       ##
         ##                                                          ##
         ##############################################################
-        elif (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or (siteID == 624) or (siteID == 769) or (siteID == 844):
+        elif (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or (siteID == 624) or (siteID == 769) or (siteID == 844) or (siteID == 890):
             metadata = PAsearchSites.networkPornPros.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
