@@ -1089,6 +1089,13 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             elif searchSiteID == 891:
                 results = PAsearchSites.siteHoloGirlsVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+            
+            ###############
+            ## GenderX
+            ###############
+            elif siteNum == 892:
+                results = PAsearchSites.siteGenderX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID)
+  
 
         results.Sort('score', descending=True)
 
@@ -2168,6 +2175,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 891:
             metadata = PAsearchSites.siteHoloGirlsVR.update(metadata, siteID, movieGenres, movieActors)
+            
+         ##############################################################
+         ##                                                          ##
+         ##  Gender X                                                ##
+         ##                                                          ##
+         ##############################################################
+        elif siteID == 892:
+            metadata = PAsearchSites.siteGenderX.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
