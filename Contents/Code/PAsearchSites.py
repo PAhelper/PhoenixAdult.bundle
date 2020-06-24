@@ -101,9 +101,10 @@ import network1service
 import networkTeamSkeet
 import networkGammaEntOther
 import siteRealityLovers
+import siteHoloGirlsVR
 
 
-searchSites = [None] * 891
+searchSites = [None] * 892
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -995,6 +996,7 @@ searchSites[887] = ("StayHomeMilf", "StayHomeMilf", "https://mylf.com", "https:/
 searchSites[888] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfightslesbianedition&q=")
 searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfights&q=")
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
+searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
