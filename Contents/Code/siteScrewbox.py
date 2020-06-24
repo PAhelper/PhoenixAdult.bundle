@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h4//a')[0].text_content().strip()
@@ -17,6 +17,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = firstActor + " in " + titleNoFormatting + " [Screwbox] ", score = score, lang = lang))
     return results
+
+
 def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     detailsPageElements = HTML.ElementFromURL(url)
@@ -84,9 +86,5 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     posterURL = detailsPageElements.xpath('//div[@class="item-details-thumb"]//img')[0].get("src0_1x")
     metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-
-
-
-
 
     return metadata

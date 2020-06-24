@@ -12,10 +12,7 @@ def getAlgolia(url, indexName, params):
     return json.loads(data)['results'][0]['hits']
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
     if unicode(sceneID, 'utf8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
@@ -89,7 +86,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = actorLink['name']
             actorPhotoURL = ''
 
-            actorsPageElements = HTML.ElementFromURL('https://www.naughtyamerica.com/pornstar/' + actorLink['slug'])
+            actorsPageURL = actorLink['slug'] if 'slug' in actorLink else actorLink['name'].lower().replace(' ', '-').replace("'", '')
+            actorsPageElements = HTML.ElementFromURL('https://www.naughtyamerica.com/pornstar/' + actorsPageURL)
             img = actorsPageElements.xpath('//img[@class="performer-pic"]/@src')
             if img:
                 actorPhotoURL = 'https:' + img[0]

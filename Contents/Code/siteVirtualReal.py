@@ -1,9 +1,9 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
 
-    url = PAsearchSites.getSearchSearchURL(searchSiteID) + searchTitle.lower().replace(" ","-")
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-")
     searchPage = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchPage.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()
@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     script_date = script_text[alpha+16:omega]
     releaseDate = parse(script_date).strftime('%Y-%m-%d')
     Log("releaseDate:" + releaseDate)
-    resultTitle = firstActor + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(searchSiteID) + "] " + releaseDate
+    resultTitle = firstActor + " - " + titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate
     if searchDate:
         score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
     else:
@@ -34,7 +34,6 @@ def update(metadata,siteID,movieGenres,movieActors):
     url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
     Log('url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
-
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1')[0].text_content().replace("VR Porn video","").strip()

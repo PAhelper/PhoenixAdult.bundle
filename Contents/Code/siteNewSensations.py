@@ -1,9 +1,8 @@
 import PAsearchSites
 import PAgenres
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate, searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     try:
         # URL Scene Search
         searchString = searchTitle.replace(" ","-")
@@ -29,6 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         curID = url.replace('/','+').replace('?','!')
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [New Sensations] ", score = 100, lang = lang))
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')

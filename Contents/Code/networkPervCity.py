@@ -2,23 +2,22 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","-").replace(",","").replace("'","").replace("?","").replace('html','').strip()
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString + ".html")
 
     titleNoFormatting = searchResults.xpath('//title')[0].text_content().strip()
     curID = (PAsearchSites.getSearchSearchURL(siteNum) + searchString + ".html").replace('/','_').replace('?','!')
-    if 'upherasshole' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+    if 'upherasshole' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower():
         subSite = 'Up Her Asshole'
-    elif 'oraloverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+    elif 'oraloverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower():
         subSite = 'Oral Overdose'
-    elif 'analoverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+    elif 'analoverdose' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower():
         subSite = 'Anal Overdose'
-    elif 'chocolatebjs' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+    elif 'chocolatebjs' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower():
         subSite = 'Chocolate BJs'
-    elif 'bangingbeauties' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower()
+    elif 'bangingbeauties' in searchResults.xpath('meta[@name="keywords"]')[0].get('content').lower():
         subSite = 'Banging Beauties'
     else:
         subSite = PAsearchSites.getSearchSiteName(siteNum)
@@ -31,6 +30,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
     results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate , name = titleNoFormatting + " [Mylf/"+subSite+"] ", score = score, lang = lang))
 
     return results
+
 
 def update(metadata,siteID,movieGenres,movieActors):
 

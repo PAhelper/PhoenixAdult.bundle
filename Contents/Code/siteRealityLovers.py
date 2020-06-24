@@ -1,10 +1,7 @@
 import PAsearchSites
 import json
 
-def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchByDateActor, searchDate, searchSiteID):
-    Log('******SEARCH CALLED*******')
-    if searchSiteID != 9999: siteNum = searchSiteID
-
+def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum)
     post_values = {
         "sortBy": "MOST_RELEVANT",

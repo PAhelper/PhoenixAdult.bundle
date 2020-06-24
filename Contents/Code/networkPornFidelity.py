@@ -1,8 +1,8 @@
 import PAsearchSites
 import PAgenres
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
+
+
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchPageContent = HTTP.Request("https://www.pornfidelity.com") #The search page seems to redirect to PornFidelity.com if you didn't just come from there, so I open this first to trick it...
     searchPageContent = HTTP.Request(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchPageContent = str(searchPageContent).split('":"')
@@ -103,6 +103,4 @@ def update(metadata,siteID,movieGenres,movieActors):
     except:
         pass
 
-
-    
     return metadata

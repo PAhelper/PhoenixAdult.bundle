@@ -15,10 +15,7 @@ def getJSONfromPage(url):
     return None
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     directURL = searchTitle.replace(' ', '-').lower()
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)
@@ -48,7 +45,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
         if detailsPageElements:
             contentName = None
             for name in ['moviesContent', 'videosContent']:
-                if name in detailsPageElements:
+                if name in detailsPageElements and detailsPageElements[name]:
                     contentName = name
                     break
 
@@ -57,10 +54,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor
                 curID = detailsPageElements.keys()[0]
                 detailsPageElements = detailsPageElements[curID]
                 titleNoFormatting = detailsPageElements['title']
-                if 'mylfdom' in sceneURL:
-                    subSite = 'MylfDom'
-                else:
+                if 'site' in detailsPageElements:
                     subSite = detailsPageElements['site']['name']
+                else:
+                    subSite =PAsearchSites.getSearchSiteName(siteNum)
 
                 if 'publishedDate' in detailsPageElements:
                     releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')

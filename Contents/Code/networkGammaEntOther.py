@@ -24,10 +24,7 @@ def getAlgolia(url, indexName, params, referer):
     return json.loads(data)
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
-    if searchSiteID != 9999:
-        siteNum = searchSiteID
-
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
     if unicode(sceneID, 'utf8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
@@ -88,7 +85,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = data['results'][0]['hits'][0]
 
     # Studio
-    metadata.studio = detailsPageElements['studio_name']
+    metadata.studio = detailsPageElements['network_name']
 
     # Title
     metadata.title = detailsPageElements['title']
