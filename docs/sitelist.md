@@ -308,6 +308,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - POV Perverts
   - Twisted Visual
 + #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### GenderX | Matching Type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### GirlfriendsFilms | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### Girls Rimming | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
