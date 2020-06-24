@@ -32,7 +32,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'LittleCaprice'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[0].text_content()
+    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[0].text_content().strip()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="et_pb_text et_pb_module et_pb_bg_layout_light et_pb_text_align_left"]/p')[0].text_content().strip()
