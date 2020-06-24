@@ -2,8 +2,9 @@ import PAsearchSites
 import PAgenres
 import PAactors
 
-
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@id="left-area"]/article'):
         titleNoFormatting = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].text_content().strip()
@@ -16,7 +17,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [LittleCaprice] " + releaseDate, score = score, lang = lang))
 
     return results
-
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -43,7 +43,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//meta[11]')[0].get("content").split("T")[0]
+    date = detailsPageElements.xpath('//meta[@property="article:published_time"]')[0].get("content").split("T")[0]
+
     if len(date) > 0:
         date_object = datetime.strptime(date, '%Y-%m-%d')
         metadata.originally_available_at = date_object
@@ -63,7 +64,9 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
             actorPhotoURL = ""
-            #actorPhotoURL = actorPage.xpath('//img[@class="model-page"]')[0].get("src")
+			# Just finds a nonexistent picture without showing a 403 Error
+            #actorPhotoURL = actorPage.xpath('//div[@class="et_pb_column et_pb_column_0"]//img')[0].get("src")
+            #actorPhotoURL = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content)
             #if 'http' not in actorPhotoURL:
             #    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
@@ -72,7 +75,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Video trailer background image
     try:
-        twitterBG = detailsPageElements.xpath('//meta[13]')[0].get('content')
+        twitterBG = detailsPageElements.xpath('//meta[@property="og:image"]')[0].get('content')
         art.append(twitterBG)
     except:
         pass
