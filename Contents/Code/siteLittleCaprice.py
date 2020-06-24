@@ -32,7 +32,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.studio = 'LittleCaprice'
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[0].text_content()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="et_pb_text et_pb_module et_pb_bg_layout_light et_pb_text_align_left"]/p')[0].text_content().strip()
@@ -63,12 +63,10 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorName = str(actorLink.text_content().strip())
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = ""
-			# Just finds a nonexistent picture without showing a 403 Error
-            #actorPhotoURL = actorPage.xpath('//div[@class="et_pb_column et_pb_column_0"]//img')[0].get("src")
-            #actorPhotoURL = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content)
-            #if 'http' not in actorPhotoURL:
-            #    actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+            actorPhotoURL = actorPage.xpath('//div[@id="main-content"]/article/div/div/div/div/div/img')[0].get("src")
+            actorPhotoURL = actorPhotoURL.replace("media.",'')
+            if 'http' not in actorPhotoURL:
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
             movieActors.addActor(actorName,actorPhotoURL)
 
     ### Posters and artwork ###
