@@ -104,7 +104,7 @@ import siteRealityLovers
 import siteHoloGirlsVR
 
 
-searchSites = [None] * 892
+searchSites = [None] * 893
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -997,6 +997,7 @@ searchSites[888] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Ed
 searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfights&q=")
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
 searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
+searchSites[892] = ("Doe Girls","Doe Girls", "https://doegirls.com/","https://doegirls.com/search.en.html?q=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
