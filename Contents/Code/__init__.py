@@ -1091,9 +1091,15 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteHoloGirlsVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
-            ## DoeGirls
+            ## LethalHardcoreVR
             ###############
             elif searchSiteID == 892:
+                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## DoeGirls
+            ###############
+            elif searchSiteID == 893:
                 results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
@@ -2177,10 +2183,18 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##   DoeGirls                                               ##
+        ##  LethalHardcoreVR                                        ##
         ##                                                          ##
         ##############################################################
         elif siteID == 892:
+            metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##   DoeGirls                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 893:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
