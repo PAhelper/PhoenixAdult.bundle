@@ -11,7 +11,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResult = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
-    curID = searchTitle.lower().replace(" ","-").replace("'","-")
+    curID = String.Encode(url)
     try:
         releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
     except:
@@ -19,19 +19,17 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             releaseDate = parse(searchDate).strftime('%Y-%m-%d')
         else:
             releaseDate = ''
-    score = 100
-    results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum) + "|" + releaseDate, name = titleNoFormatting + " [" + PAsearchSites.getSearchSiteName(siteNum) + "] " + releaseDate, score = score, lang = lang))
+
+    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name = '%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=100, lang=lang))
 
     return results
 
 
 def update(metadata,siteID,movieGenres,movieActors):
-    temp = str(metadata.id).split("|")[0]
+    metadata_id =  str(metadata.id).split("|")
+    url = String.Decode(metadata_id[0])
 
-    url = PAsearchSites.getSearchSearchURL(siteID) + temp
-    Log('scene url: ' + url)
     detailsPageElements = HTML.ElementFromURL(url)
-
 
     metadata.studio = "Porn Pros"
 
@@ -140,7 +138,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             metadata.originally_available_at = date_object
             metadata.year = metadata.originally_available_at.year
     except:
-        date = str(metadata.id).split("|")[2]
+        date = metadata_id[2]
         if len(date) > 0:
             date_object = parse(date)
             metadata.originally_available_at = date_object
