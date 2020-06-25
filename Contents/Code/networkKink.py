@@ -1,8 +1,10 @@
 import PAsearchSites
 import PAgenres
 
+def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchByDateActor,searchDate,searchSiteID):
+    if searchSiteID != 9999:
+        siteNum = searchSiteID
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     shootID = None
     for splited in searchTitle.split(' '):
         if unicode(splited, 'utf8').isdigit():
@@ -32,7 +34,6 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (shootID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
     return results
-
 
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
@@ -141,7 +142,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"With:")]//a')
+    actors = detailsPageElements.xpath('//p[@class="starring"]//a')
     if actors:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -166,7 +167,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[0].text_content().strip()
+    date = detailsPageElements.xpath('//span[@class="shoot-date"]')[0].text_content().strip()
     date = date[6:]
     date_object = parse(date)
     metadata.originally_available_at = date_object
