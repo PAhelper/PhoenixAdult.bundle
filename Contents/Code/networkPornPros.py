@@ -6,6 +6,8 @@ import PAextras
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
+    if unicode(url[-1], 'UTF-8').isdigit() and url[-2] == '-':
+        url = '%s-%s' % (url[:-1], url[-1])
     searchResult = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
