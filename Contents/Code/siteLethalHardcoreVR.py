@@ -73,7 +73,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Photos
     photos = detailsPageElements.xpath('//div[contains(@class, "screenshots-block")]//source/@srcset')
-    for photo in photos:
+    for photoLink in photos:
         art.append(photoLink)
 
     Log('Artwork found: %d' % len(art))
