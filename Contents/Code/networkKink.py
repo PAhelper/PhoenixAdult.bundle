@@ -168,10 +168,10 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Release Date
     date = detailsPageElements.xpath('//span[@class="shoot-date"]')[0].text_content().strip()
-    date = date[6:]
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    if len(date) > 0:
+        date_object = datetime.strptime(date, '%B %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     #Posters
     xpaths = [
