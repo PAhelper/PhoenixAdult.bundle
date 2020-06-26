@@ -74,7 +74,6 @@ import siteZTOD
 import siteClubFilly
 import networkIntersec
 import networkCherryPimps
-import siteWicked
 import site18OnlyGirls
 import siteClubSeventeen
 import siteElegantAngel
@@ -104,7 +103,7 @@ import siteRealityLovers
 import siteHoloGirlsVR
 import siteLethalHardcoreVR
 
-searchSites = [None] * 893
+searchSites = [None] * 894
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -898,7 +897,7 @@ searchSites[789] = ("Drilled", "Drilled.XXX", "https://www.pimp.xxx", "https://p
 searchSites[790] = ("BCM", "BCM.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[791] = ("Petite", "Petite.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[792] = ("Family", "Family.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
-searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://wicked.com/en/movie/")
+searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[794] = ("18OnlyGirls", "18 Only Girls", "http://www.18onlygirls.tv", "http://18onlygirls.tv/?s=")
 searchSites[795] = ("GirlCore", "GirlCore", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
 searchSites[796] = ("Moms On Moms", "Moms On Moms", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
@@ -998,6 +997,7 @@ searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
 searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
+searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
