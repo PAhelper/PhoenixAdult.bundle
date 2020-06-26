@@ -74,7 +74,6 @@ import siteZTOD
 import siteClubFilly
 import networkIntersec
 import networkCherryPimps
-import siteWicked
 import site18OnlyGirls
 import siteClubSeventeen
 import siteElegantAngel
@@ -898,7 +897,7 @@ searchSites[789] = ("Drilled", "Drilled.XXX", "https://www.pimp.xxx", "https://p
 searchSites[790] = ("BCM", "BCM.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[791] = ("Petite", "Petite.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[792] = ("Family", "Family.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
-searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://wicked.com/en/movie/")
+searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[794] = ("18OnlyGirls", "18 Only Girls", "http://www.18onlygirls.tv", "http://18onlygirls.tv/?s=")
 searchSites[795] = ("GirlCore", "GirlCore", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
 searchSites[796] = ("Moms On Moms", "Moms On Moms", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
