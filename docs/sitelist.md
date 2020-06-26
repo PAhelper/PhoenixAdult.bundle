@@ -308,6 +308,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - POV Perverts
   - Twisted Visual
 + #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Gender X | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlfriendsFilms | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### Girls Rimming | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
@@ -912,7 +913,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WankzVR
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### WowGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
-+ #### Wicked | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Wicked | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### XConfessions | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Xempire | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
