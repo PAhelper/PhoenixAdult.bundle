@@ -1096,6 +1096,12 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 892:
                 results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## Gender X
+            ###############
+            elif searchSiteID == 893:
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1332,7 +1338,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment Other                              ##
         ##                                                          ##
         ##############################################################
-        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797) or siteID == 878:
+        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
