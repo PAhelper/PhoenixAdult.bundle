@@ -59,6 +59,8 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
 
     searchTerm = 'site:%s %s' % (site, searchText) if site else searchText
 
+    Log('Using Google Search "%s"' % searchTerm)
+
     googleResults = []
     try:
         googleResults = list(googlesearch.search(searchTerm, stop=stop))
