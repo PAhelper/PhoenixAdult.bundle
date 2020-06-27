@@ -2,6 +2,7 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAextras
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
@@ -11,7 +12,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResult = HTML.ElementFromURL(url)
 
     titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
-    curID = String.Encode(url)
+    curID = PAutils.Encode(url)
     try:
         releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
     except:
@@ -27,7 +28,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
 def update(metadata,siteID,movieGenres,movieActors):
     metadata_id =  str(metadata.id).split("|")
-    url = String.Decode(metadata_id[0])
+    url = PAutils.Decode(metadata_id[0])
 
     detailsPageElements = HTML.ElementFromURL(url)
 

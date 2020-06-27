@@ -19,7 +19,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
     for url in searchResultsURLs:
         detailsPageElements = HTML.ElementFromURL(url)
-        curID = String.Encode(url)
+        curID = PAutils.Encode(url)
         titleNoFormatting = detailsPageElements.xpath('//h4')[0].text_content().strip()
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
@@ -29,7 +29,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '_'))
     for searchResult in searchResults.xpath('//div[contains(@class, "section-updates")]'):
-        curID = String.Encode(searchResult.xpath('.//a/@href')[0])
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         titleNoFormatting = searchResult.xpath('.//div[contains(@class, "scene-info")]//a')[0].text_content().strip()
         poster = searchResult.xpath('.//img/@src')[0]
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
@@ -45,7 +45,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    url = String.Decode(metadata_id[0])
+    url = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
     poster = metadata_id[3] if len(metadata_id) > 3 else None
 

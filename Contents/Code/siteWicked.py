@@ -7,12 +7,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ","-")
     Log("searchString: " + searchString)
     if "/" not in searchString:
-        i = searchString.rfind("-")
+        i = searchPAutils.rfind("-")
         searchString = searchString[:i] + "/" + searchString[i+1:]
         Log("searchString formatted: " + searchString)
 
         # Direct URL (DVD Page) search - preferred
-    if "scene" not in searchString.lower():
+    if "scene" not in searchPAutils.lower():
         Log("Direct URL (DVD page)")
         searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString)
         for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):

@@ -1,5 +1,5 @@
 import PAsearchSites
-import json
+import PAutils
 
 def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum)
@@ -15,8 +15,8 @@ def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
     for searchResult in searchResults['contents']:
         releaseDate = parse(searchResult['released']).strftime('%Y-%m-%d')
-        curID = String.Encode(searchResult['videoUri'])
-        posterID = String.Encode(searchResult['mainImageSrcset'].split(',')[1][:-3].replace("https", "http"))
+        curID = PAutils.Encode(searchResult['videoUri'])
+        posterID = PAutils.Encode(searchResult['mainImageSrcset'].split(',')[1][:-3].replace("https", "http"))
         siteName = PAsearchSites.getSearchSiteName(siteNum)
         titleNoFormatting = '%s [%s] %s' % (searchResult['title'], siteName, releaseDate)
         if searchDate:
@@ -32,8 +32,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     Log('******UPDATE CALLED*******')
 
     id = str(metadata.id).split('|')
-    videoUri = String.Decode(id[0])
-    posterUri = String.Decode(id[2])
+    videoUri = PAutils.Decode(id[0])
+    posterUri = PAutils.Decode(id[2])
     url = PAsearchSites.getSearchBaseURL(siteID) + videoUri
     detailsPageElements = HTML.ElementFromURL(url)
 
