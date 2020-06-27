@@ -298,7 +298,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### FuelVirtual Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - FuckedHard18
   - MassageGirls18
-+ #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Full Porn Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - Analized
   - Bad Daddy POV
   - DTF Sluts

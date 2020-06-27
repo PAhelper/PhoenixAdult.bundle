@@ -36,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     metadata_id = str(metadata.id).split('|')
     sceneURL = String.Decode(metadata_id[0])
-    sceneDate = metadata_id[1]
+    sceneDate = metadata_id[2]
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 
     # Studio

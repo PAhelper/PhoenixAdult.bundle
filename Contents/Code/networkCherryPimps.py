@@ -85,8 +85,8 @@ def update(metadata,siteID,movieGenres,movieActors):
             background = backgroundURL
         else:
             background = ""
-    metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    metadata.art[background] = Proxy.Media(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+    metadata.posters[background] = Proxy.Media(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
 
 
     # Actors
@@ -111,7 +111,7 @@ def update(metadata,siteID,movieGenres,movieActors):
                     if '//' == actorPhotoURL[:2]:
                         actorPhotoURL = "https:" + actorPhotoURL
                 movieActors.addActor(actorName,actorPhotoURL)
-                metadata.posters[actorPhotoURL] = Proxy.Preview(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
+                metadata.posters[actorPhotoURL] = Proxy.Media(HTTP.Request(actorPhotoURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = 2)
             except:
                 actorPhotoURL = ""
                 movieActors.addActor(actorName,actorPhotoURL)                
