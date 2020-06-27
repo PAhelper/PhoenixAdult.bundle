@@ -20,7 +20,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             searchResult = HTML.ElementFromString(data)
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
-            curID = String.Encode(sceneURL)
+            curID = PAutils.Encode(sceneURL)
             releaseDate = parse(searchDate) if searchDate else ''
 
             score = 100 - Util.LevenshteinDistance(searchTitle, titleNoFormatting)
@@ -34,7 +34,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneURL = String.Decode(metadata_id[0])
+    sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 

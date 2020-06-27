@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
@@ -13,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/1/' + sceneID
         detailsPageElements = HTML.ElementFromURL(url)
 
-        curID = String.Encode(url)
+        curID = PAutils.Encode(url)
         titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=100, lang=lang))
@@ -31,8 +32,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             sceneCoverURL = searchResult.xpath('.//..//img/@data-src')[0]
             if not sceneCoverURL.startswith('http'):
                 sceneCoverURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneCoverURL
-            sceneCover = String.Encode(sceneCoverURL)
-            curID = String.Encode(url)
+            sceneCover = PAutils.Encode(sceneCoverURL)
+            curID = PAutils.Encode(url)
 
             if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -47,7 +48,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
     metadata_id = str(metadata.id).split('|')
-    url = String.Decode(metadata_id[0])
+    url = PAutils.Decode(metadata_id[0])
     if 'http' not in url:
         url = PAsearchSites.getSearchBaseURL(siteID) + url
     detailsPageElements = HTML.ElementFromURL(url)
@@ -101,7 +102,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     #Posters
     art = []
     if len(metadata_id) > 2:
-        poster = String.Decode(metadata_id[2])
+        poster = PAutils.Decode(metadata_id[2])
         art.append(poster)
 
 

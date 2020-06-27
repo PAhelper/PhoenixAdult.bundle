@@ -1,12 +1,13 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAutils
 
 
 def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="grid-item scene-list-item"]'):
-        curID = String.Encode(searchResult.xpath('.//a/@href')[0])
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         titleNoFormatting = searchResult.xpath('.//p[contains(@class, "grid-item-title")]//span')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//p[@class="scene-update-stats"]//span')[1].text_content().strip()).strftime('%Y-%m-%d')
 
@@ -23,7 +24,7 @@ def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 def update(metadata, siteID, movieGenres, movieActors):
     Log('******UPDATE CALLED*******')
 
-    path = String.Decode(str(metadata.id).split("|")[0])
+    path = PAutils.Decode(str(metadata.id).split("|")[0])
     url = PAsearchSites.getSearchBaseURL(siteID) + path
     detailsPageElements = HTML.ElementFromURL(url)
     art = []

@@ -1,17 +1,18 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ", "-").replace(",", "").replace("’","").replace("'","").replace("--","-").lower()
     if "/" not in searchString:
-        searchString = searchString.replace("-", "/", 1)
+        searchString = searchPAutils.replace("-", "/", 1)
 
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchString
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 
-    curID = String.Encode(sceneURL)
+    curID = PAutils.Encode(sceneURL)
     titleNoFormatting = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
 
     date = detailsPageElements.xpath('//span[contains(@class,"date")] | //span[contains(@class,"hide")]')
@@ -35,7 +36,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneURL = String.Decode(metadata_id[0])
+    sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 
