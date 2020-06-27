@@ -10,7 +10,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     for sceneURL in googleResults:
         if sceneURL not in searchResultsURLs:
             if '/scene/' in sceneURL:
-                searchResultsURLs.append(sceneURL)
+                url = sceneURL
+            elif '/trailers/' in sceneURL:
+                url = sceneURL.replace('/trailers/', '/1/scene/').replace('.html', '/')
+
+            if url not in searchResultsURLs:
+                searchResultsURLs.append(url)
 
     for url in searchResultsURLs:
         detailsPageElements = HTML.ElementFromURL(url)
