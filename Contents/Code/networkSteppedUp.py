@@ -7,7 +7,7 @@ import PAutils
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchString = searchTitle.replace(" ", "-").replace(",", "").replace("’","").replace("'","").replace("--","-").lower()
     if "/" not in searchString:
-        searchString = searchPAutils.replace("-", "/", 1)
+        searchString = searchString.replace("-", "/", 1)
 
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchString
     detailsPageElements = HTML.ElementFromURL(sceneURL)
