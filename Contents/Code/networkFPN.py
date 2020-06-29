@@ -9,12 +9,16 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
     for sceneURL in googleResults:
         if sceneURL not in searchResultsURLs:
+            url = None
             if '/scene/' in sceneURL:
                 url = sceneURL
-            elif '/trailers/' in sceneURL:
-                url = sceneURL.replace('/trailers/', '/1/scene/').replace('.html', '/')
+            else:
+                for item in ['/trailers/', '/updates/']:
+                    if item in sceneURL:
+                        url = sceneURL.replace(item, '/1/scene/').replace('.html', '/')
+                        break
 
-            if url not in searchResultsURLs:
+            if url and url not in searchResultsURLs:
                 searchResultsURLs.append(url)
 
     for url in searchResultsURLs:
