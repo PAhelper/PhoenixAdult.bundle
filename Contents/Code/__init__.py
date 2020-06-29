@@ -1107,6 +1107,19 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             elif searchSiteID == 894:
                 results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+				
+            ###############
+            ## DefeatedXXX
+            ###############
+            elif searchSiteID == 895:
+                results = PAsearchSites.siteDefeatedXXX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+				
+            ###############
+            ## DefeatedSexFight
+            ###############
+            elif searchSiteID == 896:
+                results = PAsearchSites.siteDefeatedSexFight.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
 
         results.Sort('score', descending=True)
 
@@ -2194,6 +2207,29 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 894:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
+
+			
+        ##############################################################
+        ##                                                          ##
+        ##  DefeatedXXX		                                             ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 895:
+            metadata = PAsearchSites.siteDefeatedXXX.update(metadata, siteID, movieGenres, movieActors)
+	
+        ##############################################################
+        ##                                                          ##
+        ##  DefeatedSexFight	                                         ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 896:
+            metadata = PAsearchSites.siteDefeatedSexFight.update(metadata, siteID, movieGenres, movieActors)
+			
+        ##############################################################
+        ## Cleanup Genres and Add
+        Log("Genres")
+        movieGenres.processGenres(metadata)
+			
 
         ##############################################################
         ## Cleanup Genres and Add
