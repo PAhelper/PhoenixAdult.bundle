@@ -102,8 +102,9 @@ import networkGammaEntOther
 import siteRealityLovers
 import siteHoloGirlsVR
 import siteLethalHardcoreVR
+import siteXillimite
 
-searchSites = [None] * 895
+searchSites = [None] * 896
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -999,6 +1000,8 @@ searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com",
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
 searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
+searchSites[895] = ("Xillimite", "Xillimite", "https://www.xillimite.com", "https://www.xillimite.com/en/search?type=4&keyword=")
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

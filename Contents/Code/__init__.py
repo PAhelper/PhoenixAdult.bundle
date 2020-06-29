@@ -1106,7 +1106,13 @@ class PhoenixAdultAgent(Agent.Movies):
             ## WhoreCraftVR
             ###############
             elif searchSiteID == 894:
-                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)\
+
+            ###############
+            ## Xillimite
+            ###############
+            elif searchSiteID == 895:
+                results = PAsearchSites.siteXillimite.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2194,6 +2200,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 894:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Xillimite                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 895:
+            metadata = PAsearchSites.siteXillimite.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
