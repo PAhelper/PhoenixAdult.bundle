@@ -229,6 +229,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
++ #### DefeatedXXX | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title and Date**
++ #### DefeatedSexFight | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title and Date**
 + #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### DigitalPlayground | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
