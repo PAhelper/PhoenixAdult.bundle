@@ -1120,6 +1120,11 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 896:
                 results = PAsearchSites.siteDefeatedSexFight.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## XVirtual
+            ###############
+            elif searchSiteID == 897:
+                results = PAsearchSites.siteXVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2224,6 +2229,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 896:
             metadata = PAsearchSites.siteDefeatedSexFight.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  XVirtual	                                         ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 897:
+            metadata = PAsearchSites.siteXVirtual.update(metadata, siteID, movieGenres, movieActors)
 			
         ##############################################################
         ## Cleanup Genres and Add
