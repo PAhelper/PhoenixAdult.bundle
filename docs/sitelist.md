@@ -923,7 +923,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Eroticax
   - Hardx
   - Lesbianx
-  - AllBlackX
+  - AllBlackX 
++ #### XVirtual | atching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
+ 
 + #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list
