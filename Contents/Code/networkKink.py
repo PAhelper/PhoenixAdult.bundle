@@ -41,7 +41,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     art = []
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[1].text_content().strip().replace('\n',' ')
+    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[1].text_content().strip().replace('\n',' ').replace('Description:', '')
     
     # Tagline
     channel = detailsPageElements.xpath('//div[contains(@class,"shoot-logo")]')[0].text_content().strip()
@@ -141,7 +141,7 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//p[@class="starring" and contains(text(),"With:")]//a')
+    actors = detailsPageElements.xpath('//p[@class="starring"]//a')
     if actors:
         if len(actors) == 3:
             movieGenres.addGenre("Threesome")
@@ -166,8 +166,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         pass
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[0].text_content().strip()
-    date = date[6:]
+    date = detailsPageElements.xpath('//span[@class="shoot-date"]')[0].text_content().strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
