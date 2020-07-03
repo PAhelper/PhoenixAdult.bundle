@@ -45,7 +45,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log("siteName: " + siteName)
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('(.//*[@class="d-container"])[4]')[0].text_content().strip()
+    summary = detailsPageElements.xpath('(.//*[@class="d-container"])[4]')[0].text_content().strip()
+    metadata.summary = " ".join(summary.splitlines())
     
     # Release Date
     date = detailsPageElements.xpath('//div[@class="stats-container"]//li[3]//span[2]')[0].text_content().strip()
