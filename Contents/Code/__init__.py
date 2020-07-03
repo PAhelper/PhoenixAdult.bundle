@@ -1108,6 +1108,18 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 894:
                 results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## VRConk
+            ###############
+            elif searchSiteID == 895:
+                results = PAsearchSites.siteVRConk.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                
+            ###############
+            ## VRP Films
+            ###############
+            elif searchSiteID == 896:
+                results = PAsearchSites.siteVRPFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)    
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2195,6 +2207,22 @@ class PhoenixAdultAgent(Agent.Movies):
         elif siteID == 894:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
 
+        ##############################################################
+        ##                                                          ##
+        ##  VRConk                                                  ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 895:
+            metadata = PAsearchSites.siteVRConk.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VRP Films                                                  ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 896:
+            metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)
+        
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")
