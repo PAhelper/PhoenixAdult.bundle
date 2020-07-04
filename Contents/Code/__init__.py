@@ -1107,6 +1107,30 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             elif searchSiteID == 894:
                 results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+				
+            ###############
+            ## Defeated
+            ###############
+            elif searchSiteID == 895 or searchSiteID == 896:
+                results = PAsearchSites.siteDefeated.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## XVirtual
+            ###############
+            elif searchSiteID == 897:
+                results = PAsearchSites.siteXVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## Lust Reality
+            ###############
+            elif searchSiteID == 898:
+                results = PAsearchSites.siteLustReality.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## Sex Like Real
+            ###############
+            elif searchSiteID == 899:
+                results = PAsearchSites.siteSLR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2194,6 +2218,38 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 894:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
+		
+        ##############################################################
+        ##                                                          ##
+        ##  Defeated		                                             ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 895 or siteID == 896:
+            metadata = PAsearchSites.siteDefeated.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  XVirtual	                                         ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 897:
+            metadata = PAsearchSites.siteXVirtual.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Lust Reality	                                         ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 898:
+            metadata = PAsearchSites.siteLustReality.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Sex Like Real	                                         ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 899:
+            metadata = PAsearchSites.siteSLR.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
