@@ -1119,7 +1119,12 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             elif searchSiteID == 896:
                 results = PAsearchSites.siteVRPFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)    
-
+                
+            ###############
+            ## RealJamVR
+            ###############
+            elif searchSiteID == 897:
+                results = PAsearchSites.siteRealJamVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2217,12 +2222,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  VRP Films                                                  ##
+        ##  VRP Films                                               ##
         ##                                                          ##
         ##############################################################
         elif siteID == 896:
             metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)
-        
+
+        ##############################################################
+        ##                                                          ##
+        ##  RealJamVR                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 897:
+            metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)        
         ##############################################################
         ## Cleanup Genres and Add
         Log("Genres")

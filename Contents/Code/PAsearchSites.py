@@ -104,8 +104,9 @@ import siteHoloGirlsVR
 import siteLethalHardcoreVR
 import siteVRConk
 import siteVRPFilms
+import siteRealJamVR
 
-searchSites = [None] * 897
+searchSites = [None] * 898
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1003,6 +1004,7 @@ searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://
 searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
 searchSites[895] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
 searchSites[896] = ("VRP Films", "VRP Films", "https://vrpfilms.com/", "https://vrpfilms.com/vrp-movies/")
+searchSites[897] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
