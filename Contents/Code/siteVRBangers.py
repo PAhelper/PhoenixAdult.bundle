@@ -65,11 +65,11 @@ def update(metadata,siteID,movieGenres,movieActors):
             Log("actor: " + actorName)
             actorPageURL = actorLink.get("href")
             actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="single-model-featured"]//img')[0].get("src")
+            actorPhotoURL = actorPage.xpath('//div[@class="single-model__featured overflow-hidden position-relative"]//img')[0].get("src")
             movieActors.addActor(actorName,actorPhotoURL)
 
     # Posters/Background
-    for posterLink in detailsPageElements.xpath('//div[contains(@class,"gallery-top")]/a'):
+    for posterLink in detailsPageElements.xpath('//div[contains(@class,"free-gallery")]/a'):
         art.append(posterLink.get('href'))
         Log("poster: " + posterLink.get('href'))
 
