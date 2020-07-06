@@ -102,11 +102,16 @@ import networkGammaEntOther
 import siteRealityLovers
 import siteHoloGirlsVR
 import siteLethalHardcoreVR
+import siteDefeated
+import siteXVirtual
+import siteLustReality
+import siteSexLikeReal
+import siteXillimite
 import siteVRConk
 import siteVRPFilms
 import siteRealJamVR
 
-searchSites = [None] * 898
+searchSites = [None] * 905
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1002,9 +1007,16 @@ searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com",
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
 searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
-searchSites[895] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
-searchSites[896] = ("VRP Films", "VRP Films", "https://vrpfilms.com/", "https://vrpfilms.com/vrp-movies/")
-searchSites[897] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
+searchSites[895] = ("Defeated", "DefeatedXXX", "http://xxx.defeated.xxx", "http://xxx.defeated.xxx/?s=")
+searchSites[896] = ("Defeated Sex Fight", "Defeated Sex Fight", "https://defeatedsexfight.com", "https://defeatedsexfight.com/?s=")
+searchSites[897] = ("XVirtual", "XVirtual", "https://xvirtual.com", "https://xvirtual.com/tour/search/?q=")
+searchSites[898] = ("Lust Reality", "Lust Reality", "https://www.lustreality.com", "https://www.lustreality.com/virtualreality/scene/id/")
+searchSites[899] = ("Sex Like Real", "Sex Like Real", "https://www.sexlikereal.com", "https://www.sexlikereal.com/scenes/")
+searchSites[900] = ("Doe Girls", "Doe Girls", "https://doegirls.com/", "https://doegirls.com/search.en.html?q=")
+searchSites[901] = ("Xillimite", "Xillimite", "https://www.xillimite.com", "https://www.xillimite.com/en/search?type=4&keyword=")
+searchSites[902] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
+searchSites[903] = ("VRP Films", "VRP Films", "https://vrpfilms.com/", "https://vrpfilms.com/vrp-movies/")
+searchSites[904] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
