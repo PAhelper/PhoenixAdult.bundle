@@ -1138,6 +1138,12 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 900:
                 results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## Xillimite
+            ###############
+            elif searchSiteID == 901:
+                results = PAsearchSites.siteXillimite.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2264,6 +2270,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 900:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Xillimite                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 901:
+            metadata = PAsearchSites.siteXillimite.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
