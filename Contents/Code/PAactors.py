@@ -23,2307 +23,2309 @@ class PhoenixActors:
             ##### Skip an actor completely; this could be used to filter out male actors if desired
             if newActor == "Bad Name":
                 skip = True
-            if newActor == "Test Model Name":
+            elif newActor == "Test Model Name":
                 skip = True
 
             ##### Replace by actor name; for actors that have different aliases in the industry
             if newActor == "Abby Lee":
                 newActor = "Abby Lee Brazil"
-            if newActor == "Abby Rains":
+            elif newActor == "Abby Rains":
                 newActor = "Abbey Rain"
-            if newActor == "Ms Addie Juniper":
+            elif newActor == "Ms Addie Juniper":
                 newActor = "Addie Juniper"
-            if newActor == "Adrianna Chechik" or newActor == "Adriana Chechick":
+            elif newActor == "Adrianna Chechik" or newActor == "Adriana Chechick":
                 newActor = "Adriana Chechik"
-            if newActor == "Alex D":
+            elif newActor == "Alex D":
                 newActor = "Alex D."
-            if newActor == "Alura Tnt Jenson" or newActor == "Alura 'Tnt' Jenson":
+            elif newActor == "Alura Tnt Jenson" or newActor == "Alura 'Tnt' Jenson":
                 newActor = "Alura Jenson"
-            if newActor == "Amia Moretti":
+            elif newActor == "Amia Moretti":
                 newActor = "Amia Miley"
-            if newActor == "Amy Reid":
+            elif newActor == "Amy Reid":
                 newActor = "Amy Ried"
-            if newActor == "Ana Fox" or newActor == "Ana Foxx":
+            elif newActor == "Ana Fox" or newActor == "Ana Foxx":
                 newActor = "Ana Foxxx"
-            if newActor == "Andreina De Lux" or newActor == "Andreina De Luxe" or newActor == "Andreina Dlux":
+            elif newActor == "Andreina De Lux" or newActor == "Andreina De Luxe" or newActor == "Andreina Dlux":
                 newActor = "Andreina Deluxe"
-            if newActor == "Angela Piaf" or newActor == "Angel Piaf":
+            elif newActor == "Angela Piaf" or newActor == "Angel Piaf":
                 newActor = "Angel Piaff"
-            if newActor == "Ani Black Fox" or newActor == "Ani Black":
+            elif newActor == "Ani Black Fox" or newActor == "Ani Black":
                 newActor = "Ani Blackfox"
-            if newActor == "Anikka Albrite":
+            elif newActor == "Anikka Albrite":
                 newActor = "Annika Albrite"
-            if newActor == "Anita Bellini":
+            elif newActor == "Anita Bellini":
                 newActor = "Anita Bellini Berlusconi"
-            if newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
+            elif newActor == "Anjelica" or newActor == "Ebbi" or newActor == "Abby H" or newActor == "Katherine A":
                 newActor = "Krystal Boyd"
-            if newActor == "Anna Deville" or newActor == "Anna DeVille":
+            elif newActor == "Anna Deville" or newActor == "Anna DeVille":
                 newActor = "Anna De Ville"
-            if newActor == "Anna Morna":
+            elif newActor == "Anna Morna":
                 newActor = "Anastasia Morna"
-            if newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
+            elif newActor == "April ONeil" or newActor == "April Oneil" or newActor == "April O'neil":
                 newActor = "April O'Neil"
-            if newActor == "Ashley Graham":
+            elif newActor == "Ashley Graham":
                 newActor = "Ashlee Graham"
-            if newActor == "Bella Danger":
+            elif newActor == "Bella Danger":
                 newActor = "Abella Danger"
-            if newActor == "Bibi Jones" or newActor == "Bibi Jones™":
+            elif newActor == "Bibi Jones" or newActor == "Bibi Jones™":
                 newActor = "Britney Beth"
-            if newActor == "Bridgette B.":
+            elif newActor == "Bridgette B.":
                 newActor = "Bridgette B"
-            if newActor == "Capri Cavalli":
+            elif newActor == "Capri Cavalli":
                 newActor = "Capri Cavanni"
-            if newActor == "Ce Ce Capella":
+            elif newActor == "Ce Ce Capella":
                 newActor = "CeCe Capella"
-            if newActor == "Charli Red":
+            elif newActor == "Charli Red":
                 newActor = "Charlie Red"
-            if newActor == "Charlotte Lee":
+            elif newActor == "Charlotte Lee":
                 newActor = "Jaye Summers"
-            if newActor == "Criss Strokes":
+            elif newActor == "Criss Strokes":
                 newActor = "Chris Strokes"
-            if newActor == "Christy Charming":
+            elif newActor == "Christy Charming":
                 newActor = "Paula Shy"
-            if newActor == "CléA Gaultier":
+            elif newActor == "CléA Gaultier":
                 newActor = "Clea Gaultier"
-            if newActor == "Crissy Kay" or newActor == "Emma Hicks" or newActor == "Emma Hixx":
+            elif newActor == "Crissy Kay" or newActor == "Emma Hicks" or newActor == "Emma Hixx":
                 newActor = "Emma Hix"
-            if newActor == "Crystal Rae":
+            elif newActor == "Crystal Rae":
                 newActor = "Cyrstal Rae"
-            if newActor == "Doris Ivy":
+            elif newActor == "Doris Ivy":
                 newActor = "Gina Gerson"
-            if newActor == "Eden Sin":
+            elif newActor == "Eden Sin":
                 newActor = "Eden Sinclair"
-            if newActor == "Elsa Dream":
+            elif newActor == "Elsa Dream":
                 newActor = "Elsa Jean"
-            if newActor == "Eve Lawrence":
+            elif newActor == "Eve Lawrence":
                 newActor = "Eve Laurence"
-            if newActor == "Francesca Di Caprio" or newActor == "Francesca Dicaprio":
+            elif newActor == "Francesca Di Caprio" or newActor == "Francesca Dicaprio":
                 newActor = "Francesca DiCaprio"
-            if newActor == "Guiliana Alexis":
+            elif newActor == "Guiliana Alexis":
                 newActor = "Gulliana Alexis"
-            if newActor == "Grace Hartley":
+            elif newActor == "Grace Hartley":
                 newActor = "Pinky June"
-            if newActor == "Hailey Reed":
+            elif newActor == "Hailey Reed":
                 newActor = "Haley Reed"
-            if newActor == "Josephina Jackson":
+            elif newActor == "Josephina Jackson":
                 newActor = "Josephine Jackson"
-            if newActor == "Jane Doux":
+            elif newActor == "Jane Doux":
                 newActor = "Pristine Edge"
-            if newActor == "Jade Indica":
+            elif newActor == "Jade Indica":
                 newActor = "Miss Jade Indica"
-            if newActor == "Jassie Gold" or newActor == "Jaggie Gold":
+            elif newActor == "Jassie Gold" or newActor == "Jaggie Gold":
                 newActor = "Jessi Gold"
-            if newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
+            elif newActor == "Jenna J Ross" or newActor == "Jenna J. Ross":
                 newActor = "Jenna Ross"
-            if newActor == "Jenny Ferri":
+            elif newActor == "Jenny Ferri":
                 newActor = "Jenny Fer"
-            if newActor == "Jessica Blue" or newActor == "Jessica Cute":
+            elif newActor == "Jessica Blue" or newActor == "Jessica Cute":
                 newActor = "Jessica Foxx"
-            if newActor == "Jo Jo Kiss":
+            elif newActor == "Jo Jo Kiss":
                 newActor = "Jojo Kiss"
-            if newActor == "Josephine" or newActor == "Conny" or newActor == "Conny Carter" or newActor == "Connie":
+            elif newActor == "Josephine" or newActor == "Conny" or newActor == "Conny Carter" or newActor == "Connie":
                 newActor = "Connie Carter"
-            if newActor == "Kagney Lynn Karter":
+            elif newActor == "Kagney Lynn Karter":
                 newActor = "Kagney Linn Karter"
-            if newActor == "Kari Sweets":
+            elif newActor == "Kari Sweets":
                 newActor = "Kari Sweet"
-            if newActor == "Katarina":
+            elif newActor == "Katarina":
                 newActor = "Katerina Hartlova"
-            if newActor == "Kendra May Lust":
+            elif newActor == "Kendra May Lust":
                 newActor = "Kendra Lust"
-            if newActor == "Khloe Capri" or newActor == "Chloe Capri":
+            elif newActor == "Khloe Capri" or newActor == "Chloe Capri":
                 newActor = "Khloe Kapri"
-            if newActor == "Lara Craft":
+            elif newActor == "Lara Craft":
                 newActor = "Lora Craft"
-            if newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
+            elif newActor == "Lilly LaBeau" or newActor == "Lilly Labuea" or newActor == "Lily La Beau" or newActor == "Lily Lebeau" or newActor == "Lily Luvs":
                 newActor = "Lily Labeau"
-            if newActor == "Lilly Lit":
+            elif newActor == "Lilly Lit":
                 newActor = "Lilly Ford"
-            if newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
+            elif newActor == "Maddy OReilly" or newActor == "Maddy Oreilly" or newActor == "Maddy O'reilly":
                 newActor = "Maddy O'Reilly"
-            if newActor == "Maria Rya" or newActor == "Melena Maria":
+            elif newActor == "Maria Rya" or newActor == "Melena Maria":
                 newActor = "Melena Maria Rya"
-            if newActor == "Moe The Monster Johnson":
+            elif newActor == "Moe The Monster Johnson":
                 newActor = "Moe Johnson"
-            if newActor == "Nadya Nabakova" or newActor == "Nadya Nabokova":
+            elif newActor == "Nadya Nabakova" or newActor == "Nadya Nabokova":
                 newActor = "Bunny Colby"
-            if newActor == "Nancy A." or newActor == "Nancy A":
+            elif newActor == "Nancy A." or newActor == "Nancy A":
                 newActor = "Nancy Ace"
-            if newActor == "Nathaly" or newActor == "Nathalie Cherie" or newActor == "Natalie Cherie":
+            elif newActor == "Nathaly" or newActor == "Nathalie Cherie" or newActor == "Natalie Cherie":
                 newActor = "Nathaly Cherie"
-            if newActor == "Nika Noir":
+            elif newActor == "Nika Noir":
                 newActor = "Nika Noire"
-            if newActor == "Noe Milk" or newActor == "Noemiek":
+            elif newActor == "Noe Milk" or newActor == "Noemiek":
                 newActor = "Noemilk"
-            if newActor == "Rebel Lynn (Contract Star)":
+            elif newActor == "Rebel Lynn (Contract Star)":
                 newActor = "Rebel Lynn"
-            if newActor == "Remy La Croix":
+            elif newActor == "Remy La Croix":
                 newActor = "Remy Lacroix"
-            if newActor == "Riley Jenson" or newActor == "Riley Anne" or newActor == "Rilee Jensen":
+            elif newActor == "Riley Jenson" or newActor == "Riley Anne" or newActor == "Rilee Jensen":
                 newActor = "Riley Jensen"
-            if newActor == "Sara Luv":
+            elif newActor == "Sara Luv":
                 newActor = "Sara Luvv"
-            if newActor == "Dylann Vox" or newActor == "Dylan Vox":
+            elif newActor == "Dylann Vox" or newActor == "Dylan Vox":
                 newActor = "Skylar Vox"
-            if newActor == "Sedona" or newActor == "Stefanie Renee":
+            elif newActor == "Sedona" or newActor == "Stefanie Renee":
                 newActor = "Stephanie Renee"
-            if newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
+            elif newActor == "Stella Bankxxx" or newActor == "Stella Ferrari":
                 newActor = "Stella Banxxx"
-            if newActor == "Steven St.Croix":
+            elif newActor == "Steven St.Croix":
                 newActor = "Steven St. Croix"
-            if newActor == "Sybil Kailena" or newActor == "Sybil":
+            elif newActor == "Sybil Kailena" or newActor == "Sybil":
                 newActor = "Sybil A"
-            if newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay" or newActor == "Tiny Teen / Eva Elfie":
+            elif newActor == "Tiny Teen" or newActor == "Tieny Mieny" or newActor == "Lady Jay" or newActor == "Tiny Teen / Eva Elfie":
                 newActor = "Eva Elfie"
-            if newActor == "Veronica Vega":
+            elif newActor == "Veronica Vega":
                 newActor = "Veronica Valentine"
+            elif newActor == "Zoey Bloom":
+                newActor = "Zoe Bloom"
 
             ##### Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == "21Sextury" or metadata.studio == "Footsie Babes":
                 if newActor == "Abbie":
                     newActor = "Krystal Boyd"
-                if newActor == "Ariel Temple":
+                elif newActor == "Ariel Temple":
                     newActor = "Katarina Muti"
-                if newActor == "Henna Ssy":
+                elif newActor == "Henna Ssy":
                     newActor = "Henessy"
-            if metadata.studio == "Babes":
+            elif metadata.studio == "Babes":
                if newActor == "Angelica":
                     newActor = "Krystal Boyd"
-               if newActor == "Ariel":
+               elif newActor == "Ariel":
                    newActor = "Ariel Piper Fawn"
-               if newActor == "Aiko May":
+               elif newActor == "Aiko May":
                    newActor = "Aika May"
-               if newActor == "Clover":
+               elif newActor == "Clover":
                    newActor = "Katya Clover"
-            if metadata.studio == "Bang Bros":
+            elif metadata.studio == "Bang Bros":
                if newActor == "Amy":
                     newActor = "Abella Anderson"
-               if newActor == "Noemi Bilas":
+               elif newActor == "Noemi Bilas":
                     newActor = "Noemie Bilas"
-            if metadata.studio == "Deeper" or metadata.studio == "Tushyraw" or metadata.studio == "Tushy" or metadata.studio == "Blacked" or metadata.studio == "Blackedraw" or metadata.studio == "Vixen":
+            elif metadata.studio == "Deeper" or metadata.studio == "Tushyraw" or metadata.studio == "Tushy" or metadata.studio == "Blacked" or metadata.studio == "Blackedraw" or metadata.studio == "Vixen":
                 if newActor == "Vikalita":
                     newActor = "Vika Lita"
-                if newActor == "Vina Skyy":
+                elif newActor == "Vina Skyy":
                     newActor = "Vina Sky"
-            if metadata.studio == "FuelVirtual":
+            elif metadata.studio == "FuelVirtual":
                 if newActor == "Nicole":
                     newActor = "Nicole Ray"
-                if newActor == "August":
+                elif newActor == "August":
                     newActor = "August Ames"
-                if newActor == "Lexi":
+                elif newActor == "Lexi":
                     newActor = "Lexi Belle"
-                if newActor == "Victoria R":
+                elif newActor == "Victoria R":
                     newActor = "Victoria Rae Black"
-                if newActor == "Tori":
+                elif newActor == "Tori":
                     newActor = "Tori Black"
-                if newActor == "Tessa":
+                elif newActor == "Tessa":
                     newActor = "Tessa Taylor"
-                if newActor == "Holly":
+                elif newActor == "Holly":
                     newActor = "Holly Michaels"
-                if newActor == "Molly":
+                elif newActor == "Molly":
                     newActor = "Molly Bennett"
-                if newActor == "Jaslene":
+                elif newActor == "Jaslene":
                     newActor = "Jaslene Jade"
-                if newActor == "Mia":
+                elif newActor == "Mia":
                     newActor = "Mia Malkova"
-                if newActor == "Lily":
+                elif newActor == "Lily":
                     newActor = "Lily Carter"
-                if newActor == "Vanessa":
+                elif newActor == "Vanessa":
                     newActor = "Vanessa Cage"
-                if newActor == "Riley":
+                elif newActor == "Riley":
                     newActor = "Riley Reid"
-                if newActor == "Casi":
+                elif newActor == "Casi":
                     newActor = "Casi James"
-                if newActor == "Karina":
+                elif newActor == "Karina":
                     newActor = "Karina White"
-                if newActor == "Dillion":
+                elif newActor == "Dillion":
                     newActor = "Dillion Harper"
-                if newActor == "Lola":
+                elif newActor == "Lola":
                     newActor = "Lola Foxx"
-                if newActor == "Stacie":
+                elif newActor == "Stacie":
                     newActor = "Stacie Jaxx"
-                if newActor == "Dillon":
+                elif newActor == "Dillon":
                     newActor = "Dillion Harper"
-                if newActor == "Belle":
+                elif newActor == "Belle":
                     newActor = "Belle Knox"
-                if newActor == "Emily":
+                elif newActor == "Emily":
                     newActor = "Emily Grey"
-                if newActor == "Kennedy":
+                elif newActor == "Kennedy":
                     newActor = "Kennedy Leigh"
-                if newActor == "Alina":
+                elif newActor == "Alina":
                     newActor = "Alina Li"
-                if newActor == "Brittany":
+                elif newActor == "Brittany":
                     newActor = "Bibi Jones"
-                if newActor == "Lexi B":
+                elif newActor == "Lexi B":
                     newActor = "Lexi Bloom"
-                if newActor == "Maryjane":
+                elif newActor == "Maryjane":
                     newActor = "Mary Jane Johnson"
-                if newActor == "Ella M":
+                elif newActor == "Ella M":
                     newActor = "Ella Milano"
-                if newActor == "Rebecca":
+                elif newActor == "Rebecca":
                     newActor = "Rebecca Linares"
-                if newActor == "Hayden":
+                elif newActor == "Hayden":
                     newActor = "Hayden Winters"
-                if newActor == "Victoria":
+                elif newActor == "Victoria":
                     newActor = "Victoria Rae Black"
-                if newActor == "Erin":
+                elif newActor == "Erin":
                     newActor = "Erin Stone"
-                if newActor == "Hope":
+                elif newActor == "Hope":
                     newActor = "Hope Howell"
-                if newActor == "Whitney":
+                elif newActor == "Whitney":
                     newActor = "Whitney Westgate"
-                if newActor == "Lily":
+                elif newActor == "Lily":
                     newActor = "Lily Love"
-                if newActor == "Allie":
+                elif newActor == "Allie":
                     newActor = "Allie Rae"
-                if newActor == "Jenna":
+                elif newActor == "Jenna":
                     newActor = "Jenna Rose"
-                if newActor == "Isis":
+                elif newActor == "Isis":
                     newActor = "Isis Taylor"
-                if newActor == "Kodi":
+                elif newActor == "Kodi":
                     newActor = "Kodi Gamble"
-                if newActor == "Haley":
+                elif newActor == "Haley":
                     newActor = "Haley Cummings"
-                if newActor == "Lily C":
+                elif newActor == "Lily C":
                     newActor = "Lily Carter"
-                if newActor == "Jynx":
+                elif newActor == "Jynx":
                     newActor = "Jynx Maze"
-                if newActor == "Allie H":
+                elif newActor == "Allie H":
                     newActor = "Allie Haze"
-                if newActor == "Lizz":
+                elif newActor == "Lizz":
                     newActor = "Lizz Taylor"
-                if newActor == "Evilyn":
+                elif newActor == "Evilyn":
                     newActor = "Evilyn Fierce"
-                if newActor == "Lexi D":
+                elif newActor == "Lexi D":
                     newActor = "Lexi Diamond"
-                if newActor == "Ashlyn":
+                elif newActor == "Ashlyn":
                     newActor = "Ashlyn Rae"
-                if newActor == "Presley":
+                elif newActor == "Presley":
                     newActor = "Presley Carter"
-                if newActor == "Zoey":
+                elif newActor == "Zoey":
                     newActor = "Zoey Kush"
-                if newActor == "Madison":
+                elif newActor == "Madison":
                     newActor = "Madison Ivy"
-                if newActor == "Britney B":
+                elif newActor == "Britney B":
                     newActor = "Bibi jones"
-                if newActor == "Staci":
+                elif newActor == "Staci":
                     newActor = "Staci Silverstone"
-                if newActor == "Tealey":
+                elif newActor == "Tealey":
                     newActor = "Teal Conrad"
-                if newActor == "Brooklyn":
+                elif newActor == "Brooklyn":
                     newActor = "Brooklyn Chase"
-                if newActor == "Casana":
+                elif newActor == "Casana":
                     newActor = "Casana Lei"
-                if newActor == "Jessica":
+                elif newActor == "Jessica":
                     newActor = "Jessica Robbins"
-                if newActor == "Naomi":
+                elif newActor == "Naomi":
                     newActor = "Naomi West"
-                if newActor == "Janice":
+                elif newActor == "Janice":
                     newActor = "Janice Griffith"
-                if newActor == "Scarlet":
+                elif newActor == "Scarlet":
                     newActor = "Scarlet Red"
-                if newActor == "Jayden":
+                elif newActor == "Jayden":
                     newActor = "Jayden Taylors"
-                if newActor == "Lacy":
+                elif newActor == "Lacy":
                     newActor = "Lacy Channing"
-                if newActor == "Alexis":
+                elif newActor == "Alexis":
                     newActor = "Alexis Adams"
-                if newActor == "Pristine":
+                elif newActor == "Pristine":
                     newActor = "Pristine Edge"
-                if newActor == "Elsa":
+                elif newActor == "Elsa":
                     newActor = "Elsa Jean"
-                if newActor == "Lucy":
+                elif newActor == "Lucy":
                     newActor = "Lucy Doll"
-                if newActor == "Abigaile":
+                elif newActor == "Abigaile":
                     newActor = "Abigaile Johnson"
-                if newActor == "Stephanie C":
+                elif newActor == "Stephanie C":
                     newActor = "Stephanie Cane"
-                if newActor == "Aletta":
+                elif newActor == "Aletta":
                     newActor = "Aletta Ocean"
-                if newActor == "Remy":
+                elif newActor == "Remy":
                     newActor = "Remy LaCroix"
-            if metadata.studio == "LegalPorno":
+            elif metadata.studio == "LegalPorno":
                 if newActor == "Abby":
                     newActor = "Krystal Boyd"
-                if newActor == "Olivia":
+                elif newActor == "Olivia":
                     newActor = "Sophia Traxler"
-            if metadata.studio == "Joymii":
+            elif metadata.studio == "Joymii":
                 if newActor == "Abigail":
                     newActor = "Abigaile Johnson"
-                if newActor == "Aleska D.":
+                elif newActor == "Aleska D.":
                     newActor = "Aleska Diamond"
-                if newActor == "Alessandra J.":
+                elif newActor == "Alessandra J.":
                     newActor = "Alessandra Jane"
-                if newActor == "Alexa":
+                elif newActor == "Alexa":
                     newActor = "Alexa Tomas"
-                if newActor == "Alexis":
+                elif newActor == "Alexis":
                     newActor = "Alexis Crystal"
-                if newActor == "Alexis B.":
+                elif newActor == "Alexis B.":
                     newActor = "Alexis Brill"
-                if newActor == "Alexis T.":
+                elif newActor == "Alexis T.":
                     newActor = "Alexis Texas"
-                if newActor == "Alexis V.":
+                elif newActor == "Alexis V.":
                     newActor = "Alexis Venton"
-                if newActor == "Alice B.":
+                elif newActor == "Alice B.":
                     newActor = "Mira Sunset"
-                if newActor == "Allie J.":
+                elif newActor == "Allie J.":
                     newActor = "Allie Jordan"
-                if newActor == "Alysa":
+                elif newActor == "Alysa":
                     newActor = "Alyssa Branch"
-                if newActor == "Amirah A.":
+                elif newActor == "Amirah A.":
                     newActor = "Amirah Adara"
-                if newActor == "Andie":
+                elif newActor == "Andie":
                     newActor = "Andie Darling"
-                if newActor == "Angel B.":
+                elif newActor == "Angel B.":
                     newActor = "Angel Blade"
-                if newActor == "Anita B.":
+                elif newActor == "Anita B.":
                     newActor = "Anita Bellini"
-                if newActor == "Anna P.":
+                elif newActor == "Anna P.":
                     newActor = "Cayenne Klein"
-                if newActor == "Anneli":
+                elif newActor == "Anneli":
                     newActor = "Pinky June"
-                if newActor == "Apolonia":
+                elif newActor == "Apolonia":
                     newActor = "Apolonia Lapiedra"
-                if newActor == "Ariel":
+                elif newActor == "Ariel":
                     newActor = "Ariel Piper Fawn"
-                if newActor == "Athina":
+                elif newActor == "Athina":
                     newActor = "Tyra Moon"
-                if newActor == "Aubrey J.":
+                elif newActor == "Aubrey J.":
                     newActor = "Aubrey James"
-                if newActor == "Avril H.":
+                elif newActor == "Avril H.":
                     newActor = "Avril Hall"
-                if newActor == "Bailey D.":
+                elif newActor == "Bailey D.":
                     newActor = "Lovenia Lux"
-                if newActor == "Bailey R.":
+                elif newActor == "Bailey R.":
                     newActor = "Bailey Ryder"
-                if newActor == "Belinda":
+                elif newActor == "Belinda":
                     newActor = "Rose Delight"
-                if newActor == "Billie":
+                elif newActor == "Billie":
                     newActor = "Billie Star"
-                if newActor == "Blanche B.":
+                elif newActor == "Blanche B.":
                     newActor = "Blanche Bradburry"
-                if newActor == "Brittany":
+                elif newActor == "Brittany":
                     newActor = "Brittney Banxxx"
-                if newActor == "Candice":
+                elif newActor == "Candice":
                     newActor = "Candice Luca"
-                if newActor == "Candy B.":
+                elif newActor == "Candy B.":
                     newActor = "Candy Blond"
-                if newActor == "Caprice":
+                elif newActor == "Caprice":
                     newActor = "Little Caprice"
-                if newActor == "Carmen C.":
+                elif newActor == "Carmen C.":
                     newActor = "Carmen McCarthy"
-                if newActor == "Carolina":
+                elif newActor == "Carolina":
                     newActor = "Carolina Abril"
-                if newActor == "Cayla L.":
+                elif newActor == "Cayla L.":
                     newActor = "Cayla Lyons"
-                if newActor == "Celeste":
+                elif newActor == "Celeste":
                     newActor = "Celeste Star"
-                if newActor == "Chastity L.":
+                elif newActor == "Chastity L.":
                     newActor = "Chastity Lynn"
-                if newActor == "Cherry K.":
+                elif newActor == "Cherry K.":
                     newActor = "Cherry Kiss"
-                if newActor == "Christen":
+                elif newActor == "Christen":
                     newActor = "Christen Courtney"
-                if newActor == "Cindy D.":
+                elif newActor == "Cindy D.":
                     newActor = "Cindy Dollar"
-                if newActor == "Cindy L.":
+                elif newActor == "Cindy L.":
                     newActor = "Cindy Carson"
-                if newActor == "Clea G":
+                elif newActor == "Clea G":
                     newActor = "Clea Gaultier"
-                if newActor == "Clover":
+                elif newActor == "Clover":
                     newActor = "Katya Clover"
-                if newActor == "Coco":
+                elif newActor == "Coco":
                     newActor = "Coco de Mal"
-                if newActor == "Dani D.":
+                elif newActor == "Dani D.":
                     newActor = "Dani Daniels"
-                if newActor == "Davina E.":
+                elif newActor == "Davina E.":
                     newActor = "Sybil A"
-                if newActor == "Dee":
+                elif newActor == "Dee":
                     newActor = "Lady Dee"
-                if newActor == "Defrancesca":
+                elif newActor == "Defrancesca":
                     newActor = "Defrancesca Gallardo"
-                if newActor == "Delphine":
+                elif newActor == "Delphine":
                     newActor = "Izzy Delphine"
-                if newActor == "Denisa":
+                elif newActor == "Denisa":
                     newActor = "Denisa Heaven"
-                if newActor == "Eliana R.":
+                elif newActor == "Eliana R.":
                     newActor = "Elaina Raye"
-                if newActor == "Ella M.":
+                elif newActor == "Ella M.":
                     newActor = "Ella Milano"
-                if newActor == "Erika K.":
+                elif newActor == "Erika K.":
                     newActor = "Erika Kortni"
-                if newActor == "Eufrat":
+                elif newActor == "Eufrat":
                     newActor = "Eufrat Mai"
-                if newActor == "Eveline D.":
+                elif newActor == "Eveline D.":
                     newActor = "Eveline Dellai"
-                if newActor == "Evi F.":
+                elif newActor == "Evi F.":
                     newActor = "Evi Fox"
-                if newActor == "Evilyn F.":
+                elif newActor == "Evilyn F.":
                     newActor = "Evilyn Fierce"
-                if newActor == "Faye R.":
+                elif newActor == "Faye R.":
                     newActor = "Faye Reagan"
-                if newActor == "Ferrera":
+                elif newActor == "Ferrera":
                     newActor = "Ferrera Gomez"
-                if newActor == "Frida S.":
+                elif newActor == "Frida S.":
                     newActor = "Frida Sante"
-                if newActor == "Gina G.":
+                elif newActor == "Gina G.":
                     newActor = "Gina Gerson"
-                if newActor == "Gina V.":
+                elif newActor == "Gina V.":
                     newActor = "Gina Devine"
-                if newActor == "Ginebra B.":
+                elif newActor == "Ginebra B.":
                     newActor = "Ginebra Bellucci"
-                if newActor == "Ginger":
+                elif newActor == "Ginger":
                     newActor = "Ginger Fox"
-                if newActor == "Giselle L.":
+                elif newActor == "Giselle L.":
                     newActor = "Giselle Leon"
-                if newActor == "Hayden W.":
+                elif newActor == "Hayden W.":
                     newActor = "Hayden Winters"
-                if newActor == "Heather S.":
+                elif newActor == "Heather S.":
                     newActor = "Heather Starlet"
-                if newActor == "Holly":
+                elif newActor == "Holly":
                     newActor = "Holly Anderson"
-                if newActor == "Holly M.":
+                elif newActor == "Holly M.":
                     newActor = "Holly Michaels"
-                if newActor == "Ivy":
+                elif newActor == "Ivy":
                     newActor = "Iwia"
-                if newActor == "Jana J.":
+                elif newActor == "Jana J.":
                     newActor = "Jana Jordan"
-                if newActor == "Jana Q.":
+                elif newActor == "Jana Q.":
                     newActor = "Emma Brown"
-                if newActor == "Jane F.":
+                elif newActor == "Jane F.":
                     newActor = "Nancy Ace"
-                if newActor == "Jayden C.":
+                elif newActor == "Jayden C.":
                     newActor = "Jayden Cole"
-                if newActor == "Jennifer W.":
+                elif newActor == "Jennifer W.":
                     newActor = "Jennifer White"
-                if newActor == "Jessica":
+                elif newActor == "Jessica":
                     newActor = "Leony April"
-                if newActor == "Jessica B.":
+                elif newActor == "Jessica B.":
                     newActor = "Jessica Bee"
-                if newActor == "Jessie":
+                elif newActor == "Jessie":
                     newActor = "Jessie Jazz"
-                if newActor == "Josephine":
+                elif newActor == "Josephine":
                     newActor = "Connie Carter"
-                if newActor == "Julia R.":
+                elif newActor == "Julia R.":
                     newActor = "Julia Roca"
-                if newActor == "Kaci S.":
+                elif newActor == "Kaci S.":
                     newActor = "Kaci Starr"
-                if newActor == "Kari":
+                elif newActor == "Kari":
                     newActor = "Kari Sweet"
-                if newActor == "Karlie":
+                elif newActor == "Karlie":
                     newActor = "Karlie Montana"
-                if newActor == "Karol T.":
+                elif newActor == "Karol T.":
                     newActor = "Karol Lilien"
-                if newActor == "Katie G.":
+                elif newActor == "Katie G.":
                     newActor = "Kattie Gold"
-                if newActor == "Katie J.":
+                elif newActor == "Katie J.":
                     newActor = "Katie Jordin"
-                if newActor == "Katy R.":
+                elif newActor == "Katy R.":
                     newActor = "Katy Rose"
-                if newActor == "Kelly W":
+                elif newActor == "Kelly W":
                     newActor = "Kelly White"
-                if newActor == "Kiara D.":
+                elif newActor == "Kiara D.":
                     newActor = "Kiara Diane"
-                if newActor == "Kiara L.":
+                elif newActor == "Kiara L.":
                     newActor = "Kiara Lord"
-                if newActor == "Kira T.":
+                elif newActor == "Kira T.":
                     newActor = "Kira Thorn"
-                if newActor == "Kitty J.":
+                elif newActor == "Kitty J.":
                     newActor = "Kitty Jane"
-                if newActor == "Lara":
+                elif newActor == "Lara":
                     newActor = "Dido Angel"
-                if newActor == "Lena N.":
+                elif newActor == "Lena N.":
                     newActor = "Lena Nicole"
-                if newActor == "Lexi D.":
+                elif newActor == "Lexi D.":
                     newActor = "Lexi Dona"
-                if newActor == "Lexi S.":
+                elif newActor == "Lexi S.":
                     newActor = "Lexi Swallow"
-                if newActor == "Lilly K.":
+                elif newActor == "Lilly K.":
                     newActor = "Zena Little"
-                if newActor == "Lilu":
+                elif newActor == "Lilu":
                     newActor = "Lilu Moon"
-                if newActor == "Lily B.":
+                elif newActor == "Lily B.":
                     newActor = "Lily Carter"
-                if newActor == "Lily L.":
+                elif newActor == "Lily L.":
                     newActor = "Lily Labeau"
-                if newActor == "Lucy H.":
+                elif newActor == "Lucy H.":
                     newActor = "Lucy Heart"
-                if newActor == "Lucy L.":
+                elif newActor == "Lucy L.":
                     newActor = "Lucy Li"
-                if newActor == "Luna C.":
+                elif newActor == "Luna C.":
                     newActor = "Luna Corazon"
-                if newActor == "Maria C.":
+                elif newActor == "Maria C.":
                     newActor = "Marie McCray"
-                if newActor == "Medina U.":
+                elif newActor == "Medina U.":
                     newActor = "Foxy Di"
-                if newActor == "Mia D.":
+                elif newActor == "Mia D.":
                     newActor = "Mia Manarote"
-                if newActor == "Miela":
+                elif newActor == "Miela":
                     newActor = "Marry Queen"
-                if newActor == "Mila K.":
+                elif newActor == "Mila K.":
                     newActor = "Michaela Isizzu"
-                if newActor == "Milana R.":
+                elif newActor == "Milana R.":
                     newActor = "Milana Blanc"
-                if newActor == "Milena D.":
+                elif newActor == "Milena D.":
                     newActor = "Milena Devi"
-                if newActor == "Misty S.":
+                elif newActor == "Misty S.":
                     newActor = "Misty Stone"
-                if newActor == "Mona L.":
+                elif newActor == "Mona L.":
                     newActor = "Mona Lee"
-                if newActor == "Natalie N.":
+                elif newActor == "Natalie N.":
                     newActor = "Natalie Nice"
-                if newActor == "Natalli":
+                elif newActor == "Natalli":
                     newActor = "Nathaly Cherie"
-                if newActor == "Nataly G.":
+                elif newActor == "Nataly G.":
                     newActor = "Nataly Gold"
-                if newActor == "Nikki":
+                elif newActor == "Nikki":
                     newActor = "Nikki Daniels"
-                if newActor == "Niky S.":
+                elif newActor == "Niky S.":
                     newActor = "Niki Sweet"
-                if newActor == "Patricya L.":
+                elif newActor == "Patricya L.":
                     newActor = "Merry Pie"
-                if newActor == "Paula S.":
+                elif newActor == "Paula S.":
                     newActor = "Paula Shy"
-                if newActor == "Paulina S":
+                elif newActor == "Paulina S":
                     newActor = "Paulina Soul"
-                if newActor == "Piper P.":
+                elif newActor == "Piper P.":
                     newActor = "Piper Perri"
-                if newActor == "Presley H.":
+                elif newActor == "Presley H.":
                     newActor = "Presley Hart"
-                if newActor == "Pristine E.":
+                elif newActor == "Pristine E.":
                     newActor = "Pristine Edge"
-                if newActor == "Reena":
+                elif newActor == "Reena":
                     newActor = "Reena Sky"
-                if newActor == "Rena":
+                elif newActor == "Rena":
                     newActor = "Cara Mell"
-                if newActor == "Renee P.":
+                elif newActor == "Renee P.":
                     newActor = "Renee Perez"
-                if newActor == "Ria R.":
+                elif newActor == "Ria R.":
                     newActor = "Ria Rodrigez"
-                if newActor == "Rihanna":
+                elif newActor == "Rihanna":
                     newActor = "Rihanna Samuel"
-                if newActor == "Riley":
+                elif newActor == "Riley":
                     newActor = "Riley Jensen"
-                if newActor == "Rina":
+                elif newActor == "Rina":
                     newActor = "Rina Ellis"
-                if newActor == "Sage E.":
+                elif newActor == "Sage E.":
                     newActor = "Sage Evans"
-                if newActor == "Sally C.":
+                elif newActor == "Sally C.":
                     newActor = "Sally Charles"
-                if newActor == "Sandy A.":
+                elif newActor == "Sandy A.":
                     newActor = "Sandy Ambrosia"
-                if newActor == "Sara":
+                elif newActor == "Sara":
                     newActor = "Sara Jaymes"
-                if newActor == "Sara L.":
+                elif newActor == "Sara L.":
                     newActor = "Sara Luvv"
-                if newActor == "Scarlet B.":
+                elif newActor == "Scarlet B.":
                     newActor = "Scarlet Banks"
-                if newActor == "Shyla":
+                elif newActor == "Shyla":
                     newActor = "Shyla Jennings"
-                if newActor == "Shyla G.":
+                elif newActor == "Shyla G.":
                     newActor = "Shyla Jennings"
-                if newActor == "Simona":
+                elif newActor == "Simona":
                     newActor = "Silvie Deluxe"
-                if newActor == "Sophia J.":
+                elif newActor == "Sophia J.":
                     newActor = "Sophia Jade"
-                if newActor == "Stacey":
+                elif newActor == "Stacey":
                     newActor = "Monika Benz"
-                if newActor == "Stella C":
+                elif newActor == "Stella C":
                     newActor = "Stella Cox"
-                if newActor == "Sunny G.":
+                elif newActor == "Sunny G.":
                     newActor = "Adele Sunshine"
-                if newActor == "Suzie":
+                elif newActor == "Suzie":
                     newActor = "Suzie Carina"
-                if newActor == "Tarra W.":
+                elif newActor == "Tarra W.":
                     newActor = "Tarra White"
-                if newActor == "Tasha R.":
+                elif newActor == "Tasha R.":
                     newActor = "Tasha Reign"
-                if newActor == "Taylor V.":
+                elif newActor == "Taylor V.":
                     newActor = "Taylor Vixen"
-                if newActor == "Tegan S.":
+                elif newActor == "Tegan S.":
                     newActor = "Teagan Summers"
-                if newActor == "Tess L.":
+                elif newActor == "Tess L.":
                     newActor = "Tess Lyndon"
-                if newActor == "Tiffany F.":
+                elif newActor == "Tiffany F.":
                     newActor = "Tiffany Fox"
-                if newActor == "Tiffany T.":
+                elif newActor == "Tiffany T.":
                     newActor = "Tiffany Thompson"
-                if newActor == "Tina":
+                elif newActor == "Tina":
                     newActor = "Tina Blade"
-                if newActor == "Tina H.":
+                elif newActor == "Tina H.":
                     newActor = "Tina Hot"
-                if newActor == "Tracy":
+                elif newActor == "Tracy":
                     newActor = "Tracy Lindsay"
-                if newActor == "Tracy A.":
+                elif newActor == "Tracy A.":
                     newActor = "Tracy Gold"
-                if newActor == "Tracy S.":
+                elif newActor == "Tracy S.":
                     newActor = "Tracy Smile"
-                if newActor == "Uma Z.":
+                elif newActor == "Uma Z.":
                     newActor = "Uma Zex"
-                if newActor == "Valentina N.":
+                elif newActor == "Valentina N.":
                     newActor = "Valentina Nappi"
-                if newActor == "Vanda":
+                elif newActor == "Vanda":
                     newActor = "Vanda Lust"
-                if newActor == "Vanea H.":
+                elif newActor == "Vanea H.":
                     newActor = "Viola Bailey"
-                if newActor == "Victoria B.":
+                elif newActor == "Victoria B.":
                     newActor = "Victoria Blaze"
-                if newActor == "Victoria P.":
+                elif newActor == "Victoria P.":
                     newActor = "Victoria Puppy"
-                if newActor == "Victoria R.":
+                elif newActor == "Victoria R.":
                     newActor = "Victoria Rae Black"
-                if newActor == "Viktoria S.":
+                elif newActor == "Viktoria S.":
                     newActor = "Victoria Sweet"
-                if newActor == "Vinna R.":
+                elif newActor == "Vinna R.":
                     newActor = "Vinna Reed"
-                if newActor == "Whitney C.":
+                elif newActor == "Whitney C.":
                     newActor = "Whitney Conroy"
-                if newActor == "Zazie S.":
+                elif newActor == "Zazie S.":
                     newActor = "Zazie Sky"
-                if newActor == "Zoe V.":
+                elif newActor == "Zoe V.":
                     newActor = "Zoe Voss"
-            if metadata.studio == "Kink":
+            elif metadata.studio == "Kink":
                 if newActor == "Alana":
                     newActor = "Alana Evans"
-                if newActor == "Kade":
+                elif newActor == "Kade":
                     newActor = "Deviant Kade"
-                if newActor == "Alexa Jaymes":
+                elif newActor == "Alexa Jaymes":
                     newActor = "Lola Milano"
-                if newActor == "Avi Scott":
+                elif newActor == "Avi Scott":
                     newActor = "Avy Scott"
-                if newActor == "Boo":
+                elif newActor == "Boo":
                     newActor = "Boo Delicious"
-                if newActor == "Courtney":
+                elif newActor == "Courtney":
                     newActor = "Courtney Devine"
-                if newActor == "Cowgirl":
+                elif newActor == "Cowgirl":
                     newActor = "Liz Tyler"
-                if newActor == "Danielle":
+                elif newActor == "Danielle":
                     newActor = "Natalia Wood"
-                if newActor == "Diamond":
+                elif newActor == "Diamond":
                     newActor = "Diamond Foxxx"
-                if newActor == "Elyse":
+                elif newActor == "Elyse":
                     newActor = "Elyse Stone"
-                if newActor == "Emily":
+                elif newActor == "Emily":
                     newActor = "Emilie Davinci"
-                if newActor == "Harmony":
+                elif newActor == "Harmony":
                     newActor = "Harmony Rose"
-                if newActor == "Heather Starlett":
+                elif newActor == "Heather Starlett":
                     newActor = "Heather Starlet"
-                if newActor == "Jassie":
+                elif newActor == "Jassie":
                     newActor = "Jassie James"
-                if newActor == "Julie Night":
+                elif newActor == "Julie Night":
                     newActor = "Julie Knight"
-                if newActor == "Kristine":
+                elif newActor == "Kristine":
                     newActor = "Kristine Andrews"
-                if newActor == "Leah":
+                elif newActor == "Leah":
                     newActor = "Leah Parker"
-                if newActor == "Lolita Taylor":
+                elif newActor == "Lolita Taylor":
                     newActor = "Lola Taylor"
-                if newActor == "Melanie":
+                elif newActor == "Melanie":
                     newActor = "Melanie Jagger"
-                if newActor == "Meriesa":
+                elif newActor == "Meriesa":
                     newActor = "Meriesa Arroyo"
-                if newActor == "Michele Avanti":
+                elif newActor == "Michele Avanti":
                     newActor = "Michelle Avanti"
-                if newActor == "Molly Matthews":
+                elif newActor == "Molly Matthews":
                     newActor = "Emily Marilyn"
-                if newActor == "Naidyne":
+                elif newActor == "Naidyne":
                     newActor = "Nadine Sage"
-                if newActor == "Phoenix":
+                elif newActor == "Phoenix":
                     newActor = "Phoenix Ray"
-                if newActor == "Phyllisha":
+                elif newActor == "Phyllisha":
                     newActor = "Phyllisha Anne"
-                if newActor == "Porsha":
+                elif newActor == "Porsha":
                     newActor = "Porsha Blaze"
-                if newActor == "Ramona":
+                elif newActor == "Ramona":
                     newActor = "Ramona Luv"
-                if newActor == "Sabrine":
+                elif newActor == "Sabrine":
                     newActor = "Sabrine Maui"
-                if newActor == "Sandy":
+                elif newActor == "Sandy":
                     newActor = "Anna Ashton"
-                if newActor == "Sarah Jaymes":
+                elif newActor == "Sarah Jaymes":
                     newActor = "Sara Jaymes"
-                if newActor == "Sascha Sin":
+                elif newActor == "Sascha Sin":
                     newActor = "Sasha Sin"
-                if newActor == "Tegan Summer":
+                elif newActor == "Tegan Summer":
                     newActor = "Teagan Summers"
-                if newActor == "Wanda":
+                elif newActor == "Wanda":
                     newActor = "Wanda Curtis"
-            if metadata.studio == "Nubiles":
+            elif metadata.studio == "Nubiles":
                 if newActor == "Abbey":
                     newActor = "Amia Miley"
-                if newActor == "Addie":
+                elif newActor == "Addie":
                     newActor = "Addie Moore"
-                if newActor == "Addison":
+                elif newActor == "Addison":
                     newActor = "Addison Rose"
-                if newActor == "Adella":
+                elif newActor == "Adella":
                     newActor = "Adel Bye"
-                if newActor == "Adelle":
+                elif newActor == "Adelle":
                     newActor = "Keira Albina"
-                if newActor == "Adri":
+                elif newActor == "Adri":
                     newActor = "Sandra Bina"
-                if newActor == "Adrianne":
+                elif newActor == "Adrianne":
                     newActor = "Adrianna Gold"
-                if newActor == "Agnessa":
+                elif newActor == "Agnessa":
                     newActor = "Nessa Shine"
-                if newActor == "Alana":
+                elif newActor == "Alana":
                     newActor = "Jayme Langford"
-                if newActor == "Alanaleigh":
+                elif newActor == "Alanaleigh":
                     newActor = "Alana Leigh"
-                if newActor == "Alana G":
+                elif newActor == "Alana G":
                     newActor = "Alana Jade"
-                if newActor == "Alena":
+                elif newActor == "Alena":
                     newActor = "Lucie Theodorova"
-                if newActor == "Aletta":
+                elif newActor == "Aletta":
                     newActor = "Aletta Ocean"
-                if newActor == "Alexa":
+                elif newActor == "Alexa":
                     newActor = "Aleska Diamond"
-                if newActor == "Alexcia":
+                elif newActor == "Alexcia":
                     newActor = "Black Panther"
-                if newActor == "Alexiasky":
+                elif newActor == "Alexiasky":
                     newActor = "Alexia Sky"
-                if newActor == "Alexis":
+                elif newActor == "Alexis":
                     newActor = "Alexis Love"
-                if newActor == "Aliana":
+                elif newActor == "Aliana":
                     newActor = "Alice Miller"
-                if newActor == "Alicia":
+                elif newActor == "Alicia":
                     newActor = "Alicia Angel"
-                if newActor == "Alliehaze":
+                elif newActor == "Alliehaze":
                     newActor = "Allie Haze"
-                if newActor == "Allyann":
+                elif newActor == "Allyann":
                     newActor = "Ally Ann"
-                if newActor == "Allyssa":
+                elif newActor == "Allyssa":
                     newActor = "Allyssa Hall"
-                if newActor == "Alyssia":
+                elif newActor == "Alyssia":
                     newActor = "Nikita Black"
-                if newActor == "Amai":
+                elif newActor == "Amai":
                     newActor = "Amai Liu"
-                if newActor == "Amalie":
+                elif newActor == "Amalie":
                     newActor = "Anita Pearl"
-                if newActor == "Amber":
+                elif newActor == "Amber":
                     newActor = "Roxy Carter"
-                if newActor == "Ami":
+                elif newActor == "Ami":
                     newActor = "Ami Emerson"
-                if newActor == "Amy":
+                elif newActor == "Amy":
                     newActor = "Amy Reid"
-                if newActor == "Amybrooke":
+                elif newActor == "Amybrooke":
                     newActor = "Amy Brooke"
-                if newActor == "Amysativa":
+                elif newActor == "Amysativa":
                     newActor = "Amy Sativa"
-                if newActor == "Andie":
+                elif newActor == "Andie":
                     newActor = "Andie Valentino"
-                if newActor == "Andrea":
+                elif newActor == "Andrea":
                     newActor = "Jenny Sanders"
-                if newActor == "Angela":
+                elif newActor == "Angela":
                     newActor = "Angie Emerald"
-                if newActor == "Angelica":
+                elif newActor == "Angelica":
                     newActor = "Black Angelika"
-                if newActor == "Angelina":
+                elif newActor == "Angelina":
                     newActor = "Nadia Taylor"
-                if newActor == "Angelinaash":
+                elif newActor == "Angelinaash":
                     newActor = "Angelina Ashe"
-                if newActor == "Angellina":
+                elif newActor == "Angellina":
                     newActor = "Angelina Brooke"
-                if newActor == "Angie":
+                elif newActor == "Angie":
                     newActor = "Yulia Bright"
-                if newActor == "Aniya":
+                elif newActor == "Aniya":
                     newActor = "Stasia"
-                if newActor == "Annabelle":
+                elif newActor == "Annabelle":
                     newActor = "Annabelle Lee"
-                if newActor == "Annastevens":
+                elif newActor == "Annastevens":
                     newActor = "Anna Stevens"
-                if newActor == "Anne":
+                elif newActor == "Anne":
                     newActor = "Playful Ann"
-                if newActor == "Annette":
+                elif newActor == "Annette":
                     newActor = "Annette Allen"
-                if newActor == "Annika":
+                elif newActor == "Annika":
                     newActor = "Annika Eve"
-                if newActor == "Anoli":
+                elif newActor == "Anoli":
                     newActor = "Anoli Angel"
-                if newActor == "April":
+                elif newActor == "April":
                     newActor = "April Aubrey"
-                if newActor == "Apriloneil":
+                elif newActor == "Apriloneil":
                     newActor = "April O'Neil"
-                if newActor == "Ariadna":
+                elif newActor == "Ariadna":
                     newActor = "Ariadna Moon"
-                if newActor == "Ariel":
+                elif newActor == "Ariel":
                     newActor = "Ariel Rebel"
-                if newActor == "Ashlee":
+                elif newActor == "Ashlee":
                     newActor = "Ashlee Allure"
-                if newActor == "Ashleyjane":
+                elif newActor == "Ashleyjane":
                     newActor = "Ashley Jane"
-                if newActor == "Ashlynrae":
+                elif newActor == "Ashlynrae":
                     newActor = "Ashlyn Rae"
-                if newActor == "Asuna":
+                elif newActor == "Asuna":
                     newActor = "Asuna Fox"
-                if newActor == "Athina":
+                elif newActor == "Athina":
                     newActor = "Tyra Moon"
-                if newActor == "Aundrea":
+                elif newActor == "Aundrea":
                     newActor = "Andrea Anderson"
-                if newActor == "Austin":
+                elif newActor == "Austin":
                     newActor = "Austin Reines"
-                if newActor == "Barbra":
+                elif newActor == "Barbra":
                     newActor = "Mellisa Medisson"
-                if newActor == "Beata":
+                elif newActor == "Beata":
                     newActor = "Beata Undine"
-                if newActor == "Bella B":
+                elif newActor == "Bella B":
                     newActor = "Bella Blue"
-                if newActor == "Bernie":
+                elif newActor == "Bernie":
                     newActor = "Bernie Svintis"
-                if newActor == "Billie":
+                elif newActor == "Billie":
                     newActor = "Billy Raise"
-                if newActor == "Bliss":
+                elif newActor == "Bliss":
                     newActor = "Bliss Lei"
-                if newActor == "Boroka":
+                elif newActor == "Boroka":
                     newActor = "Boroka Balls"
-                if newActor == "Brea":
+                elif newActor == "Brea":
                     newActor = "Bree Olson"
-                if newActor == "Bridget":
+                elif newActor == "Bridget":
                     newActor = "Sugar Baby"
-                if newActor == "Britne":
+                elif newActor == "Britne":
                     newActor = "Chloe Morgan"
-                if newActor == "Britney":
+                elif newActor == "Britney":
                     newActor = "Liz Honey"
-                if newActor == "Brynn":
+                elif newActor == "Brynn":
                     newActor = "Brynn Tyler"
-                if newActor == "Bulgari":
+                elif newActor == "Bulgari":
                     newActor = "Ashley Bulgari"
-                if newActor == "Caise":
+                elif newActor == "Caise":
                     newActor = "Jada Gold"
-                if newActor == "Calliedee":
+                elif newActor == "Calliedee":
                     newActor = "Callie Dee"
-                if newActor == "Capri":
+                elif newActor == "Capri":
                     newActor = "Capri Anderson"
-                if newActor == "Carli":
+                elif newActor == "Carli":
                     newActor = "Carli Banks"
-                if newActor == "Carman":
+                elif newActor == "Carman":
                     newActor = "Carmen Kinsley"
-                if newActor == "Carmen":
+                elif newActor == "Carmen":
                     newActor = "Petra E"
-                if newActor == "Carmin":
+                elif newActor == "Carmin":
                     newActor = "Carmen McCarthy"
-                if newActor == "Carrie":
+                elif newActor == "Carrie":
                     newActor = "Sandra Kalermen"
-                if newActor == "Cassandra":
+                elif newActor == "Cassandra":
                     newActor = "Cassandra Calogera"
-                if newActor == "Cate":
+                elif newActor == "Cate":
                     newActor = "Cate Harrington"
-                if newActor == "Celeste":
+                elif newActor == "Celeste":
                     newActor = "Celeste Star"
-                if newActor == "Celina":
+                elif newActor == "Celina":
                     newActor = "Celina Cross"
-                if newActor == "Charlie":
+                elif newActor == "Charlie":
                     newActor = "Charlie Laine"
-                if newActor == "Charlielynn":
+                elif newActor == "Charlielynn":
                     newActor = "Charlie Lynn"
-                if newActor == "Charlotte":
+                elif newActor == "Charlotte":
                     newActor = "Charlotte Stokely"
-                if newActor == "Chastity":
+                elif newActor == "Chastity":
                     newActor = "Chastity Lynn"
-                if newActor == "Chloejames":
+                elif newActor == "Chloejames":
                     newActor = "Chloe James"
-                if newActor == "Chloe Cherry":
+                elif newActor == "Chloe Cherry":
                     newActor = "Chloe Couture"
-                if newActor == "Chris":
+                elif newActor == "Chris":
                     newActor = "Christine Alexis"
-                if newActor == "Christina":
+                elif newActor == "Christina":
                     newActor = "Krisztina Banks"
-                if newActor == "Christine":
+                elif newActor == "Christine":
                     newActor = "Christie Lee"
-                if newActor == "Cindy":
+                elif newActor == "Cindy":
                     newActor = "Cindy Hope"
-                if newActor == "Clover":
+                elif newActor == "Clover":
                     newActor = "Katya Clover"
-                if newActor == "Conny":
+                elif newActor == "Conny":
                     newActor = "Connie Carter"
-                if newActor == "Courtney":
+                elif newActor == "Courtney":
                     newActor = "Courtney Cummz"
-                if newActor == "Crissy":
+                elif newActor == "Crissy":
                     newActor = "Crissy Moon"
-                if newActor == "Crissysnow":
+                elif newActor == "Crissysnow":
                     newActor = "Crissy Snow"
-                if newActor == "Cristal":
+                elif newActor == "Cristal":
                     newActor = "Cristal Matthews"
-                if newActor == "Dana":
+                elif newActor == "Dana":
                     newActor = "Monica Sweet"
-                if newActor == "Dani":
+                elif newActor == "Dani":
                     newActor = "Dani Jensen"
-                if newActor == "Danielle":
+                elif newActor == "Danielle":
                     newActor = "Danielle Maye"
-                if newActor == "Daphne":
+                elif newActor == "Daphne":
                     newActor = "Daphne Angel"
-                if newActor == "Deanna":
+                elif newActor == "Deanna":
                     newActor = "Deena Daniels"
-                if newActor == "Delphine":
+                elif newActor == "Delphine":
                     newActor = "Izzy Delphine"
-                if newActor == "Dessa":
+                elif newActor == "Dessa":
                     newActor = "Jessica Valentino"
-                if newActor == "Devi":
+                elif newActor == "Devi":
                     newActor = "Devi Emmerson"
-                if newActor == "Diamond":
+                elif newActor == "Diamond":
                     newActor = "Paris Diamond"
-                if newActor == "Dimitra":
+                elif newActor == "Dimitra":
                     newActor = "Lia Chalizo"
-                if newActor == "Dina":
+                elif newActor == "Dina":
                     newActor = "Dana Sinnz"
-                if newActor == "Diore":
+                elif newActor == "Diore":
                     newActor = "Dolly Diore"
-                if newActor == "Dominica":
+                elif newActor == "Dominica":
                     newActor = "Dominic Anna"
-                if newActor == "Edenadams":
+                elif newActor == "Edenadams":
                     newActor = "Eden Adams"
-                if newActor == "Edyphia":
+                elif newActor == "Edyphia":
                     newActor = "Pearl Ami"
-                if newActor == "Eileen":
+                elif newActor == "Eileen":
                     newActor = "Eileen Sue"
-                if newActor == "Elena":
+                elif newActor == "Elena":
                     newActor = "Elena Rivera"
-                if newActor == "Elizabethanne":
+                elif newActor == "Elizabethanne":
                     newActor = "Elizabeth Anne"
-                if newActor == "Ella":
+                elif newActor == "Ella":
                     newActor = "Eufrat Mai"
-                if newActor == "Ellington":
+                elif newActor == "Ellington":
                     newActor = "Evah Ellington"
-                if newActor == "Elza A":
+                elif newActor == "Elza A":
                     newActor = "Casey Nohrman"
-                if newActor == "Emy":
+                elif newActor == "Emy":
                     newActor = "Emy Reyes"
-                if newActor == "Eriko":
+                elif newActor == "Eriko":
                     newActor = "Nikko Jordan"
-                if newActor == "Esegna":
+                elif newActor == "Esegna":
                     newActor = "Gabriella Lati"
-                if newActor == "Eva":
+                elif newActor == "Eva":
                     newActor = "Eva Gold"
-                if newActor == "Eve":
+                elif newActor == "Eve":
                     newActor = "Eve Angel"
-                if newActor == "Evelin":
+                elif newActor == "Evelin":
                     newActor = "Eveline Dellai"
-                if newActor == "Evelyn":
+                elif newActor == "Evelyn":
                     newActor = "Evelyn Baum"
-                if newActor == "Evonna":
+                elif newActor == "Evonna":
                     newActor = "Regina Prensley"
-                if newActor == "Faina":
+                elif newActor == "Faina":
                     newActor = "Faina Bona"
-                if newActor == "Faith":
+                elif newActor == "Faith":
                     newActor = "Faith Leon"
-                if newActor == "Fawn":
+                elif newActor == "Fawn":
                     newActor = "Kimberly Cox"
-                if newActor == "Faye":
+                elif newActor == "Faye":
                     newActor = "Faye Reagan"
-                if newActor == "Fayex":
+                elif newActor == "Fayex":
                     newActor = "Faye X Taylor"
-                if newActor == "Federica":
+                elif newActor == "Federica":
                     newActor = "Federica Hill"
-                if newActor == "Felicity":
+                elif newActor == "Felicity":
                     newActor = "Jana Jordan"
-                if newActor == "Ferrera":
+                elif newActor == "Ferrera":
                     newActor = "Ferrera Gomez"
-                if newActor == "Franziska":
+                elif newActor == "Franziska":
                     newActor = "Franziska Facella"
-                if newActor == "Frida":
+                elif newActor == "Frida":
                     newActor = "Frida Stark"
-                if newActor == "Gabriella":
+                elif newActor == "Gabriella":
                     newActor = "Ariel Piper Fawn"
-                if newActor == "Gemini":
+                elif newActor == "Gemini":
                     newActor = "Carmen Gemini"
-                if newActor == "Georgia":
+                elif newActor == "Georgia":
                     newActor = "Georgia Jones"
-                if newActor == "Ginger":
+                elif newActor == "Ginger":
                     newActor = "Ginger Lee"
-                if newActor == "Giselle":
+                elif newActor == "Giselle":
                     newActor = "Goldie Baby"
-                if newActor == "Grace":
+                elif newActor == "Grace":
                     newActor = "Lindsay Kay"
-                if newActor == "Haleysweet":
+                elif newActor == "Haleysweet":
                     newActor = "Haley Sweet"
-                if newActor == "Hallee":
+                elif newActor == "Hallee":
                     newActor = "Traci Lynn"
-                if newActor == "Hanna":
+                elif newActor == "Hanna":
                     newActor = "Hannah West"
-                if newActor == "Heather":
+                elif newActor == "Heather":
                     newActor = "Samantha Sin"
-                if newActor == "Heidi C":
+                elif newActor == "Heidi C":
                     newActor = "Heidi Harper"
-                if newActor == "Hollyfox":
+                elif newActor == "Hollyfox":
                     newActor = "Holly Fox"
-                if newActor == "Ianisha":
+                elif newActor == "Ianisha":
                     newActor = "Summer Breeze"
-                if newActor == "Inus":
+                elif newActor == "Inus":
                     newActor = "Anna Nova"
-                if newActor == "Jaelyn":
+                elif newActor == "Jaelyn":
                     newActor = "Jaelyn Fox"
-                if newActor == "Jamie":
+                elif newActor == "Jamie":
                     newActor = "Jewel Affair"
-                if newActor == "Janelle":
+                elif newActor == "Janelle":
                     newActor = "Karlie Montana"
-                if newActor == "Jasmine":
+                elif newActor == "Jasmine":
                     newActor = "Jasmine Rouge"
-                if newActor == "Jassie":
+                elif newActor == "Jassie":
                     newActor = "Jassie James"
-                if newActor == "Jenet":
+                elif newActor == "Jenet":
                     newActor = "Leyla Black"
-                if newActor == "Jenna":
+                elif newActor == "Jenna":
                     newActor = "Jenna Presley"
-                if newActor == "Jenni":
+                elif newActor == "Jenni":
                     newActor = "Jenni Czech"
-                if newActor == "Jenniah":
+                elif newActor == "Jenniah":
                     newActor = "Jenny Appach"
-                if newActor == "Jenny":
+                elif newActor == "Jenny":
                     newActor = "Jenni Lee"
-                if newActor == "Jensen":
+                elif newActor == "Jensen":
                     newActor = "Ashley Jensen"
-                if newActor == "Jeny":
+                elif newActor == "Jeny":
                     newActor = "Jeny Baby"
-                if newActor == "Jesica":
+                elif newActor == "Jesica":
                     newActor = "Leony April"
-                if newActor == "Jess":
+                elif newActor == "Jess":
                     newActor = "Danielle Trixie"
-                if newActor == "Jessie":
+                elif newActor == "Jessie":
                     newActor = "Jessie Cox"
-                if newActor == "Jordanbliss":
+                elif newActor == "Jordanbliss":
                     newActor = "Jordan Bliss"
-                if newActor == "Jorden":
+                elif newActor == "Jorden":
                     newActor = "Neyla Small"
-                if newActor == "Judith":
+                elif newActor == "Judith":
                     newActor = "Judith Fox"
-                if newActor == "Jujana":
+                elif newActor == "Jujana":
                     newActor = "Zuzana Z"
-                if newActor == "Julie":
+                elif newActor == "Julie":
                     newActor = "Juliana Grandi"
-                if newActor == "Juliya":
+                elif newActor == "Juliya":
                     newActor = "Crystal Maiden"
-                if newActor == "Kacey":
+                elif newActor == "Kacey":
                     newActor = "Kacey Jordan"
-                if newActor == "Kaela":
+                elif newActor == "Kaela":
                     newActor = "Lena Nicole"
-                if newActor == "Kalilane":
+                elif newActor == "Kalilane":
                     newActor = "Kali Lane"
-                if newActor == "Kalisy":
+                elif newActor == "Kalisy":
                     newActor = "Mary Kalisy"
-                if newActor == "Kandi":
+                elif newActor == "Kandi":
                     newActor = "Kandi Milan"
-                if newActor == "Karanovak":
+                elif newActor == "Karanovak":
                     newActor = "Kara Novak"
-                if newActor == "Kari S":
+                elif newActor == "Kari S":
                     newActor = "Kari Sweet"
-                if newActor == "Karin":
+                elif newActor == "Karin":
                     newActor = "Carin Kay"
-                if newActor == "Karina":
+                elif newActor == "Karina":
                     newActor = "Karina Laboom"
-                if newActor == "Kate":
+                elif newActor == "Kate":
                     newActor = "Kathleen Kruz"
-                if newActor == "Katie":
+                elif newActor == "Katie":
                     newActor = "Heather Starlet"
-                if newActor == "Katiejordin":
+                elif newActor == "Katiejordin":
                     newActor = "Katie Jordin"
-                if newActor == "Katiek":
+                elif newActor == "Katiek":
                     newActor = "Katie Kay"
-                if newActor == "Katy P":
+                elif newActor == "Katy P":
                     newActor = "Cira Nerri"
-                if newActor == "Kaula":
+                elif newActor == "Kaula":
                     newActor = "Kayla Louise"
-                if newActor == "Kaylee":
+                elif newActor == "Kaylee":
                     newActor = "Kaylee Heart"
-                if newActor == "Kellie":
+                elif newActor == "Kellie":
                     newActor = "Paige Starr"
-                if newActor == "Kennedy":
+                elif newActor == "Kennedy":
                     newActor = "Kennedy Kressler"
-                if newActor == "Kenzie":
+                elif newActor == "Kenzie":
                     newActor = "Mackenzee Pierce"
-                if newActor == "Kimber":
+                elif newActor == "Kimber":
                     newActor = "Kimber Lace"
-                if newActor == "Kimberly":
+                elif newActor == "Kimberly":
                     newActor = "Kimberly Allure"
-                if newActor == "Kimmie":
+                elif newActor == "Kimmie":
                     newActor = "Kimmie Cream"
-                if newActor == "Kira":
+                elif newActor == "Kira":
                     newActor = "Dido Angel"
-                if newActor == "Kiralanai":
+                elif newActor == "Kiralanai":
                     newActor = "Kira Lanai"
-                if newActor == "Kirra":
+                elif newActor == "Kirra":
                     newActor = "Kira Zen"
-                if newActor == "Klaudia":
+                elif newActor == "Klaudia":
                     newActor = "Cindy Hope"
-                if newActor == "Kody":
+                elif newActor == "Kody":
                     newActor = "Kody Kay"
-                if newActor == "Koks":
+                elif newActor == "Koks":
                     newActor = "Angie Koks"
-                if newActor == "Krissie":
+                elif newActor == "Krissie":
                     newActor = "Liona Levi"
-                if newActor == "Kristina":
+                elif newActor == "Kristina":
                     newActor = "Kristina Wood"
-                if newActor == "Kristinarose":
+                elif newActor == "Kristinarose":
                     newActor = "Kristina Rose"
-                if newActor == "Krystyna":
+                elif newActor == "Krystyna":
                     newActor = "Kristina Manson"
-                if newActor == "Kyra":
+                elif newActor == "Kyra":
                     newActor = "Kyra Steele"
-                if newActor == "Lady D":
+                elif newActor == "Lady D":
                     newActor = "Lady Dee"
-                if newActor == "Lanaviolet":
+                elif newActor == "Lanaviolet":
                     newActor = "Lana Violet"
-                if newActor == "Lanewood":
+                elif newActor == "Lanewood":
                     newActor = "Louisa Lanewood"
-                if newActor == "Lauracrystal":
+                elif newActor == "Lauracrystal":
                     newActor = "Laura Crystal"
-                if newActor == "Lauren":
+                elif newActor == "Lauren":
                     newActor = "Afrodite Night"
-                if newActor == "Layna":
+                elif newActor == "Layna":
                     newActor = "Brigitte Hunter"
-                if newActor == "Lea":
+                elif newActor == "Lea":
                     newActor = "Lea Tyron"
-                if newActor == "Leah":
+                elif newActor == "Leah":
                     newActor = "Leah Luv"
-                if newActor == "Leigh":
+                elif newActor == "Leigh":
                     newActor = "Leighlani Red"
-                if newActor == "Leila":
+                elif newActor == "Leila":
                     newActor = "Leila Smith"
-                if newActor == "Lexidiamond":
+                elif newActor == "Lexidiamond":
                     newActor = "Lexi Diamond"
-                if newActor == "Lexie":
+                elif newActor == "Lexie":
                     newActor = "Lexi Belle"
-                if newActor == "Lilian":
+                elif newActor == "Lilian":
                     newActor = "Lilian Lee"
-                if newActor == "Liliane":
+                elif newActor == "Liliane":
                     newActor = "Liliane Tiger"
-                if newActor == "Lilit":
+                elif newActor == "Lilit":
                     newActor = "Lola Chic"
-                if newActor == "Lily":
+                elif newActor == "Lily":
                     newActor = "Lily Cute"
-                if newActor == "Lindie":
+                elif newActor == "Lindie":
                     newActor = "Kelly Summer"
-                if newActor == "Lindsay":
+                elif newActor == "Lindsay":
                     newActor = "Jenni Carmichael"
-                if newActor == "Linna":
+                elif newActor == "Linna":
                     newActor = "Evelyn Cage"
-                if newActor == "Lola":
+                elif newActor == "Lola":
                     newActor = "Mia Me"
-                if newActor == "Lolashut":
+                elif newActor == "Lolashut":
                     newActor = "Little Caprice"
-                if newActor == "Lolly":
+                elif newActor == "Lolly":
                     newActor = "Lolly Gartner"
-                if newActor == "Lolly J":
+                elif newActor == "Lolly J":
                     newActor = "Felicia Rain"
-                if newActor == "Lora":
+                elif newActor == "Lora":
                     newActor = "Lora Craft"
-                if newActor == "Loreen":
+                elif newActor == "Loreen":
                     newActor = "Loreen Roxx"
-                if newActor == "Lorena":
+                elif newActor == "Lorena":
                     newActor = "Lorena Garcia"
-                if newActor == "Luciana":
+                elif newActor == "Luciana":
                     newActor = "Timea Bella"
-                if newActor == "Lucie":
+                elif newActor == "Lucie":
                     newActor = "Samantha Wow"
-                if newActor == "Lucy":
+                elif newActor == "Lucy":
                     newActor = "Lucy Ive"
-                if newActor == "Lucylux":
+                elif newActor == "Lucylux":
                     newActor = "Lucy Lux"
-                if newActor == "Lussy M":
+                elif newActor == "Lussy M":
                     newActor = "Deja Move"
-                if newActor == "Lynn":
+                elif newActor == "Lynn":
                     newActor = "Lynn Pleasant"
-                if newActor == "Lynnlove":
+                elif newActor == "Lynnlove":
                     newActor = "Lynn Love"
-                if newActor == "Maddy":
+                elif newActor == "Maddy":
                     newActor = "Madison Parker"
-                if newActor == "Maggies":
+                elif newActor == "Maggies":
                     newActor = "Maggie Gold"
-                if newActor == "Mai":
+                elif newActor == "Mai":
                     newActor = "Mai Ly"
-                if newActor == "Marfa":
+                elif newActor == "Marfa":
                     newActor = "Joanna Pret"
-                if newActor == "Marina":
+                elif newActor == "Marina":
                     newActor = "Marina Mae"
-                if newActor == "Marissa":
+                elif newActor == "Marissa":
                     newActor = "Marissa Mendoza"
-                if newActor == "Marlie":
+                elif newActor == "Marlie":
                     newActor = "Marlie Moore"
-                if newActor == "Marsa":
+                elif newActor == "Marsa":
                     newActor = "Jessi Gold"
-                if newActor == "Marsha":
+                elif newActor == "Marsha":
                     newActor = "Monica Sweat"
-                if newActor == "Marta":
+                elif newActor == "Marta":
                     newActor = "Melena Maria Rya"
-                if newActor == "Martha":
+                elif newActor == "Martha":
                     newActor = "Tarra White"
-                if newActor == "Maya":
+                elif newActor == "Maya":
                     newActor = "Maya Hills"
-                if newActor == "Mckenzee":
+                elif newActor == "Mckenzee":
                     newActor = "Mckenzee Miles"
-                if newActor == "Meggan":
+                elif newActor == "Meggan":
                     newActor = "Meggan Mallone"
-                if newActor == "Melanie":
+                elif newActor == "Melanie":
                     newActor = "Melanie Taylor"
-                if newActor == "Melissa":
+                elif newActor == "Melissa":
                     newActor = "Melissa Matthews"
-                if newActor == "Melody":
+                elif newActor == "Melody":
                     newActor = "Melody Kush"
-                if newActor == "Mia":
+                elif newActor == "Mia":
                     newActor = "Mia Moon"
-                if newActor == "Miahilton":
+                elif newActor == "Miahilton":
                     newActor = "Mia Hilton"
-                if newActor == "Micah":
+                elif newActor == "Micah":
                     newActor = "Micah Moore"
-                if newActor == "Michele":
+                elif newActor == "Michele":
                     newActor = "Michelle Brown"
-                if newActor == "Michelle":
+                elif newActor == "Michelle":
                     newActor = "Michelle Maylene"
-                if newActor == "Michellemoist":
+                elif newActor == "Michellemoist":
                     newActor = "Michelle Moist"
-                if newActor == "Michellemyers":
+                elif newActor == "Michellemyers":
                     newActor = "Michelle Myers"
-                if newActor == "Miesha":
+                elif newActor == "Miesha":
                     newActor = "Jessika Lux"
-                if newActor == "Mikki":
+                elif newActor == "Mikki":
                     newActor = "Elina Mikki"
-                if newActor == "Mileyann":
+                elif newActor == "Mileyann":
                     newActor = "Miley Ann"
-                if newActor == "Mili":
+                elif newActor == "Mili":
                     newActor = "Mili Jay"
-                if newActor == "Minnie":
+                elif newActor == "Minnie":
                     newActor = "Milla Yul"
-                if newActor == "Missy":
+                elif newActor == "Missy":
                     newActor = "Missy Nicole"
-                if newActor == "Mollymadison":
+                elif newActor == "Mollymadison":
                     newActor = "Molly Madison"
-                if newActor == "Monika":
+                elif newActor == "Monika":
                     newActor = "Monika Vesela"
-                if newActor == "Monique":
+                elif newActor == "Monique":
                     newActor = "Monika Cajth"
-                if newActor == "Monna":
+                elif newActor == "Monna":
                     newActor = "Monna Dark"
-                if newActor == "Morgan":
+                elif newActor == "Morgan":
                     newActor = "Nataly Gold"
-                if newActor == "Ms Faris":
+                elif newActor == "Ms Faris":
                     newActor = "Athena Faris"
-                if newActor == "Nadea":
+                elif newActor == "Nadea":
                     newActor = "Bella Rossi"
-                if newActor == "Nancy":
+                elif newActor == "Nancy":
                     newActor = "Nancy Bell"
-                if newActor == "Nancy A":
+                elif newActor == "Nancy A":
                     newActor = "Nancy Ace"
-                if newActor == "Natali":
+                elif newActor == "Natali":
                     newActor = "Natali Blond"
-                if newActor == "Nataliex":
+                elif newActor == "Nataliex":
                     newActor = "Natalia Forrest"
-                if newActor == "Natalya":
+                elif newActor == "Natalya":
                     newActor = "Little Rita"
-                if newActor == "Natosha":
+                elif newActor == "Natosha":
                     newActor = "Monica Beluchi"
-                if newActor == "Nelly":
+                elif newActor == "Nelly":
                     newActor = "Nelli Sulivan"
-                if newActor == "Nici":
+                elif newActor == "Nici":
                     newActor = "Nici Dee"
-                if newActor == "Nicol":
+                elif newActor == "Nicol":
                     newActor = "Ashley Stillar"
-                if newActor == "Nicoleray":
+                elif newActor == "Nicoleray":
                     newActor = "Nicole Ray"
-                if newActor == "Nikala":
+                elif newActor == "Nikala":
                     newActor = "Bella Cole"
-                if newActor == "Niki":
+                elif newActor == "Niki":
                     newActor = "Nika Noire"
-                if newActor == "Nikka":
+                elif newActor == "Nikka":
                     newActor = "Scarlett Nika"
-                if newActor == "Nikkivee":
+                elif newActor == "Nikkivee":
                     newActor = "Nikki Vee"
-                if newActor == "Nikysweet":
+                elif newActor == "Nikysweet":
                     newActor = "Niky Sweet"
-                if newActor == "Ninoska":
+                elif newActor == "Ninoska":
                     newActor = "Connie Rose"
-                if newActor == "Nitca":
+                elif newActor == "Nitca":
                     newActor = "Cindy Dee"
-                if newActor == "Noleta":
+                elif newActor == "Noleta":
                     newActor = "Tracy Gold"
-                if newActor == "Nyusha":
+                elif newActor == "Nyusha":
                     newActor = "Olivia Brown"
-                if newActor == "Olivia":
+                elif newActor == "Olivia":
                     newActor = "Olivia La Roche"
-                if newActor == "Oprah":
+                elif newActor == "Oprah":
                     newActor = "Nathaly Cherie"
-                if newActor == "Oxana":
+                elif newActor == "Oxana":
                     newActor = "Oxana Chic"
-                if newActor == "Palomino":
+                elif newActor == "Palomino":
                     newActor = "Athena Palomino"
-                if newActor == "Paris":
+                elif newActor == "Paris":
                     newActor = "Paris Parker"
-                if newActor == "Patritcy":
+                elif newActor == "Patritcy":
                     newActor = "Merry Pie"
-                if newActor == "Paula":
+                elif newActor == "Paula":
                     newActor = "Pavlina St."
-                if newActor == "Paulina":
+                elif newActor == "Paulina":
                     newActor = "Paulina James"
-                if newActor == "Pavla":
+                elif newActor == "Pavla":
                     newActor = "Teena Dolly"
-                if newActor == "Pearl":
+                elif newActor == "Pearl":
                     newActor = "Juicy Pearl"
-                if newActor == "Penny":
+                elif newActor == "Penny":
                     newActor = "Abby Cross"
-                if newActor == "Persia":
+                elif newActor == "Persia":
                     newActor = "Persia DeCarlo"
-                if newActor == "Pinkule":
+                elif newActor == "Pinkule":
                     newActor = "Billie Star"
-                if newActor == "Polly":
+                elif newActor == "Polly":
                     newActor = "Jasmine Davis"
-                if newActor == "Presley":
+                elif newActor == "Presley":
                     newActor = "Presley Maddox"
-                if newActor == "Quenna":
+                elif newActor == "Quenna":
                     newActor = "Maria Devine"
-                if newActor == "Rachel":
+                elif newActor == "Rachel":
                     newActor = "Yasmine Gold"
-                if newActor == "Rebeccablue":
+                elif newActor == "Rebeccablue":
                     newActor = "Rebecca Blue"
-                if newActor == "Reena":
+                elif newActor == "Reena":
                     newActor = "Reena Sky"
-                if newActor == "Renee":
+                elif newActor == "Renee":
                     newActor = "Renee Perez"
-                if newActor == "Roberta":
+                elif newActor == "Roberta":
                     newActor = "Lisa Musa"
-                if newActor == "Rosea":
+                elif newActor == "Rosea":
                     newActor = "Rose Delight"
-                if newActor == "Roxy":
+                elif newActor == "Roxy":
                     newActor = "Roxy Panther"
-                if newActor == "Ruby":
+                elif newActor == "Ruby":
                     newActor = "Ruby Flame"
-                if newActor == "Sage":
+                elif newActor == "Sage":
                     newActor = "Stephanie Sage"
-                if newActor == "Sally":
+                elif newActor == "Sally":
                     newActor = "Demi Scott"
-                if newActor == "Sammie":
+                elif newActor == "Sammie":
                     newActor = "Sammie Rhodes"
-                if newActor == "Sandra":
+                elif newActor == "Sandra":
                     newActor = "Sandra Shine"
-                if newActor == "Sandy":
+                elif newActor == "Sandy":
                     newActor = "Sandy Joy"
-                if newActor == "Sandysummers":
+                elif newActor == "Sandysummers":
                     newActor = "Sandy Summers"
-                if newActor == "Sarah":
+                elif newActor == "Sarah":
                     newActor = "Sarah Blake"
-                if newActor == "Sarahjo":
+                elif newActor == "Sarahjo":
                     newActor = "Ava Skye"
-                if newActor == "Sarai":
+                elif newActor == "Sarai":
                     newActor = "Sarai Keef"
-                if newActor == "Sasha":
+                elif newActor == "Sasha":
                     newActor = "Sasha Cane"
-                if newActor == "Sassy":
+                elif newActor == "Sassy":
                     newActor = "Monika Thu"
-                if newActor == "Scarlettfay":
+                elif newActor == "Scarlettfay":
                     newActor = "Scarlett Fay"
-                if newActor == "Sera":
+                elif newActor == "Sera":
                     newActor = "Sera Passion"
-                if newActor == "Serendipity":
+                elif newActor == "Serendipity":
                     newActor = "Jessica Foxx"
-                if newActor == "Sharon":
+                elif newActor == "Sharon":
                     newActor = "Kristina Rud"
-                if newActor == "Sheridan":
+                elif newActor == "Sheridan":
                     newActor = "Jana Sheridan"
-                if newActor == "Shyla":
+                elif newActor == "Shyla":
                     newActor = "Shyla Jennings"
-                if newActor == "Sierra":
+                elif newActor == "Sierra":
                     newActor = "Nina Stevens"
-                if newActor == "Sima":
+                elif newActor == "Sima":
                     newActor = "Shrima Malati"
-                if newActor == "Simone":
+                elif newActor == "Simone":
                     newActor = "Nikki Chase"
-                if newActor == "Smokie":
+                elif newActor == "Smokie":
                     newActor = "Smokie Flame"
-                if newActor == "Solstice":
+                elif newActor == "Solstice":
                     newActor = "Summer Solstice"
-                if newActor == "Stacy":
+                elif newActor == "Stacy":
                     newActor = "Mandy Dee"
-                if newActor == "Summersilver":
+                elif newActor == "Summersilver":
                     newActor = "Summer Silver"
-                if newActor == "Suze":
+                elif newActor == "Suze":
                     newActor = "Suzy Black"
-                if newActor == "Suzie":
+                elif newActor == "Suzie":
                     newActor = "Suzie Diamond"
-                if newActor == "Sveta":
+                elif newActor == "Sveta":
                     newActor = "Lita Phoenix"
-                if newActor == "Sylvia":
+                elif newActor == "Sylvia":
                     newActor = "Silvie Deluxe"
-                if newActor == "Talya":
+                elif newActor == "Talya":
                     newActor = "Lindsey Olsen"
-                if newActor == "Tannermays":
+                elif newActor == "Tannermays":
                     newActor = "Tanner Mayes"
-                if newActor == "Taylor":
+                elif newActor == "Taylor":
                     newActor = "Roxanna Milana"
-                if newActor == "Tea":
+                elif newActor == "Tea":
                     newActor = "Deny Moor"
-                if newActor == "Tegan":
+                elif newActor == "Tegan":
                     newActor = "Tegan Jane"
-                if newActor == "Teresina":
+                elif newActor == "Teresina":
                     newActor = "Teri Sweet"
-                if newActor == "Tereza":
+                elif newActor == "Tereza":
                     newActor = "Tereza Ilova"
-                if newActor == "Tess":
+                elif newActor == "Tess":
                     newActor = "Tess Lyndon"
-                if newActor == "Tessa":
+                elif newActor == "Tessa":
                     newActor = "Sonya Durganova"
-                if newActor == "Tiff":
+                elif newActor == "Tiff":
                     newActor = "Tiffany Sweet"
-                if newActor == "Toni":
+                elif newActor == "Toni":
                     newActor = "Kyra Black"
-                if newActor == "Tonya":
+                elif newActor == "Tonya":
                     newActor = "Casey Donell"
-                if newActor == "Traci":
+                elif newActor == "Traci":
                     newActor = "Kirsten Andrews"
-                if newActor == "Tyra":
+                elif newActor == "Tyra":
                     newActor = "Naomi Cruise"
-                if newActor == "Valerie":
+                elif newActor == "Valerie":
                     newActor = "Valerie Herrera"
-                if newActor == "Vanessa":
+                elif newActor == "Vanessa":
                     newActor = "Vanessa Monroe"
-                if newActor == "Vania":
+                elif newActor == "Vania":
                     newActor = "Ivana Sugar"
-                if newActor == "Vendula":
+                elif newActor == "Vendula":
                     newActor = "Tiffany Diamond"
-                if newActor == "Veronica":
+                elif newActor == "Veronica":
                     newActor = "Veronica Jones"
-                if newActor == "Veronicahill":
+                elif newActor == "Veronicahill":
                     newActor = "Veronica Hill"
-                if newActor == "Veronique":
+                elif newActor == "Veronique":
                     newActor = "Veronique Vega"
-                if newActor == "Victoria":
+                elif newActor == "Victoria":
                     newActor = "Talia Shepard"
-                if newActor == "Victoria P":
+                elif newActor == "Victoria P":
                     newActor = "Victoria Puppy"
-                if newActor == "Victoriasweet":
+                elif newActor == "Victoriasweet":
                     newActor = "Victoria Sweet"
-                if newActor == "Viera":
+                elif newActor == "Viera":
                     newActor = "Vika Lita"
-                if newActor == "Violet":
+                elif newActor == "Violet":
                     newActor = "Goldie Glock"
-                if newActor == "Violetta":
+                elif newActor == "Violetta":
                     newActor = "Lily Lake"
-                if newActor == "Violette":
+                elif newActor == "Violette":
                     newActor = "Violette Pink"
-                if newActor == "Viva":
+                elif newActor == "Viva":
                     newActor = "Sabina Blue"
-                if newActor == "Whitney":
+                elif newActor == "Whitney":
                     newActor = "Whitney Conroy"
-                if newActor == "Xenia":
+                elif newActor == "Xenia":
                     newActor = "Zena Little"
-                if newActor == "Yanka":
+                elif newActor == "Yanka":
                     newActor = "Sasha Rose"
-                if newActor == "Yvonne":
+                elif newActor == "Yvonne":
                     newActor = "Cindy Shine"
-                if newActor == "Zara":
+                elif newActor == "Zara":
                     newActor = "Jacqueline Sweet"
-                if newActor == "Zazie":
+                elif newActor == "Zazie":
                     newActor = "Zazie Sky"
-                if newActor == "Zeina":
+                elif newActor == "Zeina":
                     newActor = "Zeina Heart"
-                if newActor == "Zenia":
+                elif newActor == "Zenia":
                     newActor = "Nadine Greenlaw"
-            if metadata.studio == "Porn Pros":
+            elif metadata.studio == "Porn Pros":
                 if newActor == "Bailey Brookes":
                     newActor = "Bailey Brooke"
-            if metadata.studio == "TeamSkeet":
+            elif metadata.studio == "TeamSkeet":
                 if newActor == "Ada S":
                     newActor = "Ada Sanchez"
-                if newActor == "Ariel R":
+                elif newActor == "Ariel R":
                     newActor = "Ariel Rose"
-                if newActor == "Artemida":
+                elif newActor == "Artemida":
                     newActor = "Valentina Cross"
-                if newActor == "Arika":
+                elif newActor == "Arika":
                     newActor = "Arika Foxx"
-                if newActor == "Ariana":
+                elif newActor == "Ariana":
                     newActor = "Emma Brown"
-                if newActor == "Ariadna":
+                elif newActor == "Ariadna":
                     newActor = "Ariadna Moon"
-                if newActor == "Argentina":
+                elif newActor == "Argentina":
                     newActor = "Lisa Smiles"
-                if newActor == "Anfisa":
+                elif newActor == "Anfisa":
                     newActor = "Nicoline"
-                if newActor == "Aliya":
+                elif newActor == "Aliya":
                     newActor = "Rima"
-                if newActor == "Ava":
+                elif newActor == "Ava":
                     newActor = "Ava Dalush"
-                if newActor == "Avery":
+                elif newActor == "Avery":
                     newActor = "Diana Dali"
-                if newActor == "Avina":
+                elif newActor == "Avina":
                     newActor = "Sunny Rise"
-                if newActor == "Bailey":
+                elif newActor == "Bailey":
                     newActor = "Lena Love"
-                if newActor == "Bella":
+                elif newActor == "Bella":
                     newActor = "Bella Rossi"
-                if newActor == "Betty":
+                elif newActor == "Betty":
                     newActor = "Camila"
-                if newActor == "Jane":
+                elif newActor == "Jane":
                     newActor = "Camila"
-                if newActor == "Briana":
+                elif newActor == "Briana":
                     newActor = "Milana Blanc"
-                if newActor == "Brianna":
+                elif newActor == "Brianna":
                     newActor = "Milana Blanc"
-                if newActor == "Callie":
+                elif newActor == "Callie":
                     newActor = "Callie Nicole"
-                if newActor == "Carre":
+                elif newActor == "Carre":
                     newActor = "Candy C"
-                if newActor == "Casi J":
+                elif newActor == "Casi J":
                     newActor = "Casi James"
-                if newActor == "Catania":
+                elif newActor == "Catania":
                     newActor = "Jessi Gold"
-                if newActor == "Chloe Cherry":
+                elif newActor == "Chloe Cherry":
                     newActor = "Chloe Couture"
-                if newActor == "Colette":
+                elif newActor == "Colette":
                     newActor = "Inga E"
-                if newActor == "Darla":
+                elif newActor == "Darla":
                     newActor = "Alektra Sky"
-                if newActor == "Dinara":
+                elif newActor == "Dinara":
                     newActor = "Arian Joy"
-                if newActor == "Dunya":
+                elif newActor == "Dunya":
                     newActor = "Alice Marshall"
-                if newActor == "Ema":
+                elif newActor == "Ema":
                     newActor = "Chloe Blue"
-                if newActor == "Erica":
+                elif newActor == "Erica":
                     newActor = "Kristall Rush"
-                if newActor == "Sasha":
+                elif newActor == "Sasha":
                     newActor = "Kristall Rush"
-                if newActor == "Eva":
+                elif newActor == "Eva":
                     newActor = "Mia Reese"
-                if newActor == "Fantina":
+                elif newActor == "Fantina":
                     newActor = "Mariya C"
-                if newActor == "Olga":
+                elif newActor == "Olga":
                     newActor = "Mariya C"
-                if newActor == "Gabi":
+                elif newActor == "Gabi":
                     newActor = "Izi"
-                if newActor == "Gerta":
+                elif newActor == "Gerta":
                     newActor = "Erika Bellucci"
-                if newActor == "Hannah":
+                elif newActor == "Hannah":
                     newActor = "Milana Fox"
-                if newActor == "Jade":
+                elif newActor == "Jade":
                     newActor = "Netta"
-                if newActor == "Jana":
+                elif newActor == "Jana":
                     newActor = "Janna"
-                if newActor == "Janette":
+                elif newActor == "Janette":
                     newActor = "Lisa C"
-                if newActor == "Joanna":
+                elif newActor == "Joanna":
                     newActor = "Joanna Pret"
-                if newActor == "Jordan":
+                elif newActor == "Jordan":
                     newActor = "Rebeca Taylor"
-                if newActor == "Kail":
+                elif newActor == "Kail":
                     newActor = "Kortny"
-                if newActor == "Kajira":
+                elif newActor == "Kajira":
                     newActor = "Kajira Bound"
-                if newActor == "Kameya":
+                elif newActor == "Kameya":
                     newActor = "Sandra Luberc"
-                if newActor == "Katherine":
+                elif newActor == "Katherine":
                     newActor = "Selena Stuart"
-                if newActor == "Katie C":
+                elif newActor == "Katie C":
                     newActor = "Katie Cummings"
-                if newActor == "Katie K":
+                elif newActor == "Katie K":
                     newActor = "Katie Kay"
-                if newActor == "Kendall":
+                elif newActor == "Kendall":
                     newActor = "Alison Faye"
-                if newActor == "Kimberly":
+                elif newActor == "Kimberly":
                     newActor = "Pola Sunshine"
-                if newActor == "Krista":
+                elif newActor == "Krista":
                     newActor = "Krista Evans"
-                if newActor == "Lily L":
+                elif newActor == "Lily L":
                     newActor = "Lily Labeau"
-                if newActor == "Lada":
+                elif newActor == "Lada":
                     newActor = "Jay Dee"
-                if newActor == "Luna":
+                elif newActor == "Luna":
                     newActor = "Rita Rush"
-                if newActor == "Lusil":
+                elif newActor == "Lusil":
                     newActor = "Ananta Shakti"
-                if newActor == "Mackenzie":
+                elif newActor == "Mackenzie":
                     newActor = "Alice Smack"
-                if newActor == "Madelyn":
+                elif newActor == "Madelyn":
                     newActor = "Anna Taylor"
-                if newActor == "Madison":
+                elif newActor == "Madison":
                     newActor = "Karina Grand"
-                if newActor == "Magda":
+                elif newActor == "Magda":
                     newActor = "Taissia Shanti"
-                if newActor == "Mai":
+                elif newActor == "Mai":
                     newActor = "Mai Ly"
-                if newActor == "Mara":
+                elif newActor == "Mara":
                     newActor = "Marly Romero"
-                if newActor == "Mariah":
+                elif newActor == "Mariah":
                     newActor = "Aubree Jade"
-                if newActor == "Mina":
+                elif newActor == "Mina":
                     newActor = "Mila Beth"
-                if newActor == "Nadya":
+                elif newActor == "Nadya":
                     newActor = "Nadia Bella"
-                if newActor == "Seren":
+                elif newActor == "Seren":
                     newActor = "Nadia Bella"
-                if newActor == "Nika":
+                elif newActor == "Nika":
                     newActor = "Sabrina Moor"
-                if newActor == "Nora R":
+                elif newActor == "Nora R":
                     newActor = "Sheri Vi"
-                if newActor == "Parvin":
+                elif newActor == "Parvin":
                     newActor = "Adelle Booty"
-                if newActor == "Peachy":
+                elif newActor == "Peachy":
                     newActor = "Margarita C"
-                if newActor == "Petra":
+                elif newActor == "Petra":
                     newActor = "Dominica Phoenix"
-                if newActor == "Rahyndee":
+                elif newActor == "Rahyndee":
                     newActor = "Rahyndee James"
-                if newActor == "Rebecca":
+                elif newActor == "Rebecca":
                     newActor = "Anita Sparkle"
-                if newActor == "Riley J":
+                elif newActor == "Riley J":
                     newActor = "Riley Jensen"
-                if newActor == "Rosanna":
+                elif newActor == "Rosanna":
                     newActor = "Kate G."
-                if newActor == "Sadine G":
+                elif newActor == "Sadine G":
                     newActor = "Sadine Godiva"
-                if newActor == "Sarai":
+                elif newActor == "Sarai":
                     newActor = "Sarai Keef"
-                if newActor == "Serena":
+                elif newActor == "Serena":
                     newActor = "Carol Miller"
-                if newActor == "Sheila":
+                elif newActor == "Sheila":
                     newActor = "Marina Visconti"
-                if newActor == "Sierra":
+                elif newActor == "Sierra":
                     newActor = "Sierra Sanders"
-                if newActor == "Skye":
+                elif newActor == "Skye":
                     newActor = "Skye West"
-                if newActor == "Soleil":
+                elif newActor == "Soleil":
                     newActor = "Soliel Marks"
-                if newActor == "Sophia":
+                elif newActor == "Sophia":
                     newActor = "Grace C"
-                if newActor == "Stella":
+                elif newActor == "Stella":
                     newActor = "Stella Banxxx"
-                if newActor == "Tori":
+                elif newActor == "Tori":
                     newActor = "Lola Taylor"
-                if newActor == "Veiki":
+                elif newActor == "Veiki":
                     newActor = "Miranda Deen"
-                if newActor == "Viki":
+                elif newActor == "Viki":
                     newActor = "Bonnie Shai"
-                if newActor == "Vilia":
+                elif newActor == "Vilia":
                     newActor = "Lilu Tattoo"
-                if newActor == "Viviana":
+                elif newActor == "Viviana":
                     newActor = "Autumn Viviana"
-                if newActor == "Yanie":
+                elif newActor == "Yanie":
                     newActor = "Milla Yul"
-                if newActor == "Yoga":
+                elif newActor == "Yoga":
                     newActor = "Arya Fae, Megan Sage, and Nina North"
-                if newActor == "Zarina":
+                elif newActor == "Zarina":
                     newActor = "Aruna Aghora"
-                if newActor == "Zoi":
+                elif newActor == "Zoi":
                     newActor = "Liona Levi"
-            if metadata.studio == "Twistys":
+            elif metadata.studio == "Twistys":
                 if newActor == "Blaire Ivory":
                     newActor = "Lena Anderson"
-            if metadata.studio == "X-Art":
+            elif metadata.studio == "X-Art":
                 if newActor == "Abby":
                     newActor = "Abigaile Johnson"
-                if newActor == "Addison":
+                elif newActor == "Addison":
                     newActor = "Mia Manarote"
-                if newActor == "Addison C":
+                elif newActor == "Addison C":
                     newActor = "Davina Davis"
-                if newActor == "Adel":
+                elif newActor == "Adel":
                     newActor = "Angel Piaff"
-                if newActor == "Adel M":
+                elif newActor == "Adel M":
                     newActor = "Adel Morel"
-                if newActor == "Adria":
+                elif newActor == "Adria":
                     newActor = "Adria Rae"
-                if newActor == "Adriana":
+                elif newActor == "Adriana":
                     newActor = "Adriana Chechik"
-                if newActor == "Aidra":
+                elif newActor == "Aidra":
                     newActor = "Aidra Fox"
-                if newActor == "Aika":
+                elif newActor == "Aika":
                     newActor = "Aika May"
-                if newActor == "Aj":
+                elif newActor == "Aj":
                     newActor = "Alessandra Jane"
-                if newActor == "Alecia":
+                elif newActor == "Alecia":
                     newActor = "Alecia Fox"
-                if newActor == "Alena":
+                elif newActor == "Alena":
                     newActor = "Kiara Lord"
-                if newActor == "Alexa":
+                elif newActor == "Alexa":
                     newActor = "Alexa Grace"
-                if newActor == "Alexes":
+                elif newActor == "Alexes":
                     newActor = "Alexis Adams"
-                if newActor == "Alexis":
+                elif newActor == "Alexis":
                     newActor = "Alexis Love"
-                if newActor == "Alina":
+                elif newActor == "Alina":
                     newActor = "Alexa Tomas"
-                if newActor == "Alina H":
+                elif newActor == "Alina H":
                     newActor = "Henessy"
-                if newActor == "Aliyah":
+                elif newActor == "Aliyah":
                     newActor = "Aaliyah Love"
-                if newActor == "Allie":
+                elif newActor == "Allie":
                     newActor = "Allie Haze"
-                if newActor == "Alyssia":
+                elif newActor == "Alyssia":
                     newActor = "Alyssia Kent"
-                if newActor == "Amelie":
+                elif newActor == "Amelie":
                     newActor = "Chloe Amour"
-                if newActor == "Ana":
+                elif newActor == "Ana":
                     newActor = "Ana Foxxx"
-                if newActor == "Anais":
+                elif newActor == "Anais":
                     newActor = "Mae Olsen"
-                if newActor == "Angel":
+                elif newActor == "Angel":
                     newActor = "Rosemary Radeva"
-                if newActor == "Angelica":
+                elif newActor == "Angelica":
                     newActor = "Anjelica"
-                if newActor == "Angie":
+                elif newActor == "Angie":
                     newActor = "Angelica Kitten"
-                if newActor == "Anikka":
+                elif newActor == "Anikka":
                     newActor = "Annika Albrite"
-                if newActor == "Anita":
+                elif newActor == "Anita":
                     newActor = "Anita Bellini Berlusconi"
-                if newActor == "Anna":
+                elif newActor == "Anna":
                     newActor = "Gwen"
-                if newActor == "Anna M":
+                elif newActor == "Anna M":
                     newActor = "Anastasia Morna"
-                if newActor == "Anneli":
+                elif newActor == "Anneli":
                     newActor = "Pinky June"
-                if newActor == "Annemarie":
+                elif newActor == "Annemarie":
                     newActor = "Samantha Heat"
-                if newActor == "Anya":
+                elif newActor == "Anya":
                     newActor = "Anya Olsen"
-                if newActor == "Aria":
+                elif newActor == "Aria":
                     newActor = "Sunny A"
-                if newActor == "Arianna":
+                elif newActor == "Arianna":
                     newActor = "Ariana Marie"
-                if newActor == "Ariel":
+                elif newActor == "Ariel":
                     newActor = "Ariel Piper Fawn"
-                if newActor == "Ashley S":
+                elif newActor == "Ashley S":
                     newActor = "Ashlyn Molloy"
-                if newActor == "Aubrey":
+                elif newActor == "Aubrey":
                     newActor = "Aubrey Star"
-                if newActor == "Avril":
+                elif newActor == "Avril":
                     newActor = "Avril Hall"
-                if newActor == "Baby":
+                elif newActor == "Baby":
                     newActor = "Karina"
-                if newActor == "Bailey":
+                elif newActor == "Bailey":
                     newActor = "Bailey Ryder"
-                if newActor == "Bambi":
+                elif newActor == "Bambi":
                     newActor = "Olivia Grace"
-                if newActor == "Barbie":
+                elif newActor == "Barbie":
                     newActor = "Blanche Bradburry"
-                if newActor == "Poppy":
+                elif newActor == "Poppy":
                     newActor = "Victoria Puppy"
-                if newActor == "Bea":
+                elif newActor == "Bea":
                     newActor = "Victoria Puppy"
-                if newActor == "Beatrice":
+                elif newActor == "Beatrice":
                     newActor = "Beata Undine"
-                if newActor == "Becky":
+                elif newActor == "Becky":
                     newActor = "Bridgit A"
-                if newActor == "Belle":
+                elif newActor == "Belle":
                     newActor = "Belle Knox"
-                if newActor == "Breanne":
+                elif newActor == "Breanne":
                     newActor = "Brea Bennett"
-                if newActor == "Bree":
+                elif newActor == "Bree":
                     newActor = "Bree Daniels"
-                if newActor == "Brooklyn":
+                elif newActor == "Brooklyn":
                     newActor = "Brooklyn Lee"
-                if newActor == "Brynn":
+                elif newActor == "Brynn":
                     newActor = "Brynn Tyler"
-                if newActor == "Bunny":
+                elif newActor == "Bunny":
                     newActor = "Chloe Foster"
-                if newActor == "Capri":
+                elif newActor == "Capri":
                     newActor = "Capri Anderson"
-                if newActor == "Caprice":
+                elif newActor == "Caprice":
                     newActor = "Little Caprice"
-                if newActor == "Carla":
+                elif newActor == "Carla":
                     newActor = "Carla Cox"
-                if newActor == "Carlie":
+                elif newActor == "Carlie":
                     newActor = "Kasey Chase"
-                if newActor == "Carmen":
+                elif newActor == "Carmen":
                     newActor = "Jessie Rogers"
-                if newActor == "Carrie":
+                elif newActor == "Carrie":
                     newActor = "Alexis Crystal"
-                if newActor == "Carrol":
+                elif newActor == "Carrol":
                     newActor = "Lexi Dona"
-                if newActor == "Casey":
+                elif newActor == "Casey":
                     newActor = "Vanessa"
-                if newActor == "Cassidy":
+                elif newActor == "Cassidy":
                     newActor = "Cassidey Rae"
-                if newActor == "Cassie":
+                elif newActor == "Cassie":
                     newActor = "Cassie Laine"
-                if newActor == "Catie":
+                elif newActor == "Catie":
                     newActor = "Catie Parker"
-                if newActor == "Cecilia":
+                elif newActor == "Cecilia":
                     newActor = "Sicilia"
-                if newActor == "Chantal":
+                elif newActor == "Chantal":
                     newActor = "Nelly A"
-                if newActor == "Charity":
+                elif newActor == "Charity":
                     newActor = "Charity Crawford"
-                if newActor == "Charlie":
+                elif newActor == "Charlie":
                     newActor = "Charlie Red"
-                if newActor == "Charlotte":
+                elif newActor == "Charlotte":
                     newActor = "Charlotte Stokely"
-                if newActor == "Chelsea":
+                elif newActor == "Chelsea":
                     newActor = "Victoria Lynn"
-                if newActor == "Chloe":
+                elif newActor == "Chloe":
                     newActor = "Victoria Sweet"
-                if newActor == "Chloelynn":
+                elif newActor == "Chloelynn":
                     newActor = "Chloe Lynn"
-                if newActor == "Christine":
+                elif newActor == "Christine":
                     newActor = "Christine Paradise"
-                if newActor == "Cindy":
+                elif newActor == "Cindy":
                     newActor = "Sindy Vega"
-                if newActor == "Clover":
+                elif newActor == "Clover":
                     newActor = "Katya Clover"
-                if newActor == "Connie":
+                elif newActor == "Connie":
                     newActor = "Connie Carter"
-                if newActor == "Corinne":
+                elif newActor == "Corinne":
                     newActor = "Summer Breeze"
-                if newActor == "Cornelia":
+                elif newActor == "Cornelia":
                     newActor = "Stacy Cruz"
-                if newActor == "Crystal":
+                elif newActor == "Crystal":
                     newActor = "Bethany"
-                if newActor == "Danielle":
+                elif newActor == "Danielle":
                     newActor = "AJ Applegate"
-                if newActor == "Daphne":
+                elif newActor == "Daphne":
                     newActor = "Daphne Klyde"
-                if newActor == "Diana":
+                elif newActor == "Diana":
                     newActor = "Diana Fox"
-                if newActor == "Dillion":
+                elif newActor == "Dillion":
                     newActor = "Dillion Harper"
-                if newActor == "Dina":
+                elif newActor == "Dina":
                     newActor = "Lady Dee"
-                if newActor == "Dominica":
+                elif newActor == "Dominica":
                     newActor = "Dominic Anna"
-                if newActor == "Dominique":
+                elif newActor == "Dominique":
                     newActor = "Dominika C."
-                if newActor == "Elle":
+                elif newActor == "Elle":
                     newActor = "Elle Alexandra"
-                if newActor == "Ellie":
+                elif newActor == "Ellie":
                     newActor = "Rima B"
-                if newActor == "Emilie":
+                elif newActor == "Emilie":
                     newActor = "Emily Grey"
-                if newActor == "Emily":
+                elif newActor == "Emily":
                     newActor = "Cassandra Nix"
-                if newActor == "Emily B":
+                elif newActor == "Emily B":
                     newActor = "Emily Brix"
-                if newActor == "Emma":
+                elif newActor == "Emma":
                     newActor = "Emma Mae"
-                if newActor == "Erica":
+                elif newActor == "Erica":
                     newActor = "Erica Fontes"
-                if newActor == "Eufrat":
+                elif newActor == "Eufrat":
                     newActor = "Eufrat Mai"
-                if newActor == "Eve":
+                elif newActor == "Eve":
                     newActor = "Janetta"
-                if newActor == "Eve A":
+                elif newActor == "Eve A":
                     newActor = "Ivana Sugar"
-                if newActor == "Eveline":
+                elif newActor == "Eveline":
                     newActor = "Eveline Dellai"
-                if newActor == "Faye":
+                elif newActor == "Faye":
                     newActor = "Faye Reagan"
-                if newActor == "Foxi":
+                elif newActor == "Foxi":
                     newActor = "Foxxi Black"
-                if newActor == "Francesca":
+                elif newActor == "Francesca":
                     newActor = "Franziska Facella"
-                if newActor == "Gabriella":
+                elif newActor == "Gabriella":
                     newActor = "Katie Oliver"
-                if newActor == "Georgia":
+                elif newActor == "Georgia":
                     newActor = "Georgia Jones"
-                if newActor == "Gianna":
+                elif newActor == "Gianna":
                     newActor = "Victoria Blaze"
-                if newActor == "Gigi":
+                elif newActor == "Gigi":
                     newActor = "Gigi Labonne"
-                if newActor == "Gigi R":
+                elif newActor == "Gigi R":
                     newActor = "Gigi Rivera"
-                if newActor == "GiiGi":
+                elif newActor == "GiiGi":
                     newActor = "Gigi Allens"
-                if newActor == "Gina":
+                elif newActor == "Gina":
                     newActor = "Gina Gerson"
-                if newActor == "Grace":
+                elif newActor == "Grace":
                     newActor = "Teena Dolly"
-                if newActor == "Hanna":
+                elif newActor == "Hanna":
                     newActor = "Hannah Hawthorne"
-                if newActor == "Hannah":
+                elif newActor == "Hannah":
                     newActor = "Cayla Lyons"
-                if newActor == "Cayla":
+                elif newActor == "Cayla":
                     newActor = "Cayla Lyons"
-                if newActor == "Hayden":
+                elif newActor == "Hayden":
                     newActor = "Hayden Winters"
-                if newActor == "Hayden H":
+                elif newActor == "Hayden H":
                     newActor = "Hayden Hawkens"
-                if newActor == "Heather":
+                elif newActor == "Heather":
                     newActor = "Kamila"
-                if newActor == "Heidi":
+                elif newActor == "Heidi":
                     newActor = "Taylor Sands"
-                if newActor == "Heidi R":
+                elif newActor == "Heidi R":
                     newActor = "Heidi Romanova"
-                if newActor == "Holly":
+                elif newActor == "Holly":
                     newActor = "Leonie"
-                if newActor == "Ivana":
+                elif newActor == "Ivana":
                     newActor = "Megan Promesita"
-                if newActor == "Ivy":
+                elif newActor == "Ivy":
                     newActor = "Iwia"
-                if newActor == "Izzy":
+                elif newActor == "Izzy":
                     newActor = "Izzy Delphine"
-                if newActor == "Jackie":
+                elif newActor == "Jackie":
                     newActor = "Masha D."
-                if newActor == "Jade":
+                elif newActor == "Jade":
                     newActor = "Jade Baker"
-                if newActor == "Janie":
+                elif newActor == "Janie":
                     newActor = "Leila Smith"
-                if newActor == "Jasmine":
+                elif newActor == "Jasmine":
                     newActor = "Gina Devine"
-                if newActor == "Jayden":
+                elif newActor == "Jayden":
                     newActor = "Jayden Taylors"
-                if newActor == "Jenna":
+                elif newActor == "Jenna":
                     newActor = "Jenna Ross"
-                if newActor == "Jenni":
+                elif newActor == "Jenni":
                     newActor = "Jenni Czech"
-                if newActor == "Jenny":
+                elif newActor == "Jenny":
                     newActor = "Alicia A"
-                if newActor == "Jenny M":
+                elif newActor == "Jenny M":
                     newActor = "Janny Manson"
-                if newActor == "Jericha":
+                elif newActor == "Jericha":
                     newActor = "Jericha Jem"
-                if newActor == "Jessica":
+                elif newActor == "Jessica":
                     newActor = "Aleksa Slusarchi"
-                if newActor == "Jessie":
+                elif newActor == "Jessie":
                     newActor = "Jessie Andrews"
-                if newActor == "Jewel":
+                elif newActor == "Jewel":
                     newActor = "Julia I"
-                if newActor == "Jillian":
+                elif newActor == "Jillian":
                     newActor = "Jillian Janson"
-                if newActor == "Jocelyn":
+                elif newActor == "Jocelyn":
                     newActor = "Ellena Woods"
-                if newActor == "Joseline":
+                elif newActor == "Joseline":
                     newActor = "Joseline Kelly"
-                if newActor == "Julie":
+                elif newActor == "Julie":
                     newActor = "Tracy Smile"
-                if newActor == "Karina":
+                elif newActor == "Karina":
                     newActor = "Karina White"
-                if newActor == "Kassondra":
+                elif newActor == "Kassondra":
                     newActor = "Kassondra Raine"
-                if newActor == "Kat":
+                elif newActor == "Kat":
                     newActor = "Talia Shepard"
-                if newActor == "Kate":
+                elif newActor == "Kate":
                     newActor = "Foxy Di"
-                if newActor == "Katerina":
+                elif newActor == "Katerina":
                     newActor = "Antonia Sainz"
-                if newActor == "Katherine":
+                elif newActor == "Katherine":
                     newActor = "Kari Sweet"
-                if newActor == "Katia":
+                elif newActor == "Katia":
                     newActor = "Joleyn Burst"
-                if newActor == "Katie Jayne":
+                elif newActor == "Katie Jayne":
                     newActor = "Katy Jayne"
-                if newActor == "Katka":
+                elif newActor == "Katka":
                     newActor = "Ferrera Gomez"
-                if newActor == "Kato":
+                elif newActor == "Kato":
                     newActor = "Kimberly Kato"
-                if newActor == "Katrina":
+                elif newActor == "Katrina":
                     newActor = "Nessa Devil"
-                if newActor == "Katy":
+                elif newActor == "Katy":
                     newActor = "Kya"
-                if newActor == "Kaye":
+                elif newActor == "Kaye":
                     newActor = "Celine"
-                if newActor == "Kaylee":
+                elif newActor == "Kaylee":
                     newActor = "Candice Luca"
-                if newActor == "Keira":
+                elif newActor == "Keira":
                     newActor = "Keira Albina"
-                if newActor == "Kendall":
+                elif newActor == "Kendall":
                     newActor = "Kendall White"
-                if newActor == "Kenna":
+                elif newActor == "Kenna":
                     newActor = "Kenna James"
-                if newActor == "Kennedy":
+                elif newActor == "Kennedy":
                     newActor = "Kennedy Kressler"
-                if newActor == "Kenzie":
+                elif newActor == "Kenzie":
                     newActor = "Kenze Thomas"
-                if newActor == "Kiera":
+                elif newActor == "Kiera":
                     newActor = "Kiera Winters"
-                if newActor == "Kim":
+                elif newActor == "Kim":
                     newActor = "Katy Rose"
-                if newActor == "Kimmy":
+                elif newActor == "Kimmy":
                     newActor = "Kimmy Granger"
-                if newActor == "Kinsley":
+                elif newActor == "Kinsley":
                     newActor = "Kinsley Ann"
-                if newActor == "Kira":
+                elif newActor == "Kira":
                     newActor = "Kira Thorn"
-                if newActor == "Kirra":
+                elif newActor == "Kirra":
                     newActor = "Kira Zen"
-                if newActor == "Kirsten Lee":
+                elif newActor == "Kirsten Lee":
                     newActor = "Kirsten Nicole Lee"
-                if newActor == "Kitty":
+                elif newActor == "Kitty":
                     newActor = "Kitty Jane"
-                if newActor == "Klara":
+                elif newActor == "Klara":
                     newActor = "Zoe"
-                if newActor == "Kristen":
+                elif newActor == "Kristen":
                     newActor = "Jessica Rox"
-                if newActor == "Kristi":
+                elif newActor == "Kristi":
                     newActor = "Allison"
-                if newActor == "Kristin Scott":
+                elif newActor == "Kristin Scott":
                     newActor = "Kristen Scott"
-                if newActor == "Kylie":
+                elif newActor == "Kylie":
                     newActor = "Kylie Nicole"
-                if newActor == "Lana":
+                elif newActor == "Lana":
                     newActor = "Mia Hilton"
-                if newActor == "Laura":
+                elif newActor == "Laura":
                     newActor = "Kalea Taylor"
-                if newActor == "Leah":
+                elif newActor == "Leah":
                     newActor = "Vika T"
-                if newActor == "Leila":
+                elif newActor == "Leila":
                     newActor = "Blue Angel"
-                if newActor == "Lena":
+                elif newActor == "Lena":
                     newActor = "Lena Anderson"
-                if newActor == "Leony":
+                elif newActor == "Leony":
                     newActor = "Cherry Kiss"
-                if newActor == "Lexi":
+                elif newActor == "Lexi":
                     newActor = "Lexi Belle"
-                if newActor == "Lexy":
+                elif newActor == "Lexy":
                     newActor = "Lexi Layo"
-                if newActor == "Lia":
+                elif newActor == "Lia":
                     newActor = "Lia Lor"
-                if newActor == "Lilit":
+                elif newActor == "Lilit":
                     newActor = "Lilit Sweet"
-                if newActor == "Lillianne":
+                elif newActor == "Lillianne":
                     newActor = "Ariel"
-                if newActor == "Lilly":
+                elif newActor == "Lilly":
                     newActor = "Lily Labeau"
-                if newActor == "Lilly Ivy":
+                elif newActor == "Lilly Ivy":
                     newActor = "Lily Ivy "
-                if newActor == "Lilu":
+                elif newActor == "Lilu":
                     newActor = "Lilu Moon"
-                if newActor == "Lily":
+                elif newActor == "Lily":
                     newActor = "Naomi Nevena"
-                if newActor == "Linsay":
+                elif newActor == "Linsay":
                     newActor = "Nataly Gold"
-                if newActor == "Lisa":
+                elif newActor == "Lisa":
                     newActor = "Lauren Crist"
-                if newActor == "Liv":
+                elif newActor == "Liv":
                     newActor = "Elisa"
-                if newActor == "Liza Dawn":
+                elif newActor == "Liza Dawn":
                     newActor = "Lisa Dawn"
-                if newActor == "Lola":
+                elif newActor == "Lola":
                     newActor = "Penelope Lynn"
-                if newActor == "Lolita":
+                elif newActor == "Lolita":
                     newActor = "Lexie Fox"
-                if newActor == "Lorena":
+                elif newActor == "Lorena":
                     newActor = "Lorena Garcia"
-                if newActor == "Lovita":
+                elif newActor == "Lovita":
                     newActor = "Lovita Fate"
-                if newActor == "Lyra":
+                elif newActor == "Lyra":
                     newActor = "Lyra Louvel"
-                if newActor == "Malena":
+                elif newActor == "Malena":
                     newActor = "Malena Morgan"
-                if newActor == "Malena A":
+                elif newActor == "Malena A":
                     newActor = "Melena Maria Rya"
-                if newActor == "Maria":
+                elif newActor == "Maria":
                     newActor = "Anna Rose"
-                if newActor == "Marica":
+                elif newActor == "Marica":
                     newActor = "Marica Hase"
-                if newActor == "Marie":
+                elif newActor == "Marie":
                     newActor = "Satin Bloom"
-                if newActor == "Marie M.":
+                elif newActor == "Marie M.":
                     newActor = "Marie McCray"
-                if newActor == "Mary":
+                elif newActor == "Mary":
                     newActor = "Marry Queen"
-                if newActor == "Maryjane":
+                elif newActor == "Maryjane":
                     newActor = "Maryjane Johnson"
-                if newActor == "Maya":
+                elif newActor == "Maya":
                     newActor = "Lynette"
-                if newActor == "Maya M":
+                elif newActor == "Maya M":
                     newActor = "Sapphira A"
-                if newActor == "Megan":
+                elif newActor == "Megan":
                     newActor = "Natali Blond"
-                if newActor == "Melanie":
+                elif newActor == "Melanie":
                     newActor = "Melanie Rios"
-                if newActor == "Mia":
+                elif newActor == "Mia":
                     newActor = "Mia Lina"
-                if newActor == "Mia M":
+                elif newActor == "Mia M":
                     newActor = "Mia Malkova"
-                if newActor == "Michelle":
+                elif newActor == "Michelle":
                     newActor = "Irina J"
-                if newActor == "Mikah":
+                elif newActor == "Mikah":
                     newActor = "Katerina"
-                if newActor == "Mila K":
+                elif newActor == "Mila K":
                     newActor = "Michaela Isizzu"
-                if newActor == "Milla":
+                elif newActor == "Milla":
                     newActor = "Mila Azul"
-                if newActor == "Mira":
+                elif newActor == "Mira":
                     newActor = "Diana G"
-                if newActor == "Miss Pac Man":
+                elif newActor == "Miss Pac Man":
                     newActor = "Nedda A"
-                if newActor == "Misty":
+                elif newActor == "Misty":
                     newActor = "Paula Shy"
-                if newActor == "Miu":
+                elif newActor == "Miu":
                     newActor = "Sabrisse"
-                if newActor == "Anastasia":
+                elif newActor == "Anastasia":
                     newActor = "Monika Benz"
-                if newActor == "Monika":
+                elif newActor == "Monika":
                     newActor = "Monika Benz"
-                if newActor == "Monique":
+                elif newActor == "Monique":
                     newActor = "Monika Thu"
-                if newActor == "Nadia":
+                elif newActor == "Nadia":
                     newActor = "Nadia Nickels"
-                if newActor == "Nancy":
+                elif newActor == "Nancy":
                     newActor = "Nancy Ace"
-                if newActor == "Naomi":
+                elif newActor == "Naomi":
                     newActor = "Silvie Luca"
-                if newActor == "Naomi B":
+                elif newActor == "Naomi B":
                     newActor = "Naomi Bennet"
-                if newActor == "Nastia":
+                elif newActor == "Nastia":
                     newActor = "Lindsey Olsen"
-                if newActor == "Nastya":
+                elif newActor == "Nastya":
                     newActor = "Nikki Stills"
-                if newActor == "Natali":
+                elif newActor == "Natali":
                     newActor = "Elouisa"
-                if newActor == "Natalie":
+                elif newActor == "Natalie":
                     newActor = "Jaslene Jade"
-                if newActor == "Natasha B":
+                elif newActor == "Natasha B":
                     newActor = "Kelly E"
-                if newActor == "Nella":
+                elif newActor == "Nella":
                     newActor = "Lexi Foxy"
-                if newActor == "Nicola":
+                elif newActor == "Nicola":
                     newActor = "Nika"
-                if newActor == "Nicole":
+                elif newActor == "Nicole":
                     newActor = "Gina"
-                if newActor == "Niki":
+                elif newActor == "Niki":
                     newActor = "Nikki Fox"
-                if newActor == "Nikki":
+                elif newActor == "Nikki":
                     newActor = "Nici Dee"
-                if newActor == "Nikki Peaches":
+                elif newActor == "Nikki Peaches":
                     newActor = "Nikki Peach"
-                if newActor == "Nina":
+                elif newActor == "Nina":
                     newActor = "Nina James"
-                if newActor == "Olivia":
+                elif newActor == "Olivia":
                     newActor = "Livia Godiva"
-                if newActor == "Oliya":
+                elif newActor == "Oliya":
                     newActor = "Isabel B"
-                if newActor == "Paige":
+                elif newActor == "Paige":
                     newActor = "Paige Owens"
-                if newActor == "Pam":
+                elif newActor == "Pam":
                     newActor = "Lena Love"
-                if newActor == "Patsy":
+                elif newActor == "Patsy":
                     newActor = "Angelic Anya"
-                if newActor == "Paulina":
+                elif newActor == "Paulina":
                     newActor = "Susan Ayn"
-                if newActor == "Pink Violet":
+                elif newActor == "Pink Violet":
                     newActor = "Violette Pink"
-                if newActor == "Presley":
+                elif newActor == "Presley":
                     newActor = "Presley Hart"
-                if newActor == "Rainbow":
+                elif newActor == "Rainbow":
                     newActor = "Hannah Hays"
-                if newActor == "Rebecca":
+                elif newActor == "Rebecca":
                     newActor = "Rebecca Volpetti"
-                if newActor == "Reese":
+                elif newActor == "Reese":
                     newActor = "Paloma B"
-                if newActor == "Reina":
+                elif newActor == "Reina":
                     newActor = "Artemis"
-                if newActor == "Ria Sun":
+                elif newActor == "Ria Sun":
                     newActor = "Ria Sunn"
-                if newActor == "Riley":
+                elif newActor == "Riley":
                     newActor = "Dakoda Brookes"
-                if newActor == "Ruby":
+                elif newActor == "Ruby":
                     newActor = "Heather Starlet"
-                if newActor == "Sam":
+                elif newActor == "Sam":
                     newActor = "Alyssa Branch"
-                if newActor == "Samantha":
+                elif newActor == "Samantha":
                     newActor = "Samantha Jolie"
-                if newActor == "Sammy":
+                elif newActor == "Sammy":
                     newActor = "Samantha Rone"
-                if newActor == "Sandra":
+                elif newActor == "Sandra":
                     newActor = "Zena Little"
-                if newActor == "Sandy":
+                elif newActor == "Sandy":
                     newActor = "Izabelle A"
-                if newActor == "Sasha":
+                elif newActor == "Sasha":
                     newActor = "Sasha Grey"
-                if newActor == "Sasha D":
+                elif newActor == "Sasha D":
                     newActor = "Catina"
-                if newActor == "Scarlet":
+                elif newActor == "Scarlet":
                     newActor = "Veronica Radke"
-                if newActor == "Scarlett":
+                elif newActor == "Scarlett":
                     newActor = "Heather Carolin"
-                if newActor == "Serena":
+                elif newActor == "Serena":
                     newActor = "Amarna Miller"
-                if newActor == "Shrima":
+                elif newActor == "Shrima":
                     newActor = "Shrima Malati"
-                if newActor == "Silvie":
+                elif newActor == "Silvie":
                     newActor = "Silvie Deluxe"
-                if newActor == "Sophia":
+                elif newActor == "Sophia":
                     newActor = "Sophia Fiore"
-                if newActor == "Sophie":
+                elif newActor == "Sophie":
                     newActor = "Sophia Knight"
-                if newActor == "Stacy":
+                elif newActor == "Stacy":
                     newActor = "Deina"
-                if newActor == "Star":
+                elif newActor == "Star":
                     newActor = "Zoey Kush"
-                if newActor == "Stasha":
+                elif newActor == "Stasha":
                     newActor = "Irina K"
-                if newActor == "Stefanie":
+                elif newActor == "Stefanie":
                     newActor = "Eileen Sue"
-                if newActor == "Stephanie":
+                elif newActor == "Stephanie":
                     newActor = "Stefanie"
-                if newActor == "Stevie":
+                elif newActor == "Stevie":
                     newActor = "Barbamiska"
-                if newActor == "Summer":
+                elif newActor == "Summer":
                     newActor = "Tracy Lindsay"
-                if newActor == "Sunshine":
+                elif newActor == "Sunshine":
                     newActor = "Adele Sunshine"
-                if newActor == "Susie":
+                elif newActor == "Susie":
                     newActor = "Dido Angel"
-                if newActor == "Suzie C":
+                elif newActor == "Suzie C":
                     newActor = "Suzie Carina"
-                if newActor == "Sweetie":
+                elif newActor == "Sweetie":
                     newActor = "Lilith Lee"
-                if newActor == "Sybil":
+                elif newActor == "Sybil":
                     newActor = "Sybil A"
-                if newActor == "Tabitha":
+                elif newActor == "Tabitha":
                     newActor = "Sarka"
-                if newActor == "Talia":
+                elif newActor == "Talia":
                     newActor = "Talia Mint"
-                if newActor == "Tara":
+                elif newActor == "Tara":
                     newActor = "Xandra B"
-                if newActor == "Tasha":
+                elif newActor == "Tasha":
                     newActor = "Lena"
-                if newActor == "Tatiana":
+                elif newActor == "Tatiana":
                     newActor = "Leo"
-                if newActor == "Teal":
+                elif newActor == "Teal":
                     newActor = "Lucy Li"
-                if newActor == "Tess":
+                elif newActor == "Tess":
                     newActor = "Nadine"
-                if newActor == "The Red Fox":
+                elif newActor == "The Red Fox":
                     newActor = "Red Fox"
-                if newActor == "Tiffany":
+                elif newActor == "Tiffany":
                     newActor = "Tiffany Thompson"
-                if newActor == "Tiffany F":
+                elif newActor == "Tiffany F":
                     newActor = "Tiffany Fox"
-                if newActor == "Tina":
+                elif newActor == "Tina":
                     newActor = "Heather Night"
-                if newActor == "Tori":
+                elif newActor == "Tori":
                     newActor = "Tori Black"
-                if newActor == "Tracy":
+                elif newActor == "Tracy":
                     newActor = "Sinovia"
-                if newActor == "Vanna":
+                elif newActor == "Vanna":
                     newActor = "Vanna Bardot"
-                if newActor == "Veronica":
+                elif newActor == "Veronica":
                     newActor = "Veronica Clark"
-                if newActor == "Veronika":
+                elif newActor == "Veronika":
                     newActor = "Anetta V."
-                if newActor == "Vicki":
+                elif newActor == "Vicki":
                     newActor = "Vicky Love"
-                if newActor == "Vicky":
+                elif newActor == "Vicky":
                     newActor = "Vicki Chase"
-                if newActor == "Victoria":
+                elif newActor == "Victoria":
                     newActor = "Victoria Rae Black"
-                if newActor == "Viktoria":
+                elif newActor == "Viktoria":
                     newActor = "Scyley Jam"
-                if newActor == "Vinna":
+                elif newActor == "Vinna":
                     newActor = "Vinna Reed"
-                if newActor == "Willow":
+                elif newActor == "Willow":
                     newActor = "Jana Mrhacova"
-                if newActor == "Zazie":
+                elif newActor == "Zazie":
                     newActor = "Zazie Sky"
-            if metadata.studio == "DDFProd":
+            elif metadata.studio == "DDFProd":
                 if newActor == "Ms White-Kitten":
                     newActor = "Goldie Baby"
-                if newActor == "Helen":
+                elif newActor == "Helen":
                     newActor = "Alena H"
-            if metadata.studio == "Reality Kings":
+            elif metadata.studio == "Reality Kings":
                 if newActor == "Morgan":
                     newActor = "Morgan Layne"
-            if metadata.studio == "WowGirls":
+            elif metadata.studio == "WowGirls":
                 if newActor == "Clover":
                     newActor = "Katya Clover"
-            if metadata.studio == "Private":
+            elif metadata.studio == "Private":
                 if newActor == "Lolita Taylor":
                     newActor = "Lola Taylor"
-            if metadata.studio == "VIPissy":
+            elif metadata.studio == "VIPissy":
                 if newActor == "Susan Ayne":
                     newActor = "Susan Ayn"
-            if metadata.studio == "Erika Lust Films":
+            elif metadata.studio == "Erika Lust Films":
                 if newActor == "Luna Corazón":
                     newActor = "Luna Corazon"
-            if metadata.studio == "Bang Com":
+            elif metadata.studio == "Bang Com":
                 if newActor == "London Keys":
                     newActor = "London Keyes"
-            if metadata.studio == "Milehigh" or metadata.studio == "Doghouse Digital":
+            elif metadata.studio == "Milehigh" or metadata.studio == "Doghouse Digital":
                 if newActor == "Gabrielle Lati":
                     newActor = "Gabriella Lati"
 

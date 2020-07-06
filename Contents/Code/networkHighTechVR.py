@@ -65,11 +65,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     posters = detailsPageElements.xpath('//div[contains(@class,"video-gallery")]//div//figure//a | //a[@class="u-block u-ratio u-ratio--lightbox u-bgc--back-opt u-z--zero"] | //div[@class="scene-previews-container"]//a')
     posterNum = 1
     for posterCur in posters:
-        posterURLfull = posterCur.get("href").split('?')
-        posterURL = posterURLfull[0]
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.bing.com'}).content, sort_order = posterNum)
-        posterNum = posterNum + 1
+        posterURL = posterCur.get("href").split('?')[0]
+        if posterURL.startswith('http'):
+            metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
+            metadata.art[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.bing.com'}).content, sort_order = posterNum)
+            posterNum = posterNum + 1
 
     backgroundStyle = detailsPageElements.xpath('//div[@class="splash-screen fullscreen-message is-visible"]')[0].get("style")
     alpha = backgroundStyle.find('url(')+4

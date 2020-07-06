@@ -8,10 +8,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(data)
     for searchResult in searchResults.xpath('//div[contains(@class, "is-multiline")]/div[contains(@class, "column")]'):
-        curID = String.Encode(searchResult.xpath('.//a/@href')[0])
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         titleNoFormatting = searchResult.xpath('.//div[@class="has-text-weight-bold"]/text()')[0]
         releaseDate = parse(searchResult.xpath('.//span[contains(@class, "tag")]/text()')[0]).strftime('%Y-%m-%d')
-        scenePoster = String.Encode(searchResult.xpath('.//img/@src')[0])
+        scenePoster = PAutils.Encode(searchResult.xpath('.//img/@src')[0])
 
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -27,8 +27,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneURL = '%s/iod/%s' % (PAsearchSites.getSearchBaseURL(siteID), String.Decode(metadata_id[0]))
-    scenePoster = String.Decode(metadata_id[2])
+    sceneURL = '%s/iod/%s' % (PAsearchSites.getSearchBaseURL(siteID), PAutils.Decode(metadata_id[0]))
+    scenePoster = PAutils.Decode(metadata_id[2])
 
     data = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(data)

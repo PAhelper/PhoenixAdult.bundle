@@ -42,7 +42,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     art = []
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[1].text_content().strip().replace('\n',' ')
+    metadata.summary = detailsPageElements.xpath('//div[@class="description"]')[1].text_content().strip().replace('\n',' ').replace('Description:', '')
     
     # Tagline
     channel = detailsPageElements.xpath('//div[contains(@class,"shoot-logo")]')[0].text_content().strip()
@@ -168,10 +168,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Release Date
     date = detailsPageElements.xpath('//span[@class="shoot-date"]')[0].text_content().strip()
-    if len(date) > 0:
-        date_object = datetime.strptime(date, '%B %d, %Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
     #Posters
     xpaths = [

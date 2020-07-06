@@ -1,13 +1,14 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAutils
 
 
 def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate):
     searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     for searchResult in searchResults.xpath('//div[@class="memVid"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="memVidTitle"]//a/@title')[0]
-        curID = String.Encode(searchResult.xpath('.//div[@class="memVidTitle"]//a/@href')[0])
+        curID = PAutils.Encode(searchResult.xpath('.//div[@class="memVidTitle"]//a/@href')[0])
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
         results.Append(MetadataSearchResult(id=curID + "|" + str(siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
@@ -17,7 +18,7 @@ def search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 def update(metadata, siteID, movieGenres, movieActors):
     Log('******UPDATE CALLED*******')
 
-    path = String.Decode(str(metadata.id).split("|")[0])
+    path = PAutils.Decode(str(metadata.id).split("|")[0])
     url = PAsearchSites.getSearchBaseURL(siteID) + path
     detailsPageElements = HTML.ElementFromURL(url)
     art = []

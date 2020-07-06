@@ -2,6 +2,8 @@ import PAsearchSites
 
 import googlesearch
 import fake_useragent
+import base58
+import cloudscraper
 
 
 def getUserAgent():
@@ -12,20 +14,17 @@ def getUserAgent():
 
 def bypassCloudflare(url, **kwargs):
     headers = kwargs['headers'] if 'headers' in kwargs else {}
-    req_headers = '\n'.join(['%s: %s' % (key, headers[key]) for key in headers])
+    scraper = cloudscraper.CloudScraper()
 
-    for node in ['US', 'DE']:
-        params = json.dumps({'id': 0, 'json': json.dumps({'method': 'GET', 'url': url, 'headers': req_headers, 'apiNode': node, 'idnUrl': url}), 'deviceId': '', 'sessionId': ''})
-        req = urllib.Request('https://api.reqbin.com/api/v1/requests', params, headers={
-            'Content-Type': 'application/json',
-            'User-Agent': getUserAgent()
-        })
-        data = urllib.urlopen(req).read()
-        data = json.loads(data)
-        if data['Success']:
-            return data['Content']
+    for head in ['Authorization', 'Cookie']:
+        if head in headers:
+            scraper.headers[head] = headers[head]
 
-    Log('Bypass error: %s' % data['Content'])
+    data = scraper.get(url).text
+    if data:
+       return data
+
+    Log('Bypass error')
     return None
 
 
@@ -59,6 +58,8 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
 
     searchTerm = 'site:%s %s' % (site, searchText) if site else searchText
 
+    Log('Using Google Search "%s"' % searchTerm)
+
     googleResults = []
     try:
         googleResults = list(googlesearch.search(searchTerm, stop=stop))
@@ -67,3 +68,15 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
         pass
 
     return googleResults
+
+
+def Encode(text):
+    text = text.encode('UTF-8')
+
+    return base58.b58encode(text)
+
+
+def Decode(text):
+    text = text.encode('UTF-8')
+
+    return base58.b58decode(text)
