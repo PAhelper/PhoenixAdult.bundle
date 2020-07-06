@@ -1130,7 +1130,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Sex Like Real
             ###############
             elif searchSiteID == 899:
-                results = PAsearchSites.siteSLR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2249,7 +2249,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         elif siteID == 899:
-            metadata = PAsearchSites.siteSLR.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.siteSexLikeReal.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

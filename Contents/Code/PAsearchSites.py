@@ -105,7 +105,7 @@ import siteLethalHardcoreVR
 import siteDefeated
 import siteXVirtual
 import siteLustReality
-import siteSLR
+import siteSexLikeReal
 
 searchSites = [None] * 900
 
@@ -1003,7 +1003,7 @@ searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com",
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
 searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
-searchSites[895] = ("DefeatedXXX", "DefeatedXXX", "http://xxx.defeated.xxx", "http://xxx.defeated.xxx/?s=")
+searchSites[895] = ("Defeated", "DefeatedXXX", "http://xxx.defeated.xxx", "http://xxx.defeated.xxx/?s=")
 searchSites[896] = ("Defeated Sex Fight", "Defeated Sex Fight", "https://defeatedsexfight.com", "https://defeatedsexfight.com/?s=")
 searchSites[897] = ("XVirtual", "XVirtual", "https://xvirtual.com", "https://xvirtual.com/tour/search/?q=")
 searchSites[898] = ("Lust Reality", "Lust Reality", "https://www.lustreality.com", "https://www.lustreality.com/virtualreality/scene/id/")
