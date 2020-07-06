@@ -107,7 +107,7 @@ import siteXVirtual
 import siteLustReality
 import siteSexLikeReal
 
-searchSites = [None] * 900
+searchSites = [None] * 901
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1008,6 +1008,7 @@ searchSites[896] = ("Defeated Sex Fight", "Defeated Sex Fight", "https://defeate
 searchSites[897] = ("XVirtual", "XVirtual", "https://xvirtual.com", "https://xvirtual.com/tour/search/?q=")
 searchSites[898] = ("Lust Reality", "Lust Reality", "https://www.lustreality.com", "https://www.lustreality.com/virtualreality/scene/id/")
 searchSites[899] = ("Sex Like Real", "Sex Like Real", "https://www.sexlikereal.com", "https://www.sexlikereal.com/scenes/")
+searchSites[900] = ("Doe Girls", "Doe Girls", "https://doegirls.com/", "https://doegirls.com/search.en.html?q=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

@@ -1132,6 +1132,12 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 899:
                 results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## DoeGirls
+            ###############
+            elif searchSiteID == 900:
+                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2221,7 +2227,7 @@ class PhoenixAdultAgent(Agent.Movies):
 		
         ##############################################################
         ##                                                          ##
-        ##  Defeated		                                             ##
+        ##  Defeated		                                            ##
         ##                                                          ##
         ##############################################################
         elif siteID == 895 or siteID == 896:
@@ -2229,7 +2235,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  XVirtual	                                         ##
+        ##  XVirtual	                                              ##
         ##                                                          ##
         ##############################################################
         elif siteID == 897:
@@ -2237,7 +2243,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Lust Reality	                                         ##
+        ##  Lust Reality	                                          ##
         ##                                                          ##
         ##############################################################
         elif siteID == 898:
@@ -2245,11 +2251,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Sex Like Real	                                         ##
+        ##  Sex Like Real	                                          ##
         ##                                                          ##
         ##############################################################
         elif siteID == 899:
             metadata = PAsearchSites.siteSexLikeReal.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##   
+        ##   DoeGirls                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 900:
+            metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
