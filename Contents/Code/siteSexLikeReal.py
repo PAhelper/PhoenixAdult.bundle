@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 import PAutils
 
 
@@ -9,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = [directURL]
     googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
     for sceneURL in googleResults:
-        if ('/scene/' in sceneURL and sceneURL not in searchResults):
+        if ('/scenes/' in sceneURL and sceneURL not in searchResults):
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
@@ -22,8 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
-            date = detailsPageElements.xpath('//span[@class="date-display-single"] | //span[@class="u-inline-block u-mr--nine"] | //div[@class="video-meta-date"] | //div[@class="date"]')[0].text_content().strip()
-            releaseDate = parse(date).strftime('%Y-%m-%d')
+            releaseDate = parse(detailsPageElements.xpath('//time/@datetime')[0]).strftime('%Y-%m-%d')
 
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -41,57 +41,53 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata_id = str(metadata.id).split("|")
     sceneURL = PAutils.Decode(metadata_id[0])
     detailsPageElements = HTML.ElementFromURL(sceneURL)
-
+	
     # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    metadata.title = title
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "u-mb--six ")]')[0].text_content().strip()
-
-    # Studio
-    metadata.studio = 'Lust Reality'
-
-    # Date
-    date = detailsPageElements.xpath('//span[@class="date-display-single"] | //span[@class="u-inline-block u-mr--nine"] | //div[@class="video-meta-date"] | //div[@class="date"]')[0].text_content().strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "u-mb--four u-lh--opt")]')[0].text_content().strip()
 
     # Studio/Tagline/Collection
     metadata.collections.clear()
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
+    metadata.studio = detailsPageElements.xpath('//a[@rel="category"]')[0].text_content().strip()
     metadata.tagline = metadata.studio
     metadata.collections.add(metadata.studio)
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//a[contains(@href, "/list/category/")]'):
-        genreName = genreLink.text_content().strip()
+    for genreLink in detailsPageElements.xpath('//a[@rel="tag"]'):
+        genreName = genreLink.text_content()
 
         movieGenres.addGenre(genreName)
 
+
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//a[contains(@href, "/pornstars/model/")]'):
-        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
-        actorPage = HTML.ElementFromURL(actorPageURL)
+    actors = detailsPageElements.xpath('//ul//a[contains(@title, "profile")]')
+    for actorLink in actors:
+        actorPage = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href'))
 
         actorName = actorLink.text_content()
-        actorPhotoURL = actorPage.xpath('//div[contains(@class, "u-ratio--model-poster")]//img/@data-src')[0]
+        actorPhotoURL = actorPage.xpath('//div[contains(@class, "c-meta-poster")]//img/@data-src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
-
+	
+    # Date
+    date = detailsPageElements.xpath('//time/@datetime')[0]
+    date_object = parse(date)
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
+	
     # Posters/Background
     art = []
     xpaths = [
-        '//div[contains(@class, "splash-screen")]/@style',
+        '//meta[@property="og:image"]/@content',
         '//a[contains(@class, "u-ratio--lightbox")]/@href',
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
-            if poster.startswith('background-image'):
-                poster.split('url(')[1].split(')')[0]
-
             art.append(poster)
 
     Log('Artwork found: %d' % len(art))

@@ -229,8 +229,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
-+ #### DefeatedXXX | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title and Date**
-+ #### DefeatedSexFight | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title and Date**
++ #### DefeatedXXX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### DefeatedSexFight | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### DigitalPlayground | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
@@ -398,6 +398,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Look At Her Now | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### LustReality | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### Meana Wolf | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### MetArt Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -586,6 +587,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Chicas Loca
   - Crowd Bondage
   - Deutchland Report
+  - Doe Girls
   - Doe Projects
   - Exposed Casting
   - Fucked In Traffic
@@ -743,7 +745,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Other Reality Kings Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Lil Humpers
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
-+ #### SexLikeReal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### SexLikeReal | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SexyHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Dane Jones
   - Fitness Rooms
@@ -925,7 +927,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hardx
   - Lesbianx
   - AllBlackX
-+ #### XVirtual | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### XVirtual | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
++ #### Xillimite | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
 + #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list

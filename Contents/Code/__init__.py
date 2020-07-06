@@ -1130,7 +1130,19 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Sex Like Real
             ###############
             elif searchSiteID == 899:
-                results = PAsearchSites.siteSLR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## DoeGirls
+            ###############
+            elif searchSiteID == 900:
+                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## Xillimite
+            ###############
+            elif searchSiteID == 901:
+                results = PAsearchSites.siteXillimite.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2221,7 +2233,7 @@ class PhoenixAdultAgent(Agent.Movies):
 		
         ##############################################################
         ##                                                          ##
-        ##  Defeated		                                             ##
+        ##  Defeated		                                            ##
         ##                                                          ##
         ##############################################################
         elif siteID == 895 or siteID == 896:
@@ -2229,7 +2241,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  XVirtual	                                         ##
+        ##  XVirtual	                                              ##
         ##                                                          ##
         ##############################################################
         elif siteID == 897:
@@ -2237,7 +2249,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Lust Reality	                                         ##
+        ##  Lust Reality	                                          ##
         ##                                                          ##
         ##############################################################
         elif siteID == 898:
@@ -2245,11 +2257,27 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Sex Like Real	                                         ##
+        ##  Sex Like Real	                                          ##
         ##                                                          ##
         ##############################################################
         elif siteID == 899:
-            metadata = PAsearchSites.siteSLR.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.siteSexLikeReal.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##   
+        ##   DoeGirls                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 900:
+            metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Xillimite                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 901:
+            metadata = PAsearchSites.siteXillimite.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
