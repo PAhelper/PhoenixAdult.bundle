@@ -1,6 +1,7 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
@@ -8,7 +9,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     searchResults = HTML.ElementFromURL(url)
     for searchResult in searchResults.xpath('//div[contains(@class, "item-video")]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
-        curID = String.Encode(searchResult.xpath('.//a/@href')[0])
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         date = searchResult.xpath('.//div[@class="more-info-div"]')[0].text_content().split('|')
         releaseDate = parse(date[-1].strip()).strftime('%Y-%m-%d')
 
@@ -26,7 +27,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = metadata.id.split('|')
-    url = String.Decode(metadata_id[0])
+    url = PAutils.Decode(metadata_id[0])
     detailsPageElements = HTML.ElementFromURL(url)
 
     # Studio

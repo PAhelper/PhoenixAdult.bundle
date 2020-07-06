@@ -229,6 +229,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hot Legs & Feet
   - House of Taboo
   - Only Blowjob
++ #### DefeatedXXX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### DefeatedSexFight | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### DigitalPlayground | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
@@ -298,7 +300,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### FuelVirtual Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - FuckedHard18
   - MassageGirls18
-+ #### Full Porn Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Full Porn Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - Analized
   - Bad Daddy POV
   - DTF Sluts
@@ -308,6 +310,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - POV Perverts
   - Twisted Visual
 + #### Gangbang Creampie | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Gender X | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### GirlfriendsFilms | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
 + #### GirlsOutWest | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### Girls Rimming | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
@@ -395,6 +398,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Little Caprice | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Look At Her Now | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Love Her Feet | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### LustReality | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ManyVids | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, Date Add**
 + #### Meana Wolf | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### MetArt Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -741,6 +745,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Other Reality Kings Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Lil Humpers
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### SexLikeReal | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SexyHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Dane Jones
   - Fitness Rooms
@@ -913,7 +918,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WankzVR
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### WowGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
-+ #### Wicked | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Wicked | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### XConfessions | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Xempire | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -922,6 +927,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hardx
   - Lesbianx
   - AllBlackX
++ #### XVirtual | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
 + #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list

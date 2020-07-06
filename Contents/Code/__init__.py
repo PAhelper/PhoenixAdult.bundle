@@ -866,7 +866,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Wicked
             ###############
             elif searchSiteID == 793:
-                results = PAsearchSites.siteWicked.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## 18OnlyGirls
@@ -1097,9 +1097,45 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
-            ## DoeGirls
+            ## Gender X
             ###############
             elif searchSiteID == 893:
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## WhoreCraftVR
+            ###############
+            elif searchSiteID == 894:
+                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+				
+            ###############
+            ## Defeated
+            ###############
+            elif searchSiteID == 895 or searchSiteID == 896:
+                results = PAsearchSites.siteDefeated.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## XVirtual
+            ###############
+            elif searchSiteID == 897:
+                results = PAsearchSites.siteXVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## Lust Reality
+            ###############
+            elif searchSiteID == 898:
+                results = PAsearchSites.siteLustReality.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## Sex Like Real
+            ###############
+            elif searchSiteID == 899:
+                results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## DoeGirls
+            ###############
+            elif searchSiteID == 900:
                 results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
@@ -1338,7 +1374,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##   Gamma Entertainment Other                              ##
         ##                                                          ##
         ##############################################################
-        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or (795 <= siteID <= 797) or siteID == 878:
+        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
@@ -1887,14 +1923,6 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  Wicked                                                  ##
-        ##                                                          ##
-        ##############################################################
-        elif siteID == 793:
-            metadata = PAsearchSites.siteWicked.update(metadata, siteID, movieGenres, movieActors)
-
-        ##############################################################
-        ##                                                          ##
         ##  18OnlyGirls                                                ##
         ##                                                          ##
         ##############################################################
@@ -2191,10 +2219,50 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
+        ##  WhoreCraftVR                                            ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 894:
+            metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
+		
+        ##############################################################
+        ##                                                          ##
+        ##  Defeated		                                            ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 895 or siteID == 896:
+            metadata = PAsearchSites.siteDefeated.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  XVirtual	                                              ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 897:
+            metadata = PAsearchSites.siteXVirtual.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Lust Reality	                                          ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 898:
+            metadata = PAsearchSites.siteLustReality.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  Sex Like Real	                                          ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 899:
+            metadata = PAsearchSites.siteSexLikeReal.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##   
         ##   DoeGirls                                               ##
         ##                                                          ##
         ##############################################################
-        elif siteID == 893:
+        elif siteID == 900:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################

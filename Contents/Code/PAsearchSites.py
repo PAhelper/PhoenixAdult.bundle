@@ -74,7 +74,6 @@ import siteZTOD
 import siteClubFilly
 import networkIntersec
 import networkCherryPimps
-import siteWicked
 import site18OnlyGirls
 import siteClubSeventeen
 import siteElegantAngel
@@ -103,8 +102,12 @@ import networkGammaEntOther
 import siteRealityLovers
 import siteHoloGirlsVR
 import siteLethalHardcoreVR
+import siteDefeated
+import siteXVirtual
+import siteLustReality
+import siteSexLikeReal
 
-searchSites = [None] * 894
+searchSites = [None] * 901
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -324,12 +327,12 @@ searchSites[215] = ("StepSiblings", "StepSiblings", "https://www.stepsiblings.co
 searchSites[216] = ("Lets Doe It", "Let's Doe It", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[217] = ("The White Boxxx", "The White Boxxx", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[218] = ("Scam Angels", "Scam Angels", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
-searchSites[219] = ("Chicas Loca", "Chicas Loca", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
+searchSites[219] = ("Chicas Loca", "Chicas Loca", "https://mamacitaz.com", "https://mamacitaz.com/search.en.html?q=")
 searchSites[220] = ("Her Limit", "Her Limit", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[221] = ("A Girl Knows", "A Girl Knows", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[222] = ("Porno Academie", "Porno Academie", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[223] = ("Xchimera", "Xchimera", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
-searchSites[224] = ("Carne Del Mercado", "Carne Del Mercado", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
+searchSites[224] = ("Carne Del Mercado", "Carne Del Mercado", "https://mamacitaz.com", "https://mamacitaz.com/search.en.html?q=")
 searchSites[225] = ("XXX Shades", "XXX Shades", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[226] = ("Bums Bus", "Bums Bus", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[227] = ("Bitches Abroad", "Bitches Abroad", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
@@ -337,12 +340,12 @@ searchSites[228] = ("La Cochonne", "La Cochonne", "https://amateureuro.com", "ht
 searchSites[229] = ("Crowd Bondage", "Crowd Bondage", "https://forbondage.com", "https://forbondage.com/search.en.html?q=")
 searchSites[230] = ("Relaxxxed", "Relaxxxed", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[231] = ("My Naughty Album", "My Naughty Album", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
-searchSites[232] = ("Tu Venganza", "Tu Venganza", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
+searchSites[232] = ("Tu Venganza", "Tu Venganza", "https://mamacitaz.com", "https://mamacitaz.com/search.en.html?q=")
 searchSites[233] = ("Bums Buero", "Bums Buero", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[234] = ("Los Consoladores", "Los Consoladores", "https://vipsexvault.com", "https://vipsexvault.com/search.en.html?q=")
 searchSites[235] = ("Quest for Orgasm", "Quest for Orgasm", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[236] = ("Trans Bella", "Trans Bella", "https://transbella.com", "https://transbella.com/search.en.html?q=")
-searchSites[237] = ("Her Big Ass", "Her Big Ass", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
+searchSites[237] = ("Her Big Ass", "Her Big Ass", "https://mamacitaz.com", "https://mamacitaz.com/search.en.html?q=")
 searchSites[238] = ("Horny Hostel", "Horny Hostel", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[239] = ("Fucked In Traffic", "Fucked In Traffic", "https://vipsexvault.com", "https://vipsexvault.com/search.en.html?q=")
 searchSites[240] = ("Las Folladoras", "Las Folladoras", "https://amateureuro.com", "https://amateureuro.com/search.en.html?q=")
@@ -355,7 +358,7 @@ searchSites[246] = ("Casting Francais", "Casting Francais", "https://amateureuro
 searchSites[247] = ("Bums Besuch", "Bums Besuch", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
 searchSites[248] = ("Special Feet Force", "Special Feet Force", "https://forbondage.com", "https://forbondage.com/search.en.html?q")
 searchSites[249] = ("Trans Taboo", "Trans Taboo", "https://transbella.com", "https://transbella.com/search.en.html?q=")
-searchSites[250] = ("Operacion Limpieza", "Operacion Limpieza", "https://letsdoeit.com", "https://letsdoeit.com/search.en.html?q=")
+searchSites[250] = ("Operacion Limpieza", "Operacion Limpieza", "https://mamacitaz.com", "https://mamacitaz.com/search.en.html?q=")
 searchSites[251] = ("La Novice", "La Novice", "https://amateureuro.com", "https://amateureuro.com/search.en.html?q=")
 searchSites[252] = ("Casting Alla Italiana", "Casting Alla Italiana", "https://amateureuro.com", "https://amateureuro.com/search.en.html?q=")
 searchSites[253] = ("PinUp Sex", "PinUp Sex", "https://vipsexvault.com", "https://vipsexvault.com/search.en.html?q=")
@@ -448,14 +451,14 @@ searchSites[339] = ("MomXXX", "MomXXX", "https://www.sexyhub.com", "https://site
 searchSites[340] = ("FakeHub", "FakeHub", "https://www.fakehub.com", "https://site-api.project1service.com")
 searchSites[341] = ("Big Cock Bully", "Big Cock Bully", "https://tour.naughtyamerica.com", "https://i6p9q9r18e-3.algolianet.com/1/indexes/*/queries")
 searchSites[342] = ("VirtualRealPorn", "VirtualRealPorn", "https://virtualrealporn.com/", "https://virtualrealporn.com/vr-porn-video/")
-searchSites[343] = ("Analized", "Analized", "https://analized.com", "https://analized.com/search.php?query=")
-searchSites[344] = ("James Deen", "James Deen", "https://jamesdeen.com", "https://jamesdeen.com/search.php?query=")
-searchSites[345] = ("Twisted Visual", "Twisted Visual", "https://twistedvisual.com", "https://twistedvisual.com/search.php?query=")
-searchSites[346] = ("Only Prince", "Only Prince", "https://onlyprince.com", "https://onlyprince.com/search.php?query=")
-searchSites[347] = ("Bad Daddy POV", "Bad Daddy POV", "https://baddaddypov.com", "https://baddaddypov.com/search.php?query=")
-searchSites[348] = ("POV Perverts", "POV Perverts", "https://povperverts.net", "https://povperverts.net/search.php?query=")
-searchSites[349] = ("Pervert Gallery", "Pervert Gallery", "https://pervertgallery.com", "https://pervertgallery.com/search.php?query=")
-searchSites[350] = ("DTF Sluts", "DTF Sluts", "https://dtfsluts.com", "https://dtfsluts.com/search.php?query=")
+searchSites[343] = ("Analized", "Analized", "https://analized.com", "https://analized.com/1/search/")
+searchSites[344] = ("James Deen", "James Deen", "https://jamesdeen.com", "https://jamesdeen.com/1/search/")
+searchSites[345] = ("Twisted Visual", "Twisted Visual", "https://twistedvisual.com", "https://twistedvisual.com/1/search/")
+searchSites[346] = ("Only Prince", "Only Prince", "https://onlyprince.com", "https://onlyprince.com/1/search/")
+searchSites[347] = ("Bad Daddy POV", "Bad Daddy POV", "https://baddaddypov.com", "https://baddaddypov.com/1/search/")
+searchSites[348] = ("POV Perverts", "POV Perverts", "https://povperverts.net", "https://povperverts.net/1/search/")
+searchSites[349] = ("Pervert Gallery", "Pervert Gallery", "https://pervertgallery.com", "https://pervertgallery.com/1/search/")
+searchSites[350] = ("DTF Sluts", "DTF Sluts", "https://dtfsluts.com", "https://dtfsluts.com/1/search/")
 searchSites[351] = ("Mommy Blows Best", "Mommy Blows Best", "http://www.blowpass.com", "http://www.blowpass.com/en/search/mommyblowsbest/scene/")
 searchSites[352] = ("Only Teen Blowjobs", "Only Teen Blowjobs", "http://www.blowpass.com", "http://www.blowpass.com/en/search/onlyteenblowjobs/scene/")
 searchSites[353] = ("1000 Facials", "1000 Facials", "http://www.blowpass.com", "http://www.blowpass.com/en/search/1000facials/scene/")
@@ -897,8 +900,8 @@ searchSites[788] = ("Cucked", "Cucked.XXX", "https://www.pimp.xxx", "https://pim
 searchSites[789] = ("Drilled", "Drilled.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[790] = ("BCM", "BCM.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[791] = ("Petite", "Petite.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
-searchSites[792] = ("Family", "Family.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
-searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://wicked.com/en/movie/")
+searchSites[792] = ("Family", "Family.XXX", "https://www.family.xxx", "https://family.xxx/search.php?query=")
+searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[794] = ("18OnlyGirls", "18 Only Girls", "http://www.18onlygirls.tv", "http://18onlygirls.tv/?s=")
 searchSites[795] = ("GirlCore", "GirlCore", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
 searchSites[796] = ("Moms On Moms", "Moms On Moms", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
@@ -998,7 +1001,14 @@ searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
 searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
-searchSites[893] = ("Doe Girls", "Doe Girls", "https://doegirls.com/", "https://doegirls.com/search.en.html?q=")
+searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
+searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
+searchSites[895] = ("Defeated", "DefeatedXXX", "http://xxx.defeated.xxx", "http://xxx.defeated.xxx/?s=")
+searchSites[896] = ("Defeated Sex Fight", "Defeated Sex Fight", "https://defeatedsexfight.com", "https://defeatedsexfight.com/?s=")
+searchSites[897] = ("XVirtual", "XVirtual", "https://xvirtual.com", "https://xvirtual.com/tour/search/?q=")
+searchSites[898] = ("Lust Reality", "Lust Reality", "https://www.lustreality.com", "https://www.lustreality.com/virtualreality/scene/id/")
+searchSites[899] = ("Sex Like Real", "Sex Like Real", "https://www.sexlikereal.com", "https://www.sexlikereal.com/scenes/")
+searchSites[900] = ("Doe Girls", "Doe Girls", "https://doegirls.com/", "https://doegirls.com/search.en.html?q=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

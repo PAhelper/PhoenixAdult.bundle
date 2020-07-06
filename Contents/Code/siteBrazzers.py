@@ -10,7 +10,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         detailsPageElements = HTML.ElementFromURL(sceneURL)
 
         titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
-        curID = String.Encode(sceneURL)
+        curID = PAutils.Encode(sceneURL)
         subSite = detailsPageElements.xpath('//span[@class="label-text"]')[0].text_content().strip()
         releaseDate = parse(detailsPageElements.xpath('//aside[@class="scene-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
@@ -23,7 +23,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         searchResults = HTML.ElementFromString(data)
         for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]/@href')[0]
-            curID = String.Encode(sceneURL)
+            curID = PAutils.Encode(sceneURL)
             titleNoFormatting = searchResult.xpath('.//a[1]/@title')[0]
             subSite = searchResult.xpath('.//span[@class="label-text"]')[0].text_content().strip()
             releaseDate = parse(searchResult.xpath('.//time')[0].text_content().strip()).strftime('%Y-%m-%d')
@@ -42,7 +42,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
-    sceneURL = String.Decode(metadata_id[0])
+    sceneURL = PAutils.Decode(metadata_id[0])
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 
     # Summary
