@@ -878,6 +878,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### VRLatina | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
++ #### VRP Films | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
