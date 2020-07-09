@@ -74,15 +74,18 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Genres
     movieGenres.clearGenres()
     for genreLink in detailsPageElements['fantasies']:
-        movieGenres.addGenre(genreLink)
+        genreName = genreLink
+
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
-    for actorName in detailsPageElements['performers']:
+    for actorLink in detailsPageElements['performers']:
+        actorName = actorLink
         actorPhotoURL = ''
 
-        actorsPageURL = actorName.lower().replace(' ', '-').replace("'", '')
-        actorsPageElements = HTML.ElementFromURL('https://www.naughtyamerica.com/pornstar/' + actorsPageURL)
+        actorsPageURL = 'https://www.naughtyamerica.com/pornstar/' + actorName.lower().replace(' ', '-').replace("'", '')
+        actorsPageElements = HTML.ElementFromURL(actorsPageURL)
         img = actorsPageElements.xpath('//img[@class="performer-pic"]/@src')
         if img:
             actorPhotoURL = 'https:' + img[0]
