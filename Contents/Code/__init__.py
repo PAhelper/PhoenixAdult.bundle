@@ -29,7 +29,7 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
-        title = media.name.split("~")[0]
+        title = media.name
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
