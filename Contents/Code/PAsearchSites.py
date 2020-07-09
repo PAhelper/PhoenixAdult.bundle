@@ -107,8 +107,10 @@ import siteXVirtual
 import siteLustReality
 import siteSexLikeReal
 import siteXillimite
+import siteVRPFilms
+import siteVRLatina
 
-searchSites = [None] * 902
+searchSites = [None] * 904
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1000,7 +1002,7 @@ searchSites[887] = ("StayHomeMilf", "StayHomeMilf", "https://mylf.com", "https:/
 searchSites[888] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfightslesbianedition&q=")
 searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfights&q=")
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
-searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
+searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes/Videos/")
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
 searchSites[893] = ("Gender X", "Gender X", "https://www.genderx.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[894] = ("WhoreCraftVR", "WhoreCraftVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
@@ -1011,6 +1013,8 @@ searchSites[898] = ("Lust Reality", "Lust Reality", "https://www.lustreality.com
 searchSites[899] = ("Sex Like Real", "Sex Like Real", "https://www.sexlikereal.com", "https://www.sexlikereal.com/scenes/")
 searchSites[900] = ("Doe Girls", "Doe Girls", "https://doegirls.com/", "https://doegirls.com/search.en.html?q=")
 searchSites[901] = ("Xillimite", "Xillimite", "https://www.xillimite.com", "https://www.xillimite.com/en/search?type=4&keyword=")
+searchSites[902] = ("VRP Films", "VRP Films", "https://vrpfilms.com", "https://vrpfilms.com/vrp-movies?s=")
+searchSites[903] = ("VR Latina", "VR Latina", "https://vrlatina.com", "https://vrlatina.com/video/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
