@@ -24,7 +24,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//div[@class="single-part-details"]//h2')[0].text_content().strip()
             date = detailsPageElements.xpath('//div[@class="video-info-left-icon"]//span[3]/text()')[0].strip()
-            releaseDate = datetime.strptime(date, '%d%b,%Y')
+            releaseDate = datetime.strptime(date, '%d%b,%Y').strftime('%Y-%m-%d')
 
             if searchDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
