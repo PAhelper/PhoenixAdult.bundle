@@ -1144,6 +1144,18 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 901:
                 results = PAsearchSites.siteXillimite.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## VRP Films
+            ###############
+            elif searchSiteID == 902:
+                results = PAsearchSites.siteVRPFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
+            ###############
+            ## VR Latina
+            ###############
+            elif searchSiteID == 903:
+                results = PAsearchSites.siteVRLatina.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2278,6 +2290,22 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 901:
             metadata = PAsearchSites.siteXillimite.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VRPFilms                                              ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 902:
+            metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VRLatina                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 903:
+            metadata = PAsearchSites.siteVRLatina.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
