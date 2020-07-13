@@ -744,6 +744,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Wives in Pantyhose
 + #### Other Reality Kings Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Lil Humpers
++ #### RealJamVR | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### SexLikeReal | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SexyHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -877,6 +878,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### VRConk | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### VRLatina | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRP Films | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
