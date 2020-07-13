@@ -1,20 +1,27 @@
 [
 	{
-        "id": "excludegenre",
-        "label": "A semicolon delimited array of genres to exclude from metadata",
-        "type": "text",
-        "default": ""
+        "id": "proxy_enable",
+        "label": "Enable proxy",
+        "type": "bool",
+        "default": "false"
     },
 	{
-        "id": "excludeactor",
-        "label": "A semicolon delimited array of additional actors to exclude from metadata",
-        "type": "text",
-        "default": ""
+        "id": "proxy_type",
+        "label": "Proxy type",
+        "type": "enum",
+        "values": ["http", "https", "socks5"],
+        "default": "socks5"
     },
 	{
-        "id": "tagmapping",
-        "label": "A semicolon delimited array of tag maps",
+        "id": "proxy_ip",
+        "label": "Proxy ip",
         "type": "text",
-        "default": ""
+        "default": "127.0.0.1"
+    },
+	{
+        "id": "proxy_port",
+        "label": "Proxy port",
+        "type": "text",
+        "default": "9050"
     }
 ]

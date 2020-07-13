@@ -343,14 +343,14 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### JAV (via R18) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
 + #### JAY's POV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**
++ #### JulesJordan Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**
   - GirlGirl
   - JulesJordan
   - ManuelFerrara
   - SpermSwallowers
   - TheAssFactory
 + #### Kelly Madison | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### Kink.com network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Kink Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 30MinutesofTorment
   - BoundGangBangs
   - BoundGods
@@ -529,7 +529,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Wife
   - Wives on Vacation
 + #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
-+ #### Nubiles-porn.com Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### Nubiles Porn Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
   - Daddy's Lil Angel
@@ -878,6 +878,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### VRLatina | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### VRP Films | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
