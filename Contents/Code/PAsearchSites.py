@@ -110,8 +110,6 @@ import siteXillimite
 import siteVRPFilms
 import siteVRLatina
 import siteVRConk
-import siteVRPFilms
-import siteRealJamVR
 
 searchSites = [None] * 906
 

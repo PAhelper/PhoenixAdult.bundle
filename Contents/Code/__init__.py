@@ -1166,7 +1166,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## RealJamVR
             ###############
             elif searchSiteID == 905:
-                results = PAsearchSites.siteRealJamVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2333,7 +2333,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         elif siteID == 905:
-            metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)        
+            metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
