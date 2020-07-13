@@ -4,6 +4,7 @@ import googlesearch
 import fake_useragent
 import base58
 import cloudscraper
+import requests
 
 
 def getUserAgent():
@@ -13,14 +14,15 @@ def getUserAgent():
 
 
 def bypassCloudflare(url, **kwargs):
-    headers = kwargs['headers'] if 'headers' in kwargs else {}
+    headers = kwargs.pop('headers', {})
+    proxies = kwargs.pop('proxies', {})
     scraper = cloudscraper.CloudScraper()
 
     for head in ['Authorization', 'Cookie']:
         if head in headers:
             scraper.headers[head] = headers[head]
 
-    data = scraper.get(url).text
+    data = scraper.get(url, proxies=proxies).text
     if data:
        return data
 
@@ -29,9 +31,16 @@ def bypassCloudflare(url, **kwargs):
 
 
 def HTTPRequest(url, **kwargs):
-    headers = kwargs['headers'] if 'headers' in kwargs else {}
-    cookies = kwargs['cookies'] if 'cookies' in kwargs else {}
-    data = None
+    headers = kwargs.pop('headers', {})
+    cookies = kwargs.pop('cookies', {})
+    proxies = {}
+
+    if Prefs['proxy_enable']:
+        proxy = '%s://%s:%s' % (Prefs['proxy_type'], Prefs['proxy_ip'], Prefs['proxy_port'])
+        proxies = {
+            'http': proxy,
+            'https': proxy,
+        }
 
     if 'User-Agent' not in headers:
         headers['User-Agent'] = getUserAgent()
@@ -39,14 +48,13 @@ def HTTPRequest(url, **kwargs):
         cookie = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
         headers['Cookie'] = cookie
 
-    try:
-        Log('Requesting "%s"' % url)
-        req = urllib.Request(url, headers=headers)
-        data = urllib.urlopen(req).read()
-    except Exception as e:
-        Log('%s: trying to bypass' % e)
-        data = bypassCloudflare(url, headers=headers)
-        pass
+    Log('Requesting "%s"' % url)
+    req = requests.get(url, proxies=proxies, headers=headers)
+    if 200 <= req.status_code <= 299:
+        data = req.text
+    else:
+        Log('%d: trying to bypass' % req.status_code)
+        data = bypassCloudflare(url, proxies=proxies, headers=headers)
 
     return data
 
