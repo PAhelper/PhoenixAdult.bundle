@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
-    
+
     return results
 
 
@@ -94,17 +94,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            #Download image file for analysis
+            # Download image file for analysis
             try:
                 img_file = urllib.urlopen(posterUrl)
                 im = StringIO(img_file.read())
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
-                if(width > 1):
+                # Add the image proxy items to the collection
+                if width > 1:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if(width > 100 and idx > 1):
+                if width > 100 and idx > 1:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
             except:
