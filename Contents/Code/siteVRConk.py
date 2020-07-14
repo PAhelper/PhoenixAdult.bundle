@@ -5,7 +5,7 @@ import PAutils
 
 
 def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-').lower() + '/'
+    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]
     googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
@@ -22,11 +22,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
 
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
-            titleNoFormatting = detailsPageElements.xpath('//div[@class="single-part-details"]//h2')[0].text_content().strip()
-            date = detailsPageElements.xpath('//div[@class="video-info-left-icon"]//span[3]/text()')[0].strip()
-            releaseDate = datetime.strptime(date, '%d%b,%Y').strftime('%Y-%m-%d')
+            titleNoFormatting = detailsPageElements.xpath('//div[contains(@class, "video-details")]//h1[1]')[0].text_content().strip()
+            releaseDate = None
+            date = detailsPageElements.xpath('//div[@class="stats-container"]//li[3]//span[2]')[0].text_content().strip()
+            releaseDate = parse(date).strftime('%Y-%m-%d')
 
-            if searchDate:
+            if searchDate and releaseDate:
                 score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -44,51 +45,50 @@ def update(metadata,siteID,movieGenres,movieActors):
     detailsPageElements = HTML.ElementFromURL(sceneURL)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="single-part-details"]//h2')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//div[contains(@class, "video-details")]//h1[1]')[0].text_content().strip()
 
-    # Summary
-    metadata.summary = detailsPageElements.xpath('//div[(contains(@class, "video-bottom-txt"))]')[0].text_content().strip()
-
-    # Studio/Tagline/Collection
+    #Tagline and Collection(s)
     metadata.collections.clear()
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = metadata.studio
     metadata.collections.add(metadata.studio)
 
-    # Genres
-    movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//div[(contains(@class, "video-tag-section"))]/a'):
-        genreName = genreLink.text_content().strip()
-
-        movieGenres.addGenre(genreName)
-
-    # Actors
-    movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//div[(contains(@class, "video-info-left pull-left"))]/h3/span/a'):
-        actorName = actorLink.text_content().strip()
-        actorPageURL = actorLink.get('href')
-
-        actorPage = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPage.xpath('//div[(contains(@class, "single-porn-pic"))]/img/@src')[0]
-
-        movieActors.addActor(actorName, actorPhotoURL)
-	
+    # Summary
+    summary = detailsPageElements.xpath('(.//*[@class="d-container"])[4]')[0].text_content().strip()
+    metadata.summary = ' '.join(summary.splitlines())
+    
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="video-info-left-icon"]//span[3]/text()')[0].strip()
-    date_object = datetime.strptime(date, '%d%b,%Y')
+    date = detailsPageElements.xpath('//div[@class="stats-container"]//li[3]//span[2]')[0].text_content().strip()
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
-    # Posters/Background
+    # Actors
+    movieActors.clearActors()
+    for actorLink in  detailsPageElements.xpath('.//*[@class="models-list"]//img'):
+        actorName = actorLink.get('alt')
+        actorPhotoURL = actorLink.get('src')
+
+        movieActors.addActor(actorName, actorPhotoURL)
+
+    # Genres
+    movieGenres.clearGenres()
+    for genre in detailsPageElements.xpath('//a[@class="link12"]'):
+        genreName = genre.text_content().strip()
+
+        movieGenres.addGenre(genreName)
+
+    # Posters
     art = []
     xpaths = [
-        '//div[(contains(@class, "sub-video"))]/a/@href'
+        '//a[contains(@title, "Image")]/@href'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             poster = poster.split('?')[0]
 
             art.append(poster)
+    art.insert(0, detailsPageElements.xpath('//div[contains(@class, "splash-screen")]/@style')[0].split('url(')[1].split(')')[0])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

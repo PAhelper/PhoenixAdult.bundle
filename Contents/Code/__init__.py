@@ -1156,6 +1156,18 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 903:
                 results = PAsearchSites.siteVRLatina.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
+            ###############
+            ## VRConk
+            ###############
+            elif searchSiteID == 904:
+                results = PAsearchSites.siteVRConk.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate) 
+
+            ###############
+            ## RealJamVR
+            ###############
+            elif searchSiteID == 905:
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -2293,7 +2305,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  VRPFilms                                              ##
+        ##  VRPFilms                                                ##
         ##                                                          ##
         ##############################################################
         elif siteID == 902:
@@ -2301,11 +2313,27 @@ class PhoenixAdultAgent(Agent.Movies):
 
         ##############################################################
         ##                                                          ##
-        ##  VRLatina                                               ##
+        ##  VRLatina                                                ##
         ##                                                          ##
         ##############################################################
         elif siteID == 903:
             metadata = PAsearchSites.siteVRLatina.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  VRConk                                                  ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 904:
+            metadata = PAsearchSites.siteVRConk.update(metadata, siteID, movieGenres, movieActors)
+
+        ##############################################################
+        ##                                                          ##
+        ##  RealJamVR                                               ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 905:
+            metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add
