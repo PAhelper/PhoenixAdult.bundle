@@ -14,7 +14,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         detailsPageElements = HTML.ElementFromURL(PAsearchSites.getSearchBaseURL(siteNum) + url, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
 
         titleNoFormatting = detailsPageElements.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()[:-1]
-        releaseDate = parse(detailsPageElements.xpath('//div[@class="columns"]/div[@class="column"]/p')[0].text_content().strip()[6:]).strftime('%Y-%m-%d')
+        releaseDate = parse(detailsPageElements.xpath('//span[@class="shoot-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         curID = url.replace('/','_').replace('?','!')
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (shootID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=100, lang=lang))
