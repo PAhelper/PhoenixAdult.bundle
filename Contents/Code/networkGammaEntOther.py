@@ -85,11 +85,25 @@ def update(metadata,siteID,movieGenres,movieActors):
     data = getAlgolia(url, 'all_' + sceneType, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
     detailsPageElements = data['results'][0]['hits'][0]
 
+    data = getAlgolia(url, 'all_' + sceneType, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
+    data = sorted(data['results'][0]['hits'], key=lambda i: i['clip_id'])
+    scenesPagesElements = list(enumerate(data, 1))
+
     # Studio
     metadata.studio = detailsPageElements['network_name']
 
     # Title
-    metadata.title = detailsPageElements['title']
+    title = None
+    Log('scenesPagesElements: %s' % len(scenesPagesElements))
+    if sceneType == 'scenes' and len(scenesPagesElements) > 1:
+        for idx, scene in scenesPagesElements:
+            if scene['clip_id'] == sceneID:
+                title = '%s, Scene %d' % (detailsPageElements['title'], idx)
+                break
+    if not title:
+        title = detailsPageElements['title']
+
+    metadata.title = title
 
     # Summary
     metadata.summary = detailsPageElements['description'].replace('</br>', '\n')
@@ -104,7 +118,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     for collectionName in ['studio_name', 'serie_name']:
         if collectionName in detailsPageElements:
             metadata.collections.add(detailsPageElements[collectionName])
-    if ':' in detailsPageElements['title'] or '#' in detailsPageElements['title']:
+    if (':' in detailsPageElements['title'] or '#' in detailsPageElements['title']) and len(scenesPagesElements) > 1:
         if 'movie_title' in detailsPageElements:
             metadata.collections.add(detailsPageElements['movie_title'])
 
@@ -114,6 +128,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         genreName = genreLink['name']
         if genreName:
             movieGenres.addGenre(genreName)
+
+    if sceneType == 'movies':
+        for idx, scene in scenesPagesElements:
+            for genreLink in scene['categories']:
+                genreName = genreLink['name']
+                if genreName:
+                    movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
@@ -140,6 +161,11 @@ def update(metadata,siteID,movieGenres,movieActors):
         keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
         max_quality = sorted(keys)[-1]
         art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
+    else:
+        for idx, scene in scenesPagesElements:
+            keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
+            max_quality = sorted(keys)[-1]
+            art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
