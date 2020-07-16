@@ -1,11 +1,12 @@
 import PAsearchSites
 import PAgenres
 import PAactors
+import PAutils
 
 
 def getAPIKey(url):
     req = urllib.Request(url)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+    req.add_header('User-Agent', PAutils.getUserAgent())
     data = urllib.urlopen(req).read()
     match = re.search(r'\"apiKey\":\"(.*?)\"', data)
     if match:
@@ -18,7 +19,7 @@ def getAlgolia(url, indexName, params, referer):
     req = urllib.Request(url)
     req.add_header('Content-Type', 'application/json')
     req.add_header('Referer', referer)
-    req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36')
+    req.add_header('User-Agent', PAutils.getUserAgent())
     data = urllib.urlopen(req, params).read()
 
     return json.loads(data)

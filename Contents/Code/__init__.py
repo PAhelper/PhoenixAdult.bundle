@@ -200,7 +200,7 @@ class PhoenixAdultAgent(Agent.Movies):
             ## Girlfriends Films
             ###############
             elif searchSiteID == 380:
-                results = PAsearchSites.siteGirlfriendsFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
             ###############
             ## Burning Angel
@@ -2101,7 +2101,7 @@ class PhoenixAdultAgent(Agent.Movies):
         ##                                                          ##
         ##############################################################
         elif siteID == 380:
-            metadata = PAsearchSites.siteGirlfriendsFilms.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ##                                                          ##

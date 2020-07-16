@@ -86,7 +86,6 @@ import networkR18
 import networkBang
 import siteVivid
 import siteJaysPOV
-import siteGirlfriendsFilms
 import siteBAMVisions
 import sitePJGirls
 import siteSinsLife
@@ -492,7 +491,7 @@ searchSites[376] = ("Web Young", "Web Young", "http://www.girlsway.com", "https:
 searchSites[377] = ("Girls Try Anal", "Girls Try Anal", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[378] = ("Sextape Lesbians", "Sextape Lesbians", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[379] = ("Girlsway Originals", "Girlsway Originals", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
-searchSites[380] = ("Girlfriends Films", "Girlfriends Films", "http://www.girlfriendsfilms.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/query")
+searchSites[380] = ("Girlfriends Films", "Girlfriends Films", "http://www.girlfriendsfilms.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[381] = ("Burning Angel", "Burning Angel", "http://www.burningangel.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[382] = ("Pretty Dirty", "Pretty Dirty", "http://www.prettydirty.com", "http://www.prettydirty.com/en/search/")
 searchSites[383] = ("Devils Film", "Devil's Film", "http://www.devilsfilm.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
