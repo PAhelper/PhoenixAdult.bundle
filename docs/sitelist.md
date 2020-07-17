@@ -262,6 +262,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Elegant Angel | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Only DVDs supported**
 + #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Erito | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Evolved Fights Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Evolved Fights Mixed Edition
+  - Evolved Fights Lesbian Edition
 + #### FakeHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Fake Agent
   - Fake Agent UK
