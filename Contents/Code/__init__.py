@@ -29,7 +29,7 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
-        title = media.name
+        title = media.name.split("~")[0]
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
@@ -1167,6 +1167,12 @@ class PhoenixAdultAgent(Agent.Movies):
             ###############
             elif searchSiteID == 905:
                 results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+				
+            ###############
+            ## Evolved Fights Network
+            ###############
+            elif searchSiteID == 906 or searchSiteID == 907:
+                results = PAsearchSites.networkEvolvedFights.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -2334,6 +2340,14 @@ class PhoenixAdultAgent(Agent.Movies):
         ##############################################################
         elif siteID == 905:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
+		
+        ##############################################################
+        ##                                                          ##
+        ##  Evolved Fights Network		                                            ##
+        ##                                                          ##
+        ##############################################################
+        elif siteID == 906 or siteID == 907:
+            metadata = PAsearchSites.networkEvolvedFights.update(metadata, siteID, movieGenres, movieActors)
 
         ##############################################################
         ## Cleanup Genres and Add

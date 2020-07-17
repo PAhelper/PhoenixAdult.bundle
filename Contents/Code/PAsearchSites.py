@@ -110,8 +110,9 @@ import siteXillimite
 import siteVRPFilms
 import siteVRLatina
 import siteVRConk
+import networkEvolvedFights
 
-searchSites = [None] * 906
+searchSites = [None] * 908
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1018,6 +1019,8 @@ searchSites[902] = ("VRP Films", "VRP Films", "https://vrpfilms.com", "https://v
 searchSites[903] = ("VR Latina", "VR Latina", "https://vrlatina.com", "https://vrlatina.com/video/")
 searchSites[904] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
 searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
+searchSites[906] = ("EF", "EF", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
+searchSites[907] = ("EFLE", "EFLE", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
