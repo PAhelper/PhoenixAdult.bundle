@@ -94,7 +94,6 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Title
     title = None
-    Log('scenesPagesElements: %s' % len(scenesPagesElements))
     if sceneType == 'scenes' and len(scenesPagesElements) > 1:
         for idx, scene in scenesPagesElements:
             if scene['clip_id'] == sceneID:
