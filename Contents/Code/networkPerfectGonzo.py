@@ -62,29 +62,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    subSite = detailsPageElements.xpath('.//img[@class="domain-label"]/@src')[0]
-    if 'allinternal' in subSite:
-        tagline = 'All Internal'
-    elif 'asstraffic' in subSite:
-        tagline = 'Ass Traffic'
-    elif 'givemepink' in subSite:
-        tagline = 'Give Me Pink'
-    elif 'primecups' in subSite:
-        tagline = 'Prime Cups'
-    elif 'fistflush' in subSite:
-        tagline = 'Fist Flush'
-    elif 'cumforcover' in subSite:
-        tagline = 'Cum For Cover'
-    elif 'tamedteens' in subSite:
-        tagline = 'Tamed Teens'
-    elif 'spermswap' in subSite:
-        tagline = 'Sperm Swap'
-    elif 'milfthing' in subSite:
-        tagline = 'Milf Thing'
-    elif 'interview' in subSite:
-        tagline = 'Perfect Gonzo Interview'
-    else:
-        tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
