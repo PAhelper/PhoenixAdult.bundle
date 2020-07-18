@@ -4,7 +4,7 @@ import PAactors
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-').lower() + '.html'
 
     searchResults = [directURL]
@@ -14,15 +14,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
-        detailsPageElements = None
-        try:
-            detailsPageElements = HTML.ElementFromURL(sceneURL)
-        except:
-            pass
+        req = PAutils.HTTPRequest(sceneURL)
+        detailsPageElements = HTML.ElementFromString(req.text)
 
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
-            Log("curID: " +curID)
             titleNoFormatting = detailsPageElements.xpath('//title')[0].text_content().strip()
             date = detailsPageElements.xpath('//span[(contains(@class, "update_date"))]')[0].text_content().strip()
             releaseDate = datetime.strptime(date, '%m/%d/%Y').strftime('%Y-%m-%d')
@@ -37,12 +33,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    detailsPageElements = HTML.ElementFromURL(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//title')[0].text_content().strip()
@@ -50,9 +45,11 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//span[(contains(@class, "latest_update_description"))]')[0].text_content().strip()
 
+    # Studio
+    metadata.studio = 'Evolved Fights Network'
+
     # Studio/Tagline/Collection
     metadata.collections.clear()
-    metadata.studio = "Evolved Fights Network"
     metadata.tagline = metadata.studio
     metadata.collections.add(metadata.studio)
 
@@ -69,11 +66,12 @@ def update(metadata,siteID,movieGenres,movieActors):
         actorName = actorLink.text_content().strip()
         actorPageURL = actorLink.get('href')
 
-        actorPage = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPage.xpath('//img[(contains(@class, "model_bio_thumb stdimage thumbs target"))]/@src0_3x')[0]
-        actorPhotoURLFixed = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
-        movieActors.addActor(actorName, actorPhotoURLFixed)
-	
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPage = HTML.ElementFromString(req.text)
+        actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//img[(contains(@class, "model_bio_thumb stdimage thumbs target"))]/@src0_3x')[0]
+
+        movieActors.addActor(actorName, actorPhotoURL)
+
     # Release Date
     date = detailsPageElements.xpath('//span[@class="update_date"]')[0].text_content().strip()
     date_object = datetime.strptime(date, '%m/%d/%Y')
@@ -83,25 +81,27 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Posters/Background
     art = []
     poster = PAsearchSites.getSearchBaseURL(siteID) + '/' + detailsPageElements.xpath('//span[(contains(@class, "model_update_thumb"))]/img/@src0_4x')[0]
-    poster2 = poster.replace('0-4x','1-4x')
     art.append(poster)
+
+    poster2 = poster.replace('0-4x', '1-4x')
     art.append(poster2)
+
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if width > 100 and idx > 5:
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100 and idx > 1:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
