@@ -8,7 +8,7 @@ import siteGloryHoleSecrets
 import siteNewSensations
 import siteSpizoo
 import sitePrivate
-import networkFPN
+import networkFullPornNetwork
 import networkSteppedUp
 import networkGammaEnt
 import networkDogfart
@@ -19,7 +19,6 @@ import networkPornFidelity
 import networkBadoinkVR
 import siteVRBangers
 import networkHighTechVR
-import siteWankzVR
 import siteMilfVR
 import siteJoymii
 import networkPornPros
@@ -36,7 +35,7 @@ import siteFinishesTheJob
 import networkWankz
 import siteTonightsGirlfriend
 import siteKarups
-import networkTMW
+import networkTeenMegaWorld
 import siteScrewbox
 import siteDorcelClub
 import siteMissaX
@@ -193,7 +192,7 @@ searchSites[78] = ("Teens Like It Black", "Teens Like It Black", "http://www.bra
 searchSites[79] = ("Racks and Blacks", "Racks and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
 searchSites[80] = ("Butts and Blacks", "Butts and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
 
-searchSites[82] = ("X Art", "X-Art", "http://www.x-art.com", "http://www.x-art.com/search/")
+searchSites[82] = ("X Art", "X-Art", "https://www.x-art.com", "https://www.x-art.com/search/")
 searchSites[83] = ("Bang Bros", "Bang Bros", "https://bangbros.com", "https://bangbros.com/search/")
 searchSites[84] = ("Ass Parade", "Ass Parade", "https://bangbros.com", "https://bangbros.com/search/")
 searchSites[85] = ("AvaSpice", "AvaSpice", "https://bangbros.com", "https://bangbros.com/search/")
@@ -1018,12 +1017,19 @@ searchSites[903] = ("VR Latina", "VR Latina", "https://vrlatina.com", "https://v
 searchSites[904] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
 searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
 
+
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
+
+
 def getSearchSearchURL(siteID):
     return searchSites[siteID][3]
+
+
 def getSearchFilter(siteID):
     return searchSites[siteID][0]
+
+
 def getSearchSiteName(siteID):
     return searchSites[siteID][1]
 
@@ -1310,14 +1316,10 @@ def getSearchSettings(mediaTitle):
 
     # Search Site ID
     searchSiteID = None
-    # Date/Actor or Title
-    searchType = None
     # What to search for
     searchTitle = None
-    # Date search
+    # Release Date search
     searchDate = None
-    # Actors search
-    searchActors = None
 
     # Remove Site from Title
     searchSiteID = getSearchSiteIDByFilter(mediaTitle)
@@ -1353,7 +1355,7 @@ def getSearchSettings(mediaTitle):
                 title = title.replace(' ', '', 1)
                 if title.lower().startswith(site):
                     matched = True
-                    break;
+                    break
 
             if matched:
                 searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE)

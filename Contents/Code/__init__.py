@@ -1,13 +1,12 @@
 import re
 import random
+import requests
 import urllib
-import urllib2 as urllib
 import urlparse
 import json
 from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
-from SSLEXTRA import sslOptions
 from dateutil.parser import parse
 import PAactors
 import PAgenres
@@ -64,1109 +63,743 @@ class PhoenixAdultAgent(Agent.Movies):
         if searchSiteID is not None:
             siteNum = searchSiteID
 
-            ###############
-            ## Blacked Raw
-            ###############
+            # Blacked Raw
             if searchSiteID == 0:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blacked
-            ###############
+            # Blacked
             elif searchSiteID == 1:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Brazzers
-            ###############
+            # Brazzers
             elif searchSiteID == 2 or (54 <= searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
-                results = PAsearchSites.siteBrazzers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteBrazzers.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Naughty America
-            ###############
+            # Naughty America
             elif (5 <= searchSiteID <= 51) or searchSiteID == 341 or (393 <= searchSiteID <= 396) or (467 <= searchSiteID <= 468) or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
-                results = PAsearchSites.siteNaughtyAmerica.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteNaughtyAmerica.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Vixen
-            ###############
+            # Vixen
             elif searchSiteID == 52:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## GirlsWay
-            ###############
+            # GirlsWay
             elif searchSiteID == 53 or (375 <= searchSiteID <= 379) or (795 <= searchSiteID <= 797):
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## 21Naturals
-            ###############
+            # 21Naturals
             elif searchSiteID == 183 or (373 <= searchSiteID <= 374):
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Evil Angel
-            ###############
+            # Evil Angel
             elif searchSiteID == 277:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XEmpire/Hardx
-            ###############
+            # XEmpire / Hardx
             elif searchSiteID == 278:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XEmpire/Eroticax
-            ###############
+            # XEmpire / Eroticax
             elif searchSiteID == 285:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XEmpire/Darkx
-            ###############
+            # XEmpire / Darkx
             elif searchSiteID == 286:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XEmpire/Lesbianx
-            ###############
+            # XEmpire / Lesbianx
             elif searchSiteID == 287:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Pure Taboo
-            ###############
+            # Pure Taboo
             elif searchSiteID == 281:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/Throated
-            ###############
+            # Blowpass / Throated
+
             elif searchSiteID == 329:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/Mommy Blows Best
-            ###############
+            # Blowpass / Mommy Blows Best
             elif searchSiteID == 351:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/Only Teen Blowjobs
-            ###############
+            # Blowpass / Only Teen Blowjobs
             elif searchSiteID == 352:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/1000 Facials
-            ###############
+            # Blowpass / 1000 Facials
+
             elif searchSiteID == 353:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/Immoral Live
-            ###############
+            # Blowpass / Immoral Live
             elif searchSiteID == 354:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Blowpass/My XXX Pass
-            ###############
+            # Blowpass / My XXX Pass
             elif searchSiteID == 861:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Mile High Media
-            ###############
+            # Mile High Media
             elif (361 <= searchSiteID <= 364) or searchSiteID == 852:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Fantasy Massage
-            ###############
+            # Fantasy Massage
             elif searchSiteID == 330 or (355 <= searchSiteID <= 360) or searchSiteID == 750:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## 21Sextury
-            ###############
+            # 21Sextury
             elif (365 <= searchSiteID <= 372) or searchSiteID == 466 or searchSiteID == 692:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Girlfriends Films
-            ###############
+            # Girlfriends Films
             elif searchSiteID == 380:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Burning Angel
-            ###############
+            # Burning Angel
             elif searchSiteID == 381:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Pretty Dirty
-            ###############
+            # Pretty Dirty
             elif searchSiteID == 382:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Devil's Film
-            ###############
+            # Devil's Film
             elif searchSiteID == 383:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Peter North
-            ###############
+            # Peter North
             elif searchSiteID == 384:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Rocco Siffredi
-            ###############
+            # Rocco Siffredi
             elif searchSiteID == 385:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Tera Patrick
-            ###############
+            # Tera Patrick
             elif searchSiteID == 386:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Sunny Leone
-            ###############
+            # Sunny Leone
             elif searchSiteID == 387:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Lane Sisters
-            ###############
+            # Lane Sisters
             elif searchSiteID == 388:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Dylan Ryder
-            ###############
+            # Dylan Ryder
             elif searchSiteID == 389:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Abbey Brooks
-            ###############
+            # Abbey Brooks
             elif searchSiteID == 390:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Devon Lee
-            ###############
+            # Devon Lee
             elif searchSiteID == 391:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Hanna Hilton
-            ###############
+            # Hanna Hilton
             elif searchSiteID == 392:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## 21Sextreme
-            ###############
+            # 21Sextreme
             elif (460 <= searchSiteID <= 465):
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## X-Art
-            ###############
+            # X-Art
             elif searchSiteID == 82:
-                results = PAsearchSites.siteXart.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteXart.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Bang Bros
-            ###############
+            # Bang Bros
             elif (83 <= searchSiteID <= 135):
-                results = PAsearchSites.siteBangBros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteBangBros.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Tushy
-            ###############
+            # Tushy
             elif searchSiteID == 136:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Reality Kings
-            ###############
+            # Reality Kings
             elif (137 <= searchSiteID <= 182) or (822 <= searchSiteID <= 828):
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## PornFidelity
-            ###############
+            # PornFidelity
             elif searchSiteID == 184:
-                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TeenFidelity
-            ###############
+            # TeenFidelity
             elif searchSiteID == 185:
-                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Kelly Madison
-            ###############
+            # Kelly Madison
             elif searchSiteID == 186:
-                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TeamSkeet
-            ###############
+            # TeamSkeet
             elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
-                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Porndoe Premium
-            ###############
+            # Porndoe Premium
             elif (216 <= searchSiteID <= 259):
-                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Legal Porno
-            ###############
+            # Legal Porno
             elif searchSiteID == 260:
-                results = PAsearchSites.siteLegalPorno.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLegalPorno.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Mofos
-            ###############
+            # Mofos
             elif (261 <= searchSiteID <= 270) or searchSiteID == 583 or (738 <= searchSiteID <= 740):
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Babes
-            ###############
+            # Babes
             elif (271 <= searchSiteID <= 276):
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## GloryHoleSecrets
-            ###############
+            # GloryHoleSecrets
             elif searchSiteID == 279:
-                results = PAsearchSites.siteGloryHoleSecrets.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteGloryHoleSecrets.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## NewSensations
-            ###############
+            # NewSensations
             elif searchSiteID == 280:
-                results = PAsearchSites.siteNewSensations.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteNewSensations.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Swallowed
-            ###############
+            # Swallowed
             elif searchSiteID == 282:
-                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TrueAnal
-            ###############
+            # TrueAnal
             elif searchSiteID == 283:
-                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Nympho
-            ###############
+            # Nympho
             elif searchSiteID == 284:
-                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Twistys
-            ###############
+            # Twistys
             elif (288 <= searchSiteID <= 291) or searchSiteID == 768:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Spizoo
-            ###############
+            # Spizoo
             elif searchSiteID == 293 or (571 <= searchSiteID <= 577):
-                results = PAsearchSites.siteSpizoo.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteSpizoo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Private
-            ###############
+            # Private
             elif (294 <= searchSiteID <= 305):
-                results = PAsearchSites.sitePrivate.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.sitePrivate.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## PornPros Network
-            ###############
+            # PornPros Network
             elif (306 <= searchSiteID <= 327) or (479 <= searchSiteID <= 489) or searchSiteID == 624 or searchSiteID == 769 or searchSiteID == 844 or searchSiteID == 890:
-                results = PAsearchSites.networkPornPros.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPornPros.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## DigitalPlayground
-            ###############
+            # DigitalPlayground
             elif searchSiteID == 328:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## SexyHub
-            ###############
+            # SexyHub
             elif (333 <= searchSiteID <= 339) or (406 <= searchSiteID <= 407):
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## FullPornNetwork
-            ###############
+            # FullPornNetwork
             elif (343 <= searchSiteID <= 350):
-                results = PAsearchSites.networkFPN.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkFullPornNetwork.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## DogfartNetwork
-            ###############
+            # DogfartNetwork
             elif (408 <= searchSiteID <= 431):
-                results = PAsearchSites.networkDogfart.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkDogfart.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## FakeHub
-            ###############
+            # FakeHub
             elif searchSiteID == 340 or (397 <= searchSiteID <= 407):
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## JulesJordan
-            ###############
+            # JulesJordan
             elif searchSiteID == 432:
-                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Manuel Ferrara
-            ###############
+            # Manuel Ferrara
             elif searchSiteID == 522:
-                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## The Ass Factory
-            ###############
+            # The Ass Factory
             elif searchSiteID == 523:
-                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Sperm Swallowers
-            ###############
+            # Sperm Swallowers
             elif searchSiteID == 524:
-                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## GirlGirl
-            ###############
+            # GirlGirl
             elif searchSiteID == 782:
-                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## DDF Network
-            ###############
+            # DDF Network
             elif (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 447):
-                results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## PerfectGonzo
-            ###############
+            # PerfectGonzo
             elif (448 <= searchSiteID <= 459):
-                results = PAsearchSites.networkPerfectGonzo.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPerfectGonzo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## BadoinkVR Network
-            ###############
+            # BadoinkVR Network
             elif (469 <= searchSiteID <= 473):
-                results = PAsearchSites.networkBadoinkVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkBadoinkVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VRBangers
-            ###############
+            # VRBangers
             elif searchSiteID == 474:
-                results = PAsearchSites.siteVRBangers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVRBangers.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## SexBabesVR
-            ###############
+            # SexBabesVR
             elif searchSiteID == 475:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## SinsVR
-            ###############
+            # SinsVR
             elif searchSiteID == 569:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## StasyQ VR
-            ###############
+            # StasyQ VR
             elif searchSiteID == 570:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## WankzVR
-            ###############
+            # WankzVR
             elif searchSiteID == 476:
-                results = PAsearchSites.siteWankzVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMilfVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## MilfVR
-            ###############
+            # MilfVR
             elif searchSiteID == 477:
-                results = PAsearchSites.siteMilfVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMilfVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Joymii
-            ###############
+            # Joymii
             elif searchSiteID == 478:
-                results = PAsearchSites.siteJoymii.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJoymii.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Kink
-            ###############
+            # Kink
             elif (490 <= searchSiteID <= 521) or searchSiteID == 687 or (735 <= searchSiteID <= 736) or (873 <= searchSiteID <= 874) or (888 <= searchSiteID <= 889):
-                results = PAsearchSites.networkKink.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkKink.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Nubiles
-            ###############
+            # Nubiles
             elif (525 <= searchSiteID <= 545) or (755 <= searchSiteID <= 756) or searchSiteID == 766:
-                results = PAsearchSites.networkNubiles.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkNubiles.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## BellaPass
-            ###############
+            # BellaPass
             elif (548 <= searchSiteID <= 563):
-                results = PAsearchSites.networkBellaPass.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkBellaPass.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## AllureMedia
-            ###############
+            # AllureMedia
             elif (564 <= searchSiteID <= 565):
-                results = PAsearchSites.siteAllureMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteAllureMedia.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Manyvids
-            ###############
+            # Manyvids
             elif searchSiteID == 568:
-                results = PAsearchSites.siteManyvids.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteManyvids.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VirtualTaboo
-            ###############
+            # VirtualTaboo
             elif searchSiteID == 292:
-                results = PAsearchSites.siteVirtualTaboo.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVirtualTaboo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VirtualRealPorn
-            ###############
+            # VirtualRealPorn
             elif searchSiteID == 342:
-                results = PAsearchSites.siteVirtualReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVirtualReal.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## CzechVR Network
-            ###############
+            # CzechVR Network
             elif (578 <= searchSiteID <= 580):
-                results = PAsearchSites.networkCzechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkCzechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## FinishesTheJob
-            ###############
+            # FinishesTheJob
             elif (584 <= searchSiteID <= 586):
-                results = PAsearchSites.siteFinishesTheJob.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteFinishesTheJob.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Wankz Network
-            ###############
+            # Wankz Network
             elif (587 <= searchSiteID <= 619):
-                results = PAsearchSites.networkWankz.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkWankz.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## MetArt Network
-            ###############
+            # MetArt Network
             elif (621 <= searchSiteID <= 623) or (753 <= searchSiteID <= 754) or (816 <= searchSiteID <= 821):
-                results = PAsearchSites.networkMetArt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkMetArt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Tonights Girlfriend
-            ###############
+            # Tonights Girlfriend
             elif searchSiteID == 627:
-                results = PAsearchSites.siteTonightsGirlfriend.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteTonightsGirlfriend.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Karups
-            ###############
+            # Karups
             elif (628 <= searchSiteID <= 630):
-                results = PAsearchSites.siteKarups.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteKarups.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TeenMegaWorld
-            ###############
+            # TeenMegaWorld
             elif (631 <= searchSiteID <= 666):
-                results = PAsearchSites.networkTMW.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkTeenMegaWorld.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Screwbox
-            ###############
+            # Screwbox
             elif searchSiteID == 668:
-                results = PAsearchSites.siteScrewbox.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteScrewbox.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## DorcelClub
-            ###############
+            # DorcelClub
             elif searchSiteID == 669:
-                results = PAsearchSites.siteDorcelClub.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteDorcelClub.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Tushy
-            ###############
+            # Tushy
             elif searchSiteID == 670:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Deeper
-            ###############
+            # Deeper
             elif searchSiteID == 671:
-                results = PAsearchSites.networkStrike3.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkStrike3.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## MissaX / AllHerLuv
-            ###############
+            # MissaX / AllHerLuv
             elif searchSiteID == 672 or searchSiteID == 673:
-                results = PAsearchSites.siteMissaX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMissaX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Mylf
-            ###############
+            # Mylf
             elif (674 <= searchSiteID <= 683) or searchSiteID == 757 or searchSiteID == 842 or (searchSiteID >= 853 and searchSiteID <= 858) or (881 <= searchSiteID <= 887):
-                results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMylf.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Manually Add Actors
-            ###############
+            # Manually Add Actors
             elif searchSiteID == 684:
-                results = PAsearchSites.addActors.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.addActors.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## First Anal Quest
-            ###############
+            # First Anal Quest
             elif searchSiteID == 685:
-                results = PAsearchSites.siteFirstAnalQuest.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteFirstAnalQuest.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Hegre
-            ###############
+            # Hegre
             elif searchSiteID == 688:
-                results = PAsearchSites.siteHegre.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteHegre.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Femdom Empire
-            ###############
+            # Femdom Empire
             elif searchSiteID == 689 or searchSiteID == 694:
-                results = PAsearchSites.networkFemdomEmpire.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkFemdomEmpire.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Dorcel Vision
-            ###############
+            # Dorcel Vision
             elif searchSiteID == 693:
-                results = PAsearchSites.siteDorcelVision.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteDorcelVision.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XConfessions
-            ###############
+            # XConfessions
             elif searchSiteID == 695:
-                results = PAsearchSites.siteXConfessions.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteXConfessions.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## CzechAV
-            ###############
+            # CzechAV
             elif (696 <= searchSiteID <= 728):
-                results = PAsearchSites.networkCzechAV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkCzechAV.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ArchAngel
-            ###############
+            # ArchAngel
             elif searchSiteID == 729:
-                results = PAsearchSites.siteArchAngel.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteArchAngel.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## We Are Hairy
-            ###############
+            # We Are Hairy
             elif searchSiteID == 730:
-                results = PAsearchSites.siteWeAreHairy.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteWeAreHairy.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Love Her Feet
-            ###############
+            # Love Her Feet
             elif searchSiteID == 731:
-                results = PAsearchSites.siteLoveHerFeet.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLoveHerFeet.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## MomPOV
-            ###############
+            # MomPOV
             elif searchSiteID == 732:
-                results = PAsearchSites.siteMomPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMomPOV.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Property Sex
-            ###############
+            # Property Sex
             elif searchSiteID == 733:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## FuelVirtual
-            ###############
+            # FuelVirtual
             elif (546 <= searchSiteID <= 547):
-                results = PAsearchSites.networkFuelVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkFuelVirtual.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TransAngels
-            ###############
+            # TransAngels
             elif searchSiteID == 737:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Straplezz
-            ###############
+            # Straplezz
             elif searchSiteID == 741:
-                results = PAsearchSites.siteStraplezz.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteStraplezz.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## LittleCaprice
-            ###############
+            # LittleCaprice
             elif searchSiteID == 742:
-                results = PAsearchSites.siteLittleCaprice.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLittleCaprice.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## WowGirls
-            ###############
+            # WowGirls
             elif searchSiteID == 743:
-                results = PAsearchSites.siteWowGirls.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteWowGirls.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VIPissy
-            ###############
+            # VIPissy
             elif searchSiteID == 744:
-                results = PAsearchSites.siteVIPissy.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVIPissy.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## GirlsOutWest
-            ###############
+            # GirlsOutWest
             elif searchSiteID == 745:
-                results = PAsearchSites.siteGirlsOutWest.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteGirlsOutWest.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Girls Rimming
-            ###############
+            # Girls Rimming
             elif searchSiteID == 746:
-                results = PAsearchSites.siteGirlsRimming.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteGirlsRimming.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Gangbang Creampie
-            ###############
+            # Gangbang Creampie
             elif searchSiteID == 747:
-                results = PAsearchSites.siteGangbangCreampie.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteGangbangCreampie.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## StepSecrets
-            ###############
+            # StepSecrets
             elif searchSiteID == 751:
-                results = PAsearchSites.siteStepSecrets.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteStepSecrets.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VRHush
-            ###############
+            # VRHush
             elif searchSiteID == 752:
-                results = PAsearchSites.siteVRHush.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVRHush.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Fitting-Room
-            ###############
+            # Fitting-Room
             elif searchSiteID == 758:
-                results = PAsearchSites.siteFittingRoom.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteFittingRoom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## FamilyHookups
-            ###############
+            # FamilyHookups
             elif searchSiteID == 759:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Clips4Sale
-            ###############
+            # Clips4Sale
             elif searchSiteID == 760:
-                results = PAsearchSites.siteClips4Sale.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteClips4Sale.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VogoV
-            ###############
+            # VogoV
             elif searchSiteID == 761:
-                results = PAsearchSites.siteVogoV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVogoV.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Ultrafilms
-            ###############
+            # Ultrafilms
             elif searchSiteID == 762:
-                results = PAsearchSites.siteUltrafilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteUltrafilms.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## fuckingawesome.com
-            ###############
+            # fuckingawesome.com
             elif searchSiteID == 763:
-                results = PAsearchSites.siteFuckingAwesome.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteFuckingAwesome.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ToughLoveX
-            ###############
+            # ToughLoveX
             elif searchSiteID == 764:
-                results = PAsearchSites.siteToughLoveX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteToughLoveX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## cumlouder.com
-            ###############
+            # cumlouder.com
             elif searchSiteID == 765:
-                results = PAsearchSites.siteCumLouder.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteCumLouder.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## AllAnal
-            ###############
+            # AllAnal
             elif searchSiteID == 767:
-                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkSteppedUp.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ZeroTolerance
-            ###############
+            # ZeroTolerance
             elif searchSiteID == 770:
-                results = PAsearchSites.siteZTOD.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteZTOD.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ClubFilly
-            ###############
+            # ClubFilly
             elif searchSiteID == 771:
-                results = PAsearchSites.siteClubFilly.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteClubFilly.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Intersec
-            ###############
+            # Intersec
             elif (772 <= searchSiteID <= 781):
-                results = PAsearchSites.networkIntersec.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkIntersec.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Cherry Pimps
-            ###############
+            # Cherry Pimps
             elif (783 <= searchSiteID <= 792):
-                results = PAsearchSites.networkCherryPimps.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkCherryPimps.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Wicked
-            ###############
+            # Wicked
             elif searchSiteID == 793:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## 18OnlyGirls
-            ###############
+            # 18OnlyGirls
             elif searchSiteID == 794:
-                results = PAsearchSites.site18OnlyGirls.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.site18OnlyGirls.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## LilHumpers
-            ###############
+            # LilHumpers
             elif searchSiteID == 798:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Bellesa Films
-            ###############
+            # Bellesa Films
             elif searchSiteID == 799 or searchSiteID == 876:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ClubSeventeen
-            ###############
+            # ClubSeventeen
             elif searchSiteID == 800:
-                results = PAsearchSites.siteClubSeventeen.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteClubSeventeen.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Elegant Angel
-            ###############
+            # Elegant Angel
             elif searchSiteID == 801:
-                results = PAsearchSites.siteElegantAngel.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteElegantAngel.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Family Sinners
-            ###############
+            # Family Sinners
             elif searchSiteID == 802:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ReidMyLips
-            ###############
+            # ReidMyLips
             elif searchSiteID == 803:
-                results = PAsearchSites.siteReidMyLips.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteReidMyLips.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Playboy Plus
-            ###############
+            # Playboy Plus
             elif searchSiteID == 804:
-                results = PAsearchSites.sitePlayboyPlus.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.sitePlayboyPlus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Meana Wolf
-            ###############
+            # Meana Wolf
             elif searchSiteID == 805:
-                results = PAsearchSites.siteMeanaWolf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMeanaWolf.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Transsensual
-            ###############
+            # Transsensual
             elif searchSiteID == 806:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Erito
-            ###############
+            # Erito
             elif searchSiteID == 808:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TrueAmateurs
-            ###############
+            # TrueAmateurs
             elif searchSiteID == 809:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Hustler
-            ###############
+            # Hustler
             elif searchSiteID == 810:
-                results = PAsearchSites.siteHustler.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteHustler.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## AmourAngels
-            ###############
+            # AmourAngels
             elif searchSiteID == 811:
-                results = PAsearchSites.siteAmourAngels.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteAmourAngels.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## JAV
-            ###############
+            # JAV
             elif searchSiteID == 812:
-                results = PAsearchSites.networkR18.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkR18.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Bang
-            ###############
+            # Bang
             elif searchSiteID == 813:
-                results = PAsearchSites.networkBang.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkBang.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Vivid
-            ###############
+            # Vivid
             elif searchSiteID == 814:
-                results = PAsearchSites.siteVivid.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVivid.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## JAY's POV
-            ###############
+            # JAY's POV
             elif searchSiteID == 815:
-                results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteJaysPOV.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## PJGirls
-            ###############
+            # PJGirls
             elif searchSiteID == 667:
-                results = PAsearchSites.sitePJGirls.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.sitePJGirls.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## PureCFNM Network
-            ###############
+            # PureCFNM Network
             elif (829 <= searchSiteID <= 834):
-                results = PAsearchSites.networkPureCFNM.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPureCFNM.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## BAMVisions
-            ###############
+            # BAMVisions
             elif searchSiteID == 835:
-                results = PAsearchSites.siteBAMVisions.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteBAMVisions.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## ATKGirlfriends
-            ###############
+            # ATKGirlfriends
             elif searchSiteID == 836:
-                results = PAsearchSites.siteATKGirlfriends.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteATKGirlfriends.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## TwoWebMedia
-            ###############
+            # TwoWebMedia
             elif (837 <= searchSiteID <= 839):
-                results = PAsearchSites.networkTwoWebMedia.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkTwoWebMedia.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Interracial Pass
-            ###############
+            # Interracial Pass
             elif searchSiteID == 840:
-                results = PAsearchSites.siteInterracialPass.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteInterracialPass.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## LookAtHerNow
-            ###############
+            # LookAtHerNow
             elif searchSiteID == 841:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XEmpire/AllBlackX
-            ###############
+            # XEmpire / AllBlackX
             elif searchSiteID == 843:
-                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEnt.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Deviant Hardcore
-            ###############
+            # Deviant Hardcore
             elif searchSiteID == 859:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## She Will Cheat
-            ###############
+            # She Will Cheat
             elif searchSiteID == 860:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## SinsLife
-            ###############
+            # SinsLife
             elif searchSiteID == 862:
-                results = PAsearchSites.siteSinsLife.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteSinsLife.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Puffy Network
-            ###############
+            # Puffy Network
             elif searchSiteID == 863 or (867 <= searchSiteID <= 870):
-                results = PAsearchSites.networkPuffy.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkPuffy.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## SinX
-            ###############
+            # SinX
             elif (864 <= searchSiteID <= 866) or searchSiteID == 871:
-                results = PAsearchSites.networkSinX.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkSinX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Kinky Spa
-            ###############
+            # Kinky Spa
             elif searchSiteID == 872:
-                results = PAsearchSites.network1service.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Reality Lovers
-            ###############
+            # Reality Lovers
             elif searchSiteID == 877:
-                results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteRealityLovers.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Adult Time
-            ###############
+            # Adult Time
             elif searchSiteID == 878:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## RealJamVR
-            ###############
+            # RealJamVR
             elif searchSiteID == 879:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## BBC Paradise
-            ###############
+            # BBC Paradise
             elif searchSiteID == 880:
-                results = PAsearchSites.siteMylf.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteMylf.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## HoloGirlsVR
-            ###############
+            # HoloGirlsVR
             elif searchSiteID == 891:
-                results = PAsearchSites.siteHoloGirlsVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteHoloGirlsVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## LethalHardcoreVR
-            ###############
+            # LethalHardcoreVR
             elif searchSiteID == 892:
-                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Gender X
-            ###############
+            # Gender X
             elif searchSiteID == 893:
-                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## WhoreCraftVR
-            ###############
+            # WhoreCraftVR
             elif searchSiteID == 894:
-                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
-				
-            ###############
-            ## Defeated
-            ###############
+                results = PAsearchSites.siteLethalHardcoreVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Defeated
             elif searchSiteID == 895 or searchSiteID == 896:
-                results = PAsearchSites.siteDefeated.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteDefeated.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## XVirtual
-            ###############
+            # XVirtual
             elif searchSiteID == 897:
-                results = PAsearchSites.siteXVirtual.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteXVirtual.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Lust Reality
-            ###############
+            # Lust Reality
             elif searchSiteID == 898:
-                results = PAsearchSites.siteLustReality.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteLustReality.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Sex Like Real
-            ###############
+            # Sex Like Real
             elif searchSiteID == 899:
-                results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteSexLikeReal.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## DoeGirls
-            ###############
+            # DoeGirls
             elif searchSiteID == 900:
-                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.sitePorndoePremium.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## Xillimite
-            ###############
+            # Xillimite
             elif searchSiteID == 901:
-                results = PAsearchSites.siteXillimite.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteXillimite.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VRP Films
-            ###############
+            # VRP Films
             elif searchSiteID == 902:
-                results = PAsearchSites.siteVRPFilms.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVRPFilms.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VR Latina
-            ###############
+            # VR Latina
             elif searchSiteID == 903:
-                results = PAsearchSites.siteVRLatina.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteVRLatina.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## VRConk
-            ###############
+            # VRConk
             elif searchSiteID == 904:
-                results = PAsearchSites.siteVRConk.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate) 
+                results = PAsearchSites.siteVRConk.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ###############
-            ## RealJamVR
-            ###############
+            # RealJamVR
             elif searchSiteID == 905:
-                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, title, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -1180,1171 +813,593 @@ class PhoenixAdultAgent(Agent.Movies):
 
         Log('******UPDATE CALLED*******')
 
-        siteID = int(str(metadata.id).split("|")[1])
+        siteID = int(str(metadata.id).split('|')[1])
         Log(str(siteID))
 
-        ##############################################################
-        ##                                                          ##
-        ##   Blacked                                                ##
-        ##                                                          ##
-        ##############################################################
+        # Blacked
         if siteID == 1:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Blacked Raw                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Blacked Raw
         elif siteID == 0:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Brazzers                                               ##
-        ##                                                          ##
-        ##############################################################
+        # Brazzers
         elif siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
             metadata = PAsearchSites.siteBrazzers.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   SexyHub                                                ##
-        ##                                                          ##
-        ##############################################################
+        # SexyHub
         elif (siteID >= 333 and siteID <= 339):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   FakeHub                                                ##
-        ##                                                          ##
-        ##############################################################
+        # FakeHub
         elif siteID == 340 or (siteID >= 397 and siteID <= 407):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Naughty America                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Naughty America
         elif (siteID >= 5 and siteID <= 51) or siteID == 341 or (siteID >= 393 and siteID <= 396) or siteID == 467 or siteID == 468 or siteID == 581 or siteID == 620 or siteID == 625 or siteID == 691 or siteID == 749:
             metadata = PAsearchSites.siteNaughtyAmerica.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Vixen                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Vixen
         elif siteID == 52:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   X-Art                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # X-Art
         elif siteID == 82:
             metadata = PAsearchSites.siteXart.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Bang Bros                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Bang Bros
         elif siteID >= 83 and siteID <= 135:
             metadata = PAsearchSites.siteBangBros.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Tushy                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Tushy
         elif siteID == 136:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Reality Kings                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Reality Kings
         elif (siteID >= 137 and siteID <= 182) or (siteID >= 822 and siteID <= 828):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   PornFidelity                                           ##
-        ##                                                          ##
-        ##############################################################
+        # PornFidelity
         elif siteID >= 184 and siteID <= 186:
             metadata = PAsearchSites.networkPornFidelity.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   TeamSkeet                                              ##
-        ##                                                          ##
-        ##############################################################
+        # TeamSkeet
         elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875:
             metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Porndoe Premium                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Porndoe Premium
         elif siteID >= 216 and siteID <= 259:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   LegalPorno                                             ##
-        ##                                                          ##
-        ##############################################################
+        # LegalPorno
         elif siteID == 260:
             metadata = PAsearchSites.siteLegalPorno.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Mofos                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Mofos
         elif siteID >= 261 and siteID <= 270 or siteID == 583 or siteID >= 738 and siteID <= 740:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Babes                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Babes
         elif siteID >= 271 and siteID <= 276:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   GloryHoleSecrets                                       ##
-        ##                                                          ##
-        ##############################################################
+        # GloryHoleSecrets
         elif siteID == 279:
             metadata = PAsearchSites.siteGloryHoleSecrets.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   NewSensations                                          ##
-        ##                                                          ##
-        ##############################################################
+        # NewSensations
         elif siteID == 280:
             metadata = PAsearchSites.siteNewSensations.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Stepped Up Media                                       ##
-        ##                                                          ##
-        ##############################################################
+        # Stepped Up Media
         elif siteID == 767 or (siteID >= 282 and siteID <= 284):
             metadata = PAsearchSites.networkSteppedUp.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Twistys    	                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Twistys
         elif siteID >= 288 and siteID <= 291 or siteID == 768:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Spizoo                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # Spizoo
         elif siteID == 293 or (siteID >= 571 and siteID <= 577):
             metadata = PAsearchSites.siteSpizoo.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Private		                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Private
         elif siteID >= 294 and siteID <= 305:
             metadata = PAsearchSites.sitePrivate.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   PornPros Network                                       ##
-        ##                                                          ##
-        ##############################################################
+        # PornPros Network
         elif (siteID >= 306 and siteID <= 327) or (siteID >= 479 and siteID <= 489) or (siteID == 624) or (siteID == 769) or (siteID == 844) or (siteID == 890):
             metadata = PAsearchSites.networkPornPros.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   DigitalPlayground                                      ##
-        ##                                                          ##
-        ##############################################################
+        # DigitalPlayground
         elif siteID == 328:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   FullPornNetwork                                        ##
-        ##                                                          ##
-        ##############################################################
+        # FullPornNetwork
         elif siteID >= 343 and siteID <= 350:
-            metadata = PAsearchSites.networkFPN.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkFullPornNetwork.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Gamma Entertainment                                    ##
-        ##                                                          ##
-        ##############################################################
+        # Gamma Entertainment
         elif siteID == 278 or (siteID >= 285 and siteID <= 287) or (siteID >= 329 and siteID <= 330) or (siteID >= 351 and siteID <= 360) or siteID == 382 or siteID == 384 or (siteID >= 386 and siteID <= 392) or siteID == 750 or siteID == 843 or siteID == 861:
             metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Gamma Entertainment Other                              ##
-        ##                                                          ##
-        ##############################################################
+        # Gamma Entertainment Other
         elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  MileHighMedia                                           ##
-        ##                                                          ##
-        ##############################################################
+        # MileHighMedia
         elif siteID == 852 or (siteID >= 361 and siteID <= 364):
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Dogfart Network                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Dogfart Network
         elif siteID >= 408 and siteID <= 431:
             metadata = PAsearchSites.networkDogfart.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Jules Jordan                                           ##
-        ##                                                          ##
-        ##############################################################
+        # Jules Jordan
         elif siteID == 432 or (siteID >= 522 and siteID <= 524) or siteID == 782:
             metadata = PAsearchSites.siteJulesJordan.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   DDF Network                                            ##
-        ##                                                          ##
-        ##############################################################
+        # DDF Network
         elif (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 447):
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Perfect Gonzo                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Perfect Gonzo
         elif siteID >= 448 and siteID <= 459:
             metadata = PAsearchSites.networkPerfectGonzo.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  BadoinkVR Network                                       ##
-        ##                                                          ##
-        ##############################################################
+        # BadoinkVR Network
         elif siteID >= 469 and siteID <= 473:
             metadata = PAsearchSites.networkBadoinkVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VRBangers                                               ##
-        ##                                                          ##
-        ##############################################################
+        # VRBangers
         elif siteID == 474:
             metadata = PAsearchSites.siteVRBangers.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  SexBabesVR                                              ##
-        ##                                                          ##
-        ##############################################################
+        # SexBabesVR
         elif siteID == 475:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  SinsVR                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # SinsVR
         elif siteID == 569:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  StasyQ VR                                               ##
-        ##                                                          ##
-        ##############################################################
+        # StasyQ VR
         elif siteID == 570:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  WankzVR                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # WankzVR
         elif siteID == 476:
-            metadata = PAsearchSites.siteWankzVR.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.siteMilfVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  MilfVR                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # MilfVR
         elif siteID == 477:
             metadata = PAsearchSites.siteMilfVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Joymii                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Joymii
         elif siteID == 478:
             metadata = PAsearchSites.siteJoymii.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Kink                                                    ##
-        ##                                                          ##
-        ##############################################################
+        # Kink
         elif siteID >= 490 and siteID <= 521 or siteID == 687 or siteID == 735 or siteID == 736 or (873 <= siteID <= 875) or (888 <= siteID <= 889):
             metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Nubiles                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Nubiles
         elif (siteID >= 525 and siteID <= 545) or (siteID >= 755 and siteID <= 756) or (siteID == 766):
             metadata = PAsearchSites.networkNubiles.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  BellaPass                                               ##
-        ##                                                          ##
-        ##############################################################
+        # BellaPass
         elif siteID >= 548 and siteID <= 563:
             metadata = PAsearchSites.networkBellaPass.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  AllureMedia                                             ##
-        ##                                                          ##
-        ##############################################################
+        # AllureMedia
         elif siteID == 564 or siteID == 565:
             metadata = PAsearchSites.siteAllureMedia.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Manyvids                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Manyvids
         elif siteID == 568:
             metadata = PAsearchSites.siteManyvids.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VirtualTaboo                                            ##
-        ##                                                          ##
-        ##############################################################
+        # VirtualTaboo
         elif siteID == 292:
             metadata = PAsearchSites.siteVirtualTaboo.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VirtualRealPorn                                         ##
-        ##                                                          ##
-        ##############################################################
+        # VirtualRealPorn
         elif siteID == 342:
             metadata = PAsearchSites.siteVirtualReal.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  CzechVR Network                                         ##
-        ##                                                          ##
-        ##############################################################
+        # CzechVR Network
         elif (siteID >= 578 and siteID <= 580):
             metadata = PAsearchSites.networkCzechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  FinishesTheJob                                          ##
-        ##                                                          ##
-        ##############################################################
+        # FinishesTheJob
         elif (siteID >= 584 and siteID <= 586):
             metadata = PAsearchSites.siteFinishesTheJob.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Wankz Network                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Wankz Network
         elif (siteID >= 587 and siteID <= 619):
             metadata = PAsearchSites.networkWankz.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Tonights Girlfriend                                     ##
-        ##                                                          ##
-        ##############################################################
+        # Tonights Girlfriend
         elif siteID == 627:
             metadata = PAsearchSites.siteTonightsGirlfriend.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Karups                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # Karups
         elif (siteID >= 628 and siteID <= 630):
             metadata = PAsearchSites.siteKarups.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  TeenMegaWorld                                           ##
-        ##                                                          ##
-        ##############################################################
+        # TeenMegaWorld
         elif (siteID >= 631 and siteID <= 666):
-            metadata = PAsearchSites.networkTMW.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkTeenMegaWorld.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ScrewBox                                                ##
-        ##                                                          ##
-        ##############################################################
+        # ScrewBox
         elif siteID == 668:
             metadata = PAsearchSites.siteScrewbox.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  DorcelClub                                              ##
-        ##                                                          ##
-        ##############################################################
+        # DorcelClub
         elif siteID == 669:
             metadata = PAsearchSites.siteDorcelClub.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   TushyRaw                                               ##
-        ##                                                          ##
-        ##############################################################
+        # TushyRaw
         elif siteID == 670:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Deeper                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # Deeper
         elif siteID == 671:
             metadata = PAsearchSites.networkStrike3.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  MissaX / AllHerLuv                                      ##
-        ##                                                          ##
-        ##############################################################
+        # MissaX / AllHerLuv
         elif siteID == 672 or siteID == 673:
             metadata = PAsearchSites.siteMissaX.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Mylf                                                    ##
-        ##                                                          ##
-        ##############################################################
+        # Mylf
         elif (siteID >= 674 and siteID <= 683) or siteID == 757 or siteID == 842 or (siteID >= 853 and siteID <= 858) or (881 <= siteID <= 887):
             metadata = PAsearchSites.siteMylf.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Manually Add Actors                                     ##
-        ##                                                          ##
-        ##############################################################
+        # Manually Add Actors
         elif siteID == 684:
             metadata = PAsearchSites.addActors.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   First Anal Quest                                       ##
-        ##                                                          ##
-        ##############################################################
+        # First Anal Quest
         elif siteID == 685:
             metadata = PAsearchSites.siteFirstAnalQuest.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Hegre                                                   ##
-        ##                                                          ##
-        ##############################################################
+        # Hegre
         elif siteID == 688:
             metadata = PAsearchSites.siteHegre.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  FemdomEmpire                                            ##
-        ##                                                          ##
-        ##############################################################
+        # FemdomEmpire
         elif siteID == 689 or siteID == 694:
             metadata = PAsearchSites.networkFemdomEmpire.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  DorcelVision                                            ##
-        ##                                                          ##
-        ##############################################################
+        # DorcelVision
         elif siteID == 693:
             metadata = PAsearchSites.siteDorcelVision.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  XConfessions                                            ##
-        ##                                                          ##
-        ##############################################################
+        # XConfessions
         elif siteID == 695:
             metadata = PAsearchSites.siteXConfessions.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Czech AV                                                ##
-        ##                                                          ##
-        ##############################################################
+        # Czech AV
         elif (siteID >= 696 and siteID <= 728):
             metadata = PAsearchSites.networkCzechAV.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ArchAngel                                               ##
-        ##                                                          ##
-        ##############################################################
+        # ArchAngel
         elif siteID == 729:
             metadata = PAsearchSites.siteArchAngel.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  We Are Hairy                                            ##
-        ##                                                          ##
-        ##############################################################
+        # We Are Hairy
         elif siteID == 730:
             metadata = PAsearchSites.siteWeAreHairy.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Love Her Feet                                           ##
-        ##                                                          ##
-        ##############################################################
+        # Love Her Feet
         elif siteID == 731:
             metadata = PAsearchSites.siteLoveHerFeet.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  MomPOV                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # MomPOV
         elif siteID == 732:
             metadata = PAsearchSites.siteMomPOV.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Property Sex                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Property Sex
         elif siteID == 733:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  FuelVirtual                                             ##
-        ##                                                          ##
-        ##############################################################
+        # FuelVirtual
         elif (546 <= siteID <= 547):
             metadata = PAsearchSites.networkFuelVirtual.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  TransAngels                                             ##
-        ##                                                          ##
-        ##############################################################
+        # TransAngels
         elif siteID == 737:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Straplezz                                               ##
-        ##                                                          ##
-        ##############################################################
+        # Straplezz
         elif siteID == 741:
             metadata = PAsearchSites.siteStraplezz.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  LittleCaprice                                           ##
-        ##                                                          ##
-        ##############################################################
+        # LittleCaprice
         elif siteID == 742:
             metadata = PAsearchSites.siteLittleCaprice.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  WowGirls                                                ##
-        ##                                                          ##
-        ##############################################################
+        # WowGirls
         elif siteID == 743:
             metadata = PAsearchSites.siteWowGirls.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VIPissy                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # VIPissy
         elif siteID == 744:
             metadata = PAsearchSites.siteVIPissy.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  GirlsOutWest                                            ##
-        ##                                                          ##
-        ##############################################################
+        # GirlsOutWest
         elif siteID == 745:
             metadata = PAsearchSites.siteGirlsOutWest.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Girls Rimming                                           ##
-        ##                                                          ##
-        ##############################################################
+        # Girls Rimming
         elif siteID == 746:
             metadata = PAsearchSites.siteGirlsRimming.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Gangbang Creampie                                       ##
-        ##                                                          ##
-        ##############################################################
+        # Gangbang Creampie
         elif siteID == 747:
             metadata = PAsearchSites.siteGangbangCreampie.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  StepSecrets                                             ##
-        ##                                                          ##
-        ##############################################################
+        # StepSecrets
         elif siteID == 751:
             metadata = PAsearchSites.siteStepSecrets.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VRHush                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # VRHush
         elif siteID == 752:
             metadata = PAsearchSites.siteVRHush.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  MetArt Network                                          ##
-        ##                                                          ##
-        ##############################################################
+        # MetArt Network
         elif (621 <= siteID <= 623) or (753 <= siteID <= 754) or (816 <= siteID <= 821):
             metadata = PAsearchSites.networkMetArt.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Fitting-Room                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Fitting-Room
         elif siteID == 758:
             metadata = PAsearchSites.siteFittingRoom.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  FamilyHookups                                           ##
-        ##                                                          ##
-        ##############################################################
+        # FamilyHookups
         elif siteID == 759:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Clips4Sale                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Clips4Sale
         elif siteID == 760:
             metadata = PAsearchSites.siteClips4Sale.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VogoV                                                   ##
-        ##                                                          ##
-        ##############################################################
+        # VogoV
         elif siteID == 761:
             metadata = PAsearchSites.siteVogoV.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Ultrafilms                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Ultrafilms
         elif siteID == 762:
             metadata = PAsearchSites.siteUltrafilms.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  fuckingawesome.com                                      ##
-        ##                                                          ##
-        ##############################################################
+        # fuckingawesome.com
         elif siteID == 763:
             metadata = PAsearchSites.siteFuckingAwesome.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ToughLoveX                                              ##
-        ##                                                          ##
-        ##############################################################
+        # ToughLoveX
         elif siteID == 764:
             metadata = PAsearchSites.siteToughLoveX.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  cumlouder.com                                           ##
-        ##                                                          ##
-        ##############################################################
+        # cumlouder.com
         elif siteID == 765:
             metadata = PAsearchSites.siteCumLouder.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ztod.com                                                ##
-        ##                                                          ##
-        ##############################################################
+        # ztod.com
         elif siteID == 770:
             metadata = PAsearchSites.siteZTOD.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ClubFilly                                               ##
-        ##                                                          ##
-        ##############################################################
+        # ClubFilly
         elif siteID == 771:
             metadata = PAsearchSites.siteClubFilly.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Intersec                                                ##
-        ##                                                          ##
-        ##############################################################
+        # Intersec
         elif (siteID >= 772 and siteID <= 781):
             metadata = PAsearchSites.networkIntersec.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Cherry Pimps                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Cherry Pimps
         elif (siteID >= 783 and siteID <= 792):
             metadata = PAsearchSites.networkCherryPimps.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  18OnlyGirls                                                ##
-        ##                                                          ##
-        ##############################################################
+        # 18OnlyGirls
         elif siteID == 794:
             metadata = PAsearchSites.site18OnlyGirls.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Lil Humpers                                             ##
-        ##                                                          ##
-        ##############################################################
+        # Lil Humpers
         elif siteID == 798:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  BellesaFilms                                            ##
-        ##                                                          ##
-        ##############################################################
+        # BellesaFilms
         elif siteID == 799 or siteID == 876:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ClubSeventeen                                           ##
-        ##                                                          ##
-        ##############################################################
+        # ClubSeventeen
         elif siteID == 800:
             metadata = PAsearchSites.siteClubSeventeen.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Elegant Angel                                           ##
-        ##                                                          ##
-        ##############################################################
+        # Elegant Angel
         elif siteID == 801:
             metadata = PAsearchSites.siteElegantAngel.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Family Sinners                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Family Sinners
         elif siteID == 802:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ReidMyLips                                              ##
-        ##                                                          ##
-        ##############################################################
+        # ReidMyLips
         elif siteID == 803:
             metadata = PAsearchSites.siteReidMyLips.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Playboy Plus                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Playboy Plus
         elif siteID == 804:
             metadata = PAsearchSites.sitePlayboyPlus.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Meana Wolf                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Meana Wolf
         elif siteID == 805:
             metadata = PAsearchSites.siteMeanaWolf.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Transsensual                                            ##
-        ##                                                          ##
-        ##############################################################
+        # Transsensual
         elif siteID == 806:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Erito                                                   ##
-        ##                                                          ##
-        ##############################################################
+        # Erito
         elif siteID == 808:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  TrueAmateurs                                            ##
-        ##                                                          ##
-        ##############################################################
+        # TrueAmateurs
         elif siteID == 809:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Hustler                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # Hustler
         elif siteID == 810:
             metadata = PAsearchSites.siteHustler.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  AmourAngels                                             ##
-        ##                                                          ##
-        ##############################################################
+        # AmourAngels
         elif siteID == 811:
             metadata = PAsearchSites.siteAmourAngels.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  JAV                                                     ##
-        ##                                                          ##
-        ##############################################################
+        # JAV
         elif siteID == 812:
             metadata = PAsearchSites.networkR18.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Bang                                                    ##
-        ##                                                          ##
-        ##############################################################
+        # Bang
         elif siteID == 813:
             metadata = PAsearchSites.networkBang.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Vivid                                                   ##
-        ##                                                          ##
-        ##############################################################
+        # Vivid
         elif siteID == 814:
             metadata = PAsearchSites.siteVivid.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  JAY's POV                                               ##
-        ##                                                          ##
-        ##############################################################
+        # JAY's POV
         elif siteID == 815:
             metadata = PAsearchSites.siteJaysPOV.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Girlfriends Films                                       ##
-        ##                                                          ##
-        ##############################################################
+        # Girlfriends Films
         elif siteID == 380:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  PJGirls                                                 ##
-        ##                                                          ##
-        ##############################################################
+        # PJGirls
         elif siteID == 667:
             metadata = PAsearchSites.sitePJGirls.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  PureCFNM Network                                        ##
-        ##                                                          ##
-        ##############################################################
-        elif siteID >=  829 and siteID <= 834:
+        # PureCFNM Network
+        elif siteID >= 829 and siteID <= 834:
             metadata = PAsearchSites.networkPureCFNM.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  BAMVisions                                              ##
-        ##                                                          ##
-        ##############################################################
+        # BAMVisions
         elif siteID == 835:
             metadata = PAsearchSites.siteBAMVisions.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  ATK Girlfriends                                         ##
-        ##                                                          ##
-        ##############################################################
+        # ATK Girlfriends
         elif siteID == 836:
             metadata = PAsearchSites.siteATKGirlfriends.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  TwoWebMedia                                             ##
-        ##                                                          ##
-        ##############################################################
+        # TwoWebMedia
         elif (837 <= siteID <= 839):
             metadata = PAsearchSites.networkTwoWebMedia.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Interracial Pass                                        ##
-        ##                                                          ##
-        ##############################################################
+        # Interracial Pass
         elif siteID == 840:
             metadata = PAsearchSites.siteInterracialPass.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  LookAtHerNow                                            ##
-        ##                                                          ##
-        ##############################################################
+        # LookAtHerNow
         elif siteID == 841:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Deviant Hardcore                                       ##
-        ##                                                          ##
-        ##############################################################
+        # Deviant Hardcore
         elif siteID == 859:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   She Will Cheat                                         ##
-        ##                                                          ##
-        ##############################################################
+        # She Will Cheat
         elif siteID == 860:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   SinsLife                                               ##
-        ##                                                          ##
-        ##############################################################
+        # SinsLife
         elif siteID == 862:
             metadata = PAsearchSites.siteSinsLife.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Puffy Network                                          ##
-        ##                                                          ##
-        ##############################################################
-        elif siteID == 863 or (siteID >=  867 and siteID <= 870):
+        # Puffy Network
+        elif siteID == 863 or (siteID >= 867 and siteID <= 870):
             metadata = PAsearchSites.networkPuffy.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   SinX                                                   ##
-        ##                                                          ##
-        ##############################################################
-        elif siteID == 871 or (siteID >=  864 and siteID <= 866):
+        # SinX
+        elif siteID == 871 or (siteID >= 864 and siteID <= 866):
             metadata = PAsearchSites.networkSinX.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##   Kinky Spa                                              ##
-        ##                                                          ##
-        ##############################################################
+        # Kinky Spa
         elif siteID == 872:
             metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  RealityLovers                                           ##
-        ##                                                          ##
-        ##############################################################
+        # RealityLovers
         elif siteID == 877:
             metadata = PAsearchSites.siteRealityLovers.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  RealJamVR                                               ##
-        ##                                                          ##
-        ##############################################################
+        # RealJamVR
         elif siteID == 879:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  BBC Paradise                                            ##
-        ##                                                          ##
-        ##############################################################
+        # BBC Paradise
         elif siteID == 880:
             metadata = PAsearchSites.siteMylf.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  HoloGirlsVR                                             ##
-        ##                                                          ##
-        ##############################################################
+        # HoloGirlsVR
         elif siteID == 891:
             metadata = PAsearchSites.siteHoloGirlsVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  LethalHardcoreVR                                        ##
-        ##                                                          ##
-        ##############################################################
+        # LethalHardcoreVR
         elif siteID == 892:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  WhoreCraftVR                                            ##
-        ##                                                          ##
-        ##############################################################
+        # WhoreCraftVR
         elif siteID == 894:
             metadata = PAsearchSites.siteLethalHardcoreVR.update(metadata, siteID, movieGenres, movieActors)
-		
-        ##############################################################
-        ##                                                          ##
-        ##  Defeated		                                            ##
-        ##                                                          ##
-        ##############################################################
+
+        # Defeated
         elif siteID == 895 or siteID == 896:
             metadata = PAsearchSites.siteDefeated.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  XVirtual	                                              ##
-        ##                                                          ##
-        ##############################################################
+        # XVirtual
         elif siteID == 897:
             metadata = PAsearchSites.siteXVirtual.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Lust Reality	                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Lust Reality
         elif siteID == 898:
             metadata = PAsearchSites.siteLustReality.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Sex Like Real	                                          ##
-        ##                                                          ##
-        ##############################################################
+        # Sex Like Real
         elif siteID == 899:
             metadata = PAsearchSites.siteSexLikeReal.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##   
-        ##   DoeGirls                                               ##
-        ##                                                          ##
-        ##############################################################
+        # DoeGirls
         elif siteID == 900:
             metadata = PAsearchSites.sitePorndoePremium.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  Xillimite                                               ##
-        ##                                                          ##
-        ##############################################################
+        # Xillimite
         elif siteID == 901:
             metadata = PAsearchSites.siteXillimite.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VRPFilms                                                ##
-        ##                                                          ##
-        ##############################################################
+        # VRPFilms
         elif siteID == 902:
             metadata = PAsearchSites.siteVRPFilms.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VRLatina                                                ##
-        ##                                                          ##
-        ##############################################################
+        # VRLatina
         elif siteID == 903:
             metadata = PAsearchSites.siteVRLatina.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  VRConk                                                  ##
-        ##                                                          ##
-        ##############################################################
+        # VRConk
         elif siteID == 904:
             metadata = PAsearchSites.siteVRConk.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ##                                                          ##
-        ##  RealJamVR                                               ##
-        ##                                                          ##
-        ##############################################################
+        # RealJamVR
         elif siteID == 905:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
 
-        ##############################################################
-        ## Cleanup Genres and Add
+        # Cleanup Genres and Add
         Log("Genres")
         movieGenres.processGenres(metadata)
+        metadata.genres = sorted(metadata.genres)
 
-        ##############################################################
-        ## Cleanup Actors and Add
+        # Cleanup Actors and Add
         Log("Actors")
         movieActors.processActors(metadata)
 
-        ##############################################################
-        ## Add Content Rating
+        # Add Content Rating
         metadata.content_rating = 'XXX'

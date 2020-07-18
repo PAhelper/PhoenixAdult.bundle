@@ -1,68 +1,68 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    Log('searchtitle ' + searchTitle) 
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle )
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="itemm"]'):
-        titleNoFormatting = searchResult.xpath('.//a')[0].get("title")
+        titleNoFormatting = searchResult.xpath('.//a/@title')[0]
         releaseDate = parse(searchResult.xpath('.//span[@class="nm-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        subSite = searchResult.xpath('.//img[@class="domain-label"]')[0].get('src')
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+
+        subSite = searchResult.xpath('.//img[@class="domain-label"]/@src')[0]
         if 'allinternal' in subSite:
-            subSite = '/AllInternal'
+            subSite = 'AllInternal'
         elif 'asstraffic' in subSite:
-            subSite = '/AssTraffic'
+            subSite = 'AssTraffic'
         elif 'givemepink' in subSite:
-            subSite = '/GiveMePink'
+            subSite = 'GiveMePink'
         elif 'primecups' in subSite:
-            subSite = '/PrimeCups'
+            subSite = 'PrimeCups'
         elif 'fistflush' in subSite:
-            subSite = '/FistFlush'
+            subSite = 'FistFlush'
         elif 'cumforcover' in subSite:
-            subSite = '/CumForCover'
+            subSite = 'CumForCover'
         elif 'tamedteens' in subSite:
-            subSite = '/TamedTeens'
+            subSite = 'TamedTeens'
         elif 'spermswap' in subSite:
-            subSite = '/SpermSwap'
+            subSite = 'SpermSwap'
         elif 'milfthing' in subSite:
-            subSite = '/MilfThing'
+            subSite = 'MilfThing'
         elif 'interview' in subSite:
-            subSite = '/Interview'
+            subSite = 'Interview'
         else:
             subSite = PAsearchSites.getSearchSiteName(siteNum)
+
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [Perfect Gonzo"+subSite+"] " + releaseDate , score = score, lang = lang ))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Perfect Gonzo/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
+
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-    temp = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    url = PAsearchSites.getSearchBaseURL(siteID) + temp
-    detailsPageElements = HTML.ElementFromURL(url)
-    art = []
-    metadata.collections.clear()
-    movieGenres.clearGenres()
-    movieActors.clearActors()
-
-    #Studio
-    metadata.studio = "Perfect Gonzo"
+def update(metadata, siteID, movieGenres, movieActors):
+    metadata_id = str(metadata.id).split('|')
+    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + PAutils.Decode(metadata_id[0])
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h2')[0].text_content().strip()
 
     # Summary
-    paragraph = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content().strip()
-    metadata.summary = paragraph
+    metadata.summary = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side"]/p')[0].text_content().strip()
+
+    # Studio
+    metadata.studio = 'Perfect Gonzo'
 
     # Tagline and Collection(s)
-    subSite = detailsPageElements.xpath('.//img[@class="domain-label"]')[0].get('src')
+    metadata.collections.clear()
+    subSite = detailsPageElements.xpath('.//img[@class="domain-label"]/@src')[0]
     if 'allinternal' in subSite:
         tagline = 'All Internal'
     elif 'asstraffic' in subSite:
@@ -88,73 +88,64 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Genres
-    genres = detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side tag-container"]//a')
-
-    if len(genres) > 0:
-        for genreLink in genres:
-            genreName = genreLink.text_content().strip('\n').lower()
-            movieGenres.addGenre(genreName)
-
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right text-right"]/span')[0].text_content().replace('Added','').strip()
-    if len(date) > 0:
+    date = detailsPageElements.xpath('//div[@class="col-sm-6 col-md-6 no-padding-left no-padding-right text-right"]/span')[0].text_content().replace('Added', '').strip()
+    if date:
         date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    movieGenres.clearGenres()
+    for genreLink in detailsPageElements.xpath('//div[@class="col-sm-8 col-md-8 no-padding-side tag-container"]//a'):
+        genreName = genreLink.text_content().strip().lower()
+
+        movieGenres.addGenre(genreName)
+
     # Actors
-    actors = detailsPageElements.xpath('//div[@class="col-sm-3 col-md-3 col-md-offset-1 no-padding-side"]/p/a')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = str(actorLink.text_content().strip())
-            actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//div[@class="col-md-8 bigmodelpic"]/img')[0].get("src")
-            movieActors.addActor(actorName,actorPhotoURL)
+    movieActors.clearActors()
+    for actorLink in detailsPageElements.xpath('//div[@class="col-sm-3 col-md-3 col-md-offset-1 no-padding-side"]/p/a'):
+        actorName = actorLink.text_content().strip()
 
-    ### Artwork ###
+        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPage = HTML.ElementFromString(req.text)
+        actorPhotoURL = actorPage.xpath('//div[@class="col-md-8 bigmodelpic"]/img/@src')[0]
 
-    # Background
-    art.append(detailsPageElements.xpath('//video')[0].get("poster"))
+        movieActors.addActor(actorName, actorPhotoURL)
 
-    # Photos
-    photos = []
-    for poster in detailsPageElements.xpath('//ul[@class="bxslider_screenshots"]//img'):
-        try:
-            photos.append(poster.get('src'))
-        except:
-            photos.append(poster.get('data-original'))
-    for x in range(10):
-        art.append(photos[random.randint(1,len(photos))])
+    # Posters
+    art = [
+        detailsPageElements.xpath('//video/@poster')[0]
+    ]
+    xpaths = [
+        '//ul[@class="bxslider_screenshots"]//img',
+    ]
+    for xpath in xpaths:
+        for poster in detailsPageElements.xpath(xpath):
+            img = poster.get('src')
+            if not img:
+                img = poster.get('data-original')
 
-    # Screencaps
-    vidcaps = []
-    for poster in detailsPageElements.xpath('//ul[@class="bxslider_screenshots"]//img'):
-        try:
-            vidcaps.append(poster.get('src'))
-        except:
-            vidcaps.append(poster.get('data-original'))
-    for x in range(10):
-        art.append(vidcaps[random.randint(1,len(vidcaps))])
+            if img:
+                art.append(img)
 
-    j = 1
-    for posterUrl in art:
-        if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):            
-            #Download image file for analysis
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
-                if(width > 1):
+                # Add the image proxy items to the collection
+                if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                if(width > 100):
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order = j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
