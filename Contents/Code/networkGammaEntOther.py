@@ -134,8 +134,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
 
-        data = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
-        actorData = data['results'][0]['hits'][0]
+        actorData = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))[0]
         if 'pictures' in actorData and actorData['pictures']:
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
