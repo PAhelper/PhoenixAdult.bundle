@@ -15,7 +15,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                 releaseDate = str(searchResult.xpath('.//div[@class="cell update_date"]/comment()')[0]).strip()
                 releaseDate = releaseDate[releaseDate.find('OFF') + 4:releaseDate.find('D', releaseDate.find('OFF') + 4)].strip()
             except:
-                releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
+                pass
+
+        if releaseDate:
+            releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
 
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -28,7 +31,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
 def update(metadata, siteID, movieGenres, movieActors):
-    metadata_id = metadata.id.split('|')
+    metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
@@ -93,6 +96,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
+    art = []
     try:
         bigScript = detailsPageElements.xpath('//script[contains(text(), "df_movie")]')[0].text_content()
         alpha = bigScript.find('useimage = "') + 12
