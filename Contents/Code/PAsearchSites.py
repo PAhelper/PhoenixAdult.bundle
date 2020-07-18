@@ -999,8 +999,8 @@ searchSites[884] = ("Mylf X Mindi Mink", "Mylf X Mindi Mink", "https://mylf.com"
 searchSites[885] = ("Mylf X Owen Gray", "Mylf X Owen Gray", "https://mylf.com", "https://www.mylf.com/movies/")
 searchSites[886] = ("Mylf X SpankMonster", "Mylf X SpankMonster", "https://mylf.com", "https://www.mylf.com/movies/")
 searchSites[887] = ("StayHomeMilf", "StayHomeMilf", "https://mylf.com", "https://www.mylf.com/movies/")
-searchSites[888] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfightslesbianedition&q=")
-searchSites[889] = ("Evolved Fights", "Evolved Fights", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfights&q=")
+searchSites[888] = ("Kink Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfightslesbianedition&q=")
+searchSites[889] = ("Kink Evolved Fights", "Evolved Fights", "http://www.kink.com", "https://www.kink.com/search?channelIds=evolvedfights&q=")
 searchSites[890] = ("WetVR", "WetVR", "https://www.wetvr.com", "https://wetvr.com/video/")
 searchSites[891] = ("HoloGirlsVR", "HoloGirlsVR", "https://www.hologirlsvr.com", "https://www.hologirlsvr.com/Scenes?back=1&search=")
 searchSites[892] = ("LethalHardcoreVR", "LethalHardcoreVR", "https://www.lethalhardcorevr.com", "https://www.lethalhardcorevr.com/lethal-hardcore-vr-scenes.html?fq=")
@@ -1017,8 +1017,8 @@ searchSites[902] = ("VRP Films", "VRP Films", "https://vrpfilms.com", "https://v
 searchSites[903] = ("VR Latina", "VR Latina", "https://vrlatina.com", "https://vrlatina.com/video/")
 searchSites[904] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrconk.com/virtualreality/scene/id/")
 searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https://realjamvr.com/virtualreality/scene/id/")
-searchSites[906] = ("EF", "EF", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
-searchSites[907] = ("EFLE", "EFLE", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
+searchSites[906] = ("Evolved Fights", "Evolved Fights", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
+searchSites[907] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
 
 
 def getSearchBaseURL(siteID):
