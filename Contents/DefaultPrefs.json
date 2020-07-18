@@ -9,7 +9,7 @@
         "id": "proxy_type",
         "label": "Proxy type",
         "type": "enum",
-        "values": ["http", "https", "socks5"],
+        "values": ["http", "https", "socks5", "socks5h"],
         "default": "socks5"
     },
 	{
