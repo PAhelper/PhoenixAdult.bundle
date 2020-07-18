@@ -801,7 +801,7 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 905:
                 results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            ##Evolved Fights Network
+            # Evolved Fights Network
             elif searchSiteID == 906 or searchSiteID == 907:
                 results = PAsearchSites.networkEvolvedFights.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
