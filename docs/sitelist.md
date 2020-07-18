@@ -263,7 +263,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Erito | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Evolved Fights Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-  - Evolved Fights Mixed Edition
+  - Evolved Fights
   - Evolved Fights Lesbian Edition
 + #### FakeHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Fake Agent
@@ -366,8 +366,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - DivineBitches
   - Electrosluts
   - EverythingButt
-  - EvolvedFights
-  - EvolvedFightsLesbianEdition
   - FamiliesTied
   - Filthy Femdom
   - FootWorship
@@ -375,6 +373,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - FuckingMachines
   - HardcoreGangbang
   - Hogtied
+  - KinkEvolvedFights
+  - KinkEvolvedFightsLesbianEdition
   - KinkFeatures
   - KinkUniversity
   - MenInPain
