@@ -5,40 +5,36 @@ import PAextras
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(" ","-").replace("'","-")
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
     if unicode(url[-1], 'UTF-8').isdigit() and url[-2] == '-':
         url = '%s-%s' % (url[:-1], url[-1])
-    searchResult = HTML.ElementFromURL(url)
+    req = PAutils.HTTPRequest(url)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
-    titleNoFormatting = searchResult.xpath('//h1')[0].text_content()
+    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content()
     curID = PAutils.Encode(url)
     try:
-        releaseDate = parse(searchResult.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+        releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
     except:
-        if searchDate:
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-        else:
-            releaseDate = ''
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name = '%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=100, lang=lang))
+    score = 100
+
+    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    metadata_id =  str(metadata.id).split("|")
-    url = PAutils.Decode(metadata_id[0])
+def update(metadata, siteID, movieGenres, movieActors):
+    metadata_id = str(metadata.id).split('|')
+    sceneURL = PAutils.Decode(metadata_id[0])
+    sceneDate = metadata_id[2]
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
-    detailsPageElements = HTML.ElementFromURL(url)
-
-    metadata.studio = "Porn Pros"
-
-    # Collections / Tagline
-    siteName = PAsearchSites.getSearchSiteName(siteID)
-    metadata.collections.clear()
-    metadata.tagline = siteName
-    metadata.collections.add(siteName)
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
     try:
@@ -48,40 +44,58 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     try:
         if siteName.lower() == "Cum4K".lower():
-
             summaryurl = "https://cum4k.tube/" + temp
-            Log(summaryurl)
-            summaryPageElements = HTML.ElementFromURL(summaryurl)
+            req = PAutils.HTTPRequest(summaryurl)
+            summaryPageElements = HTML.ElementFromString(req.text)
             metadata.summary = summaryPageElements.xpath('//p[@class="more"]/text()')[0].strip()
     except:
-        Log("did not pull tube summary")
         pass
+
+    # Studio
+    metadata.studio = 'Porn Pros'
+
+    # Collections / Tagline
+    siteName = PAsearchSites.getSearchSiteName(siteID)
+    metadata.collections.clear()
+    metadata.tagline = siteName
+    metadata.collections.add(siteName)
+
+    # Release Date
+    if sceneDate:
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    titleActors = ""
     actors = detailsPageElements.xpath('//div[contains(@class, "pt-md")]//a[contains(@href, "/girls/")]')
-    if len(actors) > 0:
+    if actors:
+        if len(actors) == 3:
+            movieGenres.addGenre('Threesome')
+        if len(actors) == 4:
+            movieGenres.addGenre('Foursome')
+        if len(actors) > 4:
+            movieGenres.addGenre('Orgy')
+
         for actorLink in actors:
-            actorName = actorLink.text_content()
-            actorPhotoURL = PAactors.actorDBfinder(actorName)
-            titleActors = titleActors + actorName + " & "
-            Log("actorPhoto: " + actorPhotoURL)
-            movieActors.addActor(actorName,actorPhotoURL)
+            actorName = actorLink.text_content().strip()
+            actorPhotoURL = ''
+
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Manually Add Actors
     # Add Actor Based on Title
-    if "Poke Her In The Front" == metadata.title:
-        actorName = "Sara Luv"
+    if 'Poke Her In The Front' == metadata.title:
         actorPhotoURL = ''
+
+        actorName = 'Sara Luv'
         movieActors.addActor(actorName, actorPhotoURL)
-        actorName = "Dillion Harper"
-        actorPhotoURL = ''
+
+        actorName = 'Dillion Harper'
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
-        # Based on site
     if siteName.lower() == "Lubed".lower():
         for genreName in ['Lube', 'Raw', 'Wet']:
             movieGenres.addGenre(genreName)
@@ -112,123 +126,37 @@ def update(metadata,siteID,movieGenres,movieActors):
     elif siteName.lower() == "BBCPie".lower():
         for genreName in ['Interracial', 'BBC', 'Creampie']:
             movieGenres.addGenre(genreName)
-    # Based on number of actors
-    if len(actors) == 3:
-        movieGenres.addGenre('Threesome')
-    if len(actors) == 4:
-        movieGenres.addGenre('Foursome')
-    if len(actors) > 4:
-        movieGenres.addGenre('Orgy')
 
     # Posters
-    try:
-        background = detailsPageElements.xpath('//video[@id="player"]/@poster')[0]
-        if not background.startswith('http'):
-            background = "http:" + background
-        Log("BG DL: " + background)
-        metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-        metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
-    except:
-        pass
-
-    # Date
-    try:
-        date = detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()
-        if len(date) > 0:
-            date_object = datetime.strptime(date, '%B %d, %Y')
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-    except:
-        date = metadata_id[2]
-        if len(date) > 0:
-            date_object = parse(date)
-            metadata.originally_available_at = date_object
-            metadata.year = metadata.originally_available_at.year
-            Log("Date from file")
-
-    # Title
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
-
-    #Extra Posters
-    import random
     art = []
-    match = 0
+    xpaths = [
+        '//video/@poster',
+        '(//img[contains(@src, "handtouched")])[position() <5]/@src'
+    ]
+    for xpath in xpaths:
+        for poster in detailsPageElements.xpath(xpath):
+            if not poster.startswith('http'):
+                poster = 'http:' + poster
 
-    if siteName.lower() == "Holed".lower():
-        fanSite = PAextras.getFanArt("AnalPornFan.com", art, actors, actorName, metadata.title, 0, siteName)
-    elif siteName.lower() == "SpyFam".lower():
-        fanSite = PAextras.getFanArt("SpyFams.com", art, actors, actorName, metadata.title, 0, siteName)
-    elif siteName.lower() == "Lubed".lower():
-        fanSite = PAextras.getFanArt("LubedFan.com", art, actors, actorName, metadata.title, 0, siteName)
-    elif siteName.lower() == "PassionHD".lower():
-        fanSite = PAextras.getFanArt("PassionHDFan.com", art, actors, actorName, metadata.title, 0, siteName)
-    elif siteName.lower() == "Tiny4K".lower():
-        fanSite = PAextras.getFanArt("Tiny4KFan.com", art, actors, actorName, metadata.title, 0, siteName)
+            art.append(poster)
 
-    for site in ["HQSluts.com", "ImagePost.com", "PornGirlsErotica.com", "PinkWorld.com", "CoedCherry.com/pics"]:
-        try:
-            match = fanSite[2]
-        except:
-            pass
-        if match is 1:
-            break
-        fanSite = PAextras.getFanArt(site, art, actors, actorName, metadata.title, match, siteName)
-
-    try:
-        match = fanSite[2]
-    except:
-        pass
-    summary = fanSite[1]
-
-    try:
-        if len(summary) > 0:
-            metadata.summary = summary
-    except:
-        metadata.summary = summary
-
-    if match is 1 and art:
-        # Return, first, last and randóm selection of images
-        # If you want more or less posters edít the value in random.sample below or refresh metadata to get a different sample.
-        sample = [art[0], art[1], art[2], art[3], art[-1]] + random.sample(art, 4)
-        art = sample
-        Log("Selecting first 5, last and random 4 images from set")
-
-        j = 1
-
-        for posterUrl in art:
-            Log("Trying next Image")
-            if not PAsearchSites.posterAlreadyExists(posterUrl,metadata):
-            #Download image file for analysis
-                try:
-                    hdr = {
-                            'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36',
-                    }
-                    req = urllib.Request(posterUrl, headers=hdr)
-                    img_file = urllib.urlopen(req)
-                    im = StringIO(img_file.read())
-                    resized_image = Image.open(im)
-                    width, height = resized_image.size
-                    #Add the image proxy items to the collection
-                    if width > 1 or height > width:
-                        # Item is a poster
-                        metadata.posters[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
-                    if width > 100 and width > height:
-                        # Item is an art item
-                        metadata.art[posterUrl] = Proxy.Preview(HTTP.Request(posterUrl, headers=hdr).content, sort_order = j)
-                    j = j + 1
-                except:
-                    Log("there was an issue")
-    else:
-        #Smaller background images
-        Log("Match is not 1")
-        try:
-            for idx, background in enumerate(detailsPageElements.xpath('(//img[contains(@src, "handtouched")])[position() <5]/@src'), 2):
-                if not background.startswith('http'):
-                    background = "http:" + background
-                Log("BG DL: " + background)
-                metadata.art[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                metadata.posters[background] = Proxy.Preview(HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-        except:
-            pass
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
+            try:
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
 
     return metadata

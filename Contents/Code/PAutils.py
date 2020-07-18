@@ -13,26 +13,26 @@ def getUserAgent():
     return ua.random
 
 
-def bypassCloudflare(url, **kwargs):
-    headers = kwargs.pop('headers', {})
-    proxies = kwargs.pop('proxies', {})
-    scraper = cloudscraper.CloudScraper()
-
-    for head in ['Authorization', 'Cookie']:
-        if head in headers:
-            scraper.headers[head] = headers[head]
-
-    data = scraper.get(url, proxies=proxies).text
-    if data:
-       return data
-
-    Log('Bypass error')
-    return None
-
-
-def HTTPRequest(url, **kwargs):
+def bypassCloudflare(url, method, **kwargs):
     headers = kwargs.pop('headers', {})
     cookies = kwargs.pop('cookies', {})
+    proxies = kwargs.pop('proxies', {})
+    params = kwargs.pop('params', {})
+
+    scraper = cloudscraper.CloudScraper()
+    scraper.headers.update(headers)
+    scraper.cookies.update(cookies)
+
+    req = scraper.request(method, url, proxies=proxies, data=params)
+
+    return req
+
+
+def HTTPRequest(url, method = 'GET', **kwargs):
+    headers = kwargs.pop('headers', {})
+    cookies = kwargs.pop('cookies', {})
+    params = kwargs.pop('params', {})
+    bypass = kwargs.pop('bypass', True)
     proxies = {}
 
     if Prefs['proxy_enable']:
@@ -44,19 +44,27 @@ def HTTPRequest(url, **kwargs):
 
     if 'User-Agent' not in headers:
         headers['User-Agent'] = getUserAgent()
-    if cookies and 'Cookie' not in headers:
-        cookie = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
-        headers['Cookie'] = cookie
 
-    Log('Requesting "%s"' % url)
-    req = requests.get(url, proxies=proxies, headers=headers)
-    if 200 <= req.status_code <= 299:
-        data = req.text
-    else:
+    if params:
+        method = 'POST'
+
+    Log('Requesting %s "%s"' % (method.upper(), url))
+    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params)
+
+    req_bypass = None
+    if not req.ok and bypass:
         Log('%d: trying to bypass' % req.status_code)
-        data = bypassCloudflare(url, proxies=proxies, headers=headers)
+        try:
+            req_bypass = bypassCloudflare(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
+        except Exception as e:
+            Log('Bypass error: %s' % e)
 
-    return data
+    if req_bypass:
+        req = req_bypass
+
+    req.encoding = 'UTF-8'
+
+    return req
 
 
 def getFromGoogleSearch(searchText, site='', **kwargs):

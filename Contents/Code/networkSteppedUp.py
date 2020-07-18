@@ -4,13 +4,14 @@ import PAactors
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchString = searchTitle.replace(" ", "-").replace(",", "").replace("’","").replace("'","").replace("--","-").lower()
-    if "/" not in searchString:
-        searchString = searchString.replace("-", "/", 1)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    encodedTitle = searchTitle.replace(' ', '-').replace('--', '-').lower()
+    if '/' not in encodedTitle:
+        encodedTitle = encodedTitle.replace('-', '/', 1)
 
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchString
-    detailsPageElements = HTML.ElementFromURL(sceneURL)
+    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     curID = PAutils.Encode(sceneURL)
     titleNoFormatting = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
@@ -32,16 +33,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
+def update(metadata, siteID, movieGenres, movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
-    detailsPageElements = HTML.ElementFromURL(sceneURL)
-
-    # Studio
-    metadata.studio = 'Stepped Up Media'
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[@class="title"] | //h2[@class="title"]')[0].text_content().strip()
@@ -49,24 +48,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[contains(@class,"desc")]')[0].text_content().strip()
 
+    # Studio
+    metadata.studio = 'Stepped Up Media'
+
     # Tagline and Collection(s)
     metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-
-    # Genres
-    movieGenres.clearGenres()
-    if tagline == "Swallowed":
-        movieGenres.addGenre('blowjob')
-        movieGenres.addGenre('cum swallow')
-    elif tagline == "TrueAnal" or "AllAnal":
-        movieGenres.addGenre('anal')
-        movieGenres.addGenre('gaping')
-    elif tagline == "Nympho":
-        movieGenres.addGenre('nympho')
-    movieGenres.addGenre('hardcore')
-    movieGenres.addGenre('heterosexual')
 
     # Release Date
     if sceneDate:
@@ -74,51 +63,60 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    movieGenres.clearGenres()
+    if tagline == 'Swallowed':
+        movieGenres.addGenre('Blowjob')
+        movieGenres.addGenre('Cum Swallow')
+    elif tagline == "TrueAnal" or "AllAnal":
+        movieGenres.addGenre('Anal')
+        movieGenres.addGenre('Gaping')
+    elif tagline == 'Nympho':
+        movieGenres.addGenre('Nympho')
+    movieGenres.addGenre('Hardcore')
+    movieGenres.addGenre('Heterosexual')
+
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('(//h4[@class="models"])[1]//a')
     for actorLink in actors:
-        actorName = str(actorLink.text_content().strip())
+        actorName = actorLink.text_content().strip()
 
-        actorPageURL = actorLink.get("href")
-        actorPage = HTML.ElementFromURL(actorPageURL)
-        actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img')[0].get("src")
+        actorPageURL = actorLink.get('href')
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPage = HTML.ElementFromString(req.text)
+        actorPhotoURL = actorPage.xpath('//div[contains(@class,"model")]/img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
     movieActors.addActor('Mike Adriano', 'https://imgs1cdn.adultempire.com/actors/470003.jpg')
 
     # Posters
     art = []
-
-    try:
-        art.append(detailsPageElements.xpath('//div[@id="trailer-player"]')[0].get('data-screencap'))
-    except:
-        art.append(detailsPageElements.xpath('//video[@id="ypp-player"]')[0].get('poster'))
-
-    for poster in actorPage.xpath('//a[@href="' + sceneURL + '"]//img'):
-        art.append(poster.get('src'))
-    for poster in actorPage.xpath('//div[@class="thumb-mouseover"] | //div[@class="thumb-bottom"] | //div[@class="thumb-top"]'):
-        theStyle = poster.get('style')
-        alpha = theStyle.find('http')
-        omega = theStyle.find(');',alpha)
-        art.append(theStyle[alpha:omega].strip())
+    xpaths = [
+        '//div[@id="trailer-player"]/@data-screencap',
+        '//video[@id="ypp-player"]/@poster',
+        '//a[@href="%s"]//img/@src' % sceneURL,
+    ]
+    for xpath in xpaths:
+        for poster in detailsPageElements.xpath(xpath):
+            art.append(poster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
-            #Download image file for analysis
+            # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
-                #Add the image proxy items to the collection
+                # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

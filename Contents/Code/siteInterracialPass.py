@@ -4,9 +4,9 @@ import PAactors
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '+')
-    searchResults = HTML.ElementFromURL(url)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+'))
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "item-video")]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
@@ -23,15 +23,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = metadata.id.split('|')
-    url = PAutils.Decode(metadata_id[0])
-    detailsPageElements = HTML.ElementFromURL(url)
-
-    # Studio
-    metadata.studio = 'Interracial Pass'
+    sceneURL = PAutils.Decode(metadata_id[0])
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h2[@class="section-title"]')[0].text_content().strip()
@@ -39,18 +35,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[@class="update-info-block"]')[1].text_content().replace('Description:', '', 1).strip()
 
+    # Studio
+    metadata.studio = 'Interracial Pass'
+
     # Tagline and Collection(s)
     metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-
-    # Genres
-    movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//ul[@class="tags"]//li//a'):
-        genreName = genreLink.text_content().strip()
-
-        movieGenres.addGenre(genreName)
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="update-info-row"]')[0].text_content().replace('Released:', '', 1).strip()
@@ -58,6 +50,13 @@ def update(metadata,siteID,movieGenres,movieActors):
         date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+
+    # Genres
+    movieGenres.clearGenres()
+    for genreLink in detailsPageElements.xpath('//ul[@class="tags"]//li//a'):
+        genreName = genreLink.text_content().strip()
+
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
@@ -86,17 +85,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

@@ -2,26 +2,29 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAextras
+import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article//a'):
         siteName = PAsearchSites.getSearchSiteName(siteNum) + '.xxx'
         titleNoFormatting = searchResult.xpath('./@title')[0]
-        sceneURL = searchResult.xpath('./@href')[0]
-        curID = sceneURL.replace('/', '_').replace('?', '!')
+        curID = PAutils.Encode(searchResult.xpath('./@href')[0])
+
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     url = PAsearchSites.getSearchSearchURL(siteNum).replace('.xxx', '.tv', 1)
-    searchResults = HTML.ElementFromURL(url + encodedTitle)
+    req = PAutils.HTTPRequest(PAsearchSites.url + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "entry")]//h3//a'):
         siteName = PAsearchSites.getSearchSiteName(siteNum) + '.tv'
         titleNoFormatting = searchResult.xpath('./text()')[0].strip()
-        sceneURL = searchResult.xpath('./@href')[0]
-        curID = sceneURL.replace('/', '_').replace('?', '!')
+        curID = PAutils.Encode(searchResult.xpath('./@href')[0])
+
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
@@ -29,12 +32,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    url = metadata_id[0].replace('_', '/').replace('!', '?')
-    detailsPageElements = HTML.ElementFromURL(url)
+    sceneURL = PAutils.Decode(metadata_id[0])
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     if '.xxx' in url:
         # Title
@@ -55,7 +57,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             else:
                 movieActors.addActor(tagName, '')
     else:
-         # Title
+        # Title
         metadata.title = detailsPageElements.xpath('//h1[@class="title"]/text()')[0].strip()
 
         # Summary
@@ -78,7 +80,9 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    metadata.collections.add(metadata.studio)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Posters
     art = []
@@ -95,21 +99,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                headers = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0'
-                }
-                req = urllib.Request(posterUrl, headers=headers)
-                img_file = urllib.urlopen(req)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
