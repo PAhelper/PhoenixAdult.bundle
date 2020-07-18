@@ -4,9 +4,9 @@ import PAactors
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    searchResults = HTML.ElementFromString(data)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "is-multiline")]/div[contains(@class, "column")]'):
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         titleNoFormatting = searchResult.xpath('.//div[@class="has-text-weight-bold"]/text()')[0]
@@ -23,18 +23,12 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = '%s/iod/%s' % (PAsearchSites.getSearchBaseURL(siteID), PAutils.Decode(metadata_id[0]))
     scenePoster = PAutils.Decode(metadata_id[2])
-
-    data = PAutils.HTTPRequest(sceneURL)
-    detailsPageElements = HTML.ElementFromString(data)
-
-    # Studio
-    metadata.studio = 'Intersec Interactive'
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[contains(@class, "has-text-weight-bold")]/text()')[0]
@@ -42,35 +36,34 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[contains(@class, "has-text-white-ter")][3]')[0].text_content().strip()
 
-    #Tagline and Collection(s)
+    # Studio
+    metadata.studio = 'Intersec Interactive'
+
+    # Tagline and Collection(s)
     metadata.collections.clear()
     taglineText = detailsPageElements.xpath('//div[contains(@class, "has-text-white-ter")][1]//a[contains(@class, "is-dark")][last()]/text()')[0]
-    if "sexuallybroken" in taglineText:
-        tagline = "Sexually Broken"
-    elif "infernalrestraints" in taglineText:
-        tagline = "Infernal Restraints"
-    elif "realtimebondage" in taglineText:
-        tagline = "Real Time Bondage"
-    elif "hardtied" in taglineText:
-        tagline = "Hardtied"
-    elif "topgrl" in taglineText:
-        tagline = "Topgrl"
-    elif "sensualpain" in taglineText:
-        tagline = "Sensual Pain"
-    elif "paintoy" in taglineText:
-        tagline = "Pain Toy"
-    elif "renderfiend" in taglineText:
-        tagline = "Renderfiend"
-    elif "hotelhostages" in taglineText:
-        tagline = "Hotel Hostages"
+    if 'sexuallybroken' in taglineText:
+        tagline = 'Sexually Broken'
+    elif 'infernalrestraints' in taglineText:
+        tagline = 'Infernal Restraints'
+    elif 'realtimebondage' in taglineText:
+        tagline = 'Real Time Bondage'
+    elif 'hardtied' in taglineText:
+        tagline = 'Hardtied'
+    elif 'topgrl' in taglineText:
+        tagline = 'Topgrl'
+    elif 'sensualpain' in taglineText:
+        tagline = 'Sensual Pain'
+    elif 'paintoy' in taglineText:
+        tagline = 'Pain Toy'
+    elif 'renderfiend' in taglineText:
+        tagline = 'Renderfiend'
+    elif 'hotelhostages' in taglineText:
+        tagline = 'Hotel Hostages'
     else:
-        tagline = "Intersex"
+        tagline = 'Intersex'
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-
-    # Genres
-    movieGenres.clearGenres()
-    movieGenres.addGenre("BDSM")
 
     # Release Date
     date = detailsPageElements.xpath('//div[contains(@class, "has-text-white-ter")][1]//span[contains(@class, "is-dark")][1]/text()')[0]
@@ -79,16 +72,20 @@ def update(metadata,siteID,movieGenres,movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    movieGenres.clearGenres()
+    movieGenres.addGenre('BDSM')
+
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[contains(@class, "has-text-white-ter")][1]//a[contains(@class, "is-dark")][position() < last()]/text()')
     if actors:
         if len(actors) == 3:
-            movieGenres.addGenre("Threesome")
+            movieGenres.addGenre('Threesome')
         if len(actors) == 4:
-            movieGenres.addGenre("Foursome")
+            movieGenres.addGenre('Foursome')
         if len(actors) > 4:
-            movieGenres.addGenre("Orgy")
+            movieGenres.addGenre('Orgy')
 
         for actorName in actors:
             movieActors.addActor(actorName, '')
@@ -106,17 +103,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and idx > 1:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

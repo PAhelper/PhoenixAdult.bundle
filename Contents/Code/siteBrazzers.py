@@ -3,11 +3,12 @@ import PAgenres
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split()[0]
     if unicode(sceneID, 'UTF-8').isdigit():
         sceneURL = '%s/scenes/view/id/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
-        detailsPageElements = HTML.ElementFromURL(sceneURL)
+        req = PAutils.HTTPRequest(sceneURL)
+        detailsPageElements = HTML.ElementFromString(req.text)
 
         titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
         curID = PAutils.Encode(sceneURL)
@@ -19,8 +20,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         cookies = {
             'textSearch': encodedTitle
         }
-        data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum), cookies=cookies)
-        searchResults = HTML.ElementFromString(data)
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum), cookies=cookies)
+        searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@class="scene-card-info"]'):
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[1]/@href')[0]
             curID = PAutils.Encode(sceneURL)
@@ -38,16 +39,18 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    detailsPageElements = HTML.ElementFromURL(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
+
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
-    paragraph = detailsPageElements.xpath('//p[@itemprop="description"]')[0].text_content()
-    paragraph = paragraph.replace('&13;', '').strip(' \t\n\r"').replace('\n', '').replace('  ', '') + "\n\n"
+    paragraph = detailsPageElements.xpath('//p[@itemprop="description"]')[0].text_content().strip()
+    paragraph = paragraph.replace('&13;', '').strip().replace('\n', '').replace('  ', '') + '\n\n'
     metadata.summary = paragraph[:-10]
 
     # Studio
@@ -55,14 +58,21 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = detailsPageElements.xpath('//span[@class="label-text"]')[0].text_content()
+    tagline = detailsPageElements.xpath('//span[@class="label-text"]')[0].text_content().strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
-    metadata.title = detailsPageElements.xpath('//h1')[0].text_content()
+
+    # Release Date
+    date = detailsPageElements.xpath('//aside[contains(@class, "scene-date")]')
+    if date:
+        date = date[0].text_content()
+        date_object = datetime.strptime(date, '%B %d, %Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[contains(@class,"tag-card-container")]//a')
+    genres = detailsPageElements.xpath('//div[contains(@class, "tag-card-container")]//a')
 
     for genreLink in genres:
         genreName = genreLink.text_content().strip().lower()
@@ -82,15 +92,6 @@ def update(metadata,siteID,movieGenres,movieActors):
         if "series" not in genreName and "office 4-play" not in genreName:
             movieGenres.addGenre(genreName)
 
-
-    # Release Date
-    date = detailsPageElements.xpath('//aside[contains(@class,"scene-date")]')
-    if date:
-        date = date[0].text_content()
-        date_object = datetime.strptime(date, '%B %d, %Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-    
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="model-card"]')
@@ -101,7 +102,7 @@ def update(metadata,siteID,movieGenres,movieActors):
             actorPhotoURL = 'http:' + actorPhotoURL
 
         movieActors.addActor(actorName, actorPhotoURL)
-    
+
     # Posters
     art = []
     xpaths = [
@@ -120,17 +121,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if idx > 1 and width > 100:
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100 and idx > 1:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

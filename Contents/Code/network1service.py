@@ -1,25 +1,16 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import json
+import PAutils
 
 
 def get_Cookies(url):
-    import cookielib
+    req = PAutils.HTTPRequest(url, 'HEAD')
 
-    cookies = {}
-    cookie_jar = cookielib.CookieJar()
-    opener = urllib.build_opener(urllib.HTTPCookieProcessor(cookie_jar))
-    urllib.install_opener(opener)
-
-    urllib.urlopen(url)
-    for cookie in cookie_jar:
-        cookies[cookie.name] = cookie.value
-
-    return cookies
+    return req.cookies
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteNum))
     headers = {
         'Instance': cookies['instance_token'],
@@ -37,17 +28,10 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         else:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
 
-        data = None
-        req = urllib.Request(url, headers=headers)
-        try:
-            data = urllib.urlopen(req).read()
-        except Exception as e:
-            Log(e)
-            pass
-
-        if data:
-            searchResults = json.loads(data)
-            for searchResult in searchResults['result']:
+        req = PAutils.HTTPRequest(url, headers=headers)
+        if req:
+            searchResults = req.json()['result']
+            for searchResult in searchResults:
                 titleNoFormatting = searchResult['title']
                 releaseDate = parse(searchResult['dateReleased']).strftime('%Y-%m-%d')
                 curID = searchResult['id']
@@ -73,9 +57,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
@@ -85,12 +67,8 @@ def update(metadata,siteID,movieGenres,movieActors):
         'Instance': cookies['instance_token'],
     }
     url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
-    req = urllib.Request(url, headers=headers)
-    data = urllib.urlopen(req).read()
-    detailsPageElements = json.loads(data)['result'][0]
-
-    # Studio
-    metadata.studio = detailsPageElements['brand'].title()
+    req = PAutils.HTTPRequest(url, headers=headers)
+    detailsPageElements = req.json()['result'][0]
 
     # Title
     metadata.title = detailsPageElements['title']
@@ -106,10 +84,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     if description:
         metadata.summary = description
 
-    # Release Date
-    date_object = parse(detailsPageElements['dateReleased'])
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    # Studio
+    metadata.studio = detailsPageElements['brand'].title()
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -135,11 +111,17 @@ def update(metadata,siteID,movieGenres,movieActors):
     for seriesName in seriesNames:
         metadata.collections.add(seriesName)
 
+    # Release Date
+    date_object = parse(detailsPageElements['dateReleased'])
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
+
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements['tags']
     for genreLink in genres:
         genreName = genreLink['name']
+
         movieGenres.addGenre(genreName)
 
     # Actors
@@ -148,9 +130,8 @@ def update(metadata,siteID,movieGenres,movieActors):
     for actorLink in actors:
         actorPageURL = PAsearchSites.getSearchSearchURL(siteID) + '/v1/actors?id=%d' % actorLink['id']
 
-        req = urllib.Request(actorPageURL, headers=headers)
-        data = urllib.urlopen(req).read()
-        actorData = json.loads(data)['result'][0]
+        req = PAutils.HTTPRequest(actorPageURL, headers=headers)
+        actorData = req.json()['result'][0]
 
         actorName = actorData['name']
         actorPhotoURL = ''
@@ -171,17 +152,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

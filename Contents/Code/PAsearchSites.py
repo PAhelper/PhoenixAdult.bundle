@@ -8,7 +8,7 @@ import siteGloryHoleSecrets
 import siteNewSensations
 import siteSpizoo
 import sitePrivate
-import networkFPN
+import networkFullPornNetwork
 import networkSteppedUp
 import networkGammaEnt
 import networkDogfart
@@ -19,7 +19,6 @@ import networkPornFidelity
 import networkBadoinkVR
 import siteVRBangers
 import networkHighTechVR
-import siteWankzVR
 import siteMilfVR
 import siteJoymii
 import networkPornPros
@@ -36,7 +35,7 @@ import siteFinishesTheJob
 import networkWankz
 import siteTonightsGirlfriend
 import siteKarups
-import networkTMW
+import networkTeenMegaWorld
 import siteScrewbox
 import siteDorcelClub
 import siteMissaX
@@ -86,7 +85,6 @@ import networkR18
 import networkBang
 import siteVivid
 import siteJaysPOV
-import siteGirlfriendsFilms
 import siteBAMVisions
 import sitePJGirls
 import siteSinsLife
@@ -195,7 +193,7 @@ searchSites[78] = ("Teens Like It Black", "Teens Like It Black", "http://www.bra
 searchSites[79] = ("Racks and Blacks", "Racks and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
 searchSites[80] = ("Butts and Blacks", "Butts and Blacks", "http://www.brazzers.com", "https://www.brazzers.com/videos-search/")
 
-searchSites[82] = ("X Art", "X-Art", "http://www.x-art.com", "http://www.x-art.com/search/")
+searchSites[82] = ("X Art", "X-Art", "https://www.x-art.com", "https://www.x-art.com/search/")
 searchSites[83] = ("Bang Bros", "Bang Bros", "https://bangbros.com", "https://bangbros.com/search/")
 searchSites[84] = ("Ass Parade", "Ass Parade", "https://bangbros.com", "https://bangbros.com/search/")
 searchSites[85] = ("AvaSpice", "AvaSpice", "https://bangbros.com", "https://bangbros.com/search/")
@@ -493,7 +491,7 @@ searchSites[376] = ("Web Young", "Web Young", "http://www.girlsway.com", "https:
 searchSites[377] = ("Girls Try Anal", "Girls Try Anal", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[378] = ("Sextape Lesbians", "Sextape Lesbians", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[379] = ("Girlsway Originals", "Girlsway Originals", "http://www.girlsway.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
-searchSites[380] = ("Girlfriends Films", "Girlfriends Films", "http://www.girlfriendsfilms.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/query")
+searchSites[380] = ("Girlfriends Films", "Girlfriends Films", "http://www.girlfriendsfilms.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[381] = ("Burning Angel", "Burning Angel", "http://www.burningangel.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[382] = ("Pretty Dirty", "Pretty Dirty", "http://www.prettydirty.com", "http://www.prettydirty.com/en/search/")
 searchSites[383] = ("Devils Film", "Devil's Film", "http://www.devilsfilm.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
@@ -1022,12 +1020,19 @@ searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com/", "https:/
 searchSites[906] = ("EF", "EF", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
 searchSites[907] = ("EFLE", "EFLE", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
 
+
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
+
+
 def getSearchSearchURL(siteID):
     return searchSites[siteID][3]
+
+
 def getSearchFilter(siteID):
     return searchSites[siteID][0]
+
+
 def getSearchSiteName(siteID):
     return searchSites[siteID][1]
 
@@ -1314,14 +1319,10 @@ def getSearchSettings(mediaTitle):
 
     # Search Site ID
     searchSiteID = None
-    # Date/Actor or Title
-    searchType = None
     # What to search for
     searchTitle = None
     # Date search
     searchDate = None
-    # Actors search
-    searchActors = None
 
     # Remove Site from Title
     searchSiteID = getSearchSiteIDByFilter(mediaTitle)
@@ -1357,7 +1358,7 @@ def getSearchSettings(mediaTitle):
                 title = title.replace(' ', '', 1)
                 if title.lower().startswith(site):
                     matched = True
-                    break;
+                    break
 
             if matched:
                 searchTitle = re.sub(site, '', title, 1, flags=re.IGNORECASE)

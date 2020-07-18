@@ -4,7 +4,7 @@ import PAactors
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-').lower() + '/'
 
     searchResults = [directURL]
@@ -14,11 +14,8 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
-        detailsPageElements = None
-        try:
-            detailsPageElements = HTML.ElementFromURL(sceneURL)
-        except:
-            pass
+        req = PAutils.HTTPRequest(sceneURL)
+        detailsPageElements = HTML.ElementFromString(req.text)
 
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
@@ -36,12 +33,11 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    detailsPageElements = HTML.ElementFromURL(sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//div[@class="single-part-details"]//h2')[0].text_content().strip()
@@ -49,11 +45,21 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//div[(contains(@class, "video-bottom-txt"))]')[0].text_content().strip()
 
-    # Studio/Tagline/Collection
-    metadata.collections.clear()
+    # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
-    metadata.tagline = metadata.studio
-    metadata.collections.add(metadata.studio)
+
+    # Tagline and Collection
+    metadata.collections.clear()
+    tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
+    # Release Date
+    date = detailsPageElements.xpath('//div[@class="video-info-left-icon"]//span[3]/text()')[0].strip()
+    if date:
+        date_object = datetime.strptime(date, '%d%b,%Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
@@ -66,24 +72,20 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//div[(contains(@class, "video-info-left pull-left"))]/h3/span/a'):
         actorName = actorLink.text_content().strip()
-        actorPageURL = actorLink.get('href')
 
-        actorPage = HTML.ElementFromURL(actorPageURL)
+        actorPageURL = actorLink.get('href')
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPage = HTML.ElementFromString(req.text)
         actorPhotoURL = actorPage.xpath('//div[(contains(@class, "single-porn-pic"))]/img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
-	
-    # Release Date
-    date = detailsPageElements.xpath('//div[@class="video-info-left-icon"]//span[3]/text()')[0].strip()
-    date_object = datetime.strptime(date, '%d%b,%Y')
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
 
     # Posters/Background
     art = []
     xpaths = [
         '//div[(contains(@class, "sub-video"))]/a/@href'
     ]
+
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             poster = poster.split('?')[0]
@@ -95,17 +97,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and idx > 1:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

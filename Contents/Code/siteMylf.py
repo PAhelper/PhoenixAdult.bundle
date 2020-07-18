@@ -2,20 +2,19 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAutils
-import re
 
 
 def getJSONfromPage(url):
-    data = PAutils.HTTPRequest(url)
+    req = PAutils.HTTPRequest(url)
 
-    if data:
-        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data)
+    if req:
+        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data.text)
         if jsonData:
             return json.loads(jsonData.group(1))['content']
     return None
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = searchTitle.replace(' ', '-').lower()
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)
@@ -57,7 +56,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
                 if 'site' in detailsPageElements:
                     subSite = detailsPageElements['site']['name']
                 else:
-                    subSite =PAsearchSites.getSearchSiteName(siteNum)
+                    subSite = PAsearchSites.getSearchSiteName(siteNum)
 
                 if 'publishedDate' in detailsPageElements:
                     releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
@@ -75,7 +74,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0]
     releaseDate = metadata_id[2]
@@ -83,14 +82,14 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteID) + sceneName)[contentName][sceneName]
 
-    # Studio
-    metadata.studio = 'Mylf'
-
     # Title
     metadata.title = detailsPageElements['title']
 
     # Summary
     metadata.summary = detailsPageElements['description']
+
+    # Studio
+    metadata.studio = 'Mylf'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -125,35 +124,35 @@ def update(metadata,siteID,movieGenres,movieActors):
     movieGenres.clearGenres()
     genres = ["MILF", "Mature"]
 
-    if subSite.lower() == "MylfBoss".lower():
+    if subSite.lower() == 'MylfBoss'.lower():
         for genreName in ['Office', 'Boss']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "MylfBlows".lower():
+    elif subSite.lower() == 'MylfBlows'.lower():
         for genreName in ['Blowjob']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Milfty".lower():
+    elif subSite.lower() == 'Milfty'.lower():
         for genreName in ['Cheating']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Mom Drips".lower():
+    elif subSite.lower() == 'Mom Drips'.lower():
         for genreName in ['Creampie']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Milf Body".lower():
+    elif subSite.lower() == 'Milf Body'.lower():
         for genreName in ['Gym', 'Fitness']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Lone Milf".lower():
+    elif subSite.lower() == 'Lone Milf'.lower():
         for genreName in ['Solo']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Full Of JOI".lower():
+    elif subSite.lower() == 'Full Of JOI'.lower():
         for genreName in ['JOI']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "Mylfed".lower():
+    elif subSite.lower() == 'Mylfed'.lower():
         for genreName in ['Lesbian', 'Girl on Girl', 'GG']:
             movieGenres.addGenre(genreName)
-    elif subSite.lower() == "MylfDom".lower():
+    elif subSite.lower() == 'MylfDom'.lower():
         for genreName in ['BDSM']:
             movieGenres.addGenre(genreName)
-    if (len(actors) > 1) and subSite != "Mylfed":
-        genres.append("Threesome")
+    if (len(actors) > 1) and subSite != 'Mylfed':
+        genres.append('Threesome')
 
     for genre in genres:
         movieGenres.addGenre(genre)
@@ -164,23 +163,21 @@ def update(metadata,siteID,movieGenres,movieActors):
     ]
 
     Log('Artwork found: %d' % len(art))
-    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                req = urllib.Request(posterUrl, headers=headers)
-                img_file = urllib.urlopen(req)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

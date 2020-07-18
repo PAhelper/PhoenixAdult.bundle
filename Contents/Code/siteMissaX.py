@@ -1,12 +1,14 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="updateItem"] | //div[@class="photo-thumb video-thumb"]'):
         titleNoFormatting = searchResult.xpath('.//h4//a | .//p[@class="thumb-title"]')[0].text_content().strip()
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/', '_').replace('?', '!')
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         releaseDate = parse(searchResult.xpath('.//span[@class="update_thumb_date"] | .//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         actors = searchResult.xpath('.//span[@class="tour_update_models"]//a | .//p[@class="model-name"]//a')
@@ -18,57 +20,66 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s + %d in %s [%s] %s' % (firstActor, numActors, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score = score, lang = lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s + %d in %s [%s] %s' % (firstActor, numActors, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
+def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    url = metadata_id[0].replace('_', '/').replace('!', '?')
-    detailsPageElements = HTML.ElementFromURL(url)
+    sceneURL = PAutils.Decode(metadata_id[0])
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//span[@class="update_title"] | //p[@class="raiting-section__title"]')[0].text_content().strip()
 
-    # Studio/Tagline/Collection
-    metadata.collections.clear()
-    metadata.studio = 'AllHerLuv/MissaX'
-    siteName = PAsearchSites.getSearchSiteName(siteID)
-    metadata.tagline = siteName
-    metadata.collections.add(siteName)
-
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//span[@class="latest_update_description"] | //p[contains(@class,"text")]')[0].text_content().replace("Includes:","").replace("Synopsis:","").strip()
+        metadata.summary = detailsPageElements.xpath('//span[@class="latest_update_description"] | //p[contains(@class, "text")]')[0].text_content().replace('Includes:', '').replace('Synopsis:', '').strip()
     except:
-        Log('No summary found')
+        pass
 
-    # Date
+    # Studio
+    metadata.studio = 'AllHerLuv / MissaX'
+
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
+    # Release Date
     try:
         date = detailsPageElements.xpath('//span[@class="update_date"]')[0].text_content().strip()
     except:
         date = detailsPageElements.xpath('//p[@class="dvd-scenes__data"]')[0].text_content().split('|')[1].replace('Added:', '').strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+
+    if date:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@class="update_block"]//span[@class="tour_update_models"]//a | //p[@class="dvd-scenes__data"][1]//a')
     for actorLink in actors:
         actorName = actorLink.text_content().strip()
+
         actorPageURL = actorLink.get('href')
-        actorPageElements = HTML.ElementFromURL(actorPageURL)
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPageElements = HTML.ElementFromString(req.text)
         actorPhotoURL = actorPageElements.xpath('//img[contains(@class, "model_bio_thumb")]/@src0_1x')[0]
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//span[@class="tour_update_tags"]//a | //p[@class="dvd-scenes__data"][2]//a')
     for genreLink in genres:
-        genre = genreLink.text_content()
-        movieGenres.addGenre(genre)
+        genreName = genreLink.text_content()
+
+        movieGenres.addGenre(genreName)
 
     # Posters/Background
     art = [
@@ -80,17 +91,17 @@ def update(metadata,siteID,movieGenres,movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width > 1:
+                if width > 1 and height >= width:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
-                if width > 100:
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

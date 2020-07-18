@@ -8,11 +8,11 @@ def getDataFromAPI(url):
     data = PAutils.HTTPRequest(url)
 
     if data:
-        return json.loads(data)
+        return data.json()
     return data
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = searchTitle.replace(' ', '-').lower()
 
     searchResults = [directURL]
@@ -40,7 +40,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
             siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
             if 'publishedDate' in detailsPageElements:
                 releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
-            else: 
+            else:
                 releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
             displayDate = releaseDate if 'publishedDate' in detailsPageElements else ''
@@ -55,7 +55,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
+def update(metadata, siteID, movieGenres, movieActors):
     Log('******UPDATE CALLED*******')
 
     metadata_id = str(metadata.id).split('|')
@@ -65,14 +65,14 @@ def update(metadata,siteID,movieGenres,movieActors):
 
     detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (PAsearchSites.getSearchSearchURL(siteID), sceneType, sceneName))
 
-    # Studio
-    metadata.studio = 'TeamSkeet'
-
     # Title
     metadata.title = detailsPageElements['title']
 
     # Summary
     metadata.summary = detailsPageElements['description']
+
+    # Studio
+    metadata.studio = 'TeamSkeet'
 
     # Collections / Tagline
     siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteID)
@@ -80,7 +80,7 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.tagline = siteName
     metadata.collections.add(siteName)
 
-    # Date
+    # Release Date
     if sceneDate:
         date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
@@ -144,23 +144,21 @@ def update(metadata,siteID,movieGenres,movieActors):
     ]
 
     Log('Artwork found: %d' % len(art))
-    headers = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'}
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                req = urllib.Request(posterUrl, headers=headers)
-                img_file = urllib.urlopen(req)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if width > 1:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers=headers).content, sort_order=idx)
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 
