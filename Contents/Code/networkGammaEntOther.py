@@ -136,7 +136,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         data = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
         actorData = data['results'][0]['hits'][0]
-        if actorData['pictures']:
+        if 'pictures' in actorData and actorData['pictures']:
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
@@ -154,11 +154,6 @@ def update(metadata, siteID, movieGenres, movieActors):
         keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
         max_quality = sorted(keys)[-1]
         art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
-    else:
-        for idx, scene in scenesPagesElements:
-            keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
-            max_quality = sorted(keys)[-1]
-            art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
