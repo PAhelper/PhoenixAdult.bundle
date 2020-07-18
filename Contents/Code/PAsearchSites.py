@@ -1318,7 +1318,7 @@ def getSearchSettings(mediaTitle):
     searchSiteID = None
     # What to search for
     searchTitle = None
-    # Release Date search
+    # Date search
     searchDate = None
 
     # Remove Site from Title
