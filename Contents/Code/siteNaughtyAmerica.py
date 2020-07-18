@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
 def getAlgolia(url, indexName, params):
