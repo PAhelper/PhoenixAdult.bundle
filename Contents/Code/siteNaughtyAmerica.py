@@ -84,7 +84,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorPhotoURL = ''
 
         actorsPageURL = 'https://www.naughtyamerica.com/pornstar/' + actorName.lower().replace(' ', '-').replace("'", '')
-        req = PAutils.HTTPRequest(sceneURL)
+        req = PAutils.HTTPRequest(actorsPageURL)
         actorsPageElements = HTML.ElementFromString(req.text)
         img = actorsPageElements.xpath('//img[@class="performer-pic"]/@src')
         if img:

@@ -2374,7 +2374,7 @@ def actorDBfinder(actorName):
             if img:
                 actorPhotoURL = 'http://www.boobpedia.com' + img[0]
 
-        elif not actorPhotoURL:
+        if not actorPhotoURL:
             databaseName = 'Babes and Stars'
             actorPageURL = 'http://www.babesandstars.com/' + actorName[0:1].lower() + '/' + actorName.lower().replace(' ', '-').replace('\'', '-') + '/'
             req = PAutils.HTTPRequest(actorPageURL)
@@ -2383,7 +2383,7 @@ def actorDBfinder(actorName):
             if img:
                 actorPhotoURL = img[0]
 
-        elif not actorPhotoURL:
+        if not actorPhotoURL:
             databaseName = 'IAFD'
             req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
             actorSearch = HTML.ElementFromString(req.text)
@@ -2396,7 +2396,7 @@ def actorDBfinder(actorName):
                 if img and 'nophoto' not in img[0]:
                     actorPhotoURL = img[0]
 
-        elif not actorPhotoURL:
+        if not actorPhotoURL:
             databaseName = 'Babepedia'
             img = 'http://www.babepedia.com/pics/' + actorName.title().replace(' ', '%20') + '.jpg'
             req = PAutils.HTTPRequest(img, bypass=False)
