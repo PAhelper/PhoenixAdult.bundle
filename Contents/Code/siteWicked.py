@@ -132,7 +132,6 @@ def update(metadata, siteID, movieGenres, movieActors):
             directors = dvdPageElements.xpath('//ul[@class="directedBy"]')
             for dirname in directors:
                 director.name = dirname.text_content().strip()
-                Log("Director: " + director.name)
         except:
             pass
 
