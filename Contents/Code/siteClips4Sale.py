@@ -7,7 +7,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     userID = searchTitle.split(' ', 1)[0]
     sceneTitle = searchTitle.split(' ', 1)[1]
-    encodedTitle = sceneTitle.replace(' ', '%20')
+    encodedTitle = urllib.quote(sceneTitle)
 
     url = PAsearchSites.getSearchSearchURL(siteNum) + userID + '/*/Cat0-AllCategories/Page1/SortBy-bestmatch/Limit50/search/' + encodedTitle
     req = PAutils.HTTPRequest(url)

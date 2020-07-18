@@ -7,7 +7,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' a ', ' ')
 
-    req = PAutils.HTTPRequest(AsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//a[contains(@class, "thumbnail")]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="scene-title"]')[0].text_content().strip()
@@ -31,8 +31,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAutils.Decode(metadata_id[0])
-    sceneDate = PAutils.Decode(metadata_id[2])
+    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + PAutils.Decode(metadata_id[0])
+    sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -40,8 +40,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = detailsPageElements.xpath('//div[@class="icon-container"]/a/@title')[0]
 
     # Summary
-    description = detailsPageElements.xpath('//div[contains(@class, "description")]')[0].text_content().strip().replace('...read more', '').replace('\n', ' ')
-    metadata.summary = summary
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "description")]')[0].text_content().strip().replace('...read more', '').replace('\n', ' ')
 
     # Studio
     metadata.studio = 'Dogfart Network'

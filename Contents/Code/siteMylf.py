@@ -8,7 +8,7 @@ def getJSONfromPage(url):
     req = PAutils.HTTPRequest(url)
 
     if req:
-        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data.text)
+        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', req.text)
         if jsonData:
             return json.loads(jsonData.group(1))['content']
     return None

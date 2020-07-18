@@ -135,7 +135,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         alpha = bigScript.find('setid:"') + 7
         omega = bigScript.find('",', alpha)
         setID = bigScript[alpha:omega]
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(' ', '%20'))
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + urllib.quote(metadata.title))
         searchPageElements = HTML.ElementFromString(req.text)
         posterUrl = searchPageElements.xpath('//img[@id="set-target-%s"]/@src' % setID)[0]
         if 'http' not in posterUrl:
