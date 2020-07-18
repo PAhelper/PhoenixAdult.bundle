@@ -7,7 +7,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' a ', ' ')
 
-    req = PAutils.HTTPRequest(AsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//a[contains(@class, "thumbnail")]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="scene-title"]')[0].text_content().strip()

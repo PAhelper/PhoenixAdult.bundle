@@ -21,7 +21,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=100, lang=lang))
     else:
         encodedTitle = searchTitle.replace(' ', '+')
-        req = PAutils.HTTPRequest(AsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
             titleNoFormatting = searchResult.xpath('.//a/@title')[0]
