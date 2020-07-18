@@ -2360,7 +2360,7 @@ def actorDBfinder(actorName):
         actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
-        img = actorPage.xpath('//div[contains(@class, "performer-image-container")]/a/@href')[0]
+        img = actorPage.xpath('//div[contains(@class, "performer-image-container")]/a/@href')
         if img:
             actorPhotoURL = img[0]
 
