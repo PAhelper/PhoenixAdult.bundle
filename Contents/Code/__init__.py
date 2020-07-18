@@ -801,6 +801,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 905:
                 results = PAsearchSites.networkHighTechVR.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Evolved Fights Network
+            elif searchSiteID == 906 or searchSiteID == 907:
+                results = PAsearchSites.networkEvolvedFights.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1391,6 +1395,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # RealJamVR
         elif siteID == 905:
             metadata = PAsearchSites.networkHighTechVR.update(metadata, siteID, movieGenres, movieActors)
+
+        # Evolved Fights Network
+        elif siteID == 906 or siteID == 907:
+            metadata = PAsearchSites.networkEvolvedFights.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
