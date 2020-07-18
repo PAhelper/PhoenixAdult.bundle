@@ -198,7 +198,7 @@ class PhoenixActors:
                     newActor = 'Henessy'
             elif metadata.studio == 'Babes':
                 if newActor == 'Angelica':
-                        newActor = 'Krystal Boyd'
+                    newActor = 'Krystal Boyd'
                 elif newActor == 'Ariel':
                     newActor = 'Ariel Piper Fawn'
                 elif newActor == 'Aiko May':
@@ -207,9 +207,9 @@ class PhoenixActors:
                     newActor = 'Katya Clover'
             elif metadata.studio == 'Bang Bros':
                 if newActor == 'Amy':
-                        newActor = 'Abella Anderson'
+                    newActor = 'Abella Anderson'
                 elif newActor == 'Noemi Bilas':
-                        newActor = 'Noemie Bilas'
+                    newActor = 'Noemie Bilas'
             elif metadata.studio == 'Deeper' or metadata.studio == 'Tushyraw' or metadata.studio == 'Tushy' or metadata.studio == 'Blacked' or metadata.studio == 'Blackedraw' or metadata.studio == 'Vixen':
                 if newActor == 'Vikalita':
                     newActor = 'Vika Lita'
