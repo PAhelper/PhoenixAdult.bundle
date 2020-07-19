@@ -47,7 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    if 'dvds' in url:
+    if 'dvds' in sceneURL:
         sceneType = 'DVD'
     else:
         sceneType = 'Scene'
