@@ -93,7 +93,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             titleNoFormatting = titleNoFormatting.replace("BONUS-", "BONUS - ")
             titleNoFormatting = titleNoFormatting.replace("BTS-", "BTS - ")
 
-            curID = PAutil.Encode(searchResult.xpath('.//a[1]')[0].get('href'))
+            curID = PAutils.Encode(searchResult.xpath('.//a[1]')[0].get('href'))
             resultfirst.append(curID)
 
             try:
@@ -251,7 +251,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneURL = PAutils.Decode(metadata_id[0])
     if siteID != 277:
         sceneURL = PAsearchSites.getSearchBaseURL(siteID).replace('https:', 'http:') + sceneURL
-    req = PAutils.HTTPRequest(url)
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     metadata.directors.clear()
@@ -498,10 +498,10 @@ def update(metadata, siteID, movieGenres, movieActors):
         for unlockedPhoto in unlockedPhotos:
             art.append(unlockedPhoto.get('href'))
     except:
-        photoPageUrl = url
+        photoPageUrl = sceneURL
 
     # DVD Covers
-    if "/movie/" in url:
+    if "/movie/" in sceneURL:
         try:
             dvdFrontCover = detailsPageElements.xpath('//a[@class="frontCoverImg"]')[0].get('href')
             art.append(dvdFrontCover)
