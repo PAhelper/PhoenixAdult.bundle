@@ -49,7 +49,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    if 'http' not in url:
+    if 'http' not in sceneURL:
         sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     scenePoster = PAutils.Decode(metadata_id[2])
     req = PAutils.HTTPRequest(sceneURL)
