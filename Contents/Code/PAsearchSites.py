@@ -806,7 +806,7 @@ searchSites[691] = ("Watch Your Mom", "Watch Your Mom", "https://tour.naughtyame
 searchSites[692] = ("Butt Plays", "Butt Plays", "http://www.21sextury.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 searchSites[693] = ("Dorcel Vision", "Dorcel Vision", "https://www.dorcelvision.com", "https://www.dorcelvision.com/en/search?type=4&keyword=")
 searchSites[694] = ("Feminized", "Feminized", "http://feminized.com", "http://feminized.com/tour/search.php?st=advanced&qany=")
-searchSites[695] = ("XConfessions", "XConfessions", "https://xconfessions.com", "https://2rzi1cnto2-dsn.algolia.net/1/indexes/*/queries")
+searchSites[695] = ("XConfessions", "XConfessions", "https://xconfessions.com", "https://xconfessions.com/api/search")
 searchSites[696] = ("Czech Amateurs", "Czech Amateurs", "https://czechamateurs.com", "https://czechamateurs.com/tour/search/?q=")
 searchSites[697] = ("Czech Bangbus", "Czech Bangbus", "https://czechbangbus.com", "https://czechbangbus.com/tour/search/?q=")
 searchSites[698] = ("Czech Bitch", "Czech Bitch", "https://czechbitch.com", "https://czechbitch.com/tour/search/?q=")

@@ -4,50 +4,44 @@ import PAactors
 import PAutils
 
 
-def getAlgolia(url, indexName, params):
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    params = json.dumps({'requests': [{'indexName': indexName, 'params': params}]})
-    data = PAutils.HTTPRequest(url, headers=headers, params=params).json()
-
-    return data['results'][0]['hits']
-
-
 def getToken(url):
     req = PAutils.HTTPRequest(url)
 
     if req:
         return re.search(r'\.access_token=\"(.*?)\"', req.text).group(1)
-    return data
+    return None
 
 
-def getDatafromAPI(baseURL, sceneId, token):
-    url = baseURL + '/api/movies/' + str(sceneId)
+def getDatafromAPI(baseURL, searchData, token, search=True):
+    data = {}
     headers = {'Authorization': 'Bearer ' + token}
-    data = PAutils.HTTPRequest(url, headers=headers).json()
+    if search:
+        headers['Content-Type'] = 'application/json'
+        params = json.dumps({'query': searchData})
+        req = PAutils.HTTPRequest(baseURL, headers=headers, params=params)
+    else:
+        url = baseURL + '/api/movies/' + str(sceneId)
+        headers = {'Authorization': 'Bearer ' + token}
+        req = PAutils.HTTPRequest(url, headers=headers)
 
-    if 'data' in data:
-        return data['data']
+    if req:
+        data = req.json()
+        if 'data' in data:
+            return data['data']
     return None
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     token = getToken(PAsearchSites.getSearchBaseURL(siteNum))
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '?&x-algolia-application-id=2RZI1CNTO2&x-algolia-api-key=797e0814d00bb34f8bcb08e575e26625'
-    searchResults = getAlgolia(url, 'production_movies', 'query=' + searchTitle)
-    for idx, searchResult in enumerate(searchResults):
-        curID = searchResult['id']
-        titleNoFormatting = searchResult['title']['def']
-        releaseDate = parse(searchResult['release_date']['def']).strftime('%Y-%m-%d')
+    if token:
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '?&x-algolia-application-id=2RZI1CNTO2&x-algolia-api-key=797e0814d00bb34f8bcb08e575e26625'
+        searchResults = getDatafromAPI(PAsearchSites.getSearchSearchURL(siteNum), searchTitle, token)
+        for searchResult in searchResults:
+            curID = searchResult['slug']
+            titleNoFormatting = searchResult['title']
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        data = getDatafromAPI(PAsearchSites.getSearchBaseURL(siteNum), curID, token)
-        if data:
             results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
@@ -58,7 +52,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneID = metadata_id[0]
 
     token = getToken(PAsearchSites.getSearchBaseURL(siteID))
-    detailsPageElements = getDatafromAPI(PAsearchSites.getSearchBaseURL(siteID), sceneID, token)
+    detailsPageElements = getDatafromAPI(PAsearchSites.getSearchBaseURL(siteID), sceneID, token, False)
 
     # Title
     metadata.title = detailsPageElements['title']
