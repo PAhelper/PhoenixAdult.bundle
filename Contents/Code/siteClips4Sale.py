@@ -14,7 +14,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="clipWrapper"]'):
         titleNoFormatting = searchResult.xpath('.//a[@class="clipTitleLink"]')[0].text_content().replace('(HD MP4)', '').replace('(WMV)', '').strip()
-        curID = PAutils.Encode(searchResult.xpath('.//a[@class="clipTitleLink"]/@href'))[0]
+        curID = PAutils.Encode(searchResult.xpath('.//a[@class="clipTitleLink"]/@href')[0])
         subSite = searchResult.xpath('//title')[0].text_content().strip()
 
         score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
@@ -26,7 +26,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAutils.Decode(metadata_id[0])
+    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + PAutils.Decode(metadata_id[0])
     userID = sceneURL.split('/')[-3]
     sceneID = sceneURL.split('/')[-2]
     req = PAutils.HTTPRequest(sceneURL)
@@ -2593,7 +2593,7 @@ def update(metadata, siteID, movieGenres, movieActors):
                 if width > 1:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if idx > 1 and width > 100:
+                if width > 100:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
