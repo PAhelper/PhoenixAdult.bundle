@@ -56,7 +56,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         req = PAutils.HTTPRequest(actorPageURL)
         actorPageElements = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPageElements.xpath('//div[contains(@class,"modelpage-info")]//img/@src')[0].split('?')[0]
+        actorPhotoURL = actorPageElements.xpath('//div[contains(@class, "modelpage-info")]//img/@src')[0].split('?')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 

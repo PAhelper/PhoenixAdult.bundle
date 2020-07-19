@@ -4,9 +4,9 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    encodedTitle = searchTitle.replace(' ', '-')
     try:
         # URL Scene Search
-        encodedTitle = searchTitle.replace(' ', '-')
         url = PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '.html'
 
         req = PAutils.HTTPRequest(url)
@@ -27,10 +27,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [New Sensations]' % titleNoFormatting, score=score, lang=lang))
     except:
         # URL DVD Search
-        encodedTitle = searchTitle.replace(' ', '-')
-        url = PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + searchString + '.html'
+        url = PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + encodedTitle + '.html'
 
         req = PAutils.HTTPRequest(url)
+        searchResult = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResult.xpath('//div[@class="dvdSections clear"]/div[1]')[0].text_content().replace('DVDS /', '').strip()
         curID = PAutils.Encode(url)
 
