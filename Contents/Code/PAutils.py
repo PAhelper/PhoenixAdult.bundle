@@ -28,7 +28,8 @@ def bypassCloudflare(url, method, **kwargs):
     return req
 
 
-def HTTPRequest(url, method = 'GET', **kwargs):
+def HTTPRequest(url, method='GET', **kwargs):
+    method = method.upper()
     headers = kwargs.pop('headers', {})
     cookies = kwargs.pop('cookies', {})
     params = kwargs.pop('params', {})
@@ -48,7 +49,7 @@ def HTTPRequest(url, method = 'GET', **kwargs):
     if params:
         method = 'POST'
 
-    Log('Requesting %s "%s"' % (method.upper(), url))
+    Log('Requesting %s "%s"' % (method, url))
     req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params)
 
     req_bypass = None

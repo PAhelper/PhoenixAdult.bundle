@@ -41,6 +41,25 @@ def update(metadata, siteID, movieGenres, movieActors):
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
+    # Actors
+    movieActors.clearActors()
+    actorList = []
+    actors = detailsPageElements.xpath('//div[@class="scenepage-info"]//a')
+
+    sceneInfo = detailsPageElements.xpath('//div[@class="scenepage-info"]//p')[0].text_content()
+    for actorLink in actors:
+        actorName = actorLink.text_content()
+        actorList.append(actorName)
+
+        sceneInfo = sceneInfo.replace(actorName + ',', '').strip()
+        actorPageURL = actorLink.get('href').split('?')[0]
+
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPageElements = HTML.ElementFromString(req.text)
+        actorPhotoURL = actorPageElements.xpath('//div[contains(@class,"modelpage-info")]//img/@src')[0].split('?')[0]
+
+        movieActors.addActor(actorName, actorPhotoURL)
+
     # Title
     metadata.title = ', '.join(actorList).replace(', ', ' and ', -1)
 
@@ -65,25 +84,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     date_object = datetime.strptime(date, '%m-%d-%y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
-
-    # Actors
-    movieActors.clearActors()
-    actorList = []
-    actors = detailsPageElements.xpath('//div[@class="scenepage-info"]//a')
-    # sceneInfo contains actresses, who are links and have actress pages, actors (plain text), and date
-    sceneInfo = detailsPageElements.xpath('//div[@class="scenepage-info"]//p')[0].text_content()
-    for actorLink in actors:
-        actorName = actorLink.text_content()
-        actorList.append(actorName)
-        # remove actress from sceneInfo
-        sceneInfo = sceneInfo.replace(actorName + ',', '').strip()
-        actorPageURL = actorLink.get('href').split('?')[0]
-
-        req = PAutils.HTTPRequest(actorPageURL)
-        actorPageElements = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPageElements.xpath('//div[contains(@class,"modelpage-info")]//img/@src')[0].split('?')[0]
-
-        movieActors.addActor(actorName, actorPhotoURL)
 
     # rest of actors (male actors without pages on the site)
     sceneInfo = sceneInfo.replace(dateRaw, '')
