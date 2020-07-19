@@ -15,6 +15,7 @@ def getToken(url):
 def getDatafromAPI(baseURL, searchData, token, search=True):
     data = {}
     headers = {'Authorization': 'Bearer ' + token}
+
     if search:
         headers['Content-Type'] = 'application/json'
         params = json.dumps({'query': searchData})
@@ -34,7 +35,6 @@ def getDatafromAPI(baseURL, searchData, token, search=True):
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     token = getToken(PAsearchSites.getSearchBaseURL(siteNum))
     if token:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '?&x-algolia-application-id=2RZI1CNTO2&x-algolia-api-key=797e0814d00bb34f8bcb08e575e26625'
         searchResults = getDatafromAPI(PAsearchSites.getSearchSearchURL(siteNum), searchTitle, token)
         for searchResult in searchResults:
             curID = searchResult['slug']
