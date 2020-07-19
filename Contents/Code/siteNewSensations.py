@@ -4,39 +4,27 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    try:
-        # URL Scene Search
-        encodedTitle = searchTitle.replace(' ', '-')
-        url = PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '.html'
+    encodedTitle = searchTitle.replace(' ', '-')
 
+    url = PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '.html'
+    req = PAutils.HTTPRequest(url)
+    if not req.ok:
+        url = url.replace('.html', '-.html')
+        req = PAutils.HTTPRequest(url.replace('.html', '-.html'))
+    if not req.ok:
+        url = PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + encodedTitle + '.html'
         req = PAutils.HTTPRequest(url)
-        if not req.ok:
-            req = PAutils.HTTPRequest(url.replace('.html', '-.html'))
+
+    if req.ok:
         searchResult = HTML.ElementFromString(req.text)
 
-        titleNoFormatting = searchResult.xpath('//div[contains(concat(" ", normalize-space(@class), " "), "title")]//h3')[0].text_content().strip()
+        titleNoFormatting = searchResult.xpath('(//div[@class="trailerVideos clear"] | //div[@class="dvdSections clear"])/div[1]')[0].text_content().replace('DVDS /', '').strip()
         curID = PAutils.Encode(url)
-
-        if searchDate:
-            releaseDate = parse(searchDate).strftime('%Y-%m-%d')
-        else:
-            releaseDate = ''
+        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
         score = 100
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [New Sensations]' % titleNoFormatting, score=score, lang=lang))
-    except:
-        # URL DVD Search
-        encodedTitle = searchTitle.replace(' ', '-')
-        url = PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + searchString + '.html'
-
-        req = PAutils.HTTPRequest(url)
-        titleNoFormatting = searchResult.xpath('//div[@class="dvdSections clear"]/div[1]')[0].text_content().replace('DVDS /', '').strip()
-        curID = PAutils.Encode(url)
-
-        score = 100
-
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [New Sensations]' % titleNoFormatting, score=score, lang=lang))
 
     return results
 
@@ -44,6 +32,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -81,14 +70,10 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieGenres.addGenre(genreName)
 
         # Release Date
-        try:
-            date = str(metadata.id).split('|')[2]
-            if date:
-                date_object = parse(date)
-                metadata.originally_available_at = date_object
-                metadata.year = metadata.originally_available_at.year
-        except:
-            pass
+        if sceneDate:
+            date_object = parse(sceneDate)
+            metadata.originally_available_at = date_object
+            metadata.year = metadata.originally_available_at.year
 
         # Actors
         actors = detailsPageElements.xpath('//div[@class="trailerInfo"]/ul/li[1]/span/a')
