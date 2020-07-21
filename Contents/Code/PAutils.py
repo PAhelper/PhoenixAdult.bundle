@@ -54,12 +54,12 @@ def HTTPRequest(url, method='GET', **kwargs):
 
     req_bypass = None
     if not req.ok and bypass:
-        if req.status_code == 403:
-            Log('%d: trying to bypass' % req.status_code)
+        if req.status_code == 403 or req.status_code == 503:
+            Log('%d: trying to bypass with CloudScraper' % req.status_code)
             try:
                 req_bypass = bypassCloudflare(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
             except Exception as e:
-                Log('Bypass error: %s' % e)
+                Log('CloudScraper error: %s' % e)
 
     if req_bypass:
         req = req_bypass

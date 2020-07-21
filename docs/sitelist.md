@@ -531,7 +531,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
-+ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### NewSensations | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
 + #### Nubiles Porn Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
