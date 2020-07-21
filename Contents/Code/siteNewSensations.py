@@ -5,26 +5,30 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-')
+    searchResultsURLs = [
+        PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '.html',
+        PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '-.html',
+        PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + encodedTitle + '.html'
+    ]
 
-    url = PAsearchSites.getSearchSearchURL(siteNum) + 'updates/' + encodedTitle + '.html'
-    req = PAutils.HTTPRequest(url)
-    if not req.ok:
-        url = url.replace('.html', '-.html')
-        req = PAutils.HTTPRequest(url.replace('.html', '-.html'))
-    if not req.ok:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + 'dvds/' + encodedTitle + '.html'
-        req = PAutils.HTTPRequest(url)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    for sceneURL in googleResults:
+        if sceneURL not in searchResultsURLs:
+            if ('/updates/' in sceneURL or '/dvds/' in sceneURL) and sceneURL not in searchResultsURLs:
+                searchResultsURLs.append(sceneURL)
 
-    if req.ok:
-        searchResult = HTML.ElementFromString(req.text)
+    for sceneURL in searchResultsURLs:
+        req = PAutils.HTTPRequest(sceneURL)
+        if req.ok:
+            searchResult = HTML.ElementFromString(req.text)
 
-        titleNoFormatting = searchResult.xpath('(//div[@class="trailerVideos clear"] | //div[@class="dvdSections clear"])/div[1]')[0].text_content().replace('DVDS /', '').strip()
-        curID = PAutils.Encode(url)
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+            titleNoFormatting = searchResult.xpath('(//div[@class="trailerVideos clear"] | //div[@class="dvdSections clear"])/div[1]')[0].text_content().replace('DVDS /', '').strip()
+            curID = PAutils.Encode(sceneURL)
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-        score = 100
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [New Sensations]' % titleNoFormatting, score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [New Sensations]' % titleNoFormatting, score=score, lang=lang))
 
     return results
 

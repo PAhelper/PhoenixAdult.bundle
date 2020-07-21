@@ -6,7 +6,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="col col-33 t-col-50 m-col-100"]'):
         titleNoFormatting = searchResult.xpath('.//div[@data-item="c-11 r-11 / bottom"]/a/@title')[0]
         subSite = searchResult.xpath('.//div[@data-item="c-21 r-11 / bottom right"]/a/@title')[0]
@@ -26,11 +26,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Studio
-    metadata.studio = "Porndoe Premium"
+    metadata.studio = 'Porndoe Premium'
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[@class="no-space transform-none"]')[0].text_content().strip()
