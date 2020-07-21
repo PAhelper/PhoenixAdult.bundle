@@ -75,32 +75,32 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieGenres.clearGenres()
     movieGenres.addGenre('French porn')
 
-    try:
-        movieName = detailsPageElements.xpath('//div[@class="movie"]/a')[0].text_content().strip()
-        metadata.collections.add(movieName)
-        movieGenres.addGenre('Blockbuster Movie')
-    except:
-        pass
+    movieName = detailsPageElements.xpath('//div[@class="movie"]/a')
+    if movieName:
+        metadata.collections.add(movieName[0].text_content().strip())
+    movieGenres.addGenre('Blockbuster Movie')
 
     # Actors
     movieActors.clearActors()
-    try:  # For individual scene page
-        actors = detailsPageElements.xpath('//section[@id="pornstar"]//a')
-        if actors:
-            if 'porn-movie' not in url and len(actors) == 3:
+    if 'porn-movie' not in sceneURL:
+        actors = detailsPageElements.xpath('//div[@class="scene"][1]//div[@class="actors"]//a')
+    else:
+        actors = detailsPageElements.xpath('//div[@class="actors"]//a')
+
+    if actors:
+        if 'porn-movie' not in sceneURL:
+            if len(actors) == 3:
                 movieGenres.addGenre('Threesome')
-            if 'porn-movie' not in url and len(actors) == 4:
+            if len(actors) == 4:
                 movieGenres.addGenre('Foursome')
-            if 'porn-movie' not in url and len(actors) > 4:
+            if len(actors) > 4:
                 movieGenres.addGenre('Orgy')
 
-            for actorLink in actors:
-                actorName = actorLink.text_content().strip()
-                actorPhotoURL = actorLink.xpath('./img/@src')[0]
+        for actorLink in actors:
+            actorName = actorLink.text_content().strip()
+            actorPhotoURL = ''
 
-                movieActors.addActor(actorName, actorPhotoURL)
-    except:
-        pass
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Release Date
     date = detailsPageElements.xpath('//span[@class="date"]')[0].text_content().replace('Published', '').strip()
