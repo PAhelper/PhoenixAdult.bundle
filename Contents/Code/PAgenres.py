@@ -481,16 +481,16 @@ class PhoenixGenres:
                 newGenre = 'missionary (Position)'
             elif 'sixty-nine' == newGenre.lower() or '69' == newGenre.lower() or '69 position' == newGenre.lower():
                 newGenre = '69 (Position)'
-
+			
             if len(newGenre) > 25:
                 skip = True
                 # Log('skip7')
-            if ':' in metadata.title:
-                if newGenre.lower() in metadata.title.split(':')[0].lower():
+            if ':' in newGenre:
+                if newGenre.lower() in newGenre.split(':')[0].lower():
                     skip = True
                     # Log('skip8')
-            if '-' in metadata.title:
-                if newGenre.lower() in metadata.title.split('-')[0].lower():
+            if '-' in newGenre:
+                if newGenre.lower() in newGenre.split('-')[0].lower():
                     skip = True
                     # Log('skip9')
             if ' ' in newGenre:
