@@ -7,8 +7,8 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if searchDate:
         url = PAsearchSites.getSearchSearchURL(siteNum) + 'date/' + searchDate + '/' + searchDate
-        req = PAutils.HTTPRequest(sceneURL)
-        detailsPageElements = HTML.ElementFromString(req.text)
+        req = PAutils.HTTPRequest(url)
+        searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
             titleNoFormatting = searchResult.xpath('//span[@class= "title"]/a')[0].text_content().strip()
             curID = PAutils.Encode(searchResult.xpath('//span[@class="title"]/a/@href')[0].split('/')[3])
@@ -23,14 +23,14 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     sceneID = searchTitle.split(' ')[0]
     if unicode(sceneID, 'utf-8').isdigit():
-        url = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + sceneID
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + sceneID
         req = PAutils.HTTPRequest(sceneURL)
         detailsPageElements = HTML.ElementFromString(req.text)
 
         detailsPageElements = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]')[0]
-        titleNoFormatting = searchResult.xpath('//h2')[0].text_content()
+        titleNoFormatting = detailsPageElements.xpath('//h2')[0].text_content()
         curID = sceneID
-        releaseDate = parse(searchResult.xpath('//span[@class= "date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+        releaseDate = parse(detailsPageElements.xpath('//span[@class= "date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         score = 100
 
@@ -55,7 +55,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         for paragraph in detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]//p'):
             description += '\n\n' + paragraph.text_content()
     else:
-        description = description.text_content()
+        description = description[0].text_content()
 
     metadata.summary = description.strip()
 
@@ -75,55 +75,55 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    movieGenres.clearGenres()
+    for genreLink in detailsPageElements.xpath('//div[@class="categories"]/a'):
+        genreName = genreLink.text_content().strip()
+
+        movieGenres.addGenre(genreName)
+
     # Actors
     movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//div[contains(@class, "content-pane-performer")]/a'):
         actorName = actorLink.text_content().strip()
 
-        actorPageURL = actorLink.get('href')
+        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         actorPhotoURL = 'http:' + actorPage.xpath('//div[contains(@class, "model-profile")]//img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 
-    if 'Logan Long' in summary:
+    if 'Logan Long' in metadata.summary:
         movieActors.addActor('Logan Long', '')
-    elif 'Patrick Delphia' in summary:
+    elif 'Patrick Delphia' in metadata.summary:
         movieActors.addActor('Patrick Delphia', '')
-    elif 'Seth Gamble' in summary:
+    elif 'Seth Gamble' in metadata.summary:
         movieActors.addActor('Seth Gamble', '')
-    elif 'Alex D.' in summary:
+    elif 'Alex D.' in metadata.summary:
         movieActors.addActor('Alex D.', '')
-    elif 'Lucas Frost' in summary:
+    elif 'Lucas Frost' in metadata.summary:
         movieActors.addActor('Lucas Frost', '')
-    elif 'Van Wylde' in summary:
+    elif 'Van Wylde' in metadata.summary:
         movieActors.addActor('Van Wylde', '')
-    elif 'Tyler Nixon' in summary:
+    elif 'Tyler Nixon' in metadata.summary:
         movieActors.addActor('Tyler Nixon', '')
-    elif 'Logan Pierce' in summary:
+    elif 'Logan Pierce' in metadata.summary:
         movieActors.addActor('Logan Pierce', '')
-    elif 'Johnny Castle' in summary:
+    elif 'Johnny Castle' in metadata.summary:
         movieActors.addActor('Johnny Castle', '')
-    elif 'Damon Dice' in summary:
+    elif 'Damon Dice' in metadata.summary:
         movieActors.addActor('Damon Dice', '')
-    elif 'Scott Carousel' in summary:
+    elif 'Scott Carousel' in metadata.summary:
         movieActors.addActor('Scott Carousel', '')
-    elif 'Dylan Snow' in summary:
+    elif 'Dylan Snow' in metadata.summary:
         movieActors.addActor('Dylan Snow', '')
-    elif 'Michael Vegas' in summary:
+    elif 'Michael Vegas' in metadata.summary:
         movieActors.addActor('Michael Vegas', '')
-    elif 'Xander Corvus' in summary:
+    elif 'Xander Corvus' in metadata.summary:
         movieActors.addActor('Xander Corvus', '')
-    elif 'Chad White' in summary:
+    elif 'Chad White' in metadata.summary:
         movieActors.addActor('Chad White', '')
-
-    # Genres
-    movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//div[@class="categories"]/a'):
-        genreName = genreLink.text_content().strip().lower()
-
-        movieGenres.addGenre(genreName)
 
     # Posters
     art = []

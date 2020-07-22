@@ -16,7 +16,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
-        if data and data.text != 'Page not found':
+        if req and req.text != 'Page not found':
             searchResult = HTML.ElementFromString(req.text)
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
