@@ -6,7 +6,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="view_grid--container"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="video_item--content with-badge"]/a/@title')[0]
         curID = PAutils.Encode(searchResult.xpath('.//div[@class="video_item--content with-badge"]/a/@href')[0])

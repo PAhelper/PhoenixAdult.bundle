@@ -20,7 +20,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//div[contains(@class, "video-details")]//h1[1]')[0].text_content().strip()
-            releaseDate = None
             date = detailsPageElements.xpath('//div[@class="stats-container"]//li[3]//span[2]')[0].text_content().strip()
             releaseDate = parse(date).strftime('%Y-%m-%d')
 

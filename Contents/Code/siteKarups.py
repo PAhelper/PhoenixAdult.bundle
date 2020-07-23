@@ -5,8 +5,8 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchString + '/')
-    searchResults = HTML.ElementFromString(req.text)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '/')
+    actressSearchResults = HTML.ElementFromString(req.text)
 
     actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
     req = PAutils.HTTPRequest(actressPageUrl)

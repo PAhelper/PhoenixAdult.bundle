@@ -31,7 +31,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     req = PAutils.HTTPRequest(sceneURL)
-    searchResults = HTML.ElementFromString(req.text)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[contains(@class, "video-title")]')[0].text_content()

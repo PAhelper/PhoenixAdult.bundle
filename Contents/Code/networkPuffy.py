@@ -95,9 +95,9 @@ def update(metadata, siteID, movieGenres, movieActors):
                 actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
-            actorPhotoURL = actorPage.xpath('//div/section[1]/div/div[1]/img/@src')
-            if actorPhotoURL:
-                actorPhotoURL = actorPhotoURL[0]
+            actorPhotoNode = actorPage.xpath('//div/section[1]/div/div[1]/img/@src')
+            if actorPhotoNode:
+                actorPhotoURL = actorPhotoNode[0]
                 if 'http' not in actorPhotoURL:
                     actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
 
