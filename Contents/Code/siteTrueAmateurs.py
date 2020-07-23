@@ -11,6 +11,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     except:
         sceneTitle = ''
 
+    url = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + '/1'
     req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="wxt7nk-0 JqBNK"]//div[1]/h2'):

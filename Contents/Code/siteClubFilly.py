@@ -6,10 +6,6 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    try:
-        sceneTitle = searchTitle.split(' ', 1)[1]
-    except:
-        sceneTitle = ''
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
     searchResults = HTML.ElementFromString(req.text)

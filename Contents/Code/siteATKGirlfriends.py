@@ -78,10 +78,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     # If scenePage is valid, try to load it to scrape genres
     try:
         req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
-        searchResults = HTML.ElementFromString(req.text)
+        detailsPageElements = HTML.ElementFromString(req.text)
 
         genreText = detailsPageElements.xpath('//div[@class="movie-wrap img-polaroid"]')[0].text_content().split('Tags :')[1].strip()
-        genres = genreText.split(',')
         for genreLink in genreText.split(','):
             genreName = genreLink.strip()
 

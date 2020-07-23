@@ -5,7 +5,6 @@ import PAextras
 import PAutils
 
 
-# maybe helpful for linux users, who has "sslv3 alert handshake failure (_ssl.c:590)>" @kamuk90
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     url = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + encodedTitle + '%22'
     maxscore = 0
