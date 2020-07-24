@@ -29,9 +29,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    videoUri = PAutils.Decode(metadata_id[0])
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     posterUri = PAutils.Decode(metadata_id[2])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + videoUri)
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     movieGenres.clearGenres()
