@@ -5,6 +5,7 @@ import fake_useragent
 import base58
 import cloudscraper
 import requests
+from requests_response import FakeResponse
 
 
 def getUserAgent():
@@ -26,6 +27,49 @@ def bypassCloudflare(url, method, **kwargs):
     req = scraper.request(method, url, proxies=proxies, data=params)
 
     return req
+
+
+def reqBinRequest(url, method, **kwargs):
+    headers = kwargs.pop('headers', {})
+    cookies = kwargs.pop('cookies', {})
+    proxies = kwargs.pop('proxies', {})
+    params = kwargs.pop('params', {})
+
+    if cookies and 'Cookie' not in headers:
+        cookie = '; '.join(['%s=%s' % (key, cookies[key]) for key in cookies])
+        headers['Cookie'] = cookie
+
+    req_headers = '\n'.join(['%s: %s' % (key, headers[key]) for key in headers])
+
+    for node in ['US', 'DE']:
+        req_data = {
+            'method': method,
+            'url': url,
+            'headers': req_headers,
+            'apiNode': node,
+            'idnUrl': url
+        }
+
+        if method == 'POST':
+            if headers['Content-Type'] == 'application/json':
+                req_data['contentType'] = 'JSON'
+                req_data['content'] = params
+            else:
+                req_data['contentType'] = 'URLENCODED'
+                req_data['content'] = '&'.join(['%s=%s' % (key, headers[key]) for key in headers])
+
+        req_params = json.dumps({
+            'id': 0,
+            'json': json.dumps(req_data),
+            'deviceId': '',
+            'sessionId': ''
+        })
+
+        req = HTTPRequest('https://api.reqbin.com/api/v1/requests', headers={'Content-Type': 'application/json'}, params=req_params, proxies=proxies, bypass=False)
+        if req.ok:
+            data = req.json()
+            return FakeResponse(req, url, int(data['StatusCode']), data['Content'])
+    return None
 
 
 def HTTPRequest(url, method='GET', **kwargs):
@@ -60,6 +104,8 @@ def HTTPRequest(url, method='GET', **kwargs):
                 req_bypass = bypassCloudflare(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
             except Exception as e:
                 Log('CloudScraper error: %s' % e)
+                Log('Trying through ReqBIN')
+                req_bypass = reqBinRequest(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
 
     if req_bypass:
         req = req_bypass

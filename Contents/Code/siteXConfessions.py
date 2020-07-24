@@ -21,7 +21,7 @@ def getDatafromAPI(baseURL, searchData, token, search=True):
         params = json.dumps({'query': searchData})
         req = PAutils.HTTPRequest(baseURL, headers=headers, params=params)
     else:
-        url = baseURL + '/api/movies/' + str(sceneId)
+        url = baseURL + '/api/movies/slug/' + str(searchData)
         headers = {'Authorization': 'Bearer ' + token}
         req = PAutils.HTTPRequest(url, headers=headers)
 
@@ -29,7 +29,7 @@ def getDatafromAPI(baseURL, searchData, token, search=True):
         data = req.json()
         if 'data' in data:
             return data['data']
-    return None
+    return data
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -37,12 +37,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if token:
         searchResults = getDatafromAPI(PAsearchSites.getSearchSearchURL(siteNum), searchTitle, token)
         for searchResult in searchResults:
-            curID = searchResult['slug']
-            titleNoFormatting = searchResult['title']
+            if searchResult['resourceType'] == 'confessions':
+                curID = searchResult['slug']
+                titleNoFormatting = searchResult['title']
 
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+                results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s' % (titleNoFormatting), score=score, lang=lang))
 
     return results
 
