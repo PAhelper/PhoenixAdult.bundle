@@ -21,6 +21,11 @@ def bypassCloudflare(url, method, **kwargs):
     params = kwargs.pop('params', {})
 
     scraper = cloudscraper.CloudScraper()
+    if Prefs['captcha_enable']:
+        scraper.captcha = {
+            'provider': Prefs['captcha_type'],
+            'api_key': Prefs['captcha_key']
+        }
     scraper.headers.update(headers)
     scraper.cookies.update(cookies)
 
