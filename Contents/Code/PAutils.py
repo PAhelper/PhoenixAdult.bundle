@@ -24,7 +24,7 @@ def bypassCloudflare(url, method, **kwargs):
     scraper.headers.update(headers)
     scraper.cookies.update(cookies)
 
-    req = scraper.request(method, url, proxies=proxies, data=params)
+    req = scraper.request(method, url, data=params)
 
     return req
 
@@ -56,7 +56,7 @@ def reqBinRequest(url, method, **kwargs):
                 req_data['content'] = params
             else:
                 req_data['contentType'] = 'URLENCODED'
-                req_data['content'] = '&'.join(['%s=%s' % (key, headers[key]) for key in headers])
+                req_data['content'] = '&'.join(['%s=%s' % (key, params[key]) for key in params])
 
         req_params = json.dumps({
             'id': 0,

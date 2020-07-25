@@ -4,11 +4,11 @@ import PAutils
 
 
 def getDatafromAPI(url):
-    data = PAutils.HTTPRequest(url)
+    req = PAutils.HTTPRequest(url)
 
-    if data:
-        return data.json()['data']
-    return data
+    if req:
+        return req.json()['data']
+    return req
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -34,11 +34,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = PAutils.Decode(metadata_id[0])
-    if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
-    url = PAsearchSites.getSearchSearchURL(siteID) + sceneName
+    sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneName
 
-    detailsPageElements = getDatafromAPI(url)
+    detailsPageElements = getDatafromAPI(sceneURL)
     video = detailsPageElements['video']
     pictureset = detailsPageElements['pictureset']
 
