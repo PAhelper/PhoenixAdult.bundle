@@ -29,14 +29,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
     searchResultsURLs = [directURL]
 
-    if not searchResultsURLs:
-        googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
 
-        for sceneURL in googleResults:
-            sceneURL = sceneURL.rsplit('?', 1)[0]
-            if sceneURL not in searchResultsURLs:
-                if ('/movies/' in sceneURL):
-                    searchResultsURLs.append(sceneURL)
+    for sceneURL in googleResults:
+        sceneURL = sceneURL.rsplit('?', 1)[0]
+        if sceneURL not in searchResultsURLs:
+            if ('/movies/' in sceneURL):
+                searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
         detailsPageElements = getJSONfromPage(sceneURL)
