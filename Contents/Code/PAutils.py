@@ -78,6 +78,7 @@ def reqBinRequest(url, method, **kwargs):
 
 
 def HTTPRequest(url, method='GET', **kwargs):
+    url = getClearURL(url)
     method = method.upper()
     headers = kwargs.pop('headers', {})
     cookies = kwargs.pop('cookies', {})
@@ -149,3 +150,17 @@ def Decode(text):
     text = text.encode('UTF-8')
 
     return base58.b58decode(text)
+
+
+def getClearURL(url):
+    url = urlparse.urlparse(url)
+    path = url.path
+
+    while '//' in path:
+        path = path.replace('//', '/')
+
+    newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
+    if (url.query):
+        newURL += '?%s' % url.query
+
+    return newURL
