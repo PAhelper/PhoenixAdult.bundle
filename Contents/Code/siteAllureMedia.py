@@ -114,7 +114,7 @@ def update(metadata, siteID, movieGenres, movieActors):
                       'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
                       'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
                       ]:
-        if actorName in metadata.title or metadata.summary:
+        if actorName in metadata.title or actorName in metadata.summary:
             movieActors.addActor(actorName, '')
 
     # Posters
