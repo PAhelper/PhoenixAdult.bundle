@@ -50,7 +50,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         else:
             score = 60
 
-        results.Append(MetadataSearchResult(id='%s|%d|s' % (curID, siteNum, descriptionID, releaseDate, actors, posterID), name='%s [PureCFNM/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s|%s' % (curID, siteNum, descriptionID, releaseDate, actors, posterID), name='%s [PureCFNM/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
 

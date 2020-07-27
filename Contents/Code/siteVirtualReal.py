@@ -6,9 +6,9 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.lower().replace(' ', '-')
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchPage = HTML.ElementFromString(req.text)
 
-    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().replace('VR Porn video', '').strip()
+    titleNoFormatting = searchPage.xpath('//h1')[0].text_content().replace('VR Porn video', '').strip()
     curID = PAutils.Encode(searchPage.xpath('//link[@rel="canonical"]/@href')[0])
 
     firstActor = searchPage.xpath('//div[@class="w-portfolio-item-image modelBox"]//img/@alt')[0]
@@ -31,7 +31,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title

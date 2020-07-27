@@ -5,8 +5,8 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchString + '/')
-    searchResults = HTML.ElementFromString(req.text)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '/')
+    actressSearchResults = HTML.ElementFromString(req.text)
 
     actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
     req = PAutils.HTTPRequest(actressPageUrl)
@@ -37,6 +37,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = metadata.id.split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

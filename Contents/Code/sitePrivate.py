@@ -5,13 +5,13 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[contains(@class, "col-sm-6")]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="scene"]//div//h3//a')[0].text_content()
         curID = PAutils.Encode(searchResult.xpath('.//div[@class="scene"]//div//h3//a/@href')[0])
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-        score = 100 - Util.LevenshteinDistance(title.lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Private]' % titleNoFormatting, score=score, lang=lang))
 
@@ -21,8 +21,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     sceneDate = metadata_id[2]
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -54,6 +56,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     date = detailsPageElements.xpath('//meta[@itemprop="uploadDate"]')[0].get('content')
     if date:
         date_object = datetime.strptime(date, '%m/%d/%Y')
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    elif sceneDate:
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 

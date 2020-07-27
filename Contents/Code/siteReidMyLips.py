@@ -9,9 +9,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    titleNoFormatting = searchResult.xpath('//title')[0].text_content().split('|')[-1].strip()
+    titleNoFormatting = detailsPageElements.xpath('//title')[0].text_content().split('|')[-1].strip()
     curID = PAutils.Encode(url)
-    releaseDate = parse(searchResult.xpath('/html/body/div/div[4]/div[4]/div/main/div[2]/div[2]/div/div/div[2]/div/div/div[4]/p/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+    releaseDate = parse(detailsPageElements.xpath('/html/body/div/div[4]/div[4]/div/main/div[2]/div[2]/div/div/div[2]/div/div/div[4]/p/span')[0].text_content().strip()).strftime('%Y-%m-%d')
 
     score = 100
 
@@ -23,6 +23,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

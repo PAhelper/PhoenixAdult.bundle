@@ -19,7 +19,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + PAutils.Decode(metadata_id[0])
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -38,7 +40,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     tagline = 'Dorcel Vision'
     try:
         taglineFirst = detailsPageElements.xpath('//div[@class="col-xs-12 col-md-6 with-margin"]//div[@class="entries"]/div')
-        tagline = tagline[0].xpath('//a')[0].text_content().strip()
+        tagline = taglineFirst[0].xpath('//a')[0].text_content().strip()
         metadata.collections.add('Dorcel Vision')
     except:
         pass

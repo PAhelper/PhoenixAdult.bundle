@@ -48,7 +48,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -112,7 +114,7 @@ def update(metadata, siteID, movieGenres, movieActors):
                       'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
                       'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
                       ]:
-        if actorName in metadata.title or metadata.summary:
+        if actorName in metadata.title or actorName in metadata.summary:
             movieActors.addActor(actorName, '')
 
     # Posters

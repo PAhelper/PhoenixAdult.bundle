@@ -13,11 +13,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + '.html'
     req = PAutils.HTTPRequest(sceneURL)
-    searchResults = HTML.ElementFromString(req.text)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
-    titleNoFormatting = searchResult.xpath('//td[@class="blox-bg"]//td[2]//b')[0].text_content().replace('Video', '').strip()
+    titleNoFormatting = detailsPageElements.xpath('//td[@class="blox-bg"]//td[2]//b')[0].text_content().replace('Video', '').strip()
     curID = PAutils.Encode(sceneURL)
-    date = searchResult.xpath('//td[@class="blox-bg"]//td[2]')[0].text_content().title().split('Added')[1].strip()[:10]
+    date = detailsPageElements.xpath('//td[@class="blox-bg"]//td[2]')[0].text_content().title().split('Added')[1].strip()[:10]
     releaseDate = parse(date).strftime('%Y-%m-%d')
 
     if sceneTitle:
@@ -33,7 +33,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
