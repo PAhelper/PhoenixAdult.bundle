@@ -108,6 +108,8 @@ def HTTPRequest(url, method='GET', **kwargs):
             Log('%d: trying to bypass with CloudScraper' % req.status_code)
             try:
                 req_bypass = bypassCloudflare(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
+                if not req_bypass.ok:
+                    raise Exception(req.status_code)
             except Exception as e:
                 Log('CloudScraper error: %s' % e)
                 Log('Trying through ReqBIN')

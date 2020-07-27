@@ -92,7 +92,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a'):
+    for actorLink in detailsPageElements.xpath('//div[@class="backgroundcolor_info"]//span[@class="update_models"]/a'):
         actorName = str(actorLink.text_content().strip())
 
         actorPageURL = actorLink.get('href')
@@ -114,7 +114,7 @@ def update(metadata, siteID, movieGenres, movieActors):
                       'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
                       'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
                       ]:
-        if actorName in metadata.title or metadata.summary:
+        if actorName in metadata.title or actorName in metadata.summary:
             movieActors.addActor(actorName, '')
 
     # Posters
@@ -157,11 +157,11 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Photos page
     photoPageURL = None
+    photoPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
+    req = PAutils.HTTPRequest(photoPageURL)
+    photoPageElements = HTML.ElementFromString(req.text)
+    bigScript = photoPageElements.xpath('//script[contains(text(), "var ptx")]')[0].text_content()
     try:
-        photoPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
-        req = PAutils.HTTPRequest(photoPageURL)
-        photoPageElements = HTML.ElementFromString(req.text)
-        bigScript = photoPageElements.xpath('//script[contains(text(), "var ptx")]')[0].text_content()
         ptx1600starts = bigScript.find('1600')
         ptx1600ends = bigScript.find('togglestatus', ptx1600starts)
         ptx1600 = bigScript[ptx1600starts:ptx1600ends]
@@ -183,10 +183,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Vidcaps page
     try:
-        capsPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
-        req = PAutils.HTTPRequest(photoPageURL)
-        capsPageElements = HTML.ElementFromString(req.text)
-        bigScript = capsPageElements.xpath('//script[contains(text(),"var ptx")]')[0].text_content()
         ptxjpgstarts = bigScript.find('ptx["jpg"] = {};')
         ptxjpgends = bigScript.find('togglestatus', ptxjpgstarts)
         ptxjpg = bigScript[ptxjpgstarts:ptxjpgends]
@@ -211,7 +207,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                referer = photoPageURL if photoPageURL else sceneURL
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': referer})
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
