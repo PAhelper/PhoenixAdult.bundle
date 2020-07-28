@@ -14,7 +14,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
     for sceneURL in googleResults:
         if sceneURL not in searchResultsURLs:
-            if ('/updates/' in sceneURL or '/dvds/' in sceneURL) and sceneURL not in searchResultsURLs:
+            if (('/updates/' in sceneURL or '/dvds/' in sceneURL) and '/tour_ns/' in sceneURL) and sceneURL not in searchResultsURLs:
                 searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
