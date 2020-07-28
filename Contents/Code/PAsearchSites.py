@@ -1,3 +1,4 @@
+import PAutils
 import siteBrazzers
 import siteNaughtyAmerica
 import siteXart
@@ -1409,6 +1410,7 @@ def getSearchSettings(mediaTitle):
 
 
 def posterAlreadyExists(posterUrl, metadata):
+    posterUrl = PAutils.getClearURL(posterUrl)
     for p in metadata.posters.keys():
         # Log(p.lower())
         if p.lower() == posterUrl.lower():

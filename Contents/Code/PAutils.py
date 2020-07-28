@@ -21,10 +21,15 @@ def bypassCloudflare(url, method, **kwargs):
     params = kwargs.pop('params', {})
 
     scraper = cloudscraper.CloudScraper()
+    if Prefs['captcha_enable']:
+        scraper.captcha = {
+            'provider': Prefs['captcha_type'],
+            'api_key': Prefs['captcha_key']
+        }
     scraper.headers.update(headers)
     scraper.cookies.update(cookies)
 
-    req = scraper.request(method, url, proxies=proxies, data=params)
+    req = scraper.request(method, url, data=params)
 
     return req
 
@@ -56,7 +61,7 @@ def reqBinRequest(url, method, **kwargs):
                 req_data['content'] = params
             else:
                 req_data['contentType'] = 'URLENCODED'
-                req_data['content'] = '&'.join(['%s=%s' % (key, headers[key]) for key in headers])
+                req_data['content'] = '&'.join(['%s=%s' % (key, params[key]) for key in params])
 
         req_params = json.dumps({
             'id': 0,
@@ -73,6 +78,7 @@ def reqBinRequest(url, method, **kwargs):
 
 
 def HTTPRequest(url, method='GET', **kwargs):
+    url = getClearURL(url)
     method = method.upper()
     headers = kwargs.pop('headers', {})
     cookies = kwargs.pop('cookies', {})
@@ -102,6 +108,8 @@ def HTTPRequest(url, method='GET', **kwargs):
             Log('%d: trying to bypass with CloudScraper' % req.status_code)
             try:
                 req_bypass = bypassCloudflare(url, method, proxies=proxies, headers=headers, cookies=cookies, params=params)
+                if not req_bypass.ok:
+                    raise Exception(req.status_code)
             except Exception as e:
                 Log('CloudScraper error: %s' % e)
                 Log('Trying through ReqBIN')
@@ -144,3 +152,17 @@ def Decode(text):
     text = text.encode('UTF-8')
 
     return base58.b58decode(text)
+
+
+def getClearURL(url):
+    url = urlparse.urlparse(url)
+    path = url.path
+
+    while '//' in path:
+        path = path.replace('//', '/')
+
+    newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
+    if (url.query):
+        newURL += '?%s' % url.query
+
+    return newURL
