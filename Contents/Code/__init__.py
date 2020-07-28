@@ -73,7 +73,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Brazzers
             elif searchSiteID == 2 or (54 <= searchSiteID <= 81) or searchSiteID == 582 or searchSiteID == 690:
-                results = PAsearchSites.siteBrazzers.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Naughty America
             elif (5 <= searchSiteID <= 51) or searchSiteID == 341 or (393 <= searchSiteID <= 396) or (467 <= searchSiteID <= 468) or searchSiteID == 581 or searchSiteID == 620 or searchSiteID == 625 or searchSiteID == 691 or searchSiteID == 749:
@@ -830,7 +830,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Brazzers
         elif siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
-            metadata = PAsearchSites.siteBrazzers.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # SexyHub
         elif (siteID >= 333 and siteID <= 339):
