@@ -79,7 +79,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
     setID = detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@id')[0]
 
-    img = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@src0_3x')[0]
+    img = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@src0_3x')
     if img:
         art.append(img[0])
 
