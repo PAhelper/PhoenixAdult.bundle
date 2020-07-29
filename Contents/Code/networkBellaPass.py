@@ -62,7 +62,11 @@ def update(metadata, siteID, movieGenres, movieActors):
         for actorLink in actors:
             actorName = actorLink.text_content().strip()
 
-            actorPageURL = 'https:' + actorLink.get('href')
+            actorPageURL = actorLink.get('href')
+            if actorPageURL.startswith('//'):
+                actorPageURL = 'https:' + actorPageURL
+            elif not actorPageURL.startswith('http'):
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL 
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
             actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//div[@class="profile-pic"]/img/@src0_3x')[0]
