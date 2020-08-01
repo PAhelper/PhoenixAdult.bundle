@@ -171,6 +171,8 @@ class PhoenixActors:
                 newActor = 'Riley Jensen'
             elif newActor == 'Sara Luv':
                 newActor = 'Sara Luvv'
+            elif newActor == 'Shalina Devine':
+                newActor = 'Shalina Divine'
             elif newActor == 'Dylann Vox' or newActor == 'Dylan Vox':
                 newActor = 'Skylar Vox'
             elif newActor == 'Sedona' or newActor == 'Stefanie Renee':
@@ -2336,7 +2338,10 @@ class PhoenixActors:
             elif metadata.studio == 'Milehigh' or metadata.studio == 'Doghouse Digital':
                 if newActor == 'Gabrielle Lati':
                     newActor = 'Gabriella Lati'
-
+            elif metadata.studio == 'Rocco Siffredi':
+                if newActor == 'Abbie':
+                    newActor = 'Krystal Boyd'
+            
             if not skip:
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)
@@ -2358,6 +2363,7 @@ def actorDBfinder(actorName):
         actorSearch = HTML.ElementFromString(req.text)
         actorPageURL = actorSearch.xpath('//div[@id="performerlist"]/div//a/@href')
         if actorPageURL:
+
             actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
