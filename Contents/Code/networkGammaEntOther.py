@@ -131,6 +131,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
+    female = []
+    male = []
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
 
@@ -139,9 +141,14 @@ def update(metadata, siteID, movieGenres, movieActors):
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
-            actorPhotoURL = ''
-
-        movieActors.addActor(actorName, actorPhotoURL)
+            actorPhotoURL = ''  
+        if actorLink['gender'] == 'female':
+            female.append((actorName, actorPhotoURL))
+        else:
+            male.append((actorName, actorPhotoURL))
+    combined = female + male
+    for actor in combined:
+        movieActors.addActor(actor[0], actor[1])
 
     # Posters
     art = []
