@@ -142,10 +142,12 @@ def update(metadata, siteID, movieGenres, movieActors):
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
             actorPhotoURL = ''  
+
         if actorLink['gender'] == 'female':
             female.append((actorName, actorPhotoURL))
         else:
             male.append((actorName, actorPhotoURL))
+
     combined = female + male
     for actor in combined:
         movieActors.addActor(actor[0], actor[1])
