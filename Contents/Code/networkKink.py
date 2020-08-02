@@ -6,7 +6,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     shootID = None
     for splited in searchTitle.split(' '):
-        if unicode(splited, 'utf8').isdigit():
+        if unicode(splited, 'UTF-8').isdigit():
             shootID = splited
             break
 

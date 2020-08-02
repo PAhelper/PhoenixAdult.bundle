@@ -4,8 +4,9 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    for searchPageNum in range(1, 6):
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '&page=' + str(searchPageNum))
+    for searchPageNum in range(1, 3):
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '%%22%s%%22&page=%d' % (searchTitle.replace(' ', '+'), searchPageNum)
+        req = PAutils.HTTPRequest(url)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//article'):
             if searchResult.xpath('//article'):
