@@ -1,5 +1,6 @@
 import PAutils
 
+
 class PhoenixActors:
     actorsTable = None
     photosTable = None
@@ -2341,7 +2342,7 @@ class PhoenixActors:
             elif metadata.studio == 'Rocco Siffredi':
                 if newActor == 'Abbie':
                     newActor = 'Krystal Boyd'
-            
+
             if not skip:
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)
@@ -2363,7 +2364,6 @@ def actorDBfinder(actorName):
         actorSearch = HTML.ElementFromString(req.text)
         actorPageURL = actorSearch.xpath('//div[@id="performerlist"]/div//a/@href')
         if actorPageURL:
-
             actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
