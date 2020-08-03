@@ -15,7 +15,7 @@ def getMaxResolution(resolutions):
 
     if max_size[0]:
         return resolutions[max_size[0]]
-    
+
     return None
 
 
@@ -156,7 +156,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
-            actorPhotoURL = ''  
+            actorPhotoURL = ''
 
         if actorLink['gender'] == 'female':
             female.append((actorName, actorPhotoURL))
