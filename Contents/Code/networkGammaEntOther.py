@@ -4,6 +4,21 @@ import PAactors
 import PAutils
 
 
+def getMaxResolution(resolutions):
+    max_size = (None, 0)
+    for idx, key in enumerate(resolutions):
+        t = key.split('x')
+        if len(t) == 2:
+            size = int(t[0]) * int(t[1])
+            if size > max_size[1]:
+                max_size = idx, size
+
+    if max_size[0]:
+        return resolutions[max_size[0]]
+
+    return None
+
+
 def getAPIKey(url):
     data = PAutils.HTTPRequest(url).text
     match = re.search(r'\"apiKey\":\"(.*?)\"', data)
@@ -141,7 +156,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
-            actorPhotoURL = ''  
+            actorPhotoURL = ''
 
         if actorLink['gender'] == 'female':
             female.append((actorName, actorPhotoURL))
@@ -160,8 +175,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
         keys = [key for key in detailsPageElements['pictures'].keys() if key and key[0].isdigit()]
-        max_quality = sorted(keys)[-1]
-        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
+        max_quality = getMaxResolution(keys)
+        if max_quality:
+            art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
