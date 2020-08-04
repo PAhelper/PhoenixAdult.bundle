@@ -141,7 +141,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
-            actorPhotoURL = ''  
+            actorPhotoURL = ''
 
         if actorLink['gender'] == 'female':
             female.append((actorName, actorPhotoURL))
@@ -157,8 +157,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
+        art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
 
-    if 'pictures' in detailsPageElements and detailsPageElements['pictures']['nsfw']['top']:
+    if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
         max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
         art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
 
