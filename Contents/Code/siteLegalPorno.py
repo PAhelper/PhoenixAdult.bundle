@@ -19,7 +19,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
     else:
-        curID = PAutils.Encode(searchResults.xpath('//div[@class="user--guest"]//a/@href')[0])
+        sceneURL = req.url
+        curID = PAutils.Encode(sceneURL)
         titleNoFormatting = searchResults.xpath('//h1[@class="watchpage-title"]')[0].text_content().strip()
         releaseDate = parse(searchResults.xpath('//span[@class="scene-description__detail"]//a/text()')[0]).strftime('%Y-%m-%d')
 
