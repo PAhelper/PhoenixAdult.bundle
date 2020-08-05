@@ -155,14 +155,14 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
 
+    if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
+        max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
+        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
+
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
         if 'url_movie_title' in detailsPageElements:
             art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
-
-    if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
-        max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
-        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
