@@ -79,7 +79,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     data = getAlgolia(url, 'all_' + sceneType, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
     detailsPageElements = data[0]
 
-    data = getAlgolia(url, 'all_' + sceneType, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
+    data = getAlgolia(url, 'all_scenes', 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
     data = sorted(data, key=lambda i: i['clip_id'])
     scenesPagesElements = list(enumerate(data, 1))
 
@@ -157,7 +157,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
-        art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
+        if 'url_movie_title' in detailsPageElements:
+            art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
 
     if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
         max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
