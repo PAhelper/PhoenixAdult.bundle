@@ -338,7 +338,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # PerfectGonzo
-            elif (448 <= searchSiteID <= 459):
+            elif (448 <= searchSiteID <= 459) or (908 <= searchSiteID <= 911):
                 results = PAsearchSites.networkPerfectGonzo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # BadoinkVR Network
@@ -949,7 +949,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
         # Perfect Gonzo
-        elif siteID >= 448 and siteID <= 459:
+        elif (448 <= siteID <= 459) or (908 <= siteID <= 911):
             metadata = PAsearchSites.networkPerfectGonzo.update(metadata, siteID, movieGenres, movieActors)
 
         # BadoinkVR Network
