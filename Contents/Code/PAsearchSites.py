@@ -110,7 +110,7 @@ import siteVRLatina
 import siteVRConk
 import networkEvolvedFights
 
-searchSites = [None] * 908
+searchSites = [None] * 912
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1019,6 +1019,10 @@ searchSites[904] = ("VRConk", "VRConk", "https://www.vrconk.com", "https://vrcon
 searchSites[905] = ("RealJamVR", "RealJamVR", "https://realjamvr.com", "https://realjamvr.com/virtualreality/scene/id/")
 searchSites[906] = ("Evolved Fights", "Evolved Fights", "https://www.evolvedfights.com", "https://www.evolvedfights.com/updates/")
 searchSites[907] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
+searchSites[908] = ("SapphiX", "SapphiX", "https://sapphix.com", "https://sapphix.com/movies?q=")
+searchSites[909] = ("Sapphic Erotica", "Sapphic Erotica", "https://sapphix.com", "https://sapphix.com/movies?site[]=se&q=")
+searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "https://sapphix.com/movies?site[]=gmp&q=")
+searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 
 
 def getSearchBaseURL(siteID):
