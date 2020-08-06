@@ -1021,8 +1021,8 @@ searchSites[906] = ("Evolved Fights", "Evolved Fights", "https://www.evolvedfigh
 searchSites[907] = ("Evolved Fights Lesbian Edition", "Evolved Fights Lesbian Edition", "https://www.evolvedfightslez.com", "https://www.evolvedfightslez.com/updates/")
 searchSites[908] = ("SapphiX", "SapphiX", "https://sapphix.com", "https://sapphix.com/movies?q=")
 searchSites[909] = ("Sapphic Erotica", "Sapphic Erotica", "https://sapphix.com", "https://sapphix.com/movies?site[]=se&q=")
-searchSites[910] = ("GiveMePink", "GiveMePink", "https://sapphix.com", "https://sapphix.com/movies?site[]=gmp&q=")
-searchSites[911] = ("FistFlush", "FistFlush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
+searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "https://sapphix.com/movies?site[]=gmp&q=")
+searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 
 
 def getSearchBaseURL(siteID):
