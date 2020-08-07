@@ -566,7 +566,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - HannaHilton
   - LaneSisters
   - SunnyLeone
-+ #### PerfectGonzo Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only**
++ #### PerfectGonzo Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllInternal
   - AssTraffic
   - CumForCover
@@ -749,6 +749,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Lil Humpers
 + #### RealJamVR | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### SapphiX Network | Matching type: Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Sapphic Erotica
+  - Give Me Pink
+  - Fist Flush
 + #### SexLikeReal | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SexyHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Dane Jones
