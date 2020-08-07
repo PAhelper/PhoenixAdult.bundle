@@ -18,19 +18,26 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     date_object = datetime.strptime(searchDate, '%Y-%m-%d')
+    # sceneDate = date_object.strftime("%#d %b %Y")
     mediaDate = str(date_object.year) + '/' + str(date_object.month)
+
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + mediaDate
     req = PAutils.HTTPRequest(sceneURL)
     searchResults = HTML.ElementFromString(req.text)
+
     for searchResult in searchResults.xpath('//article'):
         titleNoFormatting = searchResult.xpath('./header/a/h1')[0].text_content().strip()
 
-        sceneURL = searchResult.xpath('./header/a/@href')[0].value().strip()
+        sceneDate = searchResult.xpath('./div/div[@itemprop="datePublished"]')[0].text_content().strip()
+        sceneDate = datetime.strptime(sceneDate, '%d %b %Y')
+        dateText = sceneDate.strftime('%Y-%m-%d')
+
+        sceneURL = str(searchResult.xpath('./header/a/@href')[0]).strip()
         curID = PAutils.Encode(sceneURL)
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (mediaDate, titleNoFormatting), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
 
     return results
 
@@ -43,91 +50,79 @@ def update(metadata, siteID, movieGenres, movieActors):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
-    JAVID = sceneURL.rsplit('/', 1)[1]
 
 
     # Studio
-    javStudio = detailsPageElements.xpath('//p/a[contains(@href, "/studio/")]')[0].text_content().strip()
-    metadata.studio = javStudio
+    metadata.studio = 'HuCows.com'
  
 
     # Title
-    javTitle = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - JavBus', '')
-    if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit(): javTitle = javStudio + ' '  + javTitle
-    metadata.title = javTitle
+    Title = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - HuCows.com', '')
+    metadata.title = Title
 
 
     # Tagline
-    taglineQuery = ['N', 'N', 0]
-    label = ''
-    series = ''
+    # taglineQuery = ['N', 'N', 0]
+    # label = ''
+    # series = ''
 
-    try:
-        label = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
-        taglineQuery[2] = taglineQuery[2] + 1
-    except: pass
+    # try:
+    #     label = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
+    #     taglineQuery[2] = taglineQuery[2] + 1
+    # except: pass
 
-    try:
-        series = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
-        taglineQuery[2] = taglineQuery[2] + 2
-    except: pass
+    # try:
+    #     series = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
+    #     taglineQuery[2] = taglineQuery[2] + 2
+    # except: pass
 
-    taglineQuery[0] = label
-    taglineQuery[1] = series
+    # taglineQuery[0] = label
+    # taglineQuery[1] = series
 
-    if taglineQuery[2] == 0:
-        metadata.tagline = ''
-    elif taglineQuery[2] == 1: 
-        metadata.tagline = 'Label: ' + taglineQuery[0]
-    elif taglineQuery[2] == 2: 
-        metadata.tagline = 'Series: ' + taglineQuery[1]
-    elif taglineQuery[2] == 3: 
-        metadata.tagline = 'Label: ' + taglineQuery[0] + ', Series: ' + taglineQuery[1]
+    # if taglineQuery[2] == 0:
+    #     metadata.tagline = ''
+    # elif taglineQuery[2] == 1: 
+    #     metadata.tagline = 'Label: ' + taglineQuery[0]
+    # elif taglineQuery[2] == 2: 
+    #     metadata.tagline = 'Series: ' + taglineQuery[1]
+    # elif taglineQuery[2] == 3: 
+    #     metadata.tagline = 'Label: ' + taglineQuery[0] + ', Series: ' + taglineQuery[1]
 
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="col-md-3 info"]/p[2]')[0].text_content().strip().replace('Release Date: ', '')
-    date_object = datetime.strptime(date, '%Y-%m-%d')
+    date = detailsPageElements.xpath('//article/div/div[@itemprop="datePublished"]')[0].text_content().strip().replace('Release Date: ', '')
+    date_object = datetime.strptime(date, '%d %b %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
 
     # Actors
-    for actorLink in detailsPageElements.xpath('//a[@class="avatar-box"]'):
-        fullActorName = actorLink.text_content().strip()
-
-        actorPhotoURL = detailsPageElements.xpath('//a[@class="avatar-box"]/div[@class="photo-frame"]/img[contains(@title, "%s")]/@src' % (fullActorName))[0]
-        if actorPhotoURL.rsplit('/', 1)[1] == 'nowprinting.gif':
-            actorPhotoURL = ''
-
-
-        movieActors.addActor(fullActorName, actorPhotoURL)
+    # -- No Actor Data Available On Site Metadata --
 
 
     # Genres
-    for genreLink in detailsPageElements.xpath('//span[@class="genre"]/a[contains(@href, "/genre/")]'):
+
+    # Default Genres
+    genres = ['Hucows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
+    for genre in genres:
+        movieGenres.addGenre(genre)
+
+    # Dynamic Genres
+    for genreLink in detailsPageElements.xpath('//div/span/a[@rel="category tag"]'):
         genreName = genreLink.text_content().lower().strip()
         movieGenres.addGenre(genreName)
+    
 
 
     # Posters
     art = []
     xpaths = [
-        '//a[contains(@href, "/cover/")]/@href',
-        '//a[@class="sample-box"]/div/img/@src',
+        '//div/article/div/a[@class="lightboxhover"]/img/@src',
+        '//div/center/a/img[@class="lightboxhover"]/@src',
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             art.append(poster)
-
-    coverImage = detailsPageElements.xpath('//a[contains(@href, "/cover/")]/@href')
-    coverImageCode = coverImage[0].rsplit('/', 1)[1].split('.')[0].split('_')[0]
-    imageHost = coverImage[0].rsplit('/', 2)[0]
-    coverImage = imageHost + '/thumb/'  + coverImageCode + '.jpg'
-    if coverImage.count('/images.') == 1:
-        coverImage = coverImage.replace("thumb", "thumbs")
-
-    art.append(coverImage)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
