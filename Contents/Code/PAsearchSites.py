@@ -115,9 +115,6 @@ import siteHucows
 
 searchSites = [None] * 914
 
-
-
-searchSites = [None] * 912
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
 searchSites[2] = ("Brazzers", "Brazzers", "http://www.brazzers.com", "https://site-api.project1service.com")

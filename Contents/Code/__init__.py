@@ -1423,14 +1423,10 @@ class PhoenixAdultAgent(Agent.Movies):
         elif siteID == 913:
             metadata = PAsearchSites.siteCaribbeancom.update(metadata, siteID, movieGenres, movieActors)
 
-        # Caribbeancom
+        # Hucows
         elif siteID == 914:
             metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
 
-
-        # JavBus
-        elif siteID == 908:
-            metadata = PAsearchSites.networkJavBus.update(metadata, siteID, movieGenres, movieActors)
         
         # Cleanup Genres and Add
         Log("Genres")
