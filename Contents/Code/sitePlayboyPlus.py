@@ -1,21 +1,18 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import json
+import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    data = urllib.urlopen(PAsearchSites.getSearchSearchURL(siteNum) + '?gallery=1&terms=' + encodedTitle).read()
-    data = json.loads(data)
-
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + '?gallery=1&terms=' + encodedTitle).json()
     searchResults = HTML.ElementFromString(data['results'][0]['html'])
-
     for searchResult in searchResults.xpath('//li[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//p[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
-        img = searchResults.xpath('.//img[contains(@class, "image")]/@data-src')[0].split('?', 1)[0].replace('/', '_').replace('?', '!')
-        url = PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a/@href')[0]
-        curID = url.replace('/', '_').replace('?', '!')
+        img = PAutils.Encode(searchResults.xpath('.//img[contains(@class, "image")]/@data-src')[0].split('?', 1)[0])
+        curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a/@href')[0])
+
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
@@ -26,17 +23,14 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    Log('******UPDATE CALLED*******')
-
-    id = str(metadata.id).split('|')
-    url = id[0].replace('_', '/').replace('!', '?')
-    searchImg = id[2].replace('_', '/').replace('!', '?')
-
-    detailsPageElements = HTML.ElementFromURL(url)
-
-    # Studio
-    metadata.studio = 'Playboy Plus'
+def update(metadata, siteID, movieGenres, movieActors):
+    metadata_id = str(metadata.id).split('|')
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    scenePoster = metadata_id[2]
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[@class="title"]')[0].text_content().strip()
@@ -44,21 +38,24 @@ def update(metadata,siteID,movieGenres,movieActors):
     # Summary
     metadata.summary = detailsPageElements.xpath('//p[@class="description-truncated"]')[0].text_content().strip().replace('...', '', 1)
 
+    # Studio
+    metadata.studio = 'Playboy Plus'
+
     # Tagline and Collection(s)
     metadata.collections.clear()
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Genres
-    movieGenres.clearGenres()
-    movieGenres.addGenre("Glamour")
-
     # Release Date
     date = detailsPageElements.xpath('//p[contains(@class, "date")]')[0].text_content().strip()
     date_object = datetime.strptime(date, '%B %d, %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
+
+    # Genres
+    movieGenres.clearGenres()
+    movieGenres.addGenre('Glamour')
 
     # Actors
     movieActors.clearActors()
@@ -71,30 +68,29 @@ def update(metadata,siteID,movieGenres,movieActors):
     director.name = directorName
 
     # Photos
-    art = [searchImg]
-    img = detailsPageElements.xpath('//img[contains(@class, "image")]/@data-src')[0]
-    art.append(img.split('?', 1)[0])
+    art = [
+        scenePoster,
+        detailsPageElements.xpath('//img[contains(@class, "image")]/@data-src')[0].split('?', 1)[0]
+    ]
     for img in detailsPageElements.xpath('//section[@class="gallery"]//img[contains(@class, "image")]/@data-src'):
         art.append(img.split('?', 1)[0])
 
-    j = 1
-    Log("Artwork found: " + str(len(art)))
-    for posterUrl in art:
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                img_file = urllib.urlopen(posterUrl)
-                im = StringIO(img_file.read())
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
                 if (width > 1 or height > width) and width < height:
                     # Item is a poster
-                    metadata.posters[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
                 if width > 100 and width > height:
                     # Item is an art item
-                    metadata.art[posterUrl] = Proxy.Media(HTTP.Request(posterUrl, headers={'Referer': 'http://www.google.com'}).content, sort_order=j)
-                j = j + 1
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
 

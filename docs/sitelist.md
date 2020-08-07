@@ -262,6 +262,9 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Elegant Angel | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Only DVDs supported**
 + #### EvilAngel | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Erito | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Evolved Fights Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Evolved Fights
+  - Evolved Fights Lesbian Edition
 + #### FakeHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Fake Agent
   - Fake Agent UK
@@ -343,14 +346,14 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### JAV (via R18) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
 + #### JAY's POV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### JulesJordan network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**
++ #### JulesJordan Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**
   - GirlGirl
   - JulesJordan
   - ManuelFerrara
   - SpermSwallowers
   - TheAssFactory
 + #### Kelly Madison | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
-+ #### Kink.com network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Kink Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 30MinutesofTorment
   - BoundGangBangs
   - BoundGods
@@ -363,8 +366,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - DivineBitches
   - Electrosluts
   - EverythingButt
-  - EvolvedFights
-  - EvolvedFightsLesbianEdition
   - FamiliesTied
   - Filthy Femdom
   - FootWorship
@@ -372,6 +373,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - FuckingMachines
   - HardcoreGangbang
   - Hogtied
+  - KinkEvolvedFights
+  - KinkEvolvedFightsLesbianEdition
   - KinkFeatures
   - KinkUniversity
   - MenInPain
@@ -528,8 +531,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Watch Your Mom
   - Watch Your Wife
   - Wives on Vacation
-+ #### NewSensations | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
-+ #### Nubiles-porn.com Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### NewSensations | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
++ #### Nubiles Porn Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Bad Teens Punished
   - Bountyhunter Porn
   - Daddy's Lil Angel
@@ -563,7 +566,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - HannaHilton
   - LaneSisters
   - SunnyLeone
-+ #### PerfectGonzo Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only**
++ #### PerfectGonzo Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AllInternal
   - AssTraffic
   - CumForCover
@@ -744,7 +747,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Wives in Pantyhose
 + #### Other Reality Kings Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Lil Humpers
++ #### RealJamVR | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### ReidMyLips | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### SapphiX Network | Matching type: Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Sapphic Erotica
+  - Give Me Pink
+  - Fist Flush
 + #### SexLikeReal | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SexyHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Dane Jones
@@ -877,7 +885,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### VirtualTaboo | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Vivid Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Title only for DVDs**
 + #### VRBangers | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### VRConk | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VRHush | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### VRLatina | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### VRP Films | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### VogoV | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only**
 + #### Wankz Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - 4K Desire
@@ -928,6 +939,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Lesbianx
   - AllBlackX
 + #### XVirtual | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
++ #### Xillimite | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
 + #### Zero Tolerance | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **DVDs not supported**
 
 ## Adding sites to this list

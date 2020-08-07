@@ -3,7 +3,7 @@ import PAgenres
 import PAactors
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     Log("searchTitle:" + searchTitle)
     searchTitle = searchTitle.replace(' And ',',').replace(' and ',',').replace(' In ', ' in ').replace(' At ', ' at ')
     parse_siteName = searchTitle.split(' at ')
@@ -30,7 +30,7 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
         releaseDate = ''
 
     score = 100
-    metadataID = curID + "|" + str(siteNum) + "|" + releaseDate + "|" + sceneName + "|" + siteName
+    metadataID = '%s|%d' % (curID, siteNum) + "|" + releaseDate + "|" + sceneName + "|" + siteName
     Log("metadata.id to pass: " + metadataID)
     displayName = curID.replace('+',', ').replace('_',' ')
     results.Append(MetadataSearchResult(id = metadataID, name = displayName + "[" + siteName + "] " + releaseDate, score = score, lang = lang))
@@ -38,13 +38,13 @@ def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
+def update(metadata, siteID, movieGenres, movieActors):
     Log("*******Manual actor input*******")
 
     # Actors
     movieActors.clearActors()
     Log("metadata.id: " + str(metadata.id))
-    actorList = str(metadata.id).split("|")[0].replace('_',' ').replace('+',', ')
+    actorList = str(metadata.id).split('|')[0].replace('_',' ').replace('+',', ')
     actors = actorList.split(',')
     for actor in actors:
         actorName = actor.strip().title()
@@ -53,7 +53,7 @@ def update(metadata,siteID,movieGenres,movieActors):
         Log("added actor: " + actorName)
 
     # Release Date
-    date = str(metadata.id).split("|")[2]
+    date = str(metadata.id).split('|')[2]
     if len(date) > 0:
         Log("Date Found")
         date_Object = parse(date)
@@ -68,14 +68,14 @@ def update(metadata,siteID,movieGenres,movieActors):
     metadata.collections.add(marker)
 
     # Studio
-    siteName = str(metadata.id).split("|")[4].strip().title()
+    siteName = str(metadata.id).split('|')[4].strip().title()
     if len(siteName) > 0:
         metadata.studio = siteName
         metadata.collections.add(siteName)
         Log("Found Studio/SiteName: " + siteName)
 
     # Title
-    sceneName = str(metadata.id).split("|")[3].strip().title()
+    sceneName = str(metadata.id).split('|')[3].strip().title()
     if len(sceneName) > 0:
         metadata.title = sceneName
         Log("sceneName: " + sceneName)

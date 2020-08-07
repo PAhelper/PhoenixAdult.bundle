@@ -3,96 +3,109 @@ import PAgenres
 import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    Log("Results found: " + str(len(searchResults.xpath('//div[@class="tile-grid-item"]'))))
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
-        titleNoFormatting = searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('title')
-        Log("Result Title: " + titleNoFormatting)
-        curID = PAutils.Encode(searchResult.xpath('.//a[@class="video-card-title heading heading--4"]')[0].get('href'))
-        Log("curID: " + curID)
-        try:
-            releaseDate = parse(searchResult.xpath('.//span[@class="video-card-upload-date"]')[0].get('content')).strftime('%Y-%m-%d')
-            Log("releaseDate: " + releaseDate)
-        except:
-            releaseDate = ""
-            Log("No date found (BadoinkVR)")
+        data = searchResult.xpath('.//a[contains(@class, "video-card-title")]')[0]
+        titleNoFormatting = searchResult.xpath('.//a[contains(@class, "video-card-title")]/@title')[0]
+        curID = PAutils.Encode(searchResult.xpath('.//a[contains(@class, "video-card-title")]/@href')[0])
+
+        releaseDate = ''
+        date = searchResult.xpath('.//span[@class="video-card-upload-date"]/@content')
+        if date:
+            releaseDate = parse(date[0]).strftime('%Y-%m-%d')
         girlName = searchResult.xpath('.//a[@class="video-card-link"]')[0].text_content()
-        Log("firstGirlname: " + girlName)
-        if searchDate:
+
+        if searchDate and releaseDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        Log("Score: " + str(score))
 
-        name = "[%s] %s in %s %s" % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate)
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=name, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    path = PAutils.Decode(str(metadata.id).split("|")[0])
-    url = PAsearchSites.getSearchBaseURL(siteID) + path
-    detailsPageElements = HTML.ElementFromURL(url)
+def update(metadata, siteID, movieGenres, movieActors):
+    metadata_id = str(metadata.id).split('|')
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="video-rating-and-details"]//h1[@class="heading heading--2 video-title"]')[0].text_content()
-
-    # Studio
-    metadata.studio = 'BadoinkVR'
+    metadata.title = detailsPageElements.xpath('//h1[contains(@class, "video-title")]')[0].text_content()
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//p[@class="video-description"]')[0].text_content().strip()
 
+    # Studio
+    metadata.studio = 'BadoinkVR'
+
     # Tagline and Collection
-    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.clear()
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
+    # Release Date
+    sceneDate = detailsPageElements.xpath('//p[@itemprop="uploadDate"]/@content')
+    if sceneDate:
+        date_object = parse(sceneDate[0])
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//a[@class="video-tag"]')
-    if len(genres) > 0:
-        for genre in genres:
-            movieGenres.addGenre(genre.text_content())
+    for genreLink in detailsPageElements.xpath('//a[@class="video-tag"]'):
+        genreName = genreLink.text_content().strip()
 
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//a[contains(@class,"video-actor-link")]')
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = actorLink.text_content()
-            actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get("href")
-            actorPage = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPage.xpath('//img[@class="girl-details-photo"]')[0].get("src").split('?')
-            movieActors.addActor(actorName,actorPhotoURL[0])
+    for actorLink in detailsPageElements.xpath('//a[contains(@class,"video-actor-link")]'):
+        actorName = actorLink.text_content().strip()
 
-    # Posters/Background
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
-    posters = detailsPageElements.xpath('//div[contains(@class,"gallery-item")]')
-    posterNum = 1
-    for posterCur in posters:
-        posterURL = posterCur.get("data-big-image")
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        posterNum = posterNum + 1
+        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPage = HTML.ElementFromString(req.text)
+        actorPhotoURL = actorPage.xpath('//img[@class="girl-details-photo"]/@src')[0].split('?')[0]
 
-    backgroundURL = detailsPageElements.xpath('//img[@class="video-image"]')[0].get("src").split('?')
-    metadata.art[backgroundURL[0]] = Proxy.Preview(HTTP.Request(backgroundURL[0], headers={'Referer': 'http://www.google.com'}).content, sort_order = 1)
+        movieActors.addActor(actorName, actorPhotoURL)
 
-    # Date
-    try:
-        date = detailsPageElements.xpath('.//div[@class="video-details"]//p[@class="video-upload-date"]')[0].text_content().split(":")
-        dateFixed = date[1].strip()
-        Log('DateFixed: ' + dateFixed)
-        date_object = datetime.strptime(dateFixed, '%B %d, %Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-    except:
-        Log("No date found")
+    # Posters
+    art = []
+    xpaths = [
+        '//div[contains(@class,"gallery-item")]/@data-big-image',
+        '//img[@class="video-image"]/@src'
+    ]
+
+    for xpath in xpaths:
+        for img in detailsPageElements.xpath(xpath):
+            img = img.split('?')[0]
+
+            art.append(img)
+
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
+            try:
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if idx > 1 and width > 100:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
 
     return metadata

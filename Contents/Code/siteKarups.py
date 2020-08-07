@@ -1,124 +1,124 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
-def search(results,encodedTitle,title,searchTitle,siteNum,lang,searchDate):
-    searchString = searchTitle.replace(' ','-').replace("'","-")
-    actressSearchResults = HTML.ElementFromURL(PAsearchSites.getSearchSearchURL(siteNum) + searchString + "/")
-    actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a')[0].get('href')
-    searchResults = HTML.ElementFromURL(actressPageUrl)
+def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    encodedTitle = searchTitle.replace(' ', '-')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '/')
+    actressSearchResults = HTML.ElementFromString(req.text)
+
+    actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
+    req = PAutils.HTTPRequest(actressPageUrl)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class,"listing-videos")]//div[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//span[@class="title"]')[0].text_content()
-        Log("Result Title: " + titleNoFormatting)
-        curID = searchResult.xpath('.//a')[0].get('href').replace('/','_').replace('?','!')
-        Log("curID: " + curID)
-        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().replace("th","").replace('st','').strip()).strftime('%Y-%m-%d')
-        Log("releaseDate: " + releaseDate)
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+        releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().replace('th', '').replace('st', '').strip()).strftime('%Y-%m-%d')
+
         subSiteRaw = searchResult.xpath('.//div[@class="meta"]//span[@class="date-and-site"]//span')[0].text_content()
-        Log("subSite: " + releaseDate)
         if subSiteRaw == 'kha':
             subSite = 'KarupsHA'
         elif subSiteRaw == 'kow':
             subSite = 'KarupsOW'
         elif subSiteRaw == 'kpc':
             subSite = 'KarupsPC'
+
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
-            searchSubSite = PAsearchSites.getSearchFilter(siteNum)
-            score = 100 - Util.LevenshteinDistance(searchSubSite.lower(), subSite.lower())
-        results.Append(MetadataSearchResult(id = curID + "|" + str(siteNum), name = titleNoFormatting + " [" + subSite + "] " + releaseDate, score = score, lang = lang))
+            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchTitle.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
+
     return results
 
 
-def update(metadata,siteID,movieGenres,movieActors):
-    url = str(metadata.id).split("|")[0].replace('_','/').replace('!','?')
-    detailsPageElements = HTML.ElementFromURL(url)
+def update(metadata, siteID, movieGenres, movieActors):
+    metadata_id = metadata.id.split('|')
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1//span[@class="title"]')[0].text_content().strip()
-    Log("Scene Title: " + metadata.title)
-
-    # Studio/Tagline/Collection
-    metadata.studio = "Karups"
-    subSite = detailsPageElements.xpath('//h1//span[@class="sup-title"]//span')[0].text_content().strip()
-    metadata.tagline = subSite
-    metadata.collections.clear()
-    metadata.collections.add(metadata.tagline)
-
 
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//div[@class="content-information-description"]//p')[0].text_content()
+        metadata.summary = detailsPageElements.xpath('//div[@class="content-information-description"]//p')[0].text_content().strip()
     except:
-        Log('No summary found')
+        pass
 
-    # Date
-    date = detailsPageElements.xpath('//span[@class="date"]/span[@class="content"]')[0].text_content().replace(subSite,"").replace('Video added on','').strip()
-    Log("date: " + date)
+    # Studio
+    metadata.studio = 'Karups'
+
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    tagline = detailsPageElements.xpath('//h1//span[@class="sup-title"]//span')[0].text_content().strip()
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
+    # Release Date
+    date = detailsPageElements.xpath('//span[@class="date"]/span[@class="content"]')[0].text_content().replace(tagline, '').replace('Video added on', '').strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('//span[@class="models"]//a')
-    Log("actors #: " + str(len(actors)))
-    if len(actors) > 0:
-        for actorLink in actors:
-            actorName = actorLink.text_content().strip()
-            Log("Actor: " + actorName)
-            actorPageURL = actorLink.get('href')
-            actorPageElements = HTML.ElementFromURL(actorPageURL)
-            actorPhotoURL = actorPageElements.xpath('//div[@class="model-thumb"]//img')[0].get("src")
-            Log("ActorPhotoURL: " + actorPhotoURL)
-            movieActors.addActor(actorName,actorPhotoURL)
-
     # Genres
     movieGenres.clearGenres()
-    if subSite == 'KarupsHA':
-        genres = ["Amateur"]
-    if subSite == 'KarupsPC':
+    if tagline == 'KarupsHA':
+        genres = ['Amateur']
+    if tagline == 'KarupsPC':
         genres = []
-    if subSite == 'KarupsOW':
-        genres = ["MILF"]
+    if tagline == 'KarupsOW':
+        genres = ['MILF']
+
     for genre in genres:
         movieGenres.addGenre(genre)
 
-    # Posters/Background
-    valid_names = list()
-    metadata.posters.validate_keys(valid_names)
-    metadata.art.validate_keys(valid_names)
+    # Actors
+    movieActors.clearActors()
+    for actorLink in detailsPageElements.xpath('//span[@class="models"]//a'):
+        actorName = actorLink.text_content().strip()
 
-    try:
-        background = detailsPageElements.xpath('//div[@class="video-player"]//video')[0].get("poster")
-        metadata.art[background] = Proxy.Preview(
-            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-        metadata.posters[background] = Proxy.Preview(
-            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-        Log("BG URL: " + background)
-    except:
-        pass
-    try:
-        background = detailsPageElements.xpath('//img[@class="poster"]')[0].get("src")
-        metadata.art[background] = Proxy.Preview(
-            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-        metadata.posters[background] = Proxy.Preview(
-            HTTP.Request(background, headers={'Referer': 'http://www.google.com'}).content, sort_order=1)
-        Log("BG URL: " + background)
-    except:
-        pass
+        actorPageURL = actorLink.get('href')
+        req = PAutils.HTTPRequest(actorPageURL)
+        actorPageElements = HTML.ElementFromString(req.text)
+        actorPhotoURL = actorPageElements.xpath('//div[@class="model-thumb"]//img/@src')[0]
 
+        movieActors.addActor(actorName, actorPhotoURL)
 
-    posters = detailsPageElements.xpath('//div[@class="video-thumbs"]//img')
-    Log(str(len(posters)) + " thumbs found.")
-    posterNum = 2
-    for posterCur in posters:
-        posterURL = posterCur.get("src")
-        metadata.posters[posterURL] = Proxy.Preview(HTTP.Request(posterURL, headers={'Referer': 'http://www.google.com'}).content, sort_order = posterNum)
-        posterNum += 1
+    # Posters
+    art = []
+    xpaths = [
+        '//div[@class="video-player"]//video/@poster',
+        '//img[@class="poster"]/@src',
+        '//div[@class="video-thumbs"]//img/@src'
+    ]
 
+    for xpath in xpaths:
+        for img in detailsPageElements.xpath(xpath):
+            art.append(img)
 
-
+    Log('Artwork found: %d' % len(art))
+    for idx, posterUrl in enumerate(art, 1):
+        if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
+            # Download image file for analysis
+            try:
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                im = StringIO(image.content)
+                resized_image = Image.open(im)
+                width, height = resized_image.size
+                # Add the image proxy items to the collection
+                if width > 1:
+                    # Item is a poster
+                    metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+                if width > 100:
+                    # Item is an art item
+                    metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
+            except:
+                pass
 
     return metadata
