@@ -179,8 +179,6 @@ def update(metadata, siteID, movieGenres, movieActors):
         max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
         art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
 
-
-
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
