@@ -805,8 +805,7 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 906 or searchSiteID == 907:
                 results = PAsearchSites.networkEvolvedFights.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            # JavBus Network
-
+            # JavBus
             elif searchSiteID == 912:
                 results = PAsearchSites.networkJavBus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 

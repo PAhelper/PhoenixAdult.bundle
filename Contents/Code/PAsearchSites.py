@@ -113,7 +113,7 @@ import networkJavBus
 import siteCaribbeancom
 import siteHucows
 
-searchSites = [None] * 914
+searchSites = [None] * 915
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1028,7 +1028,7 @@ searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "http
 searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 searchSites[912] = ("JavBus", "JavBus", "https://www.javbus.com", "https://www.javbus.com/en/")
 searchSites[913] = ("Caribbeancom", "Caribbeancom", "https://en.caribbeancom.com/eng", "https://en.caribbeancom.com/eng/moviepages/")
-searchSites[913] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
+searchSites[914] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
 
 
 def getSearchBaseURL(siteID):
