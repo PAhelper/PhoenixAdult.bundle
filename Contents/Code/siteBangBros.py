@@ -51,7 +51,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Release Date
     if sceneDate:
-        date_object = datetime.strptime(sceneDate, '%b %d, %Y')
+        date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 

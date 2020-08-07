@@ -4,6 +4,21 @@ import PAactors
 import PAutils
 
 
+def getMaxResolution(resolutions):
+    max_size = (None, 0)
+    for idx, key in enumerate(resolutions):
+        t = key.split('x')
+        if len(t) == 2:
+            size = int(t[0]) * int(t[1])
+            if size > max_size[1]:
+                max_size = idx, size
+
+    if max_size[0]:
+        return resolutions[max_size[0]]
+
+    return None
+
+
 def getAPIKey(url):
     data = PAutils.HTTPRequest(url).text
     match = re.search(r'\"apiKey\":\"(.*?)\"', data)
@@ -25,7 +40,7 @@ def getAlgolia(url, indexName, params, referer):
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    if unicode(sceneID, 'utf8').isdigit():
+    if unicode(sceneID, 'UTF-8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
@@ -131,6 +146,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
+    female = []
+    male = []
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
 
@@ -141,18 +158,27 @@ def update(metadata, siteID, movieGenres, movieActors):
         else:
             actorPhotoURL = ''
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if actorLink['gender'] == 'female':
+            female.append((actorName, actorPhotoURL))
+        else:
+            male.append((actorName, actorPhotoURL))
+
+    combined = female + male
+    for actor in combined:
+        movieActors.addActor(actor[0], actor[1])
 
     # Posters
     art = []
 
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
+        art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
 
     if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
-        keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
-        max_quality = sorted(keys)[-1]
-        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
+        keys = [key for key in detailsPageElements['pictures'].keys() if key and key[0].isdigit()]
+        max_quality = getMaxResolution(keys)
+        if max_quality:
+            art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

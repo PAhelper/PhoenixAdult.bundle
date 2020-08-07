@@ -50,7 +50,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(@class, "inner-area")]/div[4]/ul/li')
+    actors = detailsPageElements.xpath('//div[contains(@class, "inner-area")]/div[4]/ul/li[@class="update_models"]/a')
     if actors:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
@@ -60,10 +60,14 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieGenres.addGenre('Orgy')
 
         for actorLink in actors:
-            actorName = actorLink.text_content().replace('Featuring:', '').strip()
+            actorName = actorLink.text_content().strip()
 
-            actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
-            req = PAutils.HTTPRequest(sceneURL)
+            actorPageURL = actorLink.get('href')
+            if actorPageURL.startswith('//'):
+                actorPageURL = 'https:' + actorPageURL
+            elif not actorPageURL.startswith('http'):
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL
+            req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
             actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPage.xpath('//div[@class="profile-pic"]/img/@src0_3x')[0]
 
@@ -79,9 +83,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
     setID = detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@id')[0]
 
-    img = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@src0_3x')
+    img = detailsPageElements.xpath('//img[contains(@class, "thumbs")]/@src0_3x')
     if img:
-        art.append(img[0])
+        art.append(PAsearchSites.getSearchBaseURL(siteID) + img[0])
 
     # Search Page
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(' ', '+'))
@@ -89,7 +93,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     cnt = searchPageElements.xpath('//img[@id="%s"]/@cnt' % setID)
     if cnt:
         for i in range(int(cnt[0])):
-            img = searchPageElements.xpath('//img[@id="%s"]/@src%d_3x')
+            img = searchPageElements.xpath('//img[@id="%s"]/@src%d_3x' % (setID, i))
             if img:
                 art.append(PAsearchSites.getSearchBaseURL(siteID) + img[0])
 

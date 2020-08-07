@@ -20,7 +20,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         directURL = directURL.replace('-', '/', 1)
 
     shootID = directURL.split('/', 2)[0]
-    if not unicode(shootID, 'utf8').isdigit():
+    if not unicode(shootID, 'UTF-8').isdigit():
         shootID = None
         directURL = directURL.replace('/', '-', 1)
     else:
