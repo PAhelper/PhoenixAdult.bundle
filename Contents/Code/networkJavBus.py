@@ -77,35 +77,38 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = javTitle
 
     # Tagline
-    taglineJav = ['N', 'N', 0]
+    taglineQuery = ['N', 'N', 0]
+    label = ''
+    series = ''
+
 
     try:
-        labelJav = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
-        Log('labelJav: ' +  labelJav)
-        taglineJav[0] = labelJav
-        taglineJav[2] = taglineJav[2] + 1
-    except:
-        pass
+        label = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
+        taglineQuery[2] = taglineQuery[2] + 1
+    except: pass
 
     try:
-        seriesJav = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
-        Log('seriesJav: ' +  seriesJav)
-        taglineJav[1] = seriesJav
-        taglineJav[2] = taglineJav[2] + 2
-    except:
-        pass
+        series = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
+        taglineQuery[2] = taglineQuery[2] + 2
+    except: pass
 
-    if taglineJav[2] == 0:
-        tagline = ''
-    elif taglineJav[2] == 1: 
-        tagline = taglineJav[0]
-    elif taglineJav[2] == 2: 
-        tagline = taglineJav[1]
-    elif taglineJav[2] == 3: 
-        tagline = 'Both Match'
-    Log('Tagline: ' + tagline)
+    Log('label: ' +  label)
+    taglineQuery[0] = label
 
-    metadata.tagline = tagline
+    Log('series: ' +  series)
+    taglineQuery[1] = series
+
+    if taglineQuery[2] == 0:
+        metadata.tagline = ''
+    elif taglineQuery[2] == 1: 
+        metadata.tagline = 'Label: ' + taglineQuery[0]
+    elif taglineQuery[2] == 2: 
+        metadata.tagline = 'Series: ' + taglineQuery[1]
+    elif taglineQuery[2] == 3: 
+        metadata.tagline = 'Label: ' + taglineQuery[0] + ', Series: ' + taglineQuery[1]
+
+    # Log('Tagline: ' + tagline)
+
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="col-md-3 info"]/p[2]')[0].text_content().strip().replace('Release Date: ', '')
