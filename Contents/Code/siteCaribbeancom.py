@@ -3,16 +3,15 @@ import PAgenres
 import PAactors
 import PAutils
 
-
-
 # Known Issues
-#   Only returns one result
-#   Only returns result with JAVID, extra text causes search fail
-#   Tagline section is generally borked and needs rework (labels and series)
+#   Just a straight copy of JavBus, needs complete rebuild for new site
 #   
 #   
 #   
-
+#   
+#   
+#   
+#   
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchJAVID = None

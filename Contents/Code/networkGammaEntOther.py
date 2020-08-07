@@ -172,6 +172,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
+        if 'url_movie_title' in detailsPageElements:
+            art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
 
         if 'url_movie_title' in detailsPageElements:
             art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))

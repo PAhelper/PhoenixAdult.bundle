@@ -88,6 +88,16 @@ def update(metadata, siteID, movieGenres, movieActors):
     JavTitle = JavTitle.replace("S*****t", "Student")
     JavTitle = JavTitle.replace("V*****e", "Violate")
     JavTitle = JavTitle.replace("V*****t", "Violent")
+    JavTitle = JavTitle.replace("B***d", "Blood")
+    JavTitle = JavTitle.replace("M************n", "Mother and Son")
+    JavTitle = JavTitle.replace("StepMother", "Mother")
+    JavTitle = JavTitle.replace("StepFather", "Father")
+    JavTitle = JavTitle.replace("StepDaughter", "Daughter")
+    JavTitle = JavTitle.replace("StepSonr", "Son")
+    JavTitle = JavTitle.replace("StepBrother", "Brother")
+    JavTitle = JavTitle.replace("StepSister", "Sister")
+
+
     
     metadata.title = javID + " " + JavTitle
     Log('Title: ' + javID + " " + JavTitle)
@@ -166,36 +176,21 @@ def update(metadata, siteID, movieGenres, movieActors):
         genreName = genreName.replace("s*****t", "student")
         genreName = genreName.replace("v*****e", "violate")
         genreName = genreName.replace("v*****t", "violent")
+        genreName = genreName.replace("B***d", "Blood")
+        genreName = genreName.replace("M************n", "Mother and Son")
+        genreName = genreName.replace("StepMother", "Mother")
+        genreName = genreName.replace("StepFather", "Father")
+        genreName = genreName.replace("StepDaughter", "Daughter")
+        genreName = genreName.replace("StepSonr", "Son")
+        genreName = genreName.replace("StepBrother", "Brother")
+        genreName = genreName.replace("StepSister", "Sister")
 
-        # if genreName.lower() == 'r**e': 
-        #     movieGenres.addGenre("Rape")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 's********l': 
-        #     movieGenres.addGenre("school girl")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 's***e': 
-        #     movieGenres.addGenre("slave")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 'm****t': 
-        #     movieGenres.addGenre("molest")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 'm****ter': 
-        #     movieGenres.addGenre("molester")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 'g*******g': 
-        #     movieGenres.addGenre("gang bang")
-        #     Log("R18 GenreName: " + str(genreName))
-        # elif genreName.lower() == 'k*d': 
-        #     movieGenres.addGenre("kid")
-        #     Log("R18 GenreName: " + str(genreName))
-        # else:
-        #     movieGenres.addGenre(genreName)
-        #     Log("R18 GenreName: " + str(genreName))
-        # Log("R18 GenreName Fixed: " + str(genreName))
+
         movieGenres.addGenre(genreName)
-        # Log("R18 GenreName: " + str(genreName))    
+
         
-    # metadata.collections.add('Japan Adult Video')
+    metadata.collections.add('Japan Adult Video')
+
     
     # Posters
     art = []
