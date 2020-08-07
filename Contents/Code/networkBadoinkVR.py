@@ -8,13 +8,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
         data = searchResult.xpath('.//a[contains(@class, "video-card-title")]')[0]
-        titleNoFormatting = data.get('title')[0]
-        curID = PAutils.Encode(data.get('href')[0])
+        titleNoFormatting = searchResult.xpath('.//a[contains(@class, "video-card-title")]/@title')[0]
+        curID = PAutils.Encode(searchResult.xpath('.//a[contains(@class, "video-card-title")]/@href')[0])
 
         releaseDate = ''
         date = searchResult.xpath('.//span[@class="video-card-upload-date"]/@content')
         if date:
-            releaseDate = parse(date).strftime('%Y-%m-%d')
+            releaseDate = parse(date[0]).strftime('%Y-%m-%d')
         girlName = searchResult.xpath('.//a[@class="video-card-link"]')[0].text_content()
 
         if searchDate and releaseDate:
@@ -30,8 +30,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
-    searchResults = HTML.ElementFromString(req.text)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
     metadata.title = detailsPageElements.xpath('//h1[contains(@class, "video-title")]')[0].text_content()
@@ -49,10 +51,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="video-details"]//p[@class="video-upload-date"]')
-    if date:
-        sceneDate = date[0].text_content().split(':')[0].strip()
-        date_object = datetime.strptime(sceneDate, '%B %d, %Y')
+    sceneDate = detailsPageElements.xpath('//p[@itemprop="uploadDate"]/@content')
+    if sceneDate:
+        date_object = parse(sceneDate[0])
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 

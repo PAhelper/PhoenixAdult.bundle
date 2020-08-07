@@ -6,7 +6,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@style="position:relative; background:black;"]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
 
@@ -35,8 +35,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     sceneDate = metadata_id[2]
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -95,9 +97,9 @@ def update(metadata, siteID, movieGenres, movieActors):
                 actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorPageURL
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
-            actorPhotoURL = actorPage.xpath('//div/section[1]/div/div[1]/img/@src')
-            if actorPhotoURL:
-                actorPhotoURL = actorPhotoURL[0]
+            actorPhotoNode = actorPage.xpath('//div/section[1]/div/div[1]/img/@src')
+            if actorPhotoNode:
+                actorPhotoURL = actorPhotoNode[0]
                 if 'http' not in actorPhotoURL:
                     actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
 

@@ -16,7 +16,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
-        if data and data.text != 'Page not found':
+        if req and req.text != 'Page not found':
             searchResult = HTML.ElementFromString(req.text)
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
@@ -31,10 +31,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
 def update(metadata, siteID, movieGenres, movieActors):
-    Log('******UPDATE CALLED*******')
-
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)

@@ -7,9 +7,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = encodedTitle + '&year=' + parse(searchDate).strftime('%Y') if searchDate else encodedTitle
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[contains(@class,"item")]'):
-        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
-        if '_films_' in curID or '_massage_' in curID:
+    for searchResult in searchResults.xpath('//div[contains(@class, "item")]'):
+        sceneURL = searchResult.xpath('.//a/@href')[0]
+        if '/films/' in sceneURL or '/massage/' in sceneURL:
+            curID = PAutils.Encode(sceneURL)
             titleNoFormatting = searchResult.xpath('.//img/@alt')[0].strip()
             releaseDate = parse(searchResult.xpath('.//div[@class="details"]/span[last()]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
@@ -26,6 +27,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -91,8 +94,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Posters
     art = [
-        detailsPageElements.xpath('//meta[@name="twitter:image"]/@content')[0].get('content').replace('board-image', 'poster-image').replace('1600x', '640x'),
-        detailsPageElements.xpath('//meta[@name="twitter:image"]/@content')[0].get('content').replace('1600x', '1920x')
+        detailsPageElements.xpath('//meta[@name="twitter:image"]/@content')[0].replace('board-image', 'poster-image').replace('1600x', '640x'),
+        detailsPageElements.xpath('//meta[@name="twitter:image"]/@content')[0].replace('1600x', '1920x')
     ]
 
     Log('Artwork found: %d' % len(art))

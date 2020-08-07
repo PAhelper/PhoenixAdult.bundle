@@ -6,10 +6,10 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-')
-    if '/' not in searchString:
+    if '/' not in encodedTitle:
         encodedTitle.replace('-', '/', 1)
 
-    if 'scene' not in searchString.lower():
+    if 'scene' not in encodedTitle.lower():
         req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
@@ -132,7 +132,6 @@ def update(metadata, siteID, movieGenres, movieActors):
             directors = dvdPageElements.xpath('//ul[@class="directedBy"]')
             for dirname in directors:
                 director.name = dirname.text_content().strip()
-                Log("Director: " + director.name)
         except:
             pass
 

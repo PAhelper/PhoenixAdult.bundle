@@ -8,7 +8,7 @@ def getJSONfromPage(url):
     req = PAutils.HTTPRequest(url)
 
     if req:
-        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', data.text)
+        jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', req.text)
         if jsonData:
             return json.loads(jsonData.group(1))['content']
     return None
@@ -20,7 +20,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         directURL = directURL.replace('-', '/', 1)
 
     shootID = directURL.split('/', 2)[0]
-    if not unicode(shootID, 'utf8').isdigit():
+    if not unicode(shootID, 'UTF-8').isdigit():
         shootID = None
         directURL = directURL.replace('/', '-', 1)
     else:
@@ -29,14 +29,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
     searchResultsURLs = [directURL]
 
-    if not searchResultsURLs:
-        googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
 
-        for sceneURL in googleResults:
-            sceneURL = sceneURL.rsplit('?', 1)[0]
-            if sceneURL not in searchResultsURLs:
-                if ('/movies/' in sceneURL):
-                    searchResultsURLs.append(sceneURL)
+    for sceneURL in googleResults:
+        sceneURL = sceneURL.rsplit('?', 1)[0]
+        if sceneURL not in searchResultsURLs:
+            if ('/movies/' in sceneURL):
+                searchResultsURLs.append(sceneURL)
 
     for sceneURL in searchResultsURLs:
         detailsPageElements = getJSONfromPage(sceneURL)

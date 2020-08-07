@@ -1,5 +1,6 @@
 import PAutils
 
+
 class PhoenixActors:
     actorsTable = None
     photosTable = None
@@ -171,6 +172,8 @@ class PhoenixActors:
                 newActor = 'Riley Jensen'
             elif newActor == 'Sara Luv':
                 newActor = 'Sara Luvv'
+            elif newActor == 'Shalina Devine':
+                newActor = 'Shalina Divine'
             elif newActor == 'Dylann Vox' or newActor == 'Dylan Vox':
                 newActor = 'Skylar Vox'
             elif newActor == 'Sedona' or newActor == 'Stefanie Renee':
@@ -2336,11 +2339,14 @@ class PhoenixActors:
             elif metadata.studio == 'Milehigh' or metadata.studio == 'Doghouse Digital':
                 if newActor == 'Gabrielle Lati':
                     newActor = 'Gabriella Lati'
+            elif metadata.studio == 'Rocco Siffredi':
+                if newActor == 'Abbie':
+                    newActor = 'Krystal Boyd'
 
             if not skip:
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)
-                Log('Actor: '+newActor+' '+newPhoto)
+                Log('Actor: %s %s' % (newActor, newPhoto))
 
                 role = metadata.roles.new()
                 role.name = newActor
@@ -2352,60 +2358,61 @@ def actorDBfinder(actorName):
     actorEncoded = urllib.quote(actorName)
     actorPhotoURL = ''
 
-    databaseName = 'AdultDVDEmpire'
-    req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?q=' + actorEncoded)
-    actorSearch = HTML.ElementFromString(req.text)
-    actorPageURL = actorSearch.xpath('//div[@id="performerlist"]/div//a/@href')
-    if actorPageURL:
-        actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
-        req = PAutils.HTTPRequest(actorPageURL)
-        actorPage = HTML.ElementFromString(req.text)
-        img = actorPage.xpath('//div[contains(@class, "performer-image-container")]/a/@href')[0]
-        if img:
-            actorPhotoURL = img[0]
-
-    if not actorPhotoURL:
-        databaseName = 'Boobpedia'
-        actorPageURL = 'http://www.boobpedia.com/boobs/' + actorName.title().replace(' ', '_')
-        req = PAutils.HTTPRequest(actorPageURL)
-        actorPage = HTML.ElementFromString(req.text)
-        img = actorPage.xpath('//table[@class="infobox"]//a[@class="image"]//img/@src')
-        if img:
-            actorPhotoURL = 'http://www.boobpedia.com' + img[0]
-
-    elif not actorPhotoURL:
-        databaseName = 'Babes and Stars'
-        actorPageURL = 'http://www.babesandstars.com/' + actorName[0:1].lower() + '/' + actorName.lower().replace(' ', '-').replace('\'', '-') + '/'
-        req = PAutils.HTTPRequest(actorPageURL)
-        actorPage = HTML.ElementFromString(req.text)
-        img = actorPage.xpath('//div[@class="profile"]//div[@class="thumb"]/img/@src')
-        if img:
-            actorPhotoURL = img[0]
-
-    elif not actorPhotoURL:
-        databaseName = 'IAFD'
-        req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
+    if actorName:
+        databaseName = 'AdultDVDEmpire'
+        req = PAutils.HTTPRequest('https://www.adultdvdempire.com/performer/search?q=' + actorEncoded)
         actorSearch = HTML.ElementFromString(req.text)
-        actorPageURL = actorSearch.xpath('//table[@id="tblFem"]//tbody//a/@href')
+        actorPageURL = actorSearch.xpath('//div[@id="performerlist"]/div//a/@href')
         if actorPageURL:
-            actorPageURL = 'http://www.iafd.com' + actorPageURL[0]
+            actorPageURL = 'https://www.adultdvdempire.com' + actorPageURL[0]
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
-            img = actorPage.xpath('//div[@id="headshot"]//img/@src')
-            if img and 'nophoto' not in img[0]:
+            img = actorPage.xpath('//div[contains(@class, "performer-image-container")]/a/@href')
+            if img:
                 actorPhotoURL = img[0]
 
-    elif not actorPhotoURL:
-        databaseName = 'Babepedia'
-        img = 'http://www.babepedia.com/pics/' + actorName.title().replace(' ', '%20') + '.jpg'
-        req = PAutils.HTTPRequest(img, bypass=False)
-        if 200 > req.status_code > 299:
-            actorPhotoURL = img
+        if not actorPhotoURL:
+            databaseName = 'Boobpedia'
+            actorPageURL = 'http://www.boobpedia.com/boobs/' + actorName.title().replace(' ', '_')
+            req = PAutils.HTTPRequest(actorPageURL)
+            actorPage = HTML.ElementFromString(req.text)
+            img = actorPage.xpath('//table[@class="infobox"]//a[@class="image"]//img/@src')
+            if img:
+                actorPhotoURL = 'http://www.boobpedia.com' + img[0]
 
-    if actorPhotoURL:
-        Log('%s found in %s ' % (actorName, databaseName))
-        Log('PhotoURL: %s' % actorPhotoURL)
-    else:
-        Log('%s not found' % actorName)
+        if not actorPhotoURL:
+            databaseName = 'Babes and Stars'
+            actorPageURL = 'http://www.babesandstars.com/' + actorName[0:1].lower() + '/' + actorName.lower().replace(' ', '-').replace('\'', '-') + '/'
+            req = PAutils.HTTPRequest(actorPageURL)
+            actorPage = HTML.ElementFromString(req.text)
+            img = actorPage.xpath('//div[@class="profile"]//div[@class="thumb"]/img/@src')
+            if img:
+                actorPhotoURL = img[0]
+
+        if not actorPhotoURL:
+            databaseName = 'IAFD'
+            req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
+            actorSearch = HTML.ElementFromString(req.text)
+            actorPageURL = actorSearch.xpath('//table[@id="tblFem"]//tbody//a/@href')
+            if actorPageURL:
+                actorPageURL = 'http://www.iafd.com' + actorPageURL[0]
+                req = PAutils.HTTPRequest(actorPageURL)
+                actorPage = HTML.ElementFromString(req.text)
+                img = actorPage.xpath('//div[@id="headshot"]//img/@src')
+                if img and 'nophoto' not in img[0]:
+                    actorPhotoURL = img[0]
+
+        if not actorPhotoURL:
+            databaseName = 'Babepedia'
+            img = 'http://www.babepedia.com/pics/' + actorName.title().replace(' ', '%20') + '.jpg'
+            req = PAutils.HTTPRequest(img, bypass=False)
+            if 200 > req.status_code > 299:
+                actorPhotoURL = img
+
+        if actorPhotoURL:
+            Log('%s found in %s ' % (actorName, databaseName))
+            Log('PhotoURL: %s' % actorPhotoURL)
+        else:
+            Log('%s not found' % actorName)
 
     return actorPhotoURL

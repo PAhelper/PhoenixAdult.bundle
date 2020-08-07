@@ -48,7 +48,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+    req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -90,11 +92,11 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//div[@class="backgroundcolor_info"]/span[@class="update_models"]/a'):
+    for actorLink in detailsPageElements.xpath('//div[@class="backgroundcolor_info"]//span[@class="update_models"]/a'):
         actorName = str(actorLink.text_content().strip())
 
         actorPageURL = actorLink.get('href')
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID) + sceneURL)
+        req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         img = actorPage.xpath('//div[@class="cell_top cell_thumb"]/img/@src')
         if img:
@@ -112,7 +114,7 @@ def update(metadata, siteID, movieGenres, movieActors):
                       'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
                       'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
                       ]:
-        if actorName in metadata.title or metadata.summary:
+        if actorName in metadata.title or actorName in metadata.summary:
             movieActors.addActor(actorName, '')
 
     # Posters
@@ -135,7 +137,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         alpha = bigScript.find('setid:"') + 7
         omega = bigScript.find('",', alpha)
         setID = bigScript[alpha:omega]
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(' ', '%20'))
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + urllib.quote(metadata.title))
         searchPageElements = HTML.ElementFromString(req.text)
         posterUrl = searchPageElements.xpath('//img[@id="set-target-%s"]/@src' % setID)[0]
         if 'http' not in posterUrl:
@@ -155,11 +157,11 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Photos page
     photoPageURL = None
+    photoPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
+    req = PAutils.HTTPRequest(photoPageURL)
+    photoPageElements = HTML.ElementFromString(req.text)
+    bigScript = photoPageElements.xpath('//script[contains(text(), "var ptx")]')[0].text_content()
     try:
-        photoPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
-        req = PAutils.HTTPRequest(photoPageURL)
-        photoPageElements = HTML.ElementFromString(req.text)
-        bigScript = photoPageElements.xpath('//script[contains(text(), "var ptx")]')[0].text_content()
         ptx1600starts = bigScript.find('1600')
         ptx1600ends = bigScript.find('togglestatus', ptx1600starts)
         ptx1600 = bigScript[ptx1600starts:ptx1600ends]
@@ -181,10 +183,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Vidcaps page
     try:
-        capsPageURL = detailsPageElements.xpath('//div[@class="cell content_tab"]/a[text()="Photos"]/@href')[0]
-        req = PAutils.HTTPRequest(photoPageURL)
-        capsPageElements = HTML.ElementFromString(req.text)
-        bigScript = capsPageElements.xpath('//script[contains(text(),"var ptx")]')[0].text_content()
         ptxjpgstarts = bigScript.find('ptx["jpg"] = {};')
         ptxjpgends = bigScript.find('togglestatus', ptxjpgstarts)
         ptxjpg = bigScript[ptxjpgstarts:ptxjpgends]
@@ -209,7 +207,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                referer = photoPageURL if photoPageURL else sceneURL
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': referer})
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

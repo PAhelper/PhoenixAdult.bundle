@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAgenres
+import PAutils
 
 
 def getAlgolia(url, indexName, params):
@@ -14,7 +15,7 @@ def getAlgolia(url, indexName, params):
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    if unicode(sceneID, 'utf8').isdigit():
+    if unicode(sceneID, 'UTF-8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
@@ -83,7 +84,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorPhotoURL = ''
 
         actorsPageURL = 'https://www.naughtyamerica.com/pornstar/' + actorName.lower().replace(' ', '-').replace("'", '')
-        req = PAutils.HTTPRequest(sceneURL)
+        req = PAutils.HTTPRequest(actorsPageURL)
         actorsPageElements = HTML.ElementFromString(req.text)
         img = actorsPageElements.xpath('//img[@class="performer-pic"]/@src')
         if img:

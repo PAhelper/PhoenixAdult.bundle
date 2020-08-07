@@ -5,7 +5,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    if unicode(sceneID, 'utf8').isdigit():
+    if unicode(sceneID, 'UTF-8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
@@ -21,7 +21,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=100, lang=lang))
     else:
         encodedTitle = searchTitle.replace(' ', '+')
-        req = PAutils.HTTPRequest(AsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
             titleNoFormatting = searchResult.xpath('.//a/@title')[0]
@@ -49,7 +49,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    if 'http' not in url:
+    if 'http' not in sceneURL:
         sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     scenePoster = PAutils.Decode(metadata_id[2])
     req = PAutils.HTTPRequest(sceneURL)

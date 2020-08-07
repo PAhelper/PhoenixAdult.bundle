@@ -15,21 +15,26 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                 releaseDate = str(searchResult.xpath('.//div[@class="cell update_date"]/comment()')[0]).strip()
                 releaseDate = releaseDate[releaseDate.find('OFF') + 4:releaseDate.find('D', releaseDate.find('OFF') + 4)].strip()
             except:
-                releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
+                pass
+
+        if releaseDate:
+            releaseDate = parse(releaseDate).strftime('%Y-%m-%d')
 
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, AsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
 
 def update(metadata, siteID, movieGenres, movieActors):
-    metadata_id = metadata.id.split('|')
+    metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
@@ -93,6 +98,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
+    art = []
     try:
         bigScript = detailsPageElements.xpath('//script[contains(text(), "df_movie")]')[0].text_content()
         alpha = bigScript.find('useimage = "') + 12
@@ -111,7 +117,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         omega = bigScript.find('",', alpha)
         setID = bigScript[alpha:omega]
 
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + metadata.title.replace(' ', '%20'))
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + urllib.quote(metadata.title))
         searchPageElements = HTML.ElementFromString(req.text)
         posterUrl = searchPageElements.xpath('//img[@id="set-target-%s"]/@src' % setID)[0]
         if 'http' not in posterUrl:

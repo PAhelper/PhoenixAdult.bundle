@@ -18,7 +18,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     url = PAsearchSites.getSearchSearchURL(siteNum).replace('.xxx', '.tv', 1)
-    req = PAutils.HTTPRequest(PAsearchSites.url + encodedTitle)
+    req = PAutils.HTTPRequest(url + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "entry")]//h3//a'):
         siteName = PAsearchSites.getSearchSiteName(siteNum) + '.tv'
@@ -35,10 +35,12 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    if '.xxx' in url:
+    if '.xxx' in sceneURL:
         # Title
         metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]/text()')[0].strip()
 

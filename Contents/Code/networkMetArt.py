@@ -4,15 +4,14 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(url)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + '/search-results?query[contentType]=movies&searchPhrase=' + encodedTitle)
     searchResults = req.json()
-
     for searchResult in searchResults['items']:
         subSite = PAsearchSites.getSearchSiteName(siteNum)
         titleNoFormatting = searchResult['item']['name']
 
-        url = searchResult['item']['path'].rsplit('/', 2)
-        sceneURL = '%s/movie?name=%s&date=%s' % (PAsearchSites.getSearchSearchURL(siteNum), url[2], url[1])
+        sceneURL = searchResult['item']['path'].rsplit('/', 2)
+        sceneURL = '%s/movie?name=%s&date=%s' % (PAsearchSites.getSearchSearchURL(siteNum), sceneURL[2], sceneURL[1])
         curID = PAutils.Encode(sceneURL)
 
         releaseDate = parse(searchResult['item']['publishedAt']).strftime('%Y-%m-%d')
@@ -29,6 +28,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = req.json()
 

@@ -20,7 +20,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         if detailsPageElements:
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//div[contains(@class, "video-details")]//h1[1]')[0].text_content().strip()
-            releaseDate = None
             date = detailsPageElements.xpath('//div[@class="stats-container"]//li[3]//span[2]')[0].text_content().strip()
             releaseDate = parse(date).strftime('%Y-%m-%d')
 
@@ -35,10 +34,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
 def update(metadata, siteID, movieGenres, movieActors):
-    Log('******UPDATE CALLED*******')
-
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

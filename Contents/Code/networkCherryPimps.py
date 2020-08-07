@@ -6,7 +6,8 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     for searchPageNum in range(1, 3):
-        req = PAutils.HTTPRequest('%s"%s"&page=%d' % (PAsearchSites.getSearchSearchURL(siteNum), encodedTitle, searchPageNum))
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '%s&page=%d' % (searchTitle.replace(' ', '+'), searchPageNum)
+        req = PAutils.HTTPRequest(url)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "video-thumb")]'):
             titleNoFormatting = searchResult.xpath('.//p[@class="text-thumb"]/a')[0].text_content().strip()
@@ -36,6 +37,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

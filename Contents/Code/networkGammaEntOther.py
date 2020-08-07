@@ -25,7 +25,7 @@ def getAlgolia(url, indexName, params, referer):
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneID = searchTitle.split(' ', 1)[0]
-    if unicode(sceneID, 'utf8').isdigit():
+    if unicode(sceneID, 'UTF-8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
@@ -79,7 +79,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     data = getAlgolia(url, 'all_' + sceneType, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
     detailsPageElements = data[0]
 
-    data = getAlgolia(url, 'all_' + sceneType, 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
+    data = getAlgolia(url, 'all_scenes', 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
     data = sorted(data, key=lambda i: i['clip_id'])
     scenesPagesElements = list(enumerate(data, 1))
 
@@ -131,34 +131,38 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
+    female = []
+    male = []
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
 
-        data = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))
-        actorData = data['results'][0]['hits'][0]
-        if actorData['pictures']:
+        actorData = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))[0]
+        if 'pictures' in actorData and actorData['pictures']:
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
         else:
             actorPhotoURL = ''
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if actorLink['gender'] == 'female':
+            female.append((actorName, actorPhotoURL))
+        else:
+            male.append((actorName, actorPhotoURL))
+
+    combined = female + male
+    for actor in combined:
+        movieActors.addActor(actor[0], actor[1])
 
     # Posters
     art = []
 
     if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
+        if 'url_movie_title' in detailsPageElements:
+            art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
 
-    if 'pictures' in detailsPageElements:
-        keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
-        max_quality = sorted(keys)[-1]
+    if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
+        max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
         art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
-    else:
-        for idx, scene in scenesPagesElements:
-            keys = [key for key in detailsPageElements['pictures'].keys() if key[0].isdigit()]
-            max_quality = sorted(keys)[-1]
-            art.append('https://images-fame.gammacdn.com/movies/' + scene['pictures'][max_quality])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

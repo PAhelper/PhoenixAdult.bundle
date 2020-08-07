@@ -9,10 +9,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '.html'
 
     req = PAutils.HTTPRequest(sceneURL)
-    searchResults = HTML.ElementFromString(req.text)
-    titleNoFormatting = searchResult.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
+    detailsPageElements = HTML.ElementFromString(req.text)
+    titleNoFormatting = detailsPageElements.xpath('//meta[@name="twitter:title"]')[0].get('content').strip()
     curID = PAutils.Encode(sceneURL)
-    releaseDate = parse(searchResult.xpath('//div[@class="trailer topSpace"]/div[2]/p')[0].text_content().split('\\')[1].strip()).strftime('%Y-%m-%d')
+    releaseDate = parse(detailsPageElements.xpath('//div[@class="trailer topSpace"]/div[2]/p')[0].text_content().split('\\')[1].strip()).strftime('%Y-%m-%d')
 
     if searchDate:
         score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -27,6 +27,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

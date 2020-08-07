@@ -6,7 +6,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     shootID = None
     for splited in searchTitle.split(' '):
-        if unicode(splited, 'utf8').isdigit():
+        if unicode(splited, 'UTF-8').isdigit():
             shootID = splited
             break
 
@@ -35,12 +35,15 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (shootID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+
     return results
 
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = '%s/iod/%s' % (PAsearchSites.getSearchBaseURL(siteID), PAutils.Decode(metadata_id[0]))
+    sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 

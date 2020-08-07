@@ -10,7 +10,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         titleNoFormatting = searchResult.xpath('.//a[@class="text-km"] | .//a[@class="text-pf"] | .//a[@class="text-tf"]')[0].text_content().strip()
 
         sceneURL = searchResult.xpath('.//a[@class="text-km"] | .//a[@class="text-pf"] | .//a[@class="text-tf"]')[0].get('href')[8:-19]
-        Log(sceneURL)
         curID = PAutils.Encode(sceneURL)
 
         releaseDate = searchResult.xpath('.//div[contains(@class, "text-left")]')[0].text_content().strip()[10:]
