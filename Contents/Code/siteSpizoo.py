@@ -53,7 +53,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     try:
         tagline = detailsPageElements.xpath('//i[@id="site"]/@value')[0].strip()
     except:
-        if 'rawattack' in url:
+        if 'rawattack' in sceneURL:
             tagline = 'RawAttack'
         else:
             tagline = 'Spizoo'
