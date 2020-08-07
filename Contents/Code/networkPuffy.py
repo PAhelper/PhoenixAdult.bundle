@@ -6,7 +6,7 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@style="position:relative; background:black;"]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
 
