@@ -17,7 +17,7 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    date_object = datetime.strptime(searchTitle, '%Y-%m-%d')
+    date_object = datetime.strptime(searchDate, '%Y-%m-%d')
     mediaDate = str(date_object.year) + '/' + str(date_object.month)
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + mediaDate
     req = PAutils.HTTPRequest(sceneURL)
