@@ -61,34 +61,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = Title
 
 
-    # Tagline
-    # taglineQuery = ['N', 'N', 0]
-    # label = ''
-    # series = ''
-
-    # try:
-    #     label = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
-    #     taglineQuery[2] = taglineQuery[2] + 1
-    # except: pass
-
-    # try:
-    #     series = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
-    #     taglineQuery[2] = taglineQuery[2] + 2
-    # except: pass
-
-    # taglineQuery[0] = label
-    # taglineQuery[1] = series
-
-    # if taglineQuery[2] == 0:
-    #     metadata.tagline = ''
-    # elif taglineQuery[2] == 1: 
-    #     metadata.tagline = 'Label: ' + taglineQuery[0]
-    # elif taglineQuery[2] == 2: 
-    #     metadata.tagline = 'Series: ' + taglineQuery[1]
-    # elif taglineQuery[2] == 3: 
-    #     metadata.tagline = 'Label: ' + taglineQuery[0] + ', Series: ' + taglineQuery[1]
-
-
     # Release Date
     date = detailsPageElements.xpath('//article/div/div[@itemprop="datePublished"]')[0].text_content().strip().replace('Release Date: ', '')
     date_object = datetime.strptime(date, '%d %b %Y')
@@ -99,15 +71,21 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     # -- No Actor Data Available On Site Metadata --
 
+    # Summary
+    try:
+        description = detailsPageElements.xpath('//article/div[@class="entry-content"]/p')[0].text_content()
+        metadata.summary = description.strip()
+    except:
+        pass
 
     # Genres
 
-    # Default Genres
+        # Default Genres
     genres = ['Hucows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
     for genre in genres:
         movieGenres.addGenre(genre)
 
-    # Dynamic Genres
+        # Dynamic Genres
     for genreLink in detailsPageElements.xpath('//div/span/a[@rel="category tag"]'):
         genreName = genreLink.text_content().lower().strip()
         movieGenres.addGenre(genreName)
