@@ -86,8 +86,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         taglineJav[2] = taglineJav[2] + 1
     except:
         pass
-        # if labelJav != 'N/A': 
-        #     taglineJav.append(labelJav)
+
     try:
         seriesJav = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
         Log('seriesJav: ' +  seriesJav)
@@ -97,11 +96,11 @@ def update(metadata, siteID, movieGenres, movieActors):
         pass
 
     if taglineJav[2] == 0:
-        tagline = 'no match'
+        tagline = ''
     elif taglineJav[2] == 1: 
-        tagline = 'Label Match'
+        tagline = taglineJav[0]
     elif taglineJav[2] == 2: 
-        tagline = 'Series Match'
+        tagline = taglineJav[1]
     elif taglineJav[2] == 3: 
         tagline = 'Both Match'
     Log('Tagline: ' + tagline)
