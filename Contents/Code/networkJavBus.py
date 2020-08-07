@@ -6,8 +6,12 @@ import PAutils
 
 
 # Known Issues
-#   Only returns one result
-#   Only returns result with JAVID, extra text causes search fail
+#   [Resolved/BugFix] Only returns one result
+#       - Due to saving full URL in curID, it had a unique ID per search result, changed to just saving JAVID.
+# 
+#   [Resolved/Working As Designed] Only returns result with JAVID, extra text causes search fail
+#       - This appears to be a limit of the search on the site, even throwing the titles in there kills it.
+# 
 #   Tagline section is generally borked and needs rework (labels and series)
 #   
 #   
@@ -16,55 +20,40 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchJAVID = None
-    # splitSearchTitle = searchTitle.split(' ')
-    # if(unicode(splitSearchTitle[1], 'UTF-8').isdigit()):
-    #      searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
+    splitSearchTitle = searchTitle.split(' ')
+    if(unicode(splitSearchTitle[1], 'UTF-8').isdigit()):
+         searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
-    # Log("searchJAVID: " + searchJAVID)
+    Log("searchJAVID: " + searchJAVID)
 
     if searchJAVID:
         encodedTitle = searchJAVID
     Log("Encoded Title: " + encodedTitle)
 
-    # Normal (censored films) Search Results
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'search/' + encodedTitle
-    req = PAutils.HTTPRequest(sceneURL)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//a[@class="movie-box"]'):
-        titleNoFormatting = searchResult.xpath('.//span[1]')[0].text_content().strip()
-        # Log('titleNoFormatting: ' + titleNoFormatting)
-        JAVID = searchResult.xpath('.//date[1]')[0].text_content().strip()
-        # Log('JAVID: ' + JAVID)
-        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '-').replace('%2B', '-')
-        curID = PAutils.Encode(sceneURL)
+    searchTypes = ['Censored', 'Uncensored']
 
-        if searchJAVID:
-            score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting.title()), score=score, lang=lang))
+    for type in searchTypes:
+        if type == 'Uncensored': sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'uncensored/search/' + encodedTitle
+        elif type == 'Censored': sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'search/' + encodedTitle
+        req = PAutils.HTTPRequest(sceneURL)
+        searchResults = HTML.ElementFromString(req.text)
+        for searchResult in searchResults.xpath('//a[@class="movie-box"]'):
+            titleNoFormatting = searchResult.xpath('.//span[1]')[0].text_content().strip().replace('\t', '').replace('\r\n', '')
+            JAVID = searchResult.xpath('.//date[1]')[0].text_content().strip()
 
-    # Uncensored Films Search Results
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'uncensored/search/' + encodedTitle
-    reqUN = PAutils.HTTPRequest(sceneURL)
-    searchResultsUN = HTML.ElementFromString(reqUN.text)
-    for searchResultUN in searchResultsUN.xpath('//a[@class="movie-box"]'):
-        titleNoFormatting = searchResultUN.xpath('.//span[1]')[0].text_content().strip().replace('\t', '').replace('\r\n', '')
-        # Log('titleNoFormatting: ' + titleNoFormatting)
-        JAVID = searchResultUN.xpath('.//date[1]')[0].text_content().strip()
-        # Log('JAVID: ' + JAVID)
+            sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '-').replace('%2B', '-')
+            curID = PAutils.Encode(JAVID)
 
-        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '-').replace('%2B', '-')
-        curID = PAutils.Encode(sceneURL)
+            if searchJAVID:
+                score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        if searchJAVID:
-            score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
-        else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s][%s] %s' % (type, JAVID, titleNoFormatting), score=score, lang=lang))
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[Uncensored][%s] %s' % (JAVID, titleNoFormatting.title()), score=score, lang=lang))
-        # Log('Search Result Append:' + str(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[Uncensored][%s] %s' % (JAVID, titleNoFormatting.title()), score=score, lang=lang)))
+            Log('Title: ' + '[' + type + ']' + '[' + JAVID + '] ' + titleNoFormatting.title())
+
     return results
 
 
@@ -73,7 +62,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneURL = PAutils.Decode(metadata_id[0])
 
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
     JAVID = sceneURL.rsplit('/', 1)[1]
@@ -87,28 +76,37 @@ def update(metadata, siteID, movieGenres, movieActors):
     if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit(): javTitle = javStudio + ' '  + javTitle
     metadata.title = javTitle
 
-    # # Tagline
-    # taglineJav = []
-    # try:
-    #     labelJav = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
-    #     Log('labelJav: ' +  labelJav)
-    #     if labelJav: taglineJav.append(labelJav)
+    # Tagline
+    taglineJav = ['N', 'N', 0]
 
-    #     seriesJav = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
-    #     Log('seriesJav: ' +  seriesJav)
-    #     if seriesJav: taglineJav.append(seriesJav)
-    
-    #     Log('taglineJav: ' + str(taglineJav[0:]))
+    try:
+        labelJav = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
+        Log('labelJav: ' +  labelJav)
+        taglineJav[0] = labelJav
+        taglineJav[2] = taglineJav[2] + 1
+    except:
+        pass
+        # if labelJav != 'N/A': 
+        #     taglineJav.append(labelJav)
+    try:
+        seriesJav = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
+        Log('seriesJav: ' +  seriesJav)
+        taglineJav[1] = seriesJav
+        taglineJav[2] = taglineJav[2] + 2
+    except:
+        pass
 
-    #     if len(taglineJav) == 0:
-    #         taglineJav = []
-    #     elif len(taglineJav) == 1:
-    #         metadata.tagline = taglineJav[0]
-    #     elif len(taglineJav) == 2:
-    #         metadata.tagline = 'Label: ' + taglineJav[0] + ', Series: ' + taglineJav[1]
-    # except: 
-    #     pass
+    if taglineJav[2] == 0:
+        tagline = 'no match'
+    elif taglineJav[2] == 1: 
+        tagline = 'Label Match'
+    elif taglineJav[2] == 2: 
+        tagline = 'Series Match'
+    elif taglineJav[2] == 3: 
+        tagline = 'Both Match'
+    Log('Tagline: ' + tagline)
 
+    metadata.tagline = tagline
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="col-md-3 info"]/p[2]')[0].text_content().strip().replace('Release Date: ', '')
