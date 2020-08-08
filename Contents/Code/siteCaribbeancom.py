@@ -17,20 +17,24 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     if searchTitle.replace('-', '').isdigit:
 
-        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle + '/index.html'
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle.replace(' ', '-') + '/index.html'
+        Log('sceneURL: ' + sceneURL)
         req = PAutils.HTTPRequest(sceneURL)
         searchResults = HTML.ElementFromString(req.text)
 
         for searchResult in searchResults.xpath('//article'):
             titleNoFormatting = searchResult.xpath('//div/div/div/div/div/h1[@itemprop="name"]')[0].text_content().strip()
-
+            Log("Title: " + titleNoFormatting)
             sceneDate = searchResult.xpath('//ul/li/span[@itemprop="uploadDate"]')[0].text_content().strip()
             sceneDate = datetime.strptime(sceneDate, '%Y/%m/%d')
+            Log("sceneDate: " + sceneDate)
             dateText = sceneDate.strftime('%Y-%m-%d')
+            Log("dateText: " + dateText)
 
             curID = PAutils.Encode(sceneURL)
+            # Log("curID: " + curID)
 
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
     
