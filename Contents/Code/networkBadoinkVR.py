@@ -9,16 +9,18 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if unicode(splited[0], 'utf8').isdigit():
         sceneID = splited[0]
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) +'/vrpornvideo/'+sceneID)
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + '/vrpornvideo/' + sceneID)
         searchResults = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResults.xpath('//h1[contains(@class, "video-title")]')[0].text_content()
-        curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) +'/vrpornvideo/'+sceneID)
+        curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) + '/vrpornvideo/' + sceneID)
         girlName = ''
+
         releaseDate = ''
         date = searchResults.xpath('//p[@itemprop="uploadDate"]/@content')
         if date:
             releaseDate = parse(date[0]).strftime('%Y-%m-%d')
-        score = 100 ## Because /vrpornvideo/sceneID redirects to the matching scene we have a 1-1 match. Don't need to check something
+
+        score = 100
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
     else:
         req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
