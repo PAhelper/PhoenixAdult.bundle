@@ -4,3 +4,4 @@
 Contents/Code/siteClips4Sale.py
 .gitattributes
 Contents/Code/siteClips4Sale.py
+__pycache__/
