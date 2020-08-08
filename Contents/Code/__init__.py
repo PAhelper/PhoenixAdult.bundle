@@ -810,7 +810,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkJavBus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Caribbeancom
-            elif searchSiteID == 913:
+            elif searchSiteID == 913 or searchSiteID == 915:
                 results = PAsearchSites.siteCaribbeancom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Hucows
@@ -1425,6 +1425,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # Hucows
         elif siteID == 914:
             metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
+
+        # Caribbeancom
+        elif siteID == 915:
+            metadata = PAsearchSites.siteCaribbeancom.update(metadata, siteID, movieGenres, movieActors)
 
         
         # Cleanup Genres and Add
