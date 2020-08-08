@@ -1027,7 +1027,7 @@ searchSites[909] = ("Sapphic Erotica", "Sapphic Erotica", "https://sapphix.com",
 searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "https://sapphix.com/movies?site[]=gmp&q=")
 searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 searchSites[912] = ("JavBus", "JavBus", "https://www.javbus.com", "https://www.javbus.com/en/")
-searchSites[913] = ("Caribbeancom", "Caribbeancom", "https://en.caribbeancom.com/eng", "https://en.caribbeancom.com/eng/moviepages/")
+searchSites[913] = ("Caribbeancom", "Caribbeancom", "https://en.caribbeancom.com/eng", "https://en.caribbeancom.com/eng/search/?q=")
 searchSites[914] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
 
 
