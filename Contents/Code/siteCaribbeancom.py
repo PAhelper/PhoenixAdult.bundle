@@ -4,7 +4,7 @@ import PAactors
 import PAutils
 
 # Known Issues
-#   ID Search working, now working on title search
+#   - Actors section needs advanced logic, since the site's meta data for actors is garbage
 #   
 #   
 #   
