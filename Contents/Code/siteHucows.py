@@ -13,7 +13,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article'):
-        sceneURL = searchResult.xpath('.//a/@href')[0].strip()
+        sceneURL = searchResult.xpath('.//a/@href')[1].strip()
         curID = PAutils.Encode(sceneURL)
         titleNoFormatting = searchResult.xpath('.//h1 | .//h2')[0].text_content().strip()
 
@@ -25,7 +25,12 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        try:
+            sceneID = searchResult.xpath('./div/a/img/@src | ./div/div/div/a/img/@src | ./div/div/div/ul/li/a/img/@src')[0].strip().replace('.jpg', '').rsplit('/', 1)[1][:5]
+        except:
+            sceneID = 'N/A'
+
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (sceneID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
