@@ -6,7 +6,7 @@ import PAutils
 # Known Issues
 #   - Actors section needs advanced logic, since the site's meta data for actors is garbage
 #   
-#   
+#   - Adding support for Caribbeancompr, the premium side of the site
 #   
 #   
 #   
@@ -16,21 +16,41 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     if searchTitle[0:10].replace('-', '').replace(' ', '').replace('_', '').isdigit():
-        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle[0:10].replace(' ', '-') + '/index.html'
-        Log(sceneURL)
-        req = PAutils.HTTPRequest(sceneURL)
-        searchResult = HTML.ElementFromString(req.text)
+        
 
-        titleNoFormatting = searchResult.xpath('//div/div/div/div/div/h1[@itemprop="name"]')[0].text_content().strip()
-        sceneDate = searchResult.xpath('//ul/li/span[@itemprop="uploadDate"]')[0].text_content().strip()
-        sceneDate = datetime.strptime(sceneDate, '%Y/%m/%d')
-        dateText = sceneDate.strftime('%Y-%m-%d')
+        if siteNumber == 913:
+            sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle[0:10].replace(' ', '-') + '/index.html'
+            Log(sceneURL)
+            req = PAutils.HTTPRequest(sceneURL)
+            searchResult = HTML.ElementFromString(req.text)
 
-        curID = PAutils.Encode(sceneURL)
+            titleNoFormatting = searchResult.xpath('//div/div/div/div/div/h1[@itemprop="name"]')[0].text_content().strip()
+            sceneDate = searchResult.xpath('//ul/li/span[@itemprop="uploadDate"]')[0].text_content().strip()
+            sceneDate = datetime.strptime(sceneDate, '%Y/%m/%d').strftime('%Y-%m-%d')
 
-        score = 100
+            curID = PAutils.Encode(sceneURL)
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] [%s] %s' % (dateText, searchTitle[0:10].replace(' ', '-'), titleNoFormatting), score=score, lang=lang))
+            # This is an exact match, so setting score to 100
+            score = 100
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] [%s] %s' % (sceneDate, searchTitle[0:10].replace(' ', '-'), titleNoFormatting), score=score, lang=lang))
+        
+        elif siteNumber == 915:
+            sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle[0:10].replace(' ', '_') + '/index.html'
+            Log(sceneURL)
+            req = PAutils.HTTPRequest(sceneURL)
+            searchResult = HTML.ElementFromString(req.text)
+
+            titleNoFormatting = searchResult.xpath('//div/div/div[@class="movie-info"]/div/div[@class="heading"]/h1')[0].text_content().strip()
+            sceneDate = searchResult.xpath('//ul/li/span[contains(text(),"Release Date")]/following-sibling::span')[0].text_content().strip()
+
+            curID = PAutils.Encode(sceneURL)
+
+            # This is an exact match, so setting score to 100
+            score = 100
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] [%s] %s' % (sceneDate, searchTitle[0:10].replace(' ', '_'), titleNoFormatting), score=score, lang=lang))
+
 
     elif len(searchTitle.replace('The', '').replace('the', '')) > 3:
         sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+')
@@ -38,11 +58,14 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         searchResults = HTML.ElementFromString(req.text)
 
         for searchResult in searchResults.xpath('//div/div/div/div/div[@class="grid-item"]'):
-            titleNoFormatting = searchResult.xpath('./div/div/div/a[@itemprop="url"]')[0].text_content().strip()
-
-            sceneDate = searchResult.xpath('./div/div/div[@class="meta-data"][1]')[0].text_content().strip()
-            sceneDate = datetime.strptime(sceneDate, '%Y-%m-%d')
-            dateText = sceneDate.strftime('%Y-%m-%d')
+            titleNoFormatting = searchResult.xpath('./div/div[@class="entry-meta"]/div/a')[0].text_content().strip()
+            
+            if PAsearchSites.getSearchBaseURL(siteNum) == 913:
+                sceneDate = searchResult.xpath('./div/div/div[@class="meta-data"][1]')[0].text_content().strip()
+                sceneDate = datetime.strptime(sceneDate, '%Y-%m-%d')
+                sceneDate = sceneDate.strftime('%Y-%m-%d') + str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().split('/')[3]
+            elif PAsearchSites.getSearchBaseURL(siteNum) == 915:
+                sceneDate = str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().split('/')[3]
 
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().replace('/eng','')
             Log(sceneURL)
@@ -50,7 +73,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (sceneDate, titleNoFormatting), score=score, lang=lang))
 
     return results
 

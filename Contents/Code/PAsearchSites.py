@@ -1157,6 +1157,8 @@ def getSearchSettings(mediaTitle):
         ('^burna ', 'BurningAngel '),
         ('^bwb ', 'BigWetButts '),
         ('^cfnm ', 'ClothedFemaleNudeMale '),
+        ('^carib ', 'caribbeancom '),
+        ('^caribpr ', 'caribbeancompr '),
         ('^clip ', 'LegalPorno '),
         ('^cps ', 'CherryPimps '),
         ('^css ', 'CzechStreets '),
