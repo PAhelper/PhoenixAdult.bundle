@@ -6,7 +6,7 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
-    if(unicode(splitSearchTitle[1], 'UTF-8').isdigit()):
+    if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
         searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
@@ -41,63 +41,44 @@ def update(metadata, siteID, movieGenres, movieActors):
     
     # JAV Content ID
     javID = detailsPageElements.xpath('//dt[text()="DVD ID:"]/following-sibling::dd[1]')[0].text_content().strip()
-    Log('JAV ID (raw): ' + javID.upper())
 
     if javID.startswith("--"):
         javID = detailsPageElements.xpath('//dt[text()="Content ID:"]/following-sibling::dd[1]')[0].text_content().strip()
     
-    javID = javID.upper()
-
-    if "-" not in javID:
-        if len(javID) == 5:
-            javID = javID[:2] + '-' + javID[2:]
-        elif len(javID) == 6:
-            javID = javID[:3] + '-' + javID[3:]
-        elif len(javID) == 7:
-            javID = javID[:4] + '-' + javID[4:]
-        elif len(javID) == 8:
-            javID = javID[:5] + '-' + javID[5:]
-        elif len(javID) == 9:
-            javID = javID[:6] + '-' + javID[6:]
-        elif len(javID) == 10:
-            javID = javID[:7] + '-' + javID[7:]
-        elif len(javID) == 11:
-            javID = javID[:8] + '-' + javID[8:]
-        elif len(javID) == 12:
-            javID = javID[:9] + '-' + javID[9:]
-        Log('JAV ID (post split): ' + javID.upper())
+    if " " in javID:
+        javID = javID.upper.replace(' ', '-')
 
     # Title
     JavTitle = detailsPageElements.xpath("//cite[@itemprop='name']")[0].text_content().strip()
 
     # Undoing the Self Censoring R18.com does to their tags and titles
-    JavTitle = JavTitle.replace("R**e", "Rape")
-    JavTitle = JavTitle.replace("S********l", "Schoolgirl")
-    JavTitle = JavTitle.replace("S***e", "Slave")
-    JavTitle = JavTitle.replace("M****t", "Molest")
-    JavTitle = JavTitle.replace("F***e", "Force")
-    JavTitle = JavTitle.replace("G*******g", "Gang Bang")
-    JavTitle = JavTitle.replace("G******g", "Gangbang")
-    JavTitle = JavTitle.replace("K*d", "Descendant")
-    JavTitle = JavTitle.replace("C***d", "Descendant")
-    JavTitle = JavTitle.replace("T*****e", "Torture")
-    JavTitle = JavTitle.replace("T******e", "Tentacle")
-    JavTitle = JavTitle.replace("D**g", "Drug")
-    JavTitle = JavTitle.replace("P****h", "Punish")
-    JavTitle = JavTitle.replace("S*****t", "Student")
-    JavTitle = JavTitle.replace("V*****e", "Violate")
-    JavTitle = JavTitle.replace("V*****t", "Violent")
-    JavTitle = JavTitle.replace("B***d", "Blood")
-    JavTitle = JavTitle.replace("M************n", "Mother and Son")
-    JavTitle = JavTitle.replace("StepMother", "Mother")
-    JavTitle = JavTitle.replace("StepFather", "Father")
-    JavTitle = JavTitle.replace("StepDaughter", "Daughter")
-    JavTitle = JavTitle.replace("StepSonr", "Son")
-    JavTitle = JavTitle.replace("StepBrother", "Brother")
-    JavTitle = JavTitle.replace("StepSister", "Sister")
+    if "**" in JavTitle:
+        JavTitle = JavTitle.replace("R**e", "Rape")
+        JavTitle = JavTitle.replace("S********l", "Schoolgirl")
+        JavTitle = JavTitle.replace("S***e", "Slave")
+        JavTitle = JavTitle.replace("M****t", "Molest")
+        JavTitle = JavTitle.replace("F***e", "Force")
+        JavTitle = JavTitle.replace("G*******g", "Gang Bang")
+        JavTitle = JavTitle.replace("G******g", "Gangbang")
+        JavTitle = JavTitle.replace("K*d", "Descendant")
+        JavTitle = JavTitle.replace("C***d", "Descendant")
+        JavTitle = JavTitle.replace("T*****e", "Torture")
+        JavTitle = JavTitle.replace("T******e", "Tentacle")
+        JavTitle = JavTitle.replace("D**g", "Drug")
+        JavTitle = JavTitle.replace("P****h", "Punish")
+        JavTitle = JavTitle.replace("S*****t", "Student")
+        JavTitle = JavTitle.replace("V*****e", "Violate")
+        JavTitle = JavTitle.replace("V*****t", "Violent")
+        JavTitle = JavTitle.replace("B***d", "Blood")
+        JavTitle = JavTitle.replace("M************n", "Mother and Son")
+        JavTitle = JavTitle.replace("StepMother", "Mother")
+        JavTitle = JavTitle.replace("StepFather", "Father")
+        JavTitle = JavTitle.replace("StepDaughter", "Daughter")
+        JavTitle = JavTitle.replace("StepSonr", "Son")
+        JavTitle = JavTitle.replace("StepBrother", "Brother")
+        JavTitle = JavTitle.replace("StepSister", "Sister")
 
     metadata.title = javID + " " + JavTitle
-    Log('Title: ' + javID + " " + JavTitle)
     
     # Summary
     try:
@@ -147,23 +128,24 @@ def update(metadata, siteID, movieGenres, movieActors):
         genreName = (genreLink.text_content().lower().strip()).lower()
 
         # Undoing the Self Censoring R18.com does to their tags and titles
-        genreName = genreName.replace("r**e", "rape")
-        genreName = genreName.replace("s********l", "schoolgirl")
-        genreName = genreName.replace("s***e", "slave")
-        genreName = genreName.replace("m****ter", "molester")
-        genreName = genreName.replace("g*******g", "gang bang")
-        genreName = genreName.replace("g******g", "gangbang")
-        genreName = genreName.replace("k*d", "descendant")
-        genreName = genreName.replace("c***d", "descendant")
-        genreName = genreName.replace("f***e", "force")
-        genreName = genreName.replace("t*****e", "torture")
-        genreName = genreName.replace("t******e", "tentacle")
-        genreName = genreName.replace("d**g", "drug")
-        genreName = genreName.replace("p****h", "punish")
-        genreName = genreName.replace("s*****t", "student")
-        genreName = genreName.replace("v*****e", "violate")
-        genreName = genreName.replace("v*****t", "violent")
-        genreName = genreName.replace("b***d", "blood")
+        if "**" in genreName:
+            genreName = genreName.replace("r**e", "rape")
+            genreName = genreName.replace("s********l", "schoolgirl")
+            genreName = genreName.replace("s***e", "slave")
+            genreName = genreName.replace("m****ter", "molester")
+            genreName = genreName.replace("g*******g", "gang bang")
+            genreName = genreName.replace("g******g", "gangbang")
+            genreName = genreName.replace("k*d", "descendant")
+            genreName = genreName.replace("c***d", "descendant")
+            genreName = genreName.replace("f***e", "force")
+            genreName = genreName.replace("t*****e", "torture")
+            genreName = genreName.replace("t******e", "tentacle")
+            genreName = genreName.replace("d**g", "drug")
+            genreName = genreName.replace("p****h", "punish")
+            genreName = genreName.replace("s*****t", "student")
+            genreName = genreName.replace("v*****e", "violate")
+            genreName = genreName.replace("v*****t", "violent")
+            genreName = genreName.replace("b***d", "blood")
 
         movieGenres.addGenre(genreName)
 
