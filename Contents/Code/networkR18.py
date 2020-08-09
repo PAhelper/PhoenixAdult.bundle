@@ -122,6 +122,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Actors
+    movieActors.clearActors()
     for actor in detailsPageElements.xpath('//div[@itemprop="actors"]//span[@itemprop="name"]'):
         fullActorName = actor.text_content().strip()
         if fullActorName != '----':
@@ -162,14 +163,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         genreName = genreName.replace("s*****t", "student")
         genreName = genreName.replace("v*****e", "violate")
         genreName = genreName.replace("v*****t", "violent")
-        genreName = genreName.replace("B***d", "Blood")
-        genreName = genreName.replace("M************n", "Mother and Son")
-        genreName = genreName.replace("StepMother", "Mother")
-        genreName = genreName.replace("StepFather", "Father")
-        genreName = genreName.replace("StepDaughter", "Daughter")
-        genreName = genreName.replace("StepSonr", "Son")
-        genreName = genreName.replace("StepBrother", "Brother")
-        genreName = genreName.replace("StepSister", "Sister")
+        genreName = genreName.replace("b***d", "blood")
 
         movieGenres.addGenre(genreName)
 
