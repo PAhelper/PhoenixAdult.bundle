@@ -71,12 +71,6 @@ def update(metadata, siteID, movieGenres, movieActors):
         JavTitle = JavTitle.replace("V*****t", "Violent")
         JavTitle = JavTitle.replace("B***d", "Blood")
         JavTitle = JavTitle.replace("M************n", "Mother and Son")
-        JavTitle = JavTitle.replace("StepMother", "Mother")
-        JavTitle = JavTitle.replace("StepFather", "Father")
-        JavTitle = JavTitle.replace("StepDaughter", "Daughter")
-        JavTitle = JavTitle.replace("StepSonr", "Son")
-        JavTitle = JavTitle.replace("StepBrother", "Brother")
-        JavTitle = JavTitle.replace("StepSister", "Sister")
 
     metadata.title = javID + " " + JavTitle
     
