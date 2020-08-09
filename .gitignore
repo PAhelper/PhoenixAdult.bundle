@@ -1,14 +1,6 @@
 
 .gitattributes
-
-Contents/Code/siteClips4Sale.py
-.gitattributes
-Contents/Code/siteClips4Sale.py
-__pycache__/
-Contents/Code/env-init.py
 .pylintrc
-Contents/Libraries/Shared/__init__.py
-.vscode/
-Contents/Libraries/__init__.py
-Contents/Libraries/Shared/temp_libs/
 .venv/
+.vscode/
+__pycache__/

@@ -122,7 +122,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Actors
-    # movieActors.clearActors()
     for actor in detailsPageElements.xpath('//div[@itemprop="actors"]//span[@itemprop="name"]'):
         fullActorName = actor.text_content().strip()
         if fullActorName != '----':
@@ -144,7 +143,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieGenres.clearGenres()
         
     for genreLink in detailsPageElements.xpath('//a[@itemprop="genre"]'):
-        # Log("R18 GenreLink: " + str(genreLink))
         genreName = (genreLink.text_content().lower().strip()).lower()
 
         # Undoing the Self Censoring R18.com does to their tags and titles
