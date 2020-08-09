@@ -332,6 +332,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SexBabesVR
   - SinsVR
   - StasyQVR
++ #### HuCows | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Hustler | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### Interracial Pass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Intersec Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only**
@@ -343,7 +344,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sensual Pain
   - Sexually Broken
   - Topgrl
-+ #### JAV (via R18) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
++ #### JAV (via R18 - Censored JAV Only) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
++ #### JavBus (via JavBus - Censored & Uncensored JAV) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
 + #### JAY's POV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Joymii | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### JulesJordan Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*  **Movies Not Supported**

@@ -162,7 +162,12 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if 'pictures' in detailsPageElements and detailsPageElements['pictures']:
         max_quality = detailsPageElements['pictures']['nsfw']['top'].keys()[0]
-        art.append('https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality])
+        pictureURL = 'https://images-fame.gammacdn.com/movies/' + detailsPageElements['pictures'][max_quality]
+
+        if sceneType == 'movies':
+            art.append(pictureURL)
+        else:
+            art.insert(0, pictureURL)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

@@ -12,15 +12,20 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         releaseDate = parse(searchResult.xpath('.//span[@class="update_thumb_date"] | .//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
         actors = searchResult.xpath('.//span[@class="tour_update_models"]//a | .//p[@class="model-name"]//a')
-        firstActor = actors[0].text_content().strip()
-        numActors = len(actors) - 1
+        if actors:
+            firstActor = actors[0].text_content().strip()
+            numActors = len(actors) - 1
+
+        displayName = '%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate)
+        if firstActor:
+            displayName = '%s + %d in %s' % (firstActor, numActors, displayName)
 
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s + %d in %s [%s] %s' % (firstActor, numActors, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=displayName, score=score, lang=lang))
 
     return results
 
