@@ -1,0 +1,5 @@
+.gitattributes
+.pylintrc
+.venv/
+.vscode/
+__pycache__/

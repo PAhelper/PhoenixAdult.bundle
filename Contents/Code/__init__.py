@@ -805,6 +805,15 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 906 or searchSiteID == 907:
                 results = PAsearchSites.networkEvolvedFights.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # JavBus
+            elif searchSiteID == 912:
+                results = PAsearchSites.networkJavBus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Hucows
+            elif searchSiteID == 913:
+                results = PAsearchSites.siteHucows.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1399,6 +1408,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Evolved Fights Network
         elif siteID == 906 or siteID == 907:
             metadata = PAsearchSites.networkEvolvedFights.update(metadata, siteID, movieGenres, movieActors)
+
+        # JavBus
+        elif siteID == 912:
+            metadata = PAsearchSites.networkJavBus.update(metadata, siteID, movieGenres, movieActors)
+
+        # Hucows
+        elif siteID == 913:
+            metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
