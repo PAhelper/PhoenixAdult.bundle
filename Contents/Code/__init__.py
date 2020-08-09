@@ -810,12 +810,16 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkJavBus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Caribbeancom
-            elif searchSiteID == 913 or searchSiteID == 915:
+            elif searchSiteID == 913:
                 results = PAsearchSites.siteCaribbeancom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Hucows
             elif searchSiteID == 914:
                 results = PAsearchSites.siteHucows.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Caribbeancom
+            elif searchSiteID == 915:
+                results = PAsearchSites.siteCaribbeancom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
 
 

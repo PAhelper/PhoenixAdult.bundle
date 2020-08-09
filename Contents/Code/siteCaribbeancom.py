@@ -14,11 +14,14 @@ import PAutils
 #   
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    
+    # Log(siteNum)
+    sceneDate = ''
 
     if searchTitle[0:10].replace('-', '').replace(' ', '').replace('_', '').isdigit():
-        
-
-        if siteNumber == 913:
+        Log('Exact Match Triggered')
+        if siteNum == 913:
+            # Log('913 Exact Match Triggered')
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle[0:10].replace(' ', '-') + '/index.html'
             Log(sceneURL)
             req = PAutils.HTTPRequest(sceneURL)
@@ -35,7 +38,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] [%s] %s' % (sceneDate, searchTitle[0:10].replace(' ', '-'), titleNoFormatting), score=score, lang=lang))
         
-        elif siteNumber == 915:
+        elif siteNum == 915:
+            # Log('915 Exact Match Triggered')
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/moviepages/' + searchTitle[0:10].replace(' ', '_') + '/index.html'
             Log(sceneURL)
             req = PAutils.HTTPRequest(sceneURL)
@@ -53,6 +57,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 
     elif len(searchTitle.replace('The', '').replace('the', '')) > 3:
+        Log('Text Match Triggered')
+
         sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '+')
         req = PAutils.HTTPRequest(sceneURL)
         searchResults = HTML.ElementFromString(req.text)
@@ -60,11 +66,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         for searchResult in searchResults.xpath('//div/div/div/div/div[@class="grid-item"]'):
             titleNoFormatting = searchResult.xpath('./div/div[@class="entry-meta"]/div/a')[0].text_content().strip()
             
-            if PAsearchSites.getSearchBaseURL(siteNum) == 913:
+            if siteNum == 913:
+                # Log('913 Text Match Triggered')
                 sceneDate = searchResult.xpath('./div/div/div[@class="meta-data"][1]')[0].text_content().strip()
                 sceneDate = datetime.strptime(sceneDate, '%Y-%m-%d')
                 sceneDate = sceneDate.strftime('%Y-%m-%d') + str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().split('/')[3]
-            elif PAsearchSites.getSearchBaseURL(siteNum) == 915:
+            elif siteNum == 915:
+                # Log('915 Text Match Triggered')
                 sceneDate = str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().split('/')[3]
 
             sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + str(searchResult.xpath('./div/div/div[@class="meta-title"]/a/@href')[0]).strip().replace('/eng','')
@@ -74,6 +82,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (sceneDate, titleNoFormatting), score=score, lang=lang))
+    else:
+        Log('No Match Found or Title Too Short')
 
     return results
 
@@ -81,6 +91,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    siteNum = PAutils.Decode(metadata_id[1])
 
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
@@ -89,12 +100,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     videoID = sceneURL.rsplit('/', 2)[1]
 
     # Studio
-    metadata.studio = 'Caribbeancom.com'
+    if siteNum = 913
+        studio = 'Caribbeancom.com'
+    elif siteNum = 915
+        studio = 'Caribbeancompr.com'
+    metadata.studio = studio
  
-
     # Title
-    Title = detailsPageElements.xpath('//div/div/div/div/div/h1[@itemprop="name"]')[0].text_content().strip()
-    Title = 'Caribbeancom %s %s' % (videoID, Title)
+    Title = detailsPageElements.xpath('//div/div/div[contains(@class,"section")]/div[contains(@class,"heading")]/h1')[0].text_content().strip()
+    Title = '%s %s %s' % (studio, videoID, Title)
     metadata.title = Title
 
     # Release Date
