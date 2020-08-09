@@ -4,6 +4,21 @@ import PAactors
 import PAutils
 
 
+def getMaxResolution(resolutions):
+    max_size = (None, 0)
+    for idx, key in enumerate(resolutions):
+        t = key.split('x')
+        if len(t) == 2:
+            size = int(t[0]) * int(t[1])
+            if size > max_size[1]:
+                max_size = idx, size
+
+    if max_size[0]:
+        return resolutions[max_size[0]]
+
+    return None
+
+
 def getAPIKey(url):
     data = PAutils.HTTPRequest(url).text
     match = re.search(r'\"apiKey\":\"(.*?)\"', data)

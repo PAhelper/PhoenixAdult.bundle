@@ -813,6 +813,7 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 913:
                 results = PAsearchSites.siteHucows.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1416,7 +1417,7 @@ class PhoenixAdultAgent(Agent.Movies):
         elif siteID == 913:
             metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
 
-
+        
         # Cleanup Genres and Add
         Log("Genres")
         movieGenres.processGenres(metadata)

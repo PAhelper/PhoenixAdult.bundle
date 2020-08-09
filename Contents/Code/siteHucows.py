@@ -47,8 +47,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
 
-
-
+            
     return results
 
 

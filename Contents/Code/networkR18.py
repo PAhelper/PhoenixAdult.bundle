@@ -9,6 +9,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
         searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
+    # Log("searchJAVID: " + searchJAVID)
+
     if searchJAVID:
         encodedTitle = searchJAVID
 
@@ -97,7 +99,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.year = metadata.originally_available_at.year
 
     # Actors
-    movieActors.clearActors()
+    # movieActors.clearActors()
     for actor in detailsPageElements.xpath('//div[@itemprop="actors"]//span[@itemprop="name"]'):
         fullActorName = actor.text_content().strip()
         if fullActorName != '----':
