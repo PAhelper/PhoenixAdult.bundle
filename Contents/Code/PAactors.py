@@ -176,6 +176,8 @@ class PhoenixActors:
                 newActor = 'Shalina Divine'
             elif newActor == 'Dylann Vox' or newActor == 'Dylan Vox':
                 newActor = 'Skylar Vox'
+            elif newActor == 'Stephanie Moon' or newActor == 'Steffy Moon':
+                newActor = 'Stefanie Moon'
             elif newActor == 'Sedona' or newActor == 'Stefanie Renee':
                 newActor = 'Stephanie Renee'
             elif newActor == 'Stella Bankxxx' or newActor == 'Stella Ferrari':
@@ -199,6 +201,8 @@ class PhoenixActors:
                     newActor = 'Katarina Muti'
                 elif newActor == 'Henna Ssy':
                     newActor = 'Henessy'
+                elif newActor == 'Stefanie':
+                    newActor = 'Stefanie Moon'
             elif metadata.studio == 'Babes':
                 if newActor == 'Angelica':
                     newActor = 'Krystal Boyd'
@@ -2342,6 +2346,9 @@ class PhoenixActors:
             elif metadata.studio == 'Rocco Siffredi':
                 if newActor == 'Abbie':
                     newActor = 'Krystal Boyd'
+            elif metadata.studio == 'Puffy Network':
+                if newActor == 'Stefany':
+                    newActor = 'Stefanie Moon'
 
             if not skip:
                 if newPhoto == '':
