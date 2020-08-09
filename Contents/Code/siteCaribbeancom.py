@@ -100,9 +100,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     videoID = sceneURL.rsplit('/', 2)[1]
 
     # Studio
-    if siteNum = 913
+    if siteNum == 913:
         studio = 'Caribbeancom.com'
-    elif siteNum = 915
+    elif siteNum == 915:
         studio = 'Caribbeancompr.com'
     metadata.studio = studio
  
