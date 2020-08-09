@@ -5,80 +5,51 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-
     if searchDate:
-        date_object = datetime.strptime(searchDate, '%Y-%m-%d')
-        mediaDate = str(date_object.year) + '/' + str(date_object.month)
-
-        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + mediaDate
-        req = PAutils.HTTPRequest(sceneURL)
-        searchResults = HTML.ElementFromString(req.text)
-
-        for searchResult in searchResults.xpath('//article'):
-            titleNoFormatting = searchResult.xpath('./header/a/h1')[0].text_content().strip()
-
-            sceneDate = searchResult.xpath('./div/div[@itemprop="datePublished"]')[0].text_content().strip()
-            sceneDate = datetime.strptime(sceneDate, '%d %b %Y')
-            dateText = sceneDate.strftime('%Y-%m-%d')
-
-            sceneURL = str(searchResult.xpath('./header/a/@href')[0]).strip()
-            curID = PAutils.Encode(sceneURL)
-
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
-    
+        encodedTitle = parse(searchDate).strftime('%Y/%m')
     else:
-        sceneURL = 'https://www.hucows.com/?s=' + searchTitle.replace(' ', '+')
-        req = PAutils.HTTPRequest(sceneURL)
-        searchResults = HTML.ElementFromString(req.text)
+        encodedTitle = '?s=%s' % searchTitle.replace(' ', '+')
 
-        for searchResult in searchResults.xpath('//article'):
-            titleNoFormatting = searchResult.xpath('./div/div/header/a/h2')[0].text_content().strip()
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
+    for searchResult in searchResults.xpath('//article'):
+        sceneURL = searchResult.xpath('.//a/@href')[0].strip()
+        curID = PAutils.Encode(sceneURL)
+        titleNoFormatting = searchResult.xpath('.//h1 | .//h2')[0].text_content().strip()
 
-            sceneDate = searchResult.xpath('./div/div/div/div[@itemprop="datePublished"]')[0].text_content().strip()
-            sceneDate = datetime.strptime(sceneDate, '%d %b %Y')
-            dateText = sceneDate.strftime('%Y-%m-%d')
+        date = searchResult.xpath('.//div[@itemprop="datePublished"]')[0].text_content().strip()
+        releaseDate = parse(date).strftime('%Y-%m-%d')
 
-            sceneURL = str(searchResult.xpath('./div/div/header/a/@href')[0]).strip()
-            curID = PAutils.Encode(sceneURL)
-
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (dateText, titleNoFormatting), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
-            
     return results
 
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-
-    # Studio
-    metadata.studio = 'HuCows.com'
- 
-
     # Title
     Title = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - HuCows.com', '')
     metadata.title = Title.title()
 
+    # Studio
+    metadata.studio = 'HuCows.com'
 
     # Release Date
-    date = detailsPageElements.xpath('//article/div/div[@itemprop="datePublished"]')[0].text_content().strip().replace('Release Date: ', '')
+    date = detailsPageElements.xpath('//div[@itemprop="datePublished"]')[0].text_content().strip().replace('Release Date: ', '')
     date_object = datetime.strptime(date, '%d %b %Y')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
-
-
-    # Actors
-    # -- No Actor Data Available On Site Metadata --
 
     # Summary
     try:
@@ -89,17 +60,19 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
 
-        # Default Genres
-    genres = ['Hucows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
-    for genre in genres:
-        movieGenres.addGenre(genre)
+    # Default Genres
+    genres = ['HuCows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
+    for genreName in genres:
+        movieGenres.addGenre(genreName)
 
-        # Dynamic Genres
+    # Dynamic Genres
     for genreLink in detailsPageElements.xpath('//div/span/a[@rel="category tag"]'):
         genreName = genreLink.text_content().lower().strip()
-        movieGenres.addGenre(genreName)
-    
 
+        movieGenres.addGenre(genreName)
+
+    # Actors
+    # -- No Actor Data Available On Site Metadata --
 
     # Posters
     art = []

@@ -7,13 +7,13 @@ import PAutils
 # Known Issues
 #   [Resolved/BugFix] Only returns one result
 #       - Due to saving full URL in curID, it had a unique ID per search result, changed to just saving JAVID.
-# 
+#
 #   [Resolved/Working As Designed] Only returns result with JAVID, extra text causes search fail
 #       - This appears to be a limit of the search on the site, even throwing the titles in there kills it.
-# 
+#
 #   [Resolved/Code Rewrite] Tagline section is generally borked and needs rework (labels and series)
 #       - Rewrote the section entirely to use smarter # logic, and reduce reliance on exception catches
-#   
+#
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -25,16 +25,21 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if searchJAVID:
         encodedTitle = searchJAVID
 
-    searchTypes = ['Censored', 'Uncensored']
+    searchTypes = [
+        'Censored',
+        'Uncensored'
+    ]
 
+    for searchType in searchTypes:
+        if searchType == 'Uncensored':
+            sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'uncensored/search/' + encodedTitle
+        elif searchType == 'Censored':
+            sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'search/' + encodedTitle
 
-    for type in searchTypes:
-        if type == 'Uncensored': sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'uncensored/search/' + encodedTitle
-        elif type == 'Censored': sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + 'search/' + encodedTitle
         req = PAutils.HTTPRequest(sceneURL)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//a[@class="movie-box"]'):
-            titleNoFormatting = searchResult.xpath('.//span[1]')[0].text_content().strip().replace('\t', '').replace('\r\n', '')
+            titleNoFormatting = searchResult.xpath('.//span[1]')[0].text_content().replace('\t', '').replace('\r\n', '').strip()
             JAVID = searchResult.xpath('.//date[1]')[0].text_content().strip()
 
             sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '-').replace('%2B', '-')
@@ -46,8 +51,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                 score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s][%s] %s' % (type, JAVID, titleNoFormatting), score=score, lang=lang))
-
-            Log('Found Title: ' + '[' + type + ']' + '[' + JAVID + '] ' + titleNoFormatting.title())
 
     return results
 
@@ -62,17 +65,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
     JAVID = sceneURL.rsplit('/', 1)[1]
 
-
     # Studio
     javStudio = detailsPageElements.xpath('//p/a[contains(@href, "/studio/")]')[0].text_content().strip()
     metadata.studio = javStudio
- 
 
     # Title
     javTitle = detailsPageElements.xpath('//head/title')[0].text_content().strip().replace(' - JavBus', '')
-    if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit(): javTitle = javStudio + ' '  + javTitle
+    if JAVID.replace('-', '').replace('_', '').replace(' ', '').isdigit():
+        javTitle = javStudio + ' ' + javTitle
     metadata.title = javTitle
-
 
     # Tagline
     taglineQuery = ['N', 'N', 0]
@@ -82,25 +83,26 @@ def update(metadata, siteID, movieGenres, movieActors):
     try:
         label = detailsPageElements.xpath('//p/a[contains(@href, "/label/")]')[0].text_content().strip()
         taglineQuery[2] = taglineQuery[2] + 1
-    except: pass
+    except:
+        pass
 
     try:
         series = detailsPageElements.xpath('//p/a[contains(@href, "/series/")]')[0].text_content().strip()
         taglineQuery[2] = taglineQuery[2] + 2
-    except: pass
+    except:
+        pass
 
     taglineQuery[0] = label
     taglineQuery[1] = series
 
     if taglineQuery[2] == 0:
         metadata.tagline = ''
-    elif taglineQuery[2] == 1: 
+    elif taglineQuery[2] == 1:
         metadata.tagline = 'Label: ' + taglineQuery[0]
-    elif taglineQuery[2] == 2: 
+    elif taglineQuery[2] == 2:
         metadata.tagline = 'Series: ' + taglineQuery[1]
-    elif taglineQuery[2] == 3: 
+    elif taglineQuery[2] == 3:
         metadata.tagline = 'Label: ' + taglineQuery[0] + ', Series: ' + taglineQuery[1]
-
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="col-md-3 info"]/p[2]')[0].text_content().strip().replace('Release Date: ', '')
@@ -108,6 +110,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
+    # Genres
+    for genreLink in detailsPageElements.xpath('//span[@class="genre"]/a[contains(@href, "/genre/")]'):
+        genreName = genreLink.text_content().lower().strip()
+        movieGenres.addGenre(genreName)
+
+    metadata.collections.add('Japan Adult Video')
 
     # Actors
     for actorLink in detailsPageElements.xpath('//a[@class="avatar-box"]'):
@@ -117,17 +125,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if actorPhotoURL.rsplit('/', 1)[1] == 'nowprinting.gif':
             actorPhotoURL = ''
 
-
         movieActors.addActor(fullActorName, actorPhotoURL)
-
-
-    # Genres
-    for genreLink in detailsPageElements.xpath('//span[@class="genre"]/a[contains(@href, "/genre/")]'):
-        genreName = genreLink.text_content().lower().strip()
-        movieGenres.addGenre(genreName)
-    
-    metadata.collections.add('Japan Adult Video')
-
 
     # Posters
     art = []
@@ -142,9 +140,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     coverImage = detailsPageElements.xpath('//a[contains(@href, "/cover/")]/@href')
     coverImageCode = coverImage[0].rsplit('/', 1)[1].split('.')[0].split('_')[0]
     imageHost = coverImage[0].rsplit('/', 2)[0]
-    coverImage = imageHost + '/thumb/'  + coverImageCode + '.jpg'
+    coverImage = imageHost + '/thumb/' + coverImageCode + '.jpg'
     if coverImage.count('/images.') == 1:
-        coverImage = coverImage.replace("thumb", "thumbs")
+        coverImage = coverImage.replace('thumb', 'thumbs')
 
     art.append(coverImage)
 

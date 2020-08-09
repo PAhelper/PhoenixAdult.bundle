@@ -1408,7 +1408,7 @@ class PhoenixAdultAgent(Agent.Movies):
         # Evolved Fights Network
         elif siteID == 906 or siteID == 907:
             metadata = PAsearchSites.networkEvolvedFights.update(metadata, siteID, movieGenres, movieActors)
-        
+
         # JavBus
         elif siteID == 912:
             metadata = PAsearchSites.networkJavBus.update(metadata, siteID, movieGenres, movieActors)
@@ -1417,7 +1417,6 @@ class PhoenixAdultAgent(Agent.Movies):
         elif siteID == 913:
             metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
 
-        
         # Cleanup Genres and Add
         Log("Genres")
         movieGenres.processGenres(metadata)
