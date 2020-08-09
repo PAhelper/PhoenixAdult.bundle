@@ -19,8 +19,8 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
-    if(unicode(splitSearchTitle[1], 'UTF-8').isdigit()):
-         searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
+    if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
+        searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
         encodedTitle = searchJAVID
@@ -125,7 +125,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     for genreLink in detailsPageElements.xpath('//span[@class="genre"]/a[contains(@href, "/genre/")]'):
         genreName = genreLink.text_content().lower().strip()
         movieGenres.addGenre(genreName)
-
+    
+    metadata.collections.add('Japan Adult Video')
 
     # Posters
     art = []

@@ -3,18 +3,6 @@ import PAgenres
 import PAactors
 import PAutils
 
-# Known Issues
-#   Just a straight copy of JavBus, needs complete rebuild for new site
-#   
-#   xpath for search results: //article
-#   xpath for date match: //article/div/div[@itemprop="datePublished"]
-#   
-#   
-#   
-#   
-#   
-
-
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 

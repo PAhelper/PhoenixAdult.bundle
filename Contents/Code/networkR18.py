@@ -9,8 +9,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     if(unicode(splitSearchTitle[1], 'UTF-8').isdigit()):
         searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
-    # Log("searchJAVID: " + searchJAVID)
-
     if searchJAVID:
         encodedTitle = searchJAVID
 
@@ -72,6 +70,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Title
     JavTitle = detailsPageElements.xpath("//cite[@itemprop='name']")[0].text_content().strip()
 
+    # Undoing the Self Censoring R18.com does to their tags and titles
     JavTitle = JavTitle.replace("R**e", "Rape")
     JavTitle = JavTitle.replace("S********l", "Schoolgirl")
     JavTitle = JavTitle.replace("S***e", "Slave")
@@ -97,8 +96,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     JavTitle = JavTitle.replace("StepBrother", "Brother")
     JavTitle = JavTitle.replace("StepSister", "Sister")
 
-
-    
     metadata.title = javID + " " + JavTitle
     Log('Title: ' + javID + " " + JavTitle)
     
@@ -144,22 +141,13 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
-    # movieGenres.clearGenres()
-    
-    # Load Genres From JavBus
-    JavBusurl = 'https://www.javbus.com/en/' + javID
-    reqJavBus = PAutils.HTTPRequest(JavBusurl)
-    detailsPageElementsJavBus = HTML.ElementFromString(reqJavBus.text)
-    for genreLinkJavBus in detailsPageElementsJavBus.xpath('//span[@class="genre"]'):
-        genreNameJavBus = genreLinkJavBus.text_content().lower().strip()
-        # Log("JavBus Genre: " + genreNameJavBus)
-        movieGenres.addGenre(genreNameJavBus)
-    
-    #Load Genres From R18
+    movieGenres.clearGenres()
+        
     for genreLink in detailsPageElements.xpath('//a[@itemprop="genre"]'):
         # Log("R18 GenreLink: " + str(genreLink))
-
         genreName = (genreLink.text_content().lower().strip()).lower()
+
+        # Undoing the Self Censoring R18.com does to their tags and titles
         genreName = genreName.replace("r**e", "rape")
         genreName = genreName.replace("s********l", "schoolgirl")
         genreName = genreName.replace("s***e", "slave")
@@ -185,10 +173,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         genreName = genreName.replace("StepBrother", "Brother")
         genreName = genreName.replace("StepSister", "Sister")
 
-
         movieGenres.addGenre(genreName)
 
-        
     metadata.collections.add('Japan Adult Video')
 
     

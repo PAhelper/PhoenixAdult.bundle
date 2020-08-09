@@ -110,10 +110,9 @@ import siteVRLatina
 import siteVRConk
 import networkEvolvedFights
 import networkJavBus
-import siteCaribbeancom
 import siteHucows
 
-searchSites = [None] * 916
+searchSites = [None] * 914
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1027,9 +1026,7 @@ searchSites[909] = ("Sapphic Erotica", "Sapphic Erotica", "https://sapphix.com",
 searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "https://sapphix.com/movies?site[]=gmp&q=")
 searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 searchSites[912] = ("JavBus", "JavBus", "https://www.javbus.com", "https://www.javbus.com/en/")
-searchSites[913] = ("Caribbeancom", "Caribbeancom", "https://en.caribbeancom.com/eng", "https://en.caribbeancom.com/eng/search/?q=")
-searchSites[914] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
-searchSites[915] = ("Caribbeancompr", "Caribbeancompr", "https://en.caribbeancompr.com/eng", "https://en.caribbeancompr.com/eng/search/?q=")
+searchSites[913] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
 
 
 def getSearchBaseURL(siteID):
@@ -1157,8 +1154,6 @@ def getSearchSettings(mediaTitle):
         ('^burna ', 'BurningAngel '),
         ('^bwb ', 'BigWetButts '),
         ('^cfnm ', 'ClothedFemaleNudeMale '),
-        ('^carib ', 'caribbeancom '),
-        ('^caribpr ', 'caribbeancompr '),
         ('^clip ', 'LegalPorno '),
         ('^cps ', 'CherryPimps '),
         ('^css ', 'CzechStreets '),
@@ -1209,6 +1204,7 @@ def getSearchSettings(mediaTitle):
         ('^ihaw ', 'IHaveAWife '),
         ('^iktg ', 'IKnowThatGirl '),
         ('^il ', 'ImmoralLive '),
+        ('^jb ', 'JavBus '),
         ('^kha ', 'KarupsHA '),
         ('^kow ', 'KarupsOW '),
         ('^kpc ', 'KarupsPC '),

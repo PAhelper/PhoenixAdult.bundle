@@ -809,19 +809,9 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 912:
                 results = PAsearchSites.networkJavBus.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-            # Caribbeancom
-            elif searchSiteID == 913:
-                results = PAsearchSites.siteCaribbeancom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
-
             # Hucows
-            elif searchSiteID == 914:
+            elif searchSiteID == 913:
                 results = PAsearchSites.siteHucows.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
-
-            # Caribbeancom
-            elif searchSiteID == 915:
-                results = PAsearchSites.siteCaribbeancom.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
-
-
 
         results.Sort('score', descending=True)
 
@@ -1422,19 +1412,11 @@ class PhoenixAdultAgent(Agent.Movies):
         elif siteID == 912:
             metadata = PAsearchSites.networkJavBus.update(metadata, siteID, movieGenres, movieActors)
 
-        # Caribbeancom
-        elif siteID == 913:
-            metadata = PAsearchSites.siteCaribbeancom.update(metadata, siteID, movieGenres, movieActors)
-
         # Hucows
-        elif siteID == 914:
+        elif siteID == 913:
             metadata = PAsearchSites.siteHucows.update(metadata, siteID, movieGenres, movieActors)
 
-        # Caribbeancom
-        elif siteID == 915:
-            metadata = PAsearchSites.siteCaribbeancom.update(metadata, siteID, movieGenres, movieActors)
 
-        
         # Cleanup Genres and Add
         Log("Genres")
         movieGenres.processGenres(metadata)
