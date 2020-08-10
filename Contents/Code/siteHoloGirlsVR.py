@@ -5,16 +5,30 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[@class="memVid"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@class="memVidTitle"]//a/@title')[0]
-        curID = PAutils.Encode(searchResult.xpath('.//div[@class="memVidTitle"]//a/@href')[0])
+
+    splited = searchTitle.split(' ')
+    if unicode(splited[0], 'utf8').isdigit():
+        sceneID = splited[0]
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+        DirectURL = ('https://www.hologirlsvr.com/Scenes/Videos/' + sceneID)
+        req = PAutils.HTTPRequest(DirectURL)
+        searchResults = HTML.ElementFromString(req.text)
+        titleNoFormatting = searchResults.xpath('//div[@class="col-xs-12 video-title"]//h3')[0].text_content().strip()
+        curID = PAutils.Encode(DirectURL)
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
-
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
+        score = 100
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+    else:
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+        searchResults = HTML.ElementFromString(req.text)
+        for searchResult in searchResults.xpath('//div[@class="memVid"]'):
+            titleNoFormatting = searchResult.xpath('.//div[@class="memVidTitle"]//a/@title')[0]
+            curID = PAutils.Encode(searchResult.xpath('.//div[@class="memVidTitle"]//a/@href')[0])
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
