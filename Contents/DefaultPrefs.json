@@ -42,5 +42,17 @@
         "label": "API Key",
         "type": "text",
         "default": ""
+    },
+    {
+        "id": "strip_enable",
+        "label": "Enable FileName Strip",
+        "type": "bool",
+        "default": "false"
+    },
+	{
+        "id": "strip_symbol",
+        "label": "Strip Symbol",
+        "type": "text",
+        "default": "~"
     }
 ]
