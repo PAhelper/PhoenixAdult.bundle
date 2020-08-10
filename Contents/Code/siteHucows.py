@@ -65,6 +65,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
 
+    metadata.collections.add('HuCows')
+
     # Default Genres
     genres = ['HuCows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
     for genreName in genres:
