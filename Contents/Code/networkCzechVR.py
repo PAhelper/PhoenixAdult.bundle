@@ -4,11 +4,17 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    sceneID = None
+    splited = searchTitle.split(' ')
+    if unicode(splited[0], 'utf8').isdigit():
+        sceneID = splited[0]
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
     encodedTitle = searchTitle.replace(' ', '-')
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class,"postTag")]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="nazev"]//h2//a')[0].text_content()
+        curSceneID = searchResult.xpath('.//div[@class="nazev"]//h2//a')[0].text_content().split(" -")[0]
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         releaseDate = parse(searchResult.xpath('.//div[@class="datum"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         actors = searchResult.xpath('.//div[@class="nazev"]//div[@class="featuring"]//a')
@@ -19,8 +25,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             actorList.append(actorName)
         actorsPrint = ', '.join(actorList)
-
-        if searchDate:
+        if sceneID:
+            score = 100 - Util.LevenshteinDistance(sceneID, curSceneID)
+        elif searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -84,6 +91,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             poster = poster[1:]
+            if not poster.startswith('http'):
+                poster = PAsearchSites.getSearchBaseURL(siteID) + poster
 
             art.append(poster)
 
