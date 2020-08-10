@@ -6,17 +6,21 @@ import PAutils
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
-    splited = searchTitle.split(' ')
-    if unicode(splited[0], 'utf8').isdigit():
-        sceneID = splited[0]
+    sceneID = searchTitle.split(' ')[0]
+    if unicode(sceneID, 'utf8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
-        DirectURL = ('https://www.hologirlsvr.com/Scenes/Videos/' + sceneID)
-        req = PAutils.HTTPRequest(DirectURL)
+
+    if sceneID and not searchTitle:
+        sceneURL = '%s/Scenes/Videos/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
+        req = PAutils.HTTPRequest(sceneURL)
         searchResults = HTML.ElementFromString(req.text)
+
         titleNoFormatting = searchResults.xpath('//div[@class="col-xs-12 video-title"]//h3')[0].text_content().strip()
-        curID = PAutils.Encode(DirectURL)
+        curID = PAutils.Encode(sceneURL)
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+
         score = 100
+
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
     else:
         req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
