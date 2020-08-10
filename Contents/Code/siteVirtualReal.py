@@ -82,7 +82,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
     xpaths = [
         '//dl8-video/@poster',
-        '//a[contains(@class,"w-gallery-tnail")]/@href'
+        '//figure[contains(@itemprop, "associatedMedia")]/a/@href'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):

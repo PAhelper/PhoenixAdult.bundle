@@ -15,9 +15,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
-        detailsPageElements = HTML.ElementFromString(req.text)
-
-        if detailsPageElements:
+        if req.ok:
+            detailsPageElements = HTML.ElementFromString(req.text)
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
             releaseDate = parse(detailsPageElements.xpath('//time/@datetime')[0]).strftime('%Y-%m-%d')
