@@ -28,7 +28,11 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
-        title = media.name
+        if Prefs['strip_enable']:
+            title = media.name.split(Prefs['strip_symbol'], 1)[0]
+        else:
+            title = media.name
+
         if media.primary_metadata is not None:
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
