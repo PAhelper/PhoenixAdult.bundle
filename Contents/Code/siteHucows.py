@@ -25,10 +25,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        try:
-            sceneID = searchResult.xpath('./div/a/img/@src | ./div/div/div/a/img/@src | ./div/div/div/ul/li/a/img/@src')[0].strip().replace('.jpg', '').rsplit('/', 1)[1][:5]
-        except:
-            sceneID = 'N/A'
+        sceneID = 'N/A'
+        imgNode = searchResult.xpath('.//img/@src')
+        if imgNode:
+            sceneID = imgNode[0].strip().rsplit('/', 1)[1].rsplit('.', 1)[0]
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (sceneID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
@@ -50,6 +50,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Studio
     metadata.studio = 'HuCows.com'
 
+    # Tagline and Collection(s)
+    metadata.collections.clear()
+    tagline = 'HuCows'
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
+
     # Release Date
     date = detailsPageElements.xpath('//div[@itemprop="datePublished"]')[0].text_content().strip().replace('Release Date: ', '')
     date_object = datetime.strptime(date, '%d %b %Y')
@@ -64,8 +70,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         pass
 
     # Genres
-
-    metadata.collections.add('HuCows')
+    movieGenres.clearGenres()
 
     # Default Genres
     genres = ['HuCows', 'Breasts', 'Nipples', 'Nipple Torture', 'Breast Torture', 'Fetish', 'BDSM']
@@ -74,12 +79,17 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Dynamic Genres
     for genreLink in detailsPageElements.xpath('//div/span/a[@rel="category tag"]'):
-        genreName = genreLink.text_content().lower().strip()
+        genreName = genreLink.text_content().strip()
 
         movieGenres.addGenre(genreName)
 
     # Actors
-    # -- No Actor Data Available On Site Metadata --
+    movieActors.clearActors()
+    for actorLink in detailsPageElements.xpath('//a[@rel="tag"]'):
+        actorName = actorLink.text_content().strip()
+        actorPhotoURL = ''
+
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []
