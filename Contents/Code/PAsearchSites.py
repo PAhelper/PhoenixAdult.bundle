@@ -112,7 +112,7 @@ import networkEvolvedFights
 import networkJavBus
 import siteHucows
 
-searchSites = [None] * 914
+searchSites = [None] * 930
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1027,6 +1027,22 @@ searchSites[910] = ("Give Me Pink", "Give Me Pink", "https://sapphix.com", "http
 searchSites[911] = ("Fist Flush", "Fist Flush", "https://sapphix.com", "https://sapphix.com/movies?site[]=ff&q=")
 searchSites[912] = ("JavBus", "JavBus", "https://www.javbus.com", "https://www.javbus.com/en/")
 searchSites[913] = ("Hucows", "Hucows", "https://www.hucows.com", "https://www.hucows.com/")
+searchSites[914] = ("Mile High Media", "Mile High Media", "https://milehighmedia.com", "https://site-api.project1service.com")
+searchSites[915] = ("Mile High", "Mile High", "https://milehighmedia.com", "https://site-api.project1service.com")
+searchSites[916] = ("Why Not Bi", "Why Not Bi", "https://whynotbi.com", "https://site-api.project1service.com")
+searchSites[917] = ("HentaiPros", "HentaiPros", "https://hentaipros.com", "https://site-api.project1service.com")
+searchSites[918] = ("3dxstar Channel PornPortal", "3dxstar Channel PornPortal", "https://3dxstar-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[919] = ("Cosplay Channel PornPortal", "Cosplay Channel PornPortal", "https://cosplay-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[920] = ("Ebony Channel PornPortal", "Ebony Channel PornPortal", "https://ebony-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[921] = ("Latina Channel PornPortal", "Latina Channel PornPortal", "https://latina-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[922] = ("Teen Channel PornPortal", "Teen Channel PornPortal", "https://teen-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[923] = ("Milf Channel PornPortal", "Milf Channel PornPortal", "https://milf-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[924] = ("Stepfamily Channel PornPortal", "Stepfamily Channel PornPortal", "https://stepfamily-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[925] = ("Lesbian Channel PornPortal", "Lesbian Channel PornPortal", "https://lesbian-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[926] = ("RealityGang Channel PornPortal", "RealityGang Channel PornPortal", "https://realitygang-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[927] = ("Anal Channel PornPortal", "Anal Channel PornPortal", "https://anal-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[928] = ("BBW Channel PornPortal", "BBW Channel PornPortal", "https://bbw-channel.pornportal.com", "https://site-api.project1service.com")
+searchSites[929] = ("VR Channel PornPortal", "VR Channel PornPortal", "https://vr-channel.pornportal.com", "https://site-api.project1service.com")
 
 
 def getSearchBaseURL(siteID):
