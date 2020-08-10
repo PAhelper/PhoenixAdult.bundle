@@ -27,7 +27,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         actorsPrint = ', '.join(actorList)
         if sceneID:
             score = 100 - Util.LevenshteinDistance(sceneID, curSceneID)
-        if searchDate:
+        elif searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -91,6 +91,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             poster = poster[1:]
+            if not poster.startswith('http'):
+                poster = PAsearchSites.getSearchBaseURL(siteID) + poster
 
             art.append(poster)
 
@@ -99,7 +101,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID)+posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
