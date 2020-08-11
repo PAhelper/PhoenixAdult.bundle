@@ -2349,6 +2349,41 @@ class PhoenixActors:
             elif metadata.studio == 'Puffy Network':
                 if newActor == 'Stefany':
                     newActor = 'Stefanie Moon'
+            elif metadate.studio == 'HuCows.com':
+                if newActor == 'Daisy':
+                    newActor = 'Emma Green'
+                if newActor == 'Liz':
+                    newActor = 'Liz Rainbow'
+                if newActor == 'Buttercup':
+                    newActor = 'Kaitlin Grey'
+                if newActor == 'Cory':
+                    newActor = 'Cory Spice'
+                if newActor == 'Izzy':
+                    newActor = 'Izzy Delphine'
+                if newActor == 'Katie':
+                    newActor = 'Katie Thornton'
+                if newActor == 'Lisa':
+                    newActor = 'Lisa Scott'
+                if newActor == 'Darina':
+                    newActor = 'Darina Nikitina'
+                if newActor == 'Olga':
+                    newActor = 'Olga Cabaeva'
+                if newActor == 'Roxy':
+                    newActor = 'Roxy Mendez'
+                if newActor == 'Dolly':
+                    newActor = 'Bad Dolly'
+                if newActor == 'Alais':
+                    newActor = 'Alais Peach'
+                if newActor == 'Arabella':
+                    newActor = 'Arabella Langford'
+                if newActor == 'Katarina':
+                    newActor = 'Katarina Hartlova'
+                if newActor == 'Sam':
+                    newActor = 'Domenica'
+                if newActor == 'Samantha':
+                    newActor = 'Samantha Bentley'
+                if newActor == 'Fayth':
+                    newActor = 'Fayth On Fire'
 
             if not skip:
                 if newPhoto == '':
