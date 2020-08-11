@@ -430,7 +430,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteKarups.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # TeenMegaWorld
-            elif (631 <= searchSiteID <= 666):
+            elif (631 <= searchSiteID <= 666) or searchSiteID == 930:
                 results = PAsearchSites.networkTeenMegaWorld.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Screwbox
@@ -1057,7 +1057,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.siteKarups.update(metadata, siteID, movieGenres, movieActors)
 
         # TeenMegaWorld
-        elif (siteID >= 631 and siteID <= 666):
+        elif (siteID >= 631 and siteID <= 666) or siteID == 930:
             metadata = PAsearchSites.networkTeenMegaWorld.update(metadata, siteID, movieGenres, movieActors)
 
         # ScrewBox
