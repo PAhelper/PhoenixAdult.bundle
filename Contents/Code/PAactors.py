@@ -2352,37 +2352,37 @@ class PhoenixActors:
             elif metadate.studio == 'HuCows.com':
                 if newActor == 'Daisy':
                     newActor = 'Emma Green'
-                if newActor == 'Liz':
+                elif newActor == 'Liz':
                     newActor = 'Liz Rainbow'
-                if newActor == 'Buttercup':
+                elif newActor == 'Buttercup':
                     newActor = 'Kaitlin Grey'
-                if newActor == 'Cory':
+                elif newActor == 'Cory':
                     newActor = 'Cory Spice'
-                if newActor == 'Izzy':
+                elif newActor == 'Izzy':
                     newActor = 'Izzy Delphine'
-                if newActor == 'Katie':
+                elif newActor == 'Katie':
                     newActor = 'Katie Thornton'
-                if newActor == 'Lisa':
+                elif newActor == 'Lisa':
                     newActor = 'Lisa Scott'
-                if newActor == 'Darina':
+                elif newActor == 'Darina':
                     newActor = 'Darina Nikitina'
-                if newActor == 'Olga':
+                elif newActor == 'Olga':
                     newActor = 'Olga Cabaeva'
-                if newActor == 'Roxy':
+                elif newActor == 'Roxy':
                     newActor = 'Roxy Mendez'
-                if newActor == 'Dolly':
+                elif newActor == 'Dolly':
                     newActor = 'Bad Dolly'
-                if newActor == 'Alais':
+                elif newActor == 'Alais':
                     newActor = 'Alais Peach'
-                if newActor == 'Arabella':
+                elif newActor == 'Arabella':
                     newActor = 'Arabella Langford'
-                if newActor == 'Katarina':
+                elif newActor == 'Katarina':
                     newActor = 'Katarina Hartlova'
-                if newActor == 'Sam':
+                elif newActor == 'Sam':
                     newActor = 'Domenica'
-                if newActor == 'Samantha':
+                elif newActor == 'Samantha':
                     newActor = 'Samantha Bentley'
-                if newActor == 'Fayth':
+                elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
 
             if not skip:
