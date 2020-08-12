@@ -829,6 +829,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (918 <= searchSiteID <= 929):
                 results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # AllAnalAllTheTime
+            elif (searchSiteID == 931):
+                results = PAsearchSites.siteAllAnalAllTheTime.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1434,15 +1438,19 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Why Not Bi
         elif siteID == 916:
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # HentaiPros
         elif siteID == 917:
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # PornPortal
         elif (918 <= siteID <= 929):
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
+
+        # AllAnalAllTheTime
+        elif (siteID == 931):
+            metadata = PAsearchSites.siteAllAnalAllTheTime.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
