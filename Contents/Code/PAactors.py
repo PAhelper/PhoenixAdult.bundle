@@ -2384,7 +2384,7 @@ class PhoenixActors:
                     newActor = 'Samantha Bentley'
                 elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
-                    
+
             if not skip:
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)

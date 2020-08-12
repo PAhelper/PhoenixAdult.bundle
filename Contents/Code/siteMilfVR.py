@@ -4,26 +4,29 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = None
-    splited = searchTitle.split(' ')
-    if unicode(splited[0], 'utf8').isdigit():
-        sceneID = splited[0]
+    sceneID = searchTitle.split(' ', 1)[0]
+    if unicode(sceneID, 'UTF-8').isdigit():
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
-        req = PAutils.HTTPRequest((PAsearchSites.getSearchBaseURL(siteNum) + '/' + sceneID), cookies={
-        'sst': 'ulang-en'
+    else:
+        sceneID = None
+
+    if sceneID and not searchTitle:
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + '/' + sceneID, cookies={
+            'sst': 'ulang-en'
         })
-        searchResults = HTML.ElementFromString(req.text)
-        titleNoFormatting = searchResults.xpath('//h1[@class="detail__title"]')[0].text_content()
-        curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) + '/' + sceneID)
+        if req.ok:
+            detailsPageElements = HTML.ElementFromString(req.text)
+            titleNoFormatting = detailsPageElements.xpath('//h1[@class="detail__title"]')[0].text_content()
+            curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) + '/' + sceneID)
 
-        releaseDate = ''
-        date = searchResults.xpath('//span[@class="detail__date"]')[0].text_content().strip()
-        if date:
-            releaseDate = parse(date).strftime('%Y-%m-%d')
+            releaseDate = ''
+            date = detailsPageElements.xpath('//span[@class="detail__date"]')[0].text_content().strip()
+            if date:
+                releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        score = 100
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (PAsearchSites.getSearchSiteName(siteNum), titleNoFormatting, releaseDate), score=score, lang=lang))
-    
+            score = 100
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s %s' % (PAsearchSites.getSearchSiteName(siteNum), titleNoFormatting, releaseDate), score=score, lang=lang))
     else:
         encodedTitle = searchTitle.replace(' ', '+')
         req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle, cookies={
