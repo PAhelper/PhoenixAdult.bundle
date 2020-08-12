@@ -795,12 +795,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - TheStripperExperience
 + #### Step Secrets | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
 + #### Strike3 Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
- - Blacked
- - BlackedRaw
- - Deeper
- - Tushy
- - TushyRaw
- - Vixen
+  - Blacked
+  - BlackedRaw
+  - Deeper
+  - Tushy
+  - TushyRaw
+  - Vixen
 + #### Swallowed / TrueAnal / Nymphos / AllAnal | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### Swallow Salon | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### TeamSkeet Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Date Add**
@@ -870,9 +870,11 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - NylonsX
   - Old N Young
   - Private Teen Video
+  - Raw Couples
   - Solo Teen Girls
   - Squirting Virgin
   - Teen Sex Mania
+  - Teen Sex Movs
   - Teen Stars Only
   - Teens 3 Some
   - TmwVRnet
@@ -880,7 +882,6 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WOW Orgasms
   - Watch Me Fucked
   - X Angels
-  - Teen Sex Movs
 + #### Tonights Girlfriend | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only**
 + #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only, Date Add**
 + #### TransAngels | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*

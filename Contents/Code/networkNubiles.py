@@ -46,7 +46,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]/h2')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//div[contains(@class, "content-pane-title")]//h2')[0].text_content().strip()
 
     # Summary
     description = detailsPageElements.xpath('//div[@class="col-12 content-pane-column"]/div')
@@ -69,7 +69,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[contains(@class, "content-pane")]//span[@class= "date"]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[contains(@class, "content-pane")]//span[@class="date"]')[0].text_content().strip()
     if date:
         date_object = parse(date)
         metadata.originally_available_at = date_object
