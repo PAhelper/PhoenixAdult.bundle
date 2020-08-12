@@ -2349,7 +2349,7 @@ class PhoenixActors:
             elif metadata.studio == 'Puffy Network':
                 if newActor == 'Stefany':
                     newActor = 'Stefanie Moon'
-            elif metadate.studio == 'HuCows.com':
+            elif metadata.studio == 'HuCows.com':
                 if newActor == 'Daisy':
                     newActor = 'Emma Green'
                 elif newActor == 'Liz':
@@ -2384,7 +2384,7 @@ class PhoenixActors:
                     newActor = 'Samantha Bentley'
                 elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
-
+                    
             if not skip:
                 if newPhoto == '':
                     newPhoto = actorDBfinder(newActor)
