@@ -112,8 +112,9 @@ import networkEvolvedFights
 import networkJavBus
 import siteHucows
 import siteAllAnalAllTheTime
+import siteQueenSnake
 
-searchSites = [None] * 932
+searchSites = [None] * 933
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1046,6 +1047,7 @@ searchSites[928] = ("BBW Channel PornPortal", "BBW Channel PornPortal", "https:/
 searchSites[929] = ("VR Channel PornPortal", "VR Channel PornPortal", "https://vr-channel.pornportal.com", "https://site-api.project1service.com")
 searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "http://teenmegaworld.net/search.php?query=")
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
+searchSites[932] = ("QueenSnake", "QueenSnake", "https://qsbdsm.com", "https://qsbdsm.com/?s=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
