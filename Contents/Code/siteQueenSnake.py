@@ -34,7 +34,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    Title = detailsPageElements.xpath('//div[@class="contentBlock"]//span[@class="contentFilmName"]')[0].text_content().strip().title()
+    Title = detailsPageElements.xpath('//span[@class="contentFilmName"]')[0].text_content().strip().title()
     metadata.title = Title.title()
 
     # Studio
@@ -47,7 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="contentBlock"]//span[@class="contentFileDate"]')[0].text_content().strip().split(' • ')[0]
+    date = detailsPageElements.xpath('//span[@class="contentFileDate"]')[0].text_content().strip().split(' • ')[0]
     date_object = datetime.strptime(date, '%Y %B %d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
@@ -56,7 +56,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Basic Summary
     try:
-        description = detailsPageElements.xpath('//div[@class="contentBlock"]//div[@class="contentPreviewDescription"]')[0].text_content()
+        description = detailsPageElements.xpath('//div[@class="contentPreviewDescription"]')[0].text_content()
         metadata.summary = description.strip()
     except:
         pass
@@ -83,38 +83,40 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     siteActors = [
-        'Abby'
-        ,'Briana'
-        ,'David'
-        ,'Diamond'
-        ,'Greta'
-        ,'Hellia'
-        ,'Hilda'
-        ,'Holly'
-        ,'Jade'
-        ,'Jeby'
-        ,'Jessica'
-        ,'Keya'
-        ,'Lilith'
-        ,'Luna'
-        ,'Marc'
-        ,'Micha'
-        ,'Misty'
-        ,'Nastee'
-        ,'Nazryana'
-        ,'Pearl'
-        ,'Queensnake'
-        ,'Rachel'
-        ,'Ruby'
-        ,'Sharon'
-        ,'Suzy'
-        ,'Tanita'
-        ,'Tracy'
-        ,'Zara'
+        'abby'
+        ,'briana'
+        ,'david'
+        ,'diamond'
+        ,'greta'
+        ,'hellia'
+        ,'hilda'
+        ,'holly'
+        ,'jade'
+        ,'jeby'
+        ,'jessica'
+        ,'keya'
+        ,'lilith'
+        ,'luna'
+        ,'marc'
+        ,'micha'
+        ,'misty'
+        ,'nastee'
+        ,'nazryana'
+        ,'pearl'
+        ,'qs'
+        ,'queensnake'
+        ,'rachel'
+        ,'ruby'
+        ,'sharon'
+        ,'suzy'
+        ,'tanita'
+        ,'tracy'
+        ,'zara'
     ]
 
-    for actorLink in detailsPageElements.xpath('//div[@class="contentBlock"]//div[@class="contentPreviewTags"]/a'):
-        if actorLink in siteActors:
+    for actorLink in detailsPageElements.xpath('//div[@class="contentPreviewTags"]/a'):
+        Log(actorLink.text_content())
+        if actorLink.text_content().strip().lower() in siteActors:
             actorName = actorLink.text_content().strip()
             actorPhotoURL = ''
 

@@ -2388,7 +2388,7 @@ class PhoenixActors:
                 if newActor == 'QS':
                     newActor = 'Queensnake'
                 elif newActor != 'Queensnake':
-                    newActor = newActor + ' (QueenSnake)'
+                    newActor = newActor + ' QueenSnake'
 
             if not skip:
                 if newPhoto == '':
