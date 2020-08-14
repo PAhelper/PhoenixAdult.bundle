@@ -5,32 +5,53 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = [searchTitle]
-    try:
-        encodedTitle = searchTitle.split(' ')
-    except:
-        pass
-    Log('encodedTitle: ' + encodedTitle[0])
+    if searchDate:
+        encodedTitle = parse(searchDate).strftime('%Y/%m/%d')
+    else:
+        encodedTitle = '?s=%s' % searchTitle.replace(' ', '+')
 
-    for Title in encodedTitle:
-        Log(Title)
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + Title.lower() + '/', headers={'Cookie': 'cLegalAge=true'})
-        # Log(req.text)
-        searchResults = HTML.ElementFromString(req.text)
-        Log(searchResults.xpath('//div[@class="contentBlock"]'))
-        for searchResult in searchResults.xpath('//div[@class="contentBlock"]'):
-            
-            titleNoFormatting = searchResult.xpath('.//span[@class="contentFilmName"]')[0].text_content().strip().title()
-            Log(titleNoFormatting)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+    searchResults = HTML.ElementFromString(req.text)
+    for searchResult in searchResults.xpath('//article'):
+        sceneURL = searchResult.xpath('.//h2/a[@rel="bookmark"]/@href')[0].strip()
+        curID = PAutils.Encode(sceneURL)
+        titleNoFormatting = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].text_content().strip().replace(' + GAME for free membership'. '').replace('New movie on queensnake.com – ', '').replace('New movie update on queensect.com – ', '')
 
-            date = searchResult.xpath('.//span[@class="contentFileDate"]')[0].text_content().strip().split(' • ')[0]
-            releaseDate = parse(date).strftime('%Y-%m-%d')
-            Log(releaseDate)
+        date = searchResult.xpath('.//time[@class="entry-date published"]')[0].text_content().strip()
+        releaseDate = parse(date).strftime('%Y-%m-%d')
 
-            curID = PAutils.Encode(Title.lower() + '|' + releaseDate)
-
+        if searchDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
+        badTitles = [
+            'Welcome to my blog',
+            'Poll Results',
+            'Poll Results VI',
+            'Poll Results V',
+            'Poll Results IV',
+            'Tackrider Series',
+            'Sex in BDSM',
+            'Fetish Party',
+            'I Had A Dream',
+            'A Technical Question',
+            'Streaming or download?',
+            'Subscription',
+            'New Website Issue',
+            'New Subscription System',
+            'How to use the staples safely? Practical tips',
+            'New Separated Blog',
+            'New skin',
+            'Comments Disabled :(',
+            'New Blog Rules',
+            'Review',
+            'Queensect.com',
+            'News – Holy Shit Award 2015',
+            'Queensnake.com is online',
+            'Queensnake.com server issues on 2017-03-21',
+        ]
+        if titleNoFormatting not in badTitles:
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
@@ -46,6 +67,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Title
     Title = detailsPageElements.xpath('//article/header/h1[@class="entry-title"]')[0].text_content().strip()
+    Title = Title.replace('New movie on queensnake.com – ').replace('New movie on queensect.com – ')
     metadata.title = Title.title()
 
     # Studio
@@ -58,17 +80,14 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//time[@class="entry-date published"]')[0].text_content().strip()
+   date = detailsPageElements.xpath('//time[@class="entry-date published"]')[0].text_content().strip()
     date_object = datetime.strptime(date, '%Y/%m/%d')
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Summary
-    try:
         description = detailsPageElements.xpath('//div[@class="entry-content"]')[0].text_content()
         metadata.summary = description.strip()
-    except:
-        pass
 
     # Genres
     movieGenres.clearGenres()
@@ -127,13 +146,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Posters
     art = []
-    xpaths = [
-        '//div/article/div/a[@class="lightboxhover"]/img/@src',
-        '//div/center/a/img[@class="lightboxhover"]/@src',
-    ]
-    for xpath in xpaths:
-        for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
+    for poster in detailsPageElements.xpath('//article//img/@src'):
+        art.append(poster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

@@ -1047,7 +1047,7 @@ searchSites[928] = ("BBW Channel PornPortal", "BBW Channel PornPortal", "https:/
 searchSites[929] = ("VR Channel PornPortal", "VR Channel PornPortal", "https://vr-channel.pornportal.com", "https://site-api.project1service.com")
 searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "http://teenmegaworld.net/search.php?query=")
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
-searchSites[932] = ("QueenSnake", "QueenSnake", "https://qsbdsm.com", "https://qsbdsm.com/")
+searchSites[932] = ("QueenSnake", "QueenSnake", "https://queensnake.com", "https://queensnake.com/tag/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

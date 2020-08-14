@@ -2384,6 +2384,9 @@ class PhoenixActors:
                     newActor = 'Samantha Bentley'
                 elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
+            elif metadata.studio == 'QueenSnake.com':
+                if newActor == 'QS':
+                    newActor = 'Queensnake'
 
             if not skip:
                 if newPhoto == '':
