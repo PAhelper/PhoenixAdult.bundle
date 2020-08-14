@@ -31,6 +31,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL, headers={'Cookie': 'cLegalAge=true'})
+    Log('req.headers:')
+    Log(req.headers['Set-Cookie'].split(';')[0])
+    Log(':req.headers')
+
+    SessionID = req.headers['Set-Cookie'].split(';')[0]
+
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -133,7 +139,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl, headers={'Cookie': SessionID})
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
