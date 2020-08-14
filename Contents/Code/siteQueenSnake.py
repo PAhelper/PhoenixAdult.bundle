@@ -1,5 +1,5 @@
-import Code.PAsearchSites
-import Code.PAgenres
+import PAsearchSites
+import PAgenres
 import PAactors
 import PAutils
 
@@ -13,11 +13,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article'):
-        sceneURL = searchResult.xpath('.//h2/a[@rel="bookmark"]/@href')[1].strip()
+        sceneURL = searchResult.xpath('.//h2/a[@rel="bookmark"]/@href')[0].strip()
         curID = PAutils.Encode(sceneURL)
         titleNoFormatting = searchResult.xpath('.//h2[@class="entry-title"]/a')[0].text_content().strip()
 
-        date = searchResult.xpath('.//time[@class="entry-date published updated"]')[0].text_content().strip()
+        date = searchResult.xpath('.//time[@class="entry-date published"]')[0].text_content().strip()
         releaseDate = parse(date).strftime('%Y-%m-%d')
 
         if searchDate:
@@ -25,12 +25,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        sceneID = 'N/A'
-        imgNode = searchResult.xpath('.//img/@src')
-        if imgNode:
-            sceneID = imgNode[0].strip().rsplit('/', 1)[1].rsplit('.', 1)[0]
-
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s [%s] %s' % (sceneID, titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
