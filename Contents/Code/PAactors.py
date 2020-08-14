@@ -2387,6 +2387,8 @@ class PhoenixActors:
             elif metadata.studio == 'QueenSnake.com':
                 if newActor == 'QS':
                     newActor = 'Queensnake'
+                elif newActor != 'Queensnake':
+                    newActor = newActor + ' (QueenSnake)'
 
             if not skip:
                 if newPhoto == '':
