@@ -77,9 +77,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     except:
         pass
     
-    # Blog Summary
-    ## ToDo
-
     # Genres
     movieGenres.clearGenres()
 
@@ -92,9 +89,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     for genreLink in detailsPageElements.xpath('//div[@class="contentPreviewTags"]/a'):
         genreName = genreLink.text_content().strip()
         movieGenres.addGenre(genreName)
-
-    # Blog Genres
-    ## ToDo
 
     # Actors
     movieActors.clearActors()
