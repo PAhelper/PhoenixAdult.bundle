@@ -29,7 +29,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        if str(searchResult.xpath('//div[@class="pagerWrapper"]/a/@href')[0]) != 'https://queensnake.com/previewmovies/0':
+        if '/previewmovies/0' not in str(searchResult.xpath('//div[@class="pagerWrapper"]/a/@href')[0]):
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
