@@ -833,6 +833,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (searchSiteID == 931):
                 results = PAsearchSites.siteAllAnalAllTheTime.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # ScrewMeToo
+            elif (searchSiteID == 932):
+                results = PAsearchSites.siteScrewMeToo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1451,6 +1455,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # AllAnalAllTheTime
         elif (siteID == 931):
             metadata = PAsearchSites.siteAllAnalAllTheTime.update(metadata, siteID, movieGenres, movieActors)
+
+        # ScrewMeToo
+        elif (siteID == 932):
+            metadata = PAsearchSites.siteScrewMeToo.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
