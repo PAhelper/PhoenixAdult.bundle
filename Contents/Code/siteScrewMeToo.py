@@ -86,9 +86,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
             movieActors.addActor(actorName, actorPhotoURL)
 
-    # Get Full URL in case partial search used
-    fullURL = detailsPageElements.xpath('//meta[@property="og:url"]/@content')[0]
-    fullTitle = re.search(r"(?<=content\/).*(?=\/)", fullURL).group(0)
+    fullTitle = re.search(r"(?<=content\/).*(?=\/)", sceneURL).group(0)
 
     # Release Date
     date = actorsPageElements.xpath('//a[contains(@href,"' + fullTitle + '")]//div[@class="fsdate absolute"]')[0].text_content().strip()
