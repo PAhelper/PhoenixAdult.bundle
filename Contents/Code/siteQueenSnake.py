@@ -4,12 +4,11 @@ import PAactors
 import PAutils
 
 # Known Issues
-# - Possible host side DDOS or site rip protection mechanism at work? 
 #   - Images sometimes return placeholders (black and white swirls). Unknown cause.
-#   - Occassionally title matches will stop working, and site will redirect to front page instead. Unknown cause.
-#   - Have tried to replicate cookies and sessions, with no effect. 
-#   - IP change sometimes fixes, but not always.
-# 
+#
+#   - [Resolved/Code Fix] Occassionally title matches will stop working, and site will redirect to front page instead. Unknown cause.
+#       - Fix: Redirect was on non-match, even though occasionally it's a false negative. Added check to search function
+ 
 # To Do (maybe):
 # - Pull Artwork, Genres, and extended description from blog at qsbdsm.com. Exact date matches should work for this.
 # - Add actor photos manually. 
@@ -30,7 +29,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+        if str(searchResult.xpath('//div[@class="pagerWrapper"]/a/@href')[0]) != 'https://queensnake.com/previewmovies/0':
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
