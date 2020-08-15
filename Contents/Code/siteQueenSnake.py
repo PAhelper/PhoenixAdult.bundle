@@ -41,9 +41,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL, headers={'Cookie': 'cLegalAge=true'})
-    Log('req.headers:')
-    Log(req.headers['Set-Cookie'].split(';')[0])
-    Log(':req.headers')
 
     SessionID = req.headers['Set-Cookie'].split(';')[0]
 
@@ -125,7 +122,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     ]
 
     for actorLink in detailsPageElements.xpath('//div[@class="contentPreviewTags"]/a'):
-        Log(actorLink.text_content())
         if actorLink.text_content().strip().lower() in siteActors:
             actorName = actorLink.text_content().strip()
             actorPhotoURL = ''
