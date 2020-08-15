@@ -72,9 +72,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         for actorLink in actors:
             actorName = actorLink.text_content()
 
-            encodedActor = actorName.replace(' ', '-').lower().replace('miyabi', 'miyabia')
-
-            modelURL = PAsearchSites.getSearchBaseURL(siteID) + '/model/' + encodedActor
+            modelURL = actors.xpath('./@href')[0]
             req = PAutils.HTTPRequest(modelURL)
             actorsPageElements = HTML.ElementFromString(req.text)
 
