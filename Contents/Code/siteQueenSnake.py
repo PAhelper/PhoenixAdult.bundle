@@ -54,11 +54,11 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = Title.title()
 
     # Studio
-    metadata.studio = 'QueenSnake.com'
+    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = 'QueenSnake'
+    tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
