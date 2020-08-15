@@ -2385,7 +2385,7 @@ class PhoenixActors:
                 elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
             elif metadata.studio == 'QueenSnake.com':
-                if newActor == 'QS':
+                if newActor == 'Qs':
                     newActor = 'Queensnake'
                 elif newActor != 'Queensnake':
                     newActor = newActor + ' QueenSnake'
