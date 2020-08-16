@@ -710,6 +710,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PureCFNM
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### QueenSnake | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Exact Title Only**
++ #### QueenSect | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Exact Title Only**
 + #### Reality Kings Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 40 Inch Plus
   - 8th Street Latinas
