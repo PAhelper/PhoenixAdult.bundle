@@ -149,7 +149,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         for img in detailsPageElements.xpath(xpath):
             if 'http' not in img:
                 if 'webmasters' in sceneURL:
-                    img = sceneURL + img
+                    img = sceneURL + "/" + img
                 else:
                     img = PAsearchSites.getSearchBaseURL(siteID) + img
                 Log(img)
