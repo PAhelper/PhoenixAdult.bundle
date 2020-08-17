@@ -21,6 +21,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
     else:
+
+        #To-Do: Interpret Titles to improve results#
+
         req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + ".html")
         searchResults = HTML.ElementFromString(req.text)
 
@@ -77,7 +80,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     movieGenres.clearGenres()
     movieActors.clearActors()
-    sceneID = 0
 
     # Title
     if 'webmasters' in sceneURL:
