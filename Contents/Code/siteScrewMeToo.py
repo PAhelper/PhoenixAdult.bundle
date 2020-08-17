@@ -106,7 +106,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//div[@class="amp-vis-mobile"]//@src'
+        '//div[@class="amp-vis-mobile"]//@src',
     ]
 
     for xpath in xpaths:
