@@ -112,8 +112,10 @@ import networkEvolvedFights
 import networkJavBus
 import siteHucows
 import siteAllAnalAllTheTime
+import siteScrewMeToo
+import siteBoxTruckSex
 
-searchSites = [None] * 933
+searchSites = [None] * 934
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1047,6 +1049,7 @@ searchSites[929] = ("VR Channel PornPortal", "VR Channel PornPortal", "https://v
 searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "http://teenmegaworld.net/search.php?query=")
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
 searchSites[932] = ("ScrewMeToo", "ScrewMeToo", "https://screwmetoo.com", "https://screwmetoo.com/?amp=1&s=")
+searchSites[933] = ("Box Truck Sex", "Box Truck Sex", "https://www.boxtrucksex.com", "https://www.boxtrucksex.com/tour/search.php?query=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1170,6 +1173,7 @@ def getSearchSettings(mediaTitle):
         ('^btiu ', 'BigTitsinUniform '),
         ('^btlbd ', 'BigTitsLikeBigDicks '),
         ('^btra ', 'BigTitsRoundAsses '),
+        ('^bts ', 'BoxTruckSex '),
         ('^burna ', 'BurningAngel '),
         ('^bwb ', 'BigWetButts '),
         ('^cfnm ', 'ClothedFemaleNudeMale '),
