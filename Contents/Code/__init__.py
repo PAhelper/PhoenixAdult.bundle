@@ -841,11 +841,11 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (searchSiteID == 933)
                 results = PAsearchSites.siteBoxTruckSex.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
-        results.Sort('score', descending=True)
-
             # Aussie Ass
             elif (searchSiteID == 934):
                 results = PAsearchSites.siteAussieAss.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+        results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
         movieGenres = PAgenres.PhoenixGenres()
