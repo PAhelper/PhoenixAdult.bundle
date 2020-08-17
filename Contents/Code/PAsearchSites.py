@@ -114,8 +114,9 @@ import siteHucows
 import siteAllAnalAllTheTime
 import siteScrewMeToo
 import siteBoxTruckSex
+import siteAussieAss
 
-searchSites = [None] * 934
+searchSites = [None] * 935
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1050,6 +1051,7 @@ searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "h
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
 searchSites[932] = ("ScrewMeToo", "ScrewMeToo", "https://screwmetoo.com", "https://screwmetoo.com/?amp=1&s=")
 searchSites[933] = ("Box Truck Sex", "Box Truck Sex", "https://www.boxtrucksex.com", "https://www.boxtrucksex.com/tour/search.php?query=")
+searchSites[934] = ("Aussie Ass", "Aussie Ass", "https://www.aussieass.com/", "https://www.aussieass.com/models/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
