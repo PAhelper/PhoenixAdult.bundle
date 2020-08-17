@@ -153,6 +153,8 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     #Date
+    date = ""
+
     try:
         if 'webmasters' in sceneURL:
 
