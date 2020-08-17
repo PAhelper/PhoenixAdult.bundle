@@ -193,16 +193,22 @@ def update(metadata, siteID, movieGenres, movieActors):
         '//div[@class="box"]//img/@src',
     ]
 
+    altURL = ""
+
     for xpath in xpaths:
         for img in detailsPageElements.xpath(xpath):
             if 'http' not in img:
-                if 'webmasters' in sceneURL:
-                    img = sceneURL + "/" + img
+                if 'webmasters' in altURL:
+                    img = altURL + "/" + img
                 elif 'join' in img:
                     break
                 else:
                     img = PAsearchSites.getSearchBaseURL(siteID) + img
             art.append(img)
+        if not 'webmasters' in sceneURL:
+            altURL = PAsearchSites.getSearchBaseURL(siteID) + "/webmasters/" + sceneID
+            req = PAutils.HTTPRequest(altURL)
+            detailsPageElements = HTML.ElementFromString(req.text)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
