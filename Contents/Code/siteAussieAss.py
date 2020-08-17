@@ -133,6 +133,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     #Remove Actor Names from Genre List
     genres = detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].replace('Aussie Ass','')
+    genres = re.sub(r'id.\d*', '', genres, flags=re.IGNORECASE)
 
     if actors:
         for actorLink in actors:
