@@ -80,7 +80,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Title
     if 'webmasters' in sceneURL:
-        metadata.title = re.sub(r'^\d+', '', string.capwords(searchResults.xpath('//h1/text()')[0]))
+        metadata.title = re.sub(r'^\d+', '', string.capwords(detailsPageElements.xpath('//h1/text()')[0]))
     else:
         metadata.title = re.sub(r'^\d+', '', string.capwords(detailsPageElements.xpath('//h4/span')[0].text_content()))
 
