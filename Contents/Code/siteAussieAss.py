@@ -200,8 +200,8 @@ def update(metadata, siteID, movieGenres, movieActors):
             if 'http' not in img:
                 if 'join' in img:
                     break
-                elif 'webmasters' in altURL:
-                    img = altURL + "/" + img
+                elif 'webmasters' in sceneURL:
+                    img = sceneURL + "/" + img
                 else:
                     img = PAsearchSites.getSearchBaseURL(siteID) + img
             art.append(img)
@@ -209,6 +209,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             altURL = PAsearchSites.getSearchBaseURL(siteID) + "/webmasters/" + sceneID
             req = PAutils.HTTPRequest(altURL)
             detailsPageElements = HTML.ElementFromString(req.text)
+            sceneURL = altURL
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
