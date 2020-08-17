@@ -175,9 +175,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     except:
         date = sceneDate
 
-    date = parse(date).strftime('%d-%m-%Y')
-
     if date:
+        date = parse(date).strftime('%d-%m-%Y')
         date_object = datetime.strptime(date, '%d-%m-%Y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
@@ -198,14 +197,11 @@ def update(metadata, siteID, movieGenres, movieActors):
             if 'http' not in img:
                 if 'webmasters' in sceneURL:
                     img = sceneURL + "/" + img
+                elif 'join' in img:
+                    break
                 else:
                     img = PAsearchSites.getSearchBaseURL(siteID) + img
             art.append(img)
-
-        if not 'webmasters' in sceneURL:
-            altURL = PAsearchSites.getSearchBaseURL(siteID) + "/webmasters/" + sceneID
-            req = PAutils.HTTPRequest(altURL)
-            detailsPageElements = HTML.ElementFromString(req.text)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
@@ -227,3 +223,4 @@ def update(metadata, siteID, movieGenres, movieActors):
                 pass
 
     return metadata
+
