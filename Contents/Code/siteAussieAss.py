@@ -1,4 +1,4 @@
-mport PAsearchSites
+import PAsearchSites
 import PAgenres
 import PAactors
 import PAutils
@@ -7,7 +7,7 @@ import re
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = re.sub(r'\d+', '', searchTitle.replace(' ', '').replace('--', '').lower())
+
     sceneID = re.sub('\D', '', searchTitle)
 
     if sceneID:
@@ -21,15 +21,32 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
     else:
+        #Handle 3 Types of Links: First, Last; First Only; First-Last
+        try:
+            encodedTitle = re.search(r'^\S*.\S*', searchTitle).group(0).replace(' ', '').lower()
 
-        #To-Do: Interpret Titles to improve results#
+            req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + ".html")
+            searchResults = HTML.ElementFromString(req.text)
 
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + ".html")
-        searchResults = HTML.ElementFromString(req.text)
+            if searchResults.xpath('//html')[0].text_content() == 'Page not found':
+                raise Exception
+        except:
+            try:
+                encodedTitle = re.search(r'^\S*.\S*', searchTitle).group(0).replace(' ', '-').lower()
 
-        pageResults = (int)(searchResults.xpath('//span[@class="number_item "]')[0].text_content().strip())
+                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + ".html")
+                searchResults = HTML.ElementFromString(req.text)
 
-        if not pageResults:
+                if searchResults.xpath('//html')[0].text_content() == 'Page not found':
+                    raise Exception
+            except:
+                encodedTitle = re.search(r'^\S*', searchTitle).group(0).lower()
+
+                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + ".html")
+                searchResults = HTML.ElementFromString(req.text)
+        try:
+            pageResults = (int)(searchResults.xpath('//span[@class="number_item "]')[0].text_content().strip())
+        except:
             pageResults = 1
 
         for x in range(pageResults):
@@ -114,9 +131,13 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     actorPhotoURL = ''
 
+    #Remove Actor Names from Genre List
+    genres = detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].replace('Aussie Ass','')
+
     if actors:
         for actorLink in actors:
             actorName = string.capwords(actorLink.text_content())
+            genres = genres.replace(actorName, '')
 
             modelURL = actorLink.xpath('./@href')[0]
             req = PAutils.HTTPRequest(modelURL)
@@ -152,7 +173,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         else:
             date = sceneDate
     except:
-        pass
+        date = sceneDate
 
     date = parse(date).strftime('%d-%m-%Y')
 
@@ -162,7 +183,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    for genre in detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].replace('Aussie Ass','').split(','):
+    for genre in genres.split(','):
         movieGenres.addGenre(genre.strip())
 
     # Posters
