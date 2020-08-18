@@ -128,6 +128,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         tagline = 'SubmissiveX'
     elif 'filthyfemdom' in channel:
         tagline = 'Filthy Femdom'
+    elif 'straponsquad' in channel:
+        tagline = 'Strapon Squad'
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline

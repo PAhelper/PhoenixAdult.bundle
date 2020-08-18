@@ -114,7 +114,7 @@ import siteHucows
 import siteAllAnalAllTheTime
 import siteQueenSnake
 
-searchSites = [None] * 934
+searchSites = [None] * 935
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1049,6 +1049,8 @@ searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "h
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
 searchSites[932] = ("QueenSnake", "QueenSnake", "https://queensnake.com", "https://queensnake.com/previewmovie/")
 searchSites[933] = ("QueenSect", "QueenSect", "https://queensect.com", "https://queensect.com/previewmovie/")
+searchSites[934] = ("StraponSquad", "StraponSquad", "http://www.kink.com", "https://www.kink.com/search?channelIds=straponsquad&q=")
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

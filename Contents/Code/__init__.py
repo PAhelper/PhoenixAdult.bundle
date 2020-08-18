@@ -841,6 +841,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (searchSiteID == 933):
                 results = PAsearchSites.siteQueenSnake.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Strapon Squad
+            elif (searchSiteID == 934):
+                results = PAsearchSites.networkKink.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
 
         results.Sort('score', descending=True)
 
@@ -1468,6 +1472,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # QueenSect
         elif (siteID == 933):
             metadata = PAsearchSites.siteQueenSnake.update(metadata, siteID, movieGenres, movieActors)
+
+        # Strapon Squad
+        elif (siteID == 934):
+            metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
