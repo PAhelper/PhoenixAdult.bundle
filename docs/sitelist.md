@@ -387,6 +387,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PublicDisgrace
   - SadisticRope
   - SexAndSubmission
+  - StraponSquad
   - SubmissiveX
   - TSPussyHunters
   - TSSeduction
