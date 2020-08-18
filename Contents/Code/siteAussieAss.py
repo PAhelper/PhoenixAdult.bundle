@@ -8,7 +8,7 @@ import re
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
-    sceneID = re.sub('\D', '', searchTitle)
+    sceneID = re.sub('\D.*', '', searchTitle)
 
     if sceneID:
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + "/webmasters/" + sceneID
