@@ -371,6 +371,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Electrosluts
   - EverythingButt
   - FamiliesTied
+  - FetishNetwork
+  - FetishNetworkMale
   - Filthy Femdom
   - FootWorship
   - FuckedandBound (Twisted Factory Channel)
@@ -387,6 +389,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PublicDisgrace
   - SadisticRope
   - SexAndSubmission
+  - SexualDisgracve
   - StraponSquad
   - SubmissiveX
   - TSPussyHunters
