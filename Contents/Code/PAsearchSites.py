@@ -112,8 +112,9 @@ import networkEvolvedFights
 import networkJavBus
 import siteHucows
 import siteAllAnalAllTheTime
+import siteQueenSnake
 
-searchSites = [None] * 932
+searchSites = [None] * 938
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -887,15 +888,15 @@ searchSites[769] = ("GirlCum", "GirlCum", "https://www.girlcum.com", "https://ww
 searchSites[770] = ("ZeroTolerance", "ZeroTolerance", "http://www.ztod.com", "http://www.ztod.com/videos?query=")
 searchSites[771] = ("ClubFilly", "ClubFilly", "http://www.clubfilly.com", "http://www.clubfilly.com/scenefocus.php?vnum=V")
 searchSites[772] = ("Insex", "Insex", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[773] = ("Sexually Broken", "Sexuallybroken", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[774] = ("Infernal Restraints", "Infernalrestraints", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[775] = ("Real Time Bondage", "Realtimebondage", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[776] = ("Hardtied", "Hardtied", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[777] = ("Topgrl", "Topgrl", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[778] = ("Sensual Pain", "Sensualpain", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[779] = ("Paintoy", "Paintoy", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[780] = ("Renderfiend", "Renderfiend", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
-searchSites[781] = ("Hotel Hostages", "Hotelhostages", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?s=")
+searchSites[773] = ("Sexually Broken", "Sexuallybroken", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=sexuallybroken.com&s=")
+searchSites[774] = ("Infernal Restraints", "Infernalrestraints", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=infernalrestraints.com&s=")
+searchSites[775] = ("Real Time Bondage", "Realtimebondage", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=realtimebondage.com&s=")
+searchSites[776] = ("Hardtied", "Hardtied", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=hardtied.com&s=")
+searchSites[777] = ("Topgrl", "Topgrl", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=topgrl.com&s=")
+searchSites[778] = ("Sensual Pain", "Sensualpain", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=sensualpain.com&s=")
+searchSites[779] = ("Paintoy", "Paintoy", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=paintoy.com&s=")
+searchSites[780] = ("Renderfiend", "Renderfiend", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=renderfiend.com&s=")
+searchSites[781] = ("Hotel Hostages", "Hotelhostages", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=hotelhostages.com&s=")
 searchSites[782] = ("GirlGirl", "GirlGirl", "https://www.girlgirl.com", "https://www.girlgirl.com/trial/search.php?query=")
 searchSites[783] = ("Cherry Pimps", "Cherry Pimps", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
 searchSites[784] = ("Wild On Cam", "Wild On Cam", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
@@ -1046,6 +1047,13 @@ searchSites[928] = ("BBW Channel PornPortal", "BBW Channel PornPortal", "https:/
 searchSites[929] = ("VR Channel PornPortal", "VR Channel PornPortal", "https://vr-channel.pornportal.com", "https://site-api.project1service.com")
 searchSites[930] = ("Raw Couples", "Raw Couples", "http://teenmegaworld.net", "http://teenmegaworld.net/search.php?query=")
 searchSites[931] = ("All Anal All The Time", "All Anal All The Time", "https://www.allanalallthetime.com", "https://www.allanalallthetime.com/videos/")
+searchSites[932] = ("QueenSnake", "QueenSnake", "https://queensnake.com", "https://queensnake.com/previewmovie/")
+searchSites[933] = ("QueenSect", "QueenSect", "https://queensect.com", "https://queensect.com/previewmovie/")
+searchSites[934] = ("StraponSquad", "StraponSquad", "http://www.kink.com", "https://www.kink.com/search?channelIds=straponsquad&q=")
+searchSites[935] = ("SexualDisgrace", "SexualDisgrace", "http://www.kink.com", "https://www.kink.com/search?channelIds=sexualdisgrace&q=")
+searchSites[936] = ("FetishNetwork", "FetishNetwork", "http://www.kink.com", "https://www.kink.com/search?channelIds=fetishnetwork&q=")
+searchSites[937] = ("FetishNetwork Male", "FetishNetwork Male", "http://www.kink.com", "https://www.kink.com/search?channelIds=fetishnetworkmale&q=")
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
