@@ -128,6 +128,14 @@ def update(metadata, siteID, movieGenres, movieActors):
         tagline = 'SubmissiveX'
     elif 'filthyfemdom' in channel:
         tagline = 'Filthy Femdom'
+    elif 'straponsquad' in channel:
+        tagline = 'Strapon Squad'
+    elif 'sexualdisgrace' in channel:
+        tagline = 'Sexual Disgrace'
+    elif 'fetishnetwork' in channel:
+        tagline = 'Fetish Network'
+    elif 'fetishnetworkmale' in channel:
+        tagline = 'Fetish Network Male'
     else:
         tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.tagline = tagline
@@ -136,6 +144,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Studio
     if tagline == 'Chantas Bitches' or tagline == 'Fucked and Bound' or tagline == 'Captive Male':
         metadata.studio = 'Twisted Factory'
+    elif tagline == 'Sexual Disgrace' or tagline == 'Strapon Squad' or tagline == 'Fetish Network Male' or tagline == 'Fetish Network':
+        metadata.studio = 'Fetish Network'
     else:
         metadata.studio = 'Kink'
 
@@ -149,7 +159,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//p[@class="tag-list category-tag-list"]//a')
     for genreLink in genres:
-        genreName = genreLink.text_content().strip().title()
+        genreName = genreLink.text_content().replace(',', '').strip().title()
 
         movieGenres.addGenre(genreName)
 
