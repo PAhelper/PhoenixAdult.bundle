@@ -8,10 +8,10 @@ import PAutils
 #
 #   - [Resolved/Code Fix] Occassionally title matches will stop working, and site will redirect to front page instead. Unknown cause.
 #       - Fix: Redirect was on non-match, even though occasionally it's a false negative. Added check to search function
- 
 # To Do (maybe):
 # - Pull Artwork, Genres, and extended description from blog at qsbdsm.com. Exact date matches should work for this.
-# - Add actor photos manually. 
+# - Add actor photos manually.
+
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-').lower()
@@ -19,7 +19,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.lower() + '/', headers={'Cookie': 'cLegalAge=true'})
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="contentBlock"]'):
-        
         titleNoFormatting = searchResult.xpath('.//span[@class="contentFilmName"]')[0].text_content().strip().title()
 
         date = searchResult.xpath('.//span[@class="contentFileDate"]')[0].text_content().strip().split(' • ')[0]
@@ -41,8 +40,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL, headers={'Cookie': 'cLegalAge=true'})
-
-    SessionID = req.headers['Set-Cookie'].split(';')[0]
 
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -73,7 +70,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.summary = description.strip()
     except:
         pass
-    
+
     # Genres
     movieGenres.clearGenres()
 
@@ -90,35 +87,11 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     siteActors = [
-        'abby'
-        ,'briana'
-        ,'david'
-        ,'diamond'
-        ,'greta'
-        ,'hellia'
-        ,'hilda'
-        ,'holly'
-        ,'jade'
-        ,'jeby'
-        ,'jessica'
-        ,'keya'
-        ,'lilith'
-        ,'luna'
-        ,'marc'
-        ,'micha'
-        ,'misty'
-        ,'nastee'
-        ,'nazryana'
-        ,'pearl'
-        ,'qs'
-        ,'queensnake'
-        ,'rachel'
-        ,'ruby'
-        ,'sharon'
-        ,'suzy'
-        ,'tanita'
-        ,'tracy'
-        ,'zara'
+        'abby', 'briana', 'david', 'diamond', 'greta', 'hellia',
+        'hilda', 'holly', 'jade', 'jeby', 'jessica', 'keya', 'lilith',
+        'luna', 'marc', 'micha', 'misty', 'nastee', 'nazryana',
+        'pearl', 'qs', 'queensnake', 'rachel', 'ruby', 'sharon',
+        'suzy', 'tanita', 'tracy', 'zara'
     ]
 
     for actorLink in detailsPageElements.xpath('//div[@class="contentPreviewTags"]/a'):

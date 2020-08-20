@@ -2384,7 +2384,7 @@ class PhoenixActors:
                     newActor = 'Samantha Bentley'
                 elif newActor == 'Fayth':
                     newActor = 'Fayth On Fire'
-            elif metadata.studio == 'QueenSnake' or metadata.studio == 'QueenSect' :
+            elif metadata.studio == 'QueenSnake' or metadata.studio == 'QueenSect':
                 if newActor == 'Qs':
                     newActor = 'Queensnake'
                 elif newActor != 'Queensnake':
