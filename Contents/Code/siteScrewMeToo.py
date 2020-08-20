@@ -2,7 +2,6 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAutils
-import re
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -47,7 +46,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Summary
     try:
-        metadata.summary = detailsPageElements.xpath('//div[h2]')[0].text_content().replace('Read More ...Read Less','').strip()
+        metadata.summary = detailsPageElements.xpath('//div[h2]')[0].text_content().replace('Read More ...Read Less', '').strip()
     except:
         pass
 

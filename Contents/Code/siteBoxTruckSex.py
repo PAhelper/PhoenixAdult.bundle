@@ -85,7 +85,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             movieActors.addActor(actorName, actorPhotoURL)
 
     # Release Date
-    date = detailsPageElements.xpath('//p[@class="mb0"]')[0].text_content().replace('Date Added: ','').strip()
+    date = detailsPageElements.xpath('//p[@class="mb0"]')[0].text_content().replace('Date Added: ', '').strip()
 
     if not date and sceneDate:
         date = sceneDate
