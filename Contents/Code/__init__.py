@@ -842,8 +842,20 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteQueenSnake.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Fetish Network
-            elif 934 <= searchSiteID <= 937:
+            elif (934 <= searchSiteID <= 937):
                 results = PAsearchSites.networkKink.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # ScrewMeToo
+            elif searchSiteID == 938:
+                results = PAsearchSites.siteScrewMeToo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Box Truck Sex
+            elif searchSiteID == 939:
+                results = PAsearchSites.siteBoxTruckSex.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Aussie Ass
+            elif searchSiteID == 940:
+                results = PAsearchSites.siteAussieAss.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -1473,8 +1485,20 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.siteQueenSnake.update(metadata, siteID, movieGenres, movieActors)
 
         # Fetish Network
-        elif 934 <= siteID <= 937:
+        elif (934 <= siteID <= 937):
             metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
+
+        # ScrewMeToo
+        elif siteID == 938:
+            metadata = PAsearchSites.siteScrewMeToo.update(metadata, siteID, movieGenres, movieActors)
+
+        # Box Truck Sex
+        elif siteID == 939:
+            metadata = PAsearchSites.siteBoxTruckSex.update(metadata, siteID, movieGenres, movieActors)
+
+        # AussieAss
+        elif siteID == 940:
+            metadata = PAsearchSites.siteAussieAss.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")

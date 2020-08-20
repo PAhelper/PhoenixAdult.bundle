@@ -113,8 +113,11 @@ import networkJavBus
 import siteHucows
 import siteAllAnalAllTheTime
 import siteQueenSnake
+import siteScrewMeToo
+import siteBoxTruckSex
+import siteAussieAss
 
-searchSites = [None] * 938
+searchSites = [None] * 941
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1053,6 +1056,9 @@ searchSites[934] = ("StraponSquad", "StraponSquad", "http://www.kink.com", "http
 searchSites[935] = ("SexualDisgrace", "SexualDisgrace", "http://www.kink.com", "https://www.kink.com/search?channelIds=sexualdisgrace&q=")
 searchSites[936] = ("FetishNetwork", "FetishNetwork", "http://www.kink.com", "https://www.kink.com/search?channelIds=fetishnetwork&q=")
 searchSites[937] = ("FetishNetwork Male", "FetishNetwork Male", "http://www.kink.com", "https://www.kink.com/search?channelIds=fetishnetworkmale&q=")
+searchSites[938] = ("ScrewMeToo", "ScrewMeToo", "https://screwmetoo.com", "https://screwmetoo.com/?amp=1&s=")
+searchSites[939] = ("Box Truck Sex", "Box Truck Sex", "https://www.boxtrucksex.com", "https://www.boxtrucksex.com/tour/search.php?query=")
+searchSites[940] = ("Aussie Ass", "Aussie Ass", "https://www.aussieass.com/", "https://www.aussieass.com/models/")
 
 
 def getSearchBaseURL(siteID):
@@ -1177,6 +1183,7 @@ def getSearchSettings(mediaTitle):
         ('^btiu ', 'BigTitsinUniform '),
         ('^btlbd ', 'BigTitsLikeBigDicks '),
         ('^btra ', 'BigTitsRoundAsses '),
+        ('^bts ', 'BoxTruckSex '),
         ('^burna ', 'BurningAngel '),
         ('^bwb ', 'BigWetButts '),
         ('^cfnm ', 'ClothedFemaleNudeMale '),
@@ -1186,6 +1193,7 @@ def getSearchSettings(mediaTitle):
         ('^cuf ', 'CumFiesta '),
         ('^cws ', 'CzechWifeSwap '),
         ('^da ', 'DoctorAdventures '),
+        ('^DateSlam ', 'ScrewMeToo '),
         ('^Daughter ', 'DaughterSwap '),
         ('^Daughters ', 'DaughterSwap '),
         ('^dbm ', 'DontBreakMe '),
