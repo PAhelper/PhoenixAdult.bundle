@@ -830,8 +830,32 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.network1service.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # AllAnalAllTheTime
-            elif (searchSiteID == 931):
+            elif searchSiteID == 931:
                 results = PAsearchSites.siteAllAnalAllTheTime.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # QueenSnake
+            elif searchSiteID == 932:
+                results = PAsearchSites.siteQueenSnake.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # QueenSect
+            elif searchSiteID == 933:
+                results = PAsearchSites.siteQueenSnake.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Fetish Network
+            elif (934 <= searchSiteID <= 937):
+                results = PAsearchSites.networkKink.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # ScrewMeToo
+            elif searchSiteID == 938:
+                results = PAsearchSites.siteScrewMeToo.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Box Truck Sex
+            elif searchSiteID == 939:
+                results = PAsearchSites.siteBoxTruckSex.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Aussie Ass
+            elif searchSiteID == 940:
+                results = PAsearchSites.siteAussieAss.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -1438,19 +1462,43 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Why Not Bi
         elif siteID == 916:
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # HentaiPros
         elif siteID == 917:
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # PornPortal
         elif (918 <= siteID <= 929):
-            metadata = PAsearchSites.network1service.update(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            metadata = PAsearchSites.network1service.update(metadata, siteID, movieGenres, movieActors)
 
         # AllAnalAllTheTime
-        elif (siteID == 931):
+        elif siteID == 931:
             metadata = PAsearchSites.siteAllAnalAllTheTime.update(metadata, siteID, movieGenres, movieActors)
+
+        # QueenSnake
+        elif siteID == 932:
+            metadata = PAsearchSites.siteQueenSnake.update(metadata, siteID, movieGenres, movieActors)
+
+        # QueenSect
+        elif siteID == 933:
+            metadata = PAsearchSites.siteQueenSnake.update(metadata, siteID, movieGenres, movieActors)
+
+        # Fetish Network
+        elif (934 <= siteID <= 937):
+            metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
+
+        # ScrewMeToo
+        elif siteID == 938:
+            metadata = PAsearchSites.siteScrewMeToo.update(metadata, siteID, movieGenres, movieActors)
+
+        # Box Truck Sex
+        elif siteID == 939:
+            metadata = PAsearchSites.siteBoxTruckSex.update(metadata, siteID, movieGenres, movieActors)
+
+        # AussieAss
+        elif siteID == 940:
+            metadata = PAsearchSites.siteAussieAss.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")

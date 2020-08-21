@@ -26,7 +26,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Gapeland
   - LezCuties
   - PixandVideo
-+ #### AllAnalAllTheTime | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### AllAnalAllTheTime | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### AmourAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -371,6 +371,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Electrosluts
   - EverythingButt
   - FamiliesTied
+  - FetishNetwork
+  - FetishNetworkMale
   - Filthy Femdom
   - FootWorship
   - FuckedandBound (Twisted Factory Channel)
@@ -387,6 +389,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PublicDisgrace
   - SadisticRope
   - SexAndSubmission
+  - SexualDisgracve
+  - StraponSquad
   - SubmissiveX
   - TSPussyHunters
   - TSSeduction
@@ -709,6 +713,8 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - LadyVoyeurs
   - PureCFNM
 + #### PureTaboo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### QueenSnake | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Exact Title Only**
++ #### QueenSect | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Exact Title Only**
 + #### Reality Kings Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 40 Inch Plus
   - 8th Street Latinas
@@ -942,7 +948,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - XXX At Work
   - Young Dirty Lesbians
   - Young Sluts Hardcore
-+ #### WankzVR Network | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### WankzVR Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - MilfVR
   - WankzVR
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
