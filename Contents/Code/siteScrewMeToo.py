@@ -58,8 +58,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     actors = detailsPageElements.xpath('//a[contains(@title, "Model Bio")]')
-    actorPhotoURL = ''
-
     if actors:
         if len(actors) == 2:
             movieGenres.addGenre('Threesome')
@@ -70,8 +68,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         for actorLink in actors:
             actorName = actorLink.text_content()
+            actorPhotoURL = ''
 
-            modelURL = actors.xpath('./@href')[0]
+            modelURL = actorLink.xpath('./@href')[0]
             req = PAutils.HTTPRequest(modelURL)
             actorsPageElements = HTML.ElementFromString(req.text)
 
