@@ -1,0 +1,5 @@
+watchdog
+regex
+requests
+pyenchant
+lxml
