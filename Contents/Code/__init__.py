@@ -37,7 +37,7 @@ class PhoenixAdultAgent(Agent.Movies):
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
         trashTitle = (
-            'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD'
+            'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'ForeverAloneDude'
         )
 
         title = re.sub(r'\W', ' ', title)
