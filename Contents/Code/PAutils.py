@@ -100,7 +100,7 @@ def HTTPRequest(url, method='GET', **kwargs):
         method = 'POST'
 
     Log('Requesting %s "%s"' % (method, url))
-    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params)
+    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params, verify=False)
 
     req_bypass = None
     if not req.ok and bypass:
