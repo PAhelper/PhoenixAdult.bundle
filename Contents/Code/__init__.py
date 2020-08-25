@@ -857,6 +857,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 940:
                 results = PAsearchSites.siteAussieAss.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # 5Kporn
+            elif (941 <= searchSiteID <= 942):
+                results = PAsearchSites.network5Kporn.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1499,6 +1503,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # AussieAss
         elif siteID == 940:
             metadata = PAsearchSites.siteAussieAss.update(metadata, siteID, movieGenres, movieActors)
+
+        # 5Kporn
+        elif (941 <= siteID <= 942):
+            metadata = PAsearchSites.network5Kporn.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
