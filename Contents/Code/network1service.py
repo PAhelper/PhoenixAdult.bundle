@@ -5,7 +5,7 @@ import PAutils
 
 
 def get_Cookies(url):
-    req = PAutils.HTTPRequest(url, 'HEAD')
+    req = PAutils.HTTPRequest(url)
 
     return req.cookies
 
