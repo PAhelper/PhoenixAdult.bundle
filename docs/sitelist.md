@@ -6,9 +6,9 @@
 The above is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
 # All supported networks and sites
 
-+ #### 5Kporn | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor Only**
-  - 5Kteens
++ #### 5Kporn | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 5Kporn
+  - 5Kteens
 + #### 18OnlyGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### 21Naturals | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 21Naturals

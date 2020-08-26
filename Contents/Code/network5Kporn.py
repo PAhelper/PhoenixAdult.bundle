@@ -5,50 +5,17 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = re.sub('\D.*', '', searchTitle)
     cookies = {'nats': 'MC4wLjMuNTguMC4wLjAuMC4w'}
-
-    if sceneID:
-        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
-        req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
-        searchResult = HTML.ElementFromString(req.text)
-
-        titleNoFormatting = re.sub(r'(\s\|).*', '', searchResult.xpath('//title')[0].text_content())
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle, cookies=cookies)
+    searchResults = HTML.ElementFromString(req.json()['html'])
+    for sceneURL in searchResults.xpath('//div[@class="ep"]'):
+        titleNoFormatting = searchResults.xpath('.//h3[@class="ep-title"]')[0].text_content().strip()
+        sceneURL = searchResults.xpath('.//a/@href')[0]
         curID = PAutils.Encode(sceneURL)
-        date = re.sub(r'\D(?=\D)', '',searchResult.xpath('//h5[contains(.,"Published")]')[0].text_content().strip())
-        score = 100
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), date), score=score, lang=lang))
-    else:
-        encodedTitle =  searchTitle.replace(' ', '-')
-        searchURL = PAsearchSites.getSearchBaseURL(siteNum) + '/models/' + encodedTitle
+        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        req = PAutils.HTTPRequest(searchURL, cookies=cookies)
-        searchResults = HTML.ElementFromString(req.text)
-
-        for searchResult in searchResults.xpath('//div[contains(@class,"epwrap")]'):
-            sceneURL = searchResult.xpath('.//h3//@href')[0]
-            req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
-            sceneResult = HTML.ElementFromString(req.text)
-
-            titleNoFormatting = re.sub(r'(\s\|).*', '', sceneResult.xpath('//title')[0].text_content())
-            curID = PAutils.Encode(sceneURL)
-            date = re.sub(r'\D(?=\D)', '', sceneResult.xpath('//h5[contains(.,"Published")]')[0].text_content().strip())
-
-            if date:
-                releaseDate = parse(date).strftime('%Y-%m-%d')
-            else:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
-            releaseDate = parse(date).strftime('%Y-%m-%d')
-            displayDate = releaseDate if date else ''
-
-            if searchDate and displayDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
-
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -56,20 +23,16 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    try:
-        sceneDate = metadata_id[2]
-    except:
-        pass
 
     cookies = {'nats': 'MC4wLjMuNTguMC4wLjAuMC4w'}
     req = PAutils.HTTPRequest(sceneURL, cookies=cookies)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = re.sub(r'(\s\|).*', '', detailsPageElements.xpath('//title')[0].text_content())
+    metadata.title = detailsPageElements.xpath('//title')[0].text_content().split('|')[0]
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class=""]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "video-summary")]//p[@class=""]')[0].text_content()
 
     # Studio
     metadata.studio = '5Kporn'
@@ -79,41 +42,38 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.tagline = PAsearchSites.getSearchSiteName(siteID)
     metadata.collections.add(metadata.tagline)
 
-    # Actors
-    movieActors.clearActors()
-    actors = detailsPageElements.xpath('//h5[contains(.,"Starring")]')
-
-    if actors:
-        for actorLink in actors:
-            actorName = re.sub(r'\D.*(?:\:)', '', actorLink.text_content().strip())
-
-            modelURL = actorLink.xpath('.//@href')[0]
-            Log(modelURL)
-            req = PAutils.HTTPRequest(modelURL, cookies=cookies)
-            actorsPageElements = HTML.ElementFromString(req.text)
-
-            img = actorsPageElements.xpath('//div[contains(@class,"model-bio")]//img/@src')[1]
-            if img:
-                actorPhotoURL = img
-
-            movieActors.addActor(actorName, actorPhotoURL)
-
     # Date
-    date = re.sub(r'\D(?=\D)', '', detailsPageElements.xpath('//h5[contains(.,"Published")]')[0].text_content().strip())
-
+    date = detailsPageElements.xpath('//h5[contains(., "Published")]')
     if date:
-        date = parse(date).strftime('%d-%m-%Y')
-        date_object = datetime.strptime(date, '%d-%m-%Y')
+        date = date[0].text_content().replace('Published:', '').strip()
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
 
+    # Actors
+    movieActors.clearActors()
+    actors = detailsPageElements.xpath('//h5[contains(., "Starring")]/a')
+    for actorLink in actors:
+        actorName = actorLink.text_content().strip()
+        actorPhotoURL = ''
+
+        modelURL = actorLink.xpath('.//@href')[0]
+        req = PAutils.HTTPRequest(modelURL, cookies=cookies)
+        actorsPageElements = HTML.ElementFromString(req.text)
+
+        img = actorsPageElements.xpath('//img[@class="model-image"]/@src')
+        if img:
+            actorPhotoURL = img[0]
+
+        movieActors.addActor(actorName, actorPhotoURL)
+
     # Posters
     art = []
     xpaths = [
-        '//div[contains(@class,"gal")]//img/@src',
+        '//div[contains(@class, "gal")]//img/@src',
     ]
 
     for xpath in xpaths:
