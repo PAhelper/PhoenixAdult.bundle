@@ -6,6 +6,9 @@
 The above is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
 # All supported networks and sites
 
++ #### 5Kporn | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - 5Kporn
+  - 5Kteens
 + #### 18OnlyGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### 21Naturals | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 21Naturals
@@ -33,6 +36,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ATK Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **ActressID with Title Search, Date Add**
   - ATKGirlfriends
++ #### Aussie Ass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Babes Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Babes
   - Babes Unleashed
@@ -126,6 +130,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - OnlyTeenBlowjobs
   - Throated
   - My XXX Pass
++ #### Box Truck Sex | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Brazzers Network
   ##### Matching type (main): *[Limited](./manualsearch.md#limited-search)* - **Title only.**
   ##### Matching type (alternate): *[Exact](./manualsearch.md#exact-match)* - **SceneID**
@@ -785,6 +790,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Massage Rooms
   - MomXXX
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### ScrewMeToo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### She Will Cheat | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### SinsLife | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### SinX | Matching type: *[Limited](./manualsearch.md#limited-search)*
