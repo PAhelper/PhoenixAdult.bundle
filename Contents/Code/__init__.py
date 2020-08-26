@@ -1,3 +1,4 @@
+import os
 import re
 import random
 import requests
@@ -16,7 +17,7 @@ import PAutils
 
 def Start():
     HTTP.ClearCache()
-    HTTP.CacheTime = CACHE_1MINUTE*20
+    HTTP.CacheTime = CACHE_1MINUTE * 20
     HTTP.Headers['User-Agent'] = PAutils.getUserAgent()
     HTTP.Headers['Accept-Encoding'] = 'gzip'
 
@@ -37,7 +38,9 @@ class PhoenixAdultAgent(Agent.Movies):
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
         trashTitle = (
-            'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'ForeverAloneDude'
+            'RARBG', 'COM', r'\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', r'\dK',
+            r'\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'HD',
+            'ForeverAloneDude'
         )
 
         title = re.sub(r'\W', ' ', title)
