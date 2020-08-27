@@ -1097,7 +1097,6 @@ searchSites[973] = ("We Need New Talents", "We Need New Talents", "https://teenc
 searchSites[974] = ("X Core Club", "X Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 
 
-
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
 

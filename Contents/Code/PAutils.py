@@ -1,11 +1,14 @@
-import PAsearchSites
+import gzip
 
 import googlesearch
 import fake_useragent
 import base58
 import cloudscraper
 import requests
+from requests_toolbelt.utils import dump
 from requests_response import FakeResponse
+
+import PAsearchSites
 
 
 def getUserAgent():
@@ -120,6 +123,9 @@ def HTTPRequest(url, method='GET', **kwargs):
 
     req.encoding = 'UTF-8'
 
+    if Prefs['debug_enable']:
+        saveRequest(req)
+
     return req
 
 
@@ -170,3 +176,19 @@ def getClearURL(url):
         newURL += '?%s' % url.query
 
     return newURL
+
+
+def saveRequest(req):
+    debug_dir = 'debug_data/%s/' % datetime.now().strftime('%d-%m-%Y')
+    if not os.path.exists(debug_dir):
+        os.makedirs(debug_dir)
+
+    raw_http = dump.dump_all(req).decode('UTF-8')
+
+    file_name = '%s.gz' % Encode(req.url)
+    with gzip.open(debug_dir + file_name, 'wb') as f:
+        f.write(raw_http.encode('UTF-8'))
+
+    Log('GZip request saved as "%s"' % file_name)
+
+    return True
