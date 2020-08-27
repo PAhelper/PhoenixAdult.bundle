@@ -21,6 +21,8 @@ def Start():
     HTTP.Headers['User-Agent'] = PAutils.getUserAgent()
     HTTP.Headers['Accept-Encoding'] = 'gzip'
 
+    requests.packages.urllib3.disable_warnings()
+
 
 class PhoenixAdultAgent(Agent.Movies):
     name = 'PhoenixAdult'
