@@ -97,7 +97,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         pass
 
     for photo in detailsPageElements.xpath('//div[@class="vid-flex-container"]//span'):
-        photoLink = photo.xpath('.//img/@rsc')[0].replace('_thumb', '')
+        photoLink = photo.xpath('.//img/@src')[0].replace('_thumb', '')
         art.append(photoLink)
 
     Log('Artwork found: %d' % len(art))
