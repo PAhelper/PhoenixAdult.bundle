@@ -858,6 +858,39 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Thickumz
   - This Girl Sucks
   - Titty Attack
++ #### TeenCoreClub Network | Matching type: *[Direct](./manualsearch.md#exact-match)* - **Scene ID**
+  - Anal Checkups
+  - Analyzed Girls
+  - Ass Teen Mouth
+  - Bang Teen Pussy
+  - Brutal Invasion
+  - Cumoholic Teens
+  - Defiled 18
+  - Double Teamed Teens
+  - Dream Teens HD
+  - Drilled Chicks
+  - Fab Sluts
+  - Girls Got Cream
+  - Hardcore Youth
+  - Jerk-Off Pass
+  - Little Hellcat
+  - Make Teen Gape
+  - Nylon Spunk Junkies
+  - Nylon Sweeties
+  - Seductive 18
+  - She Got Six
+  - Spear Teen Pussy
+  - Spermatino
+  - Teach My Ass
+  - Teen Anal Casting
+  - Teen Core Club
+  - Teen Core Zine
+  - Teen Drillers
+  - Teens Go Porn
+  - Teens Natural Way
+  - Teens Try Black
+  - We Need New Talents
+  - X Core Club
 + #### TeenMegaWorld Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18 First Sex
   - ATMovs

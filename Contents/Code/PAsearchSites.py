@@ -117,8 +117,9 @@ import siteScrewMeToo
 import siteBoxTruckSex
 import siteAussieAss
 import network5Kporn
+import networkTeenCoreClub
 
-searchSites = [None] * 943
+searchSites = [None] * 975
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1062,6 +1063,39 @@ searchSites[939] = ("Box Truck Sex", "Box Truck Sex", "https://www.boxtrucksex.c
 searchSites[940] = ("Aussie Ass", "Aussie Ass", "https://www.aussieass.com/", "https://www.aussieass.com/models/")
 searchSites[941] = ("5Kporn", "5Kporn", "https://www.5kporn.com/", "https://www.5kporn.com/episodes/5KP/")
 searchSites[942] = ("5Kteens", "5Kteens", "https://www.5kporn.com/", "https://www.5kporn.com/episodes/5KT/")
+searchSites[943] = ("Analyzed Girls", "Analyzed Girls", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[944] = ("Ass Teen Mouth", "Ass Teen Mouth", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[945] = ("Bang Teen Pussy", "Bang Teen Pussy", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[946] = ("Brutal Invasion", "Brutal Invasion", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[947] = ("Cumoholic Teens", "Cumoholic Teens", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[948] = ("Defiled 18", "Defiled 18", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[949] = ("Double Teamed Teens", "Double Teamed Teens", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[950] = ("Dream Teens HD", "Dream Teens HD", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[951] = ("Girls Got Cream", "Girls Got Cream", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[952] = ("Hardcore Youth", "Hardcore Youth", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[953] = ("Little Hellcat", "Little Hellcat", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[954] = ("Make Teen Gape", "Make Teen Gape", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[955] = ("Nylon Sweeties", "Nylon Sweeties", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[956] = ("Seductive 18", "Seductive 18", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[957] = ("Teen Anal Casting", "Teen Anal Casting", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[958] = ("Teen Drillers", "Teen Drillers", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[959] = ("Teens Natural Way", "Teens Natural Way", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[960] = ("Teens Try Blacks", "Teens Try Blacks", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[961] = ("Spermatino", "Spermatino", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[962] = ("Teach My Ass", "Teach My Ass", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[963] = ("Drilled Chicks", "Drilled Chicks", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[964] = ("Anal Checkups", "Anal Checkups", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[965] = ("Fab Sluts", "Fab Sluts", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[966] = ("Jerk-Off Pass", "Jerk-Off Pass", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[967] = ("Nylon Spunk Junkies", "Nylon Spunk Junkies", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[968] = ("She Got Six", "She Got Six", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[969] = ("Spear Teen Pussy", "Spear Teen Pussy", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[970] = ("Teen Core Club", "Teen Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[971] = ("Teen Core Zine", "Teen Core Zine", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[972] = ("Teens Go Porn", "Teens Go Porn", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[973] = ("We Need New Talents", "We Need New Talents", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[974] = ("X Core Club", "X Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+
 
 
 def getSearchBaseURL(siteID):
