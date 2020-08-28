@@ -1,33 +1,34 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = re.sub('\D.*', '', searchTitle)
+    sceneID = None
+    splited = searchTitle.split(' ')
+    if unicode(splited[0], 'UTF-8').isdigit():
+        sceneID = splited[0]
+        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+    
+    if sceneID:
+        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID
+        req = PAutils.HTTPRequest(sceneURL)
+        detailsPageElements = HTML.ElementFromString(req.text)
 
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
-    req = PAutils.HTTPRequest(sceneURL)
-    detailsPageElements = HTML.ElementFromString(req.text)
+        titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().replace(',', ' and')
+        curID = PAutils.Encode(sceneURL)
 
-    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().replace(',', ' and')
-    curID = PAutils.Encode(sceneURL)
+        score = 100
 
-    score = 100
-
-    results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
-
 
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    try:
-        sceneDate = metadata_id[2]
-    except:
-        pass
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -45,21 +46,20 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    metadata.tagline = PAsearchSites.getSearchSiteName(siteID)
-    metadata.collections.add(metadata.tagline)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = tagline
+    metadata.collections.add(tagline)
 
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//h1')[0].text_content().strip().split(',')
     for actor in actors:
         actorName = actor.strip()
-        actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + 'media/models/' + actorName.lower() + '.jpg'
+        actorPhotoURL = '%s/media/models/%s.jpg' % (PAsearchSites.getSearchBaseURL(siteID), actorName.lower())
 
-        movieActors.addActor(actor, actorPhotoURL)
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Date
-    date = ""
-
     try:
         date = detailsPageElements.xpath('//li')[1].text_content().strip()
         date_object = datetime.strptime(date, '%Y')
@@ -72,8 +72,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Genres
     movieGenres.clearGenres()
     genres = detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0]
-    for genre in genres.split(','):
-        movieGenres.addGenre(genre.strip())
+    for genreLink in genres.split(','):
+        genreName = genreLink.strip()
+
+        movieGenres.addGenre(genreName)
 
     # Posters
     art = []
