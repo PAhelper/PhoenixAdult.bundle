@@ -80,6 +80,8 @@ class PhoenixActors:
                 newActor = 'Bridgette B'
             elif newActor == 'Capri Cavalli':
                 newActor = 'Capri Cavanni'
+            elif newActor == 'Carrie Cherry' or newActor == 'Carry Cherri' or newActor == 'Corry Cherry' or newActor == 'Kerry Cherry' or newActor == 'Dormiona':
+                newActor = 'Carry Cherry'
             elif newActor == 'Ce Ce Capella':
                 newActor = 'CeCe Capella'
             elif newActor == 'Charli Red':

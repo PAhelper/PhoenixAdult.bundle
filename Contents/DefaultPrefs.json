@@ -1,43 +1,58 @@
 [
-	{
+    {
+        "id": "debug_enable",
+        "label": "Enable Debug",
+        "type": "bool",
+        "default": "false"
+    },
+    {
         "id": "proxy_enable",
         "label": "Enable Proxy",
         "type": "bool",
         "default": "false"
     },
-	{
+    {
         "id": "proxy_type",
         "label": "Proxy Type",
         "type": "enum",
-        "values": ["http", "https", "socks5", "socks5h"],
+        "values": [
+            "http",
+            "https",
+            "socks5",
+            "socks5h"
+        ],
         "default": "socks5"
     },
-	{
+    {
         "id": "proxy_ip",
         "label": "Proxy IP",
         "type": "text",
         "default": "127.0.0.1"
     },
-	{
+    {
         "id": "proxy_port",
         "label": "Proxy Port",
         "type": "text",
         "default": "9050"
     },
-	{
+    {
         "id": "captcha_enable",
         "label": "Enable Captcha Solvers",
         "type": "bool",
         "default": "false"
     },
-	{
+    {
         "id": "captcha_type",
         "label": "Captcha Solver Service",
         "type": "enum",
-        "values": ["anticaptcha", "2captcha", "9kw"],
+        "values": [
+            "anticaptcha",
+            "2captcha",
+            "9kw"
+        ],
         "default": "9kw"
     },
-	{
+    {
         "id": "captcha_key",
         "label": "API Key",
         "type": "text",
@@ -49,7 +64,7 @@
         "type": "bool",
         "default": "false"
     },
-	{
+    {
         "id": "strip_symbol",
         "label": "Strip Symbol",
         "type": "text",

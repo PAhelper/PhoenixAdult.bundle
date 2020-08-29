@@ -58,8 +58,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(tagline)
 
     # Release Date
-    if searchDate:
-        date_object = parse(searchDate)
+    if sceneDate:
+        date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 

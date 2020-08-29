@@ -1,3 +1,4 @@
+import os
 import re
 import random
 import requests
@@ -16,9 +17,11 @@ import PAutils
 
 def Start():
     HTTP.ClearCache()
-    HTTP.CacheTime = CACHE_1MINUTE*20
+    HTTP.CacheTime = CACHE_1MINUTE * 20
     HTTP.Headers['User-Agent'] = PAutils.getUserAgent()
     HTTP.Headers['Accept-Encoding'] = 'gzip'
+
+    requests.packages.urllib3.disable_warnings()
 
 
 class PhoenixAdultAgent(Agent.Movies):
@@ -37,7 +40,9 @@ class PhoenixAdultAgent(Agent.Movies):
             title = media.primary_metadata.studio + " " + media.primary_metadata.title
 
         trashTitle = (
-            'RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD'
+            'RARBG', 'COM', r'\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', r'\dK',
+            r'\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'HD',
+            'ForeverAloneDude'
         )
 
         title = re.sub(r'\W', ' ', title)
@@ -857,6 +862,14 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 940:
                 results = PAsearchSites.siteAussieAss.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # 5Kporn
+            elif (941 <= searchSiteID <= 942):
+                results = PAsearchSites.network5Kporn.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Teen Core Club
+            elif (943 <= searchSiteID <= 974):
+                results = PAsearchSites.networkTeenCoreClub.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1499,6 +1512,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # AussieAss
         elif siteID == 940:
             metadata = PAsearchSites.siteAussieAss.update(metadata, siteID, movieGenres, movieActors)
+
+        # 5Kporn
+        elif (941 <= siteID <= 942):
+            metadata = PAsearchSites.network5Kporn.update(metadata, siteID, movieGenres, movieActors)
+
+        # Teen Core Club
+        elif (943 <= siteID <= 974):
+            metadata = PAsearchSites.networkTeenCoreClub.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
