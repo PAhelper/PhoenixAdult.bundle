@@ -806,7 +806,7 @@ searchSites[682] = ("Lone Milf", "Lone Milf", "https://mylf.com", "https://www.m
 searchSites[683] = ("Full Of JOI", "Full Of JOI", "https://mylf.com", "https://www.mylf.com/movies/")
 searchSites[684] = ("ManualAddActors", "ManualAddActors", "", "")
 searchSites[685] = ("First Anal Quest", "First Anal Quest", "http://www.firstanalquest.com", "http://www.firstanalquest.com/search/?q=")
-searchSites[686] = ("PervMom", "PervMom", "https://www.pervmom.com", "hhttps://www.pervmom.com/movies")
+searchSites[686] = ("PervMom", "PervMom", "https://www.pervmom.com", "https://www.pervmom.com/movies")
 searchSites[687] = ("Chantas Bitches", "Chantas Bitches", "http://www.kink.com", "http://www.kink.com/search?channelIds=chantasbitches&q=")
 searchSites[688] = ("Hegre", "Hegre", "http://www.hegre.com", "http://www.hegre.com/search?q=")
 searchSites[689] = ("Femdom Empire", "Femdom Empire", "https://femdomempire.com", "https://femdomempire.com/tour/search.php?st=advanced&qany=")
