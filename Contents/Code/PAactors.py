@@ -221,7 +221,7 @@ class PhoenixActors:
                     newActor = 'Abella Anderson'
                 elif newActor == 'Noemi Bilas':
                     newActor = 'Noemie Bilas'
-            elif metadata.studio == 'ClubSeventeen'
+            elif metadata.studio == 'ClubSeventeen':
                 if newActor == 'Scarlet':
                     newActor = 'Scarlet Domingo'
             elif metadata.studio == 'CumLouder'
