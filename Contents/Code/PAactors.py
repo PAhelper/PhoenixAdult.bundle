@@ -224,7 +224,7 @@ class PhoenixActors:
             elif metadata.studio == 'ClubSeventeen':
                 if newActor == 'Scarlet':
                     newActor = 'Scarlet Domingo'
-            elif metadata.studio == 'CumLouder'
+            elif metadata.studio == 'CumLouder':
                 if newActor == 'Scarlett':                    
                     newActor = 'Scarlet Domingo'
             elif metadata.studio == 'Deeper' or metadata.studio == 'Tushyraw' or metadata.studio == 'Tushy' or metadata.studio == 'Blacked' or metadata.studio == 'Blackedraw' or metadata.studio == 'Vixen':
@@ -232,7 +232,7 @@ class PhoenixActors:
                     newActor = 'Vika Lita'
                 elif newActor == 'Vina Skyy':
                     newActor = 'Vina Sky'
-            elif metadata.studio == 'Evilangel'
+            elif metadata.studio == 'Evilangel':
                 if newActor == 'Scarlet':
                     newActor = 'Scarlet Domingo'
             elif metadata.studio == 'FuelVirtual':
@@ -1553,7 +1553,7 @@ class PhoenixActors:
             elif metadata.studio == 'Porn Pros':
                 if newActor == 'Bailey Brookes':
                     newActor = 'Bailey Brooke'
-            elif metadata.studio == 'Porndoe Premium'
+            elif metadata.studio == 'Porndoe Premium':
                 if newActor == 'Scarlett D':
                     newActor = 'Scarlet Domingo'
             elif metadata.studio == 'TeamSkeet':
