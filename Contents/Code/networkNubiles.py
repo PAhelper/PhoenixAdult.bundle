@@ -11,7 +11,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
             titleNoFormatting = searchResult.xpath('//span[@class= "title"]/a')[0].text_content().strip()
-            curID = PAutils.Encode(searchResult.xpath('//span[@class="title"]/a/@href')[0].split('/')[3])
+            curID = searchResult.xpath('//span[@class="title"]/a/@href')[0].split('/')[3]
             releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
             if searchDate:
@@ -41,7 +41,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + '/video/watch/' + PAutils.Decode(metadata_id[0])
+    sceneURL = PAsearchSites.getSearchBaseURL(siteID) + '/video/watch/' + metadata_id[0]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
