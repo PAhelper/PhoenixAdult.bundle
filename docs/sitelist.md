@@ -29,6 +29,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Gapeland
   - LezCuties
   - PixandVideo
++ #### Adult Time | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### AllAnalAllTheTime | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*

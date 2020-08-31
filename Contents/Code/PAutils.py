@@ -132,7 +132,9 @@ def HTTPRequest(url, method='GET', **kwargs):
 def getFromGoogleSearch(searchText, site='', **kwargs):
     stop = kwargs['stop'] if 'stop' in kwargs else 10
     if isinstance(site, int):
-        site = PAsearchSites.getSearchBaseURL(site).split('://')[1]
+        site = PAsearchSites.getSearchBaseURL(site).split('://')[1].lower()
+        if site.startswith('www.'):
+            site = site.replace('www.', '', 1)
 
     searchTerm = 'site:%s %s' % (site, searchText) if site else searchText
 
