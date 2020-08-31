@@ -1,0 +1,4 @@
+watchdog==0.10.3
+requests==2.24.0
+ffmpeg_python==0.2.0
+pymediainfo==4.2.1
