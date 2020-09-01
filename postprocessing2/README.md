@@ -53,8 +53,6 @@ Dry Run - Checkbox, check if you want to test the Watchdog matching capabilities
 
 More to add as more sites will be added and also propably I will modify the current one so date will be first. It is better for sorting to recently-oldest scenes.
 
-### Known issues
-- Watchdog will report some times only created events for just moved files and not downloaded files. Go and comment out lines 82-84 and line 87 and uncomment line 86. This way your files will be processed for created or modified events. If a file creates both events then it will be processed two times. Couldn't debug it!
 
 ### To-Do - (Possible Features)
 - Download posters from the original site, making folder and move the scene and the posters together. That way even if the PhoenixAdult Agent can't match the scene you can use the posters to Plex.
