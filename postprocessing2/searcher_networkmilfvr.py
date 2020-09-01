@@ -66,6 +66,7 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
         for searchResult in searchResults:
             curSubsite = ''
             curActorstring = ''
+            curDate = ''
             curID = searchResult.xpath('.//div[contains(@class, "card__body")]/a/@href')[0].split("-")[-1]
             curTitle = searchResult.xpath('.//div[@class="card__footer"]//div[@class="card__h"]/text()')[0].replace(":"," ")
             curDate = datetime.datetime.strptime(str(searchResult.xpath('.//div[@class="card__date"]')[0].text_content().strip()),'%d %B, %Y').strftime('%Y-%m-%d')
@@ -76,7 +77,7 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
             curActorstring = curActorstring[:-3]
             if (sceneID != None):
                 curScore = 100 - enchant.utils.levenshtein(sceneID, curID)
-            elif (searchDate != None):
+            elif ((searchDate != None) and (curDate != '')):
                 curScore = 100 - enchant.utils.levenshtein(searchDate, curDate)
             else:
                 curScore = 100 - enchant.utils.levenshtein(searchTitle.lower(), curTitle.lower())

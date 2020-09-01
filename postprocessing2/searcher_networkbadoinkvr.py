@@ -21,23 +21,23 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
     else:
         sceneID = None
     if (sceneID != None):
-        URL = (siteBaseURL +'/shoot/'+ sceneID)
+        URL = (siteBaseURL +'/vrpornvideo/'+ sceneID)
         logger.info ("******************** URL used section **********************")
         logger.info (URL)
-        req = requests.get(URL, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
+        req = requests.get(URL)
         HTMLResponse = html.fromstring(req.content)
-        searchResults = HTMLResponse.xpath('//h1[@class="shoot-title"]')
+        searchResults = HTMLResponse.xpath('//h1[contains(@class, "video-title")]')
         ScenesQuantity = len(searchResults)
         logger.info("Possible matching scenes found in results: " +str(ScenesQuantity))
         curSubsite = ''
         curActorstring = ''
         curDate = ''
         curID = URL.split("/")[-1]
-        curTitle = HTMLResponse.xpath('//h1[@class="shoot-title"]')[0].text_content().strip()[:-1].replace(":"," ")
-        curDate = datetime.datetime.strptime(str(HTMLResponse.xpath('//span[@class="shoot-date"]')[0].text_content().strip()),'%B %d, %Y').strftime('%Y-%m-%d')
-        actorssize = len(HTMLResponse.xpath('//p[@class="starring"]//a'))
+        curTitle = HTMLResponse.xpath('//h1[contains(@class, "video-title")]')[0].text_content().strip().replace(":"," ")
+        curDate = datetime.datetime.strptime(str(HTMLResponse.xpath('//p[@itemprop="uploadDate"]')[0].text_content().strip().split("Uploaded: ")[1]),'%B %d, %Y').strftime('%Y-%m-%d')
+        actorssize = len(HTMLResponse.xpath('//p[@class="video-actors"]/a'))
         for i in range(actorssize):
-            actor = HTMLResponse.xpath('//p[@class="starring"]//a')[i].text_content().strip()
+            actor = HTMLResponse.xpath('//p[@class="video-actors"]/a')[i].text_content().strip()
             curActorstring += actor+' & '
         curActorstring = curActorstring[:-3]
         if (sceneID != None):
@@ -58,21 +58,31 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
         URL = (siteSearchURL + searchTitle)
         logger.info ("******************** URL used section **********************")
         logger.info (URL)
-        req = requests.get(URL, headers={'Cookie': 'viewing-preferences=straight%2Cgay'})
+        req = requests.get(URL)
         HTMLResponse = html.fromstring(req.content)
-        searchResults = HTMLResponse.xpath('//div[@class="shoot-card scene"]')
+        searchResults = HTMLResponse.xpath('//div[@class="tile-grid-item"]')
         ScenesQuantity = len(searchResults)
         logger.info("Possible matching scenes found in results: " +str(ScenesQuantity))
         for searchResult in searchResults:
+            SceneURL = searchResult.xpath('./div/a/@href')[0]
+            if not SceneURL.startswith('http'):
+                SceneURL = (siteBaseURL + SceneURL)
+                req = requests.get(SceneURL)
+                HTMLResponse = html.fromstring(req.content)
+            else:
+                req = requests.get(SceneURL)
+                HTMLResponse = html.fromstring(req.content)
+            # logger.info ("******************** Scene URL section *********************")
+            # logger.info (SceneURL)              
             curSubsite = ''
             curActorstring = ''
             curDate = ''
-            curID = searchResult.xpath('./div/a')[0].split("/")[-1]
-            curTitle = searchResult.xpath('.//img/@alt')[0].strip.replace(":"," ")
-            curDate = datetime.datetime.strptime(str(searchResult.xpath('.//div[@class="date"]')[0].text_content().strip()),'%b %d, %Y').strftime('%Y-%m-%d')
-            actorssize = len(searchResult.xpath('.//div[@class="shoot-thumb-models"]/a'))
+            curID = SceneURL.split("-")[-1].split("/")[0]
+            curTitle = HTMLResponse.xpath('//h1[contains(@class, "video-title")]')[0].text_content().strip().replace(":"," ")
+            curDate = datetime.datetime.strptime(str(HTMLResponse.xpath('//p[@itemprop="uploadDate"]')[0].text_content().strip().split("Uploaded: ")[1]),'%B %d, %Y').strftime('%Y-%m-%d')
+            actorssize = len(HTMLResponse.xpath('//p[@class="video-actors"]/a'))
             for i in range(actorssize):
-                actor = searchResult.xpath('.//div[@class="shoot-thumb-models"]/a')[i].text_content().strip()
+                actor = HTMLResponse.xpath('//p[@class="video-actors"]/a')[i].text_content().strip()
                 curActorstring += actor+' & '
             curActorstring = curActorstring[:-3]
             if (sceneID != None):

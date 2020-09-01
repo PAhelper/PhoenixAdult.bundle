@@ -35,7 +35,7 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
             actor = searchResult.xpath('//div[contains(@class, "pt-md")]//a[contains(@href, "/girls/")]')[i].text_content().strip()
             curActorstring += actor+' & '
         curActorstring = curActorstring[:-3]
-        if (searchDate != None):
+        if ((searchDate != None) and (curDate != '')):
             curScore = 100 - enchant.utils.levenshtein(searchDate, curDate)
         else:
             curScore = 100 - enchant.utils.levenshtein(searchTitle.lower(), curTitle.lower())
