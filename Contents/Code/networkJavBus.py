@@ -4,23 +4,12 @@ import PAactors
 import PAutils
 
 
-# Known Issues
-#   [Resolved/BugFix] Only returns one result
-#       - Due to saving full URL in curID, it had a unique ID per search result, changed to just saving JAVID.
-#
-#   [Resolved/Working As Designed] Only returns result with JAVID, extra text causes search fail
-#       - This appears to be a limit of the search on the site, even throwing the titles in there kills it.
-#
-#   [Resolved/Code Rewrite] Tagline section is generally borked and needs rework (labels and series)
-#       - Rewrote the section entirely to use smarter # logic, and reduce reliance on exception catches
-#
-
-
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     searchJAVID = None
     splitSearchTitle = searchTitle.split(' ')
-    if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
-        searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
+    if len(splitSearchTitle) > 1:
+        if unicode(splitSearchTitle[1], 'UTF-8').isdigit():
+            searchJAVID = '%s%%2B%s' % (splitSearchTitle[0], splitSearchTitle[1])
 
     if searchJAVID:
         encodedTitle = searchJAVID
