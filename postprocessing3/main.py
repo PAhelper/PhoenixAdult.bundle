@@ -179,6 +179,18 @@ if __name__ == '__main__':
     cleanup = args.cleanup
     additional_info = args.additional_info
     if not str(output_path).startswith(str(input_path)):
+        log_path = Path.cwd() / 'logs'
+        log_path.mkdir(parents=True, exist_ok=True)
+        log_name = log_path / ('renamer_%s.log' % date.today().strftime('%Y%m%d'))
+        logging.basicConfig(level=logging.INFO,
+                            format='%(asctime)s : %(levelname)-8s : %(message)s',
+                            handlers=[
+                                logging.FileHandler(str(log_name)),
+                                logging.StreamHandler()
+                            ])
+        logging.info('Input directory `%s`', input_path)
+        logging.info('Output directory `%s`', output_path)
+
         IMPORTED = True
         if cleanup:
             try:
@@ -189,18 +201,6 @@ if __name__ == '__main__':
                 logging.error('Required `ffmpeg-python` and `pymediainfo` for cleanup methods')
 
         if IMPORTED:
-            log_path = Path.cwd() / 'logs'
-            log_path.mkdir(parents=True, exist_ok=True)
-            log_name = log_path / ('renamer_%s.log' % date.today().strftime('%Y%m%d'))
-            logging.basicConfig(level=logging.INFO,
-                                format='%(asctime)s : %(levelname)-8s : %(message)s',
-                                handlers=[
-                                    logging.FileHandler(str(log_name)),
-                                    logging.StreamHandler()
-                                ])
-            logging.info('Input directory `%s`', input_path)
-            logging.info('Output directory `%s`', output_path)
-
             if not additional_info:
                 FILE_NAME_FORMAT = FILE_NAME_FORMAT.split('~')[0].strip()
             logging.info('File Name Format `%s`', FILE_NAME_FORMAT)
