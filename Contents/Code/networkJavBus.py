@@ -32,7 +32,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             JAVID = searchResult.xpath('.//date[1]')[0].text_content().strip()
 
             sceneURL = searchResult.xpath('./@href')[0]
-            Log(sceneURL)
             curID = PAutils.Encode(sceneURL)
 
             if searchJAVID:
