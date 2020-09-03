@@ -4,16 +4,35 @@ import PAactors
 import PAutils
 
 
-def get_Cookies(url):
-    req = PAutils.HTTPRequest(url, 'HEAD')
+def get_Token(siteID):
+    token_key = None
+    if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
+        token_key = 'brazzers_token'
 
-    return req.cookies
+    token = None
+    if token_key and token_key in Dict:
+        data = Dict[token_key].split('.')[1] + '=='
+        data = base64.b64decode(data).decode('UTF-8')
+        if json.loads(data)['exp'] > time.time():
+            token = Dict[token_key]
+
+    if not token:
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID), 'HEAD')
+        if 'instance_token' in req.cookies:
+            token = req.cookies['instance_token']
+
+    if token_key and token:
+        if token_key not in Dict or Dict[token_key] != token:
+            Dict[token_key] = token
+            Dict.Save()
+
+    return token
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteNum))
+    token = get_Token(siteNum)
     headers = {
-        'Instance': cookies['instance_token'],
+        'Instance': token,
     }
 
     sceneID = None
@@ -62,9 +81,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
 
-    cookies = get_Cookies(PAsearchSites.getSearchBaseURL(siteID))
+    token = get_Token(siteNum)
     headers = {
-        'Instance': cookies['instance_token'],
+        'Instance': token,
     }
     url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
     req = PAutils.HTTPRequest(url, headers=headers)
