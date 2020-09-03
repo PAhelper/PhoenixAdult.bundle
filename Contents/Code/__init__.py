@@ -870,6 +870,14 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (943 <= searchSiteID <= 974):
                 results = PAsearchSites.networkTeenCoreClub.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Exploited X
+            elif (975 <= searchSiteID <= 977):
+                results = PAsearchSites.networkExploitedX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Desperate Amateurs
+            elif (searchSiteID == 978):
+                results = PAsearchSites.siteDesperateAmateurs.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1520,6 +1528,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Teen Core Club
         elif (943 <= siteID <= 974):
             metadata = PAsearchSites.networkTeenCoreClub.update(metadata, siteID, movieGenres, movieActors)
+
+        # Exploited X
+        elif (975 <= siteID <= 977):
+            results = PAsearchSites.networkExploitedX.update(metadata, siteID, movieGenres, movieActors)
+
+        # Desperate Amateurs
+        elif (siteID == 978):
+            results = PAsearchSites.siteDesperateAmateurs.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
