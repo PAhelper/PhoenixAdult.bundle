@@ -48,7 +48,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Release Date
     if sceneDate:
-        date_object = parse(date)
+        date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -63,11 +63,11 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//ul[contains(text(),"Models:")]/li/a')
     if len(actors) > 0:
-        if 'porn-movie' not in url and len(actors) == 3:
+        if 'porn-movie' not in sceneURL and len(actors) == 3:
             movieGenres.addGenre('Threesome')
-        if 'porn-movie' not in url and len(actors) == 4:
+        if 'porn-movie' not in sceneURL and len(actors) == 4:
             movieGenres.addGenre('Foursome')
-        if 'porn-movie' not in url and len(actors) > 4:
+        if 'porn-movie' not in sceneURL and len(actors) > 4:
             movieGenres.addGenre('Orgy')
 
         for actorLink in actors:
