@@ -101,7 +101,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Evil Angel
-            elif searchSiteID == 277:
+            elif searchSiteID == 277 or searchSiteID == 975:
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # XEmpire / Hardx
