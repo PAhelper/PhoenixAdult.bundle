@@ -873,11 +873,11 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkTeenCoreClub.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Exploited X
-            elif (975 <= searchSiteID <= 977):
+            elif (976 <= searchSiteID <= 978):
                 results = PAsearchSites.networkExploitedX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Desperate Amateurs
-            elif (searchSiteID == 978):
+            elif (searchSiteID == 979):
                 results = PAsearchSites.siteDesperateAmateurs.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
