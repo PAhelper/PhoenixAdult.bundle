@@ -782,6 +782,13 @@ class PhoenixActors:
                     newActor = 'Teagan Summers'
                 elif newActor == 'Wanda':
                     newActor = 'Wanda Curtis'
+            elif metadata.studio == 'ManyVids':
+                if newActor == 'Imheatherharmon':
+                    newActor = 'Heather Harmon'
+                elif newActor == 'Shaiden':
+                    newActor = 'Shaiden Rogue'
+                elif newActor == 'Spencer_Bradley':
+                    newActor = 'Spencer Bradley'
             elif metadata.studio == 'Mylf':
                 if newActor == 'Scarlett':
                     newActor = 'Scarlet Domingo'
