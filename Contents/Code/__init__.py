@@ -1532,11 +1532,11 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkTeenCoreClub.update(metadata, siteID, movieGenres, movieActors)
 
         # Exploited X
-        elif (975 <= siteID <= 977):
+        elif (976 <= siteID <= 978):
             results = PAsearchSites.networkExploitedX.update(metadata, siteID, movieGenres, movieActors)
 
         # Desperate Amateurs
-        elif (siteID == 978):
+        elif (siteID == 979):
             results = PAsearchSites.siteDesperateAmateurs.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
