@@ -9,6 +9,8 @@ from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
 from dateutil.parser import parse
+import time
+import base64
 import PAactors
 import PAgenres
 import PAsearchSites
@@ -101,7 +103,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Evil Angel
-            elif searchSiteID == 277:
+            elif searchSiteID == 277 or searchSiteID == 975:
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # XEmpire / Hardx
@@ -1002,7 +1004,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
 
         # Gamma Entertainment Other
-        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893:
+        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893 or siteID == 975:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         # MileHighMedia
