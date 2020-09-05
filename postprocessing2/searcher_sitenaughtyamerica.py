@@ -35,6 +35,7 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
     logger.info("Possible matching scenes found in results: " +str(ScenesQuantity))
     for searchResult in searchResults:
         curActorstring = ''
+        curDate = ''
         curID = str(searchResult['id'])
         curTitle = searchResult['title']
         curDate = datetime.fromtimestamp(searchResult['published_at']).strftime('%Y-%m-%d')
@@ -47,7 +48,7 @@ def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
         curSubsite = searchResult['site']
         if (sceneID != None):
             curScore = 100 - enchant.utils.levenshtein(sceneID, curID)
-        elif (searchDate != None):
+        elif ((searchDate != None) and (curDate != '')):
             curScore = 100 - enchant.utils.levenshtein(searchDate, curDate)
         else:
             curScore = 100 - enchant.utils.levenshtein(searchTitle.lower(), curTitle.lower())

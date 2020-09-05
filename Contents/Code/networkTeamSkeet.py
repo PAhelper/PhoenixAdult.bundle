@@ -12,8 +12,8 @@ def getDBURL(url):
     return data
 
 
-def getDataFromAPI(url):
-    data = PAutils.HTTPRequest(url)
+def getDataFromAPI(dbURL, sceneType, sceneName):
+    data = PAutils.HTTPRequest('%s-%s/_doc/%s' % (dbURL, sceneType, sceneName))
 
     if data:
         return data.json()
@@ -39,12 +39,13 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     dbURL = getDBURL(PAsearchSites.getSearchBaseURL(siteNum))
 
     for sceneName in searchResults:
-        for sceneType in ['moviesContent', 'videosContent']:
-            detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (dbURL, sceneType, sceneName))
+        for sceneType in ['videoscontent', 'moviescontent']:
+            detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName)
             if detailsPageElements:
                 break
 
         if detailsPageElements:
+            detailsPageElements = detailsPageElements['_source']
             curID = detailsPageElements['id']
             titleNoFormatting = detailsPageElements['title']
             siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
@@ -72,7 +73,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneType = metadata_id[3]
 
     dbURL = getDBURL(PAsearchSites.getSearchBaseURL(siteID))
-    detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (dbURL, sceneType, sceneName))
+    detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName)
+    detailsPageElements = detailsPageElements['_source']
 
     # Title
     metadata.title = detailsPageElements['title']
@@ -141,7 +143,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['models']
     for actorLink in actors:
-        actorData = getDataFromAPI('%s/modelsContent/%s.json' % (dbURL, actorLink['modelId']))
+        actorData = getDataFromAPI(dbURL, 'modelscontent', actorLink['modelId'])
+        actorData = actorData['_source']
         actorName = actorData['name']
         actorPhotoURL = actorData['img']
 

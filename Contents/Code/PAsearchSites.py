@@ -118,8 +118,10 @@ import siteBoxTruckSex
 import siteAussieAss
 import network5Kporn
 import networkTeenCoreClub
+import networkExploitedX
+import siteDesperateAmateurs
 
-searchSites = [None] * 975
+searchSites = [None] * 980
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1095,6 +1097,11 @@ searchSites[971] = ("Teen Core Zine", "Teen Core Zine", "https://teencoreclub.co
 searchSites[972] = ("Teens Go Porn", "Teens Go Porn", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[973] = ("We Need New Talents", "We Need New Talents", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[974] = ("X Core Club", "X Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[975] = ("Blackmailed", "Blackmailed", "https://www.evilangel.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
+searchSites[976] = ("Backroom Casting Couch", "Backroom Casting Couch", "https://backroomcastingcouch.com/", "https://backroomcastingcouch.com/free/girls.php?t=2&alpha=")
+searchSites[977] = ("Black Ambush", "Black Ambush", "https://blackambush.com/", "https://blackambush.com/free/girls.php")
+searchSites[978] = ("Exploited College Girls", "Exploited College Girls", "https://exploitedcollegegirls.com/", "https://exploitedcollegegirls.com/free/girls.php?alpha=")
+searchSites[979] = ("Desperate Amateurs", "Desperate Amateurs", "https://desperateamateurs.com/", "https://desperateamateurs.com/fintour/search.php?st=advanced&qall=")
 
 
 def getSearchBaseURL(siteID):

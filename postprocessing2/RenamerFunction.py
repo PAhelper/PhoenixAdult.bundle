@@ -29,32 +29,32 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
             if (pref_StripSymbol != ''):
                 if (Date != ''):
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors != '' and Subsite == ''): ## We have information for actors and not for Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Actors+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+' '+pref_StripSymbol+' '+Actors+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite == ''): ## We don't have information for actors and Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite != ''): ## We don't have information for actors but we have for Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Time+' '+pref_StripSymbol+' '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                 else:
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
@@ -87,11 +87,11 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
             else:
                 if (Date != ''):
-                    new_filename = siteName+' - '+Title+' - '+Date+filename_type
+                    new_filename = siteName+' - '+Date+' - '+Title+filename_type
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                     for y in range (len(ResultsMatrix)-1):
-                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2])
+                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1])
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")                    
                 else:
                     new_filename = siteName+' - '+Title+filename_type
@@ -104,32 +104,32 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
             if (pref_StripSymbol != ''):
                 if (Date != ''):
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
-                        new_filename = siteName+' - '+ID+' - '+Date+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+ID+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][0]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][0]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors != '' and Subsite == ''): ## We have information for actors and not for Subsite
-                        new_filename = siteName+' - '+ID+' - '+Date+' '+pref_StripSymbol+' '+Actors+filename_type
+                        new_filename = siteName+' - '+Date+' - '+ID+' '+pref_StripSymbol+' '+Actors+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][0]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][0]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite == ''): ## We don't have information for actors and Subsite
-                        new_filename = siteName+' - '+ID+' - '+Date+filename_type
+                        new_filename = siteName+' - '+Date+' - '+ID+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][0]+' - '+ResultsMatrix[y][2])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][0])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite != ''): ## We don't have information for actors but we have for Subsite
-                        new_filename = siteName+' - '+ID+' - '+Date+' '+pref_StripSymbol+' '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+ID+' '+pref_StripSymbol+' '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][0]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][0]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                 else:
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
@@ -162,11 +162,11 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
             else:
                 if (Date != ''):
-                    new_filename = siteName+' - '+ID+' - '+Date+filename_type
+                    new_filename = siteName+' - '+Date+' - '+ID+filename_type
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                     for y in range (len(ResultsMatrix)-1):
-                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][0]+' - '+ResultsMatrix[y][2])
+                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][0])
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")                    
                 else:
                     new_filename = siteName+' - '+ID+filename_type
@@ -179,32 +179,32 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
             if (pref_StripSymbol != ''):
                 if (Date != ''):
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+' '+pref_StripSymbol+' '+Actors+' - '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3]+' - '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors != '' and Subsite == ''): ## We have information for actors and not for Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Actors+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+' '+pref_StripSymbol+' '+Actors+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][3])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite == ''): ## We don't have information for actors and Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     elif (Actors == '' and Subsite != ''): ## We don't have information for actors but we have for Subsite
-                        new_filename = siteName+' - '+Title+' - '+Date+' '+pref_StripSymbol+' '+Subsite+filename_type
+                        new_filename = siteName+' - '+Date+' - '+Title+' '+pref_StripSymbol+' '+Subsite+filename_type
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                         SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                         for y in range (len(ResultsMatrix)-1):
-                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
+                            SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1]+' '+pref_StripSymbol+' '+ResultsMatrix[y][4])
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                 else:
                     if (Actors != '' and Subsite != ''): ## We have information for actors and Subsite
@@ -237,11 +237,11 @@ def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripS
                         SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
             else:
                 if (Date != ''):
-                    new_filename = siteName+' - '+Title+' - '+Date+filename_type
+                    new_filename = siteName+' - '+Date+' - '+Title+filename_type
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")
                     SceneNameLogger.debug ("If your scene was in results but the Watchdog mismatched it then use as filename the matched one from below")
                     for y in range (len(ResultsMatrix)-1):
-                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][1]+' - '+ResultsMatrix[y][2])
+                        SceneNameLogger.debug(siteName+' - '+ResultsMatrix[y][2]+' - '+ResultsMatrix[y][1])
                     SceneNameLogger.debug ("************** Scene in Result but Mismatched **************")                    
                 else:
                     new_filename = siteName+' - '+Title+filename_type
