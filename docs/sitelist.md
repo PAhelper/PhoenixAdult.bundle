@@ -239,6 +239,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### DefeatedXXX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### DefeatedSexFight | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### Desperate Amateurs | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### DigitalPlayground | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Dogfart | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
   - BarbCummings
@@ -272,6 +273,10 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Evolved Fights Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Evolved Fights
   - Evolved Fights Lesbian Edition
++ #### ExploitedX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Backroom Casting Couch
+  - Black Ambush
+  - Exploited College Girls
 + #### FakeHub | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Fake Agent
   - Fake Agent UK
