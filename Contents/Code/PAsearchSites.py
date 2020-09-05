@@ -119,7 +119,7 @@ import siteAussieAss
 import network5Kporn
 import networkTeenCoreClub
 
-searchSites = [None] * 975
+searchSites = [None] * 976
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1095,6 +1095,7 @@ searchSites[971] = ("Teen Core Zine", "Teen Core Zine", "https://teencoreclub.co
 searchSites[972] = ("Teens Go Porn", "Teens Go Porn", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[973] = ("We Need New Talents", "We Need New Talents", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[974] = ("X Core Club", "X Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
+searchSites[975] = ("Blackmailed", "Blackmailed", "https://www.evilangel.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
 
 
 def getSearchBaseURL(siteID):
