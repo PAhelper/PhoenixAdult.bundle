@@ -71,11 +71,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     actorName = detailsPageElements.xpath('//div[@class="detail"][2]//p/text()[2]')[0].strip()
+    actorPhotoURL = ''
 
     actorPageURL = '%s/pornstar/%s' % (PAsearchSites.getSearchBaseURL(siteID), actorName.replace(' ', '-'))
     req = PAutils.HTTPRequest(actorPageURL)
-    actorPage = HTML.ElementFromString(req.text)
-    actorPhotoURL = actorPage.xpath('//section[contains(@id, "pornstar-profile")]//img/@src')[0]
+    if req.ok:
+        actorPage = HTML.ElementFromString(req.text)
+        actorPhoto = actorPage.xpath('//section[contains(@id, "pornstar-profile")]//img/@src')
+        if actorPhoto:
+            actorPhotoURL = actorPhoto[0]
 
     movieActors.addActor(actorName, actorPhotoURL)
 
