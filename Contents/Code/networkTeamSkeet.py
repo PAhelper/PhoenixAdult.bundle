@@ -9,15 +9,27 @@ def getDBURL(url):
 
     if req:
         return re.search(r'\.dbUrl.?=.?\"(.*?)\"', req.text).group(1)
-    return data
+    return None
 
 
-def getDataFromAPI(dbURL, sceneType, sceneName):
-    data = PAutils.HTTPRequest('%s-%s/_doc/%s' % (dbURL, sceneType, sceneName))
+def getDataFromAPI(dbURL, sceneType, sceneName, siteID):
+    is_new = True
+    if 'teamskeet.com' in PAsearchSites.getSearchBaseURL(siteID):
+        url = '%s-%s/_doc/%s' % (dbURL, sceneType, sceneName)
+    else:
+        is_new = False
+        sceneType = sceneType.replace('content', 'Content')
+        url = '%s/%s/%s.json' % (dbURL, sceneType, sceneName)
 
-    if data:
-        return data.json()
-    return data
+    data = PAutils.HTTPRequest(url)
+    if data.text != 'null':
+        data = data.json()
+        if is_new:
+            return data['_source']
+        else:
+            return data
+
+    return None
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -40,12 +52,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     for sceneName in searchResults:
         for sceneType in ['videoscontent', 'moviescontent']:
-            detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName)
+            detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName, siteNum)
             if detailsPageElements:
                 break
 
         if detailsPageElements:
-            detailsPageElements = detailsPageElements['_source']
             curID = detailsPageElements['id']
             titleNoFormatting = detailsPageElements['title']
             siteName = detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum)
@@ -73,8 +84,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneType = metadata_id[3]
 
     dbURL = getDBURL(PAsearchSites.getSearchBaseURL(siteID))
-    detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName)
-    detailsPageElements = detailsPageElements['_source']
+    detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName, siteID)
 
     # Title
     metadata.title = detailsPageElements['title']
@@ -143,12 +153,13 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['models']
     for actorLink in actors:
-        actorData = getDataFromAPI(dbURL, 'modelscontent', actorLink['modelId'])
-        actorData = actorData['_source']
-        actorName = actorData['name']
-        actorPhotoURL = actorData['img']
+        actorData = getDataFromAPI(dbURL, 'modelscontent', actorLink['modelId'], siteID)
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if actorData:
+            actorName = actorData['name']
+            actorPhotoURL = actorData['img']
+
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = [
