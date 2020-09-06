@@ -81,7 +81,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
 
-    token = get_Token(siteNum)
+    token = get_Token(siteID)
     headers = {
         'Instance': token,
     }
