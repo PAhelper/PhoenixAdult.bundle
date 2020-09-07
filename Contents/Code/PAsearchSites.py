@@ -906,7 +906,7 @@ searchSites[780] = ("Renderfiend", "Renderfiend", "https://www.insexondemand.com
 searchSites[781] = ("Hotel Hostages", "Hotelhostages", "https://www.insexondemand.com", "https://www.insexondemand.com/iod/home.php?d=hotelhostages.com&s=")
 searchSites[782] = ("GirlGirl", "GirlGirl", "https://www.girlgirl.com", "https://www.girlgirl.com/trial/search.php?query=")
 searchSites[783] = ("Cherry Pimps", "Cherry Pimps", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
-searchSites[784] = ("Wild On Cam", "Wild On Cam", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
+searchSites[784] = ("Wild On Cam", "Wild On Cam", "https://www.wildoncam.com", "https://wildoncam.com/search.php?query=")
 searchSites[785] = ("Cherry Spot", "Cherry Spot", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
 searchSites[786] = ("Britney Amber", "Britney Amber", "https://www.cherrypimps.com", "https://cherrypimps.com/search.php?query=")
 searchSites[787] = ("Confessions", "Confessions.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
