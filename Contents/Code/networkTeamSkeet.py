@@ -9,15 +9,27 @@ def getDBURL(url):
 
     if req:
         return re.search(r'\.dbUrl.?=.?\"(.*?)\"', req.text).group(1)
-    return data
+    return None
 
 
-def getDataFromAPI(url):
+def getDataFromAPI(dbURL, sceneType, sceneName, siteID):
+    is_new = True
+    if 'teamskeet.com' in PAsearchSites.getSearchBaseURL(siteID):
+        url = '%s-%s/_doc/%s' % (dbURL, sceneType, sceneName)
+    else:
+        is_new = False
+        sceneType = sceneType.replace('content', 'Content')
+        url = '%s/%s/%s.json' % (dbURL, sceneType, sceneName)
+
     data = PAutils.HTTPRequest(url)
+    if data.text != 'null':
+        data = data.json()
+        if is_new:
+            return data['_source']
+        else:
+            return data
 
-    if data:
-        return data.json()
-    return data
+    return None
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
@@ -39,8 +51,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     dbURL = getDBURL(PAsearchSites.getSearchBaseURL(siteNum))
 
     for sceneName in searchResults:
-        for sceneType in ['moviesContent', 'videosContent']:
-            detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (dbURL, sceneType, sceneName))
+        for sceneType in ['videoscontent', 'moviescontent']:
+            detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName, siteNum)
             if detailsPageElements:
                 break
 
@@ -72,7 +84,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     sceneType = metadata_id[3]
 
     dbURL = getDBURL(PAsearchSites.getSearchBaseURL(siteID))
-    detailsPageElements = getDataFromAPI('%s/%s/%s.json' % (dbURL, sceneType, sceneName))
+    detailsPageElements = getDataFromAPI(dbURL, sceneType, sceneName, siteID)
 
     # Title
     metadata.title = detailsPageElements['title']
@@ -141,11 +153,13 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['models']
     for actorLink in actors:
-        actorData = getDataFromAPI('%s/modelsContent/%s.json' % (dbURL, actorLink['modelId']))
-        actorName = actorData['name']
-        actorPhotoURL = actorData['img']
+        actorData = getDataFromAPI(dbURL, 'modelscontent', actorLink['modelId'], siteID)
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        if actorData:
+            actorName = actorData['name']
+            actorPhotoURL = actorData['img']
+
+            movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = [

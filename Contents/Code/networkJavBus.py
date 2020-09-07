@@ -31,8 +31,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             titleNoFormatting = searchResult.xpath('.//span[1]')[0].text_content().replace('\t', '').replace('\r\n', '').strip()
             JAVID = searchResult.xpath('.//date[1]')[0].text_content().strip()
 
-            sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle.replace('%20', '-').replace('%2B', '-')
-            curID = PAutils.Encode(JAVID)
+            sceneURL = searchResult.xpath('./@href')[0]
+            curID = PAutils.Encode(sceneURL)
 
             if searchJAVID:
                 score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())

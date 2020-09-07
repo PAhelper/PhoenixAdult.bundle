@@ -9,6 +9,8 @@ from datetime import datetime
 from PIL import Image
 from cStringIO import StringIO
 from dateutil.parser import parse
+import time
+import base64
 import PAactors
 import PAgenres
 import PAsearchSites
@@ -101,7 +103,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Evil Angel
-            elif searchSiteID == 277:
+            elif searchSiteID == 277 or searchSiteID == 975:
                 results = PAsearchSites.networkGammaEntOther.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # XEmpire / Hardx
@@ -870,6 +872,14 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (943 <= searchSiteID <= 974):
                 results = PAsearchSites.networkTeenCoreClub.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Exploited X
+            elif (976 <= searchSiteID <= 978):
+                results = PAsearchSites.networkExploitedX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # Desperate Amateurs
+            elif (searchSiteID == 979):
+                results = PAsearchSites.siteDesperateAmateurs.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -994,7 +1004,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkGammaEnt.update(metadata, siteID, movieGenres, movieActors)
 
         # Gamma Entertainment Other
-        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893:
+        elif siteID == 53 or siteID == 183 or siteID == 277 or siteID == 281 or (365 <= siteID <= 379) or siteID == 381 or siteID == 383 or siteID == 385 or (460 <= siteID <= 466) or siteID == 692 or siteID == 793 or (795 <= siteID <= 797) or siteID == 878 or siteID == 893 or siteID == 975:
             metadata = PAsearchSites.networkGammaEntOther.update(metadata, siteID, movieGenres, movieActors)
 
         # MileHighMedia
@@ -1520,6 +1530,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Teen Core Club
         elif (943 <= siteID <= 974):
             metadata = PAsearchSites.networkTeenCoreClub.update(metadata, siteID, movieGenres, movieActors)
+
+        # Exploited X
+        elif (976 <= siteID <= 978):
+            results = PAsearchSites.networkExploitedX.update(metadata, siteID, movieGenres, movieActors)
+
+        # Desperate Amateurs
+        elif (siteID == 979):
+            results = PAsearchSites.siteDesperateAmateurs.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
