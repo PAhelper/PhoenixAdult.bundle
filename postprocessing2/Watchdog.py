@@ -1,14 +1,20 @@
 ## Dependencies
+## Watchdog
 from watchdog.observers.polling import PollingObserver as Observer
 from watchdog.events import FileSystemEventHandler
-import os
-import re
-import time
-import logging
+## GUI - TKinter
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+## Easy Settings
+from easysettings import EasySettings
+## Other Dependecies
+import os
+import re
+import time
+import logging
+## Disabled Dependecies - Not Implemented Yet
 # import pymediainfo
 # import ffmpeg
 ## Phoenix adult agent files
@@ -29,16 +35,17 @@ import RenamerFunction
 ## The GUI + Watcher class code
 class MyGui:
     def __init__(self):
+        ############################################################################## FUNCTIONS - GUI ##############################################################################
         def get_pref_DIRECTORY_TO_WATCH():
-            folder_selected = filedialog.askdirectory()
+            folder_selected = filedialog.askdirectory(initialdir = WorkingDir)
             DIR_W_Path.set(folder_selected)
 
         def get_pref_DIRECTORY_TO_MOVE():
-            folder_selected = filedialog.askdirectory()
+            folder_selected = filedialog.askdirectory(initialdir = WorkingDir)
             DIR_M_Path.set(folder_selected)
 
         def get_pref_DIRECTORY_UNMATCHED():
-            folder_selected = filedialog.askdirectory()
+            folder_selected = filedialog.askdirectory(initialdir = WorkingDir)
             DIR_U_Path.set(folder_selected)
 
         def pref_set():
@@ -57,16 +64,25 @@ class MyGui:
             if ((DIRECTORY_TO_WATCH != "") and (DIRECTORY_TO_MOVE != "") and (DIRECTORY_UNMATCHED != "") and (os.path.exists(DIRECTORY_TO_WATCH)) and (os.path.exists(DIRECTORY_TO_MOVE)) and (os.path.exists(DIRECTORY_UNMATCHED))):
                 self.but.config(state="normal",text="Start Watchdog")
             else:
-                self.but.config(state="disabled",text="Set Preferences First") 
-
+                self.but.config(state="disabled",text="Start Watchdog") 
+            UserSettings.set("DIR_W", DIRECTORY_TO_WATCH)
+            UserSettings.set("DIR_M", DIRECTORY_TO_MOVE)
+            UserSettings.set("DIR_U", DIRECTORY_UNMATCHED)
+            UserSettings.set("pref_ID", pref_ID)
+            UserSettings.set("pref_StripSymbol", pref_StripSymbol)
+            UserSettings.set("pref_DryRun", pref_DryRun)
+            UserSettings.save()
+        ############################################################################## FUNCTIONS - GUI ##############################################################################
+        ############################################################################### GUI - GRAPHICS ##############################################################################
         root.title('Porndog - Adult Scene Renamer')
-        root.iconbitmap('.\\icon.ico')
+        root.iconbitmap(WorkingDir+'\\icon.ico')
         root.geometry("500x500")
 
         Watchdog_Preferences_Label = Label(root ,text="Watchdog Preferences - Directories")
         Watchdog_Preferences_Label.place(x = 192,y = 5)
 
         DIR_W_Path = tk.StringVar()
+        DIR_W_Path.set(UserSettings.get("DIR_W"))
         DIR_W_Label = Label(root ,text="Active Directory - ")
         DIR_W_Label.place(x = 80,y = 28)
         self.DIR_W_TextField = Entry(root,textvariable=DIR_W_Path,width=35)
@@ -75,6 +91,7 @@ class MyGui:
         self.DIR_W_Button.place(x = 400,y = 28)
 
         DIR_M_Path = tk.StringVar()
+        DIR_M_Path.set(UserSettings.get("DIR_M"))
         DIR_M_Label = Label(root ,text="Move Directory - ")
         DIR_M_Label.place(x = 82,y = 58)
         self.DIR_M_TextField = Entry(root,textvariable=DIR_M_Path,width=35)
@@ -83,6 +100,7 @@ class MyGui:
         self.DIR_M_Button.place(x = 400,y = 58)
 
         DIR_U_Path = tk.StringVar()
+        DIR_U_Path.set(UserSettings.get("DIR_U"))
         DIR_U_Label = Label(root ,text="Unmatched Directory - ")
         DIR_U_Label.place(x = 50,y = 88)
         self.DIR_U_TextField = Entry(root,textvariable=DIR_U_Path,width=35)
@@ -92,12 +110,16 @@ class MyGui:
 
         UI_FilenamePref_Label = Label(root ,text="Filename Preferences")
         UI_FilenamePref_Label.place(x = 225,y = 120)
-
         UI_pref_ID = BooleanVar()
+        try:
+            UI_pref_ID.set(UserSettings.get("pref_ID"))
+        except:
+            pass
         self.UI_Checkbutton_ID = Checkbutton(root, text="Prefer Scene ID over Scene Title", variable=UI_pref_ID)
         self.UI_Checkbutton_ID.place(x = 185,y = 150)
 
         UI_pref_StripSymbol = tk.StringVar()
+        UI_pref_StripSymbol.set(UserSettings.get("pref_StripSymbol"))
         UI_pref_StripSymbol_Label = Label(root ,text="Strip Symbol - ")
         UI_pref_StripSymbol_Label.place(x = 95,y = 180)
         self.UI_pref_StripSymbol_TextField = Entry(root,textvariable=UI_pref_StripSymbol,width=35)
@@ -105,8 +127,11 @@ class MyGui:
 
         UI_OtherPref_Label = Label(root ,text="Other Preferences")
         UI_OtherPref_Label.place(x = 228,y = 210)
-
         UI_pref_DryRun = BooleanVar()
+        try:
+            UI_pref_DryRun.set(UserSettings.get("pref_DryRun"))
+        except:
+            pass
         self.UI_Checkbutton_DryRun = Checkbutton(root, text="Dry Run", variable=UI_pref_DryRun)
         self.UI_Checkbutton_DryRun.place(x = 240,y = 240)
 
@@ -114,12 +139,8 @@ class MyGui:
         self.SET_BUTTON.place(x = 230,y = 270)
         self.but = tk.Button(root,text="Start Watchdog",command=self.start_observer)
         self.but.place(x = 230,y = 300)  
-        self.but.config(state="disabled",text="Set Preferences First") 
-
-        self.but2 = tk.Button(root,text="Stop Watchdog",command=self.stop_observer)
-        self.but2.place(x = 230,y = 330)  
-        self.but2.config(state="disabled",text="Stop Watchdog")     
-
+        self.but.config(state="disabled",text="Start Watchdog")
+        ############################################################################### GUI - GRAPHICS ##############################################################################
     def start_observer(self):
         loggerwatchdog.info("******************** Pre-initialization ********************")
         loggerwatchdog.info("Watchdog will be active to this directory: "+DIRECTORY_TO_WATCH)
@@ -146,8 +167,7 @@ class MyGui:
         self.UI_Checkbutton_DryRun.config(state="disabled")
         
         self.SET_BUTTON.config(state="disabled")
-        self.but.config(state="disabled",text="Watchdog Initiated")
-        self.but2.config(state="normal",text="Stop Watchdog")
+        self.but.config(text="Stop Watchdog",command=self.stop_observer)
 
         self.observer = Observer()
         self.observer.schedule(event_handler, DIRECTORY_TO_WATCH, recursive=True)
@@ -155,9 +175,13 @@ class MyGui:
         loggerwatchdog.info("******************** Watchdog initiated ********************")
 
     def stop_observer(self):
+        loggerwatchdog.info("****************** Stop Watchdog Sequence ******************")
         self.observer.stop()
         self.observer.join()
         self.observer = None
+        loggerwatchdog.info("Observer stopped and = None. Set Preferences are Enabled again.")
+        loggerwatchdog.info("****************** Stop Watchdog Sequence ******************")
+        
         self.DIR_W_TextField.config(state="normal")
         self.DIR_W_Button.config(state="normal")
 
@@ -172,8 +196,7 @@ class MyGui:
         self.UI_Checkbutton_DryRun.config(state="normal")
 
         self.SET_BUTTON.config(state="normal")
-        self.but.config(state="disabled",text="Set Preferences First")  
-        self.but2.config(state="disabled",text="Stop Watchdog") 
+        self.but.config(state="disabled", text="Start Watchdog",command=self.start_observer)  
 
 ## The handler class code
 class Handler(FileSystemEventHandler):
@@ -200,7 +223,8 @@ class Handler(FileSystemEventHandler):
                     if ((filename_type in ('.mp4','.mkv','.avi','.wmv')) and (filename_size > 15000000)):
                         loggerwatchdog.info ("Processing filename %s which is a type of %s" % (filename_title, filename_type))
                         loggerwatchdog.info("The file was placed at folder: " +siteFolder)
-                        trashTitle = ('RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\dK', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD','mp4_1080','mp4_720','mp4_480','mp4_360','mp4_1080_18','mp4_720_18','mp4_480_18','mp4_360_18','180_180x180_3dh_LR')
+                        filename_title = filename_title.replace("_"," ")
+                        trashTitle = ('RARBG', 'COM', '\d{3,4}x\d{3,4}', 'HEVC', 'H265', 'AVC', '\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD','oculus','180','360','LR','3dh','\dK')
                         filename_title = re.sub(r'\W', ' ', filename_title)
                         for trash in trashTitle:
                             filename_title = re.sub(r'\b%s\b' % trash, '', filename_title, flags=re.IGNORECASE)
@@ -212,7 +236,7 @@ class Handler(FileSystemEventHandler):
                         searchDate = searchSettings[2]
                         loggerwatchdog.info ("Filename (after date processing): " +searchTitle)
                         if (searchDate != None):
-                            loggerwatchdog.info ("Date Found embedded at the filename: " +searchDate)
+                            loggerwatchdog.info ("Date Found embedded at the filename: " +searchDate,WorkingDir)
                         else:
                             loggerwatchdog.info ("File didn't contain Date information. If this is false check the RegEx at PASearchSites for Dates")
                         loggerwatchdog.info ("****************** PAsearchSites matching ******************")
@@ -230,220 +254,220 @@ class Handler(FileSystemEventHandler):
                             ######################################### All sites that are under the network1service - Start #########################################
                             ## Brazzers + Subsites
                             if ((siteID == 2) or (54 <= siteID <= 80) or (siteID == 582) or (siteID == 690)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## RealityKings + Subsites
                             elif ((137 <= siteID <= 182) or (822 <= siteID <= 828)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)   
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)   
                             ## Mofos + Subsites                    
                             elif ((261 <= siteID <= 270) or (siteID == 583) or (738 <= siteID <= 740)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol) 
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir) 
                             ## Babes + Subsites                       
                             elif ((271 <= siteID <= 276)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Twistys + Subsites
                             elif ((288 <= siteID <= 291) or (siteID == 768)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## DigitalPlayground
                             elif ((siteID == 328)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## SexyHub + Subsites
                             elif ((333 <= siteID <= 339)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## FakeHub + Subsites
                             elif ((siteID == 340) or (397 <= siteID <= 407)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## MileHighMedia
                             elif ((361 <= siteID <= 364)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## PropertySex
                             elif ((siteID == 733)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## TransAngels
                             elif ((siteID == 737)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## FamilyHookUps
                             elif ((siteID == 759)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## LilHumpers
                             elif ((siteID == 798)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## BelessaFilms
                             elif ((siteID == 799) or (siteID == 876)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## FamilySinners
                             elif ((siteID == 802)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Transsensual
                             elif ((siteID == 806)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Erito
                             elif ((siteID == 808)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## TrueAmateurs
                             elif ((siteID == 809)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## LookAtHerNow
                             elif ((siteID == 841)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## BiEmpire
                             elif ((siteID == 852)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## DeviantHardcore
                             elif ((siteID == 859)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## SheWillCheat
                             elif ((siteID == 860)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## KinkySpa
                             elif ((siteID == 872)):
-                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_network1service.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the network1service - End #####################################
                             ########################################## All sites that are under the Bangbros - Start ##########################################
                             ## Bangbros + Subsites
                             elif ((83 <= siteID <= 135)):
-                                ResultsMatrix = searcher_sitebangbros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_sitebangbros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the Bangbros - End ############################################
                             ########################################## All sites that are under the Pornpros - Start ##########################################
                             ## PassionHD
                             elif ((siteID == 306)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## FantasyHD
                             elif ((siteID == 307)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Pornpros + Subsites
                             elif ((308 <= siteID <= 327)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## POVD
                             elif ((siteID == 479)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Cum4K
                             elif ((siteID == 480)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Exotic4K
                             elif ((siteID == 481)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Tiny4K
                             elif ((siteID == 482)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Lubed
                             elif ((siteID == 483)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## PureMature
                             elif ((siteID == 484)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## NannySpy
                             elif ((siteID == 485)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Holed
                             elif ((siteID == 486)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## CastingCouchX
                             elif ((siteID == 487)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## SpyFam
                             elif ((siteID == 488)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## MyVeryFirstTime
                             elif ((siteID == 489)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## Baeb
                             elif ((siteID == 624)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## GirlCum
                             elif ((siteID == 769)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## BBCPie
                             elif ((siteID == 844)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## WetVR
                             elif ((siteID == 890)):
-                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkpornpros.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the Pornpros - End ############################################
                             ########################################## All sites that are under the MilfVR - Start ############################################
                             ## WankzVR
                             elif ((siteID == 476)):
-                                ResultsMatrix = searcher_networkmilfvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkmilfvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## MilfVR
                             elif ((siteID == 477)):
-                                ResultsMatrix = searcher_networkmilfvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkmilfvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the MilfVR - End ##############################################
                             ########################################## All sites that are under the Kink - Start ##############################################
                             ## Kink + Subsites
                             elif ((490 <= siteID <= 521) or (siteID == 687) or (735 <= siteID <= 736) or (873 <= siteID <= 874) or (888 <= siteID <= 889)):
-                                ResultsMatrix = searcher_networkkink.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkkink.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the Kink - End #################################################
                             ########################################## All sites that are under the NaughtyAmerica - Start #####################################
                             ## NaughtyAmerica + Subsites
                             elif ((5 <= siteID <= 51) or (siteID == 341) or (393 <= siteID <= 396) or (467 <= siteID <= 468) or (siteID == 581) or (siteID == 620) or (siteID == 625) or (siteID == 691) or (siteID == 749)):
-                                ResultsMatrix = searcher_sitenaughtyamerica.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_sitenaughtyamerica.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the NaughtyAmerica - End #######################################
                             ########################################## All sites that are under the BaDoinkVR - Start ##########################################
                             ## BaDoinkVR
                             elif ((siteID == 469)):
-                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## BabeVR
                             elif ((siteID == 470)):
-                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## 18VR
                             elif ((siteID == 471)):
-                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## KinkVR
                             elif ((siteID == 472)):
-                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ## VRCosplayX
                             elif ((siteID == 473)):
-                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate)
-                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol)
+                                ResultsMatrix = searcher_networkbadoinkvr.search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir)
+                                new_filename = RenamerFunction.renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir)
                             ########################################## All sites that are under the BaDoinkVR - End #############################################
                             if (pref_DryRun == False):
                                 if (new_filename != None):
@@ -490,9 +514,10 @@ class Handler(FileSystemEventHandler):
             pass
 
 if __name__ == '__main__':
+    WorkingDir = os.path.dirname(os.path.abspath(__file__))
     ## Basic Logger information
-    # WorkingDir = os.path.dirname(os.path.abspath(__file__))
-    loggerwatchdog = LoggerFunction.setup_logger('Watchdog','.\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
+    loggerwatchdog = LoggerFunction.setup_logger('Watchdog',WorkingDir+'\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
+    UserSettings = EasySettings(WorkingDir+"\\UserSettings.conf")
     root = tk.Tk()
     event_handler = Handler()
     gui = MyGui()
