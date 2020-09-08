@@ -1,5 +1,7 @@
-watchdog
+EasySettings
+google
+lxml
+pyenchant
 regex
 requests
-pyenchant
-lxml
+watchdog

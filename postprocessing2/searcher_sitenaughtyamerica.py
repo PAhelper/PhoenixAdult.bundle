@@ -8,11 +8,11 @@ from datetime import datetime
 ## Other .py files
 import LoggerFunction
 
-def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
+def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir):
     ## Basic Log Configuration
-    logger = LoggerFunction.setup_logger('Searches', '.\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
+    logger = LoggerFunction.setup_logger('Searches', WorkingDir+'\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
     ## Scene Logger information
-    SceneNameLogger = LoggerFunction.setup_logger('SceneNameLogger', '.\\Logs\\'+searchTitle+'.log',level=logging.DEBUG,formatter='%(message)s')
+    SceneNameLogger = LoggerFunction.setup_logger('SceneNameLogger', WorkingDir+'\\Logs\\'+searchTitle+'.log',level=logging.DEBUG,formatter='%(message)s')
     SearchURLFixed = siteSearchURL.replace('/queries','') + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
     ResultsMatrix = [['0','0','0','0','0',0]]
     searchTitle = searchTitle.split("_")[0]
