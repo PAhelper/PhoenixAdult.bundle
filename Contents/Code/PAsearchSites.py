@@ -1098,9 +1098,9 @@ searchSites[972] = ("Teens Go Porn", "Teens Go Porn", "https://teencoreclub.com/
 searchSites[973] = ("We Need New Talents", "We Need New Talents", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[974] = ("X Core Club", "X Core Club", "https://teencoreclub.com/", "https://teencoreclub.com/video/")
 searchSites[975] = ("Blackmailed", "Blackmailed", "https://www.evilangel.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
-searchSites[976] = ("Backroom Casting Couch", "Backroom Casting Couch", "https://backroomcastingcouch.com/", "https://backroomcastingcouch.com/free/girls.php?t=2&alpha=")
-searchSites[977] = ("Black Ambush", "Black Ambush", "https://blackambush.com/", "https://blackambush.com/free/girls.php")
-searchSites[978] = ("Exploited College Girls", "Exploited College Girls", "https://exploitedcollegegirls.com/", "https://exploitedcollegegirls.com/free/girls.php?alpha=")
+searchSites[976] = ("Backroom Casting Couch", "Backroom Casting Couch", "https://backroomcastingcouch.com", "https://backroomcastingcouch.com")
+searchSites[977] = ("Black Ambush", "Black Ambush", "https://blackambush.com", "https://blackambush.com")
+searchSites[978] = ("Exploited College Girls", "Exploited College Girls", "https://exploitedcollegegirls.com", "https://exploitedcollegegirls.com")
 searchSites[979] = ("Desperate Amateurs", "Desperate Amateurs", "https://desperateamateurs.com/", "https://desperateamateurs.com/fintour/search.php?st=advanced&qall=")
 
 
