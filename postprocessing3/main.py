@@ -114,7 +114,7 @@ def get_new_file_name(data):
 
 def get_data_from_api(file_name):
     logging.info('Searching `%s`', file_name)
-    response = requests.get('https://metadataapi.net/api/scenes', headers={
+    response = requests.get('https://api.metadataapi.net/scenes', headers={
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     }, params={
