@@ -29,16 +29,23 @@ This application was made to be runned while you download files. However, you ca
 source= ""
 destination= ""
 ```
-4. Double Click the Watchdog.py and GUI will open. 
-Set your directories
-Active Directory - The directory which Watchdog will be active (included sub-directories)
-Move Directory - The directory which Watchdog will move succesfully matched files.
-Unmatched Directory - The directory which Watchdog will move unmatched files.
-Prefer Scene ID over Scene Title - Checkbox, check if you want Scene ID to your file, uncheck if you want Scene Title.
-Strip Symbol - Must be the same at your Plex Library Preferences.
-Dry Run - Checkbox, check if you want to test the Watchdog matching capabilities without really renaming and moving your files to the Move Directory.
-
-5. Move or download files to the corresponding DIRECTORY_TO_WATCH/siteSubdirectory folder. This is important because the Watchdog uses the folder to match the site.
+4. Open and edit the Watchdog.py preferences section. There are some comment - guides inside for what each parameter is doing. In sort:
+DIRECTORY_TO_WATCH is the directory that the Watchdog will be active and monitor all sub-directories.
+DIRECTORY_TO_MOVE is the directory that the Watchdog will move the scenes after successful matching. (It will create a sub-directory with name = Site Name)
+DIRECTORY_UNMATCHED is the directory that the Watchdog will move the scenes after unsuccessful matching.
+pref_ID is your preference if you want ID or Title of the scene. For now I didn't combine both as I don't use this method.
+pref_DryRyn is your preference if you want to actually move the file or you want to check the matching capabilities.
+pref_StripSymbol is your preference for StripSymbol (a detail comment is in the Watchdog.py)
+```
+DIRECTORY_TO_WATCH = ""
+DIRECTORY_TO_MOVE = ""
+DIRECTORY_UNMATCHED = ""
+pref_ID = False
+pref_DryRun = True
+pref_StripSymbol = ""
+```
+5. Double click the Watchdog.py and if all done correct the Watchdog will be initiated.
+6. Move or download files to the corresponding DIRECTORY_TO_WATCH/siteSubdirectory folder. This is important because the Watchdog uses the folder to match the site.
 
 ### Returning FileName examples based on your preferences:
 (~ is mine pref_StripSymbol)
@@ -53,6 +60,8 @@ Dry Run - Checkbox, check if you want to test the Watchdog matching capabilities
 
 More to add as more sites will be added and also propably I will modify the current one so date will be first. It is better for sorting to recently-oldest scenes.
 
+### Known issues
+- Watchdog will report some times only created events for just moved files and not downloaded files. Go and comment out lines 82-84 and line 87 and uncomment line 86. This way your files will be processed for created or modified events. If a file creates both events then it will be processed two times. Couldn't debug it!
 
 ### To-Do - (Possible Features)
 - Download posters from the original site, making folder and move the scene and the posters together. That way even if the PhoenixAdult Agent can't match the scene you can use the posters to Plex.

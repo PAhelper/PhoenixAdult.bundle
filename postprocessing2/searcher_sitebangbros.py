@@ -9,11 +9,11 @@ import datetime
 ## Other .py files
 import LoggerFunction
 
-def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate):
+def search(siteName,siteBaseURL,siteSearchURL,searchTitle,searchDate,WorkingDir):
     ## Basic Log Configuration
-    logger = LoggerFunction.setup_logger('Searcher', '.\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
+    logger = LoggerFunction.setup_logger('Searcher', WorkingDir+'\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
     ## Scene Logger information
-    SceneNameLogger = LoggerFunction.setup_logger('SceneNameLogger', '.\\Logs\\'+searchTitle+'.log',level=logging.DEBUG,formatter='%(message)s')
+    SceneNameLogger = LoggerFunction.setup_logger('SceneNameLogger', WorkingDir+'\\Logs\\'+searchTitle+'.log',level=logging.DEBUG,formatter='%(message)s')
     ResultsMatrix = [['0','0','0','0','0',0]]
     splited = searchTitle.split(' ')[0]
     if (splited.isdigit()):
