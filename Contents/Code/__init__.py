@@ -880,6 +880,14 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (searchSiteID == 979):
                 results = PAsearchSites.siteDesperateAmateurs.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Dirty Hard Drive
+            elif (980 <= searchSiteID <= 987):
+                results = PAsearchSites.networkDirtyHardDrive.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+            
+            # Melone Challenge
+            elif (searchSiteID == 988):
+                results = PAsearchSites.siteMeloneChallenge.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1538,6 +1546,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Desperate Amateurs
         elif (siteID == 979):
             results = PAsearchSites.siteDesperateAmateurs.update(metadata, siteID, movieGenres, movieActors)
+
+        # Dirty Hard Drive
+        elif (980 <= siteID <= 987):
+            results = PAsearchSites.networkDirtyHardDrive.update(metadata, siteID, movieGenres, movieActors)
+            
+        # Melone Challenge
+        elif (siteID == 988):
+            results = PAsearchSites.siteMeloneChallenge.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")

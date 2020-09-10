@@ -120,8 +120,10 @@ import network5Kporn
 import networkTeenCoreClub
 import networkExploitedX
 import siteDesperateAmateurs
+import networkDirtyHardDrive
+import siteMeloneChallenge
 
-searchSites = [None] * 980
+searchSites = [None] * 989
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1102,6 +1104,15 @@ searchSites[976] = ("Backroom Casting Couch", "Backroom Casting Couch", "https:/
 searchSites[977] = ("Black Ambush", "Black Ambush", "https://blackambush.com", "https://blackambush.com")
 searchSites[978] = ("Exploited College Girls", "Exploited College Girls", "https://exploitedcollegegirls.com", "https://exploitedcollegegirls.com")
 searchSites[979] = ("Desperate Amateurs", "Desperate Amateurs", "https://desperateamateurs.com/", "https://desperateamateurs.com/fintour/search.php?st=advanced&qall=")
+searchSites[980] = ("Bang My Hand", "Bang My Hand", "http://www.bangmyhand.com/", "http://www.bangmyhand.com/tour1/")
+searchSites[981] = ("Dirty Sluts and Studs", "Dirty Sluts and Studs", "http://www.dirtyharddrive.com/", "http://www.dirtyharddrive.com/tour1/")
+searchSites[982] = ("Katie Kox", "Katie Kox", "http://www.katiekox.com/", "http://www.katiekox.com/tour1/")
+searchSites[983] = ("Sophie Dee and Friends", "Sophie Dee and Friends", "http://www.sophiedeeandfriends.com/", "http://www.sophiedeeandfriends.com/tour1/")
+searchSites[984] = ("Lee Bang XXX", "Lee Bang XXX", "http://www.leebangxxx.com/", "http://www.leebangxxx.com/tour1/")
+searchSites[985] = ("The Squirt Instructor", "The Squirt Instructor", "http://www.thesquirtinstructor.com/", "http://www.thesquirtinstructor.com/tour1/")
+searchSites[986] = ("Girls In Nylon", "Girls In Nylon", "http://www.girlsinnylon.com/", "http://www.girlsinnylon.com/tour1/")
+searchSites[987] = ("Kiera King", "Kiera King", "http://www.kieraking.com/", "http://www.kieraking.com/tour1/")
+searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechallenge.com/", "https://melonechallenge.com/")
 
 
 def getSearchBaseURL(siteID):
