@@ -1296,6 +1296,7 @@ def getSearchSettings(mediaTitle):
         ('^ihaw ', 'IHaveAWife '),
         ('^iktg ', 'IKnowThatGirl '),
         ('^il ', 'ImmoralLive '),
+        ('^itc ', 'InTheCrack'),
         ('^jb ', 'JavBus '),
         ('^kha ', 'KarupsHA '),
         ('^kow ', 'KarupsOW '),

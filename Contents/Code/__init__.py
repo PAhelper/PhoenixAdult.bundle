@@ -890,11 +890,11 @@ class PhoenixAdultAgent(Agent.Movies):
 
             # Holly Randall
             elif (searchSiteID == 989):
-            results = PAsearchSites.siteHollyRandall.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteHollyRandall.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # In The Crack
             elif (searchSiteID == 990):
-            results = PAsearchSites.siteInTheCrack.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+                results = PAsearchSites.siteInTheCrack.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
