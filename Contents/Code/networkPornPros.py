@@ -6,22 +6,36 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
-    if unicode(url[-1], 'UTF-8').isdigit() and url[-2] == '-':
-        url = '%s-%s' % (url[:-1], url[-1])
-    req = PAutils.HTTPRequest(url)
-    detailsPageElements = HTML.ElementFromString(req.text)
 
-    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content()
-    curID = PAutils.Encode(url)
-    try:
-        releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
-    except:
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+    searchResults = []
 
-    score = 100
+    DirectURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
+    if unicode(DirectURL[-1], 'UTF-8').isdigit() and DirectURL[-2] == '-':
+        DirectURL = '%s-%s' % (DirectURL[:-1], DirectURL[-1])
+    searchResults.append(DirectURL)
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    for SceneURL in googleResults:
+        if ('/video/' in SceneURL and SceneURL not in searchResults):
+            searchResults.append(SceneURL)
+
+    for url in searchResults:
+        req = PAutils.HTTPRequest(url)
+        detailsPageElements = HTML.ElementFromString(req.text)
+        if detailsPageElements.xpath('//div[@class="form-group username d-none d-md-block"]'):
+            pass ## This is to by-pass re-direction due to wrong DirectURL. Site re-directs you to create account and i check for a form element. If you have a better way edit it and delete this comment req.ok didn't work
+        else:
+            titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content()
+            curID = PAutils.Encode(url)
+            try:
+                releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+            except:
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower()) 
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
