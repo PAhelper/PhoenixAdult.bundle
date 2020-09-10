@@ -888,6 +888,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (searchSiteID == 988):
                 results = PAsearchSites.siteMeloneChallenge.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Holly Randall
+            elif (searchSiteID == 989):
+            results = PAsearchSites.siteHollyRandall.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1554,6 +1558,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # Melone Challenge
         elif (siteID == 988):
             results = PAsearchSites.siteMeloneChallenge.update(metadata, siteID, movieGenres, movieActors)
+
+        # Holly Randall
+        elif (siteID == 989):
+            results = PAsearchSites.siteHollyRandall.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
