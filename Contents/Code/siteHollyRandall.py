@@ -47,7 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         movieGenres.addGenre(genreName)
 
     # Release Date
-    date = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().replace('Added:', '').strip()
+    date = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().split('<br />')[0].replace('Added:', '').strip()
     if date:
         date_object = datetime.strptime(date, '%B %d, %Y')
         metadata.originally_available_at = date_object
@@ -56,7 +56,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
 
-    actors = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().replace('Featuring:', '').strip()
+    actors = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().split('<br />')[2].replace('Featuring:', '').strip()
     for actorLink in actors:
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
