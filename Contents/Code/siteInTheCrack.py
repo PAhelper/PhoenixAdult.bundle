@@ -73,10 +73,10 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Posters
     art = []
-    scenePic = PAsearchSites.getSearchBaseURL(siteID).strip() + detailsPageElements.xpath('//style')[0]split('\'')[1].strip()
+    scenepic = PAsearchSites.getSearchBaseURL(siteID).strip() + detailsPageElements.xpath('//style')[0].split('\'')[1].strip()
 
-    if scenePic:
-        art.append(poster)
+    if scenepic:
+        art.append(scenepic)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
