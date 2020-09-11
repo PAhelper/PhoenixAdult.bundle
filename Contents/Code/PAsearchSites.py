@@ -1116,7 +1116,7 @@ searchSites[986] = ("Girls In Nylon", "Girls In Nylon", "http://www.girlsinnylon
 searchSites[987] = ("Kiera King", "Kiera King", "http://www.kieraking.com/", "http://www.kieraking.com/tour1/")
 searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechallenge.com/", "https://melonechallenge.com/")
 searchSites[989] = ("Holly Randall", "Holly Randall", "https://hollyrandall.com/", "https://hollyrandall.com/search.php?query=")
-searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "https://inthecrack.com/Model/")
+searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "https://inthecrack.com/Collections/Name/")
 
 
 def getSearchBaseURL(siteID):
@@ -1291,12 +1291,13 @@ def getSearchSettings(mediaTitle):
         ('^hegre-art ', 'Hegre '),
         ('^hoh ', 'HandsOnHardcore '),
         ('^hotab ', 'HouseofTaboo '),
+        ('^hr ', 'HollyRandall '),
         ('^ht ', 'Hogtied '),
         ('^hustl3r ', 'Hustler '),
         ('^ihaw ', 'IHaveAWife '),
         ('^iktg ', 'IKnowThatGirl '),
         ('^il ', 'ImmoralLive '),
-        ('^itc ', 'InTheCrack'),
+        ('^itc ', 'InTheCrack '),
         ('^jb ', 'JavBus '),
         ('^kha ', 'KarupsHA '),
         ('^kow ', 'KarupsOW '),

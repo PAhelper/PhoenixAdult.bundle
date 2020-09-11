@@ -5,29 +5,36 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    actressID = searchTitle.split(' ', 1)[0]
     try:
-        sceneTitle = searchTitle.split(' ', 1)[1]
+        sceneTitle = searchTitle.split(' ', 1)[2]
     except:
         sceneTitle = ''
 
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + actressID)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle[0])
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//ul[@class="Models"]/li'):
-        titleNoFormatting = searchResult.xpath('.//figure/p[1]')[0].text_content().strip()
-        titleNoFormattingID = PAutils.Encode(titleNoFormatting)
+    for searchResult in searchResults.xpath('//ul[@class="collectionGridLayout"]/li'):
+        discoveredname = searchResult.xpath('.//span')[0].text_content().strip().lower()
 
-        actor = searchResult.xpath('//li[@class="modelCurrent"]')[0].text_content().strip()
+        if searchTitle in discoveredname:
+            modellink = searchResult.xpath('.//a/@href')[0]
+            req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + modellink)
+            searchResults = HTML.ElementFromString(req.text)
 
-        # Release Date
-        date = searchResult.xpath('.//figure/p[2]')[0].text_content().replace('Release Date:', '').strip()
-        releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
+            for searchResult in searchResults.xpath('//ul[@class="Models"]/li'):
+                titleNoFormatting = searchResult.xpath('.//figure/p[1]')[0].text_content().strip()
+                titleNoFormattingID = PAutils.Encode(titleNoFormatting)
 
-        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+                actor = searchResult.xpath('//li[@class="modelCurrent"]')[0].text_content().strip()
 
-        score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+                # Release Date
+                date = searchResult.xpath('.//figure/p[2]')[0].text_content().replace('Release Date:', '').strip()
+                releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate, actor), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+                curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+
+                score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+
+                results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate, actor), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
