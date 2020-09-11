@@ -1057,7 +1057,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # WankzVR
         elif siteID == 476:
-            metadata = PAsearchSites.siteMilfVR.update(metadata, siteID, movieGenres, movieActors)
+            metadata = PAsearchSites.networkWankz.update(metadata, siteID, movieGenres, movieActors)
 
         # MilfVR
         elif siteID == 477:
