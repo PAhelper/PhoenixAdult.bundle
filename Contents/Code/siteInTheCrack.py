@@ -2,13 +2,23 @@ import PAsearchSites
 import PAgenres
 import PAactors
 import PAutils
+import string
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+    sceneID = ''
+    all = string.maketrans('', '')
+    nodigs = all.translate(all, string.digits)
+
     try:
-        sceneTitle = searchTitle.split(' ', 1)[2]
+        sceneTitle = searchTitle.split(' ', 2)[0]
+        sceneID = sceneTitle.translate(all, nodigs)
+        if sceneID != '':
+            searchTitle = searchTitle.split(' ', 2)[1]
+
+        searchTitle = searchTitle.lower()
     except:
-        sceneTitle = ''
+        pass
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle[0])
     searchResults = HTML.ElementFromString(req.text)
@@ -21,10 +31,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             searchResults = HTML.ElementFromString(req.text)
 
             for searchResult in searchResults.xpath('//ul[@class="Models"]/li'):
-                titleNoFormatting = searchResult.xpath('.//figure/p[1]')[0].text_content().strip()
+                titleNoFormatting = searchResult.xpath('.//figure/p[1]')[0].text_content().replace('Collection: ', '').strip()
                 titleNoFormattingID = PAutils.Encode(titleNoFormatting)
-
-                actor = searchResult.xpath('//li[@class="modelCurrent"]')[0].text_content().strip()
 
                 # Release Date
                 date = searchResult.xpath('.//figure/p[2]')[0].text_content().replace('Release Date:', '').strip()
@@ -32,9 +40,9 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
                 curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
-                score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(sceneID, titleNoFormatting.lower())
 
-                results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate, actor), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+                results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -72,9 +80,13 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actor = PAutils.Decode(metadata_id[4])
-    if actor:
-        actorName = actor
+    actorstr = detailsPageElements.xpath('//title')[0].text_content().split('#')[1]
+    actorstr = (''.join(i for i in list(actorstr) if not i.isdigit())).strip()
+    actorstr = actorstr.replace(',', '&')
+    actorlist = actorstr.split('&')
+
+    for actor in actorlist:
+        actorName = actor.strip()
         actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
 
