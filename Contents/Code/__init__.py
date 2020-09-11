@@ -896,6 +896,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 990:
                 results = PAsearchSites.siteInTheCrack.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Angela White
+            elif searchSiteID == 991:
+                results = PAsearchSites.siteAngelaWhite.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1564,12 +1568,16 @@ class PhoenixAdultAgent(Agent.Movies):
             results = PAsearchSites.siteMeloneChallenge.update(metadata, siteID, movieGenres, movieActors)
 
         # Holly Randall
-        elif (siteID == 989):
+        elif siteID == 989:
             results = PAsearchSites.siteHollyRandall.update(metadata, siteID, movieGenres, movieActors)
 
         # In The Crack
-        elif (siteID == 990):
+        elif siteID == 990:
             results = PAsearchSites.siteInTheCrack.update(metadata, siteID, movieGenres, movieActors)
+
+        # Angela White
+        elif siteID == 991:
+            results = PAsearchSites.siteAngelaWhite.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
