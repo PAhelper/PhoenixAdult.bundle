@@ -1118,7 +1118,7 @@ searchSites[987] = ("Kiera King", "Kiera King", "http://www.kieraking.com/", "ht
 searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechallenge.com/", "https://melonechallenge.com/")
 searchSites[989] = ("Holly Randall", "Holly Randall", "https://hollyrandall.com/", "https://hollyrandall.com/search.php?query=")
 searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "https://inthecrack.com/Collections/Name/")
-searchSites[991] = ("Angela White", "Angela White", "http://angelawhite.com/tour/", "http://angelawhite.com/tour/search?query=")
+searchSites[991] = ("Angela White", "Angela White", "http://angelawhite.com/", "http://angelawhite.com/tour/search?query=")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

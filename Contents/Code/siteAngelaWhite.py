@@ -8,12 +8,16 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="videodetails"]'):
-        titleNoFormatting = searchResult.xpath('./div[@class="videocontent "]/@data-title')[0]
-        sceneURL = searchResult.xpath('./div[@class="videocontent "]/h2/a/@href')[0]
+        titleNoFormatting = searchResult.xpath('./div[contains(@class, "videocontent")]/@data-title')[0]
+        sceneURL = searchResult.xpath('./div[contains(@class, "videocontent")]/h2/a/@href')[0]
         curID = PAutils.Encode(sceneURL)
 
         # Release Date
-        date = searchResult.xpath('./div[@class="videocontent "]/h2/span')[0].text_content().strip()
+        date = ''
+        try:
+            date = searchResult.xpath('./div[contains(@class, "videocontent")]/h2/span')[0].text_content().strip()
+        except:
+            pass
         releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
@@ -37,7 +41,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = PAutils.Decode(metadata_id[2]).strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="desc"]')[0].strip()
+    metadata.summary = detailsPageElements.xpath('//div[@class="desc"]/p')[0].text_content().strip()
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -47,8 +51,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//ul[@class="tags"]/li/a'):
-        genreName = genreLink.text_content().strip()
+    genres = detailsPageElements.xpath('//meta[@name="keywords"]/@content')[0].replace('.','').split(',')
+    for genreLink in genres:
+        genreName = genreLink.strip()
         movieGenres.addGenre(genreName)
 
     # Release Date
@@ -60,7 +65,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actorstr = metadata.title.replace('BTS', '')
     actorstr = (''.join(i for i in list(actorstr) if not i.isdigit())).strip()
-    actors = actorstr.split('X')
+    actors = actorstr.split(' X ')
     for actorLink in actors:
         actorName = actorLink.strip().lower()
         actorPhotoURL = ''
@@ -70,7 +75,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//img[contains(@class, "update_thumb")]/@src0_3x',
+        '//img[contains(@class, "tour-area-thumb")]/@data-src',
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
