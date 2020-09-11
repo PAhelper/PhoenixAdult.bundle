@@ -3,17 +3,24 @@ import PAgenres
 import PAactors
 import PAutils
 
+joinstr = 'https://join.hollyrandall.com/'
+
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "item-video")]'):
         titleNoFormatting = searchResult.xpath('./div[@class="item-thumb"]/a/@title')[0]
-        curID = PAutils.Encode(searchResult.xpath('./div[@class="item-thumb"]/a/@href')[0])
+        sceneURL = searchResult.xpath('./div[@class="item-thumb"]/a/@href')[0]
+        curID = PAutils.Encode(sceneURL)
 
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        if joinstr not in sceneURL:
+            # Release Date
+            date = searchResult.xpath('./div[@class="timeDate"]')[0].text_content().split('|')[1].strip()
+            releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Holly Randall]' % titleNoFormatting, score=score, lang=lang))
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, titleNoFormatting, releaseDate), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -30,7 +37,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.studio = 'Holly Randall Productions'
 
     # Title
-    metadata.title = detailsPageElements.xpath('./div[@class="item-thumb"]/a/@title')[0].text_content().strip()
+    metadata.title = PAutils.Decode(metadata_id[2]).strip()
 
     # Summary not available
 
@@ -47,16 +54,13 @@ def update(metadata, siteID, movieGenres, movieActors):
         movieGenres.addGenre(genreName)
 
     # Release Date
-    date = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().split('<br />')[0].replace('Added:', '').strip()
-    if date:
-        date_object = datetime.strptime(date, '%B %d, %Y')
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
+    date_object = parse(PAutils.Decode(metadata_id[3]))
+    metadata.originally_available_at = date_object
+    metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-
-    actors = detailsPageElements.xpath('./div[@class="info"]/p')[0].text_content().split('<br />')[2].replace('Featuring:', '').strip()
+    actors = detailsPageElements.xpath('//div[@class="info"]/p')[0].text_content().split('\n')[3].replace('Featuring:', '').split(',')
     for actorLink in actors:
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
@@ -70,7 +74,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
+            art.append(PAsearchSites.getSearchBaseURL(siteID) + poster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

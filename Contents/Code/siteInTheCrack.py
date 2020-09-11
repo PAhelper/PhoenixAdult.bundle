@@ -27,7 +27,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate, actor), name='%s [InTheCrack]' % titleNoFormatting, score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s' % (curID, siteNum, titleNoFormattingID, releaseDate, actor), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -73,10 +73,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Posters
     art = []
-    scenepic = PAsearchSites.getSearchBaseURL(siteID).strip() + detailsPageElements.xpath('//style')[0].split('\'')[1].strip()
+    scenepic = PAsearchSites.getSearchBaseURL(siteID).strip() + detailsPageElements.xpath('//style')[0].text_content().split('\'')[1].strip()
 
-    if scenepic:
-        art.append(scenepic)
+    art.append(scenepic)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
@@ -94,7 +93,8 @@ def update(metadata, siteID, movieGenres, movieActors):
                 if width > 100 and width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-            except:
+            except Exception as e:
+                Log('Error during image download: \n%s', e)
                 pass
 
     return metadata
