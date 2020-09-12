@@ -125,8 +125,9 @@ import siteMeloneChallenge
 import siteHollyRandall
 import siteInTheCrack
 import siteAngelaWhite
+import siteCumbizz
 
-searchSites = [None] * 992
+searchSites = [None] * 993
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1119,6 +1120,7 @@ searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechall
 searchSites[989] = ("Holly Randall", "Holly Randall", "https://hollyrandall.com/", "https://hollyrandall.com/search.php?query=")
 searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "https://inthecrack.com/Collections/Name/")
 searchSites[991] = ("Angela White", "Angela White", "http://angelawhite.com/", "http://angelawhite.com/tour/search?query=")
+searchSites[992] = ("Cumbizz", "Cumbizz", "https://www.cumbizz.com/", "https://www.cumbizz.com/film/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
