@@ -904,6 +904,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 992:
                 results = PAsearchSites.siteCumbizz.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Pornstar Platinum
+            elif searchSiteID == 993:
+                results = PAsearchSites.sitePornstarPlatinum.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1586,6 +1590,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # Cumbizz
         elif siteID == 992:
             results = PAsearchSites.siteCumbizz.update(metadata, siteID, movieGenres, movieActors)
+
+        # Pornstar Platinum
+        elif siteID == 993:
+            results = PAsearchSites.sitePornstarPlatinum.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
