@@ -1113,8 +1113,8 @@ searchSites[985] = ("The Squirt Instructor", "The Squirt Instructor", "http://ww
 searchSites[986] = ("Girls In Nylon", "Girls In Nylon", "http://www.girlsinnylon.com/", "http://www.girlsinnylon.com/tour1/")
 searchSites[987] = ("Kiera King", "Kiera King", "http://www.kieraking.com/", "http://www.kieraking.com/tour1/")
 searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechallenge.com/", "https://melonechallenge.com/")
-searchSites[989] = ("FamilySwapXXX", "FamilySwapXXX", "https://familyswap.xxx", "https://familyswap.xxx/video/gallery/")
-searchSites[990] = ("GirlsOnlyPorn", "GirlsOnlyPorn", "https://girlsonlyporn.com", "https://girlsonlyporn.com/video/gallery")
+searchSites[989] = ("FamilySwapXXX", "FamilySwapXXX", "https://familyswap.xxx", "https://familyswap.xxx/video/watch/")
+searchSites[990] = ("GirlsOnlyPorn", "GirlsOnlyPorn", "https://girlsonlyporn.com", "https://girlsonlyporn.com/video/watch/")
 
 
 def getSearchBaseURL(siteID):
