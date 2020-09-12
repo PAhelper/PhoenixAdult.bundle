@@ -389,7 +389,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkKink.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Nubiles
-            elif (525 <= searchSiteID <= 545) or (755 <= searchSiteID <= 756) or searchSiteID == 766:
+            elif (525 <= searchSiteID <= 545) or (755 <= searchSiteID <= 756) or searchSiteID == 766 or (989 <= searchSiteID <= 990):
                 results = PAsearchSites.networkNubiles.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # BellaPass
@@ -1072,7 +1072,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
 
         # Nubiles
-        elif (siteID >= 525 and siteID <= 545) or (siteID >= 755 and siteID <= 756) or (siteID == 766):
+        elif (siteID >= 525 and siteID <= 545) or (755 <= siteID <= 756) or (siteID == 766) or (989 <= siteID <= 990):
             metadata = PAsearchSites.networkNubiles.update(metadata, siteID, movieGenres, movieActors)
 
         # BellaPass
