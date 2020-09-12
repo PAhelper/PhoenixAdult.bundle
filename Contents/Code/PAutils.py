@@ -131,7 +131,7 @@ def HTTPRequest(url, method='GET', **kwargs):
 
 
 def getFromGoogleSearch(searchText, site='', **kwargs):
-    bypass = kwargs.pop('stop', 10)
+    stop = kwargs.pop('stop', 10)
     if isinstance(site, int):
         site = PAsearchSites.getSearchBaseURL(site).split('://')[1].lower()
         if site.startswith('www.'):
