@@ -11,7 +11,12 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     except:
         sceneTitle = ''
 
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + modelID)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum), 'HEAD', allow_redirects=False)
+    cookies = {
+        'start_session_galleria': req.cookies['start_session_galleria']
+    }
+
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + modelID, cookies=cookies)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="movie-wrap-index img-polaroid left"]'):
         titleNoFormatting = searchResult.xpath('.//h1[@class="video-title-model"]')[0].text_content().strip()

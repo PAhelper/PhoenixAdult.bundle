@@ -87,6 +87,7 @@ def HTTPRequest(url, method='GET', **kwargs):
     cookies = kwargs.pop('cookies', {})
     params = kwargs.pop('params', {})
     bypass = kwargs.pop('bypass', True)
+    allow_redirects = kwargs.pop('allow_redirects', True)
     proxies = {}
 
     if Prefs['proxy_enable']:
@@ -103,7 +104,7 @@ def HTTPRequest(url, method='GET', **kwargs):
         method = 'POST'
 
     Log('Requesting %s "%s"' % (method, url))
-    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params, verify=False)
+    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params, verify=False, allow_redirects=allow_redirects)
 
     req_bypass = None
     if not req.ok and bypass:
@@ -130,7 +131,7 @@ def HTTPRequest(url, method='GET', **kwargs):
 
 
 def getFromGoogleSearch(searchText, site='', **kwargs):
-    stop = kwargs['stop'] if 'stop' in kwargs else 10
+    bypass = kwargs.pop('stop', 10)
     if isinstance(site, int):
         site = PAsearchSites.getSearchBaseURL(site).split('://')[1].lower()
         if site.startswith('www.'):
