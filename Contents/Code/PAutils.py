@@ -142,7 +142,7 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
 
     googleResults = []
     try:
-        googleResults = list(googlesearch.search(searchTerm, stop=stop))
+        googleResults = list(googlesearch.search(searchTerm, stop=stop, user_agent=getUserAgent()))
     except:
         Log('Google Search Error')
         pass
