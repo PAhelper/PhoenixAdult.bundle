@@ -127,8 +127,10 @@ import siteInTheCrack
 import siteAngelaWhite
 import siteCumbizz
 import sitePornstarPlatinum
+import siteWoodmanCastingX
+import siteNathanSluts
 
-searchSites = [None] * 994
+searchSites = [None] * 996
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1123,6 +1125,8 @@ searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "h
 searchSites[991] = ("Angela White", "Angela White", "http://angelawhite.com/", "http://angelawhite.com/tour/search?query=")
 searchSites[992] = ("Cumbizz", "Cumbizz", "https://www.cumbizz.com/", "https://www.cumbizz.com/film/")
 searchSites[993] = ("Pornstar Platinum", "Pornstar Platinum", "https://www.pornstarplatinum.com/", "https://www.pornstarplatinum.com/tour/index.php?search=")
+searchSites[994] = ("Woodman Casting X", "Woodman Casting X", "https://www.woodmancastingx.com", "https://www.woodmancastingx.com/search?query=")
+searchSites[995] = ("Nathan Sluts", "Nathan Sluts", "https://www.nathansluts.com", "https://www.nathansluts.com/search/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
