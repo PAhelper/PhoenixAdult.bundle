@@ -125,7 +125,7 @@ def HTTPRequest(url, method='GET', **kwargs):
     req.encoding = 'UTF-8'
 
     if Prefs['debug_enable']:
-        saveRequest(req)
+        saveRequest(url, req)
 
     return req
 
@@ -175,20 +175,20 @@ def getClearURL(url):
         path = path.replace('//', '/')
 
     newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
-    if (url.query):
+    if url.query:
         newURL += '?%s' % url.query
 
     return newURL
 
 
-def saveRequest(req):
+def saveRequest(url, req):
     debug_dir = 'debug_data/%s/' % datetime.now().strftime('%d-%m-%Y')
     if not os.path.exists(debug_dir):
         os.makedirs(debug_dir)
 
     raw_http = dump.dump_all(req).decode('UTF-8')
 
-    file_name = '%s.gz' % Encode(req.url)
+    file_name = '%s.gz' % Encode(url)
     with gzip.open(debug_dir + file_name, 'wb') as f:
         f.write(raw_http.encode('UTF-8'))
 
