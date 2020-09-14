@@ -29,37 +29,31 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[@class="title"]//h1')[0].text_content().replace('HD', '').strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="detail__title"]')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="description"]//p')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[@class="detail__txt detail__txt-show_lg"]')[0].text_content()
 
     # Studio
     metadata.studio = 'Wankz'
 
-    # Tagline and Collection(s)
-    metadata.collections.clear()
-    tagline = detailsPageElements.xpath('//div[@class="bc"]/a[3]')[0].text_content().strip()
-    metadata.tagline = tagline
-    metadata.collections.add(tagline)
-
     # Release Date
-    date = detailsPageElements.xpath('//div[@class="views"]//span')[0].text_content().replace('Added', '').strip()
+    date = detailsPageElements.xpath('//span[@class="detail__date"]')[0].text_content().strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    for actor in detailsPageElements.xpath('//a[@class="model"]'):
-        actorName = actor.xpath('.//span')[0].text_content().strip()
+    for actor in detailsPageElements.xpath('//div[@class="detail__models"]//a'):
+        actorName = actor.text_content().strip()
         actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//a[@class="cat"]'):
+    for genreLink in detailsPageElements.xpath('//a[@class="tag"]'):
         genreName = genreLink.text_content().strip()
 
         movieGenres.addGenre(genreName)
@@ -67,7 +61,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters/Background
     art = []
     xpaths = [
-        '//a[contains(@class, "noplayer")]//img/@src',
+        '//meta[@property="og:image"]/@content',
+        '//div[@class="photo-strip__slide"]/@data-src'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
