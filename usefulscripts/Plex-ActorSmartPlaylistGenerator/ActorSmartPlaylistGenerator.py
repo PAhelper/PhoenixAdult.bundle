@@ -13,10 +13,11 @@ def create_playlists():
 
     for library_name in LIBRARIES:
         plex_library = plex.library.section(library_name)
-        plex_playlists[plex_library] = [playlist for playlist in plex.playlists() if playlist.items() and playlist.items()[0].section() == plex_library]
+        plex_playlists[plex_library] = [playlist for playlist in plex.playlists() if playlist.smart and playlist.items() and playlist.items()[0].section() == plex_library]
         plex_scenes[plex_library] = plex_library.all()
 
     plex_actors = {}
+
     for library in plex_scenes:
         plex_actors[library] = []
         for scene in plex_scenes[library]:
