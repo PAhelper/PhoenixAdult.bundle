@@ -5,7 +5,7 @@ TOKEN = ''  # Your Plex Token. To find your token please follow this guide https
 LIBRARIES = []  # Enter Here your titles of yours libraries. For example ['XXXMedia', 'XXXMedia 2'] if you're libraries is named XXXMedia and XXXMedia 2
 
 
-def create_playlist():
+def create_playlists():
     plex = PlexServer(BASEURL, TOKEN)
 
     plex_scenes = {}
@@ -17,20 +17,20 @@ def create_playlist():
         plex_scenes[plex_library] = plex_library.all()
 
     plex_actors = {}
-    for library_obj in plex_scenes:
-        plex_actors[library_obj] = []
-        for scene in plex_scenes[library_obj]:
+    for library in plex_scenes:
+        plex_actors[library] = []
+        for scene in plex_scenes[library]:
             for actor in scene.actors:
                 actor_name = actor.tag
 
-                if actor_name and actor_name not in plex_actors[library_obj]:
-                    plex_actors[library_obj].append(actor_name)
+                if actor_name and actor_name not in plex_actors[library]:
+                    plex_actors[library].append(actor_name)
 
-    for library_obj in plex_scenes:
-        playlist_titles = [playlist.title for playlist in plex_playlists[library_obj]]
-        for actor_name in plex_actors[library_obj]:
+    for library in plex_scenes:
+        playlist_titles = [playlist.title for playlist in plex_playlists[library]]
+        for actor_name in plex_actors[library]:
             if actor_name not in playlist_titles:
-                Playlist.create(plex, title=actor_name, section=library_obj, smart=True, actor=actor_name)
+                Playlist.create(plex, title=actor_name, section=library, smart=True, actor=actor_name)
 
 if __name__ == '__main__':
-    create_playlist()
+    create_playlists()
