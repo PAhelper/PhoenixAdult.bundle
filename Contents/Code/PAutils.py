@@ -1,4 +1,5 @@
 import gzip
+import uuid
 
 import googlesearch
 import fake_useragent
@@ -186,9 +187,10 @@ def saveRequest(url, req):
     if not os.path.exists(debug_dir):
         os.makedirs(debug_dir)
 
-    raw_http = dump.dump_all(req).decode('UTF-8')
+    raw_http = '< Target URL: "%s"\r\n\r\n' % url
+    raw_http += dump.dump_all(req).decode('UTF-8')
 
-    file_name = '%s.gz' % Encode(url)
+    file_name = '%s.gz' % uuid.uuid4().hex
     with gzip.open(debug_dir + file_name, 'wb') as f:
         f.write(raw_http.encode('UTF-8'))
 
