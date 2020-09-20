@@ -34,6 +34,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### AllHerLuv | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### Amateur Allure | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### AmourAngels | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
++ #### AngelaWhite | Matching type: *[Exact](./manualsearch.md#limited-search)* - **Actor**
 + #### ArchAngel | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ATK Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **ActressID with Title Search, Date Add**
   - ATKGirlfriends
@@ -178,6 +179,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Clips4Sale | Matching type: *[Exact](./manualsearch.md#exact-match)* - **StudioID with Title Search**
 + #### ClubFilly | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID, DVDs not supported**
 + #### ClubSeventeen | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### CumBizz | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
   - Czech Amateurs
@@ -354,6 +356,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - SexBabesVR
   - SinsVR
   - StasyQVR
++ #### Holly Randall | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### HuCows | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Hustler | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### Interracial Pass | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -366,6 +369,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Sensual Pain
   - Sexually Broken
   - Topgrl
++ #### InTheCrack | Matching type: *[Limited](./manualsearch.md#limited-search)* - **actress name**
 + #### JAV (via R18 - Censored JAV Only) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
 + #### JavBus (via JavBus - Censored & Uncensored JAV) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **SceneID (in form of JAVID)**
 + #### JAY's POV | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
@@ -705,6 +709,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - PureMature
   - SpyFam
   - Tiny4k
++ #### PornstarPlatinum | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### PrettyDirty | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Private | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - Anal Introductions
@@ -1009,6 +1014,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### We Are Hairy | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Why Not Bi | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Wicked | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### WoodmanCastingX | Matching type: *[Limited](./manualsearch.md#limited-search)* - **actress**
 + #### WowGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
 + #### X-Art | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### XConfessions | Matching type: *[Limited](./manualsearch.md#limited-search)*

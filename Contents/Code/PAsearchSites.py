@@ -122,8 +122,14 @@ import networkExploitedX
 import siteDesperateAmateurs
 import networkDirtyHardDrive
 import siteMeloneChallenge
+import siteHollyRandall
+import siteInTheCrack
+import siteAngelaWhite
+import siteCumbizz
+import sitePornstarPlatinum
+import siteWoodmanCastingX
 
-searchSites = [None] * 991
+searchSites = [None] * 997
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1113,9 +1119,14 @@ searchSites[985] = ("The Squirt Instructor", "The Squirt Instructor", "http://ww
 searchSites[986] = ("Girls In Nylon", "Girls In Nylon", "http://www.girlsinnylon.com/", "http://www.girlsinnylon.com/tour1/")
 searchSites[987] = ("Kiera King", "Kiera King", "http://www.kieraking.com/", "http://www.kieraking.com/tour1/")
 searchSites[988] = ("Melone Challenge", "Melone Challenge", "https://melonechallenge.com/", "https://melonechallenge.com/")
-searchSites[989] = ("FamilySwapXXX", "FamilySwapXXX", "https://familyswap.xxx", "https://familyswap.xxx/video/watch/")
-searchSites[990] = ("GirlsOnlyPorn", "GirlsOnlyPorn", "https://girlsonlyporn.com", "https://girlsonlyporn.com/video/watch/")
-
+searchSites[989] = ("Holly Randall", "Holly Randall", "https://hollyrandall.com/", "https://hollyrandall.com/search.php?query=")
+searchSites[990] = ("In The Crack", "In The Crack", "https://inthecrack.com", "https://inthecrack.com/Collections/Name/")
+searchSites[991] = ("Angela White", "Angela White", "http://angelawhite.com/", "http://angelawhite.com/tour/search?query=")
+searchSites[992] = ("Cumbizz", "Cumbizz", "https://www.cumbizz.com/", "https://www.cumbizz.com/film/")
+searchSites[993] = ("Pornstar Platinum", "Pornstar Platinum", "https://www.pornstarplatinum.com/", "https://www.pornstarplatinum.com/tour/index.php?search=")
+searchSites[994] = ("Woodman Casting X", "Woodman Casting X", "https://www.woodmancastingx.com", "https://www.woodmancastingx.com/search?query=")
+searchSites[995] = ("FamilySwapXXX", "FamilySwapXXX", "https://familyswap.xxx", "https://familyswap.xxx/video/watch/")
+searchSites[996] = ("GirlsOnlyPorn", "GirlsOnlyPorn", "https://girlsonlyporn.com", "https://girlsonlyporn.com/video/watch/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1216,6 +1227,7 @@ def getSearchSettings(mediaTitle):
         ('^am ', 'AssMasterpiece '),
         ('^analb ', 'AnalBeauty '),
         ('^ap ', 'AssParade '),
+        ('^aw ', 'AngelaWhite '),
         ('^baebz ', 'Baeb '),
         ('^bblib ', 'BigButtsLikeItBig '),
         ('^bcasting ', 'BangCasting '),
@@ -1289,11 +1301,13 @@ def getSearchSettings(mediaTitle):
         ('^hegre-art ', 'Hegre '),
         ('^hoh ', 'HandsOnHardcore '),
         ('^hotab ', 'HouseofTaboo '),
+        ('^hr ', 'HollyRandall '),
         ('^ht ', 'Hogtied '),
         ('^hustl3r ', 'Hustler '),
         ('^ihaw ', 'IHaveAWife '),
         ('^iktg ', 'IKnowThatGirl '),
         ('^il ', 'ImmoralLive '),
+        ('^itc ', 'InTheCrack '),
         ('^jb ', 'JavBus '),
         ('^kha ', 'KarupsHA '),
         ('^kow ', 'KarupsOW '),
