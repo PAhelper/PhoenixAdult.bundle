@@ -5,7 +5,8 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + '"' + encodedTitle + '"')
+    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
+    req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="item hover videoThumb"]'):
         titleNoFormatting = searchResult.xpath('./div/a/@title')[0].strip()

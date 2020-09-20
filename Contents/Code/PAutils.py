@@ -1,4 +1,5 @@
 import gzip
+import uuid
 
 import googlesearch
 import fake_useragent
@@ -87,6 +88,7 @@ def HTTPRequest(url, method='GET', **kwargs):
     cookies = kwargs.pop('cookies', {})
     params = kwargs.pop('params', {})
     bypass = kwargs.pop('bypass', True)
+    allow_redirects = kwargs.pop('allow_redirects', True)
     proxies = {}
 
     if Prefs['proxy_enable']:
@@ -103,7 +105,7 @@ def HTTPRequest(url, method='GET', **kwargs):
         method = 'POST'
 
     Log('Requesting %s "%s"' % (method, url))
-    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params, verify=False)
+    req = requests.request(method, url, proxies=proxies, headers=headers, cookies=cookies, data=params, verify=False, allow_redirects=allow_redirects)
 
     req_bypass = None
     if not req.ok and bypass:
@@ -124,13 +126,13 @@ def HTTPRequest(url, method='GET', **kwargs):
     req.encoding = 'UTF-8'
 
     if Prefs['debug_enable']:
-        saveRequest(req)
+        saveRequest(url, req)
 
     return req
 
 
 def getFromGoogleSearch(searchText, site='', **kwargs):
-    stop = kwargs['stop'] if 'stop' in kwargs else 10
+    stop = kwargs.pop('stop', 10)
     if isinstance(site, int):
         site = PAsearchSites.getSearchBaseURL(site).split('://')[1].lower()
         if site.startswith('www.'):
@@ -142,7 +144,7 @@ def getFromGoogleSearch(searchText, site='', **kwargs):
 
     googleResults = []
     try:
-        googleResults = list(googlesearch.search(searchTerm, stop=stop))
+        googleResults = list(googlesearch.search(searchTerm, stop=stop, user_agent=getUserAgent()))
     except:
         Log('Google Search Error')
         pass
@@ -174,20 +176,21 @@ def getClearURL(url):
         path = path.replace('//', '/')
 
     newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
-    if (url.query):
+    if url.query:
         newURL += '?%s' % url.query
 
     return newURL
 
 
-def saveRequest(req):
+def saveRequest(url, req):
     debug_dir = 'debug_data/%s/' % datetime.now().strftime('%d-%m-%Y')
     if not os.path.exists(debug_dir):
         os.makedirs(debug_dir)
 
-    raw_http = dump.dump_all(req).decode('UTF-8')
+    raw_http = '< Target URL: "%s"\r\n\r\n' % url
+    raw_http += dump.dump_all(req).decode('UTF-8')
 
-    file_name = '%s.gz' % Encode(req.url)
+    file_name = '%s.gz' % uuid.uuid4().hex
     with gzip.open(debug_dir + file_name, 'wb') as f:
         f.write(raw_http.encode('UTF-8'))
 

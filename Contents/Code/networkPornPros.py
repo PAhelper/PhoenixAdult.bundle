@@ -6,22 +6,35 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
-    if unicode(url[-1], 'UTF-8').isdigit() and url[-2] == '-':
-        url = '%s-%s' % (url[:-1], url[-1])
-    req = PAutils.HTTPRequest(url)
-    detailsPageElements = HTML.ElementFromString(req.text)
+    searchResults = []
 
-    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content()
-    curID = PAutils.Encode(url)
-    try:
-        releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
-    except:
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
+    if unicode(directURL[-1], 'UTF-8').isdigit() and directURL[-2] == '-':
+        directURL = '%s-%s' % (directURL[:-1], directURL[-1])
+    searchResults.append(directURL)
 
-    score = 100
+    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    for sceneURL in googleResults:
+        if ('/video/' in sceneURL and sceneURL not in searchResults):
+            searchResults.append(sceneURL)
 
-    results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
+    for sceneURL in searchResults:
+        req = PAutils.HTTPRequest(sceneURL)
+        if 'signup.' not in req.url:
+            detailsPageElements = HTML.ElementFromString(req.text)
+            titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
+            curID = PAutils.Encode(sceneURL)
+            try:
+                releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
+            except:
+                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+
+            if searchDate:
+                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 

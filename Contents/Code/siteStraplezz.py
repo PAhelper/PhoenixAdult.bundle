@@ -5,7 +5,8 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-') + '.html')
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.replace(' ', '-') + '.html'
+    req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="card"]'):
         titleNoFormatting = searchResult.xpath('.//div[2]/div/div[1]/h1')[0].text_content().strip()

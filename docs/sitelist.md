@@ -672,7 +672,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Stepfamily Channel PornPortal
   - Teen Channel PornPortal
   - VR Channel PornPortal
-+ #### PornPros Network | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### PornPros Network | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 18YearsOld
   - 40ozBounce
   - CockCompetition
@@ -694,7 +694,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - ShadyPi
   - SquirtDisgrace
   - TeenBFF
-+ #### Other PornPros Sites | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL, Date Add**
++ #### Other PornPros Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Baeb
   - CastingCouch-X
   - Cum4K

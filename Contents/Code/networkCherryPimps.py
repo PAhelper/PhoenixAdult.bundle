@@ -87,6 +87,9 @@ def update(metadata, siteID, movieGenres, movieActors):
             actorPhotoURL = ''
 
             actorPageURL = actorLink.get('href')
+            if not actorPageURL.startswith('http'):
+                actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + '/' + actorPageURL
+
             req = PAutils.HTTPRequest(actorPageURL)
             actorPage = HTML.ElementFromString(req.text)
 
