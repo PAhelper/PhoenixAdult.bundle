@@ -249,7 +249,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # TeamSkeet
-            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
+            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875 or (997 <= searchSiteID <= 1011):
                 results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Porndoe Premium
@@ -976,7 +976,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkPornFidelity.update(metadata, siteID, movieGenres, movieActors)
 
         # TeamSkeet
-        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875:
+        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875 or (997 <= siteID <= 1011):
             metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
         # Porndoe Premium
