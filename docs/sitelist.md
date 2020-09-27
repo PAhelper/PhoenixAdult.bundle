@@ -867,6 +867,21 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Solo Interviews
   - StepSiblings
   - Team Skeet Extras
+  - TeamSkeet X BAEB
+  - TeamSkeet X Banana Fever
+  - TeamSkeet X CamSoda
+  - TeamSkeet X Club Sweethearts
+  - TeamSkeet X Eva Elfie
+  - TeamSkeet X Flora Rodgers
+  - TeamSkeet X Fucking Awesome
+  - TeamSkeet X James Deen
+  - TeamSkeet X Joy Bear
+  - TeamSkeet X Layna Landry
+  - TeamSkeet X LunaXJames
+  - TeamSkeet X Mickey Mod
+  - TeamSkeet X OG
+  - TeamSkeet X Reislin
+  - TeamSkeet X SpankMonster
   - Teen Curves
   - Teen JOI
   - Teen Pies
