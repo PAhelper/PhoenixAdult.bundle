@@ -108,6 +108,12 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
+    if 'tags' in detailsPageElements and detailsPageElements['tags']:
+        for genreLink in detailsPageElements['tags']:
+            genreName = genreLink.strip()
+
+            movieGenres.addGenre(genreName)
+
     if siteName == 'Sis Loves Me':
         movieGenres.addGenre('Step Sister')
     elif siteName == 'DadCrush' or siteName == 'DaughterSwap':
