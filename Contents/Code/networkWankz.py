@@ -29,31 +29,31 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="detail__title"]')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//div[@class="title"]//h1')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="detail__txt detail__txt-show_lg"]')[0].text_content()
+    metadata.summary = detailsPageElements.xpath('//div[@class="description"]//p')[0].text_content()
 
     # Studio
     metadata.studio = 'Wankz'
 
     # Release Date
-    date = detailsPageElements.xpath('//span[@class="detail__date"]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[@class="views"]//span')[0].text_content().replace('Added', '').strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    for actor in detailsPageElements.xpath('//div[@class="detail__models"]//a'):
-        actorName = actor.text_content().strip()
-        actorPhotoURL = ''
+    for actorLink in detailsPageElements.xpath('//div[contains(@class, "actors")]//a[@class="model"]'):
+        actorName = actorLink.xpath('.//span').text_content().strip()
+        actorPhotoURL = actorLink.xpath('.//ims/@src')
 
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//a[@class="tag"]'):
+    for genreLink in detailsPageElements.xpath('//a[@class="cat"] | //p[@style]/a'):
         genreName = genreLink.text_content().strip()
 
         movieGenres.addGenre(genreName)
@@ -61,8 +61,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters/Background
     art = []
     xpaths = [
-        '//meta[@property="og:image"]/@content',
-        '//div[@class="photo-strip__slide"]/@data-src'
+        '//a[@class="noplayer"]/img/@src'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
