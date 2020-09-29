@@ -47,7 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//div[contains(@class, "actors")]//a[@class="model"]'):
         actorName = actorLink.xpath('.//span').text_content().strip()
-        actorPhotoURL = actorLink.xpath('.//ims/@src')
+        actorPhotoURL = actorLink.xpath('.//img/@src')
 
         movieActors.addActor(actorName, actorPhotoURL)
 
