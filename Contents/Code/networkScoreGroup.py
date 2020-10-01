@@ -4,8 +4,8 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = re.sub('\D', '', searchTitle)
-    actorName = re.sub('\s\d.*', '', searchTitle).replace(' ', '-')
+    sceneID = re.sub(r'\D', '', searchTitle)
+    actorName = re.sub(r'\s\d.*', '', searchTitle).replace(' ', '-')
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + actorName + '/' + sceneID
 
     req = PAutils.HTTPRequest(sceneURL)
@@ -33,15 +33,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = detailsPageElements.xpath('//h2')[1].text_content().strip()
 
     # Summary
-    summary = detailsPageElements.xpath('//div[@class="p-desc"]')[0].text_content().strip().split('  ')
-    metadata.summary = summary[0] + summary[1]
+    metadata.summary = detailsPageElements.xpath('//div[@class="p-desc"]')[0].text_content().replace('Read More »', '').strip()
 
     # Studio
     metadata.studio = 'Score Group'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    metadata.tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = tagline
     metadata.collections.add(metadata.tagline)
 
     # Release Date
