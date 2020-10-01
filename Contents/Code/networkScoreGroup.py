@@ -10,9 +10,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
-    titleNoFormatting = detailsPageElements.xpath('//h2')[1].text_content()
+    titleNoFormatting = detailsPageElements.xpath('//h2')[1].text_content().strip()
 
-    Log(titleNoFormatting)
     curID = PAutils.Encode(sceneURL)
 
     score = 100
@@ -25,15 +24,17 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    if not sceneURL.startswith('http'):
+        sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h2')[1].text_content()
+    metadata.title = detailsPageElements.xpath('//h2')[1].text_content().strip()
 
     # Summary
-    summary = detailsPageElements.xpath('//div[@class="p-desc"]')[0].text_content().split('  ')
-    metadata.summary = summary[0]+summary[1]
+    summary = detailsPageElements.xpath('//div[@class="p-desc"]')[0].text_content().strip().split('  ')
+    metadata.summary = summary[0] + summary[1]
 
     # Studio
     metadata.studio = 'Score Group'
@@ -44,16 +45,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.collections.add(metadata.tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div/span[@class="value"]')[1].text_content()
+    date = detailsPageElements.xpath('//div/span[@class="value"]')[1].text_content().strip()
     date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
-    for actor in detailsPageElements.xpath('//div/span[@class="value"]/a'):
-        actorName = actor.text_content().strip()
-        Log(actorName)
+    for actorLink in detailsPageElements.xpath('//div/span[@class="value"]/a'):
+        actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
@@ -70,10 +70,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     xpaths = [
         '//div/img/@src',
     ]
+
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
-            if 'http' not in poster:
+            if not poster.startswith('http'):
                 poster = 'http:' + poster
+
             if 'shared-bits' not in poster:
                 art.append(poster)
 
