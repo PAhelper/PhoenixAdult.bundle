@@ -128,8 +128,9 @@ import siteAngelaWhite
 import siteCumbizz
 import sitePornstarPlatinum
 import siteWoodmanCastingX
+import networkScoreGroup
 
-searchSites = [None] * 1012
+searchSites = [None] * 1022
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1142,7 +1143,16 @@ searchSites[1008] = ("TeamSkeet X Mickey Mod", "TeamSkeet X Mickey Mod", "https:
 searchSites[1009] = ("TeamSkeet X OG", "TeamSkeet X OG", "https://www.teamskeet.com", "https://www.teamskeet.com/movies")
 searchSites[1010] = ("TeamSkeet X Reislin", "TeamSkeet X Reislin", "https://www.teamskeet.com", "https://www.teamskeet.com/movies")
 searchSites[1011] = ("TeamSkeet X SpankMonster", "TeamSkeet X SpankMonster", "https://www.teamskeet.com", "https://www.teamskeet.com/movies")
-
+searchSites[1012] = ("Porn Mega Load", "Porn Mega Load", "https://www.pornmegaload.com", "https://www.pornmegaload.com/hd-porn-scenes/")
+searchSites[1013] = ("Naughty Mag", "Naughty Mag", "https://www.naughtymag.com", "https://www.naughtymag.com/amateur-videos/")
+searchSites[1014] = ("XL Girls", "XL Girls", "https://www.xlgirls.com", "https://www.xlgirls.com/bbw-videos/")
+searchSites[1015] = ("Bootylicious Mag", "Bootylicious Mag", "https://www.bootyliciousmag.com", "https://www.bootyliciousmag.com/big-booty-videos/")
+searchSites[1016] = ("50 Plus MILFS", "50 Plus MILFS", "https://www.50plusmilfs.com", "https://www.50plusmilfs.com/xxx-milf-videos/")
+searchSites[1017] = ("60 Plus MILFS", "60 Plus MILFS", "https://www.60plusmilfs.com", "https://www.60plusmilfs.com/xxx-granny-videos/")
+searchSites[1018] = ("18 Eighteen", "18 Eighteen", "https://www.18eighteen.com", "https://www.18eighteen.com/xxx-teen-videos/")
+searchSites[1019] = ("Big Boob Bundle", "Big Boob Bundle", "https://www.bigboobbundle.com", "https://www.bigboobbundle.com/videos/")
+searchSites[1020] = ("Leg Sex", "Leg Sex", "https://www.legsex.com", "https://www.legsex.com/foot-fetish-videos/")
+searchSites[1021] = ("Scoreland", "Scoreland", "https://www.scoreland.com", "https://www.scoreland.com/big-boob-videos/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1389,6 +1399,7 @@ def getSearchSettings(mediaTitle):
         ('^phd ', 'PassionHD '),
         ('^phdp ', 'PetiteHDPorn '),
         ('^plib ', 'PornstarsLikeitBig '),
+        ('^pml ', 'PornMegaLoad '),
         ('^pop ', 'PervsOnPatrol '),
         ('^ppu ', 'PublicPickups '),
         ('^prdi ', 'PrettyDirty '),

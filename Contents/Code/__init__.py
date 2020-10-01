@@ -912,6 +912,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 994:
                 results = PAsearchSites.siteWoodmanCastingX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            #ScoreGroup
+            elif (1012 <= searchSiteID <= 1021):
+                results = PAsearchSites.networkScoreGroup.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1602,6 +1606,11 @@ class PhoenixAdultAgent(Agent.Movies):
         # Woodman Casting X
         elif siteID == 994:
             results = PAsearchSites.siteWoodmanCastingX.update(metadata, siteID, movieGenres, movieActors)
+
+        # ScoreGroup
+        elif (1012 <= siteID <= 1021):
+            results = PAsearchSites.networkScoreGroup.update(metadata, siteID, movieGenres, movieActors)
+
 
         # Cleanup Genres and Add
         Log("Genres")
