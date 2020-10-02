@@ -67,6 +67,11 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Posters/Background
     art = []
+
+    match = re.search(r'posterImage: \'(.*)\'', req.text)
+    if match:
+        art.append(match.group(1))
+
     xpaths = [
         '//div[contains(@class, "thumb")]/img/@src',
     ]
