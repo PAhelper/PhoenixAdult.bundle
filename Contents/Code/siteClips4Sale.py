@@ -2405,6 +2405,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     #  THE MEAN GIRLS
     elif 'THE MEAN GIRLS' in tagline:
+        #  Genre list match
         if 'goddess harley' in genreList:
             movieActors.addActor('Goddess Harley', '')
             genreList.remove('goddess harley')
@@ -2432,6 +2433,64 @@ def update(metadata, siteID, movieGenres, movieActors):
         if 'goddess draya' in genreList:
             movieActors.addActor('Goddess Draya', '')
             genreList.remove('goddess draya')
+        if 'tina' in genreList:
+            movieActors.addActor('Goddess Tina', '')
+            genreList.remove('tina')
+        if 'princess tia' in genreList:
+            movieActors.addActor('Princess Tia', '')
+            genreList.remove('princess tia')
+        if 'princess arianna' in genreList:
+            movieActors.addActor('Princess Arianna', '')
+            genreList.remove('princess arianna')
+        if 'princess natalia' in genreList:
+            movieActors.addActor('Princess Natalia', '')
+            genreList.remove('princess natalia')
+        if 'princess beverly' in genreList:
+            movieActors.addActor('Princess Beverly', '')
+            genreList.remove('princess beverly')
+        if 'princess chanel' in genreList:
+            movieActors.addActor('Princess Chanel', '')
+            genreList.remove('princess chanel')
+        if 'princess ashley' in genreList:
+            movieActors.addActor('Princess Ashley', '')
+            genreList.remove('princess ashley')
+        if 'goddess charlotte' in genreList:
+            movieActors.addActor('Charlotte Stokely', '')
+            genreList.remove('goddess charlotte')
+        if 'goddess rodea' in genreList:
+            movieActors.addActor('Goddess Rodea', '')
+            genreList.remove('goddess rodea')
+        if 'tasha reign' in genreList:
+            movieActors.addActor('Tasha Reign', '')
+            genreList.remove('tasha reign')
+
+        #  Metadata match
+        if 'Goddess Suvana' in metadata.summary or 'GODDESS SUVANA' in metadata.summary:
+            movieActors.addActor('Goddess Suvana', '')
+        if 'Empress Jennifer' in metadata.summary or 'EMPRESS JENNIFER' in metadata.summary or 'P. Jenn' in metadata.summary or 'PJenn' in metadata.summary:
+            movieActors.addActor('Empress Jennifer', '')
+        if 'Goddess Charlotte Stokely' in metadata.summary:
+            movieActors.addActor('Charlotte Stokely', '')
+        if 'QUEEN KASEY' in metadata.summary:
+            movieActors.addActor('Queen Kasey', '')
+        if 'Princess Cindi' in metadata.summary:
+            movieActors.addActor('Princess Cindi', '')
+        if 'Ash Hollywood' in metadata.summary:
+            movieActors.addActor('Ash Hollywood', '')
+
+        # Metadata match (would not work in the "elif 71196" block)
+        if 'P-Jenn' in metadata.title:
+            movieActors.addActor('Empress Jennifer', '')
+        if 'Princess PERFECTION' in metadata.summary: 
+            movieActors.addActor('Princess Perfection', '')
+        if 'Goddess Farrah' in metadata.summary:
+            movieActors.addActor('Goddess Farrah', '')
+        if 'Goddess Alexis' in metadata.summary:
+            movieActors.addActor('Goddess Alexis', '')
+        if 'Goddess Nina' in metadata.summary:
+            movieActors.addActor('Goddess Nina', '')
+        if 'Goddess Randi' in metadata.summary:
+            movieActors.addActor('Goddess Randi', '')
 
     #  THE MEAN GIRLS- P O V
     elif '71196' in userID:
