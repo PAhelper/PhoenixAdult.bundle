@@ -33,7 +33,9 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = PAutils.Decode(metadata_id[2]).strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().replace('\n', '').strip()
+    description = detailsPageElements.xpath('//p[@class="description"]')
+    if description:
+        metadata.summary = description[0].text_content().replace('\n', '').strip()
 
     # Tagline and Collection(s)
     metadata.collections.clear()
