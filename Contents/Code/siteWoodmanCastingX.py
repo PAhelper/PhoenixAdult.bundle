@@ -13,7 +13,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         curID = PAutils.Encode(sceneURL)
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, titleNoFormatting), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -30,7 +30,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.studio = 'Woodman Casting X'
 
     # Title
-    metadata.title = metadata_id[2].strip()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
     description = detailsPageElements.xpath('//p[@class="description"]')
@@ -47,6 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieGenres.clearGenres()
     for genreLink in detailsPageElements.xpath('//div[@class="tags"]//a'):
         genreName = genreLink.text_content().strip()
+
         movieGenres.addGenre(genreName)
 
     # Release Date
@@ -57,13 +58,18 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actorPhotoURL = ''
-    actors = detailsPageElements.xpath('//div[@class="block_girls_videos items"]/a[@class="girl_item"]/span[@class="name"]')
+
+    actors = detailsPageElements.xpath('//div[contains(@class, "block_girls_videos")]/a[@class="girl_item"]')
     if actors:
-        for actor in actors:
-            movieActors.addActor(actor.text_content().strip(), actorPhotoURL)
+        for actorLink in actors:
+            actorName = actorLink.xpath('.//span[@class="name"]')[0].text_content().strip()
+            actorPhotoURL = actorLink.xpath('.//img/@src')[0]
+
+            movieActors.addActor(actorName, actorPhotoURL)
     else:
         actorName = detailsPageElements.xpath('//div[@id="breadcrumb"]/span[@class="crumb"]')[0].text_content().split('-')[0].strip()
+        actorPhotoURL = ''
+
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
