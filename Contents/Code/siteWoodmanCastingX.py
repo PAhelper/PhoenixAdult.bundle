@@ -30,7 +30,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.studio = 'Woodman Casting X'
 
     # Title
-    metadata.title = PAutils.Decode(metadata_id[2]).strip()
+    metadata.title = metadata_id[2].strip()
 
     # Summary
     description = detailsPageElements.xpath('//p[@class="description"]')
@@ -57,10 +57,14 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actorName = detailsPageElements.xpath('//div[@id="breadcrumb"]/span[@class="crumb"]')[0].text_content().split('-')[0].strip()
     actorPhotoURL = ''
-
-    movieActors.addActor(actorName, actorPhotoURL)
+    actors = detailsPageElements.xpath('//div[@class="block_girls_videos items"]/a[@class="girl_item"]/span[@class="name"]')
+    if actors:
+        for actor in actors:
+            movieActors.addActor(actor.text_content().strip(), actorPhotoURL)
+    else:
+        actorName = detailsPageElements.xpath('//div[@id="breadcrumb"]/span[@class="crumb"]')[0].text_content().split('-')[0].strip()
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []
