@@ -1446,6 +1446,7 @@ def getSearchSettings(mediaTitle):
         ('^wov ', 'WivesOnVacation '),
         ('^wowg ', 'WowGirls '),
         ('^wy ', 'WebYoung '),
+        ('^wcx', 'WoodmanCastingX'),
         ('^ztod ', 'ZeroTolerance '),
         ('^zzs ', 'ZZseries '),
     )
