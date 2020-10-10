@@ -98,9 +98,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
     if scenePoster:
-        art = [
-            scenePoster
-        ]
+        art.append(scenePoster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
