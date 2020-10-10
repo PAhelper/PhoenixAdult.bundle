@@ -129,8 +129,9 @@ import siteCumbizz
 import sitePornstarPlatinum
 import siteWoodmanCastingX
 import networkScoreGroup
+import siteTwoTGirls
 
-searchSites = [None] * 1022
+searchSites = [None] * 1023
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1153,6 +1154,7 @@ searchSites[1018] = ("18 Eighteen", "18 Eighteen", "https://www.18eighteen.com",
 searchSites[1019] = ("Big Boob Bundle", "Big Boob Bundle", "https://www.bigboobbundle.com", "https://www.bigboobbundle.com/videos/")
 searchSites[1020] = ("Leg Sex", "Leg Sex", "https://www.legsex.com", "https://www.legsex.com/foot-fetish-videos/")
 searchSites[1021] = ("Scoreland", "Scoreland", "https://www.scoreland.com", "https://www.scoreland.com/big-boob-videos/")
+searchSites[1022] = ("TwoTGirls", "TwoTGirls", "https://twotgirls.com/", "https://twotgirls.com/video/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
