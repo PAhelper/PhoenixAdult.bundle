@@ -6,17 +6,31 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//article'):
-        sceneURL = searchResult.xpath('.//a/@href')[0]
+    sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/' + searchTitle.replace(' ', '-')
+    req = PAutils.HTTPRequest(sceneURL)
+    if req.ok:
+        detailsPageElements = HTML.ElementFromString(req.text)
+        detailsPageElements = detailsPageElements.xpath('//div[contains(@class, "video-details")]')[0]
+
+        titleNoFormatting = detailsPageElements.xpath('.//h1')[0].text_content().strip()
         curID = PAutils.Encode(sceneURL)
-        titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [TwoTGirls]' % titleNoFormatting, score=score, lang=lang))
+    else:
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+        searchResults = HTML.ElementFromString(req.text)
+        for searchResult in searchResults.xpath('//article'):
+            sceneURL = searchResult.xpath('.//a/@href')[0]
+            curID = PAutils.Encode(sceneURL)
+            titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [TwoTGirls]' % titleNoFormatting, score=score, lang=lang))
 
     return results
 
