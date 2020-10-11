@@ -6,14 +6,12 @@ import PAutils
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = searchTitle.lower().replace(' ', '-')
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle
-
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
-    detailsPageElements = HTML.ElementFromString(req.text)
-    for detailsPageElements in detailsPageElements.xpath('//div[contains(@class, "video-details")]'):
-        titleNoFormatting = detailsPageElements.xpath('.//h1')[0].text_content().strip()
+    searchResults = HTML.ElementFromString(req.text)
+    for searchResult in searchResults.xpath('//article'):
+        sceneURL = searchResult.xpath('.//a/@href')[0]
         curID = PAutils.Encode(sceneURL)
+        titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
         releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
