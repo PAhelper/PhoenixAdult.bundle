@@ -102,9 +102,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
     xpaths = [
         '//video/@poster'
+        '//article//div[@class="row"]//img/@src'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
+            poster = poster.replace('720p', '1080p', 1)
+
             art.append(poster)
 
     Log('Artwork found: %d' % len(art))
