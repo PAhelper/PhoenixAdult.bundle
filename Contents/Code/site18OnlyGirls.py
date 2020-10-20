@@ -86,7 +86,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@itemprop="actor"]//a')
     actorPhotoURL = ''
-    
+
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
@@ -118,6 +118,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     ]
     for xpath in xpaths:
         try:
+            for poster in detailsPageElements.xpath(xpath):
+                art.append(poster)
             for poster in photosetPageElements.xpath(xpath):
                 art.append(poster)
         except:
@@ -133,10 +135,10 @@ def update(metadata, siteID, movieGenres, movieActors):
                 resized_image = Image.open(im)
                 width, height = resized_image.size
                 # Add the image proxy items to the collection
-                if width < 801:
+                if width < height:
                     # Item is a poster
                     metadata.posters[posterUrl] = Proxy.Media(image.content, sort_order=idx)
-                if width == 1200:
+                if width > height:
                     # Item is an art item
                     metadata.art[posterUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
