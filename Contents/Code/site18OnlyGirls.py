@@ -47,7 +47,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     if '-2' in sceneURL:
         photosetURL = sceneURL.replace('-2','')
-        Log('Photo URL: %s' % photosetURL)
         req = PAutils.HTTPRequest(photosetURL)
         photosetPageElements = HTML.ElementFromString(req.text)
 
