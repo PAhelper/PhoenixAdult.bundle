@@ -85,7 +85,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@itemprop="actor"]//a')
-
+    actorPhotoURL = ''
+    
     if len(actors) > 0:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
@@ -97,7 +98,6 @@ def update(metadata, siteID, movieGenres, movieActors):
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
             actorPageURL = 'https://18onlygirls.tv/models/' + actorName.replace(' ', '-')
-            actorPhotoURL = 'https://18onlygirls.tv/models/' + actorName.replace(' ', '-')
             req = PAutils.HTTPRequest(actorPageURL)
 
             try:
