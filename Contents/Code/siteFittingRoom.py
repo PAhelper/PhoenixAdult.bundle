@@ -39,7 +39,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//title')[0].text_content().split('|')[1].strip()
+    title = detailsPageElements.xpath('//title')[0].text_content().strip()
+    if '|' in title:
+        title = title.split('|')[1].strip()
+    metadata.title = title
 
     # Summary
     try:
@@ -55,19 +58,24 @@ def update(metadata, siteID, movieGenres, movieActors):
     tagline = PAsearchSites.getSearchSiteName(siteID).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
+
     # Get Collection from Related Videos
-    try:
-        collection = detailsPageElements.xpath('//div[@id="list_videos_related_videos_items"]/div[1]/div[2]/a')[0].text_content().strip()
-    except:
+    collection = None
+    collectionNode = detailsPageElements.xpath('//div[@id="list_videos_related_videos_items"]/div[1]/div[2]/a')
+    if collectionNode:
+        collection = collectionNode[0].text_content().strip()
+    else:
         if metadata.title == 'Huge Tits':
             collection = 'Busty'
-        if metadata.title == 'Pool Table':
+        elif metadata.title == 'Pool Table':
             collection = 'Fetishouse'
-        if metadata.title == 'Spanish Milf':
+        elif metadata.title == 'Spanish Milf':
             collection = 'Milf'
-        if metadata.title == 'Cotton Panty':
+        elif metadata.title == 'Cotton Panty':
             collection = 'Pantyhose'
-    metadata.collections.add(collection)
+
+    if collection:
+        metadata.collections.add(collection)
 
     # Release Date
     if sceneDate:
