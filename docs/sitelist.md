@@ -219,7 +219,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - CzechVR
   - CzechVR Casting
   - CzechVR Fetish
-+ #### DDFNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### PornWorld (formerly branded as DDFNetwork) | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Cherry Jul
   - DDF Babes
   - DDF Hardcore
@@ -229,7 +229,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Hairy Twatter
   - Sandy's Fantasies
   - Sex Video Casting
-+ #### Other DDFNetwork Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
++ #### Other PornWorld Sites | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 1By-Day
   - DDF Busty
   - Euro Girls on Girls
