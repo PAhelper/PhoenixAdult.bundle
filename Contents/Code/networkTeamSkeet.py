@@ -108,6 +108,12 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genres
+    if 'tags' in detailsPageElements and detailsPageElements['tags']:
+        for genreLink in detailsPageElements['tags']:
+            genreName = genreLink.strip()
+
+            movieGenres.addGenre(genreName)
+
     if siteName == 'Sis Loves Me':
         movieGenres.addGenre('Step Sister')
     elif siteName == 'DadCrush' or siteName == 'DaughterSwap':
@@ -148,6 +154,26 @@ def update(metadata, siteID, movieGenres, movieActors):
     elif siteName == 'Teens Love Black Cocks':
         movieGenres.addGenre('Teens')
         movieGenres.addGenre('BBC')
+    elif siteName == 'Teen Curves':
+        movieGenres.addGenre('Big Ass')
+    elif siteName == 'Titty Attack':
+        movieGenres.addGenre('Big Tits')
+    elif siteName == 'Teeny Black':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Ebony')
+    elif siteName == 'Teens Do Porn':
+        movieGenres.addGenre('Teen')
+    elif siteName == 'Teen Pies':
+        movieGenres.addGenre('Teen')
+        movieGenres.addGenre('Creampie')
+    elif siteName == 'POV Life':
+        movieGenres.addGenre('POV')
+    elif siteName == 'Ginger Patch':
+        movieGenres.addGenre('Redhead')
+    elif siteName == 'Innocent High':
+        movieGenres.addGenre('School Girl')
+    elif siteName == 'Oye Loca':
+        movieGenres.addGenre('Latina')
 
     # Actors
     movieActors.clearActors()

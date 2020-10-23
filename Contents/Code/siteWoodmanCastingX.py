@@ -13,7 +13,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         curID = PAutils.Encode(sceneURL)
 
         score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, titleNoFormatting), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -30,10 +30,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.studio = 'Woodman Casting X'
 
     # Title
-    metadata.title = PAutils.Decode(metadata_id[2]).strip()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().replace('\n', '').strip()
+    description = detailsPageElements.xpath('//p[@class="description"]')
+    if description:
+        metadata.summary = description[0].text_content().replace('\n', '').strip()
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -45,6 +47,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieGenres.clearGenres()
     for genreLink in detailsPageElements.xpath('//div[@class="tags"]//a'):
         genreName = genreLink.text_content().strip()
+
         movieGenres.addGenre(genreName)
 
     # Release Date
@@ -55,10 +58,19 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actorName = detailsPageElements.xpath('//div[@id="breadcrumb"]/span[@class="crumb"]')[0].text_content().split('-')[0].strip()
-    actorPhotoURL = ''
 
-    movieActors.addActor(actorName, actorPhotoURL)
+    actors = detailsPageElements.xpath('//div[contains(@class, "block_girls_videos")]/a[@class="girl_item"]')
+    if actors:
+        for actorLink in actors:
+            actorName = actorLink.xpath('.//span[@class="name"]')[0].text_content().strip()
+            actorPhotoURL = actorLink.xpath('.//img/@src')[0]
+
+            movieActors.addActor(actorName, actorPhotoURL)
+    else:
+        actorName = detailsPageElements.xpath('//div[@id="breadcrumb"]/span[@class="crumb"]')[0].text_content().split('-')[0].strip()
+        actorPhotoURL = ''
+
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []

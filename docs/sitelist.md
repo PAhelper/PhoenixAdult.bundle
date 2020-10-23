@@ -867,6 +867,21 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Solo Interviews
   - StepSiblings
   - Team Skeet Extras
+  - TeamSkeet X BAEB
+  - TeamSkeet X Banana Fever
+  - TeamSkeet X CamSoda
+  - TeamSkeet X Club Sweethearts
+  - TeamSkeet X Eva Elfie
+  - TeamSkeet X Flora Rodgers
+  - TeamSkeet X Fucking Awesome
+  - TeamSkeet X James Deen
+  - TeamSkeet X Joy Bear
+  - TeamSkeet X Layna Landry
+  - TeamSkeet X LunaXJames
+  - TeamSkeet X Mickey Mod
+  - TeamSkeet X OG
+  - TeamSkeet X Reislin
+  - TeamSkeet X SpankMonster
   - Teen Curves
   - Teen JOI
   - Teen Pies
@@ -949,6 +964,17 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - WOW Orgasms
   - Watch Me Fucked
   - X Angels
++ #### The Score Group | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
+  - 18 Eighteen
+  - 50 Plus MILFS
+  - 60 Plus MILFS
+  - Big Boob Bundle
+  - Bootylicious Mag
+  - Leg Sex
+  - Naughty Mag
+  - Porn Mega Load
+  - Scoreland
+  - XL Girls
 + #### Tonights Girlfriend | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Actor only**
 + #### ToughLoveX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)* - **Actor only, Date Add**
 + #### TransAngels | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*

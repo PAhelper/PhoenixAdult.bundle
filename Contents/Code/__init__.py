@@ -249,7 +249,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.networkPornFidelity.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # TeamSkeet
-            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875:
+            elif (187 <= searchSiteID <= 215) or (566 <= searchSiteID <= 567) or searchSiteID == 626 or searchSiteID == 686 or searchSiteID == 748 or searchSiteID == 807 or (845 <= searchSiteID <= 851) or searchSiteID == 875 or (997 <= searchSiteID <= 1011):
                 results = PAsearchSites.networkTeamSkeet.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # Porndoe Premium
@@ -883,7 +883,7 @@ class PhoenixAdultAgent(Agent.Movies):
             # Dirty Hard Drive
             elif (980 <= searchSiteID <= 987):
                 results = PAsearchSites.networkDirtyHardDrive.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
-            
+
             # Melone Challenge
             elif (searchSiteID == 988):
                 results = PAsearchSites.siteMeloneChallenge.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
@@ -911,6 +911,14 @@ class PhoenixAdultAgent(Agent.Movies):
             # Woodman Casting X
             elif searchSiteID == 994:
                 results = PAsearchSites.siteWoodmanCastingX.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # ScoreGroup
+            elif (1012 <= searchSiteID <= 1021):
+                results = PAsearchSites.networkScoreGroup.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
+            # TwoTGirls
+            elif searchSiteID == 1022:
+                results = PAsearchSites.siteTwoTGirls.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
 
@@ -976,7 +984,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkPornFidelity.update(metadata, siteID, movieGenres, movieActors)
 
         # TeamSkeet
-        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875:
+        elif (187 <= siteID <= 215) or (566 <= siteID <= 567) or siteID == 626 or siteID == 686 or siteID == 748 or siteID == 807 or (845 <= siteID <= 851) or siteID == 875 or (997 <= siteID <= 1011):
             metadata = PAsearchSites.networkTeamSkeet.update(metadata, siteID, movieGenres, movieActors)
 
         # Porndoe Premium
@@ -1096,7 +1104,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.networkKink.update(metadata, siteID, movieGenres, movieActors)
 
         # Nubiles
-        elif (siteID >= 525 and siteID <= 545) or (755 <= siteID <= 756) or (siteID == 766) or (989 <= siteID <= 990):
+        elif (siteID >= 525 and siteID <= 545) or (755 <= siteID <= 756) or (siteID == 766) or (995 <= siteID <= 996):
             metadata = PAsearchSites.networkNubiles.update(metadata, siteID, movieGenres, movieActors)
 
         # BellaPass
@@ -1574,7 +1582,7 @@ class PhoenixAdultAgent(Agent.Movies):
         # Dirty Hard Drive
         elif (980 <= siteID <= 987):
             results = PAsearchSites.networkDirtyHardDrive.update(metadata, siteID, movieGenres, movieActors)
-            
+
         # Melone Challenge
         elif (siteID == 988):
             results = PAsearchSites.siteMeloneChallenge.update(metadata, siteID, movieGenres, movieActors)
@@ -1602,6 +1610,14 @@ class PhoenixAdultAgent(Agent.Movies):
         # Woodman Casting X
         elif siteID == 994:
             results = PAsearchSites.siteWoodmanCastingX.update(metadata, siteID, movieGenres, movieActors)
+
+        # ScoreGroup
+        elif (1012 <= siteID <= 1021):
+            results = PAsearchSites.networkScoreGroup.update(metadata, siteID, movieGenres, movieActors)
+
+        # TwoTGirls
+        elif siteID == 1022:
+            results = PAsearchSites.siteTwoTGirls.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
