@@ -11,7 +11,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         sceneID = None
 
     if sceneID:
-        url = PAsearchSites.getSearchBaseURL(siteNum) + '/videos/1/' + sceneID
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/watch/' + sceneID
         req = PAutils.HTTPRequest(url)
         detailsPageElements = HTML.ElementFromString(req.text)
 

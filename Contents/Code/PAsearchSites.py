@@ -131,7 +131,7 @@ import siteWoodmanCastingX
 import networkScoreGroup
 import siteTwoTGirls
 
-searchSites = [None] * 1023
+searchSites = [None] * 1024
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -464,7 +464,7 @@ searchSites[328] = ("DigitalPlayground", "DigitalPlayground", "https://www.digit
 searchSites[329] = ("Throated", "Throated", "https://www.blowpass.com", "https://www.blowpass.com/en/search/throated/scene/")
 searchSites[330] = ("Nuru Massage", "Nuru Massage", "https://www.fantasymassage.com", "https://www.fantasymassage.com/en/search/")
 searchSites[331] = ("Nuru Massage", "Nuru Massage", "https://www.fantasymassage.com", "https://www.fantasymassage.com/en/search/")
-searchSites[332] = ("DDF Babes", "DDF Babes", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
+searchSites[332] = ("DDF Babes", "DDF Babes", "https://pornworld.com", "https://pornworld.com/search?query=")
 searchSites[333] = ("SexyHub", "SexyHub", "https://www.sexyhub.com", "https://site-api.project1service.com")
 searchSites[334] = ("Dane Jones", "Dane Jones", "https://www.sexyhub.com", "https://site-api.project1service.com")
 searchSites[335] = ("Fitness Rooms", "Fitness Rooms", "https://www.sexyhub.com", "https://site-api.project1service.com")
@@ -565,13 +565,13 @@ searchSites[429] = ("TheMinion", "TheMinion", "https://www.dogfartnetwork.com", 
 searchSites[430] = ("BlacksOnBoys", "BlacksOnBoys", "https://www.dogfartnetwork.com", "https://www.dogfartnetwork.com/tour/search.php?search=")
 searchSites[431] = ("GloryholesAndHandjobs", "GloryholesAndHandjobs", "https://www.dogfartnetwork.com", "https://www.dogfartnetwork.com/tour/search.php?search=")
 searchSites[432] = ("Jules Jordan", "Jules Jordan", "https://www.julesjordan.com", "https://www.julesjordan.com/trial/search.php?query=")
-searchSites[433] = ("DDFNetwork", "DDFNetwork", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[434] = ("Sandys Fantasies", "Sandy's Fantasies", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[435] = ("Cherry Jul", "Cherry Jul", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[436] = ("Eve Angel Official", "Eve Angel Official", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[437] = ("Sex Video Casting", "Sex Video Casting", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[438] = ("Hairy Twatter", "Hairy Twatter", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
-searchSites[439] = ("DDF Xtreme", "DDF Xtreme", "https://ddfnetwork.com", "https://ddfnetwork.com/videos/freeword/")
+searchSites[433] = ("DDFNetwork", "DDFNetwork", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[434] = ("Sandys Fantasies", "Sandy's Fantasies", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[435] = ("Cherry Jul", "Cherry Jul", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[436] = ("Eve Angel Official", "Eve Angel Official", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[437] = ("Sex Video Casting", "Sex Video Casting", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[438] = ("Hairy Twatter", "Hairy Twatter", "https://pornworld.com", "https://pornworld.com/search?query=")
+searchSites[439] = ("DDF Xtreme", "DDF Xtreme", "https://pornworld.com", "https://pornworld.com/search?query=")
 searchSites[440] = ("DDF Busty", "DDF Busty", "https://ddfbusty.com", "https://ddfbusty.com/videos/freeword/")
 searchSites[441] = ("House of Taboo", "House of Taboo", "https://houseoftaboo.com", "https://houseoftaboo.com/videos/freeword/")
 searchSites[442] = ("Euro Girls on Girls", "Euro Girls on Girls", "https://eurogirlsongirls.com", "https://eurogirlsongirls.com/videos/freeword/")
@@ -1155,6 +1155,8 @@ searchSites[1019] = ("Big Boob Bundle", "Big Boob Bundle", "https://www.bigboobb
 searchSites[1020] = ("Leg Sex", "Leg Sex", "https://www.legsex.com", "https://www.legsex.com/foot-fetish-videos/")
 searchSites[1021] = ("Scoreland", "Scoreland", "https://www.scoreland.com", "https://www.scoreland.com/big-boob-videos/")
 searchSites[1022] = ("TwoTGirls", "TwoTGirls", "https://twotgirls.com/", "https://twotgirls.com/videos?query=")
+searchSites[1023] = ("PornWorld", "PornWorld", "https://pornworld.com", "https://pornworld.com/search?query=")
+
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

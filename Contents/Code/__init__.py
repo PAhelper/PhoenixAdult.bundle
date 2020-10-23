@@ -345,7 +345,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteJulesJordan.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # DDF Network
-            elif (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 447):
+            elif (331 <= searchSiteID <= 332) or (433 <= searchSiteID <= 447) or searchSiteID == 1023:
                 results = PAsearchSites.networkDDFNetwork.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # PerfectGonzo
@@ -1060,7 +1060,7 @@ class PhoenixAdultAgent(Agent.Movies):
             metadata = PAsearchSites.siteJulesJordan.update(metadata, siteID, movieGenres, movieActors)
 
         # DDF Network
-        elif (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 447):
+        elif (siteID >= 331 and siteID <= 332) or (siteID >= 433 and siteID <= 447) or siteID == 1023:
             metadata = PAsearchSites.networkDDFNetwork.update(metadata, siteID, movieGenres, movieActors)
 
         # Perfect Gonzo
