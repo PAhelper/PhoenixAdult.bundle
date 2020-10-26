@@ -40,7 +40,7 @@ class PhoenixActors:
                 newActor = 'Abbey Rain'
             elif newActor == 'Ms Addie Juniper':
                 newActor = 'Addie Juniper'
-            elif newActor == 'Adrianna Chechik' or newActor == 'Adriana Chechick':
+            elif newActor == 'Adrianna Chechik' or newActor == 'Adriana Chechick' or newActor == 'Adriana  Chechik':
                 newActor = 'Adriana Chechik'
             elif newActor == 'Alex D':
                 newActor = 'Alex D.'
@@ -196,6 +196,20 @@ class PhoenixActors:
                 newActor = 'Veronica Valentine'
             elif newActor == 'Zoey Bloom':
                 newActor = 'Zoe Bloom'
+            elif newActor == 'Shinoda Yuu':
+                newActor = 'Yu Shinoda'
+            elif newActor == 'Viola Bailey’S':
+                newActor = 'Viola Bailey'
+            elif newActor == 'Ornella Morgen':
+                newActor = 'Ornella Morgan'
+            elif newActor == 'Polly Pon':
+                newActor = 'Polly Pons'
+            elif newActor == 'Riley Starr':
+                newActor = 'Riley Star'
+            elif newActor == 'Rosaline Rose':
+                newActor = 'Rosaline Rosa'
+            elif newActor == 'Selvaggia':
+                newActor = 'Selvaggia Babe'
 
             # Replace by site + actor; use when an actor just has an alias or abbreviated name on one site
             if metadata.studio == '21Sextury' or metadata.studio == 'Footsie Babes':
@@ -224,6 +238,8 @@ class PhoenixActors:
             elif metadata.studio == 'ClubSeventeen':
                 if newActor == 'Scarlet':
                     newActor = 'Scarlet Domingo'
+                elif newActor == 'Katy E':
+                    newActor = 'Katy Rose'
             elif metadata.studio == 'CumLouder':
                 if newActor == 'Scarlett':                    
                     newActor = 'Scarlet Domingo'
@@ -2420,6 +2436,15 @@ class PhoenixActors:
                     newActor = 'Queensnake'
                 elif newActor != 'Queensnake':
                     newActor = newActor + ' QueenSnake'
+            elif metadata.studio == 'VirtualTaboo':
+                if newActor == 'Penelope':
+                    newActor = 'Penelope Cum'
+            elif metadata.studio == 'VR Bangers':
+                if newActor == 'Victoria P':
+                    newActor = 'Victoria Puppy'
+            elif metadata.studio == 'HighTechVR':
+                if newActor == 'Lady D':
+                    newActor = 'Lady Dee'
 
             if not skip:
                 if newPhoto == '':
