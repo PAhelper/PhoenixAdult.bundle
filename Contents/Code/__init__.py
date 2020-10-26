@@ -920,6 +920,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 1022:
                 results = PAsearchSites.siteTwoTGirls.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Sicflics
+            elif searchSiteID == 1023:
+                results = PAsearchSites.siteSicflics.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1618,6 +1622,11 @@ class PhoenixAdultAgent(Agent.Movies):
         # TwoTGirls
         elif siteID == 1022:
             results = PAsearchSites.siteTwoTGirls.update(metadata, siteID, movieGenres, movieActors)
+
+        # Sicflics
+        elif siteID == 1023:
+            results = PAsearchSites.siteSicflics.update(metadata, siteID, movieGenres, movieActors)
+
 
         # Cleanup Genres and Add
         Log("Genres")

@@ -58,6 +58,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Title
     metadata.title = detailsPageElements.xpath('//h2//span')[0].text_content().strip()
 
+    # Summary
+    for searchResult in detailsPageElements.xpath('//p[@id="CollectionDescription"]'):
+        metadata.summary = searchResult.text_content().strip()
+
     # Studio
     metadata.studio = 'InTheCrack'
 
