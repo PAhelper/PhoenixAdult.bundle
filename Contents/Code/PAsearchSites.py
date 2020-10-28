@@ -131,8 +131,9 @@ import siteWoodmanCastingX
 import networkScoreGroup
 import siteTwoTGirls
 import siteSicflics
+import networkModelCentro
 
-searchSites = [None] * 1024
+searchSites = [None] * 1029
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1157,6 +1158,11 @@ searchSites[1020] = ("Leg Sex", "Leg Sex", "https://www.legsex.com", "https://ww
 searchSites[1021] = ("Scoreland", "Scoreland", "https://www.scoreland.com", "https://www.scoreland.com/big-boob-videos/")
 searchSites[1022] = ("TwoTGirls", "TwoTGirls", "https://twotgirls.com/", "https://twotgirls.com/videos?query=")
 searchSites[1023] = ("Sicflics", "Sicflics", "https://www.sicflics.com/", "https://www.sicflics.com/tags/")
+searchSites[1024] = ("AlettaOceanLive", "AlettaOceanLive", "https://www.alettaoceanlive.com/", "https://www.alettaoceanlive.com/sapi/")
+searchSites[1025] = ("FallInLovia", "FallInLovia", "https://www.fallinlovia.com/", "https://www.fallinlovia.com/sapi/")
+searchSites[1026] = ("RomiRain", "RomiRain", "https://www.romirain.com/", "https://www.romirain.com/sapi/")
+searchSites[1027] = ("JerkOffWithMe", "JerkOffWithMe", "https://www.jerkoffwithme.com/", "https://www.jerkoffwithme.com/sapi/")
+searchSites[1028] = ("GetYourKneesDirty", "GetYourKneesDirty", "https://www.getyourkneesdirty.com/", "https://www.getyourkneesdirty.com/sapi/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
