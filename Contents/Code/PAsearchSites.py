@@ -926,7 +926,7 @@ searchSites[790] = ("BCM", "BCM.XXX", "https://www.pimp.xxx", "https://pimp.xxx/
 searchSites[791] = ("Petite", "Petite.XXX", "https://www.pimp.xxx", "https://pimp.xxx/search.php?query=")
 searchSites[792] = ("Family", "Family.XXX", "https://www.family.xxx", "https://family.xxx/search.php?query=")
 searchSites[793] = ("Wicked", "Wicked Pictures", "https://www.wicked.com", "https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries")
-searchSites[794] = ("18OnlyGirls", "18 Only Girls", "http://www.18onlygirls.tv", "http://18onlygirls.tv/?s=")
+searchSites[794] = ("18OnlyGirls", "18 Only Girls", "https://www.18onlygirlsblog.com/", "https://www.18onlygirlsblog.com/?s=")
 searchSites[795] = ("GirlCore", "GirlCore", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
 searchSites[796] = ("Moms On Moms", "Moms On Moms", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
 searchSites[797] = ("We Like Girls", "We Like Girls", "https://www.girlsway.com", "https://www.girlsway.com/en/video/1/1/")
