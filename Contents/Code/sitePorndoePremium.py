@@ -39,7 +39,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = detailsPageElements.xpath('//h1[@class="no-space transform-none"]')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]')[0].get('content').replace('&#039;', '\'')
+    metadata.summary = detailsPageElements.xpath('//meta[@name="description"]/@content')[0].replace('&#039;', '\'')
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -49,7 +49,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//a[@class="inline-links"]')
     for genreLink in detailsPageElements.xpath('//a[@class="inline-links"]'):
         genreName = genreLink.text_content().strip()
 
@@ -65,9 +64,10 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//span[@class="group inline"]/a')
     for actorLink in detailsPageElements.xpath('//span[@class="group inline"]/a'):
+        actorName = ''
         actorPhotoURL = ''
+
         actorPageURL = actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
