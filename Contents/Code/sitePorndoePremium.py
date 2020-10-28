@@ -7,11 +7,12 @@ import PAutils
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[@class="col col-33 t-col-50 m-col-100"]'):
-        titleNoFormatting = searchResult.xpath('.//div[@data-item="c-11 r-11 / bottom"]/a/@title')[0]
-        subSite = searchResult.xpath('.//div[@data-item="c-21 r-11 / bottom right"]/a/@title')[0]
-        curID = PAutils.Encode(searchResult.xpath('.//div[@data-item="c-11 r-11 / bottom"]/a/@href')[0])
-        releaseDate = parse(searchResult.xpath('.//div[@data-item="c-21 r-21 / middle right"]/p')[0].text_content().strip()).strftime('%Y-%m-%d')
+    for searchResult in searchResults.xpath('//div[contains(@class, "main-content-videos")]//div[contains(@class, "card-video")]'):
+        titleNoFormatting = searchResult.xpath('.//a/@aria-label')[0]
+        subSite = searchResult.xpath('.//a[@class="extra-link"]/@title')[0]
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+        date = searchResult.xpath('.//p[contains(@class, "extra-info") and not(contains(@class, "actors"))]')[0].text_content().strip()
+        releaseDate = parse(date).strftime('%Y-%m-%d')
 
         if searchDate:
             score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -56,9 +57,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Release Date
     date = detailsPageElements.xpath('//div[@class="h5 h5-published nowrap color-rgba255-06"]')[0].text_content().strip()
-    if len(date) > 0:
+    if date:
         date = date.split('•')[-1].strip()
-        date_object = datetime.strptime(date, '%d %B %Y')
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
