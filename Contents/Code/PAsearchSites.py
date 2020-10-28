@@ -133,7 +133,7 @@ import siteTwoTGirls
 import siteSicflics
 import networkModelCentro
 
-searchSites = [None] * 1029
+searchSites = [None] * 1032
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1163,6 +1163,15 @@ searchSites[1025] = ("FallInLovia", "FallInLovia", "https://www.fallinlovia.com/
 searchSites[1026] = ("RomiRain", "RomiRain", "https://www.romirain.com/", "https://www.romirain.com/sapi/")
 searchSites[1027] = ("JerkOffWithMe", "JerkOffWithMe", "https://www.jerkoffwithme.com/", "https://www.jerkoffwithme.com/sapi/")
 searchSites[1028] = ("GetYourKneesDirty", "GetYourKneesDirty", "https://www.getyourkneesdirty.com/", "https://www.getyourkneesdirty.com/sapi/")
+searchSites[1029] = ("Nude Beauties", "Nude Beauties", "https://nudebeauties.eu/", "https://nudebeauties.eu/sapi/")
+searchSites[1030] = ("Dani Daniels", "Dani Daniels", "https://danidaniels.com/", "https://danidaniels.com/sapi/")
+searchSites[1031] = ("OfficialChloeToy", "OfficialChloeToy", "https://officialchloetoy.com/", "https://officialchloetoy.com/sapi/")
+searchSites[1032] = ("YummyCouple", "YummyCouple", "https://friends.yummycouple.com/", "https://friends.yummycouple.com/sapi/")
+searchSites[1033] = ("Katya Clover", "Katya Clover", "https://www.katya-clover.com/", "https://www.katya-clover.com/sapi/")
+searchSites[1034] = ("DeNudeArt", "DeNudeArt", "https://denudeart.com/", "https://denudeart.com/sapi/")
+searchSites[1035] = ("Lisey Sweet", "Lisey Sweet", "https://theliseysweet.com/", "https://theliseysweet.com/sapi/")
+searchSites[1036] = ("MyLifeInMiami", "MyLifeInMiami", "https://mylifeinmiami.com/", "https://mylifeinmiami.com/sapi/")
+searchSites[1037] = ("GinaGerson", "GinaGerson", "https://www.ginagerson.xxx/", "https://www.ginagerson.xxx/sapi/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
