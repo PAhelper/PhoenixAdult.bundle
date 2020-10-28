@@ -114,6 +114,16 @@ def update(metadata, siteID, movieGenres, movieActors):
         baseactor = "Eva Lovia"
     elif siteID == 1026:
         baseactor = "Romi Rain"
+    elif siteID == 1030:
+        baseactor = "Dani Daniels"
+    elif siteID == 1031:
+        baseactor = "Chloe Toy"
+    elif siteID == 1033:
+        baseactor = "Katya Clover"
+    elif siteID == 1035:
+        baseactor = "Lisey Sweet"
+    elif siteID == 1037:
+        baseactor = "Gina Gerson"
     else:
         baseactor = ""
 
