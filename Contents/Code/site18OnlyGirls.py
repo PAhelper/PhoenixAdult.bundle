@@ -10,20 +10,19 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
     searchResults = HTML.ElementFromString(req.text)
 
-    for searchResult in searchResults.xpath('//li[contains(@class,"box-shadow")][.//*[contains(@class,"video")]]//a[@href]'):
+    for searchResult in searchResults.xpath('//li[contains(@class, "box-shadow")][.//*[contains(@class, "video")]]//a[@href]'):
         titleNoFormatting = searchResult.xpath('.//@title')[0].strip()
         sceneURL = searchResult.xpath('.//@href')[0]
         curID = PAutils.Encode(sceneURL)
 
         req = PAutils.HTTPRequest(sceneURL)
-        sceneResult =  HTML.ElementFromString(req.text)
+        sceneResult = HTML.ElementFromString(req.text)
 
-        date =  sceneResult.xpath('//div[@class="post_date"]')[0].text_content().strip()
+        date = sceneResult.xpath('//div[@class="post_date"]')[0].text_content().strip()
         if date:
             releaseDate = parse(date).strftime('%Y-%m-%d')
         else:
             releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
-        releaseDate = parse(date).strftime('%Y-%m-%d')
         displayDate = releaseDate if date else ''
 
         if searchDate and displayDate:
@@ -45,8 +44,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    if '-2' in sceneURL:
-        photosetURL = sceneURL.replace('-2','')
+    if sceneURL.endswith('-2/'):
+        photosetURL = sceneURL.replace('-2/', '/')
         req = PAutils.HTTPRequest(photosetURL)
         photosetPageElements = HTML.ElementFromString(req.text)
 
@@ -54,10 +53,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip()
 
     # Summary
-    try:
-        metadata.summary = photosetPageElements.xpath('//div[@class="video-embed"]/p')[0].text_content().replace('<a href="/allfinegirls">18OnlyGirls</a>', '').strip()
-    except:
-        pass
+    if photosetPageElements:
+        description = photosetPageElements.xpath('//div[@class="video-embed"]/p')
+        if description:
+            metadata.summary = description[0].text_content().replace('<a href="/allfinegirls">18OnlyGirls</a>', '').strip()
 
     # Studio
     metadata.studio = '18OnlyGirls'
@@ -84,9 +83,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     actors = detailsPageElements.xpath('//div[@itemprop="actor"]//a')
-    actorPhotoURL = ''
 
-    if len(actors) > 0:
+    if actors:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
         if len(actors) == 4:
@@ -96,6 +94,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         for actorLink in actors:
             actorName = str(actorLink.text_content().strip())
+            actorPhotoURL = ''
+
             actorPageURL = 'https://18onlygirls.tv/models/' + actorName.replace(' ', '-')
             req = PAutils.HTTPRequest(actorPageURL)
 
@@ -112,17 +112,16 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//div[contains(@id,"gallery")]//@src',
-        '//div[contains(@id,"gallery")]//@href',
+        '//div[contains(@id, "gallery")]//@href',
     ]
     for xpath in xpaths:
-        try:
-            for poster in detailsPageElements.xpath(xpath):
-                art.append(poster)
+        for poster in detailsPageElements.xpath(xpath):
+            art.append(poster)
+
+    if photosetPageElements:
+        for xpath in xpaths:
             for poster in photosetPageElements.xpath(xpath):
                 art.append(poster)
-        except:
-            pass
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
