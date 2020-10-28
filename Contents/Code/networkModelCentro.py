@@ -3,7 +3,7 @@ import PAgenres
 import PAutils
 
 query = "content.load?_method=content.load&tz=1&limit=512&transitParameters[v1]=OhUOlmasXD&transitParameters[v2]=OhUOlmasXD&transitParameters[preset]=videos"
-updatequery = "content.load?_method=content.load&tz=1&limit=1&transitParameters[preset]=scene"
+updatequery = "content.load?_method=content.load&tz=1&filter[id][fields][0]=id&filter[id][values][0]={}&limit=1&transitParameters[v1]=ykYa8ALmUD&transitParameters[preset]=scene"
 modelquery = "model.getModelContent?_method=model.getModelContent&tz=1&limit=25&transitParameters[contentId]="
 
 #for future use:
@@ -12,7 +12,7 @@ aboutquery = "Client_Aboutme.getData?_method=Client_Aboutme.getData"
 def getAPIURL(url):
     req = PAutils.HTTPRequest(url)
 
-    if req:
+    if req.text:
         ah = re.search(r'"ah".?:.?\"([0-9a-zA-Z\(\)\@\:\,\/\!\+\-\.\$\_\=\\\']*)\"', req.text).group(1)[::-1] + "/"
         aet = re.search(r'"aet".?:([0-9]*)', req.text).group(1) + "/"
         Log(ah + aet)
@@ -36,7 +36,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             releaseDate = parse(searchResult.get('sites').get('collection').get(sceneID).get('publishDate')).strftime('%Y-%m-%d')
 
             if searchDate:
-                if searchDate == releaseDate:
+                a = parse(releaseDate)
+                b = parse(searchDate)
+                delta = abs(b - a)
+                if delta.days < 2:
                     artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))
                     titleNoFormatting = searchResult['title']
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
@@ -58,7 +61,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
-    title = metadata_id[2]
+    title = metadata_id[2].strip()
     apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteID) + "/scene/" + sceneID + "/" + title)
     apiurl = PAsearchSites.getSearchSearchURL(siteID) + apiurl
     searchResult = getJSONfromAPI(apiurl + updatequery.format(sceneID))[0]
@@ -124,6 +127,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         baseactor = "Lisey Sweet"
     elif siteID == 1037:
         baseactor = "Gina Gerson"
+    elif siteID == 1038:
+        baseactor = "Valentina Nappi"
     else:
         baseactor = ""
 
