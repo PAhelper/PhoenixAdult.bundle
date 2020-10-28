@@ -38,7 +38,7 @@ class PhoenixActors:
             if not skip:
                 req = None
                 try:
-                    req = PAutils.HTTPRequest(newPhoto)
+                    req = PAutils.HTTPRequest(newPhoto, 'HEAD')
                 except:
                     pass
 
@@ -2519,7 +2519,7 @@ def actorDBfinder(actorName):
         if not actorPhotoURL:
             databaseName = 'Babepedia'
             img = 'http://www.babepedia.com/pics/' + actorName.title().replace(' ', '%20') + '.jpg'
-            req = PAutils.HTTPRequest(img, bypass=False)
+            req = PAutils.HTTPRequest(img, 'HEAD', bypass=False)
             if req.ok:
                 actorPhotoURL = img
 
