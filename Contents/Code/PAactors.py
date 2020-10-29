@@ -37,10 +37,11 @@ class PhoenixActors:
 
             if not skip:
                 req = None
-                try:
-                    req = PAutils.HTTPRequest(newPhoto, 'HEAD')
-                except:
-                    pass
+                if newPhoto:
+                    try:
+                        req = PAutils.HTTPRequest(newPhoto, 'HEAD')
+                    except:
+                        pass
 
                 if not req or not req.ok:
                     newPhoto = ''
