@@ -813,7 +813,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### Screwbox | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### ScrewMeToo | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### She Will Cheat | Matching type: *[Limited](./manualsearch.md#limited-search)*
-+ #### Sicflics | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Actress name with Date Add**
++ #### Sicflics | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### SinsLife | Matching type: *[Limited](./manualsearch.md#limited-search)*
 + #### SinX | Matching type: *[Limited](./manualsearch.md#limited-search)*
   - Fully Clothed Pissing
