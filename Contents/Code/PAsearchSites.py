@@ -1156,7 +1156,7 @@ searchSites[1019] = ("Big Boob Bundle", "Big Boob Bundle", "https://www.bigboobb
 searchSites[1020] = ("Leg Sex", "Leg Sex", "https://www.legsex.com", "https://www.legsex.com/foot-fetish-videos/")
 searchSites[1021] = ("Scoreland", "Scoreland", "https://www.scoreland.com", "https://www.scoreland.com/big-boob-videos/")
 searchSites[1022] = ("TwoTGirls", "TwoTGirls", "https://twotgirls.com/", "https://twotgirls.com/videos?query=")
-searchSites[1023] = ("Sicflics", "Sicflics", "https://www.sicflics.com/", "https://www.sicflics.com/tags/")
+searchSites[1023] = ("Sicflics", "Sicflics", "https://www2.sicflics.com/", "https://www.sicflics.com/search/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
