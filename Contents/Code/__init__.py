@@ -925,7 +925,7 @@ class PhoenixAdultAgent(Agent.Movies):
                 results = PAsearchSites.siteSicflics.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
             # ModelCentro network
-            elif (1024 <= searchSiteID <= 1039):
+            elif (1024 <= searchSiteID <= 1038):
                 results = PAsearchSites.networkModelCentro.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
         results.Sort('score', descending=True)
@@ -1632,7 +1632,7 @@ class PhoenixAdultAgent(Agent.Movies):
             results = PAsearchSites.siteSicflics.update(metadata, siteID, movieGenres, movieActors)
 
         # ModelCentro network
-        elif (1024 <= siteID <= 1039):
+        elif (1024 <= siteID <= 1038):
             results = PAsearchSites.networkModelCentro.update(metadata, siteID, movieGenres, movieActors)
 
 

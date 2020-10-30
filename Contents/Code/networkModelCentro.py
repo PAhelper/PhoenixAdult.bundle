@@ -1,20 +1,22 @@
 import PAsearchSites
 import PAgenres
+import PAactors
 import PAutils
+import re
 
-query = "content.load?_method=content.load&tz=1&limit=512&transitParameters[v1]=OhUOlmasXD&transitParameters[v2]=OhUOlmasXD&transitParameters[preset]=videos"
-updatequery = "content.load?_method=content.load&tz=1&filter[id][fields][0]=id&filter[id][values][0]={}&limit=1&transitParameters[v1]=ykYa8ALmUD&transitParameters[preset]=scene"
-modelquery = "model.getModelContent?_method=model.getModelContent&tz=1&limit=25&transitParameters[contentId]="
+query = 'content.load?_method=content.load&tz=1&limit=512&transitParameters[v1]=OhUOlmasXD&transitParameters[v2]=OhUOlmasXD&transitParameters[preset]=videos'
+updatequery = 'content.load?_method=content.load&tz=1&filter[id][fields][0]=id&filter[id][values][0]={}&limit=1&transitParameters[v1]=ykYa8ALmUD&transitParameters[preset]=scene'
+modelquery = 'model.getModelContent?_method=model.getModelContent&tz=1&limit=25&transitParameters[contentId]='
 
 #for future use:
-aboutquery = "Client_Aboutme.getData?_method=Client_Aboutme.getData"
+aboutquery = 'Client_Aboutme.getData?_method=Client_Aboutme.getData'
 
 def getAPIURL(url):
     req = PAutils.HTTPRequest(url)
 
     if req.text:
-        ah = re.search(r'"ah".?:.?\"([0-9a-zA-Z\(\)\@\:\,\/\!\+\-\.\$\_\=\\\']*)\"', req.text).group(1)[::-1] + "/"
-        aet = re.search(r'"aet".?:([0-9]*)', req.text).group(1) + "/"
+        ah = re.search(r'"ah".?:.?\"([0-9a-zA-Z\(\)\@\:\,\/\!\+\-\.\$\_\=\\\']*)\"', req.text).group(1)[::-1] + '/'
+        aet = re.search(r'"aet".?:([0-9]*)', req.text).group(1) + '/'
         Log(ah + aet)
         return ah + aet
     return None
@@ -27,7 +29,7 @@ def getJSONfromAPI(url):
     return None
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + "videos/")
+    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + 'videos/')
     searchResults = getJSONfromAPI(PAsearchSites.getSearchSearchURL(siteNum) + apiurl + query)
 
     if searchResults:
@@ -36,9 +38,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             releaseDate = parse(searchResult.get('sites').get('collection').get(sceneID).get('publishDate')).strftime('%Y-%m-%d')
 
             if searchDate:
-                a = parse(releaseDate)
-                b = parse(searchDate)
-                delta = abs(b - a)
+                delta = abs(parse(searchDate) - parse(releaseDate))
                 if delta.days < 2:
                     artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))
                     titleNoFormatting = searchResult['title']
@@ -62,7 +62,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     title = metadata_id[2].strip()
-    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteID) + "/scene/" + sceneID + "/" + title)
+    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteID) + '/scene/' + sceneID + '/' + title)
     apiurl = PAsearchSites.getSearchSearchURL(siteID) + apiurl
     searchResult = getJSONfromAPI(apiurl + updatequery.format(sceneID))[0]
 
@@ -71,7 +71,6 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Summary
     metadata.summary = searchResult['description']
-
 
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteID)
@@ -87,7 +86,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    if "tags" in searchResult:
+    if 'tags' in searchResult:
         genres = searchResult['tags'].get('collection')
 
         if type(genres) is not list:
@@ -105,38 +104,39 @@ def update(metadata, siteID, movieGenres, movieActors):
         for (key, value) in actors.items():
             collect = value.get('modelId').get('collection')
 
-            for (key, value) in collect.items():
-                actorname = value.get('stageName')
+            for (k, val) in collect.items():
+                actorName = val.get('stageName')
 
-                if actorname:
-                    movieActors.addActor(actorname, '')
+                if actorName:
+                    movieActors.addActor(actorName, '')
 
     if siteID == 1024:
-        baseactor = "Aletta Ocean"
+        baseactor = 'Aletta Ocean'
     elif siteID == 1025:
-        baseactor = "Eva Lovia"
+        baseactor = 'Eva Lovia'
     elif siteID == 1026:
-        baseactor = "Romi Rain"
+        baseactor = 'Romi Rain'
     elif siteID == 1030:
-        baseactor = "Dani Daniels"
+        baseactor = 'Dani Daniels'
     elif siteID == 1031:
-        baseactor = "Chloe Toy"
+        baseactor = 'Chloe Toy'
     elif siteID == 1033:
-        baseactor = "Katya Clover"
+        baseactor = 'Katya Clover'
     elif siteID == 1035:
-        baseactor = "Lisey Sweet"
+        baseactor = 'Lisey Sweet'
     elif siteID == 1037:
-        baseactor = "Gina Gerson"
+        baseactor = 'Gina Gerson'
     elif siteID == 1038:
-        baseactor = "Valentina Nappi"
+        baseactor = 'Valentina Nappi'
     else:
-        baseactor = ""
+        baseactor = ''
 
     movieActors.addActor(baseactor, '')
 
     # Posters
     art = []
     artobj = json.loads(PAutils.Decode(metadata_id[3]))
+
     if artobj:
         for searchResult in artobj:
             art.append(searchResult.get('url'))
