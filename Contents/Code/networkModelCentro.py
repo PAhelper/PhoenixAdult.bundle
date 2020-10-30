@@ -86,6 +86,8 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
+    movieActors.clearActors()
+
     if 'tags' in searchResult:
         genres = searchResult['tags'].get('collection')
 
@@ -94,10 +96,13 @@ def update(metadata, siteID, movieGenres, movieActors):
                 genre = value.get('alias')
 
                 if genre:
-                    movieGenres.addGenre(genre)
+                    if siteID == 1027:
+                        genre = genre.replace('-', ' ')
+                        movieActors.addActor(genre, '')
+                    else:
+                        movieGenres.addGenre(genre)
 
     # Actors
-    movieActors.clearActors()
     actors = getJSONfromAPI(apiurl + modelquery + sceneID)
 
     if type(actors) is not list:
