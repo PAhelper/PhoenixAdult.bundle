@@ -2,6 +2,7 @@
 + **[Enhanced Search](./manualsearch.md#enhanced-search)** - Multi-search available. This includes searching by title and/or actor(s), enhanced with date and/or SceneID matching.
 + **[Limited Search](./manualsearch.md#limited-search)** - Limited-search available. Only title and/or actor can be used.
 + **[Exact Match](./manualsearch.md#exact-match)** - Exact matching only. Either using a numerical SceneID or a Direct URL.
++ **[Manual Add](./manualsearch.md#manual-add)** - Add scene manually. only use this when studio is not yet supported.
 
 The above is a reference list. Please see [the manualsearch doc](./manualsearch.md) for how to use these further.
 # All supported networks and sites
