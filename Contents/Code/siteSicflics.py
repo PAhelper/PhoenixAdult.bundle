@@ -1,32 +1,43 @@
 import PAsearchSites
 import PAgenres
 import PAactors
-import re
 import PAutils
+import re
 
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    firstpage = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + "/page1.html"
-    req = PAutils.HTTPRequest(firstpage)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '/page1.html'
+    req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
 
-    for pageResult in searchResults.xpath('//li[@class="col-sm-6 col-lg-4"]'):
-        imgURL = pageResult.xpath('.//div[@class="vidthumb"]/a[@class="diagrad"]/img/@src')[0]
+    for searchResult in searchResults.xpath('//li[@class="col-sm-6 col-lg-4"]'):
+        imgURL = searchResult.xpath('.//div[@class="vidthumb"]/a[@class="diagrad"]/img/@src')[0]
         imgURL = PAutils.Encode(imgURL)
-        titleNoFormatting = pageResult.xpath('.//div[@class="vidtitle"]/p[1]')[0].text_content().strip()
-        curID = str(pageResult.xpath('.//a[@href="#"]/@data-movie')[0])
-        # Release Date
-        date = ''
-        try:
-            date = pageResult.xpath('.//div[@class="vidtitle"]/p[2]')[0].text_content().strip()
-        except:
-            pass
-        releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
-        description = pageResult.xpath('.//div[@class="collapse"]/p')[0].text_content().split(':')[1].strip()
+
+        titleNoFormatting = searchResult.xpath('.//div[@class="vidtitle"]/p[1]')[0].text_content().strip()
+        curID = searchResult.xpath('.//a[@href="#"]/@data-movie')[0]
+
+        description = searchResult.xpath('.//div[@class="collapse"]/p')[0].text_content().split(':')[1].strip()
         description = PAutils.Encode(description)
 
-        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-        results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, description, imgURL), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        date = None
+        try:
+            date = searchResult.xpath('.//div[@class="vidtitle"]/p[2]')[0].text_content().strip()
+        except:
+            pass
+
+        if date:
+            releaseDate = parse(date).strftime('%Y-%m-%d')
+        else:
+            releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+        displayDate = releaseDate if date else ''
+
+        if searchDate and displayDate:
+            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        else:
+            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%d|%d|%s|%s|%s' % (curID, siteNum, description, imgURL), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
     return results
 
@@ -38,15 +49,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     if not imgURL.startswith('http'):
         imgURL = PAsearchSites.getSearchBaseURL(siteID) + imgURL
 
-    pageURL = PAsearchSites.getSearchBaseURL(siteID) + "v6/v6.pop.php?id=" + sceneID
+    pageURL = PAsearchSites.getSearchBaseURL(siteID) + 'v6/v6.pop.php?id=' + sceneID
     req = PAutils.HTTPRequest(pageURL)
-    pageresult = HTML.ElementFromString(req.text)
+    detailsPageElements = HTML.ElementFromString(req.text)
 
     # Studio
     metadata.studio = 'Sicflics'
 
     # Title
-    metadata.title = pageresult.xpath('//h4[@class="red"]')[0].text_content().strip().title()
+    metadata.title = detailsPageElements.xpath('//h4[@class="red"]')[0].text_content().strip().title()
 
     # Summary
     description = PAutils.Decode(metadata_id[2])
@@ -61,20 +72,22 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    for genre in pageresult.xpath('//div[@class="vidwrap"]/p/a'):
-        tag = genre.text_content().replace('#', '').strip()
-        movieGenres.addGenre(tag)
+    for genreLink in detailsPageElements.xpath('//div[@class="vidwrap"]/p/a'):
+        genreName = genreLink.text_content().replace('#', '').strip()
 
+        movieGenres.addGenre(genreName)
 
     # Release Date
-    date_object = parse(pageresult.xpath('//span[@title="Date Added"]')[0].text_content().split(':')[1].strip())
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    date = detailsPageElements.xpath('//span[@title="Date Added"]')[0].text_content().split(':')[1].strip()
+    if date:
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
     description = description.encode('ascii', 'replace')
-    actorName = re.split("['?]", description)[1].strip()
+    actorName = re.split(r'[\'?]', description)[1].strip()
     actorPhotoURL = ''
     if actorName:
         movieActors.addActor(actorName, actorPhotoURL)
