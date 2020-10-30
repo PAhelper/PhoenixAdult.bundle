@@ -9,7 +9,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### 5Kporn | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 5Kporn
   - 5Kteens
-+ #### 18OnlyGirls | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Date Add**
++ #### 18OnlyGirls | Matching type: *[Enhanced](./manualsearch.md#Enhanced-search)*
 + #### 21Naturals | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - 21Naturals
   - 21FootArt
