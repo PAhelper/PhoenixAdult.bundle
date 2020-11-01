@@ -744,6 +744,9 @@ class PhoenixActors:
                         newActor = 'Zazie Sky'
                     elif newActor == 'Zoe V.':
                         newActor = 'Zoe Voss'
+                elif metadata.studio == 'Jules Jordan':
+                    if newActor == 'Jesse':
+                        newActor = 'Jesse Jane'
                 elif metadata.studio == 'Kink':
                     if newActor == 'Alana':
                         newActor = 'Alana Evans'

@@ -924,6 +924,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif searchSiteID == 1023:
                 results = PAsearchSites.siteSicflics.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # ModelCentro network
+            elif (1024 <= searchSiteID <= 1038):
+                results = PAsearchSites.networkModelCentro.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1626,6 +1630,10 @@ class PhoenixAdultAgent(Agent.Movies):
         # Sicflics
         elif siteID == 1023:
             results = PAsearchSites.siteSicflics.update(metadata, siteID, movieGenres, movieActors)
+
+        # ModelCentro network
+        elif (1024 <= siteID <= 1038):
+            results = PAsearchSites.networkModelCentro.update(metadata, siteID, movieGenres, movieActors)
 
 
         # Cleanup Genres and Add
