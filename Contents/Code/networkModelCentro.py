@@ -8,8 +8,9 @@ query = 'content.load?_method=content.load&tz=1&limit=512&transitParameters[v1]=
 updatequery = 'content.load?_method=content.load&tz=1&filter[id][fields][0]=id&filter[id][values][0]={}&limit=1&transitParameters[v1]=ykYa8ALmUD&transitParameters[preset]=scene'
 modelquery = 'model.getModelContent?_method=model.getModelContent&tz=1&limit=25&transitParameters[contentId]='
 
-#for future use:
+# for future use:
 aboutquery = 'Client_Aboutme.getData?_method=Client_Aboutme.getData'
+
 
 def getAPIURL(url):
     req = PAutils.HTTPRequest(url)
@@ -21,12 +22,14 @@ def getAPIURL(url):
         return ah + aet
     return None
 
+
 def getJSONfromAPI(url):
     req = PAutils.HTTPRequest(url)
 
     if req.text:
         return json.loads(req.text).get('response').get('collection')
     return None
+
 
 def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + 'videos/')
@@ -44,8 +47,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                     titleNoFormatting = searchResult['title']
                     score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
                     results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (sceneID, siteNum, titleNoFormatting, artobj),
-                                                        name='%s %s [%s]' % (titleNoFormatting, releaseDate,
-                                                                     PAsearchSites.getSearchSiteName(siteNum)),
+                                                        name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)),
                                                         score=score, lang=lang))
             else:
                 titleNoFormatting = searchResult['title']
