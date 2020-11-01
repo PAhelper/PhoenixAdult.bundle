@@ -132,8 +132,9 @@ import networkScoreGroup
 import siteTwoTGirls
 import siteSicflics
 import networkModelCentro
+import siteCulioneros
 
-searchSites = [None] * 1040
+searchSites = [None] * 1051
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1174,6 +1175,17 @@ searchSites[1036] = ("MyLifeInMiami", "MyLifeInMiami", "https://mylifeinmiami.co
 searchSites[1037] = ("GinaGerson", "GinaGerson", "https://www.ginagerson.xxx/", "https://www.ginagerson.xxx/sapi/")
 searchSites[1038] = ("ValeNappi", "ValeNappi", "https://www.valenappi.com/", "https://www.valenappi.com/sapi/")
 searchSites[1039] = ("VinaSkyXXX", "VinaSkyXXX", "https://www.vinaskyxxx.com/", "https://www.vinaskyxxx.com/sapi/")
+searchSites[1040] = ("Culioneros", "Culioneros", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1041] = ("Sexo en Public", "Sexo en Public", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1042] = ("Mi Primer Porno", "Mi Primer Porno", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1043] = ("Por el Chiquito", "Por el Chiquito", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1044] = ("Chicas de Porno", "Chicas de Porno", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1045] = ("Tetangas Espanolas", "Tetangas Espanolas", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1046] = ("Costenas Locas", "Costenas Locas", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1047] = ("Naglgas Grandes", "Naglgas Grandes", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1048] = ("Tetonas Locas", "Tetonas Locas", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1049] = ("Chiva Culiona", "Chiva Culiona", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
+searchSites[1050] = ("Cuchi Mami", "Cuchi Mami", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1416,6 +1428,7 @@ def getSearchSettings(mediaTitle):
         ('^pav ', 'PixAndVideo '),
         ('^pba ', 'PublicAgent '),
         ('^pc ', 'PrincessCum '),
+        ('^porditos', 'Culioneros '),
         ('^pdmcl ', 'ChicasLoca '),
         ('^pf ', 'PornFidelity '),
         ('^phd ', 'PassionHD '),
