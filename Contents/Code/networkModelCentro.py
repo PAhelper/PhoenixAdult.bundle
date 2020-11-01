@@ -135,6 +135,8 @@ def update(metadata, siteID, movieGenres, movieActors):
         baseactor = 'Gina Gerson'
     elif siteID == 1038:
         baseactor = 'Valentina Nappi'
+    elif siteID == 1039:
+        baseactor = 'Vina Sky'
     else:
         baseactor = ''
 

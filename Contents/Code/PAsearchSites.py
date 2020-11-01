@@ -133,7 +133,7 @@ import siteTwoTGirls
 import siteSicflics
 import networkModelCentro
 
-searchSites = [None] * 1039
+searchSites = [None] * 1040
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1173,6 +1173,7 @@ searchSites[1035] = ("Lisey Sweet", "Lisey Sweet", "https://theliseysweet.com/",
 searchSites[1036] = ("MyLifeInMiami", "MyLifeInMiami", "https://mylifeinmiami.com/", "https://mylifeinmiami.com/sapi/")
 searchSites[1037] = ("GinaGerson", "GinaGerson", "https://www.ginagerson.xxx/", "https://www.ginagerson.xxx/sapi/")
 searchSites[1038] = ("ValeNappi", "ValeNappi", "https://www.valenappi.com/", "https://www.valenappi.com/sapi/")
+searchSites[1039] = ("VinaSkyXXX", "VinaSkyXXX", "https://www.vinaskyxxx.com/", "https://www.vinaskyxxx.com/sapi/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
@@ -1355,6 +1356,7 @@ def getSearchSettings(mediaTitle):
         ('^il ', 'ImmoralLive '),
         ('^itc ', 'InTheCrack '),
         ('^jb ', 'JavBus '),
+        ('^jowm', 'JerkOffWithMe'),
         ('^kha ', 'KarupsHA '),
         ('^kow ', 'KarupsOW '),
         ('^kpc ', 'KarupsPC '),

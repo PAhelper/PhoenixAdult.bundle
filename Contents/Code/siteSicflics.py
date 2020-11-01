@@ -15,7 +15,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         imgURL = PAutils.Encode(imgURL)
 
         titleNoFormatting = searchResult.xpath('.//div[@class="vidtitle"]/p[1]')[0].text_content().strip()
-        curID = searchResult.xpath('.//a[@href="#"]/@data-movie')[0]
+        curID = int(searchResult.xpath('.//a[@href="#"]/@data-movie')[0])
 
         description = searchResult.xpath('.//div[@class="collapse"]/p')[0].text_content().split(':')[1].strip()
         description = PAutils.Encode(description)
@@ -37,7 +37,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         else:
             score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%d|%d|%s|%s|%s' % (curID, siteNum, description, imgURL), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, description, imgURL), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
     return results
 
