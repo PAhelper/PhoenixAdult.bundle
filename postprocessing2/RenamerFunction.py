@@ -3,7 +3,7 @@ import logging
 ## Other .py files
 import LoggerFunction
 
-def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol):
+def renamer(siteName,searchTitle,filename_type,ResultsMatrix,pref_ID,pref_StripSymbol,WorkingDir):
     ## Basic Log Configuration
     logger = LoggerFunction.setup_logger('Renamers', '.\\Logs\\Watchdog.log',level=logging.INFO,formatter='%(asctime)s : %(name)s : %(levelname)-8s : %(message)s')
     ## Scene Logger information
