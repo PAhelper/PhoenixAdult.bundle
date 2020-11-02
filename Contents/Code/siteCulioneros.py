@@ -67,20 +67,21 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//p[contains(string(),"Cast")]/a'):
-        actorName = actorLink.text_content()
+    for actorLink in detailsPageElements.xpath('//p[contains(string(), "Cast")]/a'):
+        actorName = actorLink.text_content().strip()
 
         actorPhotoURL = ''
         modelBaseURL = PAsearchSites.getSearchBaseURL(siteID) + '/t1/most-liked-girls/'
         genres = genres.replace(actorName, '')
-        
-        for x in range(1, 6):
-            modelPageURL = "%s%s" % (modelBaseURL, x)
+
+        for idx in range(1, 6):
+            modelPageURL = modelBaseURL + idx
             req = PAutils.HTTPRequest(modelPageURL)
             modelPageElements = HTML.ElementFromString(req.text)
 
             try:
-                actorPhotoURL = modelPageElements.xpath('//a[@href="' + actorLink.xpath('.//@href')[0] + '"]' + '//img[@alt="' + actorName + '"]/@src')[0]
+                modelURL = actorLink.xpath('.//@href')[0]
+                actorPhotoURL = modelPageElements.xpath('//a[@href="%s"]//img[@alt="%s"]/@src' % (modelURL, actorName))[0]
                 break
             except:
                 pass
@@ -89,26 +90,26 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    for genre in genres.split(','):
-        genreName = genre.strip()
+    for genreLink in genres.split(','):
+        genreName = genreLink.strip()
 
         movieGenres.addGenre(genreName)
 
-    modelURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//p[contains(string(),"Cast")]/a/@href')[0]
+    modelURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//p[contains(string(), "Cast")]/a/@href')[0]
     req = PAutils.HTTPRequest(modelURL)
     modelPageElements = HTML.ElementFromString(req.text)
 
     # Posters
     art = []
     xpaths = [
-        '//div[@id="thumb-container"]//*[contains(@alt,"' + metadata.title + '")]/@src',
+        '//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@src' % metadata.title,
     ]
 
     # Collect Rollover Images
-    siteName = tagline.lower().replace(' ','')
-    shootCode = modelPageElements.xpath('//div[@id="thumb-container"]//*[contains(@alt,"' + metadata.title + '")]/@data-shootcode')[0]
-    for x in range(1,17):
-        img = "%s%s%s%s%s%s%s" % ('http://sm.members.khcdn.com/shoots/', siteName, '/', shootCode, '/rollover/340/', x, '.jpg')
+    siteName = tagline.lower().replace(' ', '')
+    shootCode = modelPageElements.xpath('//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@data-shootcode' % metadata.title)[0]
+    for idx in range(1, 17):
+        img = "http://sm.members.khcdn.com/shoots/%s/%s/rollover/340/%d.jpg" % (siteName, shootCode, idx)
         art.append(img)
 
     for xpath in xpaths:
