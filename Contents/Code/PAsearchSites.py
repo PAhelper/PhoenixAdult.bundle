@@ -1185,7 +1185,7 @@ searchSites[1046] = ("Costenas Locas", "Costenas Locas", "http://www.pornditos.c
 searchSites[1047] = ("Naglgas Grandes", "Naglgas Grandes", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
 searchSites[1048] = ("Tetonas Locas", "Tetonas Locas", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
 searchSites[1049] = ("Chiva Culiona", "Chiva Culiona", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
-searchSites[1050] = ("Cuchi Mami", "Cuchi Mami", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_s")
+searchSites[1050] = ("Cuchi Mami", "Cuchi Mami", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]
