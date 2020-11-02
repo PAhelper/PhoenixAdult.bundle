@@ -134,7 +134,7 @@ import siteSicflics
 import networkModelCentro
 import siteCulioneros
 
-searchSites = [None] * 1051
+searchSites = [None] * 1052
 
 searchSites[0] = ("BlackedRaw", "BlackedRaw", "https://www.blackedraw.com", "https://www.blackedraw.com/api")
 searchSites[1] = ("Blacked", "Blacked", "https://www.blacked.com", "https://www.blacked.com/api")
@@ -1186,6 +1186,7 @@ searchSites[1047] = ("Naglgas Grandes", "Naglgas Grandes", "http://www.pornditos
 searchSites[1048] = ("Tetonas Locas", "Tetonas Locas", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
 searchSites[1049] = ("Chiva Culiona", "Chiva Culiona", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
 searchSites[1050] = ("Cuchi Mami", "Cuchi Mami", "http://www.pornditos.com", "http://www.pornditos.com/t1/videos/0_")
+searchSites[1051] = ("Bruce and Morgan", "Bruce and Morgan", "https://www.bruceandmorgan.net/", "https://www.bruceandmorgan.net/sapi/")
 
 def getSearchBaseURL(siteID):
     return searchSites[siteID][2]

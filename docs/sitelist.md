@@ -469,6 +469,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
   - Bi Empire
 + #### ModelCentroNetwork | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - AlettaOceanLive
+  - BruceAndMorgan
   - DaniDaniels
   - DeNudeArt
   - FallInLovia
