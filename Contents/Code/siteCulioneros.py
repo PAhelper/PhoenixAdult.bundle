@@ -65,7 +65,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genre List
-    genres = detailsPageElements.xpath('//meta[@http-equiv="keywords"]/@content')[0].replace('porn,', '').replace('pornditos,', '').replace(tagline, '').replace('prono', 'porno')
+    genres = detailsPageElements.xpath('//meta[@http-equiv="keywords"]/@content')[0].replace(', pornditos', '').replace(', porn', '').replace(tagline, '').replace('prono', 'porno')
 
     # Actors
     movieActors.clearActors()
