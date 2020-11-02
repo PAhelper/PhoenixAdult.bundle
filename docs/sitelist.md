@@ -182,6 +182,17 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### ClubSeventeen | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumBizz | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
++ #### Culioneros | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
+  - Chicas de Porno
+  - Chiva Culiona
+  - Costenas Locas
+  - Cuchi Mami
+  - Mi Primer Porno
+  - Nalgas Grandes
+  - Por El Chiquito
+  - Sexo en Publico
+  - Tetangas Espanolas
+  - Tetonas Locas
 + #### CzechAV Network | Matching type: *[Limited](./manualsearch.md#limited-search)* - **Title only, Date Add**
   - Czech Amateurs
   - Czech Bangbus

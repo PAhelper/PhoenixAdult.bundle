@@ -928,6 +928,10 @@ class PhoenixAdultAgent(Agent.Movies):
             elif (1024 <= searchSiteID <= 1039):
                 results = PAsearchSites.networkModelCentro.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
 
+            # Culioneros
+            elif (1040 <= searchSiteID <= 1050):
+                results = PAsearchSites.siteCulioneros.search(results, encodedTitle, searchTitle, siteNum, lang, searchDate)
+
         results.Sort('score', descending=True)
 
     def update(self, metadata, media, lang):
@@ -1635,6 +1639,9 @@ class PhoenixAdultAgent(Agent.Movies):
         elif (1024 <= siteID <= 1039):
             results = PAsearchSites.networkModelCentro.update(metadata, siteID, movieGenres, movieActors)
 
+        # Culioneros
+        elif (1040 <= siteID <= 1050):
+            results = PAsearchSites.siteCulioneros.update(metadata, siteID, movieGenres, movieActors)
 
         # Cleanup Genres and Add
         Log("Genres")
