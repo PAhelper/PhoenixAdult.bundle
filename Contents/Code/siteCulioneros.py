@@ -109,7 +109,6 @@ def update(metadata, siteID, movieGenres, movieActors):
     shootCode = modelPageElements.xpath('//div[@id="thumb-container"]//*[contains(@alt,"' + metadata.title + '")]/@data-shootcode')[0]
     for x in range(1,17):
         img = "%s%s%s%s%s%s%s" % ('http://sm.members.khcdn.com/shoots/', siteName, '/', shootCode, '/rollover/340/', x, '.jpg')
-        Log(img)
         art.append(img)
 
     for xpath in xpaths:
