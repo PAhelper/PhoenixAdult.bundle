@@ -1428,7 +1428,7 @@ def getSearchSettings(mediaTitle):
         ('^pav ', 'PixAndVideo '),
         ('^pba ', 'PublicAgent '),
         ('^pc ', 'PrincessCum '),
-        ('^porditos', 'Culioneros '),
+        ('^pornditos', 'Culioneros '),
         ('^pdmcl ', 'ChicasLoca '),
         ('^pf ', 'PornFidelity '),
         ('^phd ', 'PassionHD '),
