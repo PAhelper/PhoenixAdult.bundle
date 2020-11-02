@@ -14,7 +14,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     encodedTitle = searchTitle.replace(' ', '-').lower()
 
     if sceneID:
-        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '_' + sceneID + '.htm'
+        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + '.htm'
         req = PAutils.HTTPRequest(sceneURL)
         detailsPageElements = HTML.ElementFromString(req.text)
         searchResult = detailsPageElements.xpath('//title')[0].text_content().split('|')

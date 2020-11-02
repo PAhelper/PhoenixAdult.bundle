@@ -182,7 +182,7 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### ClubSeventeen | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumBizz | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
 + #### CumLouder | Matching type: *[Exact](./manualsearch.md#exact-match)* - **Direct URL**
-+ #### Culioneros | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID with Title**
++ #### Culioneros | Matching type: *[Exact](./manualsearch.md#exact-match)* - **SceneID**
   - Chicas de Porno
   - Chiva Culiona
   - Costenas Locas
