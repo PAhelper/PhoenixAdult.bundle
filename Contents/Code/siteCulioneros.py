@@ -37,7 +37,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
     info = detailsPageElements.xpath('//title')[0].text_content().split('|')
-
+    id = re.search(r'(?<=_).*(?:\d)', sceneURL)
+    try:
+        sceneID = id.group()
+    except:
+        sceneID = ''
+    
     # Title
     metadata.title = info[0].strip()
 
@@ -63,7 +68,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         metadata.year = metadata.originally_available_at.year
 
     # Genre List
-    genres = detailsPageElements.xpath('//meta[@http-equiv="keywords"]/@content')[0].replace(', pornditos', '').replace(', porn', '').replace(tagline, '').replace('prono', 'porno')
+    genres = detailsPageElements.xpath('//meta[@http-equiv="keywords"]/@content')[0].replace(', pornditos', '').replace(', pornstar', '').replace(', porn', '').replace(tagline, '').replace('prono', 'porno')
 
     # Actors
     movieActors.clearActors()
@@ -75,7 +80,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         genres = genres.replace(actorName, '')
 
         for idx in range(1, 6):
-            modelPageURL = modelBaseURL + idx
+            modelPageURL = "%s%s" % (modelBaseURL, idx)
             req = PAutils.HTTPRequest(modelPageURL)
             modelPageElements = HTML.ElementFromString(req.text)
 
@@ -95,26 +100,32 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         movieGenres.addGenre(genreName)
 
-    modelURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//p[contains(string(), "Cast")]/a/@href')[0]
-    req = PAutils.HTTPRequest(modelURL)
-    modelPageElements = HTML.ElementFromString(req.text)
-
     # Posters
+    shootCode = ''
+
     art = []
     xpaths = [
-        '//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@src' % metadata.title,
+        '//a[contains(@href,"%s")]//@src' % sceneID,
     ]
+
+    try:
+        modelURL = PAsearchSites.getSearchBaseURL(siteID) + detailsPageElements.xpath('//p[contains(string(), "Cast")]/a/@href')[0]
+        req = PAutils.HTTPRequest(modelURL)
+        modelPageElements = HTML.ElementFromString(req.text)
+        for xpath in xpaths:
+            for img in modelPageElements.xpath(xpath):
+                art.append(img)
+    except:
+        pass
 
     # Collect Rollover Images
     siteName = tagline.lower().replace(' ', '')
-    shootCode = modelPageElements.xpath('//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@data-shootcode' % metadata.title)[0]
+    shoot = detailsPageElements.xpath('//div[@id="js-small-thumb"]//@src')[0]
+    shootMatch = re.search(r'(cd\d)\d+', shoot)
+    shootCode = shootMatch.group()
     for idx in range(1, 17):
         img = "http://sm.members.khcdn.com/shoots/%s/%s/rollover/340/%d.jpg" % (siteName, shootCode, idx)
         art.append(img)
-
-    for xpath in xpaths:
-        for img in modelPageElements.xpath(xpath):
-            art.append(img)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
