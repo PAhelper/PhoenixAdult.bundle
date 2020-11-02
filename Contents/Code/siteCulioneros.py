@@ -37,7 +37,12 @@ def update(metadata, siteID, movieGenres, movieActors):
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
     info = detailsPageElements.xpath('//title')[0].text_content().split('|')
-
+    id = re.search(r'(?<=_).*(?:\d)', sceneURL)
+    try:
+        sceneID = id.group()
+    except:
+        sceneID = ''
+    
     # Title
     metadata.title = info[0].strip()
 
@@ -75,7 +80,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         genres = genres.replace(actorName, '')
 
         for idx in range(1, 6):
-            modelPageURL = modelBaseURL + idx
+            modelPageURL = "%s%s" % (modelBaseURL, idx)
             req = PAutils.HTTPRequest(modelPageURL)
             modelPageElements = HTML.ElementFromString(req.text)
 
@@ -102,12 +107,13 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@src' % metadata.title,
+        '//a[contains(@href,"%s")]//@src' % sceneID,
     ]
+    
 
     # Collect Rollover Images
     siteName = tagline.lower().replace(' ', '')
-    shootCode = modelPageElements.xpath('//div[@id="thumb-container"]//*[contains(@alt, "%s")]/@data-shootcode' % metadata.title)[0]
+    shootCode = modelPageElements.xpath('//a[contains(@href,"%s")]//@data-shootcode' % sceneID)[0]
     for idx in range(1, 17):
         img = "http://sm.members.khcdn.com/shoots/%s/%s/rollover/340/%d.jpg" % (siteName, shootCode, idx)
         art.append(img)
