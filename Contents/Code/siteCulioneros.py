@@ -71,19 +71,18 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//p[contains(string(),"Cast")]/a'):
         actorName = actorLink.text_content()
-        img = '//img[@alt="' + actorName + '"]/@src'
+
         actorPhotoURL = ''
         modelBaseURL = PAsearchSites.getSearchBaseURL(siteID) + '/t1/most-liked-girls/'
-
         genres = genres.replace(actorName, '')
-
+        
         for x in range(1, 6):
             modelPageURL = "%s%s" % (modelBaseURL, x)
             req = PAutils.HTTPRequest(modelPageURL)
             modelPageElements = HTML.ElementFromString(req.text)
 
             try:
-                actorPhotoURL = modelPageElements.xpath(img)[0]
+                actorPhotoURL = modelPageElements.xpath('//a[@href="' + actorLink.xpath('.//@href')[0] + '"]' + '//img[@alt="' + actorName + '"]/@src')[0]
                 break
             except:
                 pass
