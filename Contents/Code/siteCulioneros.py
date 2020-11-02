@@ -11,8 +11,6 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         sceneID = splited[0]
         searchTitle = searchTitle.replace(sceneID, '', 1).strip()
 
-    encodedTitle = searchTitle.replace(' ', '-').lower()
-
     if sceneID:
         sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + '.htm'
         req = PAutils.HTTPRequest(sceneURL)
