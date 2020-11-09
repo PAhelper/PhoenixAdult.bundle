@@ -121,11 +121,14 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Collect Rollover Images
     siteName = tagline.lower().replace(' ', '')
     shoot = detailsPageElements.xpath('//div[@id="js-small-thumb"]//@src')[0]
-    shootMatch = re.search(r'(cd\d)\d+', shoot)
-    shootCode = shootMatch.group()
-    for idx in range(1, 17):
-        img = "http://sm.members.khcdn.com/shoots/%s/%s/rollover/340/%d.jpg" % (siteName, shootCode, idx)
-        art.append(img)
+    shootMatch = re.search(r'(?!\/)((?:\w+)\d\d)(?=\/)', shoot)
+    try:
+        shootCode = shootMatch.group()
+        for idx in range(1, 17):
+            img = "http://sm.members.khcdn.com/shoots/%s/%s/rollover/340/%d.jpg" % (siteName, shootCode, idx)
+            art.append(img)
+    except:
+        pass
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
