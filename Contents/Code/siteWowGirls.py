@@ -3,27 +3,27 @@ import PAextras
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article//a'):
         siteName = PAsearchSites.getSearchSiteName(siteNum) + '.xxx'
         titleNoFormatting = searchResult.xpath('./@title')[0]
         curID = PAutils.Encode(searchResult.xpath('./@href')[0])
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     url = PAsearchSites.getSearchSearchURL(siteNum).replace('.xxx', '.tv', 1)
-    req = PAutils.HTTPRequest(url + search['encoded'])
+    req = PAutils.HTTPRequest(url + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "entry")]//h3//a'):
         siteName = PAsearchSites.getSearchSiteName(siteNum) + '.tv'
         titleNoFormatting = searchResult.xpath('./text()')[0].strip()
         curID = PAutils.Encode(searchResult.xpath('./@href')[0])
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 

@@ -3,9 +3,9 @@ import PAextras
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     params = {
-        'input_search_sm': search['encoded']
+        'input_search_sm': searchData.encoded
     }
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum), params=params)
     searchResults = HTML.ElementFromString(req.text)
@@ -18,15 +18,15 @@ def search(results, lang, siteNum, search):
                 releaseDate = parse(searchResult.xpath('.//h2[2]')[0].text_content().strip()).strftime('%Y-%m-%d')
                 curID = PAutils.Encode(searchResult.get('href'))
 
-                if search['date']:
-                    score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                if searchData.date:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
-    if search['title'] in manualMatch:
-        item = manualMatch[search['title']]
+    if searchData.title in manualMatch:
+        item = manualMatch[searchData.title]
         curID = PAutils.Encode(item['curID'])
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=item['name'], score=101, lang=lang))

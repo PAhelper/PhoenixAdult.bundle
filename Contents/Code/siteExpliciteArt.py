@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '-').lower()
-    searchURL = '%s%s/page1.html' % (PAsearchSites.getSearchSearchURL(siteNum), search['encoded'])
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '-').lower()
+    searchURL = '%s%s/page1.html' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded)
     req = PAutils.HTTPRequest(searchURL)
     searchResults = HTML.ElementFromString(req.text)
 
@@ -13,7 +13,7 @@ def search(results, lang, siteNum, search):
         sceneURL = searchResult.xpath('.//a/@href')[0]
         curID = PAutils.Encode(sceneURL)
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

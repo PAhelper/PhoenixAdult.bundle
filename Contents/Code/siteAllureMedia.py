@@ -2,8 +2,8 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
 
     # Amateur Allure
@@ -13,10 +13,10 @@ def search(results, lang, siteNum, search):
             releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:', '').strip()).strftime('%Y-%m-%d')
             curID = PAutils.Encode(searchResult.xpath('.//a[1]/@href')[0])
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'
@@ -30,10 +30,10 @@ def search(results, lang, siteNum, search):
             releaseDate = parse(searchResult.xpath('.//div[@class="cell update_date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             curID = PAutils.Encode(searchResult.xpath('./a[2]/@href')[0])
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'

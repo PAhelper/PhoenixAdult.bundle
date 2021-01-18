@@ -2,8 +2,8 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//li[@class="featured-video morestdimage grid_4 mb"]'):
         detailsPage = searchResult.xpath('./a/@href')[0]
@@ -11,10 +11,10 @@ def search(results, lang, siteNum, search):
         releaseDate = parse(searchResult.xpath('./div[@class="details"]/p/strong')[0].text_content().strip()).strftime('%Y-%m-%d')
         curID = PAutils.Encode(detailsPage)
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [GloryHoleSecrets] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

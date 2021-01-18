@@ -2,13 +2,13 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     sceneID = None
-    splited = search['title'].split()
-    if unicode(splited[0], 'UTF-8').isdigit():
-        sceneID = splited[0]
+    parts = searchData.title.split()
+    if unicode(parts[0], 'UTF-8').isdigit():
+        sceneID = parts[0]
 
-    url = PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + '.html'
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + '.html'
     req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "video-item") and @data-get-thumbs-url]'):
@@ -17,10 +17,10 @@ def search(results, lang, siteNum, search):
         date = searchResult.xpath('.//div[@class="infos-video"]/p')[0].text_content().replace('Added on', '').strip()
         releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

@@ -2,12 +2,12 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     sceneID = None
-    splited = search['title'].split()
-    if unicode(splited[0], 'utf8').isdigit():
-        sceneID = splited[0]
-        search['title'] = search['title'].replace(sceneID, '', 1).strip()
+    parts = searchData.title.split()
+    if unicode(parts[0], 'utf8').isdigit():
+        sceneID = parts[0]
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
         req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + '/vrpornvideo/' + sceneID)
         searchResults = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResults.xpath('//h1[contains(@class, "video-title")]')[0].text_content()
@@ -22,7 +22,7 @@ def search(results, lang, siteNum, search):
         score = 100
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
     else:
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@class="tile-grid-item"]'):
             data = searchResult.xpath('.//a[contains(@class, "video-card-title")]')[0]
@@ -33,10 +33,10 @@ def search(results, lang, siteNum, search):
             if date:
                 releaseDate = parse(date[0]).strftime('%Y-%m-%d')
             girlName = searchResult.xpath('.//a[@class="video-card-link"]')[0].text_content()
-            if search['date'] and releaseDate:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s in %s %s' % (PAsearchSites.getSearchSiteName(siteNum), girlName, titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results

@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].lower().replace(' ', '-')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.lower().replace(' ', '-')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     titleNoFormatting = detailsPageElements.xpath('//title')[0].text_content().split('|')[-1].strip()

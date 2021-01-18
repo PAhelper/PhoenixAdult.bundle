@@ -3,8 +3,8 @@ import PAextras
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/' + search['title'].replace(' ', '-')
+def search(results, lang, siteNum, searchData):
+    sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/' + searchData.title.replace(' ', '-')
     req = PAutils.HTTPRequest(sceneURL)
     if req.ok:
         detailsPageElements = HTML.ElementFromString(req.text)
@@ -12,21 +12,21 @@ def search(results, lang, siteNum, search):
 
         titleNoFormatting = detailsPageElements.xpath('.//h1')[0].text_content().strip()
         curID = PAutils.Encode(sceneURL)
-        releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+        releaseDate = searchData.dateFormat() if searchData.date else ''
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [TwoTGirls]' % titleNoFormatting, score=score, lang=lang))
     else:
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//article'):
             sceneURL = searchResult.xpath('.//a/@href')[0]
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = searchResult.xpath('.//h2')[0].text_content().strip()
-            releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+            releaseDate = searchData.dateFormat() if searchData.date else ''
 
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [TwoTGirls]' % titleNoFormatting, score=score, lang=lang))
 

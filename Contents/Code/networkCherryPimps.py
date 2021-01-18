@@ -2,10 +2,10 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '+')
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '+')
     for searchPageNum in range(1, 3):
-        url = PAsearchSites.getSearchSearchURL(siteNum) + '%s&page=%d' % (search['encoded'], searchPageNum)
+        url = PAsearchSites.getSearchSearchURL(siteNum) + '%s&page=%d' % (searchData.encoded, searchPageNum)
         req = PAutils.HTTPRequest(url)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "video-thumb") or contains(@class, "item-video")]'):
@@ -23,10 +23,10 @@ def search(results, lang, siteNum, search):
                 actorNames.append(actorName)
             actorNames = ', '.join(actorNames)
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s in %s [CherryPimps/%s] %s' % (actorNames, titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 

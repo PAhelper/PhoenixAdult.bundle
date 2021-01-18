@@ -2,15 +2,15 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article[contains(@class, "movie-column")]'):
         titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
-        releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+        releaseDate = searchData.dateFormat() if searchData.date else ''
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

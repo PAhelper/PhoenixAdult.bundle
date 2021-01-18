@@ -2,16 +2,16 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="episode__title"]'):
         titleNoFormatting = searchResult.xpath('./a/h2')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('./a/@href')[0])
         subSite = searchResult.xpath('//head/title')[0].text_content().strip()
-        releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+        releaseDate = searchData.dateFormat() if searchData.date else ''
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [CzechAV/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 

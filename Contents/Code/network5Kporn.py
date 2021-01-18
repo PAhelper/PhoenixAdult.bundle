@@ -2,16 +2,16 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     cookies = {'nats': 'MC4wLjMuNTguMC4wLjAuMC4w'}
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'], cookies=cookies)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded, cookies=cookies)
     searchResults = HTML.ElementFromString(req.json()['html'])
     for sceneURL in searchResults.xpath('//div[@class="ep"]'):
         titleNoFormatting = searchResults.xpath('.//h3[@class="ep-title"]')[0].text_content().strip()
         sceneURL = searchResults.xpath('.//a/@href')[0]
         curID = PAutils.Encode(sceneURL)
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

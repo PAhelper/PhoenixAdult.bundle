@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     for searchPageNum in range(1, 3):
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + "/" + str(searchPageNum))
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + "/" + str(searchPageNum))
         searchResults = HTML.ElementFromString(req.text)
 
         for searchResult in searchResults.xpath('//div[@class="thumbsHolder elipsTxt"]/div[1]/div[@class="echThumb"]'):
@@ -14,10 +14,10 @@ def search(results, lang, siteNum, search):
                 subSite = searchResult.xpath('.//span[@class="faTxt"]')[0].text_content().strip()
                 releaseDate = parse(searchResult.xpath('.//span[@class="faTxt"]')[1].text_content().strip()).strftime('%Y-%m-%d')
 
-                if search['date']:
-                    score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                if searchData.date:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [BangBros/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 

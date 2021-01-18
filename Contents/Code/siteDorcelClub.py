@@ -2,15 +2,15 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     # Scenes by name
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="scenes list"]/div[@class="items"]/div[@class="scene thumbnail "]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="textual"]/a')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('.//a[@class="title"]/@href')[0])
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
@@ -19,7 +19,7 @@ def search(results, lang, siteNum, search):
         titleNoFormatting = searchResult.xpath('./h2')[0].text_content().strip()
         movieLink = searchResult.xpath('./@href')[0]
         curID = PAutils.Encode(movieLink)
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s - Full Movie [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
@@ -30,7 +30,7 @@ def search(results, lang, siteNum, search):
             titleNoFormatting = movieScene.xpath('.//div[@class="textual"]/a')[0].text_content().strip()
             curID = curID = PAutils.Encode(movieScene.xpath('.//a[@class="title"]/@href')[0])
 
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

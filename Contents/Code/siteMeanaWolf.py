@@ -2,15 +2,15 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="videoBlock"]'):
         titleNoFormatting = searchResult.xpath('./p/a')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.xpath('./p/a/@href')[0])
         img = PAutils.Encode(searchResult.xpath('.//img[@class="video_placeholder"]/@src')[0])
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, img), name='%s [Meana Wolf]' % titleNoFormatting, score=score, lang=lang))
 

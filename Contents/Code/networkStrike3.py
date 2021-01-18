@@ -10,8 +10,8 @@ def getDatafromAPI(url):
     return req
 
 
-def search(results, lang, siteNum, search):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + search['encoded']
+def search(results, lang, siteNum, searchData):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + searchData.encoded
 
     searchResults = getDatafromAPI(url)
     if searchResults:
@@ -20,10 +20,10 @@ def search(results, lang, siteNum, search):
             releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
             curID = PAutils.Encode(searchResult['targetUrl'])
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

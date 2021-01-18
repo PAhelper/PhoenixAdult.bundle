@@ -2,10 +2,10 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    sceneID = search['title'].split(' ', 1)[0]
+def search(results, lang, siteNum, searchData):
+    sceneID = searchData.title.split(' ', 1)[0]
     if unicode(sceneID, 'UTF-8').isdigit():
-        search['title'] = search['title'].replace(sceneID, '', 1).strip()
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
 
@@ -19,8 +19,8 @@ def search(results, lang, siteNum, search):
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name=titleNoFormatting, score=100, lang=lang))
     else:
-        search['encoded'] = search['title'].replace(' ', '+')
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+        searchData.encoded = searchData.title.replace(' ', '+')
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@id="content"]//div[contains(@class, "card-body")]'):
             titleNoFormatting = searchResult.xpath('.//a/@title')[0]
@@ -35,10 +35,10 @@ def search(results, lang, siteNum, search):
             sceneCover = PAutils.Encode(sceneCoverURL)
             curID = PAutils.Encode(url)
 
-            if search['date'] and releaseDate:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneCover), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

@@ -2,23 +2,23 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '-')
-    if '/' not in search['encoded']:
-        search['encoded'].replace('-', '/', 1)
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '-')
+    if '/' not in searchData.encoded:
+        searchData.encoded.replace('-', '/', 1)
 
-    if 'scene' not in search['encoded'].lower():
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+    if 'scene' not in searchData.encoded.lower():
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@class="sceneContainer"]'):
             titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip().title().replace('Xxx', 'XXX')
             curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
             releaseDate = parse(searchResult.xpath('.//p[@class="sceneDate"]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Scene] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
@@ -26,24 +26,24 @@ def search(results, lang, siteNum, search):
         curID = PAutils.Encode(searchResults.xpath('//link[@rel="canonical"]/@href')[0])
         releaseDate = parse(searchResults.xpath('//li[@class="updatedOn"]')[0].text_content().replace('Updated', '').strip()).strftime('%Y-%m-%d')
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), dvdTitle.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), dvdTitle.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Full Movie] %s' % (dvdTitle, releaseDate), score=score, lang=lang))
 
     else:
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + '/en/video/' + search['encoded'])
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteNum) + '/en/video/' + searchData.encoded)
         searchResults = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResults.xpath('//h1//span')[0].text_content().strip().title().replace('Xxx', 'XXX')
         curID = PAutils.Encode(searchResults.xpath('//link[@rel="canonical"]/@href')[0])
         releaseDate = parse(searchResults.xpath('//li[@class="updatedDate"]')[0].text_content().replace('Updated', '').replace('|', '').strip()).strftime('%Y-%m-%d')
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Wicked/Scene] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

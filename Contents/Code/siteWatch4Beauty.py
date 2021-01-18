@@ -2,17 +2,17 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     modelStrings = []
 
     # start by attempting to fetch the list of scenes for a model
-    if search['title'].lower().find('veronica da souza') >= 0:
+    if searchData.title.lower().find('veronica da souza') >= 0:
         # this is the only 3-word model nickname
         modelString = 'veronica-da-souza'
         modelStrings.append(modelString)
     else:
-        # try the first word or two of the search['title'] as the model name
-        splitWords = search['title'].lower().split()
+        # try the first word or two of the searchData.title as the model name
+        splitWords = searchData.title.lower().split()
         searchWords = []
         for i, searchWord in enumerate(splitWords):
             if i >= 2:
@@ -28,10 +28,10 @@ def search(results, lang, siteNum, search):
             break
 
     if not scenesJson:
-        # no model matches, so try to get the scene info with the search['title']
+        # no model matches, so try to get the scene info with the searchData.title
         Log('No model matches, attempting to match scene title')
 
-        modelsReq = PAutils.HTTPRequest('%s/%s/models' % (w4bApiUrl('scene'), search['title'].replace(' ', '-').lower()))
+        modelsReq = PAutils.HTTPRequest('%s/%s/models' % (w4bApiUrl('scene'), searchData.title.replace(' ', '-').lower()))
         modelsJson = modelsReq.json()
         if modelsJson:
             modelsJson = json.loads(modelsReq.text)
@@ -52,11 +52,11 @@ def search(results, lang, siteNum, search):
         modelName = modelString.replace('-', ' ').title()
         # Log('%s in %s, %s' % (modelString, sceneString, sceneDateString))
 
-        if search['date']:
-            if sceneDateString == search['date']:
+        if searchData.date:
+            if sceneDateString == searchData.date:
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (modelString, siteNum, sceneString), name='%s, %s [Watch4Beauty]' % (sceneName, sceneDateString), score=100, lang=lang))
-        elif search['title']:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), sceneName.lower())
+        elif searchData.title:
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), sceneName.lower())
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (modelString, siteNum, sceneString), name='%s, %s [Watch4Beauty]' % (sceneName, sceneDateString), score=score, lang=lang))
 
     return results

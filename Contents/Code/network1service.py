@@ -26,23 +26,23 @@ def get_Token(siteNum):
     return token
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     token = get_Token(siteNum)
     headers = {
         'Instance': token,
     }
 
     sceneID = None
-    splited = search['title'].split()
-    if unicode(splited[0], 'UTF-8').isdigit():
-        sceneID = splited[0]
-        search['title'] = search['title'].replace(sceneID, '', 1).strip()
+    parts = searchData.title.split()
+    if unicode(parts[0], 'UTF-8').isdigit():
+        sceneID = parts[0]
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
 
     for sceneType in ['scene', 'movie', 'serie', 'trailer']:
-        if sceneID and not search['title']:
+        if sceneID and not searchData.title:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, search['encoded'])
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, searchData.encoded)
 
         req = PAutils.HTTPRequest(url, headers=headers)
         if req:
@@ -59,10 +59,10 @@ def search(results, lang, siteNum, search):
 
                 if sceneID:
                     score = 100 - Util.LevenshteinDistance(sceneID, curID)
-                elif search['date']:
-                    score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                elif searchData.date:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if sceneType == 'trailer':
                     titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)

@@ -2,13 +2,13 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    if search['date']:
-        search['encoded'] = parse(search['date']).strftime('%Y/%m')
+def search(results, lang, siteNum, searchData):
+    if searchData.date:
+        searchData.encoded = parse(searchData.date).strftime('%Y/%m')
     else:
-        search['encoded'] = '?s=%s' % search['title'].replace(' ', '+')
+        searchData.encoded = '?s=%s' % searchData.title.replace(' ', '+')
 
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//article'):
         sceneURL = searchResult.xpath('.//a/@href')[1].strip()
@@ -18,10 +18,10 @@ def search(results, lang, siteNum, search):
         date = searchResult.xpath('.//div[@itemprop="datePublished"]')[0].text_content().strip()
         releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         sceneID = 'N/A'
         imgNode = searchResult.xpath('.//img/@src')

@@ -2,18 +2,18 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + '/' + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    data = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + '/' + searchData.encoded)
     searchResults = HTML.ElementFromString(data.text)
     for searchResult in searchResults.xpath('//div[@id="search-results-gallery"]//li[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="title"]')[0].text_content().strip()
         releaseDate = parse(searchResult.xpath('.//p[@class="date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         img = PAutils.Encode(searchResults.xpath('.//img[contains(@class, "image")]/@data-src')[0].split('?', 1)[0])
         curID = PAutils.Encode(PAsearchSites.getSearchBaseURL(siteNum) + searchResult.xpath('.//a[@class="cardLink"]/@href')[0])
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, img), name='%s [Playboy Plus] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 

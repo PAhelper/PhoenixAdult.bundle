@@ -4,8 +4,8 @@ import PAutils
 joinstr = 'https://join.hollyrandall.com/'
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "item-video")]'):
         titleNoFormatting = searchResult.xpath('./div[@class="item-thumb"]/a/@title')[0]
@@ -17,7 +17,7 @@ def search(results, lang, siteNum, search):
             date = searchResult.xpath('./div[@class="timeDate"]')[0].text_content().split('|')[1].strip()
             releaseDate = parse(date).strftime('%Y-%m-%d') if date else ''
 
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
             results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, titleNoFormatting, releaseDate), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results

@@ -2,21 +2,20 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     sceneID = None
-    splited = search['title'].split()
+    parts = searchData.title.split()
     searchResults = []
 
-    if unicode(splited[0], 'UTF-8').isdigit():
-        sceneID = splited[0]
-        search['title'] = search['title'].replace(sceneID, '', 1).strip()
+    if unicode(parts[0], 'UTF-8').isdigit():
+        sceneID = parts[0]
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
         directURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneID + '.html'
 
         searchResults.append(directURL)
 
-    googleResults = PAutils.getFromGoogleSearch(search['title'], siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
-        sceneURL = sceneURL.replace('://www.', '://')
         if ('/update/' in sceneURL) and sceneURL not in searchResults:
             searchResults.append(sceneURL)
 
@@ -32,10 +31,10 @@ def search(results, lang, siteNum, search):
             date = titleDate[-1].replace('!', '').strip()
             releaseDate = parse(date).strftime('%Y-%m-%d')
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
@@ -117,7 +116,7 @@ def update(metadata, siteNum, movieGenres, movieActors):
     googleResults = PAutils.getFromGoogleSearch(' '.join(actors).strip(), siteNum)
     for photoURL in googleResults:
         for scene in scenes:
-            if ('galleries' in photoURL or 'preview' in photoURL) and scene in photoURL:
+            if ('galleries' in photoURL or 'preview' in photoURL) and (scene in photoURL or scene == 'none'):
                 req = PAutils.HTTPRequest(photoURL)
                 photoPageElements = HTML.ElementFromString(req.text)
                 for xpath in xpaths:
@@ -164,6 +163,6 @@ def photoLookup(sceneID):
     elif sceneID == 1573 or sceneID == 283:
         scenes = []
     else:
-        scenes = []
+        scenes = ['none']
 
     return scenes

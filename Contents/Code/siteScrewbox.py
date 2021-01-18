@@ -2,8 +2,8 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//h4//a')[0].text_content().strip()
@@ -11,7 +11,7 @@ def search(results, lang, siteNum, search):
         actors = searchResult.xpath('.//div[@class="item-featured"]//a')
         firstActor = actors[0].text_content().strip().title()
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s in %s [Screwbox]' % (firstActor, titleNoFormatting), score=score, lang=lang))
 

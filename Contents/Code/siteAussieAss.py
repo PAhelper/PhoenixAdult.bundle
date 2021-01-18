@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
 
-    sceneID = re.sub(r'\D.*', '', search['title'])
+    sceneID = re.sub(r'\D.*', '', searchData.title)
 
     if sceneID:
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + "/webmasters/" + sceneID
@@ -19,26 +19,26 @@ def search(results, lang, siteNum, search):
     else:
         # Handle 3 Types of Links: First, Last; First Only; First-Last
         try:
-            search['encoded'] = re.search(r'^\S*.\S*', search['title']).group(0).replace(' ', '').lower()
+            searchData.encoded = re.search(r'^\S*.\S*', searchData.title).group(0).replace(' ', '').lower()
 
-            req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + ".html")
+            req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + ".html")
             searchResults = HTML.ElementFromString(req.text)
 
             if searchResults.xpath('//html')[0].text_content() == 'Page not found':
                 raise Exception
         except:
             try:
-                search['encoded'] = re.search(r'^\S*.\S*', search['title']).group(0).replace(' ', '-').lower()
+                searchData.encoded = re.search(r'^\S*.\S*', searchData.title).group(0).replace(' ', '-').lower()
 
-                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + ".html")
+                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + ".html")
                 searchResults = HTML.ElementFromString(req.text)
 
                 if searchResults.xpath('//html')[0].text_content() == 'Page not found':
                     raise Exception
             except:
-                search['encoded'] = re.search(r'^\S*', search['title']).group(0).lower()
+                searchData.encoded = re.search(r'^\S*', searchData.title).group(0).lower()
 
-                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + ".html")
+                req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + ".html")
                 searchResults = HTML.ElementFromString(req.text)
         try:
             pageResults = (int)(searchResults.xpath('//span[@class="number_item "]')[0].text_content().strip())
@@ -65,16 +65,16 @@ def search(results, lang, siteNum, search):
                 if date:
                     releaseDate = parse(date).strftime('%Y-%m-%d')
                 else:
-                    releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+                    releaseDate = searchData.dateFormat() if searchData.date else ''
                 releaseDate = parse(date).strftime('%Y-%m-%d')
                 displayDate = releaseDate if date else ''
 
                 if sceneID == resultID:
                     score = 100
-                elif search['date'] and displayDate:
-                    score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                elif searchData.date and displayDate:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

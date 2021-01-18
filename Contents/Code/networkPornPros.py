@@ -3,15 +3,15 @@ import PAextras
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     searchResults = []
 
-    directURL = PAsearchSites.getSearchSearchURL(siteNum) + search['title'].lower().replace(' ', '-')
+    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.title.lower().replace(' ', '-')
     if unicode(directURL[-1], 'UTF-8').isdigit() and directURL[-2] == '-':
         directURL = '%s-%s' % (directURL[:-1], directURL[-1])
     searchResults.append(directURL)
 
-    googleResults = PAutils.getFromGoogleSearch(search['title'], siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         if ('/video/' in sceneURL and sceneURL not in searchResults):
             searchResults.append(sceneURL)
@@ -23,9 +23,9 @@ def search(results, lang, siteNum, search):
             titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
             curID = PAutils.Encode(sceneURL)
 
-            releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+            releaseDate = searchData.dateFormat() if searchData.date else ''
 
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

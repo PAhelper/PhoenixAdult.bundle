@@ -52,9 +52,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
         title = getSearchTitle(title)
 
-        Log('*******MEDIA TITLE****** %s' % title)
-
-        Log('Getting Search Settings for: %s' % title)
+        Log('*** MEDIA TITLE [from media.name] *** %s' % title)
         searchSettings = PAsearchSites.getSearchSettings(title)
 
         filepath = None
@@ -64,36 +62,21 @@ class PhoenixAdultAgent(Agent.Movies):
             filename = str(os.path.splitext(os.path.basename(filepath))[0])
 
         if searchSettings['siteNum'] is None and filepath:
-            siteName = str(os.path.split(os.path.dirname(filepath))[1])
+            directory = str(os.path.split(os.path.dirname(filepath))[1])
 
-            newTitle = getSearchTitle(siteName)
-            Log('*******MEDIA TITLE****** %s' % newTitle)
+            newTitle = getSearchTitle(directory)
+            Log('*** MEDIA TITLE [from directory] *** %s' % newTitle)
             searchSettings = PAsearchSites.getSearchSettings(newTitle)
 
             if searchSettings['siteNum'] is not None and searchSettings['searchTitle'].lower() == PAsearchSites.getSearchSiteName(searchSettings['siteNum']).lower():
                 newTitle = '%s %s' % (siteName, title)
-                Log('*******MEDIA TITLE****** %s' % newTitle)
+                Log('*** MEDIA TITLE [from directory + media.name] *** %s' % newTitle)
                 searchSettings = PAsearchSites.getSearchSettings(newTitle)
 
         siteNum = searchSettings['siteNum']
 
         if siteNum is not None:
-            search = {
-                'title': searchSettings['searchTitle'],
-                'encoded': urllib.quote(searchSettings['searchTitle']),
-                'date': searchSettings['searchDate'],
-                'filename': filename,
-                'duration': media.duration,
-            }
-
-            Log('Search Title: %s' % search['title'])
-            Log('Encoded Title: %s' % search['encoded'])
-
-            if search['date']:
-                Log('Search Date: %s' % search['date'])
-
-            if filename:
-                Log('File Name: %s' % filename)
+            search = SearchData(media, searchSettings['searchTitle'], searchSettings['searchDate'], filepath, filename)
 
             provider = PAsiteList.getProviderFromSiteNum(siteNum)
             if provider is not None:
@@ -145,3 +128,53 @@ def getSearchTitle(title):
     title = ' '.join(title.split())
 
     return title
+
+class SearchData:
+    title = ''
+    encoded = ''
+    date = ''
+    filepath = ''
+    filename = ''
+    duration = ''
+
+    def __init__(self, media, searchTitle, searchDate, filepath, filename):
+        self.title = searchTitle
+        self.encoded = urllib.quote(searchTitle)
+        self.date = searchDate
+        self.filepath = filepath
+        self.filename = filename
+        self.duration = media.duration
+
+        Log('SearchData.title: %s' % self.title)
+
+        if self.date:
+            Log('SearchData.date: %s' % self.date)
+
+        if self.filename:
+            Log('SearchData.filename: %s' % self.filename)
+
+    def dateFormat(self, format = '%Y-%m-%d'):
+        if self.date:
+            return parse(self.date).strftime(format)
+        else:
+            return ''
+
+    def durationFormat(self, hoursFormat = '%02d:%02d:%02d', minutesFormat = '%d:%02d'):
+        durationString = ''
+
+        if self.duration:
+            import math
+            seconds = round(float(self.duration) / 1000)
+            hours = math.floor(seconds / 3600)
+            seconds = seconds - hours * 3600
+            minutes = math.floor(seconds / 60)
+            seconds = seconds - minutes * 60
+
+            if hours:
+                durationString = hoursFormat % (hours, minutes, seconds)
+            else:
+                durationString = minutesFormat % (minutes, seconds)
+
+        return durationString
+
+

@@ -3,8 +3,8 @@ import PAextras
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + search['encoded'] + '%22'
+def search(results, lang, siteNum, searchData):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '%22' + searchData.encoded + '%22'
     maxscore = 0
 
     req = PAutils.HTTPRequest(url)
@@ -14,7 +14,7 @@ def search(results, lang, siteNum, search):
         actors = searchResult.xpath('.//img/@alt')[0]
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s with %s [%s]' % (titleNoFormatting, actors, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
@@ -22,7 +22,7 @@ def search(results, lang, siteNum, search):
             maxscore = score
 
     if maxscore < 100:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + search['encoded']
+        url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
         req = PAutils.HTTPRequest(url)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//ul[@class="listing-videos listing-tube"]/*[div[@class="format-infos"]/div[@class="time-infos"]]'):
@@ -30,7 +30,7 @@ def search(results, lang, siteNum, search):
             actors = searchResult.xpath('.//img/@alt')[0]
             curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s with %s [%s]' % (titleNoFormatting, actors, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 

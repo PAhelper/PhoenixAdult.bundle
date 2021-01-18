@@ -12,18 +12,18 @@ def getAlgolia(url, indexName, params):
     return data['results'][0]['hits']
 
 
-def search(results, lang, siteNum, search):
-    sceneID = search['title'].split(' ', 1)[0]
+def search(results, lang, siteNum, searchData):
+    sceneID = searchData.title.split(' ', 1)[0]
     if unicode(sceneID, 'UTF-8').isdigit():
-        search['title'] = search['title'].replace(sceneID, '', 1).strip()
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
 
     url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
-    if sceneID and not search['title']:
+    if sceneID and not searchData.title:
         searchResults = getAlgolia(url, 'nacms_scenes_production', 'filters=id=' + sceneID)
     else:
-        searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + search['title'])
+        searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + searchData.title)
 
     for searchResult in searchResults:
         titleNoFormatting = searchResult['title']
@@ -33,10 +33,10 @@ def search(results, lang, siteNum, search):
 
         if sceneID:
             score = 100 - Util.LevenshteinDistance(sceneID, curID)
-        elif search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        elif searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, siteName, releaseDate), score=score, lang=lang))
 

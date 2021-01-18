@@ -2,11 +2,11 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    directURL = '%s%s.html' % (PAsearchSites.getSearchSearchURL(siteNum), search['title'].lower().replace(' ', '-'))
+def search(results, lang, siteNum, searchData):
+    directURL = '%s%s.html' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.title.lower().replace(' ', '-'))
     searchResults = [directURL]
 
-    googleResults = PAutils.getFromGoogleSearch(search['title'], siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.lower()
         if ('/trailers/' in sceneURL) and sceneURL not in searchResults:
@@ -19,9 +19,9 @@ def search(results, lang, siteNum, search):
 
             titleNoFormatting = searchResult.xpath('//h2[@class="title"]/text()')[0]
             curID = PAutils.Encode(sceneURL)
-            releaseDate = parse(search['date']) if search['date'] else ''
+            releaseDate = parse(searchData.date) if searchData.date else ''
 
-            score = 100 - Util.LevenshteinDistance(search['title'], titleNoFormatting)
+            score = 100 - Util.LevenshteinDistance(searchData.title, titleNoFormatting)
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Girls Rimming]' % titleNoFormatting, score=score, lang=lang))
 

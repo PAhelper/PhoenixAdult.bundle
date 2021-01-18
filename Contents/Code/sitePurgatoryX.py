@@ -2,10 +2,10 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     searchResults = []
 
-    googleResults = PAutils.getFromGoogleSearch(search['title'], siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         sceneURL = sceneURL.split('?')[0].replace('dev.', '', 1)
 
@@ -27,10 +27,10 @@ def search(results, lang, siteNum, search):
                     date = searchResult.xpath('.//span[@class="pub-date"]')[0].text_content().strip()
                     releaseDate = parse(date).strftime('%Y-%m-%d')
 
-                    if search['date']:
-                        score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                    if searchData.date:
+                        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                     else:
-                        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                     results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
@@ -44,10 +44,10 @@ def search(results, lang, siteNum, search):
         date = detailsPageElements.xpath('//span[@class="date"]')[0].text_content().strip()
         releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

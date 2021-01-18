@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['encoded'] + '&year=' + parse(search['date']).strftime('%Y') if search['date'] else search['encoded']
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.encoded + '&year=' + parse(searchData.date).strftime('%Y') if searchData.date else searchData.encoded
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[contains(@class, "item")]'):
         sceneURL = searchResult.xpath('.//a/@href')[0]
@@ -13,10 +13,10 @@ def search(results, lang, siteNum, search):
             titleNoFormatting = searchResult.xpath('.//img/@alt')[0].strip()
             releaseDate = parse(searchResult.xpath('.//div[@class="details"]/span[last()]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
-            if search['date']:
-                score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

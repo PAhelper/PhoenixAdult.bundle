@@ -2,10 +2,10 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     params = json.dumps({
         'sortBy': 'MOST_RELEVANT',
-        'searchQuery': search['title'],
+        'searchQuery': searchData.title,
         'videoView': 'MEDIUM'
     })
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum), params=params, headers={'Content-Type': 'application/json'})
@@ -17,10 +17,10 @@ def search(results, lang, siteNum, search):
         siteName = PAsearchSites.getSearchSiteName(siteNum)
         titleNoFormatting = '%s [%s] %s' % (searchResult['title'], siteName, releaseDate)
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, posterID), name=titleNoFormatting, score=score, lang=lang))
 

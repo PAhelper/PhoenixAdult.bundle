@@ -2,17 +2,17 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '_')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '_')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     titleNoFormatting = detailsPageElements.xpath('//h1[@class="latest-scene-title"]')[0].text_content().strip()
     curID = PAutils.Encode(detailsPageElements.xpath('//link[@rel="canonical"]/@href')[0])
     releaseDate = parse(detailsPageElements.xpath('//div[contains(@class, "latest-scene-meta")]//div[contains(@class, "text-left")]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
-    if search['date']:
-        score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+    if searchData.date:
+        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
     else:
         score = 95
 

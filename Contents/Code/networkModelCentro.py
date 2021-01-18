@@ -28,7 +28,7 @@ def getJSONfromAPI(url):
     return None
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + '/videos/')
     searchResults = getJSONfromAPI(PAsearchSites.getSearchSearchURL(siteNum) + apiurl + query)
 
@@ -37,18 +37,18 @@ def search(results, lang, siteNum, search):
             sceneID = str(searchResult['id'])
             releaseDate = parse(searchResult.get('sites').get('collection').get(sceneID).get('publishDate')).strftime('%Y-%m-%d')
 
-            if search['date']:
-                delta = abs(parse(search['date']) - parse(releaseDate))
+            if searchData.date:
+                delta = abs(parse(searchData.date) - parse(releaseDate))
                 if delta.days < 2:
                     artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))
                     titleNoFormatting = str(searchResult['title'])
-                    score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                     results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (sceneID, siteNum, titleNoFormatting, artobj),
                                                         name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)),
                                                         score=score, lang=lang))
             else:
                 titleNoFormatting = str(searchResult['title'])
-                score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if score >= 90:
                     artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))

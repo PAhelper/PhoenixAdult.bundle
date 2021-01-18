@@ -2,17 +2,17 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
+def search(results, lang, siteNum, searchData):
     searchJAVID = None
-    splitsearch['title'] = search['title'].split()
-    if len(splitsearch['title']) > 1:
-        if unicode(splitsearch['title'][1], 'UTF-8').isdigit():
-            searchJAVID = '%s%%2B%s' % (splitsearch['title'][0], splitsearch['title'][1])
+    splitsearchData.title = searchData.title.split()
+    if len(splitsearchData.title) > 1:
+        if unicode(splitsearchData.title[1], 'UTF-8').isdigit():
+            searchJAVID = '%s%%2B%s' % (splitsearchData.title[0], splitsearchData.title[1])
 
     if searchJAVID:
-        search['encoded'] = searchJAVID
+        searchData.encoded = searchJAVID
 
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//li[contains(@class, "item-list")]'):
         titleNoFormatting = searchResult.xpath('.//dt')[0].text_content().strip()
@@ -24,7 +24,7 @@ def search(results, lang, siteNum, search):
         if searchJAVID:
             score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
         else:
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
 

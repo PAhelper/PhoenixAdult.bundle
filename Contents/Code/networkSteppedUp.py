@@ -2,12 +2,12 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '-').replace('--', '-').replace('\'', '').lower()
-    if '/' not in search['encoded']:
-        search['encoded'] = search['encoded'].replace('-', '/', 1)
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '-').replace('--', '-').replace('\'', '').lower()
+    if '/' not in searchData.encoded:
+        searchData.encoded = searchData.encoded.replace('-', '/', 1)
 
-    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + search['encoded']
+    sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -18,13 +18,13 @@ def search(results, lang, siteNum, search):
     if date:
         releaseDate = parse(date[0].text_content().strip()).strftime('%Y-%m-%d')
     else:
-        releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+        releaseDate = searchData.dateFormat() if searchData.date else ''
     displayDate = releaseDate if date else ''
 
-    if search['date'] and displayDate:
-        score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+    if searchData.date and displayDate:
+        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
     else:
-        score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
     results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 

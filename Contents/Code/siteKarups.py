@@ -2,9 +2,9 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' ', '-')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'] + '/')
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '-')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + '/')
     actressearchResults = HTML.ElementFromString(req.text)
 
     actressPageUrl = actressearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
@@ -23,10 +23,10 @@ def search(results, lang, siteNum, search):
         elif subSiteRaw == 'kpc':
             subSite = 'KarupsPC'
 
-        if search['date']:
-            score = 100 - Util.LevenshteinDistance(search['date'], releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), search['title'].lower())
+            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchData.title.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 

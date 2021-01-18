@@ -2,15 +2,15 @@ import PAsearchSites
 import PAutils
 
 
-def search(results, lang, siteNum, search):
-    search['encoded'] = search['title'].replace(' a ', ' ')
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' a ', ' ')
 
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + search['encoded'])
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//a[contains(@class, "thumbnail")]'):
         titleNoFormatting = searchResult.xpath('.//h3[@class="scene-title"]')[0].text_content().strip()
         curID = PAutils.Encode(searchResult.get('href').split('?')[0])
-        releaseDate = parse(search['date']).strftime('%Y-%m-%d') if search['date'] else ''
+        releaseDate = searchData.dateFormat() if searchData.date else ''
         fullSubSite = searchResult.xpath('.//div/p[@class="help-block"]')[0].text_content().strip()
 
         if 'BehindTheScenes' in fullSubSite and 'BTS' not in titleNoFormatting:
@@ -18,9 +18,9 @@ def search(results, lang, siteNum, search):
         subSite = fullSubSite.split('.com')[0]
 
         if subSite == PAsearchSites.getSearchSiteName(siteNum):
-            score = 100 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
         else:
-            score = 60 - Util.LevenshteinDistance(search['title'].lower(), titleNoFormatting.lower())
+            score = 60 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [Dogfart/%s]' % (titleNoFormatting, subSite), score=score, lang=lang))
 
