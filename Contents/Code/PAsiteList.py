@@ -1407,6 +1407,7 @@ searchSites = {
     1241: ('Pretty Dirty Teens', 'https://www.prettydirtyteens.com', 'https://site-api.project1service.com'),
     1242: ('Love Her Ass', 'https://www.loveherass.com', 'https://site-api.project1service.com'),
     1243: ('Erotic Spice', 'https://www.eroticspice.com', 'https://site-api.project1service.com'),
+    1244: ('MyDirtyHobbyDE', 'https://mydirtyhobby.de/', '/profil'),
 }
 
 abbreviations = (
@@ -2621,7 +2622,7 @@ def getProviderFromSiteNum(siteNum):
             provider = networkTopWebModels
 
         # MyDirtyHobby
-        elif siteNum == 1237:
+        elif siteNum == 1237 or siteNum == 1244:
             provider = siteMyDirtyHobby
 
         # Deviante
