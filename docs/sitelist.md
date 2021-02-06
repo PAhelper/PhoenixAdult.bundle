@@ -282,6 +282,12 @@ The above is a reference list. Please see [the manualsearch doc](./manualsearch.
 + #### DefeatedXXX | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### DefeatedSexFight | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
 + #### Deviant Hardcore | Matching type: *[Limited](./manualsearch.md#limited-search)*
++ #### Deviante | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
+  - Erotic Spice
+  - Forgive Me Father
+  - Love Her Ass
+  - Pretty Dirty Teens
+  - Sex Working
 + #### Deranged Dollars | Matching type: *[Enhanced](./manualsearch.md#enhanced-search)*
   - Assylum
   - SlaveMouth

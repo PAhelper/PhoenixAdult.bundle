@@ -28,7 +28,9 @@ class PhoenixActors:
             actorName = ' '.join(actorName.split())
 
             # Skip an actor completely; this could be used to filter out male actors if desired
-            if actorName == 'Bad Name':
+            if not actorName:
+                skip = True
+            elif actorName == 'Bad Name':
                 skip = True
             elif actorName == 'Test Model Name':
                 skip = True

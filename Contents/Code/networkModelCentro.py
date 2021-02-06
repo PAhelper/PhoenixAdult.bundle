@@ -10,49 +10,41 @@ aboutquery = 'Client_Aboutme.getData?_method=Client_Aboutme.getData'
 
 
 def getAPIURL(url):
+    result = None
     req = PAutils.HTTPRequest(url)
 
     if req.text:
-        ah = re.search(r'"ah".?:.?\"([0-9a-zA-Z\(\)\@\:\,\/\!\+\-\.\$\_\=\\\']*)\"', req.text).group(1)[::-1] + '/'
-        aet = re.search(r'"aet".?:([0-9]*)', req.text).group(1) + '/'
-        Log(ah + aet)
-        return ah + aet
-    return None
+        ah = re.search(r'"ah".?:.?\"([0-9a-zA-Z\(\)\@\:\,\/\!\+\-\.\$\_\=\\\']*)\"', req.text).group(1)[::-1]
+        aet = re.search(r'"aet".?:([0-9]*)', req.text).group(1)
+        result = '%s/%s/' % (ah, aet)
+
+    return result
 
 
 def getJSONfromAPI(url):
     req = PAutils.HTTPRequest(url)
 
-    if req.text:
-        return json.loads(req.text).get('response').get('collection')
-    return None
+    return req.json()['response']['collection']
 
 
 def search(results, lang, siteNum, searchData):
     apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + '/videos/')
+    apiurl = urllib.quote(apiurl)
     searchResults = getJSONfromAPI(PAsearchSites.getSearchSearchURL(siteNum) + apiurl + query)
 
     if searchResults:
         for searchResult in searchResults:
             sceneID = str(searchResult['id'])
-            releaseDate = parse(searchResult.get('sites').get('collection').get(sceneID).get('publishDate')).strftime('%Y-%m-%d')
+            titleNoFormatting = str(searchResult['title'])
+            artobj = PAutils.Encode(json.dumps(searchResult['_resources']['base']))
+            releaseDate = parse(searchResult['sites']['collection'][sceneID]['publishDate']).strftime('%Y-%m-%d')
 
             if searchData.date:
-                delta = abs(parse(searchData.date) - parse(releaseDate))
-                if delta.days < 2:
-                    artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))
-                    titleNoFormatting = str(searchResult['title'])
-                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
-                    results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (sceneID, siteNum, titleNoFormatting, artobj),
-                                                        name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)),
-                                                        score=score, lang=lang))
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                titleNoFormatting = str(searchResult['title'])
                 score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-                if score >= 90:
-                    artobj = PAutils.Encode(json.dumps(searchResult.get('_resources').get('base')))
-                    results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (sceneID, siteNum, titleNoFormatting, artobj), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (sceneID, siteNum, titleNoFormatting, artobj), name='%s %s [%s]' % (titleNoFormatting, releaseDate, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -61,7 +53,7 @@ def update(metadata, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     title = metadata_id[2].strip()
-    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + '/scene/' + sceneID + '/' + title)
+    apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + '/scene/' + sceneID + '/' + urllib.quote(title))
     apiurl = PAsearchSites.getSearchSearchURL(siteNum) + apiurl
     searchResult = getJSONfromAPI(apiurl + updatequery.format(sceneID))[0]
 
@@ -79,7 +71,8 @@ def update(metadata, siteNum, movieGenres, movieActors):
     metadata.collections.add(metadata.studio)
 
     # Release Date
-    date_object = parse(searchResult.get('sites').get('collection').get(sceneID).get('publishDate'))
+    date = searchResult['sites']['collection'][sceneID]['publishDate']
+    date_object = parse(date)
     metadata.originally_available_at = date_object
     metadata.year = metadata.originally_available_at.year
 
@@ -88,11 +81,11 @@ def update(metadata, siteNum, movieGenres, movieActors):
     movieActors.clearActors()
 
     if 'tags' in searchResult:
-        genres = searchResult['tags'].get('collection')
+        genres = searchResult['tags']['collection']
 
-        if type(genres) is not list:
+        if not isinstance(genres, list):
             for (key, value) in genres.items():
-                genre = value.get('alias')
+                genre = value['alias']
 
                 if genre:
                     if siteNum == 1027:
@@ -104,12 +97,12 @@ def update(metadata, siteNum, movieGenres, movieActors):
     # Actors
     actors = getJSONfromAPI(apiurl + modelquery + sceneID)
 
-    if type(actors) is not list:
-        for (key, value) in actors.items():
-            collect = value.get('modelId').get('collection')
+    if not isinstance(actors, list):
+        for key, value in actors.items():
+            collect = value['modelId']['collection']
 
-            for (k, val) in collect.items():
-                actorName = val.get('stageName')
+            for k, val in collect.items():
+                actorName = val['stageName']
 
                 if actorName:
                     movieActors.addActor(actorName, '')
@@ -151,7 +144,7 @@ def update(metadata, siteNum, movieGenres, movieActors):
 
     if artobj:
         for searchResult in artobj:
-            art.append(searchResult.get('url'))
+            art.append(searchResult['url'])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
