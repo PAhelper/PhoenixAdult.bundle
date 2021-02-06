@@ -3,25 +3,53 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
+    if siteNum == 1237:
+        headers = {"Accept-Language": "en-EN,en;q=0.5"}
+        url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
 
-    req = PAutils.HTTPRequest(url)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[@id="search-results"]//li[contains(@class, "video-panel-item")]'):
-        sceneURL = searchResult.xpath('.//a/@href')[0]
-        titleNoFormatting = searchResult.xpath('.//h4')[0].text_content().strip()
+        req = PAutils.HTTPRequest(url, headers=headers)
+        searchResults = HTML.ElementFromString(req.text)
+        for searchResult in searchResults.xpath('//div[@id="search-results"]//li[contains(@class, "video-panel-item")]'):
+            sceneURL = searchResult.xpath('.//a/@href')[0]
+            titleNoFormatting = searchResult.xpath('.//h4')[0].text_content().strip()
 
-        curID = PAutils.Encode(sceneURL)
+            curID = PAutils.Encode(sceneURL)
 
-        date = searchResult.xpath('//i[contains(@class, "fa-calendar")]/parent::dd')[0].text_content().strip()
-        releaseDate = parse(date).strftime('%Y-%m-%d')
+            date = searchResult.xpath('//i[contains(@class, "fa-calendar")]/parent::dd')[0].text_content().strip()
+            releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        if searchData.date and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            if searchData.date and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [MyDirtyHobby] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [MyDirtyHobby] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+
+    else:
+        headers = {"Accept-Language": "de-DE,de;q=0.5"}
+        searchResults = []
+
+        googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum, lang='de')
+        for sceneURL in googleResults:
+            sceneURL = sceneURL.replace('www.mydirtyhobby.de', 'de.mydirtyhobby.com')
+            if '/videos/' in sceneURL:
+                searchResults.append(sceneURL)
+        for sceneURL in searchResults:
+            req = PAutils.HTTPRequest(sceneURL, headers=headers)
+            detailsPageElements = HTML.ElementFromString(req.text)
+
+            titleNoFormatting = detailsPageElements.xpath('//div[@class="page-header clearfix"]/h1')[0].text_content()
+
+            curID = PAutils.Encode(sceneURL)
+
+            releaseDate = parse(detailsPageElements.xpath('//div[contains(@class, "info-wrapper")]//i[contains(@class, "calendar")]')[0].text_content().strip()).strftime('%d.%m.%y')
+
+            if searchData.date and releaseDate:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [MyDirtyHobby] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
@@ -31,8 +59,11 @@ def update(metadata, siteNum, movieGenres, movieActors):
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
-
-    req = PAutils.HTTPRequest(sceneURL)
+    if siteNum == 1237:
+        headers = {"Accept-Language": "en-EN,en;q=0.5"}
+    else:
+	    headers = {"Accept-Language": "de-DE,de;q=0.5"}
+    req = PAutils.HTTPRequest(sceneURL, headers=headers)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
@@ -55,7 +86,10 @@ def update(metadata, siteNum, movieGenres, movieActors):
     # Release Date
     date = detailsPageElements.xpath('//i[contains(@class, "fa-calendar")]/parent::dd')[0].text_content().strip()
     if date:
-        date_object = datetime.strptime(date, '%m/%d/%y')
+        if siteNum == 1237:
+            date_object = datetime.strptime(date, '%m/%d/%y')
+        else:
+            date_object = datetime.strptime(date, '%d.%m.%y')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
