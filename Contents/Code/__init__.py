@@ -86,7 +86,7 @@ class PhoenixAdultAgent(Agent.Movies):
         if siteNum is not None:
             search = PAsearchData.SearchData(media, searchSettings['searchTitle'], searchSettings['searchDate'], filepath, filename)
 
-            provider = searchSettings['provider']
+            provider = PAsiteList.getProviderFromSiteNum(siteNum)
             if provider is not None:
                 providerName = getattr(provider, '__name__')
                 Log('Provider: %s' % providerName)
@@ -96,7 +96,7 @@ class PhoenixAdultAgent(Agent.Movies):
                     if providerName != 'networkMetadataAPI' and (not results or 100 != max([result.score for result in results])):
                         siteNum = PAsearchSites.getSiteNumByFilter('MetadataAPI')
                         if siteNum is not None:
-                            provider = PAsearchSites.getProviderBySiteNum(siteNum)
+                            provider = PAsiteList.getProviderFromSiteNum(siteNum)
                             if provider is not None:
                                 providerName = getattr(provider, '__name__')
                                 Log('Provider: %s' % providerName)
@@ -121,7 +121,7 @@ class PhoenixAdultAgent(Agent.Movies):
         siteNum = int(metadata_id[1])
         Log('SiteNum: %d' % siteNum)
 
-        provider = PAsearchSites.getProviderBySiteNum(siteNum)
+        provider = PAsiteList.getProviderFromSiteNum(siteNum)
         if provider is not None:
             providerName = getattr(provider, '__name__')
             Log('Provider: %s' % providerName)

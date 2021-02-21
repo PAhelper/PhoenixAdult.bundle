@@ -28,27 +28,6 @@ def getSearchSearchURL(siteNum):
     return url
 
 
-def getProviderId(siteNum):
-    providerId = None
-    if PAsiteList.searchSites[siteNum]:
-        providerId = PAsiteList.searchSites[siteNum][3]
-
-    return providerId
-
-
-def getProviderById(providerId):
-    provider = None
-    if providerId is not None:
-        provider = PAsiteList.providers[providerId]
-
-    return provider
-
-
-def getProviderBySiteNum(siteNum):
-    providerId = getProviderId(siteNum)
-    return getProviderById(providerId)
-
-
 def getSiteNumByFilter(searchFilter):
     searchResults = []
     searchFilter = re.sub(r'[^a-z0-9]', '', searchFilter.lower())
@@ -141,7 +120,6 @@ def getSearchSettings(mediaTitle):
             result['siteName'] = site
             result['searchTitle'] = searchTitle
             result['searchDate'] = searchDate
-            result['provider'] = getProviderBySiteNum(siteNum)
 
     return result
 
