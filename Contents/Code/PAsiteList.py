@@ -1426,6 +1426,7 @@ searchSites = {
     1260: ('Night Creep', 'https://www.filthykings.com', '/MemberSceneSearch?q='),
     1261: ('Filthy Blowjobs', 'https://www.filthykings.com', '/MemberSceneSearch?q='),
     1262: ('Filthy Newbies', 'https://www.filthykings.com', '/MemberSceneSearch?q='),
+    1263: ('Anal4K', 'https://www.anal4k.com', '/video/'),
 }
 
 abbreviations = (
@@ -1897,7 +1898,7 @@ def getProviderFromSiteNum(siteNum):
             provider = sitePrivate
 
         # PornPros Network
-        elif (306 <= siteNum <= 327) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844 or siteNum == 890:
+        elif (306 <= siteNum <= 327) or (479 <= siteNum <= 489) or siteNum == 624 or siteNum == 769 or siteNum == 844 or siteNum == 890 or siteNum == 1263:
             provider = networkPornPros
 
         # DigitalPlayground
