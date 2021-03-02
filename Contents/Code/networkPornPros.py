@@ -67,7 +67,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//a[contains(@href, "/girls/")]')
+    actors = detailsPageElements.xpath('//a[contains(@class, "badge")]')
     if actors:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
@@ -102,7 +102,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     if 'Poke Her In The Front' == metadata.title:
         actorPhotoURL = ''
 
-        actorName = 'Sara Luv'
+        actorName = 'Sara Luvv'
         movieActors.addActor(actorName, actorPhotoURL)
 
         actorName = 'Dillion Harper'
