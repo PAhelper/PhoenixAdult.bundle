@@ -118,31 +118,31 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     if siteName.lower() == "Lubed".lower():
         for genreName in ['Lube', 'Raw', 'Wet']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "Holed".lower():
+    if siteName.lower() in ["Holed".lower(), "Anal4K".lower()]:
         for genreName in ['Anal', 'Ass']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "POVD".lower():
+    if siteName.lower() == "POVD".lower():
         for genreName in ['Gonzo', 'POV']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "MassageCreep".lower():
+    if siteName.lower() == "MassageCreep".lower():
         for genreName in ['Massage', 'Oil']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "DeepThroatLove".lower():
+    if siteName.lower() == "DeepThroatLove".lower():
         for genreName in ['Blowjob', 'Deep Throat']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "PureMature".lower():
+    if siteName.lower() == "PureMature".lower():
         for genreName in ['MILF', 'Mature']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "Cum4K".lower():
+    if siteName.lower() in ["Cum4K".lower(), "Anal4K".lower()]:
         for genreName in ['Creampie']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "GirlCum".lower():
+    if siteName.lower() == "GirlCum".lower():
         for genreName in ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "PassionHD".lower():
+    if siteName.lower() == "PassionHD".lower():
         for genreName in ['Hardcore']:
             movieGenres.addGenre(genreName)
-    elif siteName.lower() == "BBCPie".lower():
+    if siteName.lower() == "BBCPie".lower():
         for genreName in ['Interracial', 'BBC', 'Creampie']:
             movieGenres.addGenre(genreName)
 
