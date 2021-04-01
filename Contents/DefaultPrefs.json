@@ -68,6 +68,30 @@
         "default": "9050"
     },
     {
+        "id": "proxy_authentication_enable",
+        "label": "Enable Proxy Authentication",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "proxy_user",
+        "label": "Proxy Username",
+        "type": "text",
+        "default": "user"
+    },
+    {
+        "id": "proxy_password",
+        "label": "Proxy Password",
+        "type": "text",
+        "default": "password"
+    },
+    {
+        "id": "ip_test",
+        "label": "Log Detected IP",
+        "type": "bool",
+        "default": "false"
+    },
+    {
         "id": "flaresolverr_endpoint",
         "label": "FlareSolverr Endpoint URL",
         "type": "text",

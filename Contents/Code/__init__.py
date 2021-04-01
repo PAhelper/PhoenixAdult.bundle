@@ -6,6 +6,8 @@ import os
 import random
 import re
 import requests
+import socks
+import socket
 import shutil
 import time
 import urllib
@@ -52,6 +54,18 @@ class PhoenixAdultAgent(Agent.Movies):
     primary_provider = True
 
     def search(self, results, media, lang):
+        # Set default socket if using socket with authentication
+        previousSocket = socket.socket
+        if Prefs['proxy_enable'] and Prefs['proxy_authentication_enable']:
+            if Prefs['proxy_type'].upper() not in socks.PROXY_TYPES:
+                Log('Error, proxy type (' + Prefs['proxy_type'] + ') must be one of the following: ' + str(socks.PROXY_TYPES.keys()))
+                raise ValueError("Invalid Proxy type: " + Prefs['proxy_type'])
+            else:
+                socks.set_default_proxy(socks.SOCKS5, Prefs['proxy_ip'], int(Prefs['proxy_port']), True, Prefs['proxy_user'],Prefs['proxy_password'])
+                socket.socket = socks.socksocket
+        if Prefs['ip_test']:
+            Log("Detecting ip: " + requests.get('http://ifconfig.me/ip').text)
+        
         if Prefs['strip_enable']:
             title = media.name.split(Prefs['strip_symbol'], 1)[0]
         else:
@@ -106,8 +120,23 @@ class PhoenixAdultAgent(Agent.Movies):
                                     Log(e)
 
         results.Sort('score', descending=True)
+        # Revert to default socket
+        if (Prefs['proxy_authentication_enable']):
+            socket.socket = previousSocket
 
     def update(self, metadata, media, lang):
+        # Set default socket if using socket with authentication
+        previousSocket = socket.socket
+        if Prefs['proxy_enable'] and Prefs['proxy_authentication_enable']:
+            if Prefs['proxy_type'].upper() not in socks.PROXY_TYPES:
+                Log('Error, proxy type (' + Prefs['proxy_type'] + ') must be one of the following: ' + str(socks.PROXY_TYPES.keys()))
+                raise ValueError("Invalid Proxy type: " + Prefs['proxy_type'])
+            else:
+                socks.set_default_proxy(socks.SOCKS5, Prefs['proxy_ip'], int(Prefs['proxy_port']), True, Prefs['proxy_user'],Prefs['proxy_password'])
+                socket.socket = socks.socksocket
+        if Prefs['ip_test']:
+            Log("Detecting ip: " + requests.get('http://ifconfig.me/ip').text)
+        
         movieGenres = PAgenres.PhoenixGenres()
         movieActors = PAactors.PhoenixActors()
 
@@ -138,6 +167,10 @@ class PhoenixAdultAgent(Agent.Movies):
 
         # Add Content Rating
         metadata.content_rating = 'XXX'
+
+        # Revert to default socket
+        if (Prefs['proxy_authentication_enable']):
+            socket.socket = previousSocket
 
 
 def getSearchTitle(title):

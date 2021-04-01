@@ -6,6 +6,8 @@ import fake_useragent
 import base58
 import cloudscraper
 import requests
+import socket
+import socks
 from requests_toolbelt.utils import dump
 from requests_response import FakeResponse
 
@@ -154,14 +156,13 @@ def HTTPRequest(url, method='GET', **kwargs):
     timeout = kwargs.pop('timeout', None)
     allow_redirects = kwargs.pop('allow_redirects', True)
     proxies = {}
-
-    if Prefs['proxy_enable']:
+    if Prefs['proxy_enable'] and not Prefs['proxy_authentication_enable']:
         proxy = '%s://%s:%s' % (Prefs['proxy_type'], Prefs['proxy_ip'], Prefs['proxy_port'])
         proxies = {
             'http': proxy,
             'https': proxy,
         }
-
+    
     if 'User-Agent' not in headers:
         headers['User-Agent'] = getUserAgent()
 
@@ -188,7 +189,6 @@ def HTTPRequest(url, method='GET', **kwargs):
 
     if Prefs['debug_enable']:
         saveRequest(url, req)
-
     return req
 
 
