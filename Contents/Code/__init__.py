@@ -60,16 +60,28 @@ class PhoenixAdultAgent(Agent.Movies):
 
         title = getSearchTitle(title)
 
+        #Use AdultEmpire to check dvd split scenes automatically
+        scene_title = re.search(r'.*(?=.Scene\s\d)', title).group()
+        if scene_title is not None:
+            searchSettings = {
+                'siteNum': 1334,
+                'siteName': "Adult Empire",
+                'searchTitle': title,
+                'searchDate': None,
+            }
+
+
         Log('***MEDIA TITLE [from media.name]*** %s' % title)
-        searchSettings = PAsearchSites.getSearchSettings(title)
-        Log(searchSettings)
+        if searchSettings is None:
+            searchSettings = PAsearchSites.getSearchSettings(title)
+            Log(searchSettings)
 
         filepath = None
         filename = None
         if media.filename:
             filepath = urllib.unquote(media.filename)
             filename = str(os.path.splitext(os.path.basename(filepath))[0])
-
+        
         if searchSettings['siteNum'] is None and filepath:
             directory = str(os.path.split(os.path.dirname(filepath))[1])
 

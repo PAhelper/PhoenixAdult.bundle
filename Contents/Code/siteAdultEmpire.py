@@ -8,6 +8,7 @@ def search(results, lang, siteNum, searchData):
     temp = []
     directID = False
     count = 0
+    scene_matched = False
 
     sceneID = None
     parts = searchData.title.split()
@@ -20,12 +21,20 @@ def search(results, lang, siteNum, searchData):
             searchResults.append(movieURL)
             directID = True
 
+    scene_break = re.search(r'.*(?=Scene\s\d)', searchData.title)
+    if scene_break:
+        scene_break = (scene_break.group().strip(), searchData.title[-1])
+        searchData.title = scene_break[0]
+        Log("scenebreak: %s %s" % (scene_break[0], scene_break[1]))
+
     searchData.encoded = searchData.title.replace(' ', '+')
     searchURL = '%s%s' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded)
     req = PAutils.HTTPRequest(searchURL, headers={'Referer': 'http://www.data18.empirestores.co'})
     searchPageElements = HTML.ElementFromString(req.text)
     if not directID:
         for searchResult in searchPageElements.xpath('//div[@class="product-card"]'):
+            if scene_matched:
+                break
             movieURL = '%s%s' % (PAsearchSites.getSearchBaseURL(siteNum), searchResult.xpath('./div[@class="boxcover-container"]/a/@href')[0].strip())
             urlID = searchResult.xpath('./div[@class="boxcover-container"]/a/@href')[0].split("/")[1]
             if movieURL not in searchResults:
@@ -35,8 +44,6 @@ def search(results, lang, siteNum, searchData):
 
                 if sceneID == urlID:
                     score = 100
-                elif searchData.date and displayDate:
-                    score = 80 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
                     score = 80 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
@@ -61,6 +68,7 @@ def search(results, lang, siteNum, searchData):
                         studio = detailsPageElements.xpath('//ul[@class="list-unstyled m-b-2"]/li[contains(., "Studio:")]/a/text()')[0].strip()
                     except:
                         studio = ''
+                        
                     if sceneID == urlID:
                         score = 100
                     elif searchData.date and displayDate:
@@ -80,7 +88,12 @@ def search(results, lang, siteNum, searchData):
                     for sceneNum in range(0, sceneCount):
                         section = 'Scene %d' % (sceneNum + 1)
                         actorNames = ', '.join(detailsPageElements.xpath('//div[@class="container"]/div[@class="row"][./div[@class="col-sm-6 text-right text-left-xs m-b-1"]][%d]/div[2]/div/a/text()' % (sceneNum + 1)))
-                        if score == 80:
+
+                        if scene_break and titleNoFormatting == scene_break[0] and sceneNum + 1 == int(scene_break[1]):
+                            scene_matched = True
+                            results.Append(MetadataSearchResult(id='%s|%d|%s|%d' % (curID, siteNum, releaseDate, sceneNum + 1), name='%s/#%d[%s][%s] %s' % (titleNoFormatting, sceneNum + 1, actorNames, studio, displayDate), score=100, lang=lang))
+                            break
+                        elif score == 80:
                             count += 1
                             temp.append(MetadataSearchResult(id='%s|%d|%s|%d' % (curID, siteNum, releaseDate, sceneNum + 1), name='%s/#%d[%s][%s] %s' % (titleNoFormatting, sceneNum + 1, actorNames, studio, displayDate), score=score, lang=lang))
                         else:
@@ -88,9 +101,9 @@ def search(results, lang, siteNum, searchData):
                 else:
                     if score == 80:
                         count += 1
-                        temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s %s' % (titleNoFormatting, displayDate), score=score, lang=lang))
+                        temp.append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s' % (titleNoFormatting), score=score, lang=lang))
                     else:
-                        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s %s' % (titleNoFormatting, displayDate), score=score, lang=lang))
+                        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s' % (titleNoFormatting), score=score, lang=lang))
 
     googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for movieURL in googleResults:
