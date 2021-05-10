@@ -61,7 +61,7 @@ class PhoenixAdultAgent(Agent.Movies):
         title = getSearchTitle(title)
 
         #Use AdultEmpire to check dvd split scenes automatically
-        scene_title = re.search(r'.*(?=.Scene\s\d)', title).group()
+        scene_title = re.search(r'.*(?=.Scene\s\d)', title)
         if scene_title is not None:
             searchSettings = {
                 'siteNum': 1334,
