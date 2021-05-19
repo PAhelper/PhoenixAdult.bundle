@@ -68,7 +68,7 @@ def search(results, lang, siteNum, searchData):
                         studio = detailsPageElements.xpath('//ul[@class="list-unstyled m-b-2"]/li[contains(., "Studio:")]/a/text()')[0].strip()
                     except:
                         studio = ''
-                        
+
                     if sceneID == urlID:
                         score = 100
                     elif searchData.date and displayDate:
