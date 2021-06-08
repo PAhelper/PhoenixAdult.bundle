@@ -4,7 +4,7 @@ import PAutils
 
 def getDatafromAPI(url):
     req = PAutils.HTTPRequest(url)
-
+    Log(req.status_code)
     if req:
         return req.json()['data']
     return req
@@ -77,14 +77,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     movieActors.clearActors()
     actors = video['modelsSlugged']
     for actorLink in actors:
+        actorName = actorLink['name']
         actorPageURL = PAsearchSites.getSearchSearchURL(siteNum) + '/' + actorLink['slugged']
         actorData = getDatafromAPI(actorPageURL)['model']
-
-        actorName = actorData['name']
         actorPhotoURL = ''
-        if actorData['images']['profile']:
+        if hasattr(actorData, '__getitem__') and actorData['images']['profile']:
             actorPhotoURL = actorData['images']['profile'][0]['highdpi']['3x']
-
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
