@@ -19,7 +19,7 @@ def search(results, lang, siteNum, searchData):
             curID = PAutils.Encode(sceneURL)
             titleNoFormatting = detailsPageElements.xpath('//h2')[0]
 
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            score = 100 - git Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
