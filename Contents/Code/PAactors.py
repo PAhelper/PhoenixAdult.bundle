@@ -95,6 +95,8 @@ class PhoenixActors:
                 newActor = "Eden Sinclair"
             elif newActor == "Elsa Dream":
                 newActor = "Elsa Jean"
+            elif newActor == "Eva Abel":
+                newActor = "Alice Klay"
             elif newActor == "Eve Lawrence":
                 newActor = "Eve Laurence"
             elif newActor == "Francesca Di Caprio" or newActor == "Francesca Dicaprio":
