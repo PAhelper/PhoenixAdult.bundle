@@ -1235,7 +1235,7 @@ searchSites = {
     1054: ('Femme', 'https://www.cherrypimps.com', '/search.php?query='),
     1055: ('Fresh', 'https://www.cherrypimps.com', '/search.php?query='),
     1056: ('Taboo', 'https://www.cherrypimps.com', '/search.php?query='),
-    1057: ('PornWorld', 'https://pornworld.com', '/search?query='),
+    1057: ('PornWorld', 'https://pornworld.com', '/search/'),
     1058: ('Vicki Valkyrie', 'https://www.vickivalkyrie.com', '/sapi/'),
     1059: ('Busted Babysitters', 'https://www.mofos.com', 'https://site-api.project1service.com'),
     1060: ('Ebony Sex Tapes', 'https://www.mofos.com', 'https://site-api.project1service.com'),
@@ -1536,6 +1536,7 @@ searchSites = {
     1355: ('MomSwap', 'http://momswap.com', '/movies'),
     1356: ('FreeuseMILF', 'http://freeusemilf.com', '/movies'),
     1357: ('Slayed', 'https://www.slayed.com', '/api'),
+    1358: ('White Teens Black Cocks', 'https://teencoreclub.com', '/video/'),
 }
 
 abbreviations = (
@@ -2584,7 +2585,7 @@ def getProviderFromSiteNum(siteNum):
             provider = network5Kporn
 
         # Teen Core Club
-        elif (943 <= siteNum <= 974):
+        elif (943 <= siteNum <= 974 or siteNum == 1358):
             provider = networkTeenCoreClub
 
         # Desperate Amateurs

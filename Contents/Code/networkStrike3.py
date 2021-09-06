@@ -79,6 +79,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     # Genres
     if video['categories']:
         movieGenres.clearGenres()
+        if metadata.studio == 'Tushy' or metadata.studio == 'TushyRaw':
+            movieGenres.addGenre('Anal')
         for tag in video['categories']:
             genreName = tag['name']
 

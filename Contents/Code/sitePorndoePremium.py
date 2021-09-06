@@ -5,7 +5,7 @@ import PAutils
 def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[contains(@class, "main-content-videos")]//div[@class="-g-vc-grid"]'):
+    for searchResult in searchResults.xpath('//div[contains(@class, "main-content")]//div[@class="-g-vc-grid"]'):
         titleNoFormatting = searchResult.xpath('./div[@class="-g-vc-item-title"]//a/@title')[0]
         subSite = searchResult.xpath('./div[@class="-g-vc-item-channel"]//a/@title')[0]
         curID = PAutils.Encode(searchResult.xpath('./div[@class="-g-vc-item-title"]//a/@href')[0])

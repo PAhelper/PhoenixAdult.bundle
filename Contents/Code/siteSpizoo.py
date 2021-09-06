@@ -69,7 +69,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row"]//div[@class="col-12"]//a')
+    genres = detailsPageElements.xpath('//div[@class="categories-holder"]/a')
     if genres:
         for genreLink in genres:
             genreName = genreLink.text_content().lower().strip()
@@ -83,7 +83,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row line"]//a | //p[@class="featuring"]/a'):
+    for actorLink in detailsPageElements.xpath('//h3[text()="Pornstars:"]/../a'):
         actorName = actorLink.text_content().replace('.', '').strip()
         actorPhotoURL = ''
 
