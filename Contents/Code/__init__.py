@@ -147,11 +147,24 @@ class PhoenixAdultAgent(Agent.Movies):
         # Add Content Rating
         metadata.content_rating = 'XXX'
 
+        # Custom Title
         if Prefs['custom_title_enable']:
+            actors = [actor.name.encode('ascii', 'ignore') for actor in metadata.roles if actor.role == 'Actress']
+            if not Prefs['hide_males_in_title_enable']:
+                actors += [actor.name.encode('ascii', 'ignore') for actor in metadata.roles if actor.role == 'Actor']
+
             data = {
                 'title': metadata.title,
-                'actors': ', '.join([actor.name.encode('ascii', 'ignore') for actor in metadata.roles]),
+                'actors': ', '.join(actors),
                 'studio': metadata.studio,
-                'series': ', '.join(set([collection.encode('ascii', 'ignore') for collection in metadata.collections if collection not in metadata.studio])),
+                'series': ', '.join(
+                    set(
+                        [
+                            collection.encode('ascii', 'ignore')
+                            for collection in metadata.collections
+                            if collection not in metadata.studio
+                        ]
+                    )
+                ),
             }
             metadata.title = Prefs['custom_title'].format(**data)
