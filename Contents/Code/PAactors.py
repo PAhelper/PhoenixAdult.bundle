@@ -64,15 +64,15 @@ class PhoenixActors:
                         displayActorName = actorName.replace('\xc2\xa0', '').strip()
 
                         (actorPhoto, gender) = actorDBfinder(displayActorName)
-                        Log('Actor: %s %s' % (displayActorName, actorPhoto))
-                        Log('Gender: %s' % gender)
-                        if Prefs['gender_enable']:
+                        Log('Actor: %s %s %s' % (displayActorName, gender, actorPhoto))
+                        if Prefs['filter_out_male_actors']:
                             if gender == 'male':
                                 continue
 
                         role = metadata.roles.new()
                         role.name = actorName
                         role.photo = actorPhoto
+                        role.role = 'Actor' if gender == 'male' else 'Actress'
                 else:
                     displayActorName = actorName.replace('\xc2\xa0', '').strip()
                     req = None
@@ -81,23 +81,21 @@ class PhoenixActors:
 
                     if not req or not req.ok:
                         (actorPhoto, gender) = actorDBfinder(displayActorName)
-                        Log('Gender: %s' % gender)
-                        if Prefs['gender_enable']:
+                    else:
+                        gender = genderCheck(urllib.quote(actorName))
+                    Log('Actor: %s %s %s' % (displayActorName, gender, actorPhoto))
+
+                    if Prefs['filter_out_male_actors']:
                             if gender == 'male':
                                 continue
-                    elif Prefs['gender_enable']:
-                        gender = genderCheck(urllib.quote(actorName))
-                        Log('Gender: %s' % gender)
-                        if gender == 'male':
-                            continue
 
                     if actorPhoto:
                         actorPhoto = PAutils.getClearURL(actorPhoto)
 
-                    Log('Actor: %s %s' % (displayActorName, actorPhoto))
                     role = metadata.roles.new()
                     role.name = actorName
                     role.photo = actorPhoto
+                    role.role = 'Actor' if gender == 'male' else 'Actress'
 
 
 def actorDBfinder(actorName):
