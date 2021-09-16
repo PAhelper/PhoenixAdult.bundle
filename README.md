@@ -23,6 +23,8 @@ Currently the features of this metadata agent are:
 - Function to clean up / merge actresses with aliases (e.g. Doris Ivy is Gina Gerson)
 - Function to locate an image for actors where the original site doesn't provide one
 - Function to manually add actors for sites the agent doesn't support
+- Function to change scene/movie title format
+- Function to filter out male actors
 - Function to automatically rename files (WIP)
 
 File Naming
