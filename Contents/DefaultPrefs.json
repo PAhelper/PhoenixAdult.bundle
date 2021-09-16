@@ -6,8 +6,14 @@
         "default": "false"
     },
     {
-        "id": "gender_enable",
-        "label": "Enable Male Actor filter",
+        "id": "filter_out_male_actors",
+        "label": "Filter out male actors",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "display_actor_gender",
+        "label": "Display gender in cast overview",
         "type": "bool",
         "default": "false"
     },
@@ -44,6 +50,12 @@
     {
         "id": "custom_title_enable",
         "label": "Use Custom Title Format",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "hide_males_in_title_enable",
+        "label": "Don't show male actors in custom title",
         "type": "bool",
         "default": "false"
     },
