@@ -168,3 +168,8 @@ class PhoenixAdultAgent(Agent.Movies):
                 ),
             }
             metadata.title = Prefs['custom_title'].format(**data)
+
+        # Display actors gender
+        if not Prefs['display_actor_gender']:
+            for actor in metadata.roles:
+                actor.role = None
