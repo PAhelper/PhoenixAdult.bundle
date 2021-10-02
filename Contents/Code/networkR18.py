@@ -165,18 +165,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata.collections.add('Japan Adult Video')
 
     # Posters
+
+    # First Adding Main Poster and Background Picture
+
     art = []
+    art.append(dataElements['images']['jacket_image']['large'])
+
+    # Appending Rest of the Images
     for photo in dataElements['gallery']:
         photoURL = photo['large']
 
         art.append(photoURL)
 
-    for poster in dataElements['images']:
-        poster_idx = poster.index('jacket_image')
-        if poster_idx:
-            posterURL = poster[poster_idx]['large']
-
-            art.append(posterURL)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
