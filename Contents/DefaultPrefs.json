@@ -6,6 +6,66 @@
         "default": "false"
     },
     {
+        "id": "gender_enable",
+        "label": "Enable Male Actor filter",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "metadataapi_enable",
+        "label": "Enable using MetadataAPI for unsuccessful search",
+        "type": "bool",
+        "default": "false"
+    },    
+    {
+        "id": "metadataapi_token",
+        "label": "MetadataAPI Token",
+        "type": "text",
+        "default": ""
+    },
+    {
+        "id": "strip_enable",
+        "label": "Enable FileName Strip",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "strip_symbol",
+        "label": "Strip After Symbol",
+        "type": "text",
+        "default": "~"
+    },
+    {
+        "id": "strip_symbol_reverse",
+        "label": "Strip Before Symbol",
+        "type": "text",
+        "default": "%"
+    },
+    {
+        "id": "custom_title_enable",
+        "label": "Use Custom Title Format",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "custom_title",
+        "label": "Title format",
+        "type": "text",
+        "default": "{actors} - {title} [{studio}/{series}]"
+    },
+    {
+        "id": "order_enable",
+        "label": "Enable Custom Order",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "order_list",
+        "label": "Order List",
+        "type": "text",
+        "default": "Local Storage, Freeones, IAFD, Indexxx, AdultDVDEmpire, Boobpedia, Babes and Stars, Babepedia"
+    },
+    {
         "id": "proxy_enable",
         "label": "Enable Proxy",
         "type": "bool",
@@ -18,6 +78,8 @@
         "values": [
             "http",
             "https",
+            "socks4",
+            "socks4a",
             "socks5",
             "socks5h"
         ],
@@ -34,6 +96,30 @@
         "label": "Proxy Port",
         "type": "text",
         "default": "9050"
+    },
+    {
+        "id": "proxy_authentication_enable",
+        "label": "Enable Proxy Authentication",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "proxy_user",
+        "label": "Proxy Username",
+        "type": "text",
+        "default": ""
+    },
+    {
+        "id": "proxy_password",
+        "label": "Proxy Password",
+        "type": "text",
+        "default": ""
+    },
+    {
+        "id": "flaresolverr_endpoint",
+        "label": "FlareSolverr Endpoint URL",
+        "type": "text",
+        "default": "http://localhost:8191"
     },
     {
         "id": "captcha_enable",
@@ -57,17 +143,5 @@
         "label": "API Key",
         "type": "text",
         "default": ""
-    },
-    {
-        "id": "strip_enable",
-        "label": "Enable FileName Strip",
-        "type": "bool",
-        "default": "false"
-    },
-    {
-        "id": "strip_symbol",
-        "label": "Strip Symbol",
-        "type": "text",
-        "default": "~"
     }
 ]

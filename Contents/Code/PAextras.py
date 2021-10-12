@@ -84,7 +84,7 @@ badMatch[47] = ['Hot Fucking with Sexy Sybil and Jake', None, 'Nude-Gals.com', '
 badMatch[48] = ['New Year’s Party', None, 'ImagePost.com', 'https://www.imagepost.com/movies/scarlett-bloom-on-passion-hd-in-new-years-party/']
 badMatch[49] = ['Couch Coach', None, 'ImagePost.com', 'https://www.imagepost.com/videos/jada-doll-couch-coach-passion-hd/']
 badMatch[50] = ['Honey, I’m Home', None, 'ImagePost.com', 'https://www.imagepost.com/movies/kyler-quinn-on-passion-hd-in-honey-im-home/']
-badMatch[51] = ['A Stepdaughter’s Gift', None,  'ImagePost.com', 'https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-a-stepdaughters-gift/']
+badMatch[51] = ['A Stepdaughter’s Gift', None, 'ImagePost.com', 'https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-a-stepdaughters-gift/']
 badMatch[52] = ['Picnic At The Park', None, 'ImagePost.com', 'https://www.imagepost.com/videos/emily-willis-on-passion-hd-in-picnic-at-the-park/']
 badMatch[53] = ['Horny StepDaughter Begs StepDad To Make Her Cum', None, 'ImagePost.com', 'https://www.imagepost.com/movies/mia-collins-on-spy-fam-begs-stepdad-to-make-her-cum/']
 badMatch[54] = ['Dear Diary: Stepsister’s Confessions', None, 'CoedCherry.com/pics', 'https://www.coedcherry.com/pics/jenni-jordan-dear-diary---stepsisters-confession']
@@ -300,7 +300,7 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
                                     # try to avoid bad matches based on title check also
                                     try:
                                         if site in ['AnalPornFan.com', 'LubedFan.com', 'PassionHDFan.com', 'Tiny4KFan.com']:
-                                            fanTitle = fanPageElements.xpath('//h1[@class= "post-title"]/text()')[0].strip()
+                                            fanTitle = fanPageElements.xpath('//h1[@class="post-title"]/text()')[0].strip()
                                         elif site == 'CoedCherry.com/pics':
                                             fanTitle = url.split('/')[-1].replace('-', ' ')
                                         elif site == 'EroticBeauties.net/pics':
@@ -326,8 +326,8 @@ def getFanArt(site, art, actors, actorName, title, match, siteName):
 
                                         Log(title.strip() + ' vs ' + str(fanTitle))
                                         # try percentage calculation of how many words match
-                                        a = [x for x in title.replace('’', '').replace('\'', '').replace(':', '').replace(',', '').strip().lower().split(' ')]
-                                        b = [x for x in fanTitle.replace('’', '').replace('\'', '').replace(':', '').replace(',', '').strip().lower().split(' ')]
+                                        a = [x for x in title.replace('’', '').replace('\'', '').replace(':', '').replace(',', '').strip().lower().split()]
+                                        b = [x for x in fanTitle.replace('’', '').replace('\'', '').replace(':', '').replace(',', '').strip().lower().split()]
                                         c = len(a)
                                         count = 0
                                         for word in a:

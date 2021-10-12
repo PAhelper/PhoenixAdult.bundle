@@ -1,107 +1,85 @@
 import PAsearchSites
-import PAgenres
-import PAactors
-import PAextras
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
+    req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//article//a'):
-        siteName = PAsearchSites.getSearchSiteName(siteNum) + '.xxx'
-        titleNoFormatting = searchResult.xpath('./@title')[0]
-        curID = PAutils.Encode(searchResult.xpath('./@href')[0])
+    pages = [url]
+    pages = pages + searchResults.xpath('//div[@class="pagination"]/ul/li/a/@href')
+    for link in pages:
+        req = PAutils.HTTPRequest(link)
+        searchResults = HTML.ElementFromString(req.text)
+        for searchResult in searchResults.xpath('//main//article[contains(@class,"thumb-block")]'):
+            siteName = PAsearchSites.getSearchSiteName(siteNum)
+            titleNoFormatting = searchResult.xpath('.//a/@title')[0].strip()
+            curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+            image = PAutils.Encode(searchResult.xpath('.//img/@src')[0])
 
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
-
-    url = PAsearchSites.getSearchSearchURL(siteNum).replace('.xxx', '.tv', 1)
-    req = PAutils.HTTPRequest(url + encodedTitle)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[contains(@class, "entry")]//h3//a'):
-        siteName = PAsearchSites.getSearchSiteName(siteNum) + '.tv'
-        titleNoFormatting = searchResult.xpath('./text()')[0].strip()
-        curID = PAutils.Encode(searchResult.xpath('./@href')[0])
-
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
-
-        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, image), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    if '.xxx' in sceneURL:
-        # Title
-        metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]/text()')[0].strip()
+    # Title
+    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[-1].text_content().strip()
 
-        # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="video-description"]')[0].text_content().strip()
+    # Release date
+    date = detailsPageElements.xpath('//div[@id="video-date"]')[0].text_content().strip()
+    if date:
+        date = date.replace('Date:', '').strip()
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
-        # Genres & Actors
-        movieGenres.clearGenres()
-        movieActors.clearActors()
-        tags = detailsPageElements.xpath('//div[@class="tags"]//a')
-        for tagLink in tags:
-            tagName = tagLink.xpath('./@title')[0]
-            tagURL = tagLink.xpath('./@href')[0]
-            if '/teen/' not in tagURL:
-                movieGenres.addGenre(tagName)
-            else:
-                movieActors.addActor(tagName, '')
-    else:
-        # Title
-        metadata.title = detailsPageElements.xpath('//h1[@class="title"]/text()')[0].strip()
+    # Genres
+    movieGenres.clearGenres()
+    genres = detailsPageElements.xpath('//div[@class="tags-list"]/a//i[@class="fa fa-folder-open"]/..')
+    for genreLink in genres:
+        genreName = genreLink.text_content().replace('Movies', '').strip()
 
-        # Summary
-        metadata.summary = detailsPageElements.xpath('//div[contains(@class, "entry")]//p')[2].text_content().strip()
+        movieGenres.addGenre(genreName)
 
-        # Genres & Actors
-        movieGenres.clearGenres()
-        movieActors.clearActors()
-        tags = detailsPageElements.xpath('//div[@class="post-meta"]//a')
-        for tagLink in tags:
-            tagName = tagLink.xpath('./text()')[0].strip()
-            tagURL = tagLink.xpath('./@href')[0]
-            if '/models/' not in tagURL:
-                movieGenres.addGenre(tagName)
-            else:
-                movieActors.addActor(tagName, '')
+    # Actors
+    movieActors.clearActors()
+    actors = detailsPageElements.xpath('//div[@id="video-actors"]//a')
+    for actorLink in actors:
+        actorName = actorLink.text_content().strip()
+        actorPhotoURL = ''
+
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Studio
-    metadata.studio = PAsearchSites.getSearchSiteName(siteID)
+    metadata.studio = PAsearchSites.getSearchSiteName(siteNum)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Posters
     art = []
-    xpaths = [
-        '//video/@poster',
-        '//dl[@class="gallery-item"]//img/@src'
-    ]
-    for xpath in xpaths:
-        for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
-
+    image = PAutils.Decode(metadata_id[2])
+    if image:
+        art.append(image)
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

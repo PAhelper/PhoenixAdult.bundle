@@ -64,20 +64,20 @@ __all__ = [
 
 # URL templates to make Google searches.
 url_home = "https://www.google.%(tld)s/"
-url_search = "https://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&" \
-             "btnG=Google+Search&tbs=%(tbs)s&safe=%(safe)s&" \
-             "cr=%(country)s"
-url_next_page = "https://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&" \
-                "start=%(start)d&tbs=%(tbs)s&safe=%(safe)s&" \
-                "cr=%(country)s"
-url_search_num = "https://www.google.%(tld)s/search?hl=%(lang)s&q=%(query)s&" \
-                 "num=%(num)d&btnG=Google+Search&tbs=%(tbs)s&safe=%(safe)s&" \
-                 "cr=%(country)s"
-url_next_page_num = "https://www.google.%(tld)s/search?hl=%(lang)s&" \
+url_search = "https://www.google.%(tld)s/search?lr=lang_%(lang)s&" \
+             "q=%(query)s&btnG=Google+Search&tbs=%(tbs)s&safe=%(safe)s&" \
+             "cr=%(country)s&filter=0"
+url_next_page = "https://www.google.%(tld)s/search?lr=lang_%(lang)s&" \
+                "q=%(query)s&start=%(start)d&tbs=%(tbs)s&safe=%(safe)s&" \
+                "cr=%(country)s&filter=0"
+url_search_num = "https://www.google.%(tld)s/search?lr=lang_%(lang)s&" \
+                 "q=%(query)s&num=%(num)d&btnG=Google+Search&tbs=%(tbs)s&" \
+                 "&safe=%(safe)scr=%(country)s&filter=0"
+url_next_page_num = "https://www.google.%(tld)s/search?lr=lang_%(lang)s&" \
                     "q=%(query)s&num=%(num)d&start=%(start)d&tbs=%(tbs)s&" \
-                    "safe=%(safe)s&cr=%(country)s"
+                    "safe=%(safe)s&cr=%(country)s&filter=0"
 url_parameters = (
-    'hl', 'q', 'num', 'btnG', 'start', 'tbs', 'safe', 'cr')
+    'hl', 'q', 'num', 'btnG', 'start', 'tbs', 'safe', 'cr', 'filter')
 
 # Cookie jar. Stored at the user's home folder.
 # If the cookie jar is inaccessible, the errors are ignored.
@@ -286,7 +286,7 @@ def search(query, tld='com', lang='en', tbs='0', safe='off', num=10, start=0,
     # Loop until we reach the maximum result, if any (otherwise, loop forever).
     while not stop or count < stop:
 
-        # Remeber last count to detect the end of results.
+        # Remember last count to detect the end of results.
         last_count = count
 
         # Append extra GET parameters to the URL.

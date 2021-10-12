@@ -1,16 +1,15 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = re.sub(r'\D', '', searchTitle)
-    actorName = re.sub(r'\s\d.*', '', searchTitle).replace(' ', '-')
+def search(results, lang, siteNum, searchData):
+    sceneID = re.sub(r'\D', '', searchData.title)
+    actorName = re.sub(r'\s\d.*', '', searchData.title).replace(' ', '-')
     sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + actorName + '/' + sceneID
 
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
-    titleNoFormatting = detailsPageElements.xpath('//h2')[1].text_content().strip()
+    titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     curID = PAutils.Encode(sceneURL)
 
@@ -21,34 +20,44 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchSearchURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h2')[1].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1')[0].text_content().strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="p-desc"]')[0].text_content().replace('Read More »', '').strip()
+    summary_xpaths = [
+        '//div[@class="p-desc"]',
+        '//div[contains(@class, "desc")]'
+    ]
+
+    for xpath in summary_xpaths:
+        for summary in detailsPageElements.xpath(xpath):
+            metadata.summary = summary.text_content().replace('Read More »', '').strip()
+            break
 
     # Studio
     metadata.studio = 'Score Group'
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(metadata.tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div/span[@class="value"]')[1].text_content().strip()
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    date = detailsPageElements.xpath('//div/span[@class="value"]')
+    if date:
+        date = date[1].text_content().strip()
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Actors
     movieActors.clearActors()
@@ -57,6 +66,9 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
+    
+    if siteNum == 1344:
+        movieActors.addActor('Christy Marks', '')
 
     # Genres
     movieGenres.clearGenres()
@@ -74,6 +86,10 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     xpaths = [
         '//div[contains(@class, "thumb")]/img/@src',
+        '//div[contains(@class, "p-image")]/a/img/@src',
+        '//div[contains(@class, "dl-opts")]/a/img/@src',
+        '//div[contains(@class, "p-photos")]/div/div/a/@href',
+        '//div[contains(@class, "gallery")]/div/div/a/@href'
     ]
 
     for xpath in xpaths:
@@ -89,7 +105,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

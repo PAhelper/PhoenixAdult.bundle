@@ -1,34 +1,32 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[contains(@class, "main-content-videos")]//div[contains(@class, "card-video")]'):
-        titleNoFormatting = searchResult.xpath('.//a/@aria-label')[0]
-        subSite = searchResult.xpath('.//a[@class="extra-link"]/@title')[0]
-        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
-        date = searchResult.xpath('.//p[contains(@class, "extra-info") and not(contains(@class, "actors"))]')[0].text_content().strip()
+    for searchResult in searchResults.xpath('//div[contains(@class, "main-content")]//div[@class="-g-vc-grid"]'):
+        titleNoFormatting = searchResult.xpath('./div[@class="-g-vc-item-title"]//a/@title')[0]
+        subSite = searchResult.xpath('./div[@class="-g-vc-item-channel"]//a/@title')[0]
+        curID = PAutils.Encode(searchResult.xpath('./div[@class="-g-vc-item-title"]//a/@href')[0])
+        date = searchResult.xpath('./div[@class="-g-vc-item-date"]')[0].text_content().strip()
         releaseDate = parse(date).strftime('%Y-%m-%d')
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [LetsDoeIt/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -71,11 +69,11 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorPageURL = actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
-        actorName = actorPage.xpath('//div[@data-item="c-13 r-11 m-c-15 / middle"]/h1')[0].text_content().strip()
+        actorName = actorPage.xpath('//div[@class="-aph-heading"]//h1')[0].text_content().strip()
         try:
-            actorPhotoURL = actorPage.xpath('//div[@class="avatar"]/picture[2]/img/@data-src')[0]
+            actorPhotoURL = actorPage.xpath('//div[@class="-api-poster-item"]//img/@data-src')[0]
             if 'http' not in actorPhotoURL:
-                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteNum) + actorPhotoURL
         except:
             pass
 
@@ -85,7 +83,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
     xpaths = [
         '//picture[@class="poster"]//img/@src',
-        '//div[@id="gallery-thumbs"]//img/@src'
+        '//div[@id="gallery-thumbs"]/div/a/svg/@data-bg'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
@@ -96,7 +94,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

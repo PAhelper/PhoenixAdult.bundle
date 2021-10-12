@@ -1,6 +1,4 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
@@ -15,34 +13,34 @@ def getDataFromAPI(url, req_type, query):
     return data
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    searchResults = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'name', searchTitle)['hits']['hits']
+def search(results, lang, siteNum, searchData):
+    searchResults = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'name', searchData.title)['hits']['hits']
     for searchResult in searchResults:
         searchResult = searchResult['_source']
-        titleNoFormatting = searchResult['name']
+        titleNoFormatting = PAutils.parseTitle(searchResult['name'], siteNum)
         studioScene = searchResult['studio']['name'].title()
         seriesScene = searchResult['series']['name']
         curID = searchResult['identifier']
         releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (seriesScene.title() if seriesScene else studioScene, titleNoFormatting), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
 
-    detailsPageElements = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteID), 'identifier', sceneID)['hits']['hits'][0]['_source']
+    detailsPageElements = getDataFromAPI(PAsearchSites.getSearchSearchURL(siteNum), 'identifier', sceneID)['hits']['hits'][0]['_source']
 
     # Title
-    metadata.title = detailsPageElements['name']
+    metadata.title = PAutils.parseTitle(detailsPageElements['name'], siteNum)
 
     # Summary
     metadata.summary = detailsPageElements['description']
@@ -91,7 +89,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

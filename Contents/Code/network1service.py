@@ -1,13 +1,10 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def get_Token(siteID):
-    token_key = None
-    if siteID == 2 or (siteID >= 54 and siteID <= 81) or siteID == 582 or siteID == 690:
-        token_key = 'brazzers_token'
+def get_Token(siteNum):
+    url = PAsearchSites.getSearchBaseURL(siteNum)
+    token_key = urlparse.urlparse(url).hostname
 
     token = None
     if token_key and token_key in Dict:
@@ -17,7 +14,7 @@ def get_Token(siteID):
             token = Dict[token_key]
 
     if not token:
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchBaseURL(siteID), 'HEAD')
+        req = PAutils.HTTPRequest(url, 'HEAD')
         if 'instance_token' in req.cookies:
             token = req.cookies['instance_token']
 
@@ -29,23 +26,23 @@ def get_Token(siteID):
     return token
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+def search(results, lang, siteNum, searchData):
     token = get_Token(siteNum)
     headers = {
         'Instance': token,
     }
 
     sceneID = None
-    splited = searchTitle.split(' ')
-    if unicode(splited[0], 'UTF-8').isdigit():
-        sceneID = splited[0]
-        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+    parts = searchData.title.split()
+    if unicode(parts[0], 'UTF-8').isdigit():
+        sceneID = parts[0]
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
 
     for sceneType in ['scene', 'movie', 'serie', 'trailer']:
-        if sceneID and not searchTitle:
+        if sceneID and not searchData.title:
             url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
         else:
-            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, encodedTitle)
+            url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&search=%s' % (sceneType, searchData.encoded)
 
         req = PAutils.HTTPRequest(url, headers=headers)
         if req:
@@ -60,15 +57,19 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                     subSite = searchResult['collections'][0]['name']
                 siteDisplay = '%s/%s' % (siteName, subSite) if subSite else siteName
 
+                score = 100
                 if sceneID:
-                    score = 100 - Util.LevenshteinDistance(sceneID, curID)
-                elif searchDate:
-                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                    score = score - Util.LevenshteinDistance(sceneID, curID)
                 else:
-                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                    if searchData.date:
+                        score = score - 2 * Util.LevenshteinDistance(searchData.date, releaseDate)
+                    score = score - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 if sceneType == 'trailer':
                     titleNoFormatting = '[%s] %s' % (sceneType.capitalize(), titleNoFormatting)
+                    score = score - 10
+
+                if subSite and PAsearchSites.getSearchSiteName(siteNum).replace(' ', '').lower() != subSite.replace(' ', '').lower():
                     score = score - 10
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, sceneType), name='%s [%s] %s' % (titleNoFormatting, siteDisplay, releaseDate), score=score, lang=lang))
@@ -76,16 +77,16 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
     sceneType = metadata_id[2]
 
-    token = get_Token(siteID)
+    token = get_Token(siteNum)
     headers = {
         'Instance': token,
     }
-    url = PAsearchSites.getSearchSearchURL(siteID) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '/v2/releases?type=%s&id=%s' % (sceneType, sceneID)
     req = PAutils.HTTPRequest(url, headers=headers)
     detailsPageElements = req.json()['result'][0]
 
@@ -118,14 +119,14 @@ def update(metadata, siteID, movieGenres, movieActors):
             seriesNames.append(detailsPageElements['parent']['title'])
 
     isInCollection = False
-    siteName = PAsearchSites.getSearchSiteName(siteID).lower().replace(' ', '').replace('\'', '')
+    siteName = PAsearchSites.getSearchSiteName(siteNum).lower().replace(' ', '').replace('\'', '')
     for seriesName in seriesNames:
         if seriesName.lower().replace(' ', '').replace('\'', '') == siteName:
             isInCollection = True
             break
 
     if not isInCollection:
-        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteID))
+        seriesNames.insert(0, PAsearchSites.getSearchSiteName(siteNum))
 
     for seriesName in seriesNames:
         metadata.collections.add(seriesName)
@@ -147,7 +148,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     movieActors.clearActors()
     actors = detailsPageElements['actors']
     for actorLink in actors:
-        actorPageURL = PAsearchSites.getSearchSearchURL(siteID) + '/v1/actors?id=%d' % actorLink['id']
+        actorPageURL = PAsearchSites.getSearchSearchURL(siteNum) + '/v1/actors?id=%d' % actorLink['id']
 
         req = PAutils.HTTPRequest(actorPageURL, headers=headers)
         actorData = req.json()['result'][0]
@@ -155,7 +156,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorName = actorData['name']
         actorPhotoURL = ''
         if actorData['images'] and actorData['images']['profile']:
-            actorPhotoURL = actorData['images']['profile'][0]['xs']['url']
+            actorPhotoURL = actorData['images']['profile']['0']['xs']['url']
 
         movieActors.addActor(actorName, actorPhotoURL)
 
@@ -164,14 +165,15 @@ def update(metadata, siteID, movieGenres, movieActors):
     for imageType in ['poster', 'cover']:
         if imageType in detailsPageElements['images']:
             for image in detailsPageElements['images'][imageType]:
-                art.append(image['xx']['url'])
+                if image.isdigit():
+                    art.append(detailsPageElements['images'][imageType][image]['xx']['url'])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

@@ -1,17 +1,16 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = searchTitle.replace(' ', '-')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle + '/')
-    actressSearchResults = HTML.ElementFromString(req.text)
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '-')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded + '/')
+    actressearchResults = HTML.ElementFromString(req.text)
 
-    actressPageUrl = actressSearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
+    actressPageUrl = actressearchResults.xpath('//div[@class="item-inside"]//a/@href')[0]
     req = PAutils.HTTPRequest(actressPageUrl)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//div[contains(@class,"listing-videos")]//div[@class="item"]'):
+    for searchResult in searchResults.xpath('//div[contains(@class, "listing-videos")]//div[@class="item"]'):
         titleNoFormatting = searchResult.xpath('.//span[@class="title"]')[0].text_content()
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
         releaseDate = parse(searchResult.xpath('.//span[@class="date"]')[0].text_content().replace('th', '').replace('st', '').strip()).strftime('%Y-%m-%d')
@@ -24,21 +23,21 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         elif subSiteRaw == 'kpc':
             subSite = 'KarupsPC'
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchTitle.lower())
+            score = 100 - Util.LevenshteinDistance(titleNoFormatting.lower(), searchData.title.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = metadata.id.split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -75,8 +74,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     if tagline == 'KarupsOW':
         genres = ['MILF']
 
-    for genre in genres:
-        movieGenres.addGenre(genre)
+    for genreLink in genres:
+        genreName = genreLink
+
+        movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
@@ -107,7 +108,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

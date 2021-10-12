@@ -29,8 +29,9 @@ File Naming
 -----------
 The agent will try to match your file automatically, usually based on the filename. You can assist it by renaming your video appropriately.
 If the video is not successfully matched, you can try to manually match it using the [Match...] function in Plex. See the [manual searching document](./docs/manualsearch.md) for more information.
-Best practice for each site is listed in the [sitelist document](./docs/sitelist.md).
-**Plex Video Files Scanner needs to be set as the library scanner for best results.**
+Best practice for each site is listed in the [sitelist document](./docs/sitelist.md). 
+
+**`Plex Video Files` needs to be set as the library scanner for best results.**
 
 #### Here are some naming structures we recommend:
 - `SiteName` - `YYYY-MM-DD` - `Scene Name` `.[ext]`

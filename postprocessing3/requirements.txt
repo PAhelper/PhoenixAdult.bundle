@@ -1,4 +1,6 @@
-watchdog==0.10.3
-requests==2.24.0
 ffmpeg_python==0.2.0
-pymediainfo==4.2.1
+oshash==0.1.1
+requests==2.25.1
+requests_cache==0.6.3
+watchdog==2.0.2
+pymediainfo==5.0.4

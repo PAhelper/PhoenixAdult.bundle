@@ -1,50 +1,52 @@
 import PAsearchSites
-import PAgenres
-import PAactors
-import PAextras
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    searchResults = []
+def search(results, lang, siteNum, searchData):
+    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchData.title.lower().replace(' ', '-').replace('\'', '-')
+    searchResults = [directURL]
 
-    directURL = PAsearchSites.getSearchSearchURL(siteNum) + searchTitle.lower().replace(' ', '-')
     if unicode(directURL[-1], 'UTF-8').isdigit() and directURL[-2] == '-':
         directURL = '%s-%s' % (directURL[:-1], directURL[-1])
     searchResults.append(directURL)
 
-    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
         if ('/video/' in sceneURL and sceneURL not in searchResults):
             searchResults.append(sceneURL)
 
+    searchResults = list(dict.fromkeys([sceneURL.replace('www.', '', 1) for sceneURL in searchResults]))
+
     for sceneURL in searchResults:
+        if sceneURL == directURL.replace('www.', '', 1):
+            for original, new in plurals.items():
+                sceneURL = sceneURL.replace(original, new)
+
         req = PAutils.HTTPRequest(sceneURL)
         if 'signup.' not in req.url:
             detailsPageElements = HTML.ElementFromString(req.text)
             titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
             curID = PAutils.Encode(sceneURL)
-            try:
-                releaseDate = parse(detailsPageElements.xpath('//div[@class="d-inline d-lg-block mb-1"]/span')[0].text_content().strip()).strftime('%Y-%m-%d')
-            except:
-                releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
 
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
-            else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            releaseDate = searchData.dateFormat() if searchData.date else ''
+
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
-    sceneDate = metadata_id[2]
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
+
+    sceneDate = None
+    if len(metadata_id) > 2:
+        sceneDate = metadata_id[2]
+
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -57,33 +59,18 @@ def update(metadata, siteID, movieGenres, movieActors):
     except:
         pass
 
-    try:
-        if siteName.lower() == "Cum4K".lower():
-            summaryurl = "https://cum4k.tube/" + temp
-            req = PAutils.HTTPRequest(summaryurl)
-            summaryPageElements = HTML.ElementFromString(req.text)
-            metadata.summary = summaryPageElements.xpath('//p[@class="more"]/text()')[0].strip()
-    except:
-        pass
-
     # Studio
     metadata.studio = 'Porn Pros'
 
     # Collections / Tagline
-    siteName = PAsearchSites.getSearchSiteName(siteID)
+    siteName = PAsearchSites.getSearchSiteName(siteNum)
     metadata.collections.clear()
     metadata.tagline = siteName
     metadata.collections.add(siteName)
 
-    # Release Date
-    if sceneDate:
-        date_object = parse(sceneDate)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[contains(@class, "pt-md")]//a[contains(@href, "/girls/")]')
+    actors = detailsPageElements.xpath('//div[@id="t2019-sinfo"]//a[contains(@href, "/girls/")]')
     if actors:
         if len(actors) == 3:
             movieGenres.addGenre('Threesome')
@@ -98,55 +85,53 @@ def update(metadata, siteID, movieGenres, movieActors):
 
             movieActors.addActor(actorName, actorPhotoURL)
 
+            if not sceneDate:
+                actorURL = actorLink.get('href')
+                if not actorURL.startswith('http'):
+                    actorURL = PAsearchSites.getSearchBaseURL(siteNum) + actorURL
+
+                req = PAutils.HTTPRequest(actorURL)
+                actorPageElements = HTML.ElementFromString(req.text)
+
+                sceneDate = None
+                for sceneLink in actorPageElements.xpath('//div[@class="row"]//div[contains(@class, "box-shadow")]'):
+                    sceneTitle = sceneLink.xpath('.//h5[@class="card-title"]')[0].text_content().strip()
+                    date = sceneLink.xpath('.//@data-date')
+                    if metadata.title == sceneTitle and date:
+                        sceneDate = date[0].strip()
+
     # Manually Add Actors
     # Add Actor Based on Title
     if 'Poke Her In The Front' == metadata.title:
         actorPhotoURL = ''
 
-        actorName = 'Sara Luv'
+        actorName = 'Sara Luvv'
         movieActors.addActor(actorName, actorPhotoURL)
 
         actorName = 'Dillion Harper'
         movieActors.addActor(actorName, actorPhotoURL)
 
+    if sceneDate:
+        date_object = parse(sceneDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+
     # Genres
     movieGenres.clearGenres()
-    if siteName.lower() == "Lubed".lower():
-        for genreName in ['Lube', 'Raw', 'Wet']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "Holed".lower():
-        for genreName in ['Anal', 'Ass']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "POVD".lower():
-        for genreName in ['Gonzo', 'POV']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "MassageCreep".lower():
-        for genreName in ['Massage', 'Oil']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "DeepThroatLove".lower():
-        for genreName in ['Blowjob', 'Deep Throat']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "PureMature".lower():
-        for genreName in ['MILF', 'Mature']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "Cum4K".lower():
-        for genreName in ['Creampie']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "GirlCum".lower():
-        for genreName in ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "PassionHD".lower():
-        for genreName in ['Hardcore']:
-            movieGenres.addGenre(genreName)
-    elif siteName.lower() == "BBCPie".lower():
-        for genreName in ['Interracial', 'BBC', 'Creampie']:
-            movieGenres.addGenre(genreName)
+    genres = []
+    for key, value in genresDB.items():
+        if key.lower() == siteName.lower():
+            genres = value
+            break
+
+    for genreName in genres:
+        movieGenres.addGenre(genreName)
 
     # Posters
     art = []
     xpaths = [
         '//video/@poster',
-        '(//img[contains(@src, "handtouched")])[position() <5]/@src'
+        '(//img[contains(@src, "handtouched")])[position() < 5]/@src'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
@@ -160,7 +145,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
@@ -175,3 +160,32 @@ def update(metadata, siteID, movieGenres, movieActors):
                 pass
 
     return metadata
+
+
+genresDB = {
+    'Anal4K': ['Anal', 'Ass', 'Creampie'],
+    'BBCPie': ['Interracial', 'BBC', 'Creampie'],
+    'Cum4K': ['Creampie'],
+    'DeepThroatLove': ['Blowjob', 'Deep Throat'],
+    'GirlCum': ['Orgasms', 'Girl Orgasm', 'Multiple Orgasms'],
+    'Holed': ['Anal', 'Ass'],
+    'Lubed': ['Lube', 'Raw', 'Wet'],
+    'MassageCreep': ['Massage', 'Oil'],
+    'PassionHD': ['Hardcore'],
+    'POVD': ['Gonzo', 'POV'],
+    'PureMature': ['MILF', 'Mature'],
+}
+
+plurals = {
+    'brothers': 'brother-s',
+    'bros': 'bro-s',
+    'sisters': 'sister-s',
+    'siss': 'sis-s',
+    'friends': 'friend-s',
+    'mothers': 'mother-s',
+    'moms': 'mom-s',
+    'fathers': 'father-s',
+    'dads': 'dad-s',
+    'sons': 'son-s',
+    'daughters': 'daughter-s',
+}

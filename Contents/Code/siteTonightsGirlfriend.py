@@ -1,12 +1,11 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = searchTitle.lower().split('and ')[0].strip().replace(' ', '-')
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.lower().split('and ')[0].strip().replace(' ', '-')
     for page in range(1, 5):
-        req = PAutils.HTTPRequest('%s%s/?p=%d' % (PAsearchSites.getSearchSearchURL(siteNum), encodedTitle, page))
+        req = PAutils.HTTPRequest('%s%s/?p=%d' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.encoded, page))
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[@class="panel-body"]'):
             actorList = []
@@ -20,12 +19,12 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0].split('?')[0])
 
-            releaseDate = parse(searchResult.xpath('.//span[@class="scene-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
+            releaseDate = parse(searchResult.xpath('.//span[@class="available-date"]')[0].text_content().strip()).strftime('%m-%d-%y')
 
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), firstActor.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), firstActor.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Tonight\'s Girlfriend] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
@@ -35,11 +34,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -58,7 +57,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         req = PAutils.HTTPRequest(actorPageURL)
         actorPageElements = HTML.ElementFromString(req.text)
-        actorPhotoURL = actorPageElements.xpath('//div[contains(@class, "modelpage-info")]//img/@src')[0].split('?')[0]
+        actorPhotoURL = 'https:' + actorPageElements.xpath('//div[contains(@class, "modelpage-info")]//img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 
@@ -105,12 +104,15 @@ def update(metadata, siteID, movieGenres, movieActors):
             genres.append('BGG')
         else:
             genres.append('BBG')
-    for genre in genres:
-        movieGenres.addGenre(genre)
+
+    for genreLink in genres:
+        genreName = genreLink
+
+        movieGenres.addGenre(genreName)
 
     # Posters/Background
     art = [
-        detailsPageElements.xpath('//img[@class="playcard"]/@src')[0]
+        'https:' + detailsPageElements.xpath('//img[@class="playcard"]/@src')[0]
     ]
 
     Log('Artwork found: %d' % len(art))
@@ -118,7 +120,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

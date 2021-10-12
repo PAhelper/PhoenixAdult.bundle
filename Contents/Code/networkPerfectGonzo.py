@@ -1,55 +1,57 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="itemm"]'):
         titleNoFormatting = searchResult.xpath('.//a/@title')[0]
         releaseDate = parse(searchResult.xpath('.//span[@class="nm-date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
         curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
 
-        subSite = searchResult.xpath('.//img[@class="domain-label"]/@src')[0]
-        if 'allinternal' in subSite:
-            subSite = 'AllInternal'
-        elif 'asstraffic' in subSite:
-            subSite = 'AssTraffic'
-        elif 'givemepink' in subSite:
-            subSite = 'GiveMePink'
-        elif 'primecups' in subSite:
-            subSite = 'PrimeCups'
-        elif 'fistflush' in subSite:
-            subSite = 'FistFlush'
-        elif 'cumforcover' in subSite:
-            subSite = 'CumForCover'
-        elif 'tamedteens' in subSite:
-            subSite = 'TamedTeens'
-        elif 'spermswap' in subSite:
-            subSite = 'SpermSwap'
-        elif 'milfthing' in subSite:
-            subSite = 'MilfThing'
-        elif 'interview' in subSite:
-            subSite = 'Interview'
-        else:
+        subSite = searchResult.xpath('.//img[@class="domain-label"]/@src')
+        if subSite:
+            subSite = subSite[0]
+            if 'allinternal' in subSite:
+                subSite = 'AllInternal'
+            elif 'asstraffic' in subSite:
+                subSite = 'AssTraffic'
+            elif 'givemepink' in subSite:
+                subSite = 'GiveMePink'
+            elif 'primecups' in subSite:
+                subSite = 'PrimeCups'
+            elif 'fistflush' in subSite:
+                subSite = 'FistFlush'
+            elif 'cumforcover' in subSite:
+                subSite = 'CumForCover'
+            elif 'tamedteens' in subSite:
+                subSite = 'TamedTeens'
+            elif 'spermswap' in subSite:
+                subSite = 'SpermSwap'
+            elif 'milfthing' in subSite:
+                subSite = 'MilfThing'
+            elif 'interview' in subSite:
+                subSite = 'Interview'
+
+        if not subSite:
             subSite = PAsearchSites.getSearchSiteName(siteNum)
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Perfect Gonzo/%s] %s' % (titleNoFormatting, subSite, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -64,7 +66,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -87,7 +89,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     for actorLink in detailsPageElements.xpath('//div[@class="col-sm-3 col-md-3 col-md-offset-1 no-padding-side"]/p/a'):
         actorName = actorLink.text_content().strip()
 
-        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
+        actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         actorPhotoURL = actorPage.xpath('//div[@class="col-md-8 bigmodelpic"]/img/@src')[0]
@@ -115,7 +117,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

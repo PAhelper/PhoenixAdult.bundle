@@ -1,5 +1,4 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
@@ -13,18 +12,18 @@ def getAlgolia(url, indexName, params):
     return data['results'][0]['hits']
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = searchTitle.split(' ', 1)[0]
+def search(results, lang, siteNum, searchData):
+    sceneID = searchData.title.split(' ', 1)[0]
     if unicode(sceneID, 'UTF-8').isdigit():
-        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
 
     url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
-    if sceneID and not searchTitle:
+    if sceneID and not searchData.title:
         searchResults = getAlgolia(url, 'nacms_scenes_production', 'filters=id=' + sceneID)
     else:
-        searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + searchTitle)
+        searchResults = getAlgolia(url, 'nacms_scenes_production', 'query=' + searchData.title)
 
     for searchResult in searchResults:
         titleNoFormatting = searchResult['title']
@@ -34,21 +33,21 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
         if sceneID:
             score = 100 - Util.LevenshteinDistance(sceneID, curID)
-        elif searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        elif searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%d|%d' % (curID, siteNum), name='%s [%s] %s' % (titleNoFormatting, siteName, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = metadata_id[0]
 
-    url = PAsearchSites.getSearchSearchURL(siteID) + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=I6P9Q9R18E&x-algolia-api-key=08396b1791d619478a55687b4deb48b4'
     detailsPageElements = getAlgolia(url, 'nacms_scenes_production', 'filters=id=' + sceneID)[0]
 
     # Title
@@ -106,7 +105,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

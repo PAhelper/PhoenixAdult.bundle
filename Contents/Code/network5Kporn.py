@@ -1,26 +1,24 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+def search(results, lang, siteNum, searchData):
     cookies = {'nats': 'MC4wLjMuNTguMC4wLjAuMC4w'}
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle, cookies=cookies)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded, cookies=cookies)
     searchResults = HTML.ElementFromString(req.json()['html'])
     for sceneURL in searchResults.xpath('//div[@class="ep"]'):
         titleNoFormatting = searchResults.xpath('.//h3[@class="ep-title"]')[0].text_content().strip()
         sceneURL = searchResults.xpath('.//a/@href')[0]
         curID = PAutils.Encode(sceneURL)
 
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
 
@@ -39,7 +37,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    metadata.tagline = PAsearchSites.getSearchSiteName(siteID)
+    metadata.tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.collections.add(metadata.tagline)
 
     # Date

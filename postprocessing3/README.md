@@ -9,18 +9,23 @@ Using [Metadata API](http://metadataapi.net/) for renaming files
 3. Run main.py
 
 ```
-usage: main.py -i INPUT_PATH -o OUTPUT_PATH [-c] [-a]
+usage: main.py -i INPUT_PATH -o OUTPUT_PATH -t TOKEN [-c] [-a] [-oh] [-co]
 
 Watchdog Adult Renamer.
 
 optional arguments:
+  -h, --help            show this help message and exit
   -i INPUT_PATH, --input_path INPUT_PATH
                         Directory to watch files
   -o OUTPUT_PATH, --output_path OUTPUT_PATH
                         Directory to store renamed files
+  -t TOKEN, --token TOKEN
+                        MetadataAPI Token
   -c, --cleanup         Remove metadata title from file
   -a, --additional_info
                         Add additional info to filename
+  -oh, --oshash         Use OpenSubtitle Hash for search
+  -co, --confirm        Ask user confirm before rename
 ```
 
 # Note

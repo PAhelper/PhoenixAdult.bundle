@@ -1,15 +1,32 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def getAPIKey(url):
-    data = PAutils.HTTPRequest(url).text
-    match = re.search(r'\"apiKey\":\"(.*?)\"', data)
-    if match:
-        return match.group(1)
-    return None
+def getAPIKey(siteNum):
+    url = PAsearchSites.getSearchBaseURL(siteNum) + '/en/login'
+    token_key = urlparse.urlparse(url).hostname
+
+    token = None
+    if token_key and token_key in Dict:
+        data = Dict[token_key]
+        data = base64.b64decode(data).decode('UTF-8')
+        if 'validUntil=' in data:
+            timestamp = int(data.split('validUntil=')[1].split('&')[0])
+            if timestamp > time.time():
+                token = Dict[token_key]
+
+    if not token:
+        req = PAutils.HTTPRequest(url)
+        match = re.search(r'\"apiKey\":\"(.*?)\"', req.text)
+        if match:
+            token = match.group(1)
+
+    if token_key and token:
+        if token_key not in Dict or Dict[token_key] != token:
+            Dict[token_key] = token
+            Dict.Save()
+
+    return token
 
 
 def getAlgolia(url, indexName, params, referer):
@@ -18,28 +35,30 @@ def getAlgolia(url, indexName, params, referer):
         'Referer': referer
     }
     params = json.dumps({'requests': [{'indexName': indexName, 'params': params}]})
-    data = PAutils.HTTPRequest(url, headers=headers, params=params).json()
+    data = PAutils.HTTPRequest(url, headers=headers, params=params)
+    data = data.json()
 
     return data['results'][0]['hits']
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = searchTitle.split(' ', 1)[0]
+def search(results, lang, siteNum, searchData):
+    searchData.title = searchData.encoded.replace('%20', ' ')
+    sceneID = searchData.title.split(' ', 1)[0]
     if unicode(sceneID, 'UTF-8').isdigit():
-        searchTitle = searchTitle.replace(sceneID, '', 1).strip()
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
     else:
         sceneID = None
 
-    apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteNum))
+    apiKEY = getAPIKey(siteNum)
     for sceneType in ['scenes', 'movies']:
         url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-        if sceneID and not searchTitle:
+        if sceneID and not searchData.title:
             if sceneType == 'scenes':
                 params = 'filters=clip_id=' + sceneID
             else:
                 params = 'filters=movie_id=' + sceneID
         else:
-            params = 'query=' + searchTitle
+            params = 'query=' + searchData.title
 
         searchResults = getAlgolia(url, 'all_' + sceneType, params, PAsearchSites.getSearchBaseURL(siteNum))
         for searchResult in searchResults:
@@ -56,30 +75,30 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
 
             if sceneID:
                 score = 100 - Util.LevenshteinDistance(sceneID, curID)
-            elif searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            elif searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%d|%d|%s|%s' % (curID, siteNum, sceneType, releaseDate), name='[%s] %s %s' % (sceneType.capitalize(), titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneID = int(metadata_id[0])
     sceneType = metadata_id[2]
     sceneIDName = 'clip_id' if sceneType == 'scenes' else 'movie_id'
     sceneDate = metadata_id[3]
 
-    apiKEY = getAPIKey(PAsearchSites.getSearchBaseURL(siteID))
+    apiKEY = getAPIKey(siteNum)
 
-    url = PAsearchSites.getSearchSearchURL(siteID) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
-    data = getAlgolia(url, 'all_' + sceneType, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteID))
+    url = PAsearchSites.getSearchSearchURL(siteNum) + '?x-algolia-application-id=TSMKFA364Q&x-algolia-api-key=' + apiKEY
+    data = getAlgolia(url, 'all_' + sceneType, 'filters=%s=%d' % (sceneIDName, sceneID), PAsearchSites.getSearchBaseURL(siteNum))
     detailsPageElements = data[0]
 
-    data = getAlgolia(url, 'all_scenes', 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteID))
+    data = getAlgolia(url, 'all_scenes', 'query=%s' % detailsPageElements['url_title'], PAsearchSites.getSearchBaseURL(siteNum))
     data = sorted(data, key=lambda i: i['clip_id'])
     scenesPagesElements = list(enumerate(data, 1))
 
@@ -96,7 +115,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.title = title
 
     # Summary
-    metadata.summary = detailsPageElements['description'].replace('</br>', '\n')
+    metadata.summary = detailsPageElements['description'].replace('</br>', '\n').replace('<br>', '\n')
 
     # Studio
     metadata.studio = detailsPageElements['network_name']
@@ -136,7 +155,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     for actorLink in detailsPageElements['actors']:
         actorName = actorLink['name']
 
-        actorData = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteID))[0]
+        actorData = getAlgolia(url, 'all_actors', 'filters=actor_id=' + actorLink['actor_id'], PAsearchSites.getSearchBaseURL(siteNum))[0]
         if 'pictures' in actorData and actorData['pictures']:
             max_quality = sorted(actorData['pictures'].keys())[-1]
             actorPhotoURL = 'https://images-fame.gammacdn.com/actors' + actorData['pictures'][max_quality]
@@ -155,7 +174,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     art = []
 
-    if not PAsearchSites.getSearchBaseURL(siteID).endswith(('girlsway.com', 'puretaboo.com')):
+    if not PAsearchSites.getSearchBaseURL(siteNum).endswith(('girlsway.com', 'puretaboo.com')):
         art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_title'].lower().replace('-', '_')))
         if 'url_movie_title' in detailsPageElements:
             art.append('https://images-fame.gammacdn.com/movies/{0}/{0}_{1}_front_400x625.jpg'.format(detailsPageElements['movie_id'], detailsPageElements['url_movie_title'].lower().replace('-', '_')))
@@ -174,7 +193,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

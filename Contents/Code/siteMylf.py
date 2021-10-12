@@ -1,6 +1,4 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
@@ -14,8 +12,8 @@ def getJSONfromPage(url):
     return None
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    directURL = searchTitle.replace(' ', '-').lower()
+def search(results, lang, siteNum, searchData):
+    directURL = searchData.title.replace(' ', '-').lower()
     if '/' not in directURL:
         directURL = directURL.replace('-', '/', 1)
 
@@ -29,7 +27,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
     searchResultsURLs = [directURL]
 
-    googleResults = PAutils.getFromGoogleSearch(searchTitle, siteNum)
+    googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
 
     for sceneURL in googleResults:
         sceneURL = sceneURL.rsplit('?', 1)[0]
@@ -60,26 +58,26 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
                 if 'publishedDate' in detailsPageElements:
                     releaseDate = parse(detailsPageElements['publishedDate']).strftime('%Y-%m-%d')
                 else:
-                    releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+                    releaseDate = searchData.dateFormat() if searchData.date else ''
                 displayDate = releaseDate if 'publishedDate' in detailsPageElements else ''
 
-                if searchDate and displayDate:
-                    score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+                if searchData.date and displayDate:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
-                    score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s|%s' % (curID, siteNum, releaseDate, contentName), name='%s [Mylf/%s] %s' % (titleNoFormatting, subSite, displayDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = metadata_id[0]
     releaseDate = metadata_id[2]
     contentName = metadata_id[3]
 
-    detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteID) + sceneName)[contentName][sceneName]
+    detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)[contentName][sceneName]
 
     # Title
     metadata.title = detailsPageElements['title']
@@ -95,7 +93,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     if 'site' in detailsPageElements:
         subSite = detailsPageElements['site']['name']
     else:
-        subSite = PAsearchSites.getSearchSiteName(siteID)
+        subSite = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = subSite
     metadata.collections.add(subSite)
 
@@ -113,7 +111,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         actorName = actorLink['modelName']
         actorPhotoURL = ''
 
-        actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteID), actorID))
+        actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorID))
         if actorData:
             actorPhotoURL = actorData['modelsContent'][actorID]['img']
 
@@ -121,7 +119,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = ["MILF", "Mature"]
+    genres = ['MILF', 'Mature']
 
     if subSite.lower() == 'MylfBoss'.lower():
         for genreName in ['Office', 'Boss']:
@@ -153,8 +151,10 @@ def update(metadata, siteID, movieGenres, movieActors):
     if (len(actors) > 1) and subSite != 'Mylfed':
         genres.append('Threesome')
 
-    for genre in genres:
-        movieGenres.addGenre(genre)
+    for genreLink in genres:
+        genreName = genreLink
+
+        movieGenres.addGenre(genreName)
 
     # Posters
     art = [
@@ -166,7 +166,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

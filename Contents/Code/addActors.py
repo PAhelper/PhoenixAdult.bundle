@@ -1,93 +1,89 @@
-import PAsearchSites
-import PAgenres
-import PAactors
+import PAutils
+
+regexList = [
+    r'(?P<actors>.*?) (in\b(?P<title>.*)) (at\b(?P<studio>.*)) (with\b(?P<genres>.*))',
+    r'(?P<actors>.*?) (in\b(?P<title>.*)) (with\b(?P<genres>.*))',
+    r'(?P<actors>.*?) (in\b(?P<title>.*)) (at\b(?P<studio>.*))',
+    r'(?P<actors>.*?) (in\b(?P<title>.*))',
+]
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    Log("searchTitle:" + searchTitle)
-    searchTitle = searchTitle.replace(' AND ', ' and ').replace(' And ', ' and ').replace(' In ', ' in ').replace(' At ', ' at ')
-    parse_siteName = searchTitle.rsplit(' at ', 1)  # only split on last 'at'
-    if len(parse_siteName) > 1:
-        siteName = parse_siteName[1].strip()
-        Log("Manual Site Name: " + siteName)
-    else:
-        siteName = ''
-    parse_sceneName = parse_siteName[0].split(' in ', 1)  # only split on first 'in'
-    if len(parse_sceneName) > 1:
-        sceneName = parse_sceneName[1].strip().title()
-        Log("Manual Scene Name: " + sceneName)
-    else:
-        sceneName = ''
-    actors = parse_sceneName[0].split("and")
-    actorsFormatted = []
-    for actor in actors:
-        actorsFormatted.append(actor.strip().title())
-    curID = '+'.join(actorsFormatted).replace(' ', '_')
-    Log("curID: " + curID)
-    if searchDate:
-        releaseDate = parse(searchDate).strftime('%Y-%m-%d')
+def search(results, lang, siteNum, searchData):
+    data = {}
+    for regex in regexList:
+        r = re.search(regex, searchData.title, flags=re.IGNORECASE)
+        if r:
+            data = r.groupdict()
+            break
+
+    if data:
+        sceneName = data['title'].strip()
+        siteName = data['studio'].strip() if 'studio' in data else ''
+
+        genres = data['genres'].strip() if 'genres' in data else ''
+        genresID = PAutils.Encode(genres)
+
+        actors = data['actors'].strip()
+        actors = ', '.join(actors.split(' and ')) if ' and ' in actors else actors  # Backward compatibility
+        actorsID = PAutils.Encode(actors)
+
+    if searchData.date:
+        releaseDate = searchData.dateFormat()
     else:
         releaseDate = ''
 
     score = 100
-    metadataID = '%s|%d' % (curID, siteNum) + "|" + releaseDate + "|" + sceneName + "|" + siteName
-    Log("metadata.id to pass: " + metadataID)
-    displayName = curID.replace('+', ', ').replace('_', ' ')
-    results.Append(MetadataSearchResult(id=metadataID, name=displayName + "[" + siteName + "] " + releaseDate, score=score, lang=lang))
+
+    results.Append(MetadataSearchResult(id='%s|%d|%s|%s|%s|%s' % (actorsID, siteNum, releaseDate, sceneName, siteName, genresID), name='%s [%s] %s' % (sceneName, siteName, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
-    Log("*******Manual actor input*******")
+def update(metadata, lang, siteNum, movieGenres, movieActors):
+    metadata_id = str(metadata.id).split('|')
+    sceneActors = PAutils.Decode(metadata_id[0])
+    sceneDate = metadata_id[2]
+    sceneName = metadata_id[3]
+    siteName = metadata_id[4]
+    sceneGenres = PAutils.Decode(metadata_id[5]) if len(metadata_id) > 5 else ''
 
-    # Actors
-    movieActors.clearActors()
-    Log("metadata.id: " + str(metadata.id))
-    actorList = str(metadata.id).split('|')[0].replace('_', ' ').replace('+', ', ')
-    actors = actorList.split(',')
-    for actor in actors:
-        actorName = actor.strip().title()
-        actorPhotoURL = ''
-        movieActors.addActor(actorName, actorPhotoURL)
-        Log("added actor: " + actorName)
-
-    # Release Date
-    date = str(metadata.id).split('|')[2]
-    if len(date) > 0:
-        Log("Date Found")
-        date_Object = parse(date)
-        metadata.originally_available_at = date_Object
-        metadata.year = metadata.originally_available_at.year
+    # Title
+    if sceneName:
+        metadata.title = sceneName
+    elif siteName:
+        metadata.title = '%s - %s' % (sceneActors, siteName)
     else:
-        Log("No Date Found")
+        metadata.title = sceneActors
+
+    # Studio
+    if siteName:
+        metadata.studio = siteName
+        metadata.collections.add(siteName)
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    marker = "Actors Manually Added"
-    metadata.collections.add(marker)
+    tagline = 'Actors Manually Added'
+    metadata.collections.add(tagline)
 
-    # Studio
-    siteName = str(metadata.id).split('|')[4].strip().title()
-    if len(siteName) > 0:
-        metadata.studio = siteName
-        metadata.collections.add(siteName)
-        Log("Found Studio/SiteName: " + siteName)
-
-    # Title
-    sceneName = str(metadata.id).split('|')[3].strip().title()
-    if len(sceneName) > 0:
-        metadata.title = sceneName
-        Log("sceneName: " + sceneName)
-    else:
-        if len(siteName) > 0:
-            metadata.title = actorList + " - " + siteName
-            Log('title: ' + metadata.title)
-        else:
-            metadata.title = actorList
-            Log('title/actorList: ' + metadata.title)
+    # Release Date
+    if sceneDate:
+        date_Object = parse(sceneDate)
+        metadata.originally_available_at = date_Object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
-    # movieGenres.clearGenres()
+    movieGenres.clearGenres()
+    for genreLink in sceneGenres.split(','):
+        genreName = genreLink.strip()
+
+        movieGenres.addGenre(genreName)
+
+    # Actors
+    movieActors.clearActors()
+    for actorLink in sceneActors.split(','):
+        actorName = actorLink.strip()
+        actorPhotoURL = ''
+
+        movieActors.addActor(actorName, actorPhotoURL)
 
     return metadata

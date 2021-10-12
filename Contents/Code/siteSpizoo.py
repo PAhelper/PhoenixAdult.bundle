@@ -1,11 +1,10 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = urllib.quote('"%s"' % searchData.title)
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="category_listing_wrapper_updates"]'):
         titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
@@ -18,32 +17,32 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         except:
             releaseDate = ''
 
-        if searchDate and releaseDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date and releaseDate:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
-            score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [Spizoo] %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    title = detailsPageElements.xpath('//h1')[0].text_content().strip()
+    title = detailsPageElements.xpath('//h1/text() | //video/@data-video')[0].strip()
     if title[-3:] == ' 4k':
         title = title[:-3].strip()
     metadata.title = title
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//p[@class="description"] | //p[@class="description-scene"]')[0].text_content().strip()
+    metadata.summary = detailsPageElements.xpath('//p[@class="description"] | //p[@class="description-scene"] | //h2/following-sibling::p')[0].text_content().strip()
 
     # Studio
     metadata.studio = 'Spizoo'
@@ -70,25 +69,25 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@id="trailer-data"]//div[@class="col-12 col-md-6"]//div[@class="row"]//div[@class="col-12"]//a')
+    genres = detailsPageElements.xpath('//div[@class="categories-holder"]/a')
     if genres:
         for genreLink in genres:
             genreName = genreLink.text_content().lower().strip()
 
             movieGenres.addGenre(genreName)
     else:  # Manual genres for Rawattack
-        if siteID == 577:
+        if siteNum == 577:
             movieGenres.addGenre('Unscripted')
             movieGenres.addGenre('Raw')
             movieGenres.addGenre('Hardcore')
 
     # Actors
     movieActors.clearActors()
-    for actorLink in detailsPageElements.xpath('//div[@class="row line"]/div[@class="col-3"][1]/a | //p[@class="featuring"]/a'):
+    for actorLink in detailsPageElements.xpath('//h3[text()="Pornstars:"]/../a'):
         actorName = actorLink.text_content().replace('.', '').strip()
         actorPhotoURL = ''
 
-        actorPageURL = PAsearchSites.getSearchBaseURL(siteID) + actorLink.get('href')
+        actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         try:
@@ -98,16 +97,16 @@ def update(metadata, siteID, movieGenres, movieActors):
 
         if actorPhotoURL:
             if 'http' not in actorPhotoURL:
-                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteNum) + actorPhotoURL
 
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
     art = []
     try:
-        twitterBG = detailsPageElements.xpath('//img[contains(@class,"update_thumb thumbs")]/@src')[0]
+        twitterBG = detailsPageElements.xpath('//img[contains(@class, "update_thumb thumbs")]/@src')[0]
         if 'http' not in twitterBG:
-            twitterBG = PAsearchSites.getSearchBaseURL(siteID) + '/' + twitterBG
+            twitterBG = PAsearchSites.getSearchBaseURL(siteNum) + '/' + twitterBG
 
         art.append(twitterBG)
     except:
@@ -118,7 +117,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

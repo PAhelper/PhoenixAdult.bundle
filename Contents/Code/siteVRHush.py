@@ -1,20 +1,18 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    encodedTitle = searchTitle.replace(' ', '_')
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    searchData.encoded = searchData.title.replace(' ', '_')
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     titleNoFormatting = detailsPageElements.xpath('//h1[@class="latest-scene-title"]')[0].text_content().strip()
     curID = PAutils.Encode(detailsPageElements.xpath('//link[@rel="canonical"]/@href')[0])
     releaseDate = parse(detailsPageElements.xpath('//div[contains(@class, "latest-scene-meta")]//div[contains(@class, "text-left")]')[0].text_content().strip()).strftime('%Y-%m-%d')
 
-    if searchDate:
-        score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+    if searchData.date:
+        score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
     else:
         score = 95
 
@@ -23,11 +21,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -44,7 +42,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -57,7 +55,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//a[contains(@class,"label")]')
+    genres = detailsPageElements.xpath('//a[contains(@class, "label")]')
     for genreLink in genres:
         genreName = genreLink.text_content().strip()
 
@@ -65,10 +63,10 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actor in detailsPageElements.xpath('//h5[@class="latest-scene-subtitle"]//a[contains(@href, "/models/")]'):
-        actorName = actor.text_content().strip()
+    for actorLink in detailsPageElements.xpath('//h5[@class="latest-scene-subtitle"]//a[contains(@href, "/models/")]'):
+        actorName = actorLink.text_content().strip()
 
-        actorPageURL = actor.get('href')
+        actorPageURL = actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         actorPhotoURL = 'https:' + actorPage.xpath('//img[@id="model-thumbnail"]/@src')[0]
@@ -79,7 +77,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Posters
     xpaths = [
         '//dl8-video/@poster',
-        '//div[contains(@class,"owl-carousel")]//img/@src'
+        '//div[contains(@class, "owl-carousel")]//img/@src'
     ]
 
     for xpath in xpaths:
@@ -94,7 +92,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

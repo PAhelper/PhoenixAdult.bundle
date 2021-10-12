@@ -1,11 +1,9 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + encodedTitle)
+def search(results, lang, siteNum, searchData):
+    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
 
     # Amateur Allure
@@ -15,10 +13,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             releaseDate = parse(searchResult.xpath('.//div[@class="update_date"]')[0].text_content().replace('Added:', '').strip()).strftime('%Y-%m-%d')
             curID = PAutils.Encode(searchResult.xpath('.//a[1]/@href')[0])
 
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'
@@ -32,10 +30,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
             releaseDate = parse(searchResult.xpath('.//div[@class="cell update_date"]')[0].text_content().strip()).strftime('%Y-%m-%d')
             curID = PAutils.Encode(searchResult.xpath('./a[2]/@href')[0])
 
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             if len(titleNoFormatting) > 29:
                 titleNoFormatting = titleNoFormatting[:32] + '...'
@@ -45,11 +43,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -64,12 +62,12 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID)
+    tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div[contains(@class,"update_date")]')[0].text_content().strip()
+    date = detailsPageElements.xpath('//div[contains(@class, "update_date")]')[0].text_content().strip()
     if not date:
         try:
             date = str(detailsPageElements.xpath('.//div[@class="cell update_date"]/comment()')[0]).strip()
@@ -93,7 +91,8 @@ def update(metadata, siteID, movieGenres, movieActors):
     # Actors
     movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//div[@class="backgroundcolor_info"]//span[@class="update_models"]/a'):
-        actorName = str(actorLink.text_content().strip())
+        actorName = actorLink.text_content().strip()
+        actorPhotoURL = ''
 
         actorPageURL = actorLink.get('href')
         req = PAutils.HTTPRequest(actorPageURL)
@@ -102,18 +101,20 @@ def update(metadata, siteID, movieGenres, movieActors):
         if img:
             actorPhotoURL = img[0]
             if not actorPhotoURL.startswith('http'):
-                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteID) + actorPhotoURL
+                actorPhotoURL = PAsearchSites.getSearchBaseURL(siteNum) + actorPhotoURL
 
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Manually Add Actors
-    for actorName in ['Faith', 'Nikki Rhodes', 'Talia Tyler', 'Hadley', 'Evangeline', 'Zoe Voss', 'Raquel Diamond', 'Shay Golden', 'Emily Grey',
-                      'Allyssa Hall', 'Alexa Grace', 'Remy LaCroix', 'Nadine Sage', 'Chloe Starr', 'Melissa Moore', 'Taylor Renae', 'Veronica Rodriguez',
-                      'Naomi Woods', 'Amanda Aimes', 'Alice Green', 'Kimber Woods', 'Alina Li', 'Holly Michaels', 'Layla London', 'Dakota Brookes', 'Adriana Chechik',
-                      'Belle Noire', 'Lilly Banks', 'Linda Lay', 'Miley May', 'Belle Knox', 'Ava Taylor', 'Stella May', 'Claire Heart', 'Kennedy Leigh', 'Lucy Tyler',
-                      'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
-                      'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
-                      ]:
+    actors = [
+        'Faith', 'Nikki Rhodes', 'Talia Tyler', 'Hadley', 'Evangeline', 'Zoe Voss', 'Raquel Diamond', 'Shay Golden', 'Emily Grey',
+        'Allyssa Hall', 'Alexa Grace', 'Remy LaCroix', 'Nadine Sage', 'Chloe Starr', 'Melissa Moore', 'Taylor Renae', 'Veronica Rodriguez',
+        'Naomi Woods', 'Amanda Aimes', 'Alice Green', 'Kimber Woods', 'Alina Li', 'Holly Michaels', 'Layla London', 'Dakota Brookes', 'Adriana Chechik',
+        'Belle Noire', 'Lilly Banks', 'Linda Lay', 'Miley May', 'Belle Knox', 'Ava Taylor', 'Stella May', 'Claire Heart', 'Kennedy Leigh', 'Lucy Tyler',
+        'Cadence Lux', 'Goldie Glock', 'Jayma Reid', 'Samantha Sin', 'Emma Hix', 'Lexi Mansfield', 'Emma Wilson', 'Kenzie Reeves', 'Devon Green', 'Jane Wilde',
+        'Lena Anderson', 'Lilly Banks', 'Linda Lay', 'Belle Knox', 'Miley May'
+    ]
+    for actorName in actors:
         if actorName in metadata.title or actorName in metadata.summary:
             movieActors.addActor(actorName, '')
 
@@ -126,7 +127,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         omega = bigScript.find('";', alpha)
         background = bigScript[alpha:omega]
         if 'http' not in background:
-            background = PAsearchSites.getSearchBaseURL(siteID) + background
+            background = PAsearchSites.getSearchBaseURL(siteNum) + background
         art.append(background)
     except:
         pass
@@ -137,18 +138,18 @@ def update(metadata, siteID, movieGenres, movieActors):
         alpha = bigScript.find('setid:"') + 7
         omega = bigScript.find('",', alpha)
         setID = bigScript[alpha:omega]
-        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteID) + urllib.quote(metadata.title))
+        req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + urllib.quote(metadata.title))
         searchPageElements = HTML.ElementFromString(req.text)
         posterUrl = searchPageElements.xpath('//img[@id="set-target-%s"]/@src' % setID)[0]
         if 'http' not in posterUrl:
-            posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+            posterUrl = PAsearchSites.getSearchBaseURL(siteNum) + posterUrl
         art.append(posterUrl)
 
         for i in range(0, 7):
             try:
                 posterUrl = searchPageElements.xpath('//img[@id="set-target-%s"]/@src%d_1x' % (setID, i))[0]
                 if 'http' not in posterUrl:
-                    posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+                    posterUrl = PAsearchSites.getSearchBaseURL(siteNum) + posterUrl
                 art.append(posterUrl)
             except:
                 pass
@@ -172,7 +173,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             omega = ptx1600.find('"', alpha)
             posterUrl = ptx1600[alpha:omega]
             if 'http' not in posterUrl:
-                posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+                posterUrl = PAsearchSites.getSearchBaseURL(siteNum) + posterUrl
             if i == 5:
                 actorPhotoURL = posterUrl
             photos.append(posterUrl)
@@ -193,7 +194,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             omega = ptxjpg.find('"', alpha)
             posterUrl = ptxjpg[alpha:omega]
             if 'http' not in posterUrl:
-                posterUrl = PAsearchSites.getSearchBaseURL(siteID) + posterUrl
+                posterUrl = PAsearchSites.getSearchBaseURL(siteNum) + posterUrl
             if i == 5:
                 actorPhotoURL = posterUrl
             vidcaps.append(posterUrl)

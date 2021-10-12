@@ -1,13 +1,11 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    sceneID = searchTitle.split(' ', 1)[0]
+def search(results, lang, siteNum, searchData):
+    sceneID = searchData.title.split(' ', 1)[0]
     try:
-        sceneTitle = searchTitle.split(' ', 1)[1]
+        sceneTitle = searchData.title.split(' ', 1)[1]
     except:
         sceneTitle = ''
 
@@ -16,10 +14,10 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     detailsPageElements = HTML.ElementFromString(req.text)
     titleNoFormatting = detailsPageElements.xpath('//title')[0].text_content().split('|')[1].strip()
     curID = PAutils.Encode(sceneURL)
-    releaseDate = parse(searchDate).strftime('%Y-%m-%d') if searchDate else ''
+    releaseDate = searchData.dateFormat() if searchData.date else ''
 
     if sceneTitle:
-        score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+        score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
     else:
         score = 90
 
@@ -28,11 +26,11 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
-        sceneURL = PAsearchSites.getSearchBaseURL(siteID) + sceneURL
+        sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     sceneDate = metadata_id[2]
     sceneID = metadata_id[3]
     req = PAutils.HTTPRequest(sceneURL)
@@ -55,7 +53,7 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Tagline and Collection(s)
     metadata.collections.clear()
-    tagline = PAsearchSites.getSearchSiteName(siteID).strip()
+    tagline = PAsearchSites.getSearchSiteName(siteNum).strip()
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
@@ -85,9 +83,9 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actor = detailsPageElements.xpath('//a[@class="model"]/div[1]/img')[0]
-    actorName = actor.get('alt').strip()
-    actorPhotoURL = actor.get('src').strip()
+    actorLink = detailsPageElements.xpath('//a[@class="model"]/div[1]/img')[0]
+    actorName = actorLink.get('alt').strip()
+    actorPhotoURL = actorLink.get('src').strip()
 
     movieActors.addActor(actorName, actorPhotoURL)
 
@@ -114,7 +112,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size

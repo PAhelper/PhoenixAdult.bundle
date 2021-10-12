@@ -1,5 +1,4 @@
 import PAsearchSites
-import PAgenres
 import PAutils
 
 
@@ -11,47 +10,62 @@ def getDatafromAPI(url):
     return req
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
-    url = PAsearchSites.getSearchSearchURL(siteNum) + '/search?q=' + encodedTitle
+def search(results, lang, siteNum, searchData):
+    if searchData.encoded.isdigit():
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/graphql?query=' + search_id_query % (searchData.encoded, PAsearchSites.getSearchSiteName(siteNum).upper())
+        searchResult = getDatafromAPI(url)
+        if searchResult:
+            titleNoFormatting = PAutils.parseTitle(searchResult['findOneVideo']['title'], siteNum)
+            releaseDate = parse(searchResult['findOneVideo']['releaseDate']).strftime('%Y-%m-%d')
+            curID = PAutils.Encode(searchResult['findOneVideo']['slug'])
 
-    searchResults = getDatafromAPI(url)
-    if searchResults:
-        for searchResult in searchResults['videos']:
-            titleNoFormatting = searchResult['title']
-            releaseDate = parse(searchResult['releaseDate']).strftime('%Y-%m-%d')
-            curID = PAutils.Encode(searchResult['targetUrl'])
-
-            if searchDate:
-                score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
-                score = 100 - Util.LevenshteinDistance(searchTitle.lower(), titleNoFormatting.lower())
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
             results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
+    else:
+        url = PAsearchSites.getSearchBaseURL(siteNum) + '/graphql?query=' + search_query % (searchData.encoded, PAsearchSites.getSearchSiteName(siteNum).upper())
+        searchResults = getDatafromAPI(url)
+        if searchResults:
+            for searchResult in searchResults['searchVideos']['edges']:
+                titleNoFormatting = PAutils.parseTitle(searchResult['node']['title'], siteNum)
+                releaseDate = parse(searchResult['node']['releaseDate']).strftime('%Y-%m-%d')
+                curID = PAutils.Encode(searchResult['node']['slug'])
+
+                if searchData.date:
+                    score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+                else:
+                    score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+                results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s %s' % (titleNoFormatting, releaseDate), score=score, lang=lang))
 
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneName = PAutils.Decode(metadata_id[0])
-    sceneURL = PAsearchSites.getSearchSearchURL(siteID) + sceneName
+    sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/graphql?query=' + update_query % (sceneName, PAsearchSites.getSearchSiteName(siteNum).upper())
 
     detailsPageElements = getDatafromAPI(sceneURL)
-    video = detailsPageElements['video']
-    pictureset = detailsPageElements['pictureset']
+    video = detailsPageElements['findOneVideo']
+    pictureset = video['carousel']
 
     # Title
-    metadata.title = video['title']
+    metadata.title = PAutils.parseTitle(video['title'], siteNum)
 
     # Summary
     metadata.summary = video['description']
 
     # Director
-    director = metadata.directors.new()
-    director.name = video['directorNames']
+    if video['directors']:
+        director = metadata.directors.new()
+        director.name = video['directors'][0]['name']
 
     # Studio
-    metadata.studio = video['primarySite'].title()
+    metadata.studio = PAsearchSites.getSearchSiteName(siteNum).title()
 
     # Tagline and Collection(s)
     metadata.collections.clear()
@@ -64,19 +78,23 @@ def update(metadata, siteID, movieGenres, movieActors):
 
     # Genres
     movieGenres.clearGenres()
-    genres = video['tags']
-    for genreName in genres:
-        movieGenres.addGenre(genreName)
+    if metadata.studio == 'Tushy' or metadata.studio == 'TushyRaw':
+        movieGenres.addGenre('Anal')
+
+    if video['categories']:
+        for tag in video['categories']:
+            genreName = tag['name']
+
+            movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
-    actors = video['modelsSlugged']
-    for actorLink in actors:
-        actorPageURL = PAsearchSites.getSearchSearchURL(siteID) + '/' + actorLink['slugged']
-        actorData = getDatafromAPI(actorPageURL)['model']
-
-        actorName = actorData['name']
-        actorPhotoURL = actorData['cdnUrl']
+    actors = video['models']
+    for actor in actors:
+        actorName = actor['name']
+        actorPhotoURL = ''
+        if actor['images']:
+            actorPhotoURL = actor['images']['listing'][0]['highdpi']['double']
 
         movieActors.addActor(actorName, actorPhotoURL)
 
@@ -84,7 +102,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     art = []
 
     for name in ['movie', 'poster']:
-        if name in video['images'] and video['images'][name]:
+        if name in video['carousel'] and video['images'][name]:
             image = video['images'][name][-1]
             if 'highdpi' in image:
                 art.append(image['highdpi']['3x'])
@@ -93,7 +111,7 @@ def update(metadata, siteID, movieGenres, movieActors):
             break
 
     for image in pictureset:
-        img = image['main'][0]['src']
+        img = image['listing'][0]['highdpi']['triple']
 
         art.append(img)
 
@@ -102,7 +120,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
@@ -117,3 +135,8 @@ def update(metadata, siteID, movieGenres, movieActors):
                 pass
 
     return metadata
+
+
+search_query = '{searchVideos(input:{query:\"%s\",site:%s,first:10}){edges{node{videoId,title,releaseDate,slug}}}}'
+update_query = '{findOneVideo(input:{slug:\"%s\",site:%s}){videoId,title,description,releaseDate,models{name,slug,images{listing{highdpi{double}}}},directors{name},categories{name},carousel{listing{highdpi{triple}}}}}'
+search_id_query = '{findOneVideo(input:{videoId:\"%s\",site:%s}){videoId,title,releaseDate,slug}}'

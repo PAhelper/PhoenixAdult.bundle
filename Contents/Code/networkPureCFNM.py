@@ -1,20 +1,18 @@
 import PAsearchSites
-import PAgenres
-import PAactors
 import PAutils
 
 
-def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
+def search(results, lang, siteNum, searchData):
     try:
-        modelID = '-'.join(searchTitle.split(' ', 2)[:2])
+        modelID = '-'.join(searchData.title.split(' ', 2)[:2])
         try:
-            sceneTitle = searchTitle.split(' ', 2)[2]
+            sceneTitle = searchData.title.split(' ', 2)[2]
         except:
             sceneTitle = ''
     except:
-        modelID = searchTitle.split(' ', 1)[0]
+        modelID = searchData.title.split(' ', 1)[0]
         try:
-            sceneTitle = searchTitle.split(' ', 1)[1]
+            sceneTitle = searchData.title.split(' ', 1)[1]
         except:
             sceneTitle = ''
 
@@ -43,8 +41,8 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
         descriptionID = PAutils.Encode(description)
         posterID = PAutils.Encode(poster)
 
-        if searchDate:
-            score = 100 - Util.LevenshteinDistance(searchDate, releaseDate)
+        if searchData.date:
+            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         elif sceneTitle:
             score = 100 - Util.LevenshteinDistance(sceneTitle.lower(), titleNoFormatting.lower())
         else:
@@ -55,7 +53,7 @@ def search(results, encodedTitle, searchTitle, siteNum, lang, searchDate):
     return results
 
 
-def update(metadata, siteID, movieGenres, movieActors):
+def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
     sceneTitle = PAutils.Decode(metadata_id[0])
     sceneDescription = PAutils.Decode(metadata_id[2])
@@ -78,7 +76,7 @@ def update(metadata, siteID, movieGenres, movieActors):
     metadata.studio = 'PureCFNM'
 
     # Tagline and Collection(s)
-    subSite = PAsearchSites.getSearchSiteName(siteID)
+    subSite = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = subSite
     metadata.collections.add(subSite)
 
@@ -133,7 +131,7 @@ def update(metadata, siteID, movieGenres, movieActors):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):
             # Download image file for analysis
             try:
-                image = PAutils.HTTPRequest(posterUrl, headers={'Referer': 'http://www.google.com'})
+                image = PAutils.HTTPRequest(posterUrl)
                 im = StringIO(image.content)
                 resized_image = Image.open(im)
                 width, height = resized_image.size
