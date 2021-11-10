@@ -46,7 +46,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     if not imgURL.startswith('http'):
         imgURL = PAsearchSites.getSearchBaseURL(siteNum) + imgURL
 
-    pageURL = PAsearchSites.getSearchBaseURL(siteNum) + 'v6/v6.pop.php?id=' + sceneID
+    pageURL = PAsearchSites.getSearchBaseURL(siteNum) + '/v6/v6.pop.php?id=' + sceneID
+    pageURL = pageURL.Replace("www", "www2", 1)
     req = PAutils.HTTPRequest(pageURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
