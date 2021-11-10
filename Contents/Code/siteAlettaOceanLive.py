@@ -14,9 +14,6 @@ def search(results, lang, siteNum, searchData):
                 searchResult = searchPageElements.xpath('//div[contains(@class, "movie-set-list-item")][contains(., "%s")]' % searchData.title)
                 if searchResult:
                     searchResults.append(searchResult[0])
-                    break
-            else:
-                break
         else:
             break
 
