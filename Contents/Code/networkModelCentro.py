@@ -35,7 +35,7 @@ def search(results, lang, siteNum, searchData):
     if searchResults:
         for searchResult in searchResults:
             sceneID = searchResult['id']
-            titleNoFormatting = PAutils.parseTitle(searchResult['title'].title(), siteNum)
+            titleNoFormatting = PAutils.parseTitle(searchResult['title'].strip().title(), siteNum)
             artobj = PAutils.Encode(json.dumps(searchResult['_resources']['base']))
             releaseDate = parse(searchResult['sites']['collection'][str(sceneID)]['publishDate']).strftime('%Y-%m-%d')
 
@@ -51,7 +51,7 @@ def search(results, lang, siteNum, searchData):
 
 def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata_id = str(metadata.id).split('|')
-    sceneID = PAutils.Decode(metadata_id[0])
+    sceneID = metadata_id[0]
     title = metadata_id[2].strip().title()
     
     apiurl = getAPIURL(PAsearchSites.getSearchBaseURL(siteNum) + '/scene/' + sceneID + '/' + urllib.quote(title))

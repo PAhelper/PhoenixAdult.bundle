@@ -3,20 +3,23 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
+    url = PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded
+    req = PAutils.HTTPRequest(url)
     searchResults = HTML.ElementFromString(req.text)
-    pages = searchResults.xpath('//div[@class="pagination"]/ul/li/a/@href')
+    pages = [url]
+    pages = pages + searchResults.xpath('//div[@class="pagination"]/ul/li/a/@href')
     for link in pages:
         req = PAutils.HTTPRequest(link)
         searchResults = HTML.ElementFromString(req.text)
-        for searchResult in searchResults.xpath('//li[.//div[@class="time-infos"]]//a'):
+        for searchResult in searchResults.xpath('//main//article[contains(@class,"thumb-block")]'):
             siteName = PAsearchSites.getSearchSiteName(siteNum)
-            titleNoFormatting = searchResult.xpath('./@title')[0].strip()
-            curID = PAutils.Encode(searchResult.xpath('./@href')[0])
+            titleNoFormatting = searchResult.xpath('.//a/@title')[0].strip()
+            curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+            image = PAutils.Encode(searchResult.xpath('.//img/@src')[0])
 
             score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-            results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, image), name='%s [%s]' % (titleNoFormatting, siteName), score=score, lang=lang))
 
     return results
 
@@ -30,33 +33,29 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@itemprop="headline"]//span/text()')[-1].lstrip("- ").strip()
-
-    # Summary
-    description = detailsPageElements.xpath('//div[contains(@class, "video-embed")]//p')
-    if description:
-        metadata.summary = description[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//h1[@class="entry-title"]')[-1].text_content().strip()
 
     # Release date
-    date = detailsPageElements.xpath('//div[@class="post_date"]/text()')
+    date = detailsPageElements.xpath('//div[@id="video-date"]')[0].text_content().strip()
     if date:
-        date_object = parse(date[0])
+        date = date.replace('Date:', '').strip()
+        date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()
-    genres = detailsPageElements.xpath('//div[@itemprop="keywords"]//a')
+    genres = detailsPageElements.xpath('//div[@class="tags-list"]/a//i[@class="fa fa-folder-open"]/..')
     for genreLink in genres:
-        genreName = genreLink.xpath('./text()')[0].strip()
+        genreName = genreLink.text_content().replace('Movies', '').strip()
 
         movieGenres.addGenre(genreName)
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//div[@itemprop="actor"]//a/text()')
+    actors = detailsPageElements.xpath('//div[@id="video-actors"]//a')
     for actorLink in actors:
-        actorName = actorLink.strip()
+        actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
 
         movieActors.addActor(actorName, actorPhotoURL)
@@ -72,13 +71,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Posters
     art = []
-    xpaths = [
-        '//img[contains(@class, "fp-splash")]/@src',
-    ]
-    for xpath in xpaths:
-        for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
-
+    image = PAutils.Decode(metadata_id[2])
+    if image:
+        art.append(image)
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         if not PAsearchSites.posterAlreadyExists(posterUrl, metadata):

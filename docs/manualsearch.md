@@ -54,13 +54,15 @@ There are 4 available search/matching methods, as listed below:
   - Adding any additional terms (ie. Title/Actors) will cause issues with matching.
 
 ## Manual Add
-#### Studio not (yet) supported.
-*If the studio is not yet supported, you can add the scene manually. Check [the sitelist](./sitelist.md)* for supported websites.
+*If the studio is not yet supported, you can add the scene manually. Check [the sitelist](./sitelist.md) for supported websites.*
 + **Add** Keyword Add tells PhoenixAdult you want to add the scene manually
 + **Date** You can add the date but is not required
 + **Actor** Adds actor. You can add multiple actors by typing 'And' between each one
 + **Title** After actor(s), keyword 'In' tells PhoenixAdult that scenetitle follows
 + **Studio** After title or actor(s), keyword 'At' tells PhoenixAdult that studio follows
++ **Genres** After all above, keyword 'With' tells PhoenixAdult what genres should be added
+
+*Check [Issue1275](https://github.com/PAhelper/PhoenixAdult.bundle/issues/1275) if you have fields that contain some of the keywords and couldn't match properly.*
 
 ## Notes
 + **Date Add** - Some sites don't make release dates available. The agent will scrape the date from your filename/search term, instead.
@@ -107,6 +109,8 @@ Here are some examples for each type of search:
     - Add `Date` `Actress` At `Studio`
   - Add Date, actresses, title and studio:
     - Add `Date` `Actress` And `Actress` In `Scene` At `Studio`
+  - Add Date, actresses, title, studio, and genres:
+    - Add `Date` `Actress` And `Actress` In `Scene` At `Studio` With `Genre1`, `Genre2`
 
 # Custom Title Naming
 

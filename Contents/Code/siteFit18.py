@@ -4,7 +4,7 @@ import PAutils
 
 def search(results, lang, siteNum, searchData):
     actorName = searchData.title.lower()
-    baseURL = PAsearchSites.getSearchSearchURL(siteNum) + actorName.replace(' ', '-') + '/'
+    baseURL = PAsearchSites.getSearchSearchURL(siteNum) + actorName.replace(' ', '-') + '%3A'
     count = 0
     while True:
         count += 1
@@ -15,11 +15,11 @@ def search(results, lang, siteNum, searchData):
 
         searchPageElements = HTML.ElementFromString(req.text)
 
-        titleNoFormatting = searchPageElements.xpath('//div[contains(@class, "scene-info")]/h1/text()')[0]
+        titleNoFormatting = searchPageElements.xpath('//div[contains(@class, "info")]/h1/text()')[0]
         titleNoFormatting = PAutils.parseTitle(titleNoFormatting, siteNum)
 
         curID = PAutils.Encode(searchURL)
-        actor = searchPageElements.xpath('//div[contains(@class, "scene-info")]/h2/a/text()')[0]
+        actor = searchPageElements.xpath('//div[contains(@class, "info")]/h3/span/a/text()')[0]
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=80, lang=lang))
 
@@ -32,10 +32,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//div[contains(@class, "scene-info")]/h1/text()')[0]
+    metadata.title = detailsPageElements.xpath('//div[contains(@class, "info")]/h1/text()')[0]
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "scene-info")]/p/text()')[0]
+    metadata.summary = detailsPageElements.xpath('//div[contains(@class, "info")]/p/text()')[0]
 
     # Studio
     metadata.studio = 'Fit18'
@@ -53,7 +53,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    actorName = detailsPageElements.xpath('//div[contains(@class, "scene-info")]/h2/a/text()')[0]
+    actorName = detailsPageElements.xpath('//div[contains(@class, "info")]/h3/span/a/text()')[0]
     actorPhotoURL = ''
 
     movieActors.addActor(actorName, actorPhotoURL)
@@ -61,7 +61,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//div[contains(@class, "scene-info")]//div/a/div/img/@src',
+        '//div[contains(@class, "gallery-image")]/img/@src',
     ]
 
     for xpath in xpaths:

@@ -89,6 +89,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata.collections.add('Japan Adult Video')
 
     # Actors
+    movieActors.clearActors()
     for actorLink in detailsPageElements.xpath('//a[@class="avatar-box"]'):
         fullActorName = actorLink.text_content().strip()
 

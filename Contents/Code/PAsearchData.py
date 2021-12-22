@@ -15,6 +15,7 @@ class SearchData:
         self.filepath = filepath
         if filepath:
             self.filename = str(os.path.splitext(os.path.basename(filepath))[0])
+            self.filename = PAutils.getSearchTitleStrip(self.filename)
         self.duration = media.duration
         if media.openSubtitlesHash:
             self.ohash = media.openSubtitlesHash

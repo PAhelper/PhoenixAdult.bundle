@@ -390,3 +390,29 @@ def cleanHTML(text):
     data = data.strip()
 
     return data
+
+
+def getCleanSearchTitle(title):
+    trashTitle = (
+        'RARBG', 'COM', r'\d{3,4}x\d{3,4}', 'HEVC', r'H\d{3}', 'AVC', r'\dK',
+        r'\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'HD',
+        'KTR', 'IEVA', 'WRB', 'NBQ', 'ForeverAloneDude', r'X\d{3}', 'SoSuMi',
+    )
+
+    for trash in trashTitle:
+        title = re.sub(r'\b%s\b' % trash, '', title, flags=re.IGNORECASE)
+
+    title = ' '.join(title.split())
+
+    return title
+
+
+def getSearchTitleStrip(title):
+    if Prefs['strip_enable']:
+        if Prefs['strip_symbol'] and Prefs['strip_symbol'] in title:
+            title = title.split(Prefs['strip_symbol'], 1)[0]
+
+        if Prefs['strip_symbol_reverse'] and Prefs['strip_symbol_reverse'] in title:
+            title = title.rsplit(Prefs['strip_symbol_reverse'], 1)[-1]
+
+    return title.strip()

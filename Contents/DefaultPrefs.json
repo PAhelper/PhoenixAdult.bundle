@@ -6,6 +6,12 @@
         "default": "false"
     },
     {
+        "id": "gender_enable",
+        "label": "Enable Male Actor filter",
+        "type": "bool",
+        "default": "false"
+    },
+    {
         "id": "metadataapi_enable",
         "label": "Enable using MetadataAPI for unsuccessful search",
         "type": "bool",

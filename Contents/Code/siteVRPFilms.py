@@ -3,16 +3,18 @@ import PAutils
 
 
 def search(results, lang, siteNum, searchData):
-    req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
-    searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//article[contains(@class, "movie-column")]'):
-        titleNoFormatting = searchResult.xpath('.//h3')[0].text_content().strip()
-        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
-        releaseDate = searchData.dateFormat() if searchData.date else ''
+    site_name = PAsearchSites.getSearchSiteName(siteNum).lower() + '-'
+    scene_slug = searchData.filename.lower().replace(' ', '-').replace('_', ' ').replace(site_name, '')
+    directURL = PAsearchSites.getSearchSearchURL(siteNum) + scene_slug.lower()
+    req = PAutils.HTTPRequest(directURL)
 
+    if req and req.ok:
+        detailsPageElements = HTML.ElementFromString(req.text)
+        curID = PAutils.Encode(directURL)
+        titleNoFormatting = detailsPageElements.xpath('//section[@class="login-banner parallax"]/h1')[0].text_content().strip()
         score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
 
     return results
 
@@ -22,29 +24,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     sceneURL = PAutils.Decode(metadata_id[0])
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
-    sceneDate = metadata_id[2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    script_text = detailsPageElements.xpath('//script[@type="application/ld+json"]')[0].text_content()
-    sceneData = json.loads(script_text)
-
-    WebPage = None
-    ImageObject = None
-    for item in sceneData['@graph']:
-        if item['@type'] == 'ImageObject':
-            ImageObject = item
-        elif item['@type'] == 'WebPage':
-            WebPage = item
-
     # Title
-    metadata.title = detailsPageElements.xpath('//h3[contains(@class, "release-title")]/span')[0].text_content().strip()
+    metadata.title = detailsPageElements.xpath('//section[@class="login-banner parallax"]/h1')[0].text_content().strip()
 
     # Summary
-    description = ''
-    for item in detailsPageElements.xpath('//div[contains(@class, "movie-content")]/p'):
-        description += item.text_content().strip() + '\n'
-    metadata.summary = description
+    metadata.summary = detailsPageElements.xpath('//div[@class="col-md-8 text-justify"]')[0].text_content().strip()
 
     # Studio
     metadata.studio = PAsearchSites.getSearchSiteName(siteNum)
@@ -55,50 +42,25 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     metadata.tagline = tagline
     metadata.collections.add(tagline)
 
-    # Release Date
-    if WebPage:
-        date = WebPage['datePublished']
-    elif sceneDate:
-        date = sceneDate
-
-    if date:
-        date_object = parse(date)
-        metadata.originally_available_at = date_object
-        metadata.year = metadata.originally_available_at.year
-
     # Actors
     movieActors.clearActors()
-    actorName = detailsPageElements.xpath('//div[@class="detail"][2]//p/text()[2]')[0].strip()
-    actorPhotoURL = ''
-
-    actorPageURL = '%s/pornstar/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorName.replace(' ', '-'))
-    req = PAutils.HTTPRequest(actorPageURL)
-    if req.ok:
-        actorPage = HTML.ElementFromString(req.text)
-        actorPhoto = actorPage.xpath('//section[contains(@id, "pornstar-profile")]//img/@src')
-        if actorPhoto:
-            actorPhotoURL = actorPhoto[0]
-
-    movieActors.addActor(actorName, actorPhotoURL)
+    for actor in detailsPageElements.xpath('//a[@class="starring_contain"]'):
+        actorName = actor.xpath('//div[@class="col-xs-12 video-star-title"]/h3')[0].text_content().strip()
+        actorPhotoURL = actor.xpath('//div[@class="starring_image"]/@style')[0].split('url(')[1].split(')')[0].replace("'", "")
+        movieActors.addActor(actorName, actorPhotoURL)
 
     # Genres
     movieGenres.clearGenres()
-    for genreLink in detailsPageElements.xpath('//div[@class="movies-description"]//div[3]//p/text()[2]')[0].split(','):
-        genreName = genreLink
+    for genreLink in detailsPageElements.xpath('//div[@class="single__download tags"]')[0].text_content().strip().split(', '):
+        movieGenres.addGenre(genreLink)
 
-        movieGenres.addGenre(genreName)
-
-    # Posters/Background
     art = []
-    xpaths = [
-        '//div[contains(@class, "movies-gallery")]//a/@href',
-    ]
-    if ImageObject:
-        art.insert(0, ImageObject['url'])
+    # Posters/Background
+    background = detailsPageElements.xpath('//section[@class="login-banner parallax"]/@style')[0].split('url(')[1].split(')')[0].replace("'", "")
+    art.append(background)
 
-    for xpath in xpaths:
-        for poster in detailsPageElements.xpath(xpath):
-            art.append(poster)
+    for poster in detailsPageElements.xpath('//div[@class="col-md-12 gallery-body"]/div/div/div/a/@href'):
+        art.append(poster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

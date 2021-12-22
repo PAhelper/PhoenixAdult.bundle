@@ -187,6 +187,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
+    else:
+        date_object = parse(detailsPageElements.xpath('//span[contains(., "Release")]')[0].text_content().split(':', 1)[1].strip())
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     movieGenres.clearGenres()

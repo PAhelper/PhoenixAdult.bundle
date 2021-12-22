@@ -6,8 +6,8 @@ def search(results, lang, siteNum, searchData):
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
     searchResults = HTML.ElementFromString(req.text)
     for searchResult in searchResults.xpath('//div[@class="update_details"]'):
-        curID = PAutils.Encode(searchResult.xpath('./a[last()]/@href')[0])
-        titleNoFormatting = searchResult.xpath('./a[last()]')[0].text_content().strip()
+        curID = PAutils.Encode(searchResult.xpath('.//a/@href')[0])
+        titleNoFormatting = searchResult.xpath('.//span[@class="showMobile"]/a')[0].text_content().strip()
         releaseDate = searchResult.xpath('.//div[@class="cell update_date"]')[0].text_content().strip()
         if not releaseDate:
             try:

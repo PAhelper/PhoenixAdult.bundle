@@ -50,11 +50,12 @@ class PhoenixAdultAgent(Agent.Movies):
     name = 'PhoenixAdult'
     languages = [Locale.Language.English, Locale.Language.German, Locale.Language.French, Locale.Language.Spanish, Locale.Language.Italian, Locale.Language.Dutch]
     accepts_from = ['com.plexapp.agents.localmedia', 'com.plexapp.agents.lambda']
+    contributes_to = ['com.plexapp.agents.stashplexagent', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.imdb']
     primary_provider = True
 
     def search(self, results, media, lang):
-        title = getSearchTitleStrip(media.name)
-        title = getSearchTitle(title)
+        title = PAutils.getSearchTitleStrip(media.name)
+        title = PAutils.getCleanSearchTitle(title)
 
         Log('***MEDIA TITLE [from media.name]*** %s' % title)
         searchSettings = PAsearchSites.getSearchSettings(title)
@@ -65,13 +66,13 @@ class PhoenixAdultAgent(Agent.Movies):
         if media.filename:
             filepath = urllib.unquote(media.filename)
             filename = str(os.path.splitext(os.path.basename(filepath))[0])
-            filename = getSearchTitleStrip(filename)
+            filename = PAutils.getSearchTitleStrip(filename)
 
         if searchSettings['siteNum'] is None and filepath:
             directory = str(os.path.split(os.path.dirname(filepath))[1])
-            directory = getSearchTitleStrip(directory)
+            directory = PAutils.getSearchTitleStrip(directory)
 
-            newTitle = getSearchTitle(directory)
+            newTitle = PAutils.getCleanSearchTitle(directory)
             Log('***MEDIA TITLE [from directory]*** %s' % newTitle)
             searchSettings = PAsearchSites.getSearchSettings(newTitle)
 
@@ -155,29 +156,3 @@ class PhoenixAdultAgent(Agent.Movies):
                 'series': ', '.join(set([collection.encode('ascii', 'ignore') for collection in metadata.collections if collection not in metadata.studio])),
             }
             metadata.title = Prefs['custom_title'].format(**data)
-
-
-def getSearchTitle(title):
-    trashTitle = (
-        'RARBG', 'COM', r'\d{3,4}x\d{3,4}', 'HEVC', r'H\d{3}', 'AVC', r'\dK',
-        r'\d{3,4}p', 'TOWN.AG_', 'XXX', 'MP4', 'KLEENEX', 'SD', 'HD',
-        'KTR', 'IEVA', 'WRB', 'NBQ', 'ForeverAloneDude', r'X\d{3}', 'SoSuMi',
-    )
-
-    for trash in trashTitle:
-        title = re.sub(r'\b%s\b' % trash, '', title, flags=re.IGNORECASE)
-
-    title = ' '.join(title.split())
-
-    return title
-
-
-def getSearchTitleStrip(title):
-    if Prefs['strip_enable']:
-        if Prefs['strip_symbol'] and Prefs['strip_symbol'] in title:
-            title = title.split(Prefs['strip_symbol'], 1)[0]
-
-        if Prefs['strip_symbol_reverse'] and Prefs['strip_symbol_reverse'] in title:
-            title = title.rsplit(Prefs['strip_symbol_reverse'], 1)[-1]
-
-    return title.strip()

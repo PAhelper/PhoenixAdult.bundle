@@ -17,7 +17,7 @@ def search(results, lang, siteNum, searchData):
             detailsPageElements = HTML.ElementFromString(req.text)
 
             curID = PAutils.Encode(sceneURL)
-            titleNoFormatting = detailsPageElements.xpath('//h2')[0]
+            titleNoFormatting = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip()
 
             score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 

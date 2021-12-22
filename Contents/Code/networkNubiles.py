@@ -135,14 +135,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
             art.append(poster)
 
-    galleryURL = PAsearchSites.getSearchBaseURL(siteNum) + detailsPageElements.xpath('//div[contains(@class, "content-pane-related-links")]/a[contains(., "Pic")]/@href')[0]
-    req = PAutils.HTTPRequest(galleryURL)
-    photoPageElements = HTML.ElementFromString(req.text)
-    for poster in photoPageElements.xpath('//div[@class="img-wrapper"]//picture/source[1]/@srcset'):
-        if not poster.startswith('http'):
-            poster = 'http:' + poster
+    if siteNum != 543:
+        # Fix for HotCrazyMess having no gallery 
+        galleryURL = PAsearchSites.getSearchBaseURL(siteNum) + detailsPageElements.xpath('//div[contains(@class, "content-pane-related-links")]/a[contains(., "Pic")]/@href')[0]
+        req = PAutils.HTTPRequest(galleryURL)
+        photoPageElements = HTML.ElementFromString(req.text)
+        for poster in photoPageElements.xpath('//div[@class="img-wrapper"]//picture/source[1]/@srcset'):
+            if not poster.startswith('http'):
+                poster = 'http:' + poster
 
-        art.append(poster)
+            art.append(poster)
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

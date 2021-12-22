@@ -13,7 +13,7 @@ def search(results, lang, siteNum, searchData):
 
     req = PAutils.HTTPRequest(url, headers=headers)
     searchResults = HTML.ElementFromString(req.text)
-    for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[contains(@class, "col-sm-6")]'):
+    for searchResult in searchResults.xpath('//ul[@id="search_results"]//li[@class="card"]'):
         titleNoFormatting = searchResult.xpath('.//div[@class="scene"]//img/@alt')[0].split(':', 1)[-1].strip()
         curID = PAutils.Encode(searchResult.xpath('.//div[@class="scene"]//div//h3//a/@href')[0])
         releaseDate = searchData.dateFormat() if searchData.date else ''
@@ -79,7 +79,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     # Actors
     movieActors.clearActors()
-    for actorPage in detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[contains(@class, "featuring")]'):
+    for actorPage in detailsPageElements.xpath('//ul[@id="featured_pornstars"]//li[@class="card"]'):
         actorName = actorPage.xpath('.//div[@class="model"]//a/@title')[0]
         actorPhotoURL = actorPage.xpath('.//div[@class="model"]//a//picture//img/@src')[0]
 
@@ -88,11 +88,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     # Posters
     art = []
     xpaths = [
-        '//meta[@itemprop="thumbnailUrl"]/@content'
+        '//meta[@itemprop="thumbnailUrl"]/@content',
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
             art.append(poster)
+
+    sceneId = sceneURL.split('/')[-1]
+    galleryPageUrl = 'https://www.private.com/gallery.php?type=highres&id=' + sceneId + '&langx=en'
+    galleryReq = PAutils.HTTPRequest(galleryPageUrl, headers=headers)
+    galleryPageElements = HTML.ElementFromString(galleryReq.text)
+    for poster in galleryPageElements.xpath('//a/@href'):
+        art.append(poster)
 
     backgrounds = detailsPageElements.xpath('//meta[@itemprop="contentURL"]/@content')[0]
     j = backgrounds.rfind('upload/')
@@ -101,6 +108,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
     backgrounds = backgrounds[:k] + 'Fullwatermarked/'
     for i in range(1, 10):
         img = backgrounds + sceneID.lower() + '_' + '{0:0=3d}'.format(i * 5) + '.jpg'
+        img = img.replace('pcoms', 'pcom')
 
         art.append(img)
 

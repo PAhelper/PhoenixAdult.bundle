@@ -23,7 +23,7 @@ def search(results, lang, siteNum, searchData):
             try:
                 searchResult = HTML.ElementFromString(req.text)
 
-                titleNoFormatting = searchResult.xpath('(//div[@class="indScene"] | //div[@class="indSceneDVD"])/h2')[0].text_content().strip()
+                titleNoFormatting = searchResult.xpath('(//div[@class="indScene"] | //div[@class="indSceneDVD"])/h1')[0].text_content().strip()
                 curID = PAutils.Encode(sceneURL)
 
                 score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
@@ -60,10 +60,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     if sceneType == 'Scene':
         # Title
-        metadata.title = detailsPageElements.xpath('//div[@class="indScene"]/h2')[0].text_content().strip()
+        metadata.title = detailsPageElements.xpath('//div[@class="indScene"]/h1')[0].text_content().strip()
 
         # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="description"]/p')[0].text_content().replace('Description:', '').strip()
+        metadata.summary = detailsPageElements.xpath('//div[@class="description"]/h2')[0].text_content().replace('Description:', '').strip()
 
         # Tagline and Collection(s)
         metadata.collections.add(PAsearchSites.getSearchSiteName(siteNum))
@@ -71,7 +71,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
         # No genres for scenes
 
         # Release Date
-        date = detailsPageElements.xpath('//div[@class="sceneDateP"]')[0].text_content().split(',')[0].strip()
+        date = detailsPageElements.xpath('//div[@class="sceneDateP"]/span')[0].text_content().split(',')[0].strip()
         date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
@@ -94,11 +94,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors):
 
     else:
         # Title
-        title = detailsPageElements.xpath('//div[@class="indSceneDVD"]/h2')[0].text_content().strip()
+        title = detailsPageElements.xpath('//div[@class="indSceneDVD"]/h1')[0].text_content().strip()
         metadata.title = title
 
         # Summary
-        metadata.summary = detailsPageElements.xpath('//div[@class="description"]/p')[0].text_content().replace('Description:', '').strip()
+        metadata.summary = detailsPageElements.xpath('//div[@class="description"]/h2')[0].text_content().replace('Description:', '').strip()
 
         # Tagline and Collection(s)
         dvdName = title
