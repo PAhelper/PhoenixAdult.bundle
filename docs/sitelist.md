@@ -1089,8 +1089,10 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Freeuse Fantasy
   - Gingerpatch
   - Her Freshman Year
+  - HijabHookup
   - I Made Porn
   - Innocent High
+  - KissingSis
   - Little Asians
   - Lust HD
   - My Babysitters Club
@@ -1098,6 +1100,7 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Oye Loca
   - PervDoctor
   - PervMom
+  - PervTherapy
   - POV Life
   - Rub A Teen
   - Self Desire
