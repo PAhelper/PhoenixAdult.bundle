@@ -19,6 +19,7 @@ jobs:
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
           filter_mode: file
+          reporter: github-pr-review
           fail_on_error: true
           flake8_args: '--exclude Contents/Libraries/Shared'
           tool_name: pycodestyle
