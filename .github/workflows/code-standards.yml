@@ -4,7 +4,7 @@ on:
     branches:
       - master
 jobs:
-  flake8-lint:
+  lint:
     runs-on: ubuntu-latest
     name: Lint
     steps:
@@ -13,12 +13,12 @@ jobs:
       - name: Set up Python environment
         uses: actions/setup-python@v2
         with:
-          python-version: 3.x
-      - name: flake8 Lint
+          python-version: 2.x
+      - name: Lint
         uses: reviewdog/action-flake8@v3
         with:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
           filter_mode: file
           fail_on_error: true
-          workdir: Contents/Code
-          flake8_args: '--ignore E501,E722'
+          flake8_args: '--ignore E305,E501,E722 --exclude Contents/Libraries/Shared'
+          tool_name: pycodestyle
