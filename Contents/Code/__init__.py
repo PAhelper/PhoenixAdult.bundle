@@ -53,6 +53,7 @@ class PhoenixAdultAgent(Agent.Movies):
     contributes_to = ['com.plexapp.agents.stashplexagent', 'com.plexapp.agents.themoviedb', 'com.plexapp.agents.imdb']
     primary_provider = True
 
+
     def search(self, results, media, lang):
         title = PAutils.getSearchTitleStrip(media.name)
         title = PAutils.getCleanSearchTitle(title)
