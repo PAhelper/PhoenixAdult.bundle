@@ -2888,9 +2888,9 @@ def getProviderFromSiteNum(siteNum):
         # Huge Media
         elif (1376 <= siteNum <= 1388):
             provider = networkHugeMedia
-            
-         # ModelHub
+
+        # ModelHub
         elif siteNum == 1389:
             provider = networkModelHub
-
+            
     return provider
