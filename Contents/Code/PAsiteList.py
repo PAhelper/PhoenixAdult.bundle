@@ -1573,6 +1573,7 @@ searchSites = {
     1386: ('Fist4k', 'https://fist4k.com', '/'),
     1387: ('Mature4k', 'https://mature4k.com', '/'),
     1388: ('Shame4k', 'https://shame4k.com', '/'),
+    1389: ('ModelHub', 'https://www.modelhub.com', '/video/'),
 }
 
 abbreviations = (
@@ -2887,5 +2888,9 @@ def getProviderFromSiteNum(siteNum):
         # Huge Media
         elif (1376 <= siteNum <= 1388):
             provider = networkHugeMedia
+            
+         # ModelHub
+        elif siteNum == 1389:
+            provider = networkModelHub
 
     return provider
