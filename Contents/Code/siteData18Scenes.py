@@ -195,7 +195,61 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
     else:
-        date_object = parse(detailsPageElements.xpath('//@datetime')[0].strip())
+        date_object = detailsPageElements.xpath('//span[contains(., "Release date")]')[0].text_content().strip().replace("Release date: ","").replace(", more updates...","")
+        Log(date_object)
+             
+        # Month
+        month = 0
+        if "January" in date_object:
+            month = 1
+            date_object = date_object.replace('January ','')
+        elif "February" in date_object:
+            month = 2 
+            date_object = date_object.replace('February ','')
+        elif "March" in date_object:
+            month = 3 
+            date_object = date_object.replace('March ','')
+        elif "April" in date_object:
+            month = 4
+            date_object = date_object.replace('April ','')
+        elif "May" in date_object:
+            month = 5
+            date_object = date_object.replace('May ','')
+        elif "June" in date_object:
+            month = 6
+            date_object = date_object.replace('June ','')
+        elif "July" in date_object:
+            month = 7
+            date_object = date_object.replace('July ','')
+        elif "August" in date_object:
+            month = 8
+            date_object = date_object.replace('August ','')
+        elif "September" in date_object:
+            month = 9
+            date_object = date_object.replace('September ','')
+        elif "October" in date_object:
+            month = 10
+            date_object = date_object.replace('October ','')     
+        elif "November" in date_object:
+            month = 11
+            date_object = date_object.replace('November ','')
+        elif "December" in date_object:
+            month = 12
+            date_object = date_object.replace('December ','')        
+                
+        #Day
+        day = int(date_object[:2])
+        Log('Day:' + date_object[:2])
+                
+        #Year
+        date_object = date_object.replace(date_object[:4],'')
+        year = int(date_object[:4])
+           
+        try:
+            date_object = parse(year+'-'+month+'-'+day)
+        except:
+            date_object = datetime(year, month, day)
+                
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
@@ -208,7 +262,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
 
     # Actors
     movieActors.clearActors()
-    actors = detailsPageElements.xpath('//b[contains(., "Cast")]//following::div//a[contains(@href, "/pornstars/")]//img')
+    actors = detailsPageElements.xpath("//div[contains(@style,'margin-left: -15px;')]//a[contains(@href, '/name/')]//img")
+    
     for actorLink in actors:
         actorName = actorLink.xpath('./@alt')[0].strip()
         actorPhotoURL = actorLink.xpath('./@data-src')[0].strip()
