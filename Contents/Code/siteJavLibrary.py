@@ -18,7 +18,7 @@ def search(results, lang, siteNum, searchData):
         searchData.encoded = searchJAVID
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
-    if req.status_code == 302:
+    if req.status_code == 302 or req.status_code == 200:
         searchResult = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
         JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
@@ -55,7 +55,10 @@ def search(results, lang, siteNum, searchData):
 
 def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAutils.Decode(metadata_id[0])
+    sceneURL_broken = PAutils.Decode(metadata_id[0])
+    # No idea why but metadata_id[0] is base58 of the URL without the schema
+    # part for some reason
+    sceneURL = "https:" + sceneURL_broken
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
