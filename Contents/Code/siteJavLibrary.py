@@ -1,6 +1,35 @@
 import PAsearchSites
 import PAutils
+import re
 
+def handle_200_ok(req, searchJAVID, siteNum, lang, results):
+    page = HTML.ElementFromString(req.text)
+    pageTitle = page.xpath('//title')[0].text_content().strip()
+    pattern = re.compile("^(.)*\ Search Result - JAVLibrary$")
+    result = pattern.match(pageTitle)
+
+    if result:
+        handle_search_results(page, searchJAVID, siteNum, lang, results)
+    else:
+        handle_direct_match(page, searchJAVID, siteNum, lang, results)
+
+def handle_search_results(page, searchJAVID, siteNum, lang, results):
+    videos = page.xpath('//div[@class="video" and contains(@id, "vid_")]/a')
+    for video in videos:
+        titleNoFormatting = video.xpath('.//div[@class="title"]')[0].text_content().strip()
+        JAVID = video.xpath('.//div[@class="id"]')[0].text_content().strip()
+        # href is relative: './?v=javli6zm2e'
+        relativePath = str(video.xpath('.//@href')[0]).split("./")
+        curID = "https://javlibrary.co/en/" + relativePath[1]
+        score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+        results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
+
+def handle_direct_match(page, searchJAVID, siteNum, lang, results):
+    titleNoFormatting = page.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
+    JAVID = page.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
+    curID = PAutils.Encode(page.xpath('//meta[@property="og:url"]/@content')[0].strip())
+    score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
+    results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
 
 def search(results, lang, siteNum, searchData):
     searchJAVID = None
@@ -18,7 +47,7 @@ def search(results, lang, siteNum, searchData):
         searchData.encoded = searchJAVID
 
     req = PAutils.HTTPRequest(PAsearchSites.getSearchSearchURL(siteNum) + searchData.encoded)
-    if req.status_code == 302 or req.status_code == 200:
+    if req.status_code == 302:
         searchResult = HTML.ElementFromString(req.text)
         titleNoFormatting = searchResult.xpath('//h3[@class="post-title text"]/a')[0].text_content().strip()
         JAVID = searchResult.xpath('//td[contains(text(), "ID:")]/following-sibling::td')[0].text_content().strip()
@@ -26,7 +55,11 @@ def search(results, lang, siteNum, searchData):
         score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
 
         results.Append(MetadataSearchResult(id='%s|%d' % (curID, siteNum), name='[%s] %s' % (JAVID, titleNoFormatting), score=score, lang=lang))
-
+    elif req.status_code == 200:
+        # We end up here if:
+        # 1. There is more than one search result
+        # 2. We go directly to the video page
+        handle_200_ok(req, searchJAVID, siteNum, lang, results)
     else:
         searchResultsURLs = []
         googleResults = PAutils.getFromGoogleSearch('%s %s' % (splitSearchTitle[0], splitSearchTitle[1]), siteNum)
