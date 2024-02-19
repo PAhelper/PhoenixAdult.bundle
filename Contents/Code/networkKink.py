@@ -48,7 +48,13 @@ def search(results, lang, siteNum, searchData):
 def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
-    sceneDate = metadata_id[2]
+    try:
+        sceneDate = metadata_id[2]
+    except IndexError:
+        # for some reason this is no longer passing three items, only two.
+        # this fix appears to work
+        # TODO: resolve the underlying issue.
+        sceneDate = None
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
