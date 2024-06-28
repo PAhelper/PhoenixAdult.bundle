@@ -53,8 +53,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    javID = detailsPageElements.xpath('//tr[./td[contains(., "DVD ID")]]//td[@class="tablevalue"]')[0].text_content().strip()
-    title = detailsPageElements.xpath('//tr[./td[contains(., "Translated")]]//td[@class="tablevalue"]')[0].text_content().replace(javID, '').strip()
+    javID = detailsPageElements.xpath('//p[.//b[contains(., "DVD ID")]]')[0].text_content().split(':')[-1].strip()
+    title = detailsPageElements.xpath('//p[.//b[contains(., "Title")]]')[0].text_content().split(':')[-1].replace(javID, '').strip()
 
     for word, correction in censoredWordsDB.items():
         if word in title:
@@ -67,9 +67,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.title = '[%s] %s' % (javID.upper(), PAutils.parseTitle(title, siteNum))
 
     # Studio
-    studio = detailsPageElements.xpath('//tr[./td[contains(., "Studio")]]//td[@class="tablevalue"]')
+    studio = detailsPageElements.xpath('//p[.//b[contains(., "Studio")]]/span')
     if studio:
-        studioClean = studio[0].text_content().strip()
+        studioClean = studio[0].text_content().split(':')[-1].strip()
         for word, correction in censoredWordsDB.items():
             if word in studioClean:
                 studioClean = studioClean.replace(word, correction)
@@ -77,9 +77,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.studio = studioClean
 
     # Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//tr[./td[contains(., "Label")]]//td[@class="tablevalue"]')
+    tagline = detailsPageElements.xpath('//p[.//b[contains(., "JAV Series")]]/span')
     if tagline and tagline[0].text_content().strip():
-        taglineClean = tagline[0].text_content().strip()
+        taglineClean = tagline[0].text_content().split(':')[-1].strip()
         for word, correction in censoredWordsDB.items():
             if word in taglineClean:
                 taglineClean = taglineClean.replace(word, correction)
@@ -92,14 +92,14 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.collections.add('Japan Adult Video')
 
     # Release Date
-    date = detailsPageElements.xpath('//tr[./td[contains(., "Release Date")]]//td[@class="tablevalue"]')
+    date = detailsPageElements.xpath('//p[.//b[contains(., "Release Date")]]')
     if date:
-        date_object = datetime.strptime(date[0].text_content().strip(), '%Y-%m-%d')
+        date_object = datetime.strptime(date[0].text_content().split(':')[-1].strip(), '%Y-%m-%d')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    for genreLink in detailsPageElements.xpath('//tr[./td[contains(., "Genre")]]//td[@class="tablevalue"]//a'):
+    for genreLink in detailsPageElements.xpath('//p[.//b[contains(., "Genre")]]/span'):
         genreName = genreLink.text_content().strip()
 
         movieGenres.addGenre(genreName)
@@ -120,9 +120,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 movieActors.addActor(actorName, actorPhotoURL)
 
     # Director
-    directorLink = detailsPageElements.xpath('//tr[./td[contains(., "Director")]]//td[@class="tablevalue"]')
+    directorLink = detailsPageElements.xpath('//p[.//b[contains(., "Director")]]/span')
     if directorLink:
-        directorName = directorLink[0].text_content().strip()
+        directorName = directorLink[0].text_content().split(':')[-1].strip()
 
         movieActors.addDirector(directorName, '')
 

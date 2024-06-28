@@ -305,6 +305,9 @@ def actorDBfinder(actorName, metadata):
     if actorPhotoURL:
         Log('%s found in %s ' % (actorName, databaseName))
         Log('PhotoURL: %s' % actorPhotoURL)
+    elif Prefs['gender_enable']:
+        gender = genderCheck(actorName)
+        Log('%s image not found' % actorName)
     else:
         Log('%s not found' % actorName)
 
@@ -313,6 +316,13 @@ def actorDBfinder(actorName, metadata):
 
 def genderCheck(actorName):
     actorEncoded = urllib.quote(re.sub(r'(?<=\w)\.\s(?=\w\.)', '', actorName).replace('.', ''))
+    period_corrections = {
+        (r'^dr%20', 'Dr%2E%20'), (r'%20st%20', '%20St.%20'), (r'^j%20', 'J%2E%20')
+    }
+
+    for value in period_corrections:
+        actorEncoded = re.sub(value[0], value[1], actorEncoded, flags=re.IGNORECASE)
+
     gender = ''
 
     url = 'http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded
@@ -455,10 +465,16 @@ def getFromBabesandStars(actorName, actorEncoded, metadata):
 def getFromIAFD(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
     gender = ''
-    req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded.replace('.', ''))
+    period_corrections = {
+        (r'^dr%20', 'Dr%2E%20'), (r'%20st%20', '%20St.%20'), (r'^j%20', 'J%2E%20')
+    }
+
+    for value in period_corrections:
+        actorEncoded = re.sub(value[0], value[1], actorEncoded, flags=re.IGNORECASE)
+
+    req = PAutils.HTTPRequest('http://www.iafd.com/results.asp?searchtype=comprehensive&searchstring=' + actorEncoded)
 
     actorSearch = HTML.ElementFromString(req.text)
-    actorThumbs = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[1]//a')
     actorResults = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[2]//a')
     actorAlias = actorSearch.xpath('//table[@id="tblFem" or @id="tblMal"]//tbody//td[@class="text-left"]')
     maleActorURLs = actorSearch.xpath('//table[@id="tblMal"]//tbody//td[2]//a/@href')
@@ -478,12 +494,11 @@ def getFromIAFD(actorName, actorEncoded, metadata):
                 if metadata.studio.replace(' ', '').lower() in actorAlias[idx].text_content().replace(' ', '').lower():
                     resultScore = 0
 
-            if 'th_iafd_ad' not in actorThumbs[idx].xpath('.//@src')[0]:
-                if resultScore == score:
-                    results.append(actor)
-                elif resultScore < score:
-                    score = resultScore
-                    results = [actor]
+            if resultScore == score:
+                results.append(actor)
+            elif resultScore < score:
+                score = resultScore
+                results = [actor]
 
         if results:
             actor = random.choice(results)
@@ -493,7 +508,7 @@ def getFromIAFD(actorName, actorEncoded, metadata):
         req = PAutils.HTTPRequest('http://www.iafd.com' + actorPageURL)
         actorPage = HTML.ElementFromString(req.text)
         img = actorPage.xpath('//div[@id="headshot"]//img/@src')
-        if img and 'nophoto' not in img[0]:
+        if img and 'nophoto' not in img[0] and 'th_iafd_ad' not in img[0]:
             actorPhotoURL = img[0]
 
         gender = 'male' if actorPageURL in maleActorURLs else 'female'
