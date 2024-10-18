@@ -5631,6 +5631,9 @@ ActorsReplaceStudios = {
         'Rose Winters': ['Rose'],
     },
     56: {  # Score Group
+        'Adria Rae': ['Adria'],
+        'Aidan Layne': ['Aidan'],
+        'Alyssa Heart': ['Alyssa'],
         'Bess Breast': ['Bess'],
         'Gracie Gates': ['Gracie'],
         'Leana Lovings': ['Leana'],

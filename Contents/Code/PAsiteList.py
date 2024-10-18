@@ -1980,6 +1980,7 @@ searchSites = {
     1886: ('Heavy on Hotties', 'https://www.heavyonhotties.com', '/'),
     1887: ('Filthy Kings', 'https://www.filthykings.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     1888: ('MYLF Seeker', 'https://www.filthykings.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
+    1889: ('Score Classics', 'https://www.scoreclassics.com', '/classic-boob-videos/'),
 }
 
 abbreviations = (
@@ -3016,7 +3017,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteWoodmanCastingX
 
         # ScoreGroup
-        elif (1012 <= siteNum <= 1021) or (1344 <= siteNum <= 1345) or siteNum == 1744:
+        elif (1012 <= siteNum <= 1021) or (1344 <= siteNum <= 1345) or siteNum == 1744 or siteNum == 1889:
             provider = networkScoreGroup
 
         # TwoTGirls

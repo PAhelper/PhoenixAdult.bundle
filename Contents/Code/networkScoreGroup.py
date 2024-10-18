@@ -2,8 +2,22 @@ import PAsearchSites
 import PAutils
 
 
+def getSearchFromForm(query, siteNum):
+    params = {
+        'keywords': query,
+        's_filters[type]': 'videos',
+        's_filters[site]': 'current'
+    }
+    searchURL = '%s/search-es' % PAsearchSites.getSearchBaseURL(siteNum)
+    req = PAutils.HTTPRequest(searchURL, params=params)
+    data = HTML.ElementFromString(req.text)
+
+    return data
+
+
 def search(results, lang, siteNum, searchData):
     searchResults = []
+    searchPageResults = []
     searchID = None
 
     parts = searchData.title.split()
@@ -14,34 +28,50 @@ def search(results, lang, siteNum, searchData):
         sceneID = re.sub(r'\D', '', searchData.title)
         actorName = re.sub(r'\s\d.*', '', searchData.title).replace(' ', '-')
         directURL = '%s%s/%s/' % (PAsearchSites.getSearchSearchURL(siteNum), actorName, sceneID)
+        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
         searchResults.append(directURL)
 
     urlID = PAsearchSites.getSearchSearchURL(siteNum).replace(PAsearchSites.getSearchBaseURL(siteNum), '')
 
+    searchPageElements = getSearchFromForm(searchData.title, siteNum)
+    for searchResult in searchPageElements.xpath('//div[contains(@class, "compact video")]'):
+        titleNoFormatting = PAutils.parseTitle(searchResult.xpath('.//a[contains(@class, "title")]')[0].text_content().strip(), siteNum)
+        sceneURL = searchResult.xpath('.//a[contains(@class, "title")]/@href')[0].strip().split('?')[0]
+        curID = PAutils.Encode(sceneURL)
+        searchPageResults.append(sceneURL)
+        match = re.search(r'(?<=\/)\d+(?=\/)', sceneURL)
+        if match:
+            searchID = match.group(0)
+
+        releaseDate = searchData.dateFormat() if searchData.date else ''
+
+        if searchID and searchID == sceneID:
+            score = 100
+        else:
+            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+
+        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s]' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum)), score=score, lang=lang))
+
     googleResults = PAutils.getFromGoogleSearch(searchData.title, siteNum)
     for sceneURL in googleResults:
-        if urlID in sceneURL and '?' not in sceneURL and sceneURL not in searchResults:
+        if urlID in sceneURL and '?' not in sceneURL and sceneURL not in searchResults and sceneURL not in searchPageResults:
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
         req = PAutils.HTTPRequest(sceneURL)
-        searchPageElements = HTML.ElementFromString(req.text)
-        titleNoFormatting = PAutils.parseTitle(searchPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
+        scenePageElements = HTML.ElementFromString(req.text)
+        titleNoFormatting = PAutils.parseTitle(scenePageElements.xpath('//h1')[0].text_content().strip(), siteNum)
 
-        if '404' not in titleNoFormatting and 'Latest Videos' not in titleNoFormatting:
+        if '404' not in titleNoFormatting and not re.search('Latest.*Videos', titleNoFormatting):
             match = re.search(r'(?<=\/)\d+(?=\/)', sceneURL)
             if match:
                 searchID = match.group(0)
 
             curID = PAutils.Encode(sceneURL)
 
-            try:
-                date = searchPageElements.xpath('//div[./span[contains(., "Date:")]]//span[@class="value"]')[0].text_content().strip()
-            except:
-                date = ''
-
+            date = scenePageElements.xpath('//div[./span[contains(., "Date:")]]//span[@class="value"]')
             if date:
-                releaseDate = parse(date).strftime('%Y-%m-%d')
+                releaseDate = parse(date[0].text_content().strip()).strftime('%Y-%m-%d')
             else:
                 releaseDate = searchData.dateFormat() if searchData.date else ''
             displayDate = releaseDate if date else ''
@@ -91,9 +121,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(metadata.tagline)
 
     # Release Date
-    date = detailsPageElements.xpath('//div/span[@class="value"]')
+    try:
+        date = detailsPageElements.xpath('//div/span[@class="value"]')[1].text_content().strip()
+    except:
+        date = None
     if date:
-        date = date[1].text_content().strip()
         date_object = parse(date)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
