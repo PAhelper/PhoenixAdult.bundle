@@ -17,7 +17,7 @@ ActorsReplace = {
     'Alura Jenson': ['Alura \'Tnt\' Jenson', 'Alura Tnt Jenson'],
     'Amaris': ['Amaris XXX', 'Koko Amaris', 'Kortney', 'Kortney Y'],
     'Amia Miley': ['Amia Moretti', 'Amia'],
-    'Amirah Adara': ['Amirah', 'Amira Adara', ['Amiraha Adara'],
+    'Amirah Adara': ['Amirah', 'Amira Adara', 'Amiraha Adara'],
     'Amy Reid': ['Amy Reed', 'Amy Ried', 'Devin Valencia'],
     'Ana Foxxx': ['Ana Fox', 'Ana Foxx'],
     'Anabelle Evans': ['Ana Bell Evans', 'Ana Belle', 'Anabelle', 'Anabelle Sonic', 'Pd Anabell'],
