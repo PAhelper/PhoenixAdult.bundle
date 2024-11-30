@@ -409,6 +409,7 @@ ActorsReplaceStudios = {
     },
     6: {  # Evilangel
         'Alice Miller': ['Paulina B'],
+        'Drea Alexa': ['Brianna Rose'],
         'Sasha D': ['Sasha', 'Sandra'],
         'Sasha Rose': ['Lynn'],
         'Scarlet Domingo': ['Scarlett'],
