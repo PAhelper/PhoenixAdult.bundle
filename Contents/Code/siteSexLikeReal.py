@@ -19,7 +19,11 @@ def search(results, lang, siteNum, searchData):
             titleNoFormatting = detailsPageElements.xpath('//h1')[0].text_content().strip()
             releaseDate = parse(detailsPageElements.xpath('//time/@datetime')[0]).strftime('%Y-%m-%d')
 
-            if searchData.date:
+            Log("directURL: " + str(directURL))
+            Log("sceneURL: " + str(sceneURL))
+            if directURL == sceneURL:
+                score = 100
+            elif searchData.date:
                 score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
             else:
                 score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
@@ -52,10 +56,16 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.collections.add(metadata.studio)
 
     # Release Date
-    date = detailsPageElements.xpath('//time[contains(@class, "u-inline-block u-align-y--m")]/@datetime')[0]
-    date_object = parse(date)
-    metadata.originally_available_at = date_object
-    metadata.year = metadata.originally_available_at.year
+    maybeDate = detailsPageElements.xpath('//div[contains(@class, "u-flex u-flex-wrap u-align-i--center u-fs--fo u-dw u-mt--three u-flex-grow--one desktop:u-mt--four desktop:u-fs--si")]/time/@datetime')[0]
+    if maybeDate:
+        date_object = parse(maybeDate)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
+    else:
+        date = detailsPageElements.xpath('//time[contains(@class, "u-inline-block u-align-y--m")]/@datetime')[0]
+        date_object = parse(date)
+        metadata.originally_available_at = date_object
+        metadata.year = metadata.originally_available_at.year
 
     # Genres
     for genreName in detailsPageElements.xpath('//meta[@property="video:tag"]/@content'):

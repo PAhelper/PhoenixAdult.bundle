@@ -67,7 +67,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Actor(s)
     for actorLink in sceneData['actors']:
         actorName = actorLink['name']
-        actorPhotoURL = detailsPageElements.xpath('//div[@class="performerItem"]//a[@href="%s"]//img/@src' % actorLink['url'])[0]
+        actorPhotoURL = detailsPageElements.xpath('//div[@class="model-box"]//a//img/@src')[0]
 
         movieActors.addActor(actorName, actorPhotoURL)
 

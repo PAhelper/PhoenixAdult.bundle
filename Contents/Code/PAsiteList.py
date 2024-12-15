@@ -1557,7 +1557,7 @@ searchSites = {
     1363: ('IMadePorn', 'https://www.teamskeet.com', '/movies/'),
     1364: ('Facials4K', 'https://www.facials4k.com', '/video/'),
     1365: ('Bang Movies', 'https://www.bang.com', '/movies?term='),
-    1366: ('VirtualPorn', 'https://virtualporn.com', '/'),
+    1366: ('VirtualPorn', 'https://virtualporn.com', '/videos?q='),
     1367: ('JAVLibrary', 'https://www.javlibrary.com', '/en/vl_searchbyid.php?keyword='),
     1368: ('Killergram', 'https://killergram.com', '/episodes.asp?page=episodes&id='),
     1369: ('Killergram Platinum', 'https://killergram.com', '/platinum.asp?page=platinum&id='),
@@ -1982,6 +1982,7 @@ searchSites = {
     1888: ('MYLF Seeker', 'https://www.filthykings.com', 'https://tsmkfa364q-dsn.algolia.net/1/indexes/*/queries'),
     1889: ('Score Classics', 'https://www.scoreclassics.com', '/classic-boob-videos/'),
     1890: ('LustCinema', 'https://next-prod-api.lustcinema.com', '/api/search'),
+    1891: ('CzechAR', 'https://www.czechar.com', '/model-'),
 }
 
 abbreviations = (
@@ -2566,7 +2567,7 @@ def getProviderFromSiteNum(siteNum):
             provider = siteVirtualReal
 
         # CzechVR Network
-        elif (578 <= siteNum <= 580):
+        elif (578 <= siteNum <= 580) or (1891 == siteNum):
             provider = networkCzechVR
 
         # FinishesTheJob

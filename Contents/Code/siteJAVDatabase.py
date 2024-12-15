@@ -22,8 +22,8 @@ def search(results, lang, siteNum, searchData):
     searchPageElements = HTML.ElementFromString(req.text)
     for searchResult in searchPageElements.xpath('//div[contains(@class, "card h-100")]'):
         titleNoFormatting = PAutils.parseTitle(searchResult.xpath('.//div[@class="mt-auto"]/a')[0].text_content().strip(), siteNum)
-        JAVID = searchResult.xpath('.//p[@class="display-6"]/a')[0].text_content().strip()
-        sceneURL = searchResult.xpath('.//p[@class="display-6"]/a/@href')[0].strip()
+        JAVID = searchResult.xpath('.//p//a[contains(@class, "cut-text")]')[0].text_content().strip()
+        sceneURL = searchResult.xpath('.//p//a[contains(@class, "cut-text")]/@href')[0].strip()
         curID = PAutils.Encode(sceneURL)
 
         date = searchResult.xpath('.//div[@class="mt-auto"]/text()')
@@ -36,8 +36,6 @@ def search(results, lang, siteNum, searchData):
 
         if searchJAVID:
             score = 100 - Util.LevenshteinDistance(searchJAVID.lower(), JAVID.lower())
-        elif searchData.date and displayDate:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
         else:
             score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
@@ -53,8 +51,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    javID = detailsPageElements.xpath('//p[.//b[contains(., "DVD ID")]]')[0].text_content().split(':')[-1].strip()
-    title = detailsPageElements.xpath('//p[.//b[contains(., "Title")]]')[0].text_content().split(':')[-1].replace(javID, '').strip()
+    javID = detailsPageElements.xpath('//meta[@property="og:title"]/@content')[0].strip()
+    title = detailsPageElements.xpath('//*[text()="Title: "]/following-sibling::text()')[0].strip()
 
     for word, correction in censoredWordsDB.items():
         if word in title:
@@ -67,47 +65,36 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
         metadata.title = '[%s] %s' % (javID.upper(), PAutils.parseTitle(title, siteNum))
 
     # Studio
-    studio = detailsPageElements.xpath('//p[.//b[contains(., "Studio")]]/span')
+    studio = detailsPageElements.xpath('//*[text()="Studio: "]/following-sibling::span/a')
     if studio:
-        studioClean = studio[0].text_content().split(':')[-1].strip()
+        studioClean = studio[0].text_content().strip()
         for word, correction in censoredWordsDB.items():
             if word in studioClean:
                 studioClean = studioClean.replace(word, correction)
 
         metadata.studio = studioClean
 
-    # Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//p[.//b[contains(., "JAV Series")]]/span')
-    if tagline and tagline[0].text_content().strip():
-        taglineClean = tagline[0].text_content().split(':')[-1].strip()
-        for word, correction in censoredWordsDB.items():
-            if word in taglineClean:
-                taglineClean = taglineClean.replace(word, correction)
-
-        metadata.tagline = taglineClean
-        metadata.collections.add(metadata.tagline)
-    elif studio and metadata.studio:
+    if studio and metadata.studio:
         metadata.collections.add(metadata.studio)
     else:
         metadata.collections.add('Japan Adult Video')
 
     # Release Date
-    date = detailsPageElements.xpath('//p[.//b[contains(., "Release Date")]]')
+    date = detailsPageElements.xpath('//*[text()="Release Date: "]/following-sibling::text()[1]')
     if date:
-        date_object = datetime.strptime(date[0].text_content().split(':')[-1].strip(), '%Y-%m-%d')
+        date_object = datetime.strptime(date[0], '%Y-%m-%d')
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
 
     # Genres
-    for genreLink in detailsPageElements.xpath('//p[.//b[contains(., "Genre")]]/span'):
+    for genreLink in detailsPageElements.xpath('//*[text()="Genre(s): "]/following-sibling::*/a'):
         genreName = genreLink.text_content().strip()
-
         movieGenres.addGenre(genreName)
 
     # Actor(s)
-    for actor in detailsPageElements.xpath('//div/div[./h2[contains(., "Idols")]]//div[@class="idol-thumb"]'):
-        actorName = actor.xpath('.//@alt')[0].strip().split('(')[0].replace(')', '')
-        actorPhotoURL = actor.xpath('.//img/@src')[0].replace('melody-marks', 'melody-hina-marks')
+    for actor in detailsPageElements.xpath('//*[text()="Idol(s)/Actress(es): "]/following-sibling::span/a'):
+        actorName = actor.text_content().strip()
+        actorPhotoURL = actor.get('href').replace('melody-marks', 'melody-hina-marks')
 
         req = PAutils.HTTPRequest(actorPhotoURL)
         if 'unknown.' in req.url:
@@ -120,10 +107,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
                 movieActors.addActor(actorName, actorPhotoURL)
 
     # Director
-    directorLink = detailsPageElements.xpath('//p[.//b[contains(., "Director")]]/span')
+    directorLink = detailsPageElements.xpath('//*[text()="Director: "]/following-sibling::span/a')
     if directorLink:
-        directorName = directorLink[0].text_content().split(':')[-1].strip()
-
+        directorName = directorLink[0].text_content().strip()
         movieActors.addDirector(directorName, '')
 
     # Manually Add Actors By JAV ID

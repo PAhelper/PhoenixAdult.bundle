@@ -48,7 +48,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     metadata.title = detailsPageElements.xpath('//head/title')[0].text_content().replace('Czech VR Network', '').replace(' - Czech VR Fetish Porn Videos', '').replace('Czech VR Fetish', '').replace('Czech VR Casting', '').replace('Czech VR', '').strip()
 
     # Summary
-    metadata.summary = detailsPageElements.xpath('//div[@class="text"]')[0].text_content().strip()
+    maybeSummary = detailsPageElements.xpath('//div[@class="text"]')
+    if maybeSummary:
+        metadata.summary = maybeSummary[0].text_content().strip()
+    else:
+        metadata.summary = detailsPageElements.xpath('//div[@class="textDetail"]')[0].text_content().strip()
 
     # Studio
     metadata.studio = 'CzechVR'
@@ -68,14 +72,19 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, art):
     # Genres
     for genreLink in detailsPageElements.xpath('//div[@class="tag new"]//a'):
         genreName = genreLink.text_content().lower().strip()
-
+        movieGenres.addGenre(genreName)
+    for genreLink in detailsPageElements.xpath('//div[@class="tag"]//a'):
+        genreName = genreLink.text_content().lower().strip()
         movieGenres.addGenre(genreName)
 
     # Actor(s)
-    for actorLink in detailsPageElements.xpath('//div[@class="modelky"]//a/span'):
+    for actorLink in detailsPageElements.xpath('//div[@class="modelky"]//a'):
         actorName = actorLink.text_content().strip()
         actorPhotoURL = ''
-
+        movieActors.addActor(actorName, actorPhotoURL)
+    for actorLink in detailsPageElements.xpath('(//div[contains(@class, "nazev")])[1]//div[@class="featuring"]//a'):
+        actorName = actorLink.text_content().strip()
+        actorPhotoURL = ''
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
