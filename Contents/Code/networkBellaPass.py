@@ -56,13 +56,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
     sceneDate = metadata_id[2]
+
     if not sceneURL.startswith('http'):
         sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + sceneURL
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h3')[0].text_content().strip()
+    if siteNum in [1246, 1553]:
+        metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
+    else:
+        metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h3')[0].text_content().strip(), siteNum)
 
     # Summary
     description = detailsPageElements.xpath('//div[contains(@class, "videoDetails")]//p')

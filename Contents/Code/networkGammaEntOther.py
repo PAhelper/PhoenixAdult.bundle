@@ -175,13 +175,13 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             actorPhotoURL = ''
 
         if actorLink['gender'] == 'female':
-            female.append((actorName, actorPhotoURL))
+            female.append((actorName, actorPhotoURL, 'female'))
         else:
-            male.append((actorName, actorPhotoURL))
+            male.append((actorName, actorPhotoURL, 'male'))
 
     combined = female + male
     for actor in combined:
-        movieActors.addActor(actor[0], actor[1])
+        movieActors.addActor(actor[0], actor[1], gender=actor[2])
 
     # Posters
     if not PAsearchSites.getSearchBaseURL(siteNum).endswith(('girlsway.com', 'puretaboo.com')):
