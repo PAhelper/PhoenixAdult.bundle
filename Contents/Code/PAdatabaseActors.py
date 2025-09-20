@@ -81,6 +81,7 @@ ActorsReplace = {
     'Cory Chase': ['Corey Chase', 'Cory Chade'],
     'Crystal Rae': ['Cyrstal Rae', 'Crystal Ray', 'Chrysal Ray'],
     'Dahlia Sky': ['Amber Rose', 'Bailey Blue', 'Dahlia Skye'],
+    'Daisy Phoenix': ['Daisy Pheonix'],
     'Dana Sofia': ['Dana SofíA'],
     'Darcie Belle': ['Darcie Bell'],
     'Darlene Amaro': ['Delanie', 'Darlene', 'Yorkine'],
