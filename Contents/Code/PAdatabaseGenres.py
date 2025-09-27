@@ -38,7 +38,7 @@ GenresReplace = {
     'Boy-Boy-Girl-Girl-Girl': ['fffmm'],
     'Boy-Boy-Girl-Girl': ['mmff'],
     'Boy-Boy-Girl': ['bbg', 'mmf', 'threesome bbg'],
-    'Boy-Girl-Girl': ['2 girl bj', 'bgg', 'ffm', 'girl-girl-boy', 'threesome bgg', '2 Girls', 'girl girl boy'],
+    'Boy-Girl-Girl': ['2 girl bj', 'bgg', 'ffm', 'girl-girl-boy', 'threesome bgg', '2 Girls', 'girl girl boy', 'threesome - ffm'],
     'Boy-Girl': ['boy girl', 'girl-boy', 'girl/boy', 'couples - boy/girl'],
     'Braces': ['metal mouth'],
     'Bras & Panties': ['bras n panties'],

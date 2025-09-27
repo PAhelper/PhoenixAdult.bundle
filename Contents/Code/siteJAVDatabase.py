@@ -92,9 +92,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         movieGenres.addGenre(genreName)
 
     # Actor(s)
-    for actor in detailsPageElements.xpath('//*[text()="Idol(s)/Actress(es): "]/following-sibling::span/a'):
-        actorName = actor.text_content().strip()
-        actorPhotoURL = actor.get('href').replace('melody-marks', 'melody-hina-marks')
+    for actor in detailsPageElements.xpath('//div[./h4[contains(., "Actress/Idols")]]//div[contains(@class, "card-body")]'):
+        actorName = actor.xpath('.//a[@class="cut-text"]')[0].text_content().strip()
+        actorPhotoURL = actor.xpath('.//div[@class="idol-thumb"]//img/@src')[0].replace('thumb/', 'full/').replace('melody-marks', 'melody-hina-marks')
 
         req = PAutils.HTTPRequest(actorPhotoURL)
         if 'unknown.' in req.url:

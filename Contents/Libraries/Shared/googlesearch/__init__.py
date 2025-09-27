@@ -68,7 +68,7 @@ def search(term, site, num_results=10, lang='en', proxy=None, advanced=False, sl
         # put in file - comment for debugging purpose
         # with open('google.html', 'w') as f:
         #     f.write(resp.text)
-        
+
         # Parse
         if is_bs4:
             soup = BeautifulSoup(resp.text, 'html.parser')

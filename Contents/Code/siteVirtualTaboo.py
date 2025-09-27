@@ -47,7 +47,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     if description:
         metadata.summary = description[0].text_content().strip()
     else:
-        metadata.summary = detailsPageElements.xpath('//p[@class="description"]')[0].text_content().strip()
+        metadata.summary = detailsPageElements.xpath('//details[@class="description"]')[0].text_content().strip()
 
     # Genres
     for genreLink in detailsPageElements.xpath('//div[contains(@class, "tag-list")]'):

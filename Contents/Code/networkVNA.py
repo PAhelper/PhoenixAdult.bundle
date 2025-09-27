@@ -46,11 +46,12 @@ def search(results, lang, siteNum, searchData):
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
+    sceneID = sceneURL.split('/')[-2]
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
     # Title
-    metadata.title = detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content()
+    metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content().strip(), siteNum)
 
     # Summary
     metadata.summary = detailsPageElements.xpath('//*[@class="customhcolor2"]')[0].text_content().strip()
@@ -99,6 +100,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     if siteNum == 1314:
         movieActors.addActor('Siri', '')
 
+    # Manually Add Actors
+    # Add Actor Based on Title
+    for actor in PAutils.getDictValuesFromKey(actorsDB, sceneID):
+        movieActors.addActor(actor[0], '', gender=actor[1])
+
     # Posters/Background
     xpaths = [
         '//center//img/@src',
@@ -112,7 +118,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             art.append(img)
 
     # add thumbnails not found on scene page
-    if 'thumb_1' in art[0]:
+    if art and 'thumb_1' in art[0]:
         art.extend([
             art[0].replace('thumb_1', 'thumb_2'),
             art[0].replace('thumb_1', 'thumb_3'),
@@ -138,3 +144,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
+
+
+actorsDB = {
+    '36260': [('Sarah Arabic', 'female')],
+}

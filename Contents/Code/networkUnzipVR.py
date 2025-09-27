@@ -69,7 +69,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             except:
                 pass
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        movieActors.addActor(actorName, actorPhotoURL, gender='female')
 
     # Posters
     maybeSlider = detailsPageElements['sliderImage']
