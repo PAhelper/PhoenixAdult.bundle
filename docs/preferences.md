@@ -3,6 +3,15 @@
 ## Male Actor Filter
  - Enable/Disable the adding of Male Actors
 
+## Actor Image Caching
+ - Enable/Disable the saving of Actor Images locally, if found in Metdata Search (speeds up refreshes and searches significantly)
+
+## Replace Cached Actor Images
+ - Enable/Disable the replacement of existing Actor Images on next Metadata Search/Refresh
+
+## Generic Actor Images
+ - Enable/Disable the use of a generic male/female silhouette if actor gender is identified, but image is not
+
 ## Remove Obsolete Images
  - Enable/Disable removal of images no longer found in scrape from metadata when running the "Refresh Metadata" Operation
 
@@ -53,6 +62,14 @@
 ## Custom Order for Actor Matching
  - Allows for ranking perferred actor metadata source
  - Default: Local Storage, Freeones, IAFD, Indexxx, AdultDVDEmpire, Boobpedia, Babes and Stars, Babepedia, JavBus, JAVDatabase
+
+## Enable Restoring Words Deleted By Plex Scanners
+ - Enable/Disable a list of words to be restored to the search title
+ - Allows automatic re-insertion of a list of words that may have been deleted by the media scanner to be used in metadata searches
+
+## List of Deleted Words to Restore
+ - List of words to restore to metadata searches
+ - Default: web, cam, internal, xxx
 
 ## Proxy Preferences
 

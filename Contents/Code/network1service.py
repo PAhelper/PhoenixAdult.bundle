@@ -160,7 +160,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             gender = ''
 
         if actorData['images'] and actorData['images']['profile']:
-            actorPhotoURL = actorData['images']['profile']['0']['xs']['url']
+            actorPhotoURL = 'https://image-service-ht.project1content.com/%s' % (actorData['images']['profile']['0']['xs']['url'].split('=')[-1].split('/', 1)[-1])
 
         movieActors.addActor(actorName, actorPhotoURL, gender=gender)
 
@@ -174,7 +174,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         if imageType in detailsPageElements['images']:
             for image in sorted(detailsPageElements['images'][imageType]):
                 if image.isdigit():
-                    art.append(detailsPageElements['images'][imageType][image]['xx']['url'])
+                    art.append('https://image-service-ht.project1content.com/%s' % detailsPageElements['images'][imageType][image]['xx']['url'].split('=')[-1].split('/', 1)[-1])
 
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):

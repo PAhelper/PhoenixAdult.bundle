@@ -60,16 +60,6 @@ class PhoenixAdultAgent(Agent.Movies):
             Log('Skipping Search for Manual Override')
             return
 
-        if not media.name and media.primary_metadata.title:
-            media.name = media.primary_metadata.title
-
-        title = PAutils.getSearchTitleStrip(media.name)
-        title = PAutils.getCleanSearchTitle(title)
-
-        Log('***MEDIA TITLE [from media.name]*** %s' % title)
-        searchSettings = PAsearchSites.getSearchSettings(title)
-        Log(searchSettings)
-
         filepath = None
         filename = None
         if media.filename:
@@ -77,13 +67,27 @@ class PhoenixAdultAgent(Agent.Movies):
             filename = str(os.path.splitext(os.path.basename(filepath))[0])
             filename = PAutils.getSearchTitleStrip(filename)
 
+        if not media.name and media.primary_metadata.title:
+            media.name = media.primary_metadata.title
+
+        title = PAutils.getSearchTitleStrip(media.name)
+
+        if filename and '5.1080p' in filename.lower():
+            title = title.replace(' 080p', ' 5 1080p').strip()
+
+        title = PAutils.getCleanSearchTitle(title)
+
+        Log('***MEDIA TITLE [from media.name]*** %s' % title)
+        searchSettings = PAsearchSites.getSearchSettings(title, filename)
+        Log(searchSettings)
+
         if searchSettings['siteNum'] is None and filepath:
             directory = str(os.path.split(os.path.dirname(filepath))[1])
             directory = PAutils.getSearchTitleStrip(directory)
 
             newTitle = PAutils.getCleanSearchTitle(directory)
             Log('***MEDIA TITLE [from directory]*** %s' % newTitle)
-            searchSettings = PAsearchSites.getSearchSettings(newTitle)
+            searchSettings = PAsearchSites.getSearchSettings(newTitle, filename)
 
             if searchSettings['siteNum'] is None:
                 if title == newTitle and title != filename:
@@ -91,7 +95,7 @@ class PhoenixAdultAgent(Agent.Movies):
 
                 newTitle = '%s %s' % (newTitle, title)
                 Log('***MEDIA TITLE [from directory + media.name]*** %s' % newTitle)
-                searchSettings = PAsearchSites.getSearchSettings(newTitle)
+                searchSettings = PAsearchSites.getSearchSettings(newTitle, filename)
 
         providerName = None
         siteNum = searchSettings['siteNum']

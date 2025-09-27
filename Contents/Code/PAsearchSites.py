@@ -47,7 +47,23 @@ def getSiteNumByFilter(searchFilter):
     return None
 
 
-def getSearchSettings(mediaTitle):
+def getSearchSettings(mediaTitle, filename):
+    plexScannerBlacklist = map(str.strip, map(str.lower, Prefs['blacklist_list'].split(',')))
+
+    if filename and Prefs['blacklist_enable']:
+        cleanFilename = re.sub(r'\W', ' ', filename.rsplit('/', 1)[-1].lower()).strip().split()
+        splitMediaTitle = mediaTitle.split()
+
+        for word in plexScannerBlacklist:
+            if word in cleanFilename:
+                Log('Restoring %s to SearchTitle' % word)
+
+                for idx in [i for i, x in enumerate(cleanFilename) if x == word]:
+                    replaceWord = splitMediaTitle[map(str.lower, splitMediaTitle).index(cleanFilename[idx - 1])]
+                    splitMediaTitle[map(str.lower, splitMediaTitle).index(cleanFilename[idx - 1])] = '%s %s' % (replaceWord, word)
+
+                mediaTitle = ' '.join(splitMediaTitle)
+
     Log('mediaTitle w/ possible abbreviation: %s' % mediaTitle)
 
     for abbreviation, full in PAsiteList.abbreviations:

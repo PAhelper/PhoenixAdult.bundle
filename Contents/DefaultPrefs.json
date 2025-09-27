@@ -12,6 +12,24 @@
         "default": "false"
     },
     {
+        "id": "actor_cache_enable",
+        "label": "Enable Actor Image Caching",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "actor_cache_replace_enable",
+        "label": "Enable Replacement of Cached Actor Images",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "generic_image_enable",
+        "label": "Enable display of a generic Actor Image when only Gender is Found",
+        "type": "bool",
+        "default": "false"
+    },
+    {
         "id": "validate_image_keys",
         "label": "Remove Obsolete Images",
         "type": "bool",
@@ -90,6 +108,18 @@
         "label": "Order List",
         "type": "text",
         "default": "Local Storage, Freeones, IAFD, Indexxx, AdultDVDEmpire, Boobpedia, Babes and Stars, Babepedia, JAVBus, JAVDatabase"
+    },
+    {
+        "id": "blacklist_enable",
+        "label": "Enable Restoring Words in Filname Deleted By Plex Scanners",
+        "type": "bool",
+        "default": "false"
+    },
+    {
+        "id": "blacklist_list",
+        "label": "List of Words Deleted from Filename to be Used in Searches",
+        "type": "text",
+        "default": "web, cam, internal, xxx"
     },
     {
         "id": "proxy_enable",

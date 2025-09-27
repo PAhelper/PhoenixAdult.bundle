@@ -7,7 +7,7 @@ ActorsReplace = {
     'Addison Lee': ['Addi Lee'],
     'Adelle Sabelle': ['Adelle Saballe'],
     'Adriana Chechik': ['Adriana Chechick', 'Adrianna Chechik'],
-    'AJ Applegate': ['Aj Applegate', 'A.J. Applegate'],
+    'A.J. Applegate': ['Aj Applegate'],
     'Alex D.': ['Alex D'],
     'Alex Kane': ['Sabrina Snow'],
     'Alex Mason': ['Alex Mac', 'Alex Mack', 'Alex Moreno'],
@@ -151,6 +151,7 @@ ActorsReplace = {
     'Jmac': ['J Mac', 'JMac'],
     'Johnny Bravo': ['Jhonny Bravo'],
     'Johnny Love': ['Johnny The Kid', 'Myles Long'],
+    'Johnny Savage': ['Greek Savage'],
     'Jojo Kiss': ['Jo Jo Kiss'],
     'Jonas Kaizer': ['Chris Сatharsis'],
     'Jordan Ashe': ['Jordan Ash', 'Jordan Ashley', 'Jorden Ashley'],
@@ -262,7 +263,7 @@ ActorsReplace = {
     'Noemilk': ['Noe Milk', 'Noemiek'],
     'Nova Sky': ['Jupiter Jetson'],
     'Olivia Jameson': ['Olive Bell', 'Olivia Devine', 'Olivia Divine'],
-    'Ondra Welik': ['Yiny Leon', 'Yini Leon', 'YiniLeon', 'YInyleon', 'YinyLeon', 'Leon'],
+    'Ondra Welik': ['Leon'],
     'Ornella Morgan': ['Ornella Morgen', 'Morgan Rodriguez'],
     'Paul Suarez': ['Paul Suárez'],
     'Paula Shy': ['Christy Charming'],
@@ -356,6 +357,7 @@ ActorsReplace = {
     'Voodoo Child': ['Lex', 'Voo Do', 'Voo Doo', 'Voodoo', 'Voodoo Pornstar'],
     'Xxlayna Marie': ['Xxylayna Marie', 'Layna Marie'],
     'Yenny Contreras': ['Siarilis'],
+    'YinyLeon': ['Yiny Leon', 'Yini Leon', 'YiniLeon'],
     'Yu Shinoda': ['Shinoda Yuu'],
     'Yuriy Sergeev': ['Alexander', 'Boris', 'Krokodil', 'Mr Henderson', 'Mr. Anderson', 'Rocket', 'Sam', 'Sergei', 'Yuri', 'Yury'],
     'Zazie Skymm': ['Azazia Skymm', 'Zazie Skymm', 'Zazie Skimm', 'Azazai', 'Zazie Sky', 'Zazie'],
@@ -790,7 +792,7 @@ ActorsReplaceStudios = {
         'Spencer Bradley': ['Spencer_Bradley'],
         'Valentina Nappi': ['valentinanappi'],
         'Vanessa Veracruz': ['VanessaVeracruz'],
-        'Ondra Welik': ['Yiny Leon', 'YInyleon'],
+        'YinyLeon': ['Yiny Leon', 'YInyleon'],
     },
     14: {  # Mylf
         'Scarlet Domingo': ['Scarlett'],
@@ -6125,6 +6127,9 @@ ActorsReplaceStudios = {
         'Teena Lipoldino': ['Teena'],
         'Victoria Ferrera': ['Roksolana'],
     },
+    71: {  # Brazzers
+        'Alice Fabre': ['Alice']
+    }
 }
 
 ActorsStudioIndexes = {
@@ -6199,6 +6204,7 @@ ActorsStudioIndexes = {
     68: ['Mofos'],
     69: ['Adult Empire'],
     70: ['Heavy on Hotties'],
+    71: ['Brazzers'],
 }
 
 
