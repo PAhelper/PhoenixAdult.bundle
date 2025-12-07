@@ -774,6 +774,7 @@ ActorsReplaceStudios = {
         'Janessa Brazil': ['JanessaBrazil'],
         'Jenny Lux': ['Jennylux'],
         'Kayla Kayden': ['KaylaKayden'],
+        'Kate Kuray': ['Katekuray'],
         'Leana Lovings': ['naughtynightlover'],
         'Lexi Anne Garza': ['Lexi_Aaane'],
         'Lexis Star': ['LexisStar'],
