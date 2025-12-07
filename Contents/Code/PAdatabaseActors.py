@@ -766,6 +766,7 @@ ActorsReplaceStudios = {
         'Brandi Sparks': ['BrandiSparks'],
         'Carla Cute': ['CarlaCute', 'Carlacute', 'carlacute'],
         'Darling Josefin': ['darlingjosefin'],
+        'Elly Clutch': ['Ellyclutch'],
         'Ember Springs': ['EmberSprings'],
         'Eva Elfie': ['EvaElfie'],
         'Florane Russell': ['Florane_Russell'],
