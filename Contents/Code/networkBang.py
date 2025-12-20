@@ -18,24 +18,34 @@ def search(results, lang, siteNum, searchData):
     for searchURL in searchResults:
         req = PAutils.HTTPRequest(searchURL)
         detailsPageElements = HTML.ElementFromString(req.text)
-        videoPageElements = json.loads(detailsPageElements.xpath('//script[@type="application/ld+json"]')[-1].text_content().replace('\n', '').strip())
+        videoPageElements = None
+        json_ld_scripts = detailsPageElements.xpath('//script[@type="application/ld+json"]')
+        for script in json_ld_scripts:
+            try:
+                data = json.loads(script.text_content().replace('\n', '').strip())
+                if data.get('@type') == 'VideoObject':
+                    videoPageElements = data
+                    break
+            except:
+                pass
 
-        titleNoFormatting = PAutils.parseTitle(PAutils.cleanHTML(videoPageElements['name']), siteNum)
-        curID = PAutils.Encode(searchURL)
+        if videoPageElements:
+            titleNoFormatting = PAutils.parseTitle(PAutils.cleanHTML(videoPageElements['name']), siteNum)
+            curID = PAutils.Encode(searchURL)
 
-        date = videoPageElements['datePublished']
-        if date:
-            releaseDate = parse(date).strftime('%Y-%m-%d')
-        else:
-            releaseDate = searchData.dateFormat() if searchData.date else ''
-        displayDate = releaseDate if date else ''
+            date = videoPageElements.get('datePublished')
+            if date:
+                releaseDate = parse(date).strftime('%Y-%m-%d')
+            else:
+                releaseDate = searchData.dateFormat() if searchData.date else ''
+            displayDate = releaseDate if date else ''
 
-        if searchData.date:
-            score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
-        else:
-            score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
+            if searchData.date:
+                score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
+            else:
+                score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
-        results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+            results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
 
     for searchResult in searchPageElements.xpath('//div[contains(@class, "movie-preview") or contains(@class, "video_container")]'):
         sceneURL = searchResult.xpath('./a[contains(@class, "group")]/@href')[0]
@@ -73,16 +83,38 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     req = PAutils.HTTPRequest(sceneURL)
     detailsPageElements = HTML.ElementFromString(req.text)
 
-    videoPageElements = json.loads(detailsPageElements.xpath('//script[@type="application/ld+json"][contains(., "thumbnail")]')[-1].text_content().replace('\n', '').strip())
+    videoPageElements = None
+    json_ld_scripts = detailsPageElements.xpath('//script[@type="application/ld+json"]')
+    for script in json_ld_scripts:
+        try:
+            data = json.loads(script.text_content().replace('\n', '').strip())
+            if data.get('@type') == 'VideoObject':
+                videoPageElements = data
+                break
+        except:
+            pass
 
     # Title
-    metadata.title = PAutils.parseTitle(PAutils.cleanHTML(videoPageElements['name']), siteNum)
+    if videoPageElements:
+        metadata.title = PAutils.parseTitle(PAutils.cleanHTML(videoPageElements['name']), siteNum)
+    elif detailsPageElements.xpath('//h1'):
+        metadata.title = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().strip(), siteNum)
 
     # Summary
-    metadata.summary = PAutils.cleanHTML(videoPageElements['description'])
+    if videoPageElements:
+        metadata.summary = PAutils.cleanHTML(videoPageElements['description'])
+    elif detailsPageElements.xpath('//div[contains(@class, "description")]'):
+        metadata.summary = detailsPageElements.xpath('//div[contains(@class, "description")]')[0].text_content().strip()
+    elif detailsPageElements.xpath('//meta[@name="description"]/@content'):
+        metadata.summary = detailsPageElements.xpath('//meta[@name="description"]/@content')[0].strip()
+    elif detailsPageElements.xpath('//meta[@property="og:description"]/@content'):
+        metadata.summary = detailsPageElements.xpath('//meta[@property="og:description"]/@content')[0].strip()
 
     # Studio
-    metadata.studio = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(videoPageElements['productionCompany']['name'].strip(), siteNum), flags=re.IGNORECASE)
+    if videoPageElements and 'productionCompany' in videoPageElements and 'name' in videoPageElements['productionCompany']:
+        metadata.studio = re.sub(r'bang(?=(\s|$))(?!\!)', 'Bang!', PAutils.parseTitle(videoPageElements['productionCompany']['name'].strip(), siteNum), flags=re.IGNORECASE)
+    else:
+        metadata.studio = 'Bang!'
 
     # Tagline and Collection(s)
     tagline = ""
@@ -107,7 +139,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         movieCollections.addCollection(dvdTitle)
 
     # Release Date
-    date = videoPageElements['datePublished']
+    date = None
+    if videoPageElements:
+        date = videoPageElements.get('datePublished')
     if date:
         date_object = parse(date)
         metadata.originally_available_at = date_object
@@ -132,15 +166,19 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             req = PAutils.HTTPRequest(modelURL)
             modelPage = HTML.ElementFromString(req.text)
 
-            modelPageElements = json.loads(modelPage.xpath('//script[@type="application/ld+json"][contains(., "Person")]')[0].text_content().strip())
-
-            actorPhotoURL = modelPageElements['image'].split('?')[0].strip()
+            try:
+                modelPageElements = json.loads(modelPage.xpath('//script[@type="application/ld+json"][contains(., "Person")]')[0].text_content().strip())
+                actorPhotoURL = modelPageElements['image'].split('?')[0].strip()
+            except:
+                pass
         else:
             actorName = actorLink.xpath('.//span')[0].text_content()
-            img = actorLink.xpath('../..//img/@src')[0].split('?')[0]
-
-            if 'placeholder' not in img:
-                actorPhotoURL = img
+            try:
+                img = actorLink.xpath('../..//img/@src')[0].split('?')[0]
+                if 'placeholder' not in img:
+                    actorPhotoURL = img
+            except:
+                pass
 
         if actorName:
             movieActors.addActor(actorName, actorPhotoURL)
@@ -152,18 +190,37 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         movieGenres.addGenre(genreName)
 
     # Posters
-    if 'covers' in videoPageElements['thumbnailUrl']:
-        art.append(videoPageElements['thumbnailUrl'])
-    else:
-        match = re.search(r'(?<=shots/)\d+', videoPageElements['thumbnailUrl'])
-        if match:
-            movieID = match.group(0)
-            art.append('https://i.bang.com/covers/%s/front.jpg' % movieID)
-        art.append(videoPageElements['thumbnailUrl'])
+    if videoPageElements and 'thumbnailUrl' in videoPageElements:
+        if 'covers' in videoPageElements['thumbnailUrl']:
+            art.append(videoPageElements['thumbnailUrl'])
+        else:
+            match = re.search(r'(?<=shots/)\d+', videoPageElements['thumbnailUrl'])
+            if match:
+                movieID = match.group(0)
+                art.append('https://i.bang.com/covers/%s/front.jpg' % movieID)
+            art.append(videoPageElements['thumbnailUrl'])
 
-    if 'trailer' in videoPageElements:
+    if videoPageElements and 'trailer' in videoPageElements:
         for img in videoPageElements['trailer']:
-            art.append(img['thumbnailUrl'])
+            if 'thumbnailUrl' in img:
+                art.append(img['thumbnailUrl'])
+
+    # Fallback for posters
+    if not art:
+        xpaths = [
+            '//meta[@property="og:image"]/@content',
+            '//video/@poster',
+            '//img[contains(@class, "object-cover aspect-cover mx-auto")]/@src',
+            '//img[contains(@class, "object-cover aspect-cover mx-auto")]/@srcset',
+            '//img[contains(@class, "w-full h-auto object-cover rounded-md")]/@src'
+        ]
+        for xpath in xpaths:
+            for img in detailsPageElements.xpath(xpath):
+                if 'srcset' in xpath:
+                    for url in img.split(','):
+                        art.append(url.strip().split(' ')[0].split('?')[0])
+                else:
+                    art.append(img.split('?')[0])
 
     images = []
     posterExists = False
