@@ -18,7 +18,6 @@ def search(results, lang, siteNum, searchData):
     for searchURL in searchResults:
         req = PAutils.HTTPRequest(searchURL)
         detailsPageElements = HTML.ElementFromString(req.text)
-        
         videoPageElements = None
         json_ld_scripts = detailsPageElements.xpath('//script[@type="application/ld+json"]')
         for script in json_ld_scripts:
