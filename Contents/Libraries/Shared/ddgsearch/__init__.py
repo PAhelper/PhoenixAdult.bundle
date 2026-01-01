@@ -83,6 +83,7 @@ def search(term, site, num_results=10, lang='en', proxy=None, advanced=False, sl
 
             # Extract and decode the link URL
             link = unquote(link_tag.split('=', 1)[-1]) if link_tag else ''
+            link = link.split('&rut=')[0]
             # Check if the link has already been fetched and if unique results are required
             if link in fetched_links and unique:
                 continue  # Skip this result if the link is not unique
