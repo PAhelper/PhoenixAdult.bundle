@@ -226,14 +226,17 @@ def getFromSearchEngine(searchText, site='', **kwargs):
     Log('Using Google Search "%s"' % searchText)
     try:
         results = list(googlesearch.search(searchText, site, lang=lang, sleep_interval=1))
+        if not results:
+            raise ValueError("No Results")
     except:
         Log('Google Search Error')
-
         Log('Using Duck Duck Go Search "%s"' % searchTerm)
         try:
             results = list(ddgsearch.search(searchTerm, site, lang=lang, sleep_interval=1))
+            if not results:
+                raise ValueError("No Results")
         except:
-            Log('Duck Duck Go Search Error')
+            Log('DDGS Search Error')
 
     return results
 

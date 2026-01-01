@@ -16,8 +16,9 @@ def getJSONfromPage(url):
 def search(results, lang, siteNum, searchData):
     directURL = slugify(searchData.title.replace('\'', ''), lowercase=True)
 
-    directURL = PAsearchSites.getSearchSearchURL(siteNum) + directURL
-    searchResultsURLs = [directURL]
+    directURL1 = PAsearchSites.getSearchSearchURL(siteNum) + directURL
+    directURL2 = 'https://www.mylf.com/movies/%s' % directURL
+    searchResultsURLs = [directURL1, directURL2]
 
     googleResults = PAutils.getFromSearchEngine(searchData.title, siteNum)
 
@@ -69,7 +70,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     sceneDate = metadata_id[2]
     sceneType = metadata_id[3]
 
-    detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)[sceneType][sceneName]
+    try:
+        detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)[sceneType][sceneName]
+    except:
+        detailsPageElements = getJSONfromPage('https://www.mylf.com/movies/%s' % sceneName)[sceneType][sceneName]
 
     # Title
     metadata.title = PAutils.parseTitle(detailsPageElements['title'], siteNum)
@@ -106,8 +110,11 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         actorPhotoURL = ''
 
         try:
-            actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorID))
-            if actorData:
+            try:
+                actorData = getJSONfromPage('%s/models/%s' % (PAsearchSites.getSearchBaseURL(siteNum), actorID))
+                actorPhotoURL = actorData['modelsContent'][actorID]['img']
+            except:
+                actorData = getJSONfromPage('https://www.mylf.com/models/%s' % actorID)
                 actorPhotoURL = actorData['modelsContent'][actorID]['img']
         except:
             pass

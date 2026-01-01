@@ -4,31 +4,23 @@ import PAutils
 
 def search(results, lang, siteNum, searchData):
     searchResults = []
-    sceneID = None
-    parts = searchData.title.split()
-    if unicode(parts[0], 'UTF-8').isdigit():
-        sceneID = parts[0]
-        searchData.title = searchData.title.replace(sceneID, '', 1).strip()
-        searchResults.append(PAsearchSites.getSearchSearchURL(siteNum) + sceneID)
+    directURL = '%s/video/%s' % (PAsearchSites.getSearchBaseURL(siteNum), slugify(searchData.title))
+    searchResults.append(directURL)
 
     googleResults = PAutils.getFromSearchEngine(searchData.title, siteNum)
     for sceneURL in googleResults:
-        sceneURL = sceneURL.rsplit('/', 1)[0]
-        if '/videos/' in sceneURL and sceneURL not in searchResults:
+        sceneURL = sceneURL.rsplit('/', 1)[0].split('/join.php')[0]
+        if '/video/' in sceneURL and sceneURL not in searchResults:
             searchResults.append(sceneURL)
 
     for sceneURL in searchResults:
-        searchID = None
         req = PAutils.HTTPRequest(sceneURL)
         if req.ok:
             detailsPageElements = HTML.ElementFromString(req.text)
 
-            if not detailsPageElements.xpath('//h2')[0].text_content() == 'Latest Videos':
+            try:
                 titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h1[@class="customhcolor"]')[0].text_content().replace('-', ' ').strip(), siteNum)
                 curID = PAutils.Encode(sceneURL)
-                match = re.search(r'(?<=videos\/).*((?=\/)|\d)', sceneURL)
-                if match:
-                    searchID = match.group(0)
 
                 date = detailsPageElements.xpath('//span[@class="date"]')
                 if date:
@@ -38,14 +30,14 @@ def search(results, lang, siteNum, searchData):
 
                 displayDate = releaseDate if date else ''
 
-                if sceneID and sceneID == searchID:
-                    score = 100
-                elif searchData.date:
+                if searchData.date:
                     score = 100 - Util.LevenshteinDistance(searchData.date, releaseDate)
                 else:
                     score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
                 results.Append(MetadataSearchResult(id='%s|%d|%s' % (curID, siteNum, releaseDate), name='%s [%s] %s' % (titleNoFormatting, PAsearchSites.getSearchSiteName(siteNum), displayDate), score=score, lang=lang))
+            except:
+                pass
 
     return results
 
@@ -74,12 +66,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         date_object = parse(sceneDate)
         metadata.originally_available_at = date_object
         metadata.year = metadata.originally_available_at.year
-
-    # Genres
-    for genreLink in detailsPageElements.xpath('//h4[@class="customhcolor"]')[0].text_content().split(','):
-        genreName = genreLink.strip()
-
-        movieGenres.addGenre(genreName)
 
     # Actor(s)
     actors = re.split(r',|\sand\s', detailsPageElements.xpath('//h3')[0].text_content())
