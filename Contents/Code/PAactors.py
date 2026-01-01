@@ -550,7 +550,8 @@ def getFromAdultDVDEmpire(actorName, actorEncoded, metadata):
 
         if imgID != 'nophoto':
             gender = actor[1]
-            actorPhotoURL = 'https://imgs1cdn.adultempire.com/actors/%sh.jpg' % imgID
+            if imgID != 'boxcover':
+                actorPhotoURL = 'https://imgs1cdn.adultempire.com/actors/%sh.jpg' % imgID
 
     return actorPhotoURL, gender
 
