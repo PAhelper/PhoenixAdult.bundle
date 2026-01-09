@@ -18,7 +18,11 @@ def search(results, lang, siteNum, searchData):
 
     directURL1 = PAsearchSites.getSearchSearchURL(siteNum) + directURL
     directURL2 = 'https://www.mylf.com/movies/%s' % directURL
-    searchResultsURLs = [directURL1, directURL2]
+
+    if directURL1 == directURL2:
+        searchResultsURLs = [directURL1]
+    else:
+        searchResultsURLs = [directURL1, directURL2]
 
     googleResults = PAutils.getFromSearchEngine(searchData.title, siteNum)
 
