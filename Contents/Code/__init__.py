@@ -16,6 +16,7 @@ from dateutil.parser import parse
 from PIL import Image
 from slugify import slugify
 from traceback import format_exc
+import pickle
 import PAactors
 import PAgenres
 import PAcollections
