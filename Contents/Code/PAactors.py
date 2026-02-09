@@ -719,21 +719,17 @@ def getFromJAVDatabase(actorName, actorEncoded, metadata):
 
 def getFromLocalStorage(actorName, actorEncoded, metadata):
     actorPhotoURL = ''
+    gender = ''
+    localPhoto = None
     actorsResourcesPath = os.path.join(Core.bundle_path, 'Contents', 'Resources')
     filename = '%s.%s' % (actorEncoded, actorName.replace(' ', '-').lower())
 
-    for root, dirs, files in os.walk(actorsResourcesPath):
-        for file in files:
-            if filename == file.rsplit('.', 1)[0].split('_')[0]:
-                filename = file
-                break
-        break
+    actor_index = get_actor_index(actorsResourcesPath)
+    localPhoto = actor_index.get(filename)
 
-    localPhoto = Resource.ExternalPath(filename)
     if localPhoto:
         actorPhotoURL = localPhoto
-
-    gender = filename.split('_')[-1].split('.')[0] if '_' in filename else ''
+        gender = localPhoto.split('_')[-1].split('.')[0] if '_' in localPhoto else ''
 
     return actorPhotoURL, gender
 
@@ -753,11 +749,12 @@ def cacheActorPhoto(url, actorName, gender, type, **kwargs):
 
     # Check if file already exists
     if not Prefs['actor_cache_replace_enable']:
-        for root, dirs, files in os.walk(actorsResourcesPath):
-            for file in files:
-                if baseFileName == file.rsplit('.', 1)[0].split('_')[0]:
-                    checkGender = file.split('_')[-1].split('.')[0] if '_' in file else checkGender
-                    return Resource.ExternalPath(file), checkGender
+        actor_index = get_actor_index(actorsResourcesPath)
+        matches = actor_index.get(baseFileName)
+        if matches:
+            fileName = matches.split('/')[-1].split('?')[0]
+            checkGender = fileName.split('_')[-1].split('.')[0] if '_' in fileName else checkGender
+            return matches, checkGender
 
     try:
         extension = mimetypes.guess_extension(req.headers['Content-Type'], strict=False).replace('jpe', 'jpg')
@@ -784,3 +781,82 @@ def cacheActorPhoto(url, actorName, gender, type, **kwargs):
             localPhoto = ''
 
     return localPhoto, checkGender
+
+
+def save_index(path, index, signature):
+    data = {
+        'index': index,
+        'signature': signature,
+    }
+    with codecs.open(path, 'wb') as f:
+        pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)
+
+
+def load_index(path):
+    try:
+        with codecs.open(path, 'rb') as f:
+            return pickle.load(f)
+    except (IOError, EOFError, pickle.PickleError):
+        return None
+
+
+def get_tree_signature(base_path):
+    count = 0
+    latest = 0.0
+
+    for root, dirs, files in os.walk(base_path):
+        count += len(files)
+        for name in files:
+            try:
+                mtime = os.path.getmtime(os.path.join(root, name))
+                if mtime > latest:
+                    latest = mtime
+            except OSError:
+                pass
+
+    return count, latest
+
+
+def is_cache_fresh(cache_path, tree_signature):
+    if not os.path.exists(cache_path):
+        return False
+
+    try:
+        cache_mtime = os.path.getmtime(cache_path)
+    except OSError:
+        return False
+
+    return tree_signature[1] <= cache_mtime
+
+
+def get_actor_index(base_path):
+    tree_sig = get_tree_signature(base_path)
+    actorsResourcesPath = os.path.join(Core.bundle_path, 'Contents', 'Resources')
+    INDEX_CACHE_FILE = os.path.join(actorsResourcesPath, 'actor_index.cache')
+
+    if os.path.exists(INDEX_CACHE_FILE):
+        cached = load_index(INDEX_CACHE_FILE)
+        if cached:
+            try:
+                if cached.get('signature')[0] == tree_sig[0] and is_cache_fresh(INDEX_CACHE_FILE, tree_sig):
+                    return cached['index']
+            except OSError:
+                pass
+
+    index = build_actor_index(base_path)
+    save_index(INDEX_CACHE_FILE, index, tree_sig)
+    return index
+
+
+def build_actor_index(base_path):
+    Log('Rebuilding Local Actor Image Index')
+    index = {}
+
+    for root, dirs, files in os.walk(base_path):
+        for filename in files:
+            name, ext = os.path.splitext(filename)
+            key = name.split('_', 1)[0]
+            if key not in index:
+                index[key] = Resource.ExternalPath(filename)
+
+    return index
