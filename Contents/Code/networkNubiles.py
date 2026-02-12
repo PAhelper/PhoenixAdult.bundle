@@ -152,7 +152,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         try:
             galleryURL = PAsearchSites.getSearchBaseURL(siteNum) + detailsPageElements.xpath('//div[contains(@class, "content-pane-related-links")]/a[contains(., "Pic")]/@href')[0]
         except:
-            match = re.search(r'(?<=videos\/).*(?=\/sample)', detailsPageElements.xpath('//video/@poster')[0])
+            match = re.search(r'(?<=videos\/).*(?=\/sample)', detailsPageElements.xpath('//video/@poster | //div[@class="fake-video-player"]/img/@src')[0])
             if match:
                 sceneID = match.group(0)
             galleryURL = '%s/galleries/%s/screenshots' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
