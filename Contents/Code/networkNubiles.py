@@ -99,7 +99,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         if not actorPhotoURL.startswith('http'):
             actorPhotoURL = 'http:%s' % actorPhotoURL
 
-        movieActors.addActor(actorName, actorPhotoURL)
+        gender = ''
+        checkGender = actorPage.xpath('//p[@class="model-profile-subheading"][contains(., "Figure")]')
+        if checkGender:
+            gender = 'female'
+
+        movieActors.addActor(actorName, actorPhotoURL, gender=gender)
 
     if 'Logan Long' in metadata.summary:
         movieActors.addActor('Logan Long', '')
