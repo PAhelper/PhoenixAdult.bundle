@@ -96,11 +96,12 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         if poster:
             art.append(poster['serve']['uri'])
 
+    postersClean = list()
     Log('Artwork found: %d' % len(art))
     for idx, posterUrl in enumerate(art, 1):
         # Remove Timestamp and Token from URL
         cleanUrl = posterUrl.split('?')[0]
-        art[idx - 1] = cleanUrl
+        postersClean.append(cleanUrl)
         if not PAsearchSites.posterAlreadyExists(cleanUrl, metadata):
             # Download image file for analysis
             try:
@@ -117,6 +118,8 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                     metadata.art[cleanUrl] = Proxy.Media(image.content, sort_order=idx)
             except:
                 pass
+
+    art.extend(postersClean)
 
     return metadata
 
