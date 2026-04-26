@@ -300,18 +300,22 @@ def parseTitle(s, siteNum):
     s = preParseTitle(s)
     word_list = re.split(' ', s)
 
+    if not word_list:
+        return s
+
     pattern = re.compile(r'\W')
-    firstWord = parseWord(word_list[0], siteNum)
-    cleanfirstWord = re.sub(pattern, '', firstWord)
-    if len(cleanfirstWord) > 1:
-        firstWord = firstWord[0].capitalize() + firstWord[1:]
-    else:
-        firstWord = firstWord.upper()
+    final = []
 
-    final = [firstWord]
+    for idx, word in enumerate(word_list):
+        parsed = parseWord(word, siteNum)
 
-    for word in word_list[1:]:
-        final.append(parseWord(word, siteNum))
+        # Capitalize first word only
+        if idx == 0:
+            cleanWord = re.sub(pattern, '', parsed)
+            if cleanWord:
+                parsed = parsed[0].upper() + parsed[1:] if len(cleanWord) > 1 else parsed.upper()
+
+        final.append(parsed)
 
     output = ' '.join(final)
     output = postParseTitle(output)
@@ -326,27 +330,28 @@ def parseWord(word, siteNum):
         'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
         'joi', 'rpg', 'wunf', 'uk', 'asap', 'sss', 'nf', 'pawg', 'ama'
     )
-    symbolsClean = ['-', '/', '.', '+', '\'']
-    symbolsEsc = ['-', '/', r'\.', r'\+', r'\'']
+    symbols_map = {'-': '-', '/': '/', '.': r'\.', '+': r'\+', '\'': r'\''}
 
     pattern = re.compile(r'\W')
     cleanWord = re.sub(pattern, '', word)
+    cleanWordLower = cleanWord.lower()
     cleanSiteName = re.sub(pattern, '', PAsearchSites.getSearchSiteName(siteNum).replace(' ', ''))
 
-    if cleanSiteName.lower() == cleanWord.lower():
+    if cleanSiteName.lower() == cleanWordLower:
         word = PAsearchSites.getSearchSiteName(siteNum)
-    elif any(symbol in word for symbol in symbolsClean):
-        for idx, symbol in enumerate(symbolsClean, 0):
+    elif any(symbol in word for symbol in symbols_map):
+        for symbol, escaped_symbol in symbols_map.items():
             if symbol in word:
-                word = parseTitleSymbol(word, siteNum, symbolsEsc[idx])
-    elif cleanWord.lower() in upper_exceptions:
+                word = parseTitleSymbol(word, siteNum, escaped_symbol)
+                break
+    elif cleanWordLower in upper_exceptions:
         word = word.upper()
-    elif cleanWord.isupper() and cleanWord.lower() not in lower_exceptions:
+    elif cleanWord.isupper() and cleanWordLower not in lower_exceptions:
         word = word.upper()
-    elif not (cleanWord.islower() or cleanWord.isupper() or cleanWord.lower() in lower_exceptions):
+    elif not (cleanWord.islower() or cleanWord.isupper() or cleanWordLower in lower_exceptions):
         pass
     else:
-        word = word.lower() if cleanWord.lower() in lower_exceptions else word.capitalize()
+        word = word.lower() if cleanWordLower in lower_exceptions else word.capitalize()
 
     word = manualWordFix(word)
 
@@ -361,39 +366,49 @@ def any(s):
 
 
 def parseTitleSymbol(word, siteNum, symbol):
-    lower_exceptions = ['vs']
-    contraction_exceptions = ['re', 't', 's', 'd', 'll', 've', 'm', 'am', 'ed']
-    word_list = re.split(symbol, word)
-    symbols = ['-', '/', r'\.', r'\+']
-    pattern = re.compile(r'\W')
+    lower_exceptions = set(['vs'])
+    contraction_exceptions = set(['re', 't', 's', 'd', 'll', 've', 'm', 'am', 'ed'])
+    symbols = set(['-', '/', r'\.', r'\+'])
+    nonword_re = re.compile(r'\W')
 
-    firstWord = parseWord(word_list[0], siteNum)
-    if firstWord not in lower_exceptions:
-        if re.search(r'^\W', firstWord):
-            firstWord = firstWord[0:2].upper() + firstWord[2:]
-        elif len(firstWord) > 1:
-            firstWord = firstWord[0].capitalize() + firstWord[1:]
-        else:
-            firstWord = firstWord.upper()
-    nhword = firstWord + symbol.replace('\\', '')
-
-    for idx, hword in enumerate(word_list[1:], 1):
-        cleanWord = re.sub(pattern, '', hword)
-        if symbol in symbols:
-            if idx == 1 and not firstWord:
-                nhword += hword.capitalize()
-            elif len(hword) > 1:
-                nhword += parseWord(hword, siteNum)
+    parts = re.split(symbol, word)
+    # Normalize first part
+    first = parseWord(parts[0], siteNum)
+    if first not in lower_exceptions:
+        if first and re.search(r'^\W', first):
+            # Preserve leading punctuation then uppercase the next char(s)
+            if len(first) >= 2:
+                first = first[:2].upper() + first[2:]
             else:
-                nhword += hword.capitalize()
-        elif cleanWord.lower() in contraction_exceptions:
-            nhword += hword.lower()
+                first = first.upper()
+        elif len(first) > 1:
+            first = first[0].upper() + first[1:]
         else:
-            nhword += parseWord(hword, siteNum)
+            first = first.upper()
 
-        if idx != len(word_list) - 1:
-            nhword += symbol.replace('\\', '')
-    return nhword
+    sep = symbol.replace('\\', '')
+    result = first + sep
+
+    # Process remaining parts
+    total = len(parts)
+    for idx, part in enumerate(parts[1:], 1):
+        clean = nonword_re.sub('', part)
+        if symbol in symbols:
+            if idx == 1 and not first:
+                result += part.capitalize()
+            elif len(part) > 1:
+                result += parseWord(part, siteNum)
+            else:
+                result += part.capitalize()
+        elif clean.lower() in contraction_exceptions:
+            result += part.lower()
+        else:
+            result += parseWord(part, siteNum)
+
+        if idx != total - 1:
+            result += sep
+
+    return result
 
 
 def postParseTitle(output):
@@ -480,23 +495,20 @@ def cleanSummary(summary):
 
 
 def manualWordFix(word):
-    exceptions = (
-        'im', 'theyll', 'cant', 'ive', 'shes', 'theyre', 'tshirt', 'dont', 'wasnt', 'youre', 'ill', 'whats', 'didnt',
-        'isnt', 'senor', 'senorita', 'thats', 'gstring', 'milfs', 'oreilly', 'bangbros', 'bday', 'dms', 'bffs',
-        'ohmy', 'wont', 'whos', 'shouldnt', 'lasirena', 'espanol', 'youd'
-    )
-    corrections = (
-        'I\'m', 'They\'ll', 'Can\'t', 'I\'ve', 'She\'s', 'They\'re', 'T-Shirt', 'Don\'t', 'Wasn\'t', 'You\'re', 'I\'ll', 'What\'s', 'Didn\'t',
-        'Isn\'t', 'Señor', 'Señorita', 'That\'s', 'G-String', 'MILFs', 'O\'Reilly', 'BangBros', 'B-Day', 'DMs', 'BFFs',
-        'OhMy', 'Won\'t', 'Who\'s', 'Shouldn\'t', 'LaSirena', 'español', 'You\'d'
-    )
+    corrections_map = {
+        'im': 'I\'m', 'theyll': 'They\'ll', 'cant': 'Can\'t', 'ive': 'I\'ve', 'shes': 'She\'s', 'theyre': 'They\'re', 'tshirt': 'T-Shirt', 'dont': 'Don\'t',
+        'wasnt': 'Wasn\'t', 'youre': 'You\'re', 'ill': 'I\'ll', 'whats': 'What\'s', 'didnt': 'Didn\'t', 'isnt': 'Isn\'t', 'senor': 'Señor', 'senorita': 'Señorita',
+        'thats': 'That\'s', 'gstring': 'G-String', 'milfs': 'MILFs', 'oreilly': 'O\'Reilly', 'bangbros': 'BangBros', 'bday': 'B-Day', 'dms': 'DMs', 'bffs': 'BFFs',
+        'ohmy': 'OhMy', 'wont': 'Won\'t', 'whos': 'Who\'s', 'shouldnt': 'Shouldn\'t', 'lasirena': 'LaSirena', 'espanol': 'español', 'youd': 'You\'d'
+    }
+
     pattern = re.compile(r'\d|\W')
     cleanWord = re.sub(pattern, '', word)
+    cleanWordLower = cleanWord.lower()
 
-    if cleanWord.lower() in exceptions:
-        for correction in corrections:
-            if cleanWord.lower() == re.sub(pattern, '', correction.replace('ñ', 'n')).lower():
-                return re.sub(re.escape(cleanWord), correction, word)
+    if cleanWordLower in corrections_map:
+        correction = corrections_map[cleanWordLower]
+        return re.sub(re.escape(cleanWord), correction, word, flags=re.IGNORECASE)
 
     return word
 
