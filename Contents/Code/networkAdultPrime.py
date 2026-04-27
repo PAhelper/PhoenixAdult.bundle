@@ -14,7 +14,7 @@ def search(results, lang, siteNum, searchData):
         sceneURL = '%s/studios/video/%s' % (PAsearchSites.getSearchBaseURL(siteNum), sceneID)
         req = PAutils.HTTPRequest(sceneURL)
         detailsPageElements = HTML.ElementFromString(req.text)
-        titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h2')[0].text_content().strip(), siteNum)
+        titleNoFormatting = PAutils.parseTitle(detailsPageElements.xpath('//h1')[0].text_content().split(':')[-1].split('Full video by')[0].strip(), siteNum)
         curID = PAutils.Encode(sceneURL)
 
         date = detailsPageElements.xpath('//p[@class="update-info-line regular"]/b[1][./preceding-sibling::i[contains(@class, "calendar")]]')
@@ -80,10 +80,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         metadata.summary = summary
 
     # Studio
-    metadata.studio = detailsPageElements.xpath('//p[@class="update-info-line regular"][./b[contains(., "Studio")]]//a')[0].text_content().strip()
+    metadata.studio = 'Adult Prime'
 
     # Tagline and Collection(s)
-    tagline = detailsPageElements.xpath('//p[@class="update-info-line regular"][./b[contains(., "Series")]]//a')[1].text_content().strip()
+    tagline = detailsPageElements.xpath('//p[@class="update-info-line regular"][./b[contains(., "Studio")]]//a')[0].text_content().strip()
     metadata.tagline = tagline
     movieCollections.addCollection(tagline)
 
