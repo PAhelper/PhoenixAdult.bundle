@@ -295,7 +295,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - XXXPawn
 + #### Bang! | ✓ - **Title only**
 + #### Bang! Movies | ✓ - **Title only**
-+ #### BBC Paradise | ✅
 + #### Bel Ami Online | ❌ - **SceneID**
 + #### BellaPass | ✓ - **Title only**
   - AleahJasmine
@@ -896,63 +895,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### MormonGirlz | ✓ - **Title or Actor**
 + #### My Pervy Family | ✅
 + #### MyDirtyHobby | ✅
-+ #### Mylf Network | ✅ - **Date Add**
-  - Anal Mom
-  - Ask Your Mother
-  - Freeuse MILF
-  - Full Of JOI
-  - Got Mylf
-  - Lone Milf
-  - Milf Body
-  - Milfty
-  - Mom Drips
-  - Mom Swap
-  - MomShoot
-  - Mylf
-  - Mylf Classics
-  - Mylf Labs
-  - Mylf Of The Month
-  - Mylf X Bang
-  - Mylf X BJ Raw
-  - Mylf X CamSoda
-  - Mylf X Chad Alva
-  - Mylf X Dee Siren
-  - Mylf X Elegant Raw
-  - Mylf X EvilAngel
-  - Mylf X Fucking Awesome
-  - Mylf X Hussie Pass
-  - Mylf X James Deen
-  - Mylf X Joybear
-  - Mylf X Karups Older Women
-  - Mylf X Lady Fyre
-  - Mylf X Little Puck
-  - Mylf X Mandy Flores
-  - Mylf X Marie McCray
-  - Mylf X Manko88
-  - Mylf X MariskaX
-  - Mylf X Mindi Mink
-  - Mylf X Miss Lexa
-  - Mylf X Owen Gray
-  - Mylf X Paytons Place
-  - Mylf X Purgatory X
-  - Mylf X SinfulXXX
-  - Mylf X SpankMonster
-  - Mylf X Steve Holmes
-  - Mylf X Teamskeet
-  - Mylf X ToughLoveX
-  - MylfBlows
-  - MylfBoss
-  - MylfDom
-  - Mylfed
-  - Mylfselects
-  - Mylfwood
-  - New Mylfs
-  - PervNana
-  - PervPrincipal
-  - Secrets
-  - StayHomeMilf
-  - Tiger Moms
-  - Use POV
 + #### Naughty America Network | ✅
   - 2 Chicks Same Time
   - American Daydreams
@@ -1408,6 +1350,202 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
   - Lil Humpers
 + #### RealJamVR | ❌ - **Direct URL**
 + #### ReidMyLips | ❌ - **Direct URL**
++ #### Reptyle Network | ✅
+  - Family Strokes
+    - Ask Your Mother
+    - Black Step Dad
+    - Dad Crush
+    - Family Strokes
+    - Family Strokes Features
+    - Foster Tapes
+    - Not My Grandpa
+    - Perv Mom
+    - Perv Nana
+    - Sis Loves Me
+    - Tiny Sis
+  - FreeUse
+    - Freaky Fembots
+    - Freeuse
+    - Freeuse Fantasy
+    - Freeuse MILF
+    - Freeuse Singles
+    - Use POV
+  - MYLF
+    - Anal Mom
+    - BBC Paradise
+    - Blue Collar Babes
+    - Full Of JOI
+    - Got MYLF
+    - Hijab MYLFs
+    - Hookup Pad
+    - Lone Milf
+    - MILF Body
+    - MILF Features
+    - Milfty
+    - Mom Drips
+    - Mom Shoot
+    - Mommy's Little Man
+    - MYLF
+    - MYLF After Dark
+    - MYLF Blows
+    - MYLF Boss
+    - MYLF Of The Month
+    - Mylf X Bang
+    - Mylf X BJ Raw
+    - Mylf X CamSoda
+    - Mylf X Chad Alva
+    - Mylf X Dee Siren
+    - Mylf X Elegant Raw
+    - Mylf X EvilAngel
+    - Mylf X Fucking Awesome
+    - Mylf X Hussie Pass
+    - Mylf X James Deen
+    - Mylf X Joybear
+    - Mylf X Karups Older Women
+    - Mylf X Lady Fyre
+    - Mylf X Little Puck
+    - Mylf X Mandy Flores
+    - Mylf X Manko88
+    - Mylf X Marie McCray
+    - Mylf X MariskaX
+    - Mylf X Mindi Mink
+    - Mylf X Miss Lexa
+    - Mylf X Owen Gray
+    - Mylf X Paytons Place
+    - Mylf X Purgatory X
+    - Mylf X SinfulXXX
+    - Mylf X SpankMonster
+    - Mylf X Steve Holmes
+    - Mylf X Teamskeet
+    - Mylf X ToughLoveX
+    - Mylfdom
+    - Mylfed
+    - Mylfwood
+    - New MYLFs
+    - Secrets
+    - Shag Street
+    - Stay Home MILF
+    - Tiger Moms
+  - Pervz
+    - Charmed
+    - MILF Taxi
+    - Perv Doctor
+    - Perv Driver
+    - Perv Massage
+    - Perv Principal
+    - Perv Singles
+    - Perv Therapy
+    - Pervz
+    - Pervz Features
+    - Shoplyfter
+    - Shoplyfter MYLF
+  - Swappz
+    - Daughter Swap
+    - Mom Swap
+    - Sis Swap
+    - Swappz
+  - TeamSkeet
+    - After Dark
+    - Anal Euro
+    - Bad MILFs
+    - BFFs
+    - Black Valley Girls
+    - Brace Faced
+    - Brat Tamer
+    - Breeding Material
+    - CFNM Teens
+    - Ciao Bella
+    - Daddy Pounds
+    - Dyked
+    - Exxxtra Small
+    - Ginger Patch
+    - Her Freshman Year
+    - Hijab Hookup
+    - I Made Porn
+    - Innocent High
+    - Kissing Sis
+    - Latina Team
+    - Little Asians
+    - Lust HD
+    - Messy Jessy
+    - Mormon Girlz
+    - My Babysitters Club
+    - Our Little Secret
+    - Oye Loca
+    - Passport Bros
+    - Petite Teens 18
+    - POV Life
+    - Reptyle Classics (Formerly TeamSkeet/MYLF Classics)
+    - Reptyle Labs (Formerly TeamSkeet/MYLF Labs)
+    - Rub a Teen
+    - Self Desire
+    - Sex and Grades
+    - She's New
+    - Solo Interviews
+    - Spanish 18
+    - Stay Home POV
+    - Step Siblings
+    - TeamSkeet AllStars
+    - TeamSkeet Extras
+    - TeamSkeet Features
+    - TeamSkeet X Avery Black
+    - TeamSkeet X BAEB
+    - TeamSkeet X Banana Fever
+    - TeamSkeet X Bang
+    - TeamSkeet X BJ Raw
+    - TeamSkeet X Bratty Foot Girls
+    - TeamSkeet X BritStudioXXX
+    - TeamSkeet X CamSoda
+    - TeamSkeet X Club Sweethearts
+    - TeamSkeet X Cum Kitchen
+    - TeamSkeet X DocTayTay
+    - TeamSkeet X Erotique TV Live
+    - TeamSkeet X Eva Elfie
+    - TeamSkeet X EvilAngel
+    - TeamSkeet X Fit18
+    - TeamSkeet X Flora Rodgers
+    - TeamSkeet X Fucking Awesome
+    - TeamSkeet X GrandDadz
+    - TeamSkeet X Harmony Films
+    - TeamSkeet X Herb Collins
+    - TeamSkeet X Impure Desire
+    - TeamSkeet X James Deen
+    - TeamSkeet X JAV Hub
+    - TeamSkeet X Jonathan Jordan
+    - TeamSkeet X Joy Bear
+    - TeamSkeet X Kriss Kiss
+    - TeamSkeet X Layna Landry
+    - TeamSkeet X LunaXJames
+    - TeamSkeet X Luxury Girl
+    - TeamSkeet X Mickey Mod
+    - TeamSkeet X Molly RedWolf
+    - TeamSkeet X OG
+    - TeamSkeet X OZ Fellatio Queens
+    - TeamSkeet X POV Perv
+    - TeamSkeet X POVGod
+    - TeamSkeet X PurgatoryX
+    - TeamSkeet X Reislin
+    - TeamSkeet X Riley Cyriis
+    - TeamSkeet X Screampies
+    - TeamSkeet X Slut Inspection
+    - TeamSkeet X SpankMonster
+    - TeamSkeet X Sweetie Fox
+    - TeamSkeet X ToughLoveX
+    - TeamSkeet X YoungBusty
+    - Teen Curves
+    - Teen JOI
+    - Teen Pies
+    - Teens Do Porn
+    - Teens Love Anal
+    - Teens Love Black Cocks
+    - Teens Love Money
+    - Teeny Black
+    - The Loft
+    - The Real Workout
+    - Thickumz
+    - This Girl Sucks
+    - Titty Attack
+    - Tomboyz
 + #### Romero Multimedia Network | ✓
   - Deafeated XXX
   - Defeated Sex Fight
@@ -1478,114 +1616,6 @@ If you're having difficulty finding the SceneID, double-check [PAsiteList.py](..
 + #### Sunny Lane Live | ✅
 + #### Swallow Bay | ❌ - **Direct URL**
 + #### Swallow Salon | ✓
-+ #### TeamSkeet Network | ✅ - **Date Add**
-  - After Dark
-  - Badmilfs
-  - BFFs
-  - Black Valley Girls
-  - BraceFaced
-  - Brat Tamer
-  - Breeding Material
-  - CFNM Teens
-  - DadCrush
-  - DaughterSwap
-  - Dyked
-  - ExxxtraSmall
-  - FamilyStrokes
-  - Foster Tapes
-  - Freaky Fembots
-  - Freeuse Fantasy
-  - Gingerpatch
-  - Her Freshman Year
-  - Hijab Hookup
-  - I Made Porn
-  - Innocent High
-  - Kissing Sis
-  - Little Asians
-  - Lust HD
-  - My Babysitters Club
-  - Mormon Girlz
-  - Not My Grandpa
-  - Oye Loca
-  - PervDoctor
-  - PervMom
-  - PervTherapy
-  - POV Life
-  - Rub A Teen
-  - Self Desire
-  - Sex and Grades
-  - She's New
-  - Shoplyfter
-  - ShoplyfterMylf
-  - Sis Loves Me
-  - Sis Swap
-  - Solo Interviews
-  - StayHomePOV
-  - StepSiblings
-  - TeamSkeet AllStars
-  - TeamSkeet Classics
-  - TeamSkeet Extras
-  - TeamSkeet Features
-  - TeamSkeet Labs
-  - TeamSkeet Selects
-  - TeamSkeet X Avery Black
-  - TeamSkeet X BAEB
-  - TeamSkeet X Banana Fever
-  - TeamSkeet X Bang
-  - TeamSkeet X BJ Raw
-  - TeamSkeet X Bratty Foot Girls
-  - TeamSkeet X BritStudioXXX
-  - TeamSkeet X CamSoda
-  - TeamSkeet X Club Sweethearts
-  - TeamSkeet X Cum Kitchen
-  - TeamSkeet X DocTayTay
-  - TeamSkeet X Erotique TV Live
-  - TeamSkeet X Eva Elfie
-  - TeamSkeet X EvilAngel
-  - TeamSkeet X Fit18
-  - TeamSkeet X Flora Rodgers
-  - TeamSkeet X Fucking Awesome
-  - TeamSkeet X GrandDadz
-  - TeamSkeet X Harmony Films
-  - TeamSkeet X Herb Collins
-  - TeamSkeet X Impure Desire
-  - TeamSkeet X James Deen
-  - TeamSkeet X JAV Hub
-  - TeamSkeet X Jonathan Jordan
-  - TeamSkeet X Joy Bear
-  - TeamSkeet X Kriss Kiss
-  - TeamSkeet X Layna Landry
-  - TeamSkeet X LunaXJames
-  - TeamSkeet X Luxury Girl
-  - TeamSkeet X Mickey Mod
-  - TeamSkeet X Molly RedWolf
-  - TeamSkeet X OG
-  - TeamSkeet X OZ Fellatio Queens
-  - TeamSkeet X POV Perv
-  - TeamSkeet X POVGod
-  - TeamSkeet X PurgatoryX
-  - TeamSkeet X Reislin
-  - TeamSkeet X Riley Cyriis
-  - TeamSkeet X Screampies
-  - TeamSkeet X Slut Inspection
-  - TeamSkeet X SpankMonster
-  - TeamSkeet X Sweetie Fox
-  - TeamSkeet X ToughLoveX
-  - TeamSkeet X YoungBusty
-  - Teen Curves
-  - Teen JOI
-  - Teen Pies
-  - Teens Do Porn
-  - Teens Love Anal
-  - Teens Love Black Cocks
-  - Teens Love Money
-  - Teeny Black
-  - The Loft
-  - The Real Workout
-  - Thickumz
-  - This Girl Sucks
-  - Tiny Sis
-  - Titty Attack
 + #### TeenCoreClub Network | ✅
   - Anal Checkups
   - Analyzed Girls
