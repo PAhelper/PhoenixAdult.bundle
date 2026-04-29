@@ -10,6 +10,7 @@ def getJSONfromPage(url):
         jsonData = re.search(r'window\.__INITIAL_STATE__ = (.*);', req.text)
         if jsonData:
             return json.loads(jsonData.group(1))['content']
+
     return None
 
 
@@ -108,15 +109,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     searchNetwork = getSubNetwork(PAsearchSites.getSearchSiteName(siteNum), 'search')
     searchNetworkCleanLower = re.sub(r'\W', '', searchNetwork).lower()
 
-    try:
-        detailsPageElements = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)
-    except:
-        detailsPageElements = getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))
+    detailsPageJson = getJSONfromPage(PAsearchSites.getSearchSearchURL(siteNum) + sceneName)
+    detailsPageElements = None
 
-    if sceneType in detailsPageElements:
-        detailsPageElements = detailsPageElements[sceneType][sceneName]
-    else:
-        detailsPageElements = detailsPageElements['videosContent'][sceneName]
+    for pageJson in (detailsPageJson, getJSONfromPage('https://www.%s.com/movies/%s' % (searchNetworkCleanLower, sceneName))):
+        if sceneType in pageJson and sceneName in pageJson[sceneType]:
+            detailsPageElements = pageJson[sceneType][sceneName]
+            break
+        if 'videosContent' in pageJson and sceneName in pageJson['videosContent']:
+            detailsPageElements = pageJson['videosContent'][sceneName]
+            break
+
     subSite = getSubSite(detailsPageElements['site']['name'] if 'site' in detailsPageElements else PAsearchSites.getSearchSiteName(siteNum))
     subNetwork = getSubNetwork(subSite)
 
