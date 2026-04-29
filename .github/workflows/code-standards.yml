@@ -11,7 +11,7 @@ jobs:
     name: Lint
     steps:
       - name: Check out source repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: flake8 Lint
         uses: reviewdog/action-flake8@v3
