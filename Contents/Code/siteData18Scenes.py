@@ -1,5 +1,6 @@
 import PAsearchSites
 import PAutils
+import networkReptyle
 
 
 def search(results, lang, siteNum, searchData):
@@ -179,15 +180,15 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
     # Studio
     try:
-        metadata.studio = detailsPageElements.xpath('//b[contains(., "Studio") or contains(., "Network")]//following-sibling::b')[0].text_content().strip()
+        studio = detailsPageElements.xpath('//b[contains(., "Studio") or contains(., "Network")]//following-sibling::b')[0].text_content().strip()
     except:
         try:
-            metadata.studio = detailsPageElements.xpath('//b[contains(., "Studio") or contains(., "Network")]//following-sibling::a')[0].text_content().strip()
+            studio = detailsPageElements.xpath('//b[contains(., "Studio") or contains(., "Network")]//following-sibling::a')[0].text_content().strip()
         except:
             try:
-                metadata.studio = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
+                studio = detailsPageElements.xpath('//p[contains(., "Site:")]//following-sibling::a[@class="bold"]')[0].text_content().strip()
             except:
-                metadata.studio = ''
+                studio = ''
 
     # Tagline and Collection(s)
     try:
@@ -231,9 +232,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
 
     tagline = PAutils.parseTitle(tagline, siteNum)
 
-    if not metadata.studio:
+    if studio:
+        if studio.lower() in ['teamskeet', 'mylf']:
+            subNetwork = networkReptyle.getSubNetwork(tagline)
+            metadata.studio = subNetwork if subNetwork else studio
+            tagline = networkReptyle.getSubSite(tagline)
+        else:
+            metadata.studio = studio
+    else:
         metadata.studio = tagline
-    elif metadata.studio.replace(' ', '').lower() != tagline.replace(' ', '').lower():
+
+    if tagline and metadata.studio.replace(' ', '').lower() != tagline.replace(' ', '').lower():
         metadata.tagline = tagline
 
     if tagline:

@@ -17,7 +17,7 @@ class PhoenixGenres:
     def processGenres(self, metadata, siteNum):
         for genreLink in self.genresTable:
             skip = False
-            genreName = genreLink.replace('"', '').strip()
+            genreName = genreLink.replace('"', '').replace('\xc2\xa0', ' ').strip()
 
             searchGenreName = genreName.lower()
             for genre in PAdatabaseGenres.GenresSkip:
