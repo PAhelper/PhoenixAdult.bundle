@@ -4,9 +4,10 @@ import PAutils
 
 def search(results, lang, siteNum, searchData):
     cookies = {'18-plus-modal': 'hidden'}
-    headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'}
+    cookies.update(PAutils.nCookies(siteNum))
+
     if searchData.date:
-        url = PAsearchSites.getSearchSearchURL(siteNum) + 'date/' + searchData.date + '/' + searchData.date
+        url = '%sdate/%s/%s' % (PAsearchSites.getSearchSearchURL(siteNum), searchData.date, searchData.date)
         req = PAutils.HTTPRequest(url, cookies=cookies, headers=headers)
         searchResults = HTML.ElementFromString(req.text)
         for searchResult in searchResults.xpath('//div[contains(@class, "content-grid-item")]'):
@@ -43,9 +44,9 @@ def search(results, lang, siteNum, searchData):
 
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     cookies = {'18-plus-modal': 'hidden'}
-    headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'}
+    cookies.update(PAutils.nCookies(siteNum))
     metadata_id = str(metadata.id).split('|')
-    sceneURL = PAsearchSites.getSearchBaseURL(siteNum) + '/video/watch/' + metadata_id[0]
+    sceneURL = '%s/video/watch/%s' % (PAsearchSites.getSearchBaseURL(siteNum), metadata_id[0])
     req = PAutils.HTTPRequest(sceneURL, cookies=cookies, headers=headers)
     detailsPageElements = HTML.ElementFromString(req.text)
 
@@ -210,3 +211,17 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     art.extend(postersClean)
 
     return metadata
+
+
+headers = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.9',
+    'Sec-Ch-Ua': '"Microsoft Edge";v="107", "Chromium";v="107", "Not=A?Brand";v="24"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1',
+    'Upgrade-Insecure-Requests': '1',
+}

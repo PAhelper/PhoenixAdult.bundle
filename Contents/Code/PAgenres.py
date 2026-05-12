@@ -40,7 +40,7 @@ class PhoenixGenres:
                         break
 
             if not found:
-                genreName = PAutils.parseTitle(genreName, siteNum)
+                genreName = PAutils.parseTitle(genreName, siteNum, title_type='genre')
 
             if not found and not skip:
                 if len(genreName) > 25:

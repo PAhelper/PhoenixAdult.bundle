@@ -12,6 +12,8 @@ from requests_response import FakeResponse
 from HTMLParser import HTMLParser
 
 import PAsearchSites
+from PAparseTitle import TitleCaseEngine
+from PAcaptchaHelper import CaptchaHelper
 
 UserAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36'
 
@@ -209,7 +211,6 @@ def HTTPRequest(url, method='GET', **kwargs):
 
 
 def getFromSearchEngine(searchText, site='', **kwargs):
-    stop = kwargs.pop('stop', 10)
     lang = kwargs.pop('lang', 'en')
 
     if isinstance(site, int):
@@ -258,32 +259,39 @@ def Decode(text):
 
 
 def getClearURL(url):
-    newURL = url
-    if url.startswith('http'):
-        url = urlparse.urlparse(url)
-        path = url.path
+    if not url.startswith('http'):
+        return url
 
-        while '//' in path:
-            path = path.replace('//', '/')
+    parsed = urlparse.urlparse(url)
+    path = parsed.path.replace('//', '/')
 
-        newURL = '%s://%s%s' % (url.scheme, url.netloc, path)
-        if url.query:
-            newURL += '?%s' % url.query
+    # Rebuild URL
+    new_url = '%s://%s%s' % (parsed.scheme, parsed.netloc, path)
 
-    return newURL
+    if parsed.query:
+        new_url += '?' + parsed.query
+
+    return new_url
 
 
 def saveRequest(url, req):
+    # Build dated debug directory
     debug_dir = os.path.join('debug_data', datetime.now().strftime('%d-%m-%Y'))
-    debug_dir = os.path.realpath(debug_dir)
+
     if not os.path.exists(debug_dir):
-        os.makedirs(debug_dir)
+        try:
+            os.makedirs(debug_dir)
+        except OSError:
+            pass
 
-    raw_http = '< Target URL: "%s"\r\n\r\n' % url
-    raw_http += dump.dump_all(req).decode('UTF-8', errors='replace')
+    # Build raw HTTP dump
+    raw_http = '\r\n'.join(['< Target URL: "%s"' % url, '', dump.dump_all(req).decode('UTF-8', 'replace')])
 
-    file_name = '%s.gz' % uuid.uuid4().hex
-    with gzip.open(os.path.join(debug_dir, file_name), 'wb') as f:
+    # Create gzip file
+    file_name = uuid.uuid4().hex + '.gz'
+    file_path = os.path.join(debug_dir, file_name)
+
+    with gzip.open(file_path, 'wb') as f:
         f.write(raw_http.encode('UTF-8'))
 
     Log('GZip request saved as "%s"' % file_name)
@@ -291,71 +299,14 @@ def saveRequest(url, req):
     return True
 
 
-def parseTitle(s, siteNum):
-    s = re.sub(r'w\/(?!\s)', 'w/ ', s, flags=re.IGNORECASE)
-    s = re.sub(r'\,(?![\s|\d])', ', ', s)
-    s = s.replace('_', ' ')
-    s = s.replace('’', '\'')
-    s = s.replace('´', '\'')
-    s = preParseTitle(s)
-    word_list = re.split(' ', s)
-
-    if not word_list:
-        return s
-
-    pattern = re.compile(r'\W')
-    final = []
-
-    for idx, word in enumerate(word_list):
-        parsed = parseWord(word, siteNum)
-
-        # Capitalize first word only
-        if idx == 0:
-            cleanWord = re.sub(pattern, '', parsed)
-            if cleanWord:
-                parsed = parsed[0].upper() + parsed[1:] if len(cleanWord) > 1 else parsed.upper()
-
-        final.append(parsed)
-
-    output = ' '.join(final)
-    output = postParseTitle(output)
-
-    return output
+def parseTitle(s, siteNum, title_type='title'):
+    engine = TitleCaseEngine(title_type, debug=Prefs['debug_enable'])
+    return engine.parse_title(s, siteNum)
 
 
-def parseWord(word, siteNum):
-    lower_exceptions = ['a', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'in', 'on', 'com', 'co', 'org']
-    upper_exceptions = (
-        'bbc', 'xxx', 'bbw', 'bf', 'bff', 'bts', 'pov', 'dp', 'gf', 'bj', 'wtf', 'cfnm', 'bwc', 'fm', 'tv', 'ai',
-        'hd', 'milf', 'gilf', 'dilf', 'dtf', 'zz', 'xxxl', 'usa', 'nsa', 'hr', 'ii', 'iii', 'iv', 'bbq', 'avn', 'xtc', 'atv',
-        'joi', 'rpg', 'wunf', 'uk', 'asap', 'sss', 'nf', 'pawg', 'ama', 'xs', 'xl', 'xxl', 'xxxl'
-    )
-    symbols_map = {'-': '-', '/': '/', '.': r'\.', '+': r'\+', '\'': r'\''}
-
-    pattern = re.compile(r'\W')
-    cleanWord = re.sub(pattern, '', word)
-    cleanWordLower = cleanWord.lower()
-    cleanSiteName = re.sub(pattern, '', PAsearchSites.getSearchSiteName(siteNum).replace(' ', ''))
-
-    if cleanSiteName.lower() == cleanWordLower:
-        word = PAsearchSites.getSearchSiteName(siteNum)
-    elif any(symbol in word for symbol in symbols_map):
-        for symbol, escaped_symbol in symbols_map.items():
-            if symbol in word:
-                word = parseTitleSymbol(word, siteNum, escaped_symbol)
-                break
-    elif cleanWordLower in upper_exceptions:
-        word = word.upper()
-    elif cleanWord.isupper() and cleanWordLower not in lower_exceptions:
-        word = word.upper()
-    elif not (cleanWord.islower() or cleanWord.isupper() or cleanWordLower in lower_exceptions):
-        pass
-    else:
-        word = word.lower() if cleanWordLower in lower_exceptions else word.capitalize()
-
-    word = manualWordFix(word)
-
-    return word
+def nCookies(siteNum):
+    helper = CaptchaHelper(debug=Prefs['debug_enable'])
+    return helper.get_verified_cookies(PAsearchSites.getSearchBaseURL(siteNum))
 
 
 def any(s):
@@ -363,114 +314,6 @@ def any(s):
         if v:
             return True
     return False
-
-
-def parseTitleSymbol(word, siteNum, symbol):
-    lower_exceptions = set(['vs'])
-    contraction_exceptions = set(['re', 't', 's', 'd', 'll', 've', 'm', 'am', 'ed'])
-    symbols = set(['-', '/', r'\.', r'\+'])
-    nonword_re = re.compile(r'\W')
-
-    parts = re.split(symbol, word)
-    # Normalize first part
-    first = parseWord(parts[0], siteNum)
-    if first not in lower_exceptions:
-        if first and re.search(r'^\W', first):
-            # Preserve leading punctuation then uppercase the next char(s)
-            if len(first) >= 2:
-                first = first[:2].upper() + first[2:]
-            else:
-                first = first.upper()
-        elif len(first) > 1:
-            first = first[0].upper() + first[1:]
-        else:
-            first = first.upper()
-
-    sep = symbol.replace('\\', '')
-    result = first + sep
-
-    # Process remaining parts
-    total = len(parts)
-    for idx, part in enumerate(parts[1:], 1):
-        clean = nonword_re.sub('', part)
-        if symbol in symbols:
-            if idx == 1 and not first:
-                result += part.capitalize()
-            elif len(part) > 1:
-                result += parseWord(part, siteNum)
-            else:
-                result += part.capitalize()
-        elif clean.lower() in contraction_exceptions:
-            result += part.lower()
-        else:
-            result += parseWord(part, siteNum)
-
-        if idx != total - 1:
-            result += sep
-
-    return result
-
-
-def postParseTitle(output):
-    replace = [(r'“', '\"'), (r'”', '\"'), (r'’', '\''), (r'W/', 'w/'), (r'A\.\sJ\.', 'A.J.'), (r'T\.\sJ\.', 'T.J.'), (r'(?<!\S)AJ(?!\S)', 'A.J.')]
-    lower_exceptions = ['a', 'y', 'n', 'an', 'of', 'the', 'and', 'for', 'to', 'onto', 'but', 'or', 'nor', 'at', 'with', 'vs', 'com', 'co', 'org']
-
-    # Add space after a punctuation if missing
-    output = re.sub(r'(?=[\!|\:|\?|\.](?=(\w{2,}))\b)\S(?!(co\b|net\b|com\b|org\b|porn\b|E\d|xxx\b))', lambda m: m.group(0) + ' ', output, flags=re.IGNORECASE)
-    # Remove single period at end of title
-    output = re.sub(r'(?<=[^\.].)(?<=\w)(?:\.)$', '', output)
-    # Remove space between word and certain punctuation
-    output = re.sub(r'\s+(?=[.,!\'\)]|(:(?!\))))', '', output)
-    # Add space between word and opening double quote
-    output = re.sub(r'(?<=\S)([\"]\S+)', lambda m: ' ' + m.group(1), output)
-    # Add space between word and opening single quote, capitalizing if not a contraction
-    output = re.sub(r'(?<=\S)(\'(?!\b(?:re|t|s|d|ll|ve|m|am|ed)\b)\S+)(?=.*\')', lambda m: ' ' + m.group(1)[0] + m.group(1)[1:].capitalize(), output)
-    # Remove space between punctuation and word
-    output = re.sub(r'(?<=[#\(\"])\s+', '', output)
-    # Add space after closing double quote
-    output = re.sub(r'"(?!\s)(?=(?:(?:[^"]*"){2})*[^"]*$)', '" ', output)
-    # Override lowercase if word follows a punctuation
-    output = re.sub(ur'(?<!vs\.)(?<=!|:|\?|\.|-|\u2013)(\s)(\S)', lambda m: m.group(1) + m.group(2).upper(), output)
-    # Override lowercase if word follows certain punctuation
-    output = re.sub(r'(?<=[\(|\&|\"|\[|\*|\~])(\w)', lambda m: m.group(0).upper() + m.group(1)[1:] if m.group(1).lower() not in lower_exceptions else m.group(1), output)
-    # Override lowercase if last word in section
-    output = re.sub(r'\S+[\]\)\"\~\:]', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
-    # Override lowercase if last word
-    output = re.sub(r'\S+$', lambda m: m.group(0)[0].capitalize() + m.group(0)[1:], output)
-    # Add period at end of string for Initials
-    output = re.sub(r'^\w\.\s\w(?<=$)', lambda m: m.group(0) + '.', output)
-    # Remove space between initials
-    output = re.sub(r'^(\w\.)\s(\w\.)', lambda m: m.group(1) + m.group(2), output)
-
-    if re.search(r'(,\sthe)(?=:|\s\()', output, re.IGNORECASE):
-        output = re.sub(r'(,\sthe)(?=:|\s\()', '', output, flags=re.IGNORECASE)
-        output = 'The ' + output
-    elif re.search(r'(,\sthe)$', output, re.IGNORECASE):
-        output = re.sub(r'(,\sthe)$', '', output, flags=re.IGNORECASE)
-        output = 'The ' + output
-    elif re.search(r'(,\sA)$', output, re.IGNORECASE):
-        output = re.sub(r'(,\sA)$', '', output, flags=re.IGNORECASE)
-        output = 'A ' + output
-
-    for value in replace:
-        output = output.replace(value[0], value[1])
-
-    return output
-
-
-def preParseTitle(input):
-    exceptions_corrections = {
-        (r'(?<!\S)t\sshirt', 'tshirt'), (r'j\smac|jmac', 'jmac'), (r'\bmr(?=\s)', 'mr.'), (r'\bmrs(?=\s)', 'mrs.'),
-        (r'\bms(?=\s)', 'ms.'), (r'\bdr(?=\s)', 'dr.'), (r'\bvs(?=\s)', 'vs.'), (r'\bst(?=\s)', 'st.'), (r'\s\s+', ' '),
-        (r'\bvol(?=\s)', 'vol.'), (r'sci\sfi|scifi', 'sci-fi')
-    }
-
-    output = input.replace('\xc2\xa0', ' ')
-
-    for value in exceptions_corrections:
-        output = re.sub(value[0], value[1], output, flags=re.IGNORECASE)
-
-    return output
 
 
 def cleanSummary(summary):
@@ -552,33 +395,70 @@ def getSearchTitleStrip(title):
 
 
 def getDictValuesFromKey(dictDB, identifier):
+    ident = str(identifier).lower()
+
     for key, values in dictDB.items():
-        keys = list(key) if type(key) == tuple else [key]
-        for key in keys:
-            if str(key).lower() == str(identifier).lower():
+        key_items = key if isinstance(key, tuple) else (key,)
+
+        for item in key_items:
+            if str(item).lower() == ident:
                 return values
 
     return []
 
 
 def getDictKeyFromValues(dictDB, identifier):
-    keys = []
-    for key, values in dictDB.items():
-        for item in values:
-            if str(item).lower() == str(identifier).lower():
-                keys.append(key)
-                break
+    ident = str(identifier).lower()
+    result = []
 
-    return keys
+    for key, values in dictDB.items():
+        lower_values = [str(v).lower() for v in values]
+
+        if ident in lower_values:
+            result.append(key)
+
+    return result
 
 
 class MLStripper(HTMLParser):
     def __init__(self):
-        self.reset()
+        HTMLParser.__init__(self)
         self.text = StringIO()
+        self.skip_flag = False  # skip script/style content
 
-    def handle_data(self, d):
-        self.text.write(d)
+    def handle_starttag(self, tag, attrs):
+        if tag in ('script', 'style'):
+            self.skip_flag = True
+
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style'):
+            self.skip_flag = False
+
+    def handle_data(self, data):
+        if not self.skip_flag:
+            self.text.write(data)
+
+    def handle_entityref(self, name):
+        try:
+            from htmlentitydefs import name2codepoint
+        except ImportError:
+            from html.entities import name2codepoint
+        cp = name2codepoint.get(name)
+        if cp:
+            self.text.write(unichr(cp))
+
+    def handle_charref(self, name):
+        try:
+            if name.startswith('x'):
+                cp = int(name[1:], 16)
+            else:
+                cp = int(name)
+            self.text.write(unichr(cp))
+        except:
+            pass
+
+    def get_data(self):
+        return self.text.getvalue()
 
     def get_data(self):
         return self.text.getvalue()
@@ -592,9 +472,10 @@ def strip_tags(html):
 
 def functionTimer(fun, msg, *args):
     start_time = time.time()
-    fun(*args)
+    output = fun(*args)
     end_time = time.time()
     Log('%s: %s' % (msg, str(timedelta(seconds=(end_time - start_time)))))
+    return output
 
 
 def rreplace(s, r, n, o):

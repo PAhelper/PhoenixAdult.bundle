@@ -207,8 +207,6 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     if (len(actors) > 1) and subSite != 'Mylfed':
         genres.append('Threesome')
 
-    genres.extend(PAutils.getDictValuesFromKey(genresDB, subSite))
-
     for genreLink in genres:
         genreName = genreLink
 
@@ -217,57 +215,18 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     # Posters
     art.append(detailsPageElements['img'])
     if Prefs['data18_enable']:
-        providers = ['TeamSkeet', 'MYLF', 'Family Strokes', 'Pervz', 'FreeUse', 'Swappz', subSite]
-        data18Url = getSceneURLFromData18(metadata.title, providers, date_object if sceneDate else None)
-        if data18Url:
-            getData18Images(data18Url, art, metadata)
+        scene_id = PAutils.getDictKeyFromValues(data18ManualMappings, detailsPageElements['id'])
+        if scene_id:
+            data18Url = ('https://www.data18.com/scenes/%s' % scene_id[0])
         else:
-            getArtwork(metadata, art)
+            providers = ['TeamSkeet', 'MYLF', 'Family Strokes', 'Pervz', 'FreeUse', 'Swappz', subSite]
+            data18Url = getSceneURLFromData18(metadata.title, providers, date_object if sceneDate else None)
+
+        getData18Images(data18Url, art, metadata) if data18Url else getArtwork(metadata, art)
     else:
         getArtwork(metadata, art)
 
     return metadata
-
-
-genresDB = {
-    'Anal Mom': ['Anal', 'MILF'],
-    'BFFs': ['Teen', 'Group Sex'],
-    'Black Valley Girls': ['Teen', 'Ebony'],
-    'DadCrush': ['Step Dad', 'Step Daughter'],
-    'DaughterSwap': ['Step Dad', 'Step Daughter'],
-    'Dyked': ['Hardcore', 'Teen', 'Lesbian'],
-    'Exxxtra Small': ['Teen', 'Small Tits'],
-    'Family Strokes': ['Taboo Family'],
-    'Foster Tapes': ['Taboo Sex'],
-    'Freeuse Fantasy': ['Freeuse'],
-    'Full Of JOI': ['JOI'],
-    'Ginger Patch': ['Redhead'],
-    'Innocent High': ['School Girl'],
-    'Little Asians': ['Asian', 'Teen'],
-    'Lone MILF': ['Solo'],
-    'Milf Body': ['Gym', 'Fitness'],
-    'Milfty': ['Cheating'],
-    'MomDrips': ['Creampie'],
-    'MylfBlows': ['Blowjob'],
-    'MylfBoss': ['Office', 'Boss'],
-    'MylfDom': ['BDSM'],
-    'Mylfed': ['Lesbian', 'Girl on Girl', 'GG'],
-    'Not My Grandpa': ['Older/Younger'],
-    'Oye Loca': ['Latina'],
-    'PervMom': ['Step Mom'],
-    'POV Life': ['POV'],
-    'Shoplyfter': ['Strip'],
-    'ShoplyfterMylf': ['Strip', 'MILF'],
-    'Sis Loves Me': ['Step Sister'],
-    'Teen Curves': ['Big Ass'],
-    'Teen Pies': ['Teen', 'Creampie'],
-    'TeenJoi': ['Teen', 'JOI'],
-    'Teens Do Porn': ['Teen'],
-    'Teens Love Black Cocks': ['Teens', 'BBC'],
-    'Teeny Black': ['Teen', 'Ebony'],
-    'Thickumz': ['Thick'],
-    'Titty Attack': ['Big Tits'],
-}
 
 
 familystrokesDB = {
@@ -313,4 +272,13 @@ teamskeetDB = {
     'TeamSkeet VIP', 'TeamSkeet', 'Teen Curves', 'Teen JOI', 'Teen Pies', 'Teens Do Porn', 'Teens Love Anal',
     'Teens Love Black Cocks', 'Teens Love Money', 'Teeny Black', 'The Loft', 'The Real Workout', 'Thickumz',
     'This Girl Sucks', 'Titty Attack', 'Tomboyz',
+}
+
+
+data18ManualMappings = {
+    169646: ['thats-better-than-stealing-it'],
+    1313219: ['delicious-firsts'],
+    1349311: ['thanksgiving-the-hijab-way'],
+    1341218: ['the-vamp-next-door'],
+    1341212: ['home-for-the-holidays'],
 }
