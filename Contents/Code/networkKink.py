@@ -420,7 +420,9 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     xpaths = [
         '//video/@poster',
         '//div[@class="player"]/div/@poster',
-        '//div[@id="galleryWrapper"]//img/@data-image-file'
+        '//div[@id="galleryWrapper"]//img/@data-image-file',
+        # Current page design: gallery images are img.gallery-img; data-image-file is the full-size, unsigned URL
+        '//img[contains(@class, "gallery-img")]/@data-image-file'
     ]
     for xpath in xpaths:
         for poster in detailsPageElements.xpath(xpath):
