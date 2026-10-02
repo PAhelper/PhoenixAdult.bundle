@@ -74,7 +74,9 @@ def search(results, lang, siteNum, searchData):
         # full listing (empty query) by date instead.
         baseURL = PAsearchSites.getSearchSearchURL(siteNum)
         attempts = [baseURL + searchData.encoded]
-        if searchData.date:
+        # The listing fallback (empty query) only makes sense within one channel; for the
+        # network-wide "Kink" site it would offer every scene released that day.
+        if searchData.date and 'channelIds=' in baseURL:
             attempts.append(baseURL)
 
         for searchURL in attempts:
@@ -98,8 +100,9 @@ def getKinkPage(searchURL, page):
     # (the site menu uses the same CSS classes, so match on position, not class)
     total = None
     for totalText in pageElements.xpath('//h1/following-sibling::span[contains(@class, "text-primary")]/text()'):
-        if totalText.strip().isdigit():
-            total = int(totalText.strip())
+        totalText = totalText.strip().replace(',', '')    # large counts are formatted "7,488"
+        if totalText.isdigit():
+            total = int(totalText)
             break
     return cards, total
 
@@ -110,6 +113,24 @@ def getCardDate(card):
         if DATE_RE.match(text.strip()):
             return parse(text.strip()).strftime('%Y-%m-%d')
     return None
+
+
+def titleFits(searchTitle, cardTitle):
+    # Is the card's title consistent with the title we searched for? At least half of the
+    # searched words must appear in the card title. Censored card words ("P****") count as a
+    # match for any searched word with the same first letter. With no title to check
+    # (date-only search), anything fits.
+    wanted = re.findall(r"[a-z0-9']+", searchTitle.lower())
+    if not wanted:
+        return True
+    cardWords = [re.sub(r"[^a-z0-9'*]", '', w) for w in cardTitle.lower().split()]
+    hits = 0
+    for word in wanted:
+        for cardWord in cardWords:
+            if cardWord == word or (cardWord and '*' in cardWord and cardWord[0] == word[0]):
+                hits += 1
+                break
+    return hits * 2 >= len(wanted)
 
 
 def addKinkCards(results, lang, siteNum, searchData, cards, onlyExactDate):
@@ -133,8 +154,12 @@ def addKinkCards(results, lang, siteNum, searchData, cards, onlyExactDate):
         if searchData.date and cardDate:
             if onlyExactDate and cardDate != searchData.date:
                 continue
-            score = 100 - Util.LevenshteinDistance(searchData.date, cardDate)
-            exactDate = exactDate or cardDate == searchData.date
+            # The date alone isn't proof: several scenes can share a release date, especially
+            # in a network-wide search. A title that doesn't fit costs 10 points and doesn't
+            # count as found.
+            fits = titleFits(searchData.title, titleNoFormatting)
+            score = 100 - Util.LevenshteinDistance(searchData.date, cardDate) - (0 if fits else 10)
+            exactDate = exactDate or (cardDate == searchData.date and fits)
         else:
             score = 100 - Util.LevenshteinDistance(searchData.title.lower(), titleNoFormatting.lower())
 
