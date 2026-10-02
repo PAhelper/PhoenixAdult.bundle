@@ -43,17 +43,25 @@ def search(results, lang, siteNum, searchData):
         detailsPageElements = HTML.ElementFromString(req.text)
         jsonLD = getJSONLD(detailsPageElements)
 
-        # A real scene page carries a schema.org VideoObject with a name. Retired shoot IDs
-        # (e.g. 15393, re-released as 104942) land on a generic "Channels" listing instead,
-        # which must not be offered as a match.
-        if not jsonLD.get('name'):
+        # Prefer the schema.org VideoObject. Without it, fall back to the HTML, but only on a
+        # real scene page (it has the shoot-detail legend). Retired shoot IDs (e.g. 15393,
+        # re-released as 104942) redirect to a generic "Channels" listing, which has neither
+        # and must not be offered as a match.
+        legend = detailsPageElements.xpath('//div[contains(@class, "shoot-detail-legend")]')
+        heading = detailsPageElements.xpath('//h1')
+        if jsonLD.get('name'):
+            titleNoFormatting = PAutils.parseTitle(jsonLD['name'].strip(), siteNum)
+        elif legend and heading:
+            titleNoFormatting = PAutils.parseTitle(heading[0].text_content().strip(), siteNum)
+        else:
             Log('Shoot %s: no scene data on %s (retired or redirected); not offering it' % (shootID, sceneURL))
             return results
 
-        titleNoFormatting = PAutils.parseTitle(jsonLD['name'].strip(), siteNum)
-
+        legendDate = [d.text_content().strip() for d in detailsPageElements.xpath('//div[contains(@class, "shoot-detail-legend")]//span[contains(@class, "text-muted")]') if DATE_RE.match(d.text_content().strip())]
         if jsonLD.get('uploadDate'):
             releaseDate = parse(jsonLD['uploadDate']).strftime('%Y-%m-%d')
+        elif legendDate:
+            releaseDate = parse(legendDate[0]).strftime('%Y-%m-%d')
         else:
             releaseDate = searchData.dateFormat() if searchData.date else ''
         curID = PAutils.Encode(sceneURL)
@@ -180,6 +188,22 @@ def searchKinkPages(results, lang, siteNum, searchData, searchURL):
     return False
 
 
+def getKinkPersonPhoto(personURL):
+    # Performer and director pages sit behind the same age gate as scenes, so send the cookies.
+    # The photo moved from .biography-container to .kink-slider-images. Visitors who get
+    # "safe-images" see a blurred placeholder of a different person, so skip those rather
+    # than attach the wrong face. The query string is a signature, so keep the full URL.
+    req = PAutils.HTTPRequest(personURL, cookies=KINK_COOKIES)
+    personPage = HTML.ElementFromString(req.text)
+    for xpath in ('//div[contains(@class, "biography-container")]//img/@src',
+                  '//div[contains(@class, "kink-slider-images")]//img/@src',
+                  '//div[contains(@class, "kink-slider-images")]//img/@data-src'):
+        for src in personPage.xpath(xpath):
+            if '/safe-images/' not in src:
+                return src
+    return ''
+
+
 def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, art):
     metadata_id = str(metadata.id).split('|')
     sceneURL = PAutils.Decode(metadata_id[0])
@@ -291,10 +315,10 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         tagline = 'Strapon Squad'
     elif 'sexualdisgrace' in channel:
         tagline = 'Sexual Disgrace'
-    elif 'fetishnetwork' in channel:
-        tagline = 'Fetish Network'
     elif 'fetishnetworkmale' in channel:
         tagline = 'Fetish Network Male'
+    elif 'fetishnetwork' in channel:
+        tagline = 'Fetish Network'
     else:
         tagline = PAsearchSites.getSearchSiteName(siteNum)
     metadata.tagline = tagline
@@ -349,10 +373,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
             actorName = actorLink.text_content().replace(',', '').strip()
             actorPhotoURL = ''
             try:
-                actorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href')
-                req = PAutils.HTTPRequest(actorPageURL)
-                actorPage = HTML.ElementFromString(req.text)
-                actorPhotoURL = actorPage.xpath('//div[contains(@class, "biography-container")]//img/@src')[0]
+                actorPhotoURL = getKinkPersonPhoto(PAsearchSites.getSearchBaseURL(siteNum) + actorLink.get('href'))
             except:
                 pass
 
@@ -364,10 +385,7 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
         directorName = directorLink.text_content().strip()
         directorPhotoURL = ''
         try:
-            directorPageURL = PAsearchSites.getSearchBaseURL(siteNum) + directorLink.get('href')
-            req = PAutils.HTTPRequest(directorPageURL)
-            directorPage = HTML.ElementFromString(req.text)
-            directorPhotoURL = directorPage.xpath('//div[contains(@class, "biography-container")]//img/@src')[0]
+            directorPhotoURL = getKinkPersonPhoto(PAsearchSites.getSearchBaseURL(siteNum) + directorLink.get('href'))
         except:
             pass
 
