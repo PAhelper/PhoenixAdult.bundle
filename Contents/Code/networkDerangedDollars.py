@@ -71,36 +71,50 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
     # Actor(s)
     actors = detailsPageElements.xpath('//div[@class="lch"]/span')[0].text_content().rsplit(',', 2)[0]
     if ':' in actors:
-        actors = re.split(',|&|/|And', actors.split(':', 1)[1])
-    else:
-        actors = re.split(',|&|/|And', actors)
+        actors = actors.split(':', 1)[1]
+    actors = re.split(r',|&|/|\band\b', actors, flags=re.IGNORECASE)
 
-    modelURL = PAsearchSites.getSearchSearchURL(siteNum) + '?models'
-    req = PAutils.HTTPRequest(modelURL)
-    modelPageElements = HTML.ElementFromString(req.text)
-    models = modelPageElements.xpath('//div[@class="item"]')
-    modelURL = PAsearchSites.getSearchSearchURL(siteNum) + '?models/2'
-    req = PAutils.HTTPRequest(modelURL)
-    modelPageElements = HTML.ElementFromString(req.text)
-    models += modelPageElements.xpath('//div[@class="item"]')
+    models = []
+    for page in range(1, 11):
+        modelURL = PAsearchSites.getSearchSearchURL(siteNum) + ('?models' if page == 1 else '?models/%d' % page)
+        req = PAutils.HTTPRequest(modelURL)
+        if not req.text.strip():
+            break
+        pageModels = HTML.ElementFromString(req.text).xpath('//div[@class="item"]')
+        if not pageModels:
+            break
+        models += pageModels
 
+    # The cast line sometimes holds a series or scene name (e.g. "Ass Slave Day 3, Lexi Grey"), so keep only names
+    # found in the site's model list; if none are found there, fall back to models named in the page title
+    sceneTitle = ' '.join(re.sub(r'\W', ' ', detailsPageElements.xpath('//h3[@class="mas_title"]')[0].text_content()).split()).lower()
+    matchedActors = []
+    unmatchedActors = []
     for actorLink in actors:
-        actorName = actorLink.strip()
-        actorName = re.sub(r'\W', ' ', actorName).replace('Nurses', '').replace('Nurse', '')
+        actorName = re.sub(r'\W', ' ', actorLink).replace('Nurses', '').replace('Nurse', '')
+        actorName = ' '.join(actorName.split())
+        if not actorName or actorName.lower() == sceneTitle:
+            continue
 
-        actorPhotoURL = ''
+        modelName, actorPhotoURL = getModel(actorName, models, siteNum)
+        if modelName:
+            matchedActors.append((modelName, actorPhotoURL))
+        else:
+            unmatchedActors.append((actorName, ''))
+
+    if not matchedActors:
+        pageTitle = detailsPageElements.xpath('//title')[0].text_content().split('|')[0]
         for model in models:
-            if ':' in model.text_content().strip():
-                if actorName in model.text_content().split(':', 1)[1].strip():
-                    actorName = model.text_content().split(':', 1)[1].strip()
-                    actorPhotoURL = PAsearchSites.getSearchSearchURL(siteNum) + model.xpath('.//@src')[0]
-                    break
-            else:
-                if actorName in model.text_content().strip():
-                    actorName = model.text_content().strip()
-                    actorPhotoURL = PAsearchSites.getSearchSearchURL(siteNum) + model.xpath('.//@src')[0]
-                    break
+            modelName = getModelName(model)
+            if modelName and re.search(r'\b%s\b' % re.escape(modelName), pageTitle, flags=re.IGNORECASE):
+                matchedActors.append(getModel(modelName, models, siteNum))
 
+    addedActors = []
+    for actorName, actorPhotoURL in matchedActors or unmatchedActors:
+        if [addedActor for addedActor in addedActors if actorName in addedActor]:
+            continue
+
+        addedActors.append(actorName)
         movieActors.addActor(actorName, actorPhotoURL)
 
     # Posters
@@ -138,3 +152,20 @@ def update(metadata, lang, siteNum, movieGenres, movieActors, movieCollections, 
                 pass
 
     return metadata
+
+
+def getModelName(model):
+    modelName = model.text_content().strip()
+    if ':' in modelName:
+        modelName = modelName.split(':', 1)[1].strip()
+
+    return modelName
+
+
+def getModel(actorName, models, siteNum):
+    for model in models:
+        modelName = getModelName(model)
+        if actorName in modelName:
+            return modelName, PAsearchSites.getSearchSearchURL(siteNum) + model.xpath('.//@src')[0]
+
+    return None, ''
